@@ -339,7 +339,7 @@
                         Thanks for rating this package!
                     </div>
 
-                    <div v-if="auth" class="mb-4 flex">
+                    <div v-if="auth && !isSelfAuthored" class="mb-4 flex">
                         <div class="w-1/3 pt-1 text-grey-darker">
                             Tap to rate:
                         </div>
@@ -462,10 +462,10 @@ export default {
 
     props: {
         auth: {},
+        authId: {},
         creatingReview: { deafult: false },
         initialPackage: {},
         ratings: {},
-        userId: {},
     },
 
     data: function() {
@@ -507,6 +507,10 @@ export default {
 
         packagistDownloads: function() {
             return this.package.packagist_downloads.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+
+        isSelfAuthored: function() {
+            return this.auth && this.package.author.id === this.authId;
         },
     },
 

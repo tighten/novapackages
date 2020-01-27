@@ -36,6 +36,7 @@ class PackageResource extends ModelResource
             'is_favorite' => $this->isFavorite($package),
             'favorites_count' => $this->favoritesCount($package),
             'author' => [
+                'id' => $package->author_id,
                 'name' => $package->author->name,
                 'url' => $package->author->url,
                 'avatar_url' => $package->author->avatar ?: 'https://api.adorable.io/avatars/285/'.Str::slug($package->author->name).'.png',

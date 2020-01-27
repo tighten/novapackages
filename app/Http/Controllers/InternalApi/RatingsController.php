@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\InternalApi;
 
 use App\Events\PackageRated;
+use App\Exceptions\SelfAuthoredRatingException;
 use App\Http\Controllers\Controller;
 use App\Package;
 use Illuminate\Http\Request;
@@ -13,7 +14,14 @@ class RatingsController extends Controller
 {
     public function store()
     {
-        auth()->user()->ratePackage(request('package_id'), request('rating'));
+        try {
+            auth()->user()->ratePackage(request('package_id'), request('rating'));
+        } catch (SelfAuthoredRatingException $e) {
+            return response([
+                'status' => 'error',
+                'message' => 'A package cannot be rated by it\'s author',
+            ], 422);
+        }
 
         event(new PackageRated(request('package_id')));
 

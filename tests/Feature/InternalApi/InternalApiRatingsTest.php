@@ -75,4 +75,23 @@ class InternalApiRatingsTest extends TestCase
 
         $this->assertEquals(2, (int) $package->user_average_rating);
     }
+
+    /** @test */
+    function a_user_cannot_rate_a_package_they_authored()
+    {
+        $user = factory(User::class)->create();
+        $package = factory(Package::class)->create(['author_id' => $user->id]);
+
+        $request = $this->be($user)->post(route('internalapi.ratings.store'), [
+            'package_id' => $package->id,
+            'rating' => 5,
+        ]);
+
+        $this->assertEquals(0, $package->ratings()->count());
+        $request->assertStatus(422);
+        $request->assertJson([
+            'status' => 'error',
+            'message' => 'A package cannot be rated by it\'s author',
+        ]);
+    }
 }
