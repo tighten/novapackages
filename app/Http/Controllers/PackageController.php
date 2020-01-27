@@ -34,14 +34,4 @@ class PackageController extends Controller
             ->with('package', PackageDetailResource::from($package))
             ->with('screenshots', $package->screenshots);
     }
-
-    public function redirectOldRoutes($packageId)
-    {
-        $package = Package::findOrFail($packageId);
-
-        return redirect()->route('packages.show', [
-            'namespace' => $package->composer_vendor,
-            'name' => $package->composer_package,
-        ]);
-    }
 }
