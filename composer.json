@@ -1,8 +1,10 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "tightenco/novapackages",
+    "description": "Nova Packages",
     "keywords": [
-        "framework",
+        "laravel nova",
+        "nova",
+        "saas",
         "laravel"
     ],
     "license": "MIT",
