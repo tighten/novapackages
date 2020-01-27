@@ -52,13 +52,11 @@
             @endforeach
 
             <span class="block mt-6 mb-2 mx-4 pb-2 px-4 mt-4 border-b border-grey uppercase text-sm">Popular tags</span>
-            @todo
-            {{--
-
-            <a :key="thisTag.slug" v-for="thisTag in popularTags" class="block px-8 py-2 cursor-pointer hover:text-indigo-dark" :class="{'text-grey-darkest font-bold': thisTag.slug == tag, 'text-grey-darker': thisTag.slug != tag}" @click="filterTag(thisTag.slug)">
-                {{ thisTag.name }}
-            </a>
-                --}}
-
+            @foreach ($popularTags as $thisTag)
+            <a
+                wire:click="filterTag('{{ $thisTag->slug }}')"
+                class="block px-8 py-2 cursor-pointer hover:text-indigo-dark {{ $thisTag->slug === $tag ? 'text-grey-darkest font-bold' : 'text-grey-darker' }}"
+                >{{ $thisTag->name }}</a>
+            @endforeach
         </nav>
     </div>

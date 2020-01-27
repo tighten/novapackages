@@ -27,10 +27,10 @@ class PackageList extends Component
     public function renderPopularAndRecent()
     {
         return view('livewire.popular-and-recent-packages', [
-            'popularPackages' => PackageResource::from(Package::popular()->take(6)->with(['author', 'ratings', 'tags'])->withCount('favorites')->get()),
-            'recentPackages' => PackageResource::from(Package::latest()->take(3)->with(['author', 'ratings', 'tags'])->withCount('favorites')->get()),
+            'popularPackages' => Package::popular()->take(6)->with(['author', 'ratings', 'tags'])->withCount('favorites')->get(),
+            'recentPackages' => Package::latest()->take(3)->with(['author', 'ratings', 'tags'])->withCount('favorites')->get(),
             'typeTags' => Tag::types()->get(),
-            // 'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
+            'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
         ]);
     }
 
@@ -39,10 +39,16 @@ class PackageList extends Component
         $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
 
         return view('livewire.package-list', [
-            'packages' => $this->addSearch($packageQuery)->paginate(3),
+            'packages' => $this->addSearch($packageQuery)->paginate(6),
             'typeTags' => Tag::types()->get(),
-            // 'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
+            'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
         ]);
+    }
+
+    // temporary--while we have vue pre-1.0
+    public function paginationView()
+    {
+        return 'livewire.partials.tailwind-beta-pagination';
     }
 
     public function addSearch($query)

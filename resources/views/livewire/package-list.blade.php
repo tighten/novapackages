@@ -11,9 +11,8 @@
         Filtered by search query "{{ $search }}"
     @endif
 
-
     @if (! $packages->isEmpty())
-        <div class="flex flex-wrap justify-center sm:justify-start">
+        <div class="flex flex-wrap justify-center sm:justify-start mb-6">
             @each('livewire.partials.package-card', $packages, 'package')
         </div>
     @else
