@@ -72,5 +72,7 @@ class DatabaseSeeder extends Seeder
         Package::all()->each(function ($package) use ($tags) {
             $package->tags()->attach($tags->random()->take(3)->get());
         });
+
+        factory(Package::class, 400)->create();
     }
 }

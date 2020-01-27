@@ -74,6 +74,13 @@ class Package extends Model implements Feedable
         return $this->hasMany(Favorite::class);
     }
 
+    public function scopeTagged($query, $tagSlug)
+    {
+        $query->whereHas('tags', function ($query) use ($tagSlug) {
+            $query->where('slug', $tagSlug);
+        });
+    }
+
     public function scopePopular($query)
     {
         return $query->select(

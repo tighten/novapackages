@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'PackageController@index')->name('home');
+Route::get('/', 'WelcomeController@index')->name('home');
 
+Route::get('packages', 'PackageController@index');
 Route::get('packages/{packageId}', 'PackageController@redirectOldRoutes');
 Route::get('packages/{namespace}/{name}', 'PackageController@show')->name('packages.show');
 
