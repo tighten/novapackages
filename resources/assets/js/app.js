@@ -55,14 +55,11 @@ Vue.component('collaborator-select', require('./components/CollaboratorSelect.vu
 Vue.component('package-card', require('./components/PackageCard.vue'));
 Vue.component('package-detail', require('./components/PackageDetail.vue'));
 Vue.component('package-detail-frame', require('./components/PackageDetailFrame.vue'));
-Vue.component('package-index', require('./components/PackageIndex.vue'));
 Vue.component('package-review-create', require('./components/PackageReviewCreate.vue'));
 Vue.component('package-screenshot', require('./components/PackageScreenshot.vue'));
 Vue.component('package-screenshots', require('./components/PackageScreenshots.vue'));
 Vue.component('package-screenshots-dropzone', require('./components/PackageScreenshotsDropzone.vue'));
 Vue.component('package-screenshots-list', require('./components/PackageScreenshotsList.vue'));
-Vue.component('package-search', require('./components/PackageSearch.vue'));
-Vue.component('package-search-results', require('./components/PackageSearchResults.vue'));
 Vue.component('rating-count-bar', require('./components/RatingCountBar.vue'));
 Vue.component('tag-select', require('./components/TagSelect.vue'));
 Vue.component('title-icon', require('./components/TitleIcon.vue'));
