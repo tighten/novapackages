@@ -1,0 +1,171 @@
+.markdown {
+    color: #111;
+}
+
+.markdown p + ul,
+.markdown p + ol {
+    margin-top: 0;
+}
+
+.markdown a {
+    @apply .text-indigo-dark;
+    text-decoration: none;
+}
+
+.markdown a:hover {
+    text-decoration: underline;
+}
+
+.markdown p {
+    @apply .mb-4;
+}
+
+.markdown ul,
+.markdown ol {
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+    margin-left: 0;
+    list-style-position: outside;
+}
+
+.markdown ul ul,
+.markdown ul ol,
+.markdown ol ul,
+.markdown ol ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
+}
+
+.markdown ol li {
+    padding-bottom: 0.5rem;
+}
+
+.markdown ol li:last-child {
+    padding-bottom: 0;
+}
+
+.markdown ol ul,
+.markdown ol ol {
+    margin-bottom: 0;
+}
+
+.markdown h3 {
+    margin-bottom: 1rem;
+}
+
+.markdown .highlight pre,
+.markdown pre {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    font-size: 0.925rem;
+    line-height: 1.45;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    overflow: auto;
+    padding: 1em;
+}
+
+.markdown code {
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    padding: 0.2em 0.4em;
+}
+
+.markdown pre code {
+    background: transparent;
+    font-size: 100%;
+    padding: 0;
+}
+
+.markdown code.hljs {
+    @apply .bg-transparent;
+    @apply .p-0;
+}
+
+.markdown code.hljs .hljs-comment,
+.hljs-keyword,
+.hljs-meta {
+    @apply .font-normal;
+    @apply .roman;
+}
+
+.markdown blockquote {
+    border-left-width: 4px;
+    border-color: #b8c2cc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: 1rem;
+    color: #3d4852;
+}
+
+.markdown blockquote p {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.markdown table {
+    box-sizing: border-box;
+    display: block;
+    margin-bottom: 1em;
+    overflow: auto;
+    width: 100%;
+}
+.markdown tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+.markdown th,
+.markdown td {
+    border: 1px solid #dfe2e5;
+    padding: 6px 13px;
+}
+.markdown tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+.markdown hr {
+    background-color: #e1e4e8;
+    border: 0;
+    height: 0.25em;
+    margin: 24px 0;
+    padding: 0;
+}
+
+.markdown .anchor {
+    float: left;
+    line-height: 1;
+    margin-left: -20px;
+    padding-right: 4px;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+    color: #1b1f23;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+    text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+    visibility: visible;
+}

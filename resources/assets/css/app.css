@@ -1,0 +1,10 @@
+@tailwind preflight;
+@tailwind components;
+
+@import './custom.css';
+@import './dropzone.css';
+@import './passport-shame.css';
+@import './markdown-shame.css';
+@import '../../../node_modules/highlight.js/styles/a11y-light.css';
+
+@tailwind utilities;

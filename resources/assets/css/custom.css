@@ -1,0 +1,36 @@
+
+.header-underline {
+    border-bottom: 1px solid #aabac5;
+    padding-bottom: 0.1rem;
+}
+
+.button--indigo {
+    @apply .bg-indigo;
+    @apply .cursor-pointer;
+    @apply .no-underline;
+    @apply .px-6;
+    @apply .py-3;
+    @apply .rounded-full;
+    @apply .text-xs;
+    @apply .text-white;
+
+    transition: background .3s ease-out;
+}
+
+    .button--indigo:hover {
+        @apply .bg-indigo-dark;
+    }
+
+    @screen sm {
+        .button--indigo {
+            @apply .text-sm;
+        }
+    }
+
+.v-cloak {
+    @apply .hidden;
+}
+
+.text-inherit {
+    color: inherit;
+}

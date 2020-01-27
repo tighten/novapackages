@@ -1,0 +1,85 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^7.2",
+        "algolia/algoliasearch-client-php": "^2.2",
+        "barryvdh/laravel-cors": "^0.11.4",
+        "bugsnag/bugsnag-laravel": "^2.0",
+        "doctrine/dbal": "^2.8",
+        "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "kitetail/zttp": "^0.3.0",
+        "knplabs/github-api": "^2.9",
+        "laravel/framework": "^6.0",
+        "laravel/horizon": "^3.2.7",
+        "laravel/passport": "^7.3.3",
+        "laravel/scout": "^7.0",
+        "laravel/slack-notification-channel": "^2.0",
+        "laravel/socialite": "^4.3",
+        "laravel/tinker": "^1.0",
+        "laravelium/sitemap": "6.0.*",
+        "php-http/guzzle6-adapter": "^1.1",
+        "predis/predis": "^1.1",
+        "spatie/laravel-feed": "^2.4",
+        "tightenco/ziggy": "^0.8.0",
+        "willvincent/laravel-rateable": "^2.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
+        "codedungeon/phpunit-result-printer": "^0.26.1",
+        "dms/phpunit-arraysubset-asserts": "^0.1.0",
+        "facade/ignition": "^1.4",
+        "fzaninotto/faker": "^1.4",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^3.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
