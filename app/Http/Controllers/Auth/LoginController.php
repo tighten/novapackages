@@ -43,6 +43,8 @@ class LoginController extends Controller
 
     public function redirectToProvider()
     {
+        session()->flash('redirect_url', url()->previous());
+
         return Socialite::driver('github')->redirect();
     }
 
@@ -55,6 +57,10 @@ class LoginController extends Controller
         }
 
         Auth::login($user, false);
+
+        if (session()->get('redirect_url')) {
+            return redirect(session()->get('redirect_url'));
+        }
 
         return redirect()->route('home');
     }
