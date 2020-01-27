@@ -9,10 +9,11 @@
             @include('livewire.partials.package-list-tags')
 
             <!-- The body -->
-            <div class="w-full">
+            <div class="w-full relative">
                 @yield('home-page-body')
 
-                <div wire:loading class="text-4xl text-center text-grey tracking-wide py-8 my-8">LOADING...</div>
+                {{-- @todo clean this UI up --}}
+                <div wire:loading style="top: 3em" class="bg-black absolute text-4xl text-center text-grey tracking-wide mx-12 py-8 w-full">LOADING...</div>
             </div>
         </div>
     </div>

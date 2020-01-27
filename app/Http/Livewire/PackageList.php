@@ -45,12 +45,6 @@ class PackageList extends Component
         ]);
     }
 
-    // temporary--while we have vue pre-1.0
-    public function paginationView()
-    {
-        return 'livewire.partials.tailwind-beta-pagination';
-    }
-
     public function addSearch($query)
     {
         if ($this->search) {
@@ -78,5 +72,11 @@ class PackageList extends Component
         if (request()->has('query')) {
             // @todo initial scope
         }
+    }
+
+    // temporary--while we have vue pre-1.0
+    public function paginationView()
+    {
+        return 'livewire.partials.tailwind-beta-pagination';
     }
 }
