@@ -72,7 +72,7 @@
         </p>
 
         <span class="hidden sm:block mx-4">|</span>
-        <a href="https://github.com/tightenco/novapackages-issues/issues" class="font-bold text-white no-underline hover:underline mb-2 sm:mb-0">
+        <a href="https://github.com/tightenco/novapackages/issues" class="font-bold text-white no-underline hover:underline mb-2 sm:mb-0">
             Issues/Feature Requests
         </a>
 
