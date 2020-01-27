@@ -1,5 +1,6 @@
 @php
 // hack shit
+$package = (new App\Http\Resources\PackageResource($package))->toArray($package);
 $package['accent'] = '#ff0000';
 @endphp
 <div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs">

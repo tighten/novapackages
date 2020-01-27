@@ -12,7 +12,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('collaborators/{collaborator}', 'CollaboratorController@show')->name('collaborators.show');
 
 Route::get('stats', 'StatsController')->name('stats');
-Route::get('search', 'SearchController')->name('search');
 Route::get('package-ideas', 'PackageIdeaController')->name('package-ideas');
 
 Route::get('login/github', 'Auth\LoginController@redirectToProvider')->name('login');

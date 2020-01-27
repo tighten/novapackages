@@ -6,10 +6,11 @@ use App\Http\Resources\PackageResource;
 use App\Package;
 use App\Tag;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PackageList extends Component
 {
-    use Paginates;
+    use WithPagination;
 
     public $tag = 'all';
     public $search;
@@ -38,7 +39,7 @@ class PackageList extends Component
         $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
 
         return view('livewire.package-list', [
-            'packages' => PackageResource::from($this->paginate($this->addSearch($packageQuery))->get()),
+            'packages' => $this->addSearch($packageQuery)->paginate(3),
             'typeTags' => Tag::types()->get(),
             // 'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
         ]);
@@ -47,6 +48,8 @@ class PackageList extends Component
     public function addSearch($query)
     {
         if ($this->search) {
+            // @todo make this more robust
+            // old one was this: return Package::search($q)->get()->load(['author', 'tags'])->values();
             // return $query->search($this->search);
             return $query->where('name', 'like', '%' . $this->search . '%');
         }
@@ -57,7 +60,7 @@ class PackageList extends Component
     public function filterTag($tagSlug)
     {
         $this->tag = $tagSlug;
-        $this->page = 1;
+        $this->goToPage(1);
     }
 
     public function mount()
