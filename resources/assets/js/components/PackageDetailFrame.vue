@@ -368,7 +368,7 @@
                         {{ totalRatings }} ratings
                     </div>
 
-                    <div v-if="auth && !package.current_user_review.length">
+                    <div v-if="auth && !package.current_user_review.length && !isSelfAuthored">
                         <a
                             class="block text-indigo no-underline font-bold text-sm cursor-pointer pb-4"
                             :href="route('reviews.create', {
