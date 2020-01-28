@@ -364,8 +364,14 @@
                         v-for="rating_count in package.rating_counts"
                     />
 
-                    <div class="text-right text-sm text-grey-dark mt-2 mb-2">
+                    <div class="text-right text-sm text-grey-dark mt-2">
                         {{ totalRatings }} ratings
+                    </div>
+
+                    <div v-if="package.last_rated_at" class="text-right text-sm text-grey-dark mb-2">
+                        <span :title="lastRatedTitle">
+                            {{ lastRatedAtString }}
+                        </span>
                     </div>
 
                     <div v-if="auth && !package.current_user_review.length">
@@ -507,6 +513,20 @@ export default {
 
         packagistDownloads: function() {
             return this.package.packagist_downloads.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+
+        lastRatedAtString: function() {
+            return this.package.last_rated_at ? 'Last rated ' + moment(this.package.last_rated_at).fromNow() : null;
+        },
+
+        lastRatedTitle: function() {
+            if (!this.package.last_rated_at) {
+                return null;
+            }
+
+            let momented = moment(this.package.last_rated_at)
+
+            return momented.format('MMMM Do, YYYY') + ' at ' + momented.format('h:mma');
         },
     },
 

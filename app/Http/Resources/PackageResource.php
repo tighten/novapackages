@@ -32,6 +32,7 @@ class PackageResource extends ModelResource
             'url' => $package->url,
             'average_rating' => $this->averageRating($package),
             'rating_count' => $this->ratingCount($package),
+            'last_rated_at' => $package->loadMissing('ratings')->ratings->sortByDesc('updated_at')->first()['updated_at'],
             'created_at' => $package->created_at->diffForHumans(),
             'is_favorite' => $this->isFavorite($package),
             'favorites_count' => $this->favoritesCount($package),
