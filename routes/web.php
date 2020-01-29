@@ -30,9 +30,6 @@ Route::group(['prefix' => 'app/email', 'middleware' => 'auth', 'as' => 'app.emai
 });
 
 Route::group(['prefix' => 'app', 'middleware' => ['auth', 'email'], 'as' => 'app.'], function () {
-    Route::redirect('/', '/app/home');
-    Route::get('home', 'HomeController@index')->name('home');
-
     Route::post('screenshot-uploads', 'App\ScreenshotUploadController@store')->name('screenshot-uploads.store');
     Route::middleware(['can:delete,screenshot'])->group(function () {
         Route::delete('screenshot-uploads/{screenshot}', 'App\ScreenshotUploadController@destroy')->name('screenshot-uploads.destroy');
