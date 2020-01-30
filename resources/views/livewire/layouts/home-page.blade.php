@@ -13,7 +13,7 @@
                 @yield('home-page-body')
 
                 {{-- @todo clean this UI up --}}
-                <div wire:loading style="top: 3em" class="bg-black absolute text-4xl text-center text-grey tracking-wide mx-12 py-8 w-full">LOADING...</div>
+                <div wire:loading style="top: 3em" class="bg-black absolute text-4xl text-center text-grey tracking-wide mx-12 py-8 w-full uppercase w-4">Loading...</div>
             </div>
         </div>
     </div>

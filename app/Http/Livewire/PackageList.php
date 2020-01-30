@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Resources\PackageResource;
 use App\Package;
 use App\Tag;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -36,25 +36,23 @@ class PackageList extends Component
 
     public function renderPackageList()
     {
-        $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
+        // @todo do we need to eager load author or tags?
+        if ($this->search) {
+            $packageQuery = Package::search($this->search)
+                ->query(function (Builder $builder) {
+                    if ($this->tag !== 'all') {
+                        $builder->tagged($this->tag);
+                    }
+                });
+        } else {
+            $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
+        }
 
         return view('livewire.package-list', [
-            'packages' => $this->addSearch($packageQuery)->paginate(6),
+            'packages' => $packageQuery->paginate(6),
             'typeTags' => Tag::types()->get(),
             'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
         ]);
-    }
-
-    public function addSearch($query)
-    {
-        if ($this->search) {
-            // @todo make this more robust
-            // old one was this: return Package::search($q)->get()->load(['author', 'tags'])->values();
-            // return $query->search($this->search);
-            return $query->where('name', 'like', '%' . $this->search . '%');
-        }
-
-        return $query;
     }
 
     public function filterTag($tagSlug)
@@ -70,11 +68,11 @@ class PackageList extends Component
         // @todo later when we are handling query string updates
         // in updated version of Livewire
         if (request()->has('query')) {
-            // @todo initial scope
+            // initial scope based on query
         }
     }
 
-    // temporary--while we have vue pre-1.0
+    // temporary--while we have Tailwind pre-1.0
     public function paginationView()
     {
         return 'livewire.partials.tailwind-beta-pagination';
