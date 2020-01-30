@@ -48,15 +48,7 @@ $package['accent'] = '#ff0000';
 
                 <div class="flex flex-row absolute pin-b pin-r">
                     <div class="flex">
-                        @todo star rating system<br>
-                        {{--
-                        <star-rating
-                            v-bind:rating="floatAverageRating"
-                            :increment="0.1"
-                            v-bind:read-only="true"
-                            v-bind:star-size="20"
-                            v-bind:show-rating="false"></star-rating>
-                        --}}
+                        @include('partials.stars', ['stars' => $package['average_rating']])
                     </div>
 
                     <div class="flex text-grey-dark pt-1 pl-1 text-xs">
