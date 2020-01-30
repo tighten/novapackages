@@ -2,14 +2,14 @@
 
 @section('title', 'Discover new packages for Laravel Nova')
 @section('meta')
-@og('title', 'Discover new packages for Laravel Nova')
-@og('type', 'website')
-@og('url', url('/'))
-@og('image', url('images/nova-packages-opengraph.png'))
-@og('description', 'Discover new packages for Laravel Nova. Search, browse, or submit your own packages.')
-@og('site_name', 'Nova Packages')
+    @og('title', 'Discover new packages for Laravel Nova')
+    @og('type', 'website')
+    @og('url', url('/'))
+    @og('image', url('images/nova-packages-opengraph.png'))
+    @og('description', 'Discover new packages for Laravel Nova. Search, browse, or submit your own packages.')
+    @og('site_name', 'Nova Packages')
 
-<meta name="description" content="Discover new packages for Laravel Nova. Search, browse, or submit your own packages" />
+    <meta name="description" content="Discover new packages for Laravel Nova. Search, browse, or submit your own packages" />
 @endsection
 
 @section('content')
