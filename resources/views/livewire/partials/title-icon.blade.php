@@ -11,4 +11,4 @@ $cssClass = $iconSizes[$size ?? 'small'];
     <div class="{{ $cssClass }} rounded-full inline-block text-white text-center leading-none flex flex-row items-center justify-center" style="background-color: {{ $color ?? '#606f7b' }}">
         {{ strtoupper(substr(str_replace("Nova ", "", $title), 0, 1)) }}
     </div>
-</div
+</div>
