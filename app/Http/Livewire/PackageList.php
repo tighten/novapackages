@@ -38,12 +38,17 @@ class PackageList extends Component
     {
         // @todo do we need to eager load author or tags?
         if ($this->search) {
+            // @todo this doesn't actually work. sigh.
+            // Maybe we can customize it like this? https://www.algolia.com/doc/api-client/methods/search/
+            // ... brain hurts right now.
             $packageQuery = Package::search($this->search)
                 ->query(function (Builder $builder) {
                     if ($this->tag !== 'all') {
                         $builder->tagged($this->tag);
                     }
                 });
+                dd($packageQuery->paginate()->total());
+
         } else {
             $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
         }
