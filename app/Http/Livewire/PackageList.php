@@ -61,6 +61,11 @@ class PackageList extends Component
         $this->goToPage(1);
     }
 
+    public function updatedSearch()
+    {
+        $this->gotoPage(1);
+    }
+
     public function mount()
     {
         return;
