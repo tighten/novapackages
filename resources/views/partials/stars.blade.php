@@ -1,15 +1,12 @@
 @php
-// @todo Come up with a clever computer science-y way to make this happen
 for ($i = 1; $i <= 5; $i++) {
-    $starPercentages[$i] = 0;
-}
-
-for ($i = 1; $i <= $stars; $i++) {
-    $starPercentages[$i] = 100;
-}
-
-if ($stars - floor($stars) > 0) {
-    $starPercentages[$i] = ($stars - floor($stars)) * 100;
+    if ($i <= $stars) {
+        $starPercentages[$i] = 100;
+    } elseif ($i - $stars > 0 && $i - $stars < 1) {
+        $starPercentages[$i] = ($i - $stars) * 100;
+    } else {
+        $starPercentages[$i] = 0;
+    }
 }
 @endphp
 
