@@ -2,7 +2,15 @@
 // hack shit
 $package = (new App\Http\Resources\PackageResource($package))->toArray($package);
 // @todo
-$package['accent'] = '#ff0000';
+$package['accent'] = Arr::random([
+    '#6574cd', // Blue
+    '#41ac9c', // Teal
+    '#e49334', // Orange
+    '#56ad34', // Green
+    '#c34949', // Red
+    '#a72b9d', // Purple
+    '#d2c823', // Yellow
+]);
 @endphp
 <div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs">
     <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded-sm">
