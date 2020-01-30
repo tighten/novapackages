@@ -19,7 +19,7 @@ class RatingsController extends Controller
         } catch (SelfAuthoredRatingException $e) {
             return response([
                 'status' => 'error',
-                'message' => 'A package cannot be rated by it\'s author',
+                'message' => 'A package cannot be rated by its author',
             ], 422);
         }
 
