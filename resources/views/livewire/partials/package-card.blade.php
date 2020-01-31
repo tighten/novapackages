@@ -35,7 +35,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
                             'size' => 'small',
                             'title' => str_replace(['Laravel Nova ', 'Nova '], [], $package['name']),
                         ])
-                        {{ str_replace(['Laravel Nova ', 'Nova'], [], $package['name']) }}
+                        {{ str_replace(['Laravel Nova ', 'Nova '], [], $package['name']) }}
 
                         @if ($package['is_disabled'])
                         <span class="text-xs uppercase text-grey-light">Disabled</span>
