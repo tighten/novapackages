@@ -5,7 +5,7 @@
         @include('livewire.partials.search')
 
         <!-- Flexes the left/right column of the whole page layout -->
-        <div class="flex flex-col sm:flex-row justify-around mt-8">
+        <div class="flex flex-col sm:flex-row justify-around sm:mt-8">
             @include('livewire.partials.package-list-tags')
 
             <!-- The body -->

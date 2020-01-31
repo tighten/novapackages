@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Package;
 use App\Tag;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,12 +12,13 @@ class PackageList extends Component
 {
     use WithPagination;
 
+    const POPULAR_TAG = 'popular--and--recent';
     public $tag = 'all';
     public $search;
 
     public function render()
     {
-        if ($this->tag === 'popular--and--recent') {
+        if ($this->tag === self::POPULAR_TAG) {
             return $this->renderPopularAndRecent();
         }
 
@@ -65,12 +67,20 @@ class PackageList extends Component
     public function filterTag($tagSlug)
     {
         $this->tag = $tagSlug;
-        $this->goToPage(1);
     }
 
     public function updatedSearch()
     {
+        if ($this->tag === self::POPULAR_TAG) {
+            $this->tag = 'all';
+        }
+
         $this->gotoPage(1);
+    }
+
+    public function updatedTag()
+    {
+        $this->goToPage(1);
     }
 
     public function mount()

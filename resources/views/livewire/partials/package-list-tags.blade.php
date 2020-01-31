@@ -1,34 +1,29 @@
-<div class="block w-full sm:hidden relative mx-auto mb-4 px-2" style="max-width: 380px;">
-            @todo handle nav on mobile
-    {{--
-                <select v-model="tag" @change="filterTag($event.target.value)" class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="popular---and---recent">
-                        Popular &amp; Recent
-                    </option>
+    <div class="block w-full sm:hidden relative mx-auto mb-8 px-2" style="max-width: 380px;">
+        <select wire:model="tag" class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+            <option value="popular--and--recent">
+                Popular &amp; Recent
+            </option>
 
-                    <option value="all">
-                        All Packages
-                    </option>
+            <option value="all">
+                All Packages
+            </option>
 
-                    <optgroup label="Package types">
-                        <option v-for="(thisTag) in typeTags" v-bind:key="thisTag.slug" :value="thisTag.slug">
-                            {{ thisTag.name }}
-                        </option>
-                    </optgroup>
-                    <optgroup label="Popular tags">
-                        <option v-for="(thisTag) in popularTags" v-bind:key="thisTag.slug" :value="thisTag.slug">
-                            {{ thisTag.name }}
-                        </option>
-                    </optgroup>
-                </select>
---}}
-                <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 mr-2 text-grey-darker">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-                </div>
-            </div>
-
-
+            <optgroup label="Package types">
+                @foreach ($typeTags as $thisTag)
+                    <option value="{{ $thisTag->slug }}">{{ $thisTag->name }}</option>
+                @endforeach
+            </optgroup>
+            <optgroup label="Popular tags">
+                @foreach ($popularTags as $thisTag)
+                    <option value="{{ $thisTag->slug }}">{{ $thisTag->name }}</option>
+                @endforeach
+            </optgroup>
+        </select>
+        <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 mr-2 text-grey-darker">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+        </div>
+    </div>
 
     <div class="hidden sm:block flex-no-shrink flex-no-grow mr-4" style="min-width: 13em;">
         <nav>
