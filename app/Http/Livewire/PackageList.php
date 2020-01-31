@@ -37,7 +37,6 @@ class PackageList extends Component
 
     public function renderPackageList()
     {
-        // @todo do we need to eager load author or tags?
         if ($this->search) {
             /*
             // @todo this doesn't actually work. sigh.
