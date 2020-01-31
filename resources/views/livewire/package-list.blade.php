@@ -12,7 +12,7 @@
     @endif
 
     @if (! $packages->isEmpty())
-        <div class="flex flex-wrap justify-center sm:justify-start mb-6">
+        <div wire:key="package-bounding-box" class="flex flex-wrap justify-center sm:justify-start mb-6">
             @each('livewire.partials.package-card', $packages, 'package')
         </div>
     @else

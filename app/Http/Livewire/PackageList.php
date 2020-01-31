@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Package;
 use App\Tag;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -38,6 +37,7 @@ class PackageList extends Component
     {
         // @todo do we need to eager load author or tags?
         if ($this->search) {
+            /*
             // @todo this doesn't actually work. sigh.
             // Maybe we can customize it like this? https://www.algolia.com/doc/api-client/methods/search/
             // ... brain hurts right now.
@@ -47,14 +47,16 @@ class PackageList extends Component
                         $builder->tagged($this->tag);
                     }
                 });
-                dd($packageQuery->paginate()->total());
+            */
 
+            $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
+            $packageQuery->where('name', 'like', '%' . $this->search . '%');
         } else {
             $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
         }
 
         return view('livewire.package-list', [
-            'packages' => $packageQuery->paginate(6),
+            'packages' => $packageQuery->with(['tags', 'author'])->withCount('favorites')->paginate(6),
             'typeTags' => Tag::types()->get(),
             'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
         ]);
