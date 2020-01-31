@@ -41,7 +41,7 @@ class UserRatePackage implements ShouldQueue
 
             $package = Package::findOrFail($this->packageId);
 
-            if ((int) $package->author_id === (int) $this->userId) {
+            if ($this->isSelfAuthored($package) || $this->isSelfContributed($package)) {
                 throw new SelfAuthoredRatingException;
             }
 
@@ -56,5 +56,15 @@ class UserRatePackage implements ShouldQueue
             $rating->rating = $this->stars;
             $rating->save();
         }
+    }
+
+    private function isSelfAuthored($package)
+    {
+        return (int) $package->author_id === (int) $this->userId;
+    }
+
+    private function isSelfContributed($package)
+    {
+        return $package->contributors->pluck('user_id')->contains($this->userId);
     }
 }

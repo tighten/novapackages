@@ -339,7 +339,7 @@
                         Thanks for rating this package!
                     </div>
 
-                    <div v-if="auth && !isSelfAuthored" class="mb-4 flex">
+                    <div v-if="auth && !isSelfAuthored && !isSelfContributed" class="mb-4 flex">
                         <div class="w-1/3 pt-1 text-grey-darker">
                             Tap to rate:
                         </div>
@@ -368,7 +368,7 @@
                         {{ totalRatings }} ratings
                     </div>
 
-                    <div v-if="auth && !package.current_user_review.length && !isSelfAuthored">
+                    <div v-if="auth && !package.current_user_review.length && !isSelfAuthored && !isSelfContributed">
                         <a
                             class="block text-indigo no-underline font-bold text-sm cursor-pointer pb-4"
                             :href="route('reviews.create', {
@@ -511,6 +511,12 @@ export default {
 
         isSelfAuthored: function() {
             return this.auth && this.package.author.id === this.authId;
+        },
+
+        isSelfContributed: function() {
+            return this.package.contributors.filter((contributor) => {
+                return contributor.id === this.authId;
+            }).length;
         },
     },
 
