@@ -3,7 +3,7 @@
 use App\Collaborator;
 use App\Package;
 use App\Tag;
-use Faker\Factory as Faker;
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Faker::create();
+        factory(User::class, 50)->create();
 
         foreach (Tag::PROJECT_TYPES as $name) {
             Tag::create(['name' => $name, 'slug' => Str::slug($name)]);
@@ -67,12 +67,23 @@ class DatabaseSeeder extends Seeder
             $collaborator->authoredPackages()->save(next($packages));
         });
 
-        $tags = Tag::all();
+        $users = User::all();
 
-        Package::all()->each(function ($package) use ($tags) {
-            $package->tags()->attach($tags->random()->take(3)->get());
+        // Give each of our main packages a jillion ratings
+        Package::all()->each(function ($package) use ($users) {
+            $users->shuffle();
+            $users->take(50)->each(function ($user) use ($package) {
+                $user->ratePackage($package->id, rand(1, 15) / 3);
+            });
         });
 
+        $tags = Tag::all();
+
         factory(Package::class, 400)->create();
+
+        Package::all()->each(function ($package) use ($tags, $users) {
+            $package->tags()->attach($tags->random()->take(3)->get());
+            $users->random()->ratePackage($package->id, rand(1, 15) / 3);
+        });
     }
 }

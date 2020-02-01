@@ -44,13 +44,17 @@ class PackageResource extends ModelResource
 
     protected function averageRating($package)
     {
-        return Cache::remember(CacheKeys::packageAverageRating($package->id), self::CACHE_RATINGS_LENGTH, function () use ($package) {
+        // return Cache::remember(CacheKeys::packageAverageRating($package->id), self::CACHE_RATINGS_LENGTH, function () use ($package) {
             return number_format($package->average_rating, '2', '.', '');
-        });
+        // });
     }
 
     protected function ratingCount($package)
     {
+        if (isset($package->ratings_count)) {
+            return $package->ratings_count;
+        }
+
         if ($package->relationLoaded('ratings')) {
             return $package->ratings->count();
         }
