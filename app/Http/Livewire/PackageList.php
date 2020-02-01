@@ -32,8 +32,8 @@ class PackageList extends Component
     public function renderPopularAndRecent()
     {
         return view('livewire.popular-and-recent-packages', [
-            'popularPackages' => Package::popular()->take(6)->with(['author', 'ratings', 'tags'])->withCount('favorites')->get(),
-            'recentPackages' => Package::latest()->take(3)->with(['author', 'ratings', 'tags'])->withCount('favorites')->get(),
+            'popularPackages' => Package::popular()->take(6)->with(['author', 'ratings'])->get(),
+            'recentPackages' => Package::latest()->take(3)->with(['author', 'ratings'])->get(),
             'typeTags' => Tag::types()->get(),
             'popularTags' => $this->topTenPopularTags(),
         ]);
@@ -50,10 +50,10 @@ class PackageList extends Component
                 return $algolia->search($query, $options);
             })->paginate(6);
 
-            $packages->load(['tags', 'author', 'ratings'])->loadCount('favorites');
+            $packages->load(['author', 'ratings']);
         } else {
             $packages = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
-            $packages = $packages->latest()->with(['tags', 'author', 'ratings'])->withCount('favorites')->paginate(6);
+            $packages = $packages->latest()->with(['author', 'ratings'])->paginate(6);
         }
 
         return view('livewire.package-list', [
