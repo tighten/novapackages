@@ -34,6 +34,11 @@ class CacheKeys
         return 'popular-packages';
     }
 
+    public static function popularTags()
+    {
+        return 'popular-tags';
+    }
+
     public static function recentPackages()
     {
         return 'recent-packages';

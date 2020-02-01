@@ -3,8 +3,10 @@
 namespace App\Http\Livewire;
 
 use Algolia\AlgoliaSearch\SearchIndex;
+use App\CacheKeys;
 use App\Package;
 use App\Tag;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,6 +15,8 @@ class PackageList extends Component
     use WithPagination;
 
     const POPULAR_TAG = 'popular--and--recent';
+    const POPULAR_TAGS_LENGTH = 120;
+
     public $tag = 'all';
     public $search;
 
@@ -55,8 +59,19 @@ class PackageList extends Component
         return view('livewire.package-list', [
             'packages' => $packages->onEachSide(1),
             'typeTags' => Tag::types()->get(),
-            'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
+            'popularTags' => $this->topTenPopularTags(),
         ]);
+    }
+
+    private function topTenPopularTags()
+    {
+        return Cache::remember(
+            CacheKeys::popularTags(),
+            self::POPULAR_TAGS_LENGTH,
+            function () {
+                return Tag::popular()->take(10)->get()->sortByDesc('packages_count');
+            }
+        );
     }
 
     public function filterTag($tagSlug)
