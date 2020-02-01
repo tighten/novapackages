@@ -100,7 +100,7 @@ class Package extends Model implements Feedable
 
         // Add tags so we can filter them @todo not sure if helpful
         // @todo Make sure this is updated when tags are updated
-        $packageAttributes['tags'] = $this->tags->toArray();
+        $packageAttributes['_tags'] = $this->tags->pluck('slug')->toArray();
 
         return $packageAttributes;
     }

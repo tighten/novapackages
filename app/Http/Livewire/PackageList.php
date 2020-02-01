@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Algolia\AlgoliaSearch\SearchIndex;
 use App\Package;
 use App\Tag;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,26 +39,22 @@ class PackageList extends Component
     public function renderPackageList()
     {
         if ($this->search) {
-            /*
-            // @todo this doesn't actually work. sigh.
-            // Maybe we can customize it like this? https://www.algolia.com/doc/api-client/methods/search/
-            // ... brain hurts right now.
-            $packageQuery = Package::search($this->search)
-                ->query(function (Builder $builder) {
-                    if ($this->tag !== 'all') {
-                        $builder->tagged($this->tag);
-                    }
-                });
-            */
+            $packages = Package::search($this->search, function (SearchIndex $algolia, string $query, array $options) {
+                if ($this->tag !== 'all') {
+                    $options['tagFilters'] = [$this->tag];
+                }
 
-            $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
-            $packageQuery->where('name', 'like', '%' . $this->search . '%');
+                return $algolia->search($query, $options);
+            })->paginate(6);
+
+            $packages->load(['tags', 'author'])->loadCount('favorites');
         } else {
-            $packageQuery = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
+            $packages = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
+            $packages = $packages->with(['tags', 'author'])->withCount('favorites')->paginate(6);
         }
 
         return view('livewire.package-list', [
-            'packages' => $packageQuery->with(['tags', 'author'])->withCount('favorites')->paginate(6),
+            'packages' => $packages,
             'typeTags' => Tag::types()->get(),
             'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
         ]);
