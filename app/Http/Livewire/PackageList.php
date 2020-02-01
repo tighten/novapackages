@@ -53,7 +53,7 @@ class PackageList extends Component
             $packages->load(['tags', 'author', 'ratings'])->loadCount('favorites');
         } else {
             $packages = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
-            $packages = $packages->with(['tags', 'author', 'ratings'])->withCount('favorites')->paginate(6);
+            $packages = $packages->latest()->with(['tags', 'author', 'ratings'])->withCount('favorites')->paginate(6);
         }
 
         return view('livewire.package-list', [
