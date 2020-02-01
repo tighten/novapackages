@@ -19,6 +19,6 @@ class ClearPackageRatingCache
             Cache::forget(CacheKeys::userPackageRating($event->userId, $event->packageId));
         }
 
-        Cache::forget(CacheKeys::packageRatingsCounts(Package::class, $event->packageId));
+        Cache::forget(CacheKeys::ratingsCounts(Package::class, $event->packageId));
     }
 }

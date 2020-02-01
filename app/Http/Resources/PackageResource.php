@@ -44,9 +44,7 @@ class PackageResource extends ModelResource
 
     protected function averageRating($package)
     {
-        // return Cache::remember(CacheKeys::packageAverageRating($package->id), self::CACHE_RATINGS_LENGTH, function () use ($package) {
-            return number_format($package->average_rating, '2', '.', '');
-        // });
+        return number_format($package->average_rating, '2', '.', '');
     }
 
     protected function ratingCount($package)

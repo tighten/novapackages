@@ -4,9 +4,9 @@ namespace App;
 
 class CacheKeys
 {
-    public static function packageAverageRating($packageId)
+    public static function averageRating($class, $id)
     {
-        return 'average-package-rating::'.$packageId;
+        return 'average-rating--model::'.$class.'-id::'.$id;
     }
 
     public static function userPackageRating($userId, $packageId)
@@ -14,7 +14,7 @@ class CacheKeys
         return 'user-package-rating::package-'.$packageId.'-user-'.$userId;
     }
 
-    public static function packageRatingsCounts($class, $id)
+    public static function ratingsCounts($class, $id)
     {
         return 'count-ratings--model::'.$class.'-id::'.$id.'-count';
     }

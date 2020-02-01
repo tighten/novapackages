@@ -19,7 +19,7 @@ trait RatingCountable
     protected function getRatingsCounts()
     {
         return Cache::remember(
-            CacheKeys::packageRatingsCounts(static::class, $this->id),
+            CacheKeys::ratingsCounts(static::class, $this->id),
             $this->ratingsCountCacheLength,
             function () {
                 if ($this->relationLoaded('ratings')) {
@@ -90,7 +90,7 @@ trait RatingCountable
     public function averageRating()
     {
         return Cache::remember(
-            CacheKeys::packageAverageRating(static::class, $this->id),
+            CacheKeys::averageRating(static::class, $this->id),
             $this->avarageRatingCacheLength,
             function () {
                 $ratingsCounts = collect($this->getRatingsCounts());
