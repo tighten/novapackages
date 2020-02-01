@@ -5,25 +5,25 @@ $package['accent'] = app(App\Colors::class)->nextColor();
 <div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs" wire:key="{{ $context ?? 'no-context' }}-{{ $package['id'] }}">
     <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded-sm">
         @if (optional(auth()->user())->isAdmin())
-        <div class="text-right -mb-6">
-            <admin-dropdown>
-                <span slot="link" class="appearance-none flex items-center inline-block text-white font-medium">
-                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                </span>
+            <div class="text-right -mb-6">
+                <admin-dropdown>
+                    <span slot="link" class="appearance-none flex items-center inline-block text-white font-medium">
+                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                    </span>
 
-                <div slot="dropdown" class="bg-indigo shadow rounded border overflow-hidden">
-                    <a v-if="package.is_disabled == true" :href="route('app.admin.enable-package', package)" class="no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue">
-                        Enable
-                    </a>
+                    <div slot="dropdown" class="bg-indigo shadow rounded border overflow-hidden">
+                        <a v-if="package.is_disabled == true" :href="route('app.admin.enable-package', package)" class="no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue">
+                            Enable
+                        </a>
 
-                    <a v-else :href="route('app.admin.disable-package', package)" class="no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue">
-                        Disable
-                    </a>
-                </div>
-            </admin-dropdown>
-        </div>
+                        <a v-else :href="route('app.admin.disable-package', package)" class="no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue">
+                            Disable
+                        </a>
+                    </div>
+                </admin-dropdown>
+            </div>
         @endif
 
         <div class="flex flex-row mt-4 px-4 pb-4" style="height: 14em">
@@ -38,7 +38,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
                         {{ str_replace(['Laravel Nova ', 'Nova '], [], $package['name']) }}
 
                         @if ($package['is_disabled'])
-                        <span class="text-xs uppercase text-grey-light">Disabled</span>
+                            <span class="text-xs uppercase text-grey-light">Disabled</span>
                         @endif
                     </h2>
                 </a>
