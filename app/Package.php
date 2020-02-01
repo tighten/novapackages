@@ -98,7 +98,7 @@ class Package extends Model implements Feedable
 
         Arr::forget($packageAttributes, $this->excludeFromSearchIndex);
 
-        // Add tags so we can filter them @todo not sure if helpful
+        // Add tags so we can filter them
         // @todo Make sure this is updated when tags are updated
         $packageAttributes['_tags'] = $this->tags->pluck('slug')->toArray();
 
