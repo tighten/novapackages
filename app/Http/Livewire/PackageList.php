@@ -57,7 +57,7 @@ class PackageList extends Component
         }
 
         return view('livewire.package-list', [
-            'packages' => $packages->onEachSide(1),
+            'packages' => $packages->onEachSide(3),
             'typeTags' => Tag::types()->get(),
             'popularTags' => $this->topTenPopularTags(),
         ]);
