@@ -77,6 +77,7 @@ class PackageList extends Component
     public function filterTag($tagSlug)
     {
         $this->tag = $tagSlug;
+        $this->goToPage(1);
     }
 
     /** Livewire Hooks and lifecycle methods */
