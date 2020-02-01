@@ -50,10 +50,10 @@ class PackageList extends Component
                 return $algolia->search($query, $options);
             })->paginate(6);
 
-            $packages->load(['tags', 'author'])->loadCount(['favorites', 'ratings']);
+            $packages->load(['tags', 'author', 'ratings'])->loadCount('favorites');
         } else {
             $packages = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
-            $packages = $packages->with(['tags', 'author'])->withCount(['favorites', 'ratings'])->paginate(6);
+            $packages = $packages->with(['tags', 'author', 'ratings'])->withCount('favorites')->paginate(6);
         }
 
         return view('livewire.package-list', [
