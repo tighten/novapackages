@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use Algolia\AlgoliaSearch\SearchIndex;
 use App\Package;
 use App\Tag;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -54,7 +53,7 @@ class PackageList extends Component
         }
 
         return view('livewire.package-list', [
-            'packages' => $packages,
+            'packages' => $packages->onEachSide(1),
             'typeTags' => Tag::types()->get(),
             'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
         ]);
@@ -65,6 +64,7 @@ class PackageList extends Component
         $this->tag = $tagSlug;
     }
 
+    /** Livewire Hooks and lifecycle methods */
     public function updatedSearch()
     {
         if ($this->tag === self::POPULAR_TAG) {
@@ -90,7 +90,7 @@ class PackageList extends Component
         }
     }
 
-    // temporary--while we have Tailwind pre-1.0
+    /* Temporary override of WithPagination -- wwhile we have Tailwind pre-1.0 */
     public function paginationView()
     {
         return 'livewire.partials.tailwind-beta-pagination';
