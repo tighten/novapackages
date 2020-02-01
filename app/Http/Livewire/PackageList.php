@@ -35,7 +35,7 @@ class PackageList extends Component
             'popularPackages' => Package::popular()->take(6)->with(['author', 'ratings', 'tags'])->withCount('favorites')->get(),
             'recentPackages' => Package::latest()->take(3)->with(['author', 'ratings', 'tags'])->withCount('favorites')->get(),
             'typeTags' => Tag::types()->get(),
-            'popularTags' => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
+            'popularTags' => $this->topTenPopularTags(),
         ]);
     }
 

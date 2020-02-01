@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        factory(User::class, 50)->create();
+        factory(User::class, 500)->create();
 
         foreach (Tag::PROJECT_TYPES as $name) {
             Tag::create(['name' => $name, 'slug' => Str::slug($name)]);
@@ -83,6 +83,8 @@ class DatabaseSeeder extends Seeder
 
         Package::all()->each(function ($package) use ($tags, $users) {
             $package->tags()->attach($tags->random()->take(3)->get());
+            $users->random()->ratePackage($package->id, rand(1, 15) / 3);
+            $users->random()->ratePackage($package->id, rand(1, 15) / 3);
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
         });
     }
