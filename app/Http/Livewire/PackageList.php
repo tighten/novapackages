@@ -17,7 +17,7 @@ class PackageList extends Component
     const POPULAR_TAG = 'popular--and--recent';
     const POPULAR_TAGS_LENGTH = 120;
 
-    public $tag = 'all';
+    public $tag = 'popular--and--recent';
     public $search;
 
     public function render()
