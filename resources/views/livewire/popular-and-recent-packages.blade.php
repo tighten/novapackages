@@ -15,6 +15,8 @@
         @foreach ($popularPackages as $package)
             @include('livewire.partials.package-card', ['context' => 'popular'])
         @endforeach
+
+        {!! $popularPackages->links() !!}
     </div>
 </div>
 @endsection

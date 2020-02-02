@@ -32,7 +32,7 @@ class PackageList extends Component
     public function renderPopularAndRecent()
     {
         return view('livewire.popular-and-recent-packages', [
-            'popularPackages' => Package::popular()->take(6)->with(['author', 'ratings'])->get(),
+            'popularPackages' => Package::popular()->with(['author', 'ratings'])->paginate(6),
             'recentPackages' => Package::latest()->take(3)->with(['author', 'ratings'])->get(),
             'typeTags' => Tag::types()->get(),
             'popularTags' => $this->topTenPopularTags(),
