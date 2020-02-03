@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 trait RatingCountable
 {
     public $ratingsCountCacheLength = 60;
+    public $avarageRatingCacheLength = 60;
 
     public function countStarRatings($numberOfStars)
     {
@@ -18,7 +19,7 @@ trait RatingCountable
     protected function getRatingsCounts()
     {
         return Cache::remember(
-            CacheKeys::packageRatingsCounts(static::class, $this->id),
+            CacheKeys::ratingsCounts(static::class, $this->id),
             $this->ratingsCountCacheLength,
             function () {
                 if ($this->relationLoaded('ratings')) {
@@ -88,14 +89,20 @@ trait RatingCountable
      */
     public function averageRating()
     {
-        $ratingsCounts = collect($this->getRatingsCounts());
+        return Cache::remember(
+            CacheKeys::averageRating(static::class, $this->id),
+            $this->avarageRatingCacheLength,
+            function () {
+                $ratingsCounts = collect($this->getRatingsCounts());
 
-        if ($ratingsCounts->sum() === 0) {
-            return 0;
-        }
+                if ($ratingsCounts->sum() === 0) {
+                    return 0;
+                }
 
-        return round($ratingsCounts->map(function ($count, $stars) {
-            return $count * $stars;
-        })->sum() / $ratingsCounts->sum(), 1);
+                return round($ratingsCounts->map(function ($count, $stars) {
+                    return $count * $stars;
+                })->sum() / $ratingsCounts->sum(), 1);
+            }
+        );
     }
 }

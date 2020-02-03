@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PackageController@index')->name('home');
-
 Route::get('packages/{namespace}/{name}', 'PackageController@show')->name('packages.show');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -13,7 +12,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('collaborators/{collaborator}', 'CollaboratorController@show')->name('collaborators.show');
 
 Route::get('stats', 'StatsController')->name('stats');
-Route::get('search', 'SearchController')->name('search');
 Route::get('package-ideas', 'PackageIdeaController')->name('package-ideas');
 
 Route::get('login/github', 'Auth\LoginController@redirectToProvider')->name('login');
@@ -30,9 +28,6 @@ Route::group(['prefix' => 'app/email', 'middleware' => 'auth', 'as' => 'app.emai
 });
 
 Route::group(['prefix' => 'app', 'middleware' => ['auth', 'email'], 'as' => 'app.'], function () {
-    Route::redirect('/', '/app/home');
-    Route::get('home', 'HomeController@index')->name('home');
-
     Route::post('screenshot-uploads', 'App\ScreenshotUploadController@store')->name('screenshot-uploads.store');
     Route::middleware(['can:delete,screenshot'])->group(function () {
         Route::delete('screenshot-uploads/{screenshot}', 'App\ScreenshotUploadController@destroy')->name('screenshot-uploads.destroy');

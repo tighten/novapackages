@@ -22,7 +22,10 @@
             user_id: '{{ auth()->id() ?? null }}'
         };
     </script>
+
+    @livewireStyles
 </head>
+
 <body class="bg-page-background font-sans font-normal">
     <div class="flex flex-col sm:flex-row bg-indigo-darker px-8 py-4 items-center justify-between">
         <a href="/" class="flex items-center text-white font-bold text-md no-underline uppercase">
@@ -40,10 +43,8 @@
                     <a href="{{ route('app.admin.index') }}" class="no-underline hover:underline text-sm font-bold text-white px-3">Admin</a>
                 @endif
 
-                <a href="{{ route('logout') }}"
-                    class="no-underline hover:underline text-sm font-bold text-white px-3"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">Log out</a>
+                <a href="{{ route('logout') }}" class="no-underline hover:underline text-sm font-bold text-white px-3" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Log out</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                     {{ csrf_field() }}
                 </form>
@@ -88,6 +89,7 @@
     </div>
 
     @routes
+    @livewireScripts
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

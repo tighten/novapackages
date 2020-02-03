@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('sync:packagist')->hourly();
         $schedule->command('sync:repo')->hourlyAt(30);
         $schedule->command('purge:abandonedscreenshots')->dailyAt('1:00');
+        $schedule->command('telescope:prune')->daily();
     }
 
     /**
