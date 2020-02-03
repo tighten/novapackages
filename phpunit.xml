@@ -33,5 +33,6 @@
         <env name="DB_CONNECTION" value="sqlite"/>
         <env name="DB_DATABASE" value=":memory:"/>
         <env name="SCOUT_DRIVER" value="null"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
     </php>
 </phpunit>
