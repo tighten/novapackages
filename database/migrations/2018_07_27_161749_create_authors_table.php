@@ -13,7 +13,6 @@ class CreateAuthorsTable extends Migration
             $table->string('name');
             $table->string('url');
             $table->text('description');
-            // @todo handle companies with multiple collaborators?
             $table->timestamps();
         });
     }
