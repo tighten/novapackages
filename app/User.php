@@ -50,7 +50,9 @@ class User extends Authenticatable
     {
         parent::boot();
         self::updated(function ($user) {
-            $user->updateCollaboratorNames();
+            if ($user->isDirty('name')) {
+                $user->updateCollaboratorNames();
+            }
         });
     }
 
