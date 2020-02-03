@@ -74,6 +74,13 @@ class Package extends Model implements Feedable
         return $this->hasMany(Favorite::class);
     }
 
+    public function scopeTagged($query, $tagSlug)
+    {
+        $query->whereHas('tags', function ($query) use ($tagSlug) {
+            $query->where('slug', $tagSlug);
+        });
+    }
+
     public function scopePopular($query)
     {
         return $query->select(
@@ -90,6 +97,10 @@ class Package extends Model implements Feedable
         $packageAttributes['instructions'] = substr($packageAttributes['instructions'], 0, 500);
 
         Arr::forget($packageAttributes, $this->excludeFromSearchIndex);
+
+        // Add tags so we can filter them
+        // @todo Make sure this is updated when tags are updated
+        $packageAttributes['_tags'] = $this->tags->pluck('slug')->toArray();
 
         return $packageAttributes;
     }

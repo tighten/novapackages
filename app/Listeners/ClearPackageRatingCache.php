@@ -11,14 +11,14 @@ class ClearPackageRatingCache
 {
     public function handle(PackageRated $event)
     {
-        Cache::forget(CacheKeys::packageAverageRating($event->packageId));
+        Cache::forget(CacheKeys::averageRating(Package::class, $event->packageId));
 
-        /* @todo: Can we forget all the usrPackageRatings? Cache tags? */
+        /* @todo: Can we forget all the userPackageRatings? Cache tags? */
         // ... at least let's forget the triggering user.
         if ($event->userId) {
             Cache::forget(CacheKeys::userPackageRating($event->userId, $event->packageId));
         }
 
-        Cache::forget(CacheKeys::packageRatingsCounts(Package::class, $event->packageId));
+        Cache::forget(CacheKeys::ratingsCounts(Package::class, $event->packageId));
     }
 }

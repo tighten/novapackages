@@ -4,7 +4,9 @@ namespace App\Http\Resources;
 
 use App\CacheKeys;
 use App\Exceptions\PackagistException;
+use App\Favorite;
 use App\Http\Remotes\Packagist;
+use App\Http\Resources\TagResource;
 use App\ReadmeFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
@@ -48,6 +50,9 @@ class PackageDetailResource extends PackageResource
             'possibly_abandoned' => $this->isPossiblyAbandoned($package, $composer_latest ?? null, $packagistData ?? []),
             'github_stars' => $package->github_stars,
             'packagist_downloads' => $package->packagist_downloads,
+            'tags' => TagResource::from($package->tags),
+            'is_favorite' => $this->isFavorite($package),
+            'favorites_count' => $this->favoritesCount($package),
         ]);
     }
 
@@ -97,5 +102,15 @@ class PackageDetailResource extends PackageResource
     {
         return Arr::get($packagistData, 'package.abandoned', false) ||
             ($package->created_at->diffInDays(now()) > 15 && ! $composer_latest);
+    }
+
+    protected function isFavorite($package)
+    {
+        return auth()->user() && (auth()->user()->favorites()->where('package_id', $package->id)->count() > 0);
+    }
+
+    protected function favoritesCount($package)
+    {
+        return $package->favorites_count ?? Favorite::where('package_id', $package->id)->count();
     }
 }
