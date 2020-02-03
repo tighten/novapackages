@@ -65,6 +65,6 @@ class UserRatePackage implements ShouldQueue
 
     private function isSelfContributed($package)
     {
-        return $package->contributors->pluck('user_id')->contains($this->userId);
+        return $package->contributors()->pluck('user_id')->contains($this->userId);
     }
 }
