@@ -10,7 +10,7 @@ class CreateToolsTable extends Migration
     {
         Schema::create('tools', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('author_id'); // @todo add fk constraint
+            $table->unsignedInteger('author_id');
             $table->string('name');
             $table->string('type');
             $table->string('promo_url');
