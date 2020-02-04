@@ -89991,10 +89991,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: {
         auth: {},
-        creatingReview: { deafult: false },
+        authId: {},
+        creatingReview: { default: false },
         initialPackage: {},
-        ratings: {},
-        userId: {}
+        ratings: {}
     },
 
     data: function data() {
@@ -90034,6 +90034,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         packagistDownloads: function packagistDownloads() {
             return this.package.packagist_downloads.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+
+        isSelfAuthored: function isSelfAuthored() {
+            return this.auth && this.package.author.id === this.authId;
+        },
+
+        isSelfContributed: function isSelfContributed() {
+            var _this = this;
+
+            return this.package.contributors.filter(function (contributor) {
+                return contributor.id === _this.authId;
+            }).length;
         }
     },
 
@@ -90057,43 +90069,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.installBoxOpen) return this.installBoxOpen = false;
         },
         setRating: function setRating(rating) {
-            var _this = this;
+            var _this2 = this;
 
             __WEBPACK_IMPORTED_MODULE_4__http__["a" /* default */].post('/internalapi/ratings', {
                 package_id: this.package.id,
                 rating: rating
             }).then(function (response) {
-                _this.rating = rating;
-                _this.rated = true;
+                _this2.rating = rating;
+                _this2.rated = true;
             }, function (response) {
                 alert('Error: ' + response.message);
             });
         },
         requestPackagistRefresh: function requestPackagistRefresh() {
-            var _this2 = this;
+            var _this3 = this;
 
             __WEBPACK_IMPORTED_MODULE_4__http__["a" /* default */].delete('/app/packages/' + this.package.id + '/packagist-cache').then(function (response) {
-                _this2.refreshRequested = true;
+                _this3.refreshRequested = true;
             }, function (response) {
                 alert('Error: ' + response.message);
             });
         },
         requestRepositoryRefresh: function requestRepositoryRefresh() {
-            var _this3 = this;
+            var _this4 = this;
 
             __WEBPACK_IMPORTED_MODULE_4__http__["a" /* default */].post('/app/packages/' + this.package.id + '/repository-refresh').then(function (response) {
-                _this3.repositoryRefreshRequested = true;
+                _this4.repositoryRefreshRequested = true;
             }, function (response) {
                 alert('Error: ' + response.message);
             });
         },
         copySuccessful: function copySuccessful() {
-            var _this4 = this;
+            var _this5 = this;
 
             this.copyWasSuccessful = true;
 
             setTimeout(function () {
-                _this4.copyWasSuccessful = false;
+                _this5.copyWasSuccessful = false;
             }, 3000);
         },
         goBack: function goBack() {
@@ -90110,21 +90122,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         addToFavorites: function addToFavorites() {
-            var _this5 = this;
+            var _this6 = this;
 
             __WEBPACK_IMPORTED_MODULE_4__http__["a" /* default */].post('/internalapi/packages/' + this.package.id + '/favorites').then(function (response) {
-                _this5.isFavorite = true;
-                _this5.favoritesCount++;
+                _this6.isFavorite = true;
+                _this6.favoritesCount++;
             }, function (response) {
                 alert('Error: ' + response.message);
             });
         },
         removeFromFavorites: function removeFromFavorites() {
-            var _this6 = this;
+            var _this7 = this;
 
             __WEBPACK_IMPORTED_MODULE_4__http__["a" /* default */].delete('/internalapi/packages/' + this.package.id + '/favorites').then(function (response) {
-                _this6.isFavorite = false;
-                _this6.favoritesCount--;
+                _this7.isFavorite = false;
+                _this7.favoritesCount--;
             }, function (response) {
                 alert('Error: ' + response.message);
             });
@@ -91734,7 +91746,7 @@ var render = function() {
                           )
                         ]),
                     _vm._v(" "),
-                    _vm.auth
+                    _vm.auth && !_vm.isSelfAuthored && !_vm.isSelfContributed
                       ? _c("div", { staticClass: "mb-4 flex" }, [
                           _c(
                             "div",
@@ -91802,7 +91814,10 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm.auth && !_vm.package.current_user_review.length
+                    _vm.auth &&
+                    !_vm.package.current_user_review.length &&
+                    !_vm.isSelfAuthored &&
+                    !_vm.isSelfContributed
                       ? _c("div", [
                           _c(
                             "a",

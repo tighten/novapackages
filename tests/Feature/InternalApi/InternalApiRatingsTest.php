@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\InternalApi;
 
+use App\Collaborator;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -74,5 +75,46 @@ class InternalApiRatingsTest extends TestCase
         ]);
 
         $this->assertEquals(2, (int) $package->user_average_rating);
+    }
+
+    /** @test */
+    function a_user_cannot_rate_a_package_they_authored()
+    {
+        $user = factory(User::class)->create();
+        $package = factory(Package::class)->create(['author_id' => $user->id]);
+
+        $request = $this->be($user)->post(route('internalapi.ratings.store'), [
+            'package_id' => $package->id,
+            'rating' => 5,
+        ]);
+
+        $this->assertEquals(0, $package->ratings()->count());
+        $request->assertStatus(422);
+        $request->assertJson([
+            'status' => 'error',
+            'message' => 'A package cannot be rated by its author',
+        ]);
+    }
+
+    /** @test */
+    function a_user_cannot_rate_a_package_they_collaborated_on()
+    {
+        $user = factory(User::class)->create();
+        $collaborator = factory(Collaborator::class)->make();
+        $user->collaborators()->save($collaborator);
+        $package = factory(Package::class)->create();
+        $package->contributors()->save($collaborator);
+
+        $request = $this->be($user)->post(route('internalapi.ratings.store'), [
+            'package_id' => $package->id,
+            'rating' => 5,
+        ]);
+
+        $this->assertEquals(0, $package->ratings()->count());
+        $request->assertStatus(422);
+        $request->assertJson([
+            'status' => 'error',
+            'message' => 'A package cannot be rated by its author',
+        ]);
     }
 }

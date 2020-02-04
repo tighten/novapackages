@@ -94,9 +94,6 @@ class PackageController extends Controller
         $package->tags()->sync(array_merge($request->input('tags', []), $newTagsCreated));
         $package->syncScreenshots($request->input('screenshots', []));
 
-        // @todo: create this event
-        // event(new PackageUpdated($package));
-
         return redirect()->route('app.packages.index');
     }
 

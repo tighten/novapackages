@@ -19,7 +19,8 @@ class PackageDetailResource extends PackageResource
         try {
             $packagistData = Packagist::make($package->composer_name)->data();
             $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
-        } catch (PackagistException $e) { }
+        } catch (PackagistException $e) {
+        }
 
         return array_merge(parent::toArray($package), [
             'composer_data' => $packagistData ?? false,
@@ -41,6 +42,7 @@ class PackageDetailResource extends PackageResource
             'ratings' => $package->ratings ?? null,
             'contributors' => $package->contributors->map(function ($contributor) {
                 return [
+                    'id' => $contributor->user_id,
                     'name' => $contributor->name,
                     'avatar_url' => $contributor->avatar ?: 'https://api.adorable.io/avatars/285/' . Str::slug($contributor->name) . '.png',
                 ];
