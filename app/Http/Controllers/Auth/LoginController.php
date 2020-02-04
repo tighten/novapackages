@@ -79,6 +79,7 @@ class LoginController extends Controller
             'email' => $socialiteUser->getEmail(),
             'avatar' => $socialiteUser->getAvatar(),
             'github_username' => $socialiteUser->getNickname(),
+            'github_user_id' => $socialiteUser->getId(),
         ];
     }
 }
