@@ -19,7 +19,7 @@
 
     <package-detail-frame
         :auth="{{ auth()->check() ? 'true' : 'false' }}"
-        :auth-id="{{ auth()->check() ? auth()->id() : null }}"
+        :auth-id="{{ auth()->check() ? auth()->id() : 'null' }}"
         :initial-package="{{ json_encode($package) }}"
     >
         <package-detail

@@ -463,7 +463,7 @@ export default {
     props: {
         auth: {},
         authId: {},
-        creatingReview: { deafult: false },
+        creatingReview: { default: false },
         initialPackage: {},
         ratings: {},
     },
