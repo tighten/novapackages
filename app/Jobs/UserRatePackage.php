@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Exceptions\SelfAuthoredRatingException;
 use App\Package;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -38,7 +39,13 @@ class UserRatePackage implements ShouldQueue
             $rating->rating = $this->stars;
             $rating->user_id = $this->userId;
 
-            Package::findOrFail($this->packageId)->ratings()->save($rating);
+            $package = Package::findOrFail($this->packageId);
+
+            if ($this->isSelfAuthored($package) || $this->isSelfContributed($package)) {
+                throw new SelfAuthoredRatingException;
+            }
+
+            $package->ratings()->save($rating);
         } else {
             $rating = Rating::where([
                 'user_id' => $this->userId,
@@ -49,5 +56,15 @@ class UserRatePackage implements ShouldQueue
             $rating->rating = $this->stars;
             $rating->save();
         }
+    }
+
+    private function isSelfAuthored($package)
+    {
+        return (int) $package->author_id === (int) $this->userId;
+    }
+
+    private function isSelfContributed($package)
+    {
+        return $package->contributors()->pluck('user_id')->contains($this->userId);
     }
 }

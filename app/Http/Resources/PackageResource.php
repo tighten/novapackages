@@ -28,6 +28,7 @@ class PackageResource extends ModelResource
             'rating_count' => $this->ratingCount($package),
             'created_at' => $package->created_at->diffForHumans(),
             'author' => [
+                'id' => $package->author_id,
                 'name' => $package->author->name,
                 'url' => $package->author->url,
                 'avatar_url' => $package->author->avatar ?: 'https://api.adorable.io/avatars/285/'.Str::slug($package->author->name).'.png',
