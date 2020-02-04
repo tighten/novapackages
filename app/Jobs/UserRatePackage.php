@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Collaborator;
 use App\Exceptions\SelfAuthoredRatingException;
 use App\Package;
 use Illuminate\Bus\Queueable;
@@ -60,7 +61,7 @@ class UserRatePackage implements ShouldQueue
 
     private function isSelfAuthored($package)
     {
-        return (int) $package->author_id === (int) $this->userId;
+        return (int) $package->author_id === (int) optional(Collaborator::where('user_id', $this->userId)->first())->id;
     }
 
     private function isSelfContributed($package)
