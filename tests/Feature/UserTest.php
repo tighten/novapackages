@@ -113,4 +113,64 @@ class UserTest extends TestCase
 
         $this->assertEquals('calebdume', $collaborator->fresh()->github_username);
     }
+
+    /** @test */
+    function updating_collaborator_github_user_id_on_user_update()
+    {
+        $user = factory(User::class)->create([
+            'github_user_id' => null,
+            'github_username' => 'calebdume',
+        ]);
+        $collaborator = factory(Collaborator::class)->make([
+            'github_user_id' => null,
+            'github_username' => 'calebdume',
+        ]);
+        $user->collaborators()->save($collaborator);
+
+        $user->update(['github_user_id' => 123]);
+
+        $this->assertEquals(123, $collaborator->fresh()->github_user_id);
+    }
+
+    /** @test */
+    function collaborator_github_user_ids_are_only_updated_where_github_username_matches()
+    {
+        $user = factory(User::class)->create([
+            'github_user_id' => null,
+            'github_username' => 'calebdume',
+        ]);
+        $collaborator = factory(Collaborator::class)->make([
+            'github_user_id' => null,
+            'github_username' => 'calebdume',
+        ]);
+        $newCollaborator = factory(Collaborator::class)->make([
+            'github_user_id' => null,
+            'github_username' => 'ezrabridger',
+        ]);
+        $user->collaborators()->save($collaborator);
+        $user->collaborators()->save($newCollaborator);
+
+        $user->update(['github_user_id' => 123]);
+
+        $this->assertEquals(123, $collaborator->fresh()->github_user_id);
+        $this->assertNull($newCollaborator->fresh()->github_user_id);
+    }
+
+    /** @test */
+    function collaborator_github_user_id_is_only_updated_when_it_is_null()
+    {
+        $user = factory(User::class)->create([
+            'github_user_id' => null,
+            'github_username' => 'calebdume',
+        ]);
+        $collaborator = factory(Collaborator::class)->make([
+            'github_user_id' => 321,
+            'github_username' => 'calebdume',
+        ]);
+        $user->collaborators()->save($collaborator);
+
+        $user->update(['github_user_id' => 123]);
+
+        $this->assertEquals(321, $collaborator->fresh()->github_user_id);
+    }
 }
