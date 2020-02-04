@@ -53,6 +53,9 @@ class User extends Authenticatable
             if ($user->isDirty('name')) {
                 $user->updateCollaboratorNames();
             }
+            if ($user->isDirty('github_username')) {
+                $user->updateCollaboratorGithubUsernames();
+            }
         });
     }
 
@@ -127,6 +130,20 @@ class User extends Authenticatable
             })
             ->each(function ($collaborator) {
                 $collaborator->update(['name' => $this->name]);
+            });
+    }
+
+    public function updateCollaboratorGithubUsernames()
+    {
+        $this->collaborators
+            ->reject(function ($collaborator) {
+                return ! $collaborator->github_user_id;
+            })
+            ->filter(function ($collaborator) {
+                return (int) $collaborator->github_user_id === (int) $this->github_user_id;
+            })
+            ->each(function ($collaborator) {
+                $collaborator->update(['github_username' => $this->github_username]);
             });
     }
 }
