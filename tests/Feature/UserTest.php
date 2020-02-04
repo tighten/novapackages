@@ -58,9 +58,11 @@ class UserTest extends TestCase
     function updating_collaborator_github_usernames_when_the_user_github_username_changes()
     {
         $user = factory(User::class)->create([
+            'github_user_id' => 123,
             'github_username' => 'calebdume',
         ]);
         $collaborator = factory(Collaborator::class)->make([
+            'github_user_id' => 123,
             'github_username' => 'calebdume',
         ]);
         $user->collaborators()->save($collaborator);
@@ -74,15 +76,15 @@ class UserTest extends TestCase
     function updating_collaborator_github_usernames_only_updates_where_same_github_user_id()
     {
         $user = factory(User::class)->create([
-            'github_user_id' => 1,
+            'github_user_id' => 123,
             'github_username' => 'calebdume',
         ]);
         $collaborator = factory(Collaborator::class)->make([
-            'github_user_id' => 1,
+            'github_user_id' => 123,
             'github_username' => 'calebdume',
         ]);
         $newCollaborator = factory(Collaborator::class)->make([
-            'github_user_id' => 2,
+            'github_user_id' => 321,
             'github_username' => 'ezrabridger',
         ]);
         $user->collaborators()->save($collaborator);
