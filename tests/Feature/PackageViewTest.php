@@ -43,16 +43,16 @@ class PackageViewTest extends TestCase
     {
         $packageNamespace = 'tightenco';
         $packageName = 'bae';
-        $packageA = factory(Package::class)->make([
+        $package = factory(Package::class)->make([
             'composer_name' => "{$packageNamespace}/{$packageName}",
         ]);
         $collaborator = factory(Collaborator::class)->make();
         $user = factory(User::class)->create();
         $user->collaborators()->save($collaborator);
-        $collaborator->authoredPackages()->save($packageA);
+        $collaborator->authoredPackages()->save($package);
 
         $response = $this->actingAs($user)
-            ->get(route('packages.show', ['namespace' => $packageA->id]));
+            ->get(route('packages.show-id', ['package' => $package->id]));
 
         $response->assertRedirect(route('packages.show', ['namespace' => $packageNamespace, 'name' => $packageName]));
     }

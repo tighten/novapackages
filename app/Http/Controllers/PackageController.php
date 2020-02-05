@@ -13,13 +13,8 @@ class PackageController extends Controller
         return view('packages.index');
     }
 
-    public function show($namespace, $name = null)
+    public function show($namespace, $name)
     {
-        // Legacy URI by ID Support
-        if (is_numeric($namespace) && $name === null) {
-            return $this->idSearch($namespace);
-        }
-
         $query = Package::where('composer_name', $namespace.'/'.$name);
 
         if (auth()->user() && auth()->user()->isAdmin()) {
@@ -33,10 +28,8 @@ class PackageController extends Controller
             ->with('screenshots', $package->screenshots);
     }
 
-    public function idSearch($id)
+    public function showId(Package $package)
     {
-        $package = Package::findOrFail($id);
-
         return redirect()->route('packages.show', [
             'namespace' => Str::before($package->composer_name, '/'),
             'name' => Str::after($package->composer_name, '/'),
