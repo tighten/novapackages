@@ -46,6 +46,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        self::updated(function ($user) {
+            if ($user->isDirty('name')) {
+                $user->updateCollaboratorNames();
+            }
+        });
+    }
+
     public function collaborators()
     {
         return $this->hasMany(Collaborator::class);
@@ -107,5 +117,16 @@ class User extends Authenticatable
         return self::where('github_username', $socialiteUser->getNickname())
             ->orWhere('email', $socialiteUser->getEmail())
             ->first();
+    }
+
+    public function updateCollaboratorNames()
+    {
+        $this->collaborators
+            ->filter(function ($collaborator) {
+                return $collaborator->github_username === $this->github_username;
+            })
+            ->each(function ($collaborator) {
+                $collaborator->update(['name' => $this->name]);
+            });
     }
 }
