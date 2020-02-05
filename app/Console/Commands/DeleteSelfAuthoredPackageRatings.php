@@ -37,7 +37,7 @@ class DeleteSelfAuthoredPackageRatings extends Command
                 ->whereRaw('collaborators.user_id = ratings.user_id');
         });
 
-        $this->info("Deleting {$query->count()} self-authored package ratings");
+        $this->info("Deleting {$query->count()} self-contributed package ratings");
 
         $query->delete();
     }
