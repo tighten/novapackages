@@ -35,8 +35,8 @@ class PackageController extends Controller
     {
         $repo = Repo::fromRequest($request);
 
-        // We disable syncing here and manually call ->searchable() after so
-        // the tags are stored in the database and can be indexed.
+        // We disable syncing here and manually call ->searchable() after the tag
+        // associations are established in the database so they can be indexed.
         $package = Package::withoutSyncingToSearch(function () use ($request, $repo) {
             // @todo: Kick off a sync operation and validate it's a real repo? grab name? geez there's a lot here that's sillly to make them enter manually
             $package = Package::create(array_merge(
@@ -85,6 +85,8 @@ class PackageController extends Controller
     {
         $repo = Repo::fromRequest($request);
 
+        // We disable syncing here and manually call ->searchable() after the tag
+        // associations are established in the database so they can be indexed.
         $package = Package::withoutSyncingToSearch(function () use ($package, $request, $repo) {
             $package->update(array_merge(
                 request()->only(['name', 'author_id', 'url', 'abstract', 'instructions']),
