@@ -81,7 +81,11 @@ class InternalApiRatingsTest extends TestCase
     function a_user_cannot_rate_a_package_they_authored()
     {
         $user = factory(User::class)->create();
-        $package = factory(Package::class)->create(['author_id' => $user->id]);
+        $package = factory(Package::class)->create([
+            'author_id' => factory(Collaborator::class)->create([
+                'user_id' => $user->id,
+            ]),
+        ]);
 
         $request = $this->be($user)->post(route('internalapi.ratings.store'), [
             'package_id' => $package->id,
