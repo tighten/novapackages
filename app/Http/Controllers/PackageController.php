@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Package;
-use Illuminate\Support\Str;
 use App\Http\Resources\PackageDetailResource;
 
 class PackageController extends Controller
@@ -31,8 +30,8 @@ class PackageController extends Controller
     public function showId(Package $package)
     {
         return redirect()->route('packages.show', [
-            'namespace' => Str::before($package->composer_name, '/'),
-            'name' => Str::after($package->composer_name, '/'),
+            'namespace' => $package->composer_vendor,
+            'name' => $package->composer_package,
         ]);
     }
 }
