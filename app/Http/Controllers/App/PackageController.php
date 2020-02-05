@@ -35,23 +35,31 @@ class PackageController extends Controller
     {
         $repo = Repo::fromRequest($request);
 
-        // @todo: Kick off a sync operation and validate it's a real repo? grab name? geez there's a lot here that's sillly to make them enter manually
-        $package = Package::create(array_merge(
-            request()->only(['name', 'author_id', 'url', 'abstract', 'instructions']),
-            [
-                'composer_name' => $request->getComposerName(),
-                'repo_url' => $repo->url(),
-                'readme_source' => $repo->source(),
-                'readme_format' => $repo->readmeFormat(),
-                'submitter_id' => auth()->user()->id,
-                'readme' => $repo->readme(),
-                'latest_version' => $repo->latestReleaseVersion(),
-            ]
-        ));
+        // We disable syncing here and manually call ->searchable() after the tag
+        // associations are established in the database so they can be indexed.
+        $package = Package::withoutSyncingToSearch(function () use ($request, $repo) {
+            // @todo: Kick off a sync operation and validate it's a real repo? grab name? geez there's a lot here that's sillly to make them enter manually
+            $package = Package::create(array_merge(
+                request()->only(['name', 'author_id', 'url', 'abstract', 'instructions']),
+                [
+                    'composer_name' => $request->getComposerName(),
+                    'repo_url' => $repo->url(),
+                    'readme_source' => $repo->source(),
+                    'readme_format' => $repo->readmeFormat(),
+                    'submitter_id' => auth()->user()->id,
+                    'readme' => $repo->readme(),
+                    'latest_version' => $repo->latestReleaseVersion(),
+                ]
+            ));
 
-        $package->contributors()->sync(request()->input('contributors', []));
-        $newTagsCreated = $this->createNewTags(request()->input('tags-new', []));
-        $package->tags()->sync(array_merge(request()->input('tags', []), $newTagsCreated));
+            $package->contributors()->sync(request()->input('contributors', []));
+            $newTagsCreated = $this->createNewTags(request()->input('tags-new', []));
+            $package->tags()->sync(array_merge(request()->input('tags', []), $newTagsCreated));
+
+            return $package;
+        });
+
+        $package->refresh()->searchable();
 
         event(new PackageCreated($package));
 
@@ -77,21 +85,30 @@ class PackageController extends Controller
     {
         $repo = Repo::fromRequest($request);
 
-        $package->update(array_merge(
-            request()->only(['name', 'author_id', 'url', 'abstract', 'instructions']),
-            [
-                'composer_name' => $request->getComposerName(),
-                'repo_url' => $repo->url(),
-                'readme_source' => $repo->source(),
-                'readme_format' => $repo->readmeFormat(),
-                'readme' => $repo->readme(),
-                'latest_version' => $repo->latestReleaseVersion(),
-            ]
-        ));
+        // We disable syncing here and manually call ->searchable() after the tag
+        // associations are established in the database so they can be indexed.
+        $package = Package::withoutSyncingToSearch(function () use ($package, $request, $repo) {
+            $package->update(array_merge(
+                request()->only(['name', 'author_id', 'url', 'abstract', 'instructions']),
+                [
+                    'composer_name' => $request->getComposerName(),
+                    'repo_url' => $repo->url(),
+                    'readme_source' => $repo->source(),
+                    'readme_format' => $repo->readmeFormat(),
+                    'readme' => $repo->readme(),
+                    'latest_version' => $repo->latestReleaseVersion(),
+                ]
+            ));
 
-        $package->contributors()->sync($request->input('contributors', []));
-        $newTagsCreated = $this->createNewTags($request->input('tags-new', []));
-        $package->tags()->sync(array_merge($request->input('tags', []), $newTagsCreated));
+            $package->contributors()->sync($request->input('contributors', []));
+            $newTagsCreated = $this->createNewTags($request->input('tags-new', []));
+            $package->tags()->sync(array_merge($request->input('tags', []), $newTagsCreated));
+
+            return $package;
+        });
+
+        $package->refresh()->searchable();
+
         $package->syncScreenshots($request->input('screenshots', []));
 
         return redirect()->route('app.packages.index');
