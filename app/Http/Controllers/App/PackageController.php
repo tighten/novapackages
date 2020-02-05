@@ -85,21 +85,28 @@ class PackageController extends Controller
     {
         $repo = Repo::fromRequest($request);
 
-        $package->update(array_merge(
-            request()->only(['name', 'author_id', 'url', 'abstract', 'instructions']),
-            [
-                'composer_name' => $request->getComposerName(),
-                'repo_url' => $repo->url(),
-                'readme_source' => $repo->source(),
-                'readme_format' => $repo->readmeFormat(),
-                'readme' => $repo->readme(),
-                'latest_version' => $repo->latestReleaseVersion(),
-            ]
-        ));
+        $package = Package::withoutSyncingToSearch(function () use ($package, $request, $repo) {
+            $package->update(array_merge(
+                request()->only(['name', 'author_id', 'url', 'abstract', 'instructions']),
+                [
+                    'composer_name' => $request->getComposerName(),
+                    'repo_url' => $repo->url(),
+                    'readme_source' => $repo->source(),
+                    'readme_format' => $repo->readmeFormat(),
+                    'readme' => $repo->readme(),
+                    'latest_version' => $repo->latestReleaseVersion(),
+                ]
+            ));
 
-        $package->contributors()->sync($request->input('contributors', []));
-        $newTagsCreated = $this->createNewTags($request->input('tags-new', []));
-        $package->tags()->sync(array_merge($request->input('tags', []), $newTagsCreated));
+            $package->contributors()->sync($request->input('contributors', []));
+            $newTagsCreated = $this->createNewTags($request->input('tags-new', []));
+            $package->tags()->sync(array_merge($request->input('tags', []), $newTagsCreated));
+
+            return $package;
+        });
+
+        $package->refresh()->searchable();
+
         $package->syncScreenshots($request->input('screenshots', []));
 
         return redirect()->route('app.packages.index');
