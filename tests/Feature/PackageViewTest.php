@@ -37,4 +37,23 @@ class PackageViewTest extends TestCase
         $response->assertViewHas('package');
         $response->assertViewHas('screenshots');
     }
+
+    /** @test */
+    public function legacy_package_id_lookup_redirects_to_namespace_search()
+    {
+        $packageNamespace = 'tightenco';
+        $packageName = 'bae';
+        $package = factory(Package::class)->make([
+            'composer_name' => "{$packageNamespace}/{$packageName}",
+        ]);
+        $collaborator = factory(Collaborator::class)->make();
+        $user = factory(User::class)->create();
+        $user->collaborators()->save($collaborator);
+        $collaborator->authoredPackages()->save($package);
+
+        $response = $this->actingAs($user)
+            ->get(route('packages.show-id', ['package' => $package->id]));
+
+        $response->assertRedirect(route('packages.show', ['namespace' => $packageNamespace, 'name' => $packageName]));
+    }
 }
