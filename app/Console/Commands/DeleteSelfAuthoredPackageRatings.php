@@ -20,7 +20,9 @@ class DeleteSelfAuthoredPackageRatings extends Command
     private function deleteSelfAuthoredPackageRatings()
     {
         $query = Rating::whereHasMorph('rateable', 'App\Package', function ($query) {
-            return $query->whereRaw('packages.author_id = ratings.user_id');
+            return $query
+                ->join('collaborators', 'collaborators.id', '=', 'packages.author_id')
+                ->whereRaw('collaborators.user_id = ratings.user_id');
         });
 
         $this->info("Deleting {$query->count()} self-authored package ratings");
