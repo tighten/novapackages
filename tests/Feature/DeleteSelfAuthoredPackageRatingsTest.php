@@ -17,7 +17,7 @@ class DeleteSelfAuthoredPackageRatingsTest extends TestCase
     function deleting_self_authored_package_ratings()
     {
         $packageAuthor = factory(User::class)->create();
-        // We are creating two collaborators here and setting the the
+        // We are creating two collaborators here and setting the
         // second one on the author to ensure the user_id on the rating
         // is different from the author_id on the package.
         $collaborators = factory(Collaborator::class, 2)->create();
