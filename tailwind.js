@@ -127,7 +127,7 @@ let colors = {
     'pink-lighter': '#ffbbca',
     'pink-lightest': '#ffebef',
 
-    'page-background': '#f0f5f8',
+    'page-background': '#f2f6f9',
 
     get ['brand-darkest']() {
         return this['blue-darkest'];

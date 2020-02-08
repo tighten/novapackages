@@ -1858,7 +1858,7 @@ table {
 }
 
 .bg-page-background {
-  background-color: #f0f5f8;
+  background-color: #f2f6f9;
 }
 
 .bg-brand-darkest {
@@ -2182,7 +2182,7 @@ table {
 }
 
 .hover\:bg-page-background:hover {
-  background-color: #f0f5f8;
+  background-color: #f2f6f9;
 }
 
 .hover\:bg-brand-darkest:hover {
@@ -2578,7 +2578,7 @@ table {
 }
 
 .border-page-background {
-  border-color: #f0f5f8;
+  border-color: #f2f6f9;
 }
 
 .border-brand-darkest {
@@ -2902,7 +2902,7 @@ table {
 }
 
 .hover\:border-page-background:hover {
-  border-color: #f0f5f8;
+  border-color: #f2f6f9;
 }
 
 .hover\:border-brand-darkest:hover {
@@ -5682,7 +5682,7 @@ table {
 }
 
 .text-page-background {
-  color: #f0f5f8;
+  color: #f2f6f9;
 }
 
 .text-brand-darkest {
@@ -6006,7 +6006,7 @@ table {
 }
 
 .hover\:text-page-background:hover {
-  color: #f0f5f8;
+  color: #f2f6f9;
 }
 
 .hover\:text-brand-darkest:hover {
@@ -6718,7 +6718,7 @@ table {
   }
 
   .sm\:bg-page-background {
-    background-color: #f0f5f8;
+    background-color: #f2f6f9;
   }
 
   .sm\:bg-brand-darkest {
@@ -7042,7 +7042,7 @@ table {
   }
 
   .sm\:hover\:bg-page-background:hover {
-    background-color: #f0f5f8;
+    background-color: #f2f6f9;
   }
 
   .sm\:hover\:bg-brand-darkest:hover {
@@ -7430,7 +7430,7 @@ table {
   }
 
   .sm\:border-page-background {
-    border-color: #f0f5f8;
+    border-color: #f2f6f9;
   }
 
   .sm\:border-brand-darkest {
@@ -7754,7 +7754,7 @@ table {
   }
 
   .sm\:hover\:border-page-background:hover {
-    border-color: #f0f5f8;
+    border-color: #f2f6f9;
   }
 
   .sm\:hover\:border-brand-darkest:hover {
@@ -10518,7 +10518,7 @@ table {
   }
 
   .sm\:text-page-background {
-    color: #f0f5f8;
+    color: #f2f6f9;
   }
 
   .sm\:text-brand-darkest {
@@ -10842,7 +10842,7 @@ table {
   }
 
   .sm\:hover\:text-page-background:hover {
-    color: #f0f5f8;
+    color: #f2f6f9;
   }
 
   .sm\:hover\:text-brand-darkest:hover {
@@ -11555,7 +11555,7 @@ table {
   }
 
   .md\:bg-page-background {
-    background-color: #f0f5f8;
+    background-color: #f2f6f9;
   }
 
   .md\:bg-brand-darkest {
@@ -11879,7 +11879,7 @@ table {
   }
 
   .md\:hover\:bg-page-background:hover {
-    background-color: #f0f5f8;
+    background-color: #f2f6f9;
   }
 
   .md\:hover\:bg-brand-darkest:hover {
@@ -12267,7 +12267,7 @@ table {
   }
 
   .md\:border-page-background {
-    border-color: #f0f5f8;
+    border-color: #f2f6f9;
   }
 
   .md\:border-brand-darkest {
@@ -12591,7 +12591,7 @@ table {
   }
 
   .md\:hover\:border-page-background:hover {
-    border-color: #f0f5f8;
+    border-color: #f2f6f9;
   }
 
   .md\:hover\:border-brand-darkest:hover {
@@ -15355,7 +15355,7 @@ table {
   }
 
   .md\:text-page-background {
-    color: #f0f5f8;
+    color: #f2f6f9;
   }
 
   .md\:text-brand-darkest {
@@ -15679,7 +15679,7 @@ table {
   }
 
   .md\:hover\:text-page-background:hover {
-    color: #f0f5f8;
+    color: #f2f6f9;
   }
 
   .md\:hover\:text-brand-darkest:hover {
@@ -16392,7 +16392,7 @@ table {
   }
 
   .lg\:bg-page-background {
-    background-color: #f0f5f8;
+    background-color: #f2f6f9;
   }
 
   .lg\:bg-brand-darkest {
@@ -16716,7 +16716,7 @@ table {
   }
 
   .lg\:hover\:bg-page-background:hover {
-    background-color: #f0f5f8;
+    background-color: #f2f6f9;
   }
 
   .lg\:hover\:bg-brand-darkest:hover {
@@ -17104,7 +17104,7 @@ table {
   }
 
   .lg\:border-page-background {
-    border-color: #f0f5f8;
+    border-color: #f2f6f9;
   }
 
   .lg\:border-brand-darkest {
@@ -17428,7 +17428,7 @@ table {
   }
 
   .lg\:hover\:border-page-background:hover {
-    border-color: #f0f5f8;
+    border-color: #f2f6f9;
   }
 
   .lg\:hover\:border-brand-darkest:hover {
@@ -20192,7 +20192,7 @@ table {
   }
 
   .lg\:text-page-background {
-    color: #f0f5f8;
+    color: #f2f6f9;
   }
 
   .lg\:text-brand-darkest {
@@ -20516,7 +20516,7 @@ table {
   }
 
   .lg\:hover\:text-page-background:hover {
-    color: #f0f5f8;
+    color: #f2f6f9;
   }
 
   .lg\:hover\:text-brand-darkest:hover {
@@ -21229,7 +21229,7 @@ table {
   }
 
   .xl\:bg-page-background {
-    background-color: #f0f5f8;
+    background-color: #f2f6f9;
   }
 
   .xl\:bg-brand-darkest {
@@ -21553,7 +21553,7 @@ table {
   }
 
   .xl\:hover\:bg-page-background:hover {
-    background-color: #f0f5f8;
+    background-color: #f2f6f9;
   }
 
   .xl\:hover\:bg-brand-darkest:hover {
@@ -21941,7 +21941,7 @@ table {
   }
 
   .xl\:border-page-background {
-    border-color: #f0f5f8;
+    border-color: #f2f6f9;
   }
 
   .xl\:border-brand-darkest {
@@ -22265,7 +22265,7 @@ table {
   }
 
   .xl\:hover\:border-page-background:hover {
-    border-color: #f0f5f8;
+    border-color: #f2f6f9;
   }
 
   .xl\:hover\:border-brand-darkest:hover {
@@ -25029,7 +25029,7 @@ table {
   }
 
   .xl\:text-page-background {
-    color: #f0f5f8;
+    color: #f2f6f9;
   }
 
   .xl\:text-brand-darkest {
@@ -25353,7 +25353,7 @@ table {
   }
 
   .xl\:hover\:text-page-background:hover {
-    color: #f0f5f8;
+    color: #f2f6f9;
   }
 
   .xl\:hover\:text-brand-darkest:hover {
