@@ -5344,13 +5344,13 @@ table {
 }
 
 .shadow-md {
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
 }
 
 .shadow-lg {
-  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
-          box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
+          box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
 }
 
 .shadow-inner {
@@ -10212,13 +10212,13 @@ table {
   }
 
   .sm\:shadow-md {
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
   }
 
   .sm\:shadow-lg {
-    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
-            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
+            box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
   }
 
   .sm\:shadow-inner {
@@ -15073,13 +15073,13 @@ table {
   }
 
   .md\:shadow-md {
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
   }
 
   .md\:shadow-lg {
-    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
-            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
+            box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
   }
 
   .md\:shadow-inner {
@@ -19934,13 +19934,13 @@ table {
   }
 
   .lg\:shadow-md {
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
   }
 
   .lg\:shadow-lg {
-    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
-            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
+            box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
   }
 
   .lg\:shadow-inner {
@@ -24795,13 +24795,13 @@ table {
   }
 
   .xl\:shadow-md {
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 50, .12), 0 2px 4px 0 rgba(0, 0, 50, .08);
   }
 
   .xl\:shadow-lg {
-    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
-            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
+            box-shadow: 0 15px 30px 0 rgba(0, 0, 50, .11), 0 5px 15px 0 rgba(0, 0, 50, .08);
   }
 
   .xl\:shadow-inner {

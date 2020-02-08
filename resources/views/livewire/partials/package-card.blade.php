@@ -2,8 +2,8 @@
 $package = (new App\Http\Resources\PackageResource($package))->toArray($package);
 $package['accent'] = app(App\Colors::class)->nextColor();
 @endphp
-<div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs" wire:key="{{ $context ?? 'no-context' }}-{{ $package['id'] }}">
-    <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded-sm">
+<div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs rounded" wire:key="{{ $context ?? 'no-context' }}-{{ $package['id'] }}">
+    <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded">
         @if (optional(auth()->user())->isAdmin())
             <div class="text-right -mb-6">
                 <admin-dropdown>
@@ -63,7 +63,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
             </div>
         </div>
 
-        <div class="bg-grey-lightest flex text-sm border-t border-grey-light px-4 py-4 items-center">
+        <div class="bg-grey-lightest flex text-sm border-t border-grey-light px-4 py-4 items-center rounded-b">
             <img src="{{ $package['author']['avatar_url'] }}" class="rounded-full h-6 w-6 mr-4" alt="{{ $package['author']['name'] }}" />
 
             <a href="/collaborators/{{ $package['author']['github_username'] }}" class="text-indigo font-bold no-underline uppercase text-xs hover:text-indigo-dark">
