@@ -41,7 +41,7 @@
                         :href="route('packages.show', { 'namespace': package.packagist_namespace, 'name': package.packagist_name})"
                         class="block mb-2 no-underline"
                     >
-                        <h2 class="text-xl text-grey-darkest flex flex-row items-center">
+                        <h2 class="text-xl font-bold text-grey-darkest flex flex-row items-center">
                             <title-icon
                                 :color="package.accent"
                                 size="small"

@@ -87681,7 +87681,7 @@ var render = function() {
                       "h2",
                       {
                         staticClass:
-                          "text-xl text-grey-darkest flex flex-row items-center"
+                          "text-xl font-bold text-grey-darkest flex flex-row items-center"
                       },
                       [
                         _c("title-icon", {
