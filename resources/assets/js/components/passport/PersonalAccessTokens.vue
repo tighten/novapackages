@@ -1,10 +1,10 @@
 <template>
     <div class="flex flex-col my-8 rounded-lg text-grey-darker">
         <div class="flex flex-col items-center justify-between mb-6 sm:flex-row">
-            <h3 class="text-grey-darkest font-semibold mb-4 sm:mb-0">Personal Access Tokens</h3>
+            <h3 class="text-grey-darkest text-xl font-semibold mb-4 sm:mb-0">Personal Access Tokens</h3>
 
             <a class="button--indigo" tabindex="-1" @click="showCreateTokenForm">
-                <img src="/images/icon-plus.svg" alt="Plus icon" class="mr-2"> Create new token
+                <img src="/images/icon-plus.svg" alt="Plus icon" class="mr-2 inline"> Create new token
             </a>
         </div>
 
@@ -50,7 +50,7 @@
                         Create Token
                     </h4>
 
-                    <button type="button" class="absolute pin-t pin-r pr-2 pt-1" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="absolute top-0 right-0 pr-2 pt-1" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
                 <div class="modal-body">
@@ -118,7 +118,7 @@
                         Personal Access Token
                     </h4>
 
-                    <button type="button" class="absolute pin-t pin-r pr-2 pt-1" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="absolute top-0 right-0 pr-2 pt-1" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
                 <div class="modal-body">

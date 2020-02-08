@@ -1,5 +1,13 @@
-@tailwind preflight;
+@tailwind base;
 @tailwind components;
+
+/* TODO: this a temporary fix to preseve the current leading.
+Read more: https://tailwindcss.com/docs/upgrading-to-v1/#14-adjust-the-line-height-and-padding-on-your-form-elements;
+Ream more: https://tailwindcss.com/docs/upgrading-to-v1/#17-double-check-your-default-line-height
+*/
+html {
+  line-height: 1.15;
+}
 
 @import './custom.css';
 @import './dropzone.css';

@@ -7,22 +7,22 @@
     <div class="flex mb-12 items-center justify-between">
         @include('partials.errors')
 
-        <h1 class="text-grey-darkest mb-4">API Details</h1>
+        <h1 class="text-grey-darkest text-3xl font-bold mb-4">API Details</h1>
     </div>
 
     <div class="bg-white p-8 mb-16 rounded-lg leading-loose text-grey-darkest shadow sm:p-12">
-        <h3 class="mb-2 text-grey-darkest">Current public (accessible without API keys) API routes:</h3>
+        <h3 class="mb-2 text-grey-darkest text-lg font-bold">Current public (accessible without API keys) API routes:</h3>
 
-        <ul class="mb-4 leading-normal">
+        <ul class="mb-4 leading-normal list-disc pl-10">
             <li>/api/search?q=Ticker</li>
             <li>/api/recent</li>
             <li>/api/popular</li>
             <li>/api/stats</li>
         </ul>
 
-        <h3 class="mb-2 text-grey-darkest">Current private (accessible only with API keys) API routes:</h3>
+        <h3 class="mb-2 text-grey-darkest text-lg font-bold">Current private (accessible only with API keys) API routes:</h3>
 
-        <ul class="mb-8 leading-normal">
+        <ul class="mb-8 leading-normal list-disc pl-10">
             <li>/api/packages - paginated, 10 per page</li>
         </ul>
 

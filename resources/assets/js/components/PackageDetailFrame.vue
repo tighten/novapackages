@@ -73,7 +73,7 @@
                 </a>
 
                 <div
-                    class="absolute shadow rounded bg-white pin-r"
+                    class="absolute shadow rounded bg-white right-0"
                     :class="installBoxOpen ? 'visible' : 'hidden'"
                     style="top: calc(100% + 1rem); min-width: 380px;"
                 >
@@ -197,6 +197,8 @@
                                             'https://packagist.org/packages/' +
                                                 package.composer_name
                                         "
+
+                                        class="text-blue underline"
                                         >{{ package.composer_name }}</a
                                     >
                                 </td>
@@ -297,13 +299,13 @@
                     style="text-overflow: ellipsis;white-space: nowrap;"
                     v-if="package.url"
                 >
-                    <h3 class="uppercase text-grey-dark text-sm pb-2">URL</h3>
+                    <h3 class="uppercase text-grey-dark text-sm pb-2 font-bold">URL</h3>
 
-                    <a :href="package.url">{{ package.url }}</a>
+                    <a :href="package.url" class="text-blue underline">{{ package.url }}</a>
                 </div>
 
                 <div class="p-4 pb-0 md:p-6 md:pb-2 border-grey-light border-b">
-                    <h3 class="uppercase text-grey-dark text-sm">Favorites</h3>
+                    <h3 class="uppercase text-grey-dark text-sm font-bold">Favorites</h3>
 
                     <div class="block py-4">
                         {{ favoritesCountString }} favorited
@@ -319,7 +321,7 @@
                 </div>
 
                 <div v-if="!creatingReview" class="p-4 md:p-6 pb-4 border-grey-light border-b">
-                    <h3 class="uppercase text-grey-dark text-sm">Rating</h3>
+                    <h3 class="uppercase text-grey-dark text-sm font-bold">Rating</h3>
 
                     <div class="flex" v-if="!rated">
                         <div class="mt-2 mb-4 text-5xl w-1/2">
@@ -382,7 +384,7 @@
                 </div>
 
                 <div class="p-4 md:p-6 border-grey-light border-b">
-                    <h3 class="uppercase text-grey-dark text-sm">Author</h3>
+                    <h3 class="uppercase text-grey-dark text-sm font-bold">Author</h3>
 
                     <div class="flex text-sm pt-4 items-center">
                         <img
@@ -407,7 +409,7 @@
                     class="p-4 pb-2 md:p-6 border-grey-light border-b"
                     v-if="package.contributors.length"
                 >
-                    <h3 class="uppercase text-grey-dark text-sm">
+                    <h3 class="uppercase text-grey-dark text-sm font-bold">
                         Contributors
                     </h3>
 
@@ -430,7 +432,7 @@
                 </div>
 
                 <div class="p-4 pb-0 md:p-6 md:pb-2 border-grey-light border-b">
-                    <h3 class="uppercase text-grey-dark text-sm">Tags</h3>
+                    <h3 class="uppercase text-grey-dark text-sm font-bold">Tags</h3>
 
                     <div class="block py-4">
                         <button

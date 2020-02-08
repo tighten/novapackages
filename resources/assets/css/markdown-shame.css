@@ -89,7 +89,7 @@
 .hljs-keyword,
 .hljs-meta {
     @apply .font-normal;
-    @apply .roman;
+    @apply .not-italic;
 }
 
 .markdown blockquote {

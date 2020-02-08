@@ -1,4 +1,4 @@
-<a href="{{ $idea['html_url'] }}" class="block mb-4 no-underline text-near-black border px-4 py-3 hover:border-grey hover:bg-grey-lightest">
+<a href="{{ $idea['html_url'] }}" class="block mb-4 no-underline text-near-black border border-grey-light px-4 py-3 hover:border-grey hover:bg-grey-lightest">
     <span class="font-bold text-lg">{{ $idea['title'] }}</span>
     @foreach ($idea['labels'] as $label)
         <div class="text-xs inline-block font-bold rounded-sm px-1 ml-1 shadow-slim" style="background-color: #{{ $label['color'] }};">{{ $label['name'] }}</div>

@@ -1,6 +1,6 @@
 {{-- https://gist.github.com/mazedlx/86512703b1dbcb987b2815c31e5173a3 --}}
 @if ($paginator->hasPages())
-    <div class="flex items-center">
+    <div class="flex w-full items-center">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <span class="bg-white rounded-l rounded-sm border border-brand-light px-3 py-2 cursor-not-allowed no-underline text-brand-light">&laquo;</span>

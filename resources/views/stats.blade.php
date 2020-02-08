@@ -10,7 +10,7 @@
         </div>
         <div class="rounded shadow">
             <div class="bg-white p-3 rounded-b leading-normal">
-                <ul>
+                <ul class="list-disc pl-10">
                     <li><strong>Package Count</strong>: {{ $stats->packageCount() }}</li>
                     <li><strong>Collaborators Count</strong>: {{ $stats->collaboratorsCount() }}</li>
                     <li><strong>Packagist Download Count</strong>: {{ $stats->packagistDownloadsCount() }}</li>

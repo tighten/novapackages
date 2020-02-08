@@ -87195,7 +87195,7 @@ var render = function() {
             expression: "open"
           }
         ],
-        staticClass: "absolute pin-r w-auto mr-2"
+        staticClass: "absolute right-0 w-auto mr-2"
       },
       [_vm._t("dropdown")],
       2
@@ -87713,7 +87713,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "flex flex-row absolute pin-b pin-r" },
+                  { staticClass: "flex flex-row absolute bottom-0 right-0" },
                   [
                     _c(
                       "div",
@@ -87757,7 +87757,7 @@ var render = function() {
                   "a",
                   {
                     staticClass:
-                      "absolute block text-indigo font-bold no-underline pin-b pin-l",
+                      "absolute block text-indigo font-bold no-underline bottom-0 left-0",
                     attrs: {
                       href: _vm.route("packages.show", {
                         namespace: _vm.package.packagist_namespace,
@@ -88261,7 +88261,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "w-full h-full fixed pin-t pin-l text-center",
+      staticClass: "w-full h-full fixed top-0 left-0 text-center",
       staticStyle: { background: "rgba(0,0,0,0.9)" },
       on: {
         click: function($event) {
@@ -88322,7 +88322,7 @@ var render = function() {
               "a",
               {
                 staticClass:
-                  "text-white cursor-pointer absolute pin-t pt-4 pl-4",
+                  "text-white cursor-pointer absolute top-0 pt-4 pl-4",
                 on: { click: _vm.closeLightbox }
               },
               [
@@ -89214,7 +89214,7 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "bg-grey-darker" }, [
-      _c("ul", { staticClass: "list-reset flex" }, [
+      _c("ul", { staticClass: "flex" }, [
         _vm._m(0),
         _vm._v(" "),
         _vm.screenshots.length
@@ -89339,12 +89339,12 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "m-4 md:m-10 break-words" }, [
       _vm.package.instructions
-        ? _c("div", { staticClass: "border-b pb-6" }, [
+        ? _c("div", { staticClass: "border-b border-grey-light pb-6" }, [
             _c(
               "h2",
               {
                 staticClass:
-                  "border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-grey-darkest"
+                  "border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-grey-darkest"
               },
               [
                 _vm._v(
@@ -89360,12 +89360,12 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "border-b pb-6" }, [
+      _c("div", { staticClass: "border-b border-grey-light pb-6" }, [
         _c(
           "h2",
           {
             staticClass:
-              "border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8",
+              "border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8",
             attrs: { id: "readme" }
           },
           [_vm._v("\n                Readme\n            ")]
@@ -89380,13 +89380,13 @@ var render = function() {
       _vm.screenshots.length
         ? _c(
             "div",
-            { staticClass: "border-b pb-6" },
+            { staticClass: "border-b border-grey-light pb-6" },
             [
               _c(
                 "h2",
                 {
                   staticClass:
-                    "border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-2xl text-grey-darkest font-bold mb-4 mt-8",
+                    "border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-2xl text-grey-darkest font-bold mb-4 mt-8",
                   attrs: { id: "screenshots" }
                 },
                 [_vm._v("\n                Screenshots\n            ")]
@@ -89403,13 +89403,13 @@ var render = function() {
       _vm.package.reviews.length
         ? _c(
             "div",
-            { staticClass: "border-b pb-6" },
+            { staticClass: "border-b border-grey-light pb-6" },
             [
               _c(
                 "h2",
                 {
                   staticClass:
-                    "border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8",
+                    "border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8",
                   attrs: { id: "reviews" }
                 },
                 [_vm._v("\n                Reviews\n            ")]
@@ -89527,6 +89527,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_star_rating__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_star_rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_star_rating__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(18);
+//
+//
 //
 //
 //
@@ -91273,7 +91275,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "absolute shadow rounded bg-white pin-r",
+                  staticClass: "absolute shadow rounded bg-white right-0",
                   class: _vm.installBoxOpen ? "visible" : "hidden",
                   staticStyle: {
                     top: "calc(100% + 1rem)",
@@ -91477,6 +91479,7 @@ var render = function() {
                                 _c(
                                   "a",
                                   {
+                                    staticClass: "text-blue underline",
                                     attrs: {
                                       href:
                                         "https://packagist.org/packages/" +
@@ -91651,13 +91654,21 @@ var render = function() {
                   [
                     _c(
                       "h3",
-                      { staticClass: "uppercase text-grey-dark text-sm pb-2" },
+                      {
+                        staticClass:
+                          "uppercase text-grey-dark text-sm pb-2 font-bold"
+                      },
                       [_vm._v("URL")]
                     ),
                     _vm._v(" "),
-                    _c("a", { attrs: { href: _vm.package.url } }, [
-                      _vm._v(_vm._s(_vm.package.url))
-                    ])
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-blue underline",
+                        attrs: { href: _vm.package.url }
+                      },
+                      [_vm._v(_vm._s(_vm.package.url))]
+                    )
                   ]
                 )
               : _vm._e(),
@@ -91669,9 +91680,11 @@ var render = function() {
                   "p-4 pb-0 md:p-6 md:pb-2 border-grey-light border-b"
               },
               [
-                _c("h3", { staticClass: "uppercase text-grey-dark text-sm" }, [
-                  _vm._v("Favorites")
-                ]),
+                _c(
+                  "h3",
+                  { staticClass: "uppercase text-grey-dark text-sm font-bold" },
+                  [_vm._v("Favorites")]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "block py-4" }, [
                   _vm._v(
@@ -91708,7 +91721,10 @@ var render = function() {
                   [
                     _c(
                       "h3",
-                      { staticClass: "uppercase text-grey-dark text-sm" },
+                      {
+                        staticClass:
+                          "uppercase text-grey-dark text-sm font-bold"
+                      },
                       [_vm._v("Rating")]
                     ),
                     _vm._v(" "),
@@ -91848,9 +91864,11 @@ var render = function() {
               "div",
               { staticClass: "p-4 md:p-6 border-grey-light border-b" },
               [
-                _c("h3", { staticClass: "uppercase text-grey-dark text-sm" }, [
-                  _vm._v("Author")
-                ]),
+                _c(
+                  "h3",
+                  { staticClass: "uppercase text-grey-dark text-sm font-bold" },
+                  [_vm._v("Author")]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex text-sm pt-4 items-center" }, [
                   _c("img", {
@@ -91890,7 +91908,10 @@ var render = function() {
                   [
                     _c(
                       "h3",
-                      { staticClass: "uppercase text-grey-dark text-sm" },
+                      {
+                        staticClass:
+                          "uppercase text-grey-dark text-sm font-bold"
+                      },
                       [
                         _vm._v(
                           "\n                    Contributors\n                "
@@ -91941,9 +91962,11 @@ var render = function() {
                   "p-4 pb-0 md:p-6 md:pb-2 border-grey-light border-b"
               },
               [
-                _c("h3", { staticClass: "uppercase text-grey-dark text-sm" }, [
-                  _vm._v("Tags")
-                ]),
+                _c(
+                  "h3",
+                  { staticClass: "uppercase text-grey-dark text-sm font-bold" },
+                  [_vm._v("Tags")]
+                ),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -92572,7 +92595,7 @@ exports = module.exports = __webpack_require__(142)(false);
 
 
 // module
-exports.push([module.i, "\n.dropzone .dz-preview .dz-error-message {\n  top: 150px;\n}\n", ""]);
+exports.push([module.i, "\n.dropzone .dz-preview .dz-error-message {\n    top: 150px;\n}\n", ""]);
 
 // exports
 
@@ -97133,7 +97156,10 @@ var render = function() {
         [
           _c(
             "h3",
-            { staticClass: "text-grey-darkest font-semibold mb-4 sm:mb-0" },
+            {
+              staticClass:
+                "text-grey-darkest text-xl font-semibold mb-4 sm:mb-0"
+            },
             [_vm._v("OAuth Clients")]
           ),
           _vm._v(" "),
@@ -97146,7 +97172,7 @@ var render = function() {
             },
             [
               _c("img", {
-                staticClass: "mr-2",
+                staticClass: "mr-2 inline",
                 attrs: { src: "/images/icon-plus.svg", alt: "Plus icon" }
               }),
               _vm._v(" Create new client\n        ")
@@ -97699,7 +97725,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "absolute pin-t pin-r pr-2 pt-1",
+          staticClass: "absolute top-0 right-0 pr-2 pt-1",
           attrs: {
             type: "button",
             "data-dismiss": "modal",
@@ -97731,7 +97757,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "absolute pin-t pin-r pr-2 pt-1",
+          staticClass: "absolute top-0 right-0 pr-2 pt-1",
           attrs: {
             type: "button",
             "data-dismiss": "modal",
@@ -97847,7 +97873,7 @@ exports = module.exports = __webpack_require__(142)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n  cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -98476,7 +98502,10 @@ var render = function() {
         [
           _c(
             "h3",
-            { staticClass: "text-grey-darkest font-semibold mb-4 sm:mb-0" },
+            {
+              staticClass:
+                "text-grey-darkest text-xl font-semibold mb-4 sm:mb-0"
+            },
             [_vm._v("Personal Access Tokens")]
           ),
           _vm._v(" "),
@@ -98489,7 +98518,7 @@ var render = function() {
             },
             [
               _c("img", {
-                staticClass: "mr-2",
+                staticClass: "mr-2 inline",
                 attrs: { src: "/images/icon-plus.svg", alt: "Plus icon" }
               }),
               _vm._v(" Create new token\n            ")
@@ -98799,7 +98828,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "absolute pin-t pin-r pr-2 pt-1",
+          staticClass: "absolute top-0 right-0 pr-2 pt-1",
           attrs: {
             type: "button",
             "data-dismiss": "modal",
@@ -98833,7 +98862,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "absolute pin-t pin-r pr-2 pt-1",
+          staticClass: "absolute top-0 right-0 pr-2 pt-1",
           attrs: {
             type: "button",
             "data-dismiss": "modal",

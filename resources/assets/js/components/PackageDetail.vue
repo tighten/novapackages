@@ -4,7 +4,7 @@
             This package is possibly abandoned. Please proceed with care.
         </div>
         <div class="bg-grey-darker">
-            <ul class="list-reset flex">
+            <ul class="flex">
                 <li class="ml-4">
                     <a
                         class="block bg-grey-darkest hover:bg-grey-lighter text-grey-lighter hover:text-grey-darkest text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6"
@@ -74,8 +74,8 @@
         </div>
 
         <div class="m-4 md:m-10 break-words">
-            <div v-if="package.instructions" class="border-b pb-6">
-                <h2 class="border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-grey-darkest">
+            <div v-if="package.instructions" class="border-b border-grey-light pb-6">
+                <h2 class="border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-grey-darkest">
                     Installation Instructions
                 </h2>
 
@@ -85,10 +85,10 @@
                 ></div>
             </div>
 
-            <div class="border-b pb-6">
+            <div class="border-b border-grey-light pb-6">
                 <h2
                     id="readme"
-                    class="border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8"
+                    class="border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8"
                 >
                     Readme
                 </h2>
@@ -99,10 +99,10 @@
                 ></div>
             </div>
 
-            <div v-if="screenshots.length" class="border-b pb-6">
+            <div v-if="screenshots.length" class="border-b border-grey-light pb-6">
                 <h2
                     id="screenshots"
-                    class="border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-2xl text-grey-darkest font-bold mb-4 mt-8"
+                    class="border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-2xl text-grey-darkest font-bold mb-4 mt-8"
                 >
                     Screenshots
                 </h2>
@@ -112,10 +112,10 @@
                 />
             </div>
 
-            <div v-if="package.reviews.length" class="border-b pb-6">
+            <div v-if="package.reviews.length" class="border-b border-grey-light pb-6">
                 <h2
                     id="reviews"
-                    class="border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8"
+                    class="border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8"
                 >
                     Reviews
                 </h2>

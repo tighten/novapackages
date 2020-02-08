@@ -43,7 +43,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
                     </h2>
                 </a>
 
-                <div class="flex flex-row absolute pin-b pin-r">
+                <div class="flex flex-row absolute bottom-0 right-0">
                     <div class="flex">
                         @include('partials.stars', ['stars' => $package['average_rating']])
                     </div>
@@ -57,7 +57,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
                     {!! $package['abstract'] !!}
                 </div>
 
-                <a href="{{ route('packages.show', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']]) }}" class="absolute block text-indigo font-bold no-underline pin-b pin-l">
+                <a href="{{ route('packages.show', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']]) }}" class="absolute block text-indigo font-bold no-underline bottom-0 left-0">
                     Learn More
                 </a>
             </div>
