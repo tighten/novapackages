@@ -45,7 +45,7 @@ View the full documentation at https://tailwindcss.com.
 let colors = {
     transparent: 'transparent',
 
-    black: '#22292f',
+    'near-black': '#11181e',
     'grey-darkest': '#3d4852',
     'grey-darker': '#606f7b',
     'grey-dark': '#8795a1',
@@ -128,6 +128,7 @@ let colors = {
     'pink-lightest': '#ffebef',
 
     'page-background': '#f2f6f9',
+    'page-header': '#2b3158',
 
     get ['brand-darkest']() {
         return this['blue-darkest'];
