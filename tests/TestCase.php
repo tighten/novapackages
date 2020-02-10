@@ -39,6 +39,7 @@ abstract class TestCase extends BaseTestCase
             'email' => $userData['email'],
             'avatar' => $userData['avatar'],
             'nickname' => $userData['github_username'],
+            'id' => $userData['github_user_id'],
         ]);
 
         $m = $this->createMock(GithubProvider::class);

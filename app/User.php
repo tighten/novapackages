@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'avatar', 'github_username',
+        'name', 'email', 'avatar', 'github_username', 'github_user_id',
     ];
 
     /**
@@ -52,6 +52,12 @@ class User extends Authenticatable
         self::updated(function ($user) {
             if ($user->isDirty('name')) {
                 $user->updateCollaboratorNames();
+            }
+            if ($user->isDirty('github_username')) {
+                $user->updateCollaboratorGithubUsernames();
+            }
+            if ($user->isDirty('github_user_id')) {
+                $user->updateCollaboratorGithubUserIds();
             }
         });
     }
@@ -127,6 +133,35 @@ class User extends Authenticatable
             })
             ->each(function ($collaborator) {
                 $collaborator->update(['name' => $this->name]);
+            });
+    }
+
+    public function updateCollaboratorGithubUsernames()
+    {
+        if (! $this->github_user_id) {
+            return;
+        }
+
+        $this->collaborators
+            ->filter(function ($collaborator) {
+                return (int) $collaborator->github_user_id === (int) $this->github_user_id;
+            })
+            ->each(function ($collaborator) {
+                $collaborator->update(['github_username' => $this->github_username]);
+            });
+    }
+
+    public function updateCollaboratorGithubUserIds()
+    {
+        $this->collaborators
+            ->reject(function ($collaborator) {
+                return (bool) $collaborator->github_user_id;
+            })
+            ->filter(function ($collaborator) {
+                return $collaborator->github_username === $this->github_username;
+            })
+            ->each(function ($collaborator) {
+                $collaborator->update(['github_user_id' => $this->github_user_id]);
             });
     }
 }

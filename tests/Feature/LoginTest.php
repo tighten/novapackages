@@ -125,4 +125,35 @@ class LoginTest extends TestCase
         $this->assertArraySubset($fakeUserData, $existingUser->toArray());
         $this->assertEquals($existingUser->id, auth()->id());
     }
+
+    /** @test */
+    function the_github_user_id_is_updated_if_it_is_null()
+    {
+        Event::fake();
+
+        $fakeUserData = [
+            'name' => 'Ahsoka Tano',
+            'email' => 'ahsoka@example.com',
+            'avatar' => 'http://new-test-avatar.jpg',
+            'github_username' => 'ahsokatano',
+            'github_user_id' => 123,
+        ];
+
+        $this->mockSocialiteWithUserData($fakeUserData);
+
+        $existingUser = factory(User::class)->create([
+            'name' => 'Ahsoka Tano',
+            'email' => 'ahsoka@example.com',
+            'avatar' => 'http://test-avatar.jpg',
+            'github_username' => 'ahsokatano',
+            'github_user_id' => null,
+        ]);
+
+        $response = $this->get('login/github/callback');
+
+        $response->assertRedirect(route('home'));
+        Event::assertNotDispatched(NewUserSignedUp::class);
+        $this->assertCount(1, User::all());
+        $this->assertEquals(123, $existingUser->fresh()->github_user_id);
+    }
 }
