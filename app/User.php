@@ -138,10 +138,11 @@ class User extends Authenticatable
 
     public function updateCollaboratorGithubUsernames()
     {
+        if (! $this->github_user_id) {
+            return;
+        }
+
         $this->collaborators
-            ->reject(function ($collaborator) {
-                return ! $collaborator->github_user_id;
-            })
             ->filter(function ($collaborator) {
                 return (int) $collaborator->github_user_id === (int) $this->github_user_id;
             })
