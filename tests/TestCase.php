@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use App\User;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Facades\App\Repo;
 use Illuminate\Database\Eloquent\Model;

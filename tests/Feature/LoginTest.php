@@ -5,11 +5,7 @@ namespace Tests\Feature;
 use App\Events\NewUserSignedUp;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Event;
-use Laravel\Socialite\Facades\Socialite;
-use Laravel\Socialite\Two\GithubProvider;
-use Laravel\Socialite\Two\User as SocialiteUser;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -26,6 +22,7 @@ class LoginTest extends TestCase
             'email' => 'test@example.com',
             'avatar' => 'http://someimg.jpg',
             'github_username' => 'test',
+            'github_user_id' => 123,
         ];
 
         $this->mockSocialiteWithUserData($fakeUserData);
@@ -50,6 +47,7 @@ class LoginTest extends TestCase
             'email' => null,
             'avatar' => 'http://someimg.jpg',
             'github_username' => 'test',
+            'github_user_id' => 123,
         ];
 
         $this->mockSocialiteWithUserData($fakeUserData);
@@ -74,6 +72,7 @@ class LoginTest extends TestCase
             'email' => 'test@example.com',
             'avatar' => 'http://new-test-avatar.jpg',
             'github_username' => 'newgithubname',
+            'github_user_id' => 123,
         ];
 
         $this->mockSocialiteWithUserData($fakeUserData);
@@ -105,6 +104,7 @@ class LoginTest extends TestCase
             'email' => 'newtest@example.com',
             'avatar' => 'http://new-test-avatar.jpg',
             'github_username' => 'githubname',
+            'github_user_id' => 123,
         ];
 
         $this->mockSocialiteWithUserData($fakeUserData);
