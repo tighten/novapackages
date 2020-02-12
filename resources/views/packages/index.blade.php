@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('body-id', 'livewire-app')
+@section('top-id', 'livewire-app')
 
 @section('title', 'Discover new packages for Laravel Nova')
 @section('meta')
