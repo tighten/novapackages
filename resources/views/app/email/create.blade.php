@@ -17,8 +17,8 @@
                     @csrf
 
                     <label for="email" class="block italic font-bold mb-1">Email address</label>
-                    <input name="email" id="email" type="email" placeholder="you@yours.com" class="border border-grey-dark p-2 block mb-2" required>
-                    <input type="submit" value="Save" class="border border-grey-dark p-1 px-8">
+                    <input name="email" id="email" type="email" placeholder="you@yours.com" class="border border-gray-600 p-2 block mb-2" required>
+                    <input type="submit" value="Save" class="border border-gray-600 p-1 px-8">
                 </form>
             </div>
         </div>

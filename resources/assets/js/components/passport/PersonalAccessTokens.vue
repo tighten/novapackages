@@ -1,10 +1,10 @@
 <template>
-    <div class="flex flex-col my-8 rounded-lg text-grey-darker">
+    <div class="flex flex-col my-8 rounded-lg text-gray-600">
         <div class="flex flex-col items-center justify-between mb-6 sm:flex-row">
-            <h3 class="text-grey-darkest font-semibold mb-4 sm:mb-0">Personal Access Tokens</h3>
+            <h3 class="text-gray-800 text-xl font-semibold mb-4 sm:mb-0">Personal Access Tokens</h3>
 
             <a class="button--indigo" tabindex="-1" @click="showCreateTokenForm">
-                <img src="/images/icon-plus.svg" alt="Plus icon" class="mr-2"> Create new token
+                <img src="/images/icon-plus.svg" alt="Plus icon" class="mr-2 inline"> Create new token
             </a>
         </div>
 
@@ -16,9 +16,9 @@
 
             <!-- Personal Access Tokens -->
             <table class="flex flex-col w-full" v-if="tokens.length > 0">
-                <thead class="border-b border-grey-light p-8 pb-4">
-                    <tr class="flex pb-2 justify-between text-grey-darkest">
-                        <th class="w-2/3 text-left text-semibold text-grey-darkest">Name</th>
+                <thead class="border-b border-gray-300 p-8 pb-4">
+                    <tr class="flex pb-2 justify-between text-gray-800">
+                        <th class="w-2/3 text-left text-semibold text-gray-800">Name</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -32,7 +32,7 @@
 
                         <!-- Delete Button -->
                         <td class="w-1/3 align-middle text-right">
-                            <a class="cursor-pointer border p-2 text-red text-xs sm:text-sm hover:bg-grey-lightest hover:border-grey-dark" @click="revoke(token)">
+                            <a class="cursor-pointer border p-2 text-red text-xs sm:text-sm hover:bg-gray-100 hover:border-gray-600" @click="revoke(token)">
                                 Delete
                             </a>
                         </td>
@@ -50,12 +50,12 @@
                         Create Token
                     </h4>
 
-                    <button type="button" class="absolute pin-t pin-r pr-2 pt-1" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="absolute top-0 right-0 pr-2 pt-1" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
                 <div class="modal-body">
                     <!-- Form Errors -->
-                    <div class="relative px-3 py-3 mb-4 border rounded text-red-darker border-red-dark bg-red-lighter" v-if="form.errors.length > 0">
+                    <div class="relative px-3 py-3 mb-4 border rounded text-red-900 border-red-700 bg-red-300" v-if="form.errors.length > 0">
                         <p class="mb-0"><strong>Whoops!</strong> Something went wrong!</p>
                         <br>
                         <ul>
@@ -72,7 +72,7 @@
                             <label class="md:w-1/3 pr-4 pl-4 pt-2 pb-2 mb-0 leading-normal">Name</label>
 
                             <div class="md:w-1/2 pr-4 pl-4">
-                                <input id="create-token-name" type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded" name="name" v-model="form.name">
+                                <input id="create-token-name" type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded" name="name" v-model="form.name">
                             </div>
                         </div>
 
@@ -99,9 +99,9 @@
 
                 <!-- Modal Actions -->
                 <div class="modal-footer">
-                    <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-grey-lightest bg-grey hover:bg-grey-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400" data-dismiss="modal">Close</button>
 
-                    <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-lightest bg-blue hover:bg-blue-light" @click="store">
+                    <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-100 bg-blue-500 hover:bg-blue-400" @click="store">
                         Create
                     </button>
                 </div>
@@ -118,7 +118,7 @@
                         Personal Access Token
                     </h4>
 
-                    <button type="button" class="absolute pin-t pin-r pr-2 pt-1" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="absolute top-0 right-0 pr-2 pt-1" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
                 <div class="modal-body">
@@ -127,12 +127,12 @@
                         You may now use this token to make API requests.
                     </p>
 
-                    <textarea class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded" rows="10">{{ accessToken }}</textarea>
+                    <textarea class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded" rows="10">{{ accessToken }}</textarea>
                 </div>
 
                 <!-- Modal Actions -->
                 <div class="modal-footer">
-                    <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-grey-lightest bg-grey hover:bg-grey-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

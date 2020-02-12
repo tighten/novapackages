@@ -41,7 +41,7 @@
                         :href="route('packages.show', { 'namespace': package.packagist_namespace, 'name': package.packagist_name})"
                         class="block mb-2 no-underline"
                     >
-                        <h2 class="text-xl text-grey-darkest flex flex-row items-center">
+                        <h2 class="text-xl font-bold text-gray-100 flex flex-row items-center">
                             <title-icon
                                 :color="package.accent"
                                 size="small"
@@ -49,11 +49,11 @@
                             ></title-icon>
 
                             {{ novaLessName }}
-                            <span class="text-xs uppercase text-grey-light" v-if="package.is_disabled == true">Disabled</span>
+                            <span class="text-xs uppercase text-gray-400" v-if="package.is_disabled == true">Disabled</span>
                         </h2>
                     </a>
 
-                    <div class="flex flex-row absolute pin-b pin-r">
+                    <div class="flex flex-row absolute bottom-0 right-0">
                         <div class="flex">
                             <star-rating
                                 v-bind:rating="floatAverageRating"
@@ -63,31 +63,31 @@
                                 v-bind:show-rating="false"></star-rating>
                         </div>
 
-                        <div class="flex text-grey-dark pt-1 pl-1 text-xs">
+                        <div class="flex text-gray-500 pt-1 pl-1 text-xs">
                             ({{ package.rating_count }})
                         </div>
                     </div>
 
                     <div
                         v-html="package.abstract"
-                        class="text-grey-darkest leading-normal mb-4 markdown leading-tight w-full" style="word-break: break-word;"
+                        class="text-gray-800 leading-normal mb-4 markdown leading-tight w-full" style="word-break: break-word;"
                     ></div>
 
                     <a
                         :href="route('packages.show', { 'namespace': package.packagist_namespace, 'name': package.packagist_name})"
-                        class="absolute block text-indigo font-bold no-underline pin-b pin-l"
+                        class="absolute block text-indigo-600 font-bold no-underline bottom-0 left-0"
                     >
                         Learn More
                     </a>
                 </div>
             </div>
 
-            <div class="bg-grey-lightest flex text-sm border-t border-grey-light px-4 py-4 items-center">
+            <div class="bg-gray-100 flex text-sm border-t border-gray-300 px-4 py-4 items-center">
                 <img :src="package.author.avatar_url" class="rounded-full h-6 w-6 mr-4" :alt="package.author.name" />
 
                 <a
                     :href="'/collaborators/' + package.author.github_username"
-                    class="text-indigo font-bold no-underline uppercase text-xs hover:text-indigo-dark"
+                    class="text-indigo-600 font-bold no-underline uppercase text-xs hover:text-indigo-700"
                 >
                     {{ package.author.name }}
                 </a>

@@ -8,7 +8,7 @@
 }
 
 .markdown a {
-    @apply .text-indigo-dark;
+    @apply .text-indigo-600;
     text-decoration: none;
 }
 
@@ -89,7 +89,7 @@
 .hljs-keyword,
 .hljs-meta {
     @apply .font-normal;
-    @apply .roman;
+    @apply .not-italic;
 }
 
 .markdown blockquote {

@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="bg-red-light text-white p-4" v-if="package.possibly_abandoned">
+        <div class="bg-red-600 text-white p-4" v-if="package.possibly_abandoned">
             This package is possibly abandoned. Please proceed with care.
         </div>
-        <div class="bg-grey-darker">
-            <ul class="list-reset flex">
+        <div class="bg-gray-700">
+            <ul class="flex">
                 <li class="ml-4">
                     <a
-                        class="block bg-grey-darkest hover:bg-grey-lighter text-grey-lighter hover:text-grey-darkest text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6"
+                        class="block bg-gray-800 hover:bg-gray-100 text-gray-100 hover:text-gray-800 text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6"
                         href="#readme"
                         >Readme</a
                     >
@@ -15,7 +15,7 @@
 
                 <li v-if="screenshots.length" class="">
                     <a
-                        class="block bg-grey-darkest hover:bg-grey-lighter text-grey-lighter hover:text-grey-darkest text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6"
+                        class="block bg-gray-800 hover:bg-gray-100 text-gray-100 hover:text-gray-800 text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6"
                         href="#screenshots"
                         >Screenshots</a
                     >
@@ -23,7 +23,7 @@
 
                 <li v-if="package.reviews.length" class="">
                     <a
-                        class="block bg-grey-darkest hover:bg-grey-lighter text-grey-lighter hover:text-grey-darkest text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6"
+                        class="block bg-gray-800 hover:bg-gray-100 text-gray-100 hover:text-gray-800 text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6"
                         href="#reviews"
                         >Reviews</a
                     >
@@ -50,13 +50,13 @@
 
                 <div
                     slot="dropdown"
-                    class="bg-indigo shadow rounded border overflow-hidden"
+                    class="bg-indigo-600 shadow rounded border overflow-hidden"
                 >
                     <a v-if="package.is_disabled"
                         :href="
                             route('app.admin.enable-package', package)
                         "
-                        class="no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue"
+                        class="no-underline block px-4 py-3 border-b text-white bg-indigo-600 hover:text-white hover:bg-blue"
                     >
                         Enable
                     </a>
@@ -65,7 +65,7 @@
                         :href="
                             route('app.admin.disable-package', package)
                         "
-                        class="no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue"
+                        class="no-underline block px-4 py-3 border-b text-white bg-indigo-600 hover:text-white hover:bg-blue"
                     >
                         Disable
                     </a>
@@ -74,35 +74,35 @@
         </div>
 
         <div class="m-4 md:m-10 break-words">
-            <div v-if="package.instructions" class="border-b pb-6">
-                <h2 class="border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-grey-darkest">
+            <div v-if="package.instructions" class="border-b border-gray-300 pb-6">
+                <h2 class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-gray-800">
                     Installation Instructions
                 </h2>
 
                 <div
-                    class="text-grey-darker leading-normal mb-4"
+                    class="text-gray-600 leading-normal mb-4"
                     v-html="package.instructions"
                 ></div>
             </div>
 
-            <div class="border-b pb-6">
+            <div class="border-b border-gray-300 pb-6">
                 <h2
                     id="readme"
-                    class="border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8"
+                    class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-gray-800 font-bold mb-4 mt-8"
                 >
                     Readme
                 </h2>
 
                 <div
                     v-html="packageReadme"
-                    class="text-grey-darker leading-normal mb-4"
+                    class="text-gray-600 leading-normal mb-4"
                 ></div>
             </div>
 
-            <div v-if="screenshots.length" class="border-b pb-6">
+            <div v-if="screenshots.length" class="border-b border-gray-300 pb-6">
                 <h2
                     id="screenshots"
-                    class="border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-2xl text-grey-darkest font-bold mb-4 mt-8"
+                    class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-2xl text-gray-800 font-bold mb-4 mt-8"
                 >
                     Screenshots
                 </h2>
@@ -112,10 +112,10 @@
                 />
             </div>
 
-            <div v-if="package.reviews.length" class="border-b pb-6">
+            <div v-if="package.reviews.length" class="border-b border-gray-300 pb-6">
                 <h2
                     id="reviews"
-                    class="border-b-2 bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8"
+                    class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-gray-800 font-bold mb-4 mt-8"
                 >
                     Reviews
                 </h2>
@@ -128,7 +128,7 @@
 
             <a
                 href="#top"
-                class="mt-8 block text-center text-indigo hover:text-grey-darkest font-semibold no-underline"
+                class="mt-8 block text-center text-indigo-600 hover:text-gray-800 font-semibold no-underline"
             >
                 Back to Top
             </a>

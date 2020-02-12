@@ -15,8 +15,9 @@ require("laravel-mix-purgecss");
  */
 
 mix.js("resources/assets/js/app.js", "public/js")
-   .postCss("resources/assets/css/app.css", "public/css")
-   .tailwind();
+   .postCss("resources/assets/css/app.css", "public/css", [
+   		require('tailwindcss'),
+   	]);
    // .purgeCss(); @todo someone please make this stop stripping used-by-Vue styles
 
 if (mix.inProduction()) {

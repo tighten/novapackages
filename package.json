@@ -19,7 +19,7 @@
         "laravel-mix-tailwind": "^0.1.0",
         "lodash": "^4.17.4",
         "popper.js": "^1.12",
-        "tailwindcss": "^0.6.6",
+        "tailwindcss": "^1.2.0",
         "vue": "^2.5.7"
     },
     "dependencies": {
@@ -27,6 +27,7 @@
         "dropzone": "^5.5.1",
         "highlight.js": "^9.13.1",
         "moment": "^2.22.2",
+        "node-sass": "^4.13.1",
         "vue-select": "^2.4.0",
         "vue-star-rating": "^1.6.0"
     }

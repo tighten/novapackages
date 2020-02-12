@@ -17,7 +17,7 @@
 
                 <textarea
                     v-model="content"
-                    class="w-full leading-tight mb-1 p-2 border border-indigo-darker"
+                    class="w-full leading-tight mb-1 p-2 border border-indigo-700"
                     maxLength="5000"
                     minlength="20"
                     ref="review"
@@ -26,7 +26,7 @@
                 ></textarea>
 
                 <button
-                    class="flex justify-center items-center w-full md:w-auto cursor-pointer no-underline text-white bg-indigo hover:bg-indigo-dark py-4 px-4 sm:px-6"
+                    class="flex justify-center items-center w-full md:w-auto cursor-pointer no-underline text-white bg-indigo-600 hover:bg-indigo-700 py-4 px-4 sm:px-6"
                     type="button"
                     @click="update">
                     Update Review
@@ -45,13 +45,13 @@
                 />
             </template>
 
-            <p class="text-grey-dark text-sm py-1">By {{author.name}} on {{date}}</p>
+            <p class="text-gray-600 text-sm py-1">By {{author.name}} on {{date}}</p>
 
-            <p class="text-grey-darkest py-1">{{ content }}</p>
+            <p class="text-gray-800 py-1">{{ content }}</p>
 
             <div v-if="canEditReview" class="flex mt-2">
                 <button
-                    class="cursor-pointer bg-indigo text-white no-underline hover:bg-indigo-dark flex justify-center items-center py-2 px-4 md:px-6"
+                    class="cursor-pointer bg-indigo-600 text-white no-underline hover:bg-indigo-700 flex justify-center items-center py-2 px-4 md:px-6"
                     @click="edit"
                 >
                     Edit
