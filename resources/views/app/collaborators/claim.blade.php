@@ -19,9 +19,9 @@
 
                     <p class="font-bold mb-8">Yes, we're fully aware that this isn't validating. We're trusting you to not lie.</p>
 
-                    <input type="submit" value="Claim {{ $collaborator->name }}" class="inline-block border border-grey-dark p-2 px-6 cursor-pointer bg-grey-light hover:border-grey-darker">
+                    <input type="submit" value="Claim {{ $collaborator->name }}" class="inline-block border border-gray-600 p-2 px-6 cursor-pointer bg-gray-400 hover:border-gray-700">
 
-                    <a href="{{ route('app.collaborators.index') }}" class="inline-block border border-grey-dark hover:border-grey-darker p-2 px-6 no-underline bg-grey-lighter text-grey-darker">Just kidding</a>
+                    <a href="{{ route('app.collaborators.index') }}" class="inline-block border border-gray-600 hover:border-gray-700 p-2 px-6 no-underline bg-gray-200 text-gray-600">Just kidding</a>
                 </form>
             </div>
         </div>

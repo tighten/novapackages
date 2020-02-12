@@ -25,7 +25,7 @@ export default {
                 'large': 'h-16 w-16 mr-4 text-lg',
                 'xlarge': 'h-24 w-24 mr-6 text-xl',
             },
-            imageAdditionalClasses: 'rounded-full inline-block bg-grey-dark',
+            imageAdditionalClasses: 'rounded-full inline-block bg-gray-600',
             noImageAdditionalClasses:
                 'rounded-full inline-block text-white text-center leading-none flex flex-row items-center justify-center'
         };

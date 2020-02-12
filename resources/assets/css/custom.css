@@ -5,7 +5,7 @@
 }
 
 .button--indigo {
-    @apply .bg-indigo;
+    @apply .bg-indigo-600;
     @apply .cursor-pointer;
     @apply .no-underline;
     @apply .px-6;
@@ -18,7 +18,7 @@
 }
 
     .button--indigo:hover {
-        @apply .bg-indigo-dark;
+        @apply .bg-indigo-700;
     }
 
     @screen sm {

@@ -8,7 +8,7 @@
             @include('livewire.partials.package-card', ['context' => 'recent'])
         @endforeach
     </div>
-    <a href="#" wire:click.prevent="filterTag('all')" class="text-blue underline font-bold ml-2 mb-6">See More...</a>
+    <a href="#" wire:click.prevent="filterTag('all')" class="text-indigo-600 underline font-bold ml-2 mb-6">See More...</a>
 
     <h2 class="ml-2 mb-2 mt-8 text-2xl font-bold">Popular</h2>
     <div class="flex flex-wrap justify-center sm:justify-start">

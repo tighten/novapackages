@@ -87681,7 +87681,7 @@ var render = function() {
                       "h2",
                       {
                         staticClass:
-                          "text-xl font-bold text-grey-darkest flex flex-row items-center"
+                          "text-xl font-bold text-gray-100 flex flex-row items-center"
                       },
                       [
                         _c("title-icon", {
@@ -87700,7 +87700,7 @@ var render = function() {
                           ? _c(
                               "span",
                               {
-                                staticClass: "text-xs uppercase text-grey-light"
+                                staticClass: "text-xs uppercase text-gray-400"
                               },
                               [_vm._v("Disabled")]
                             )
@@ -87734,7 +87734,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "flex text-grey-dark pt-1 pl-1 text-xs" },
+                      { staticClass: "flex text-gray-500 pt-1 pl-1 text-xs" },
                       [
                         _vm._v(
                           "\n                        (" +
@@ -87748,7 +87748,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", {
                   staticClass:
-                    "text-grey-darkest leading-normal mb-4 markdown leading-tight w-full",
+                    "text-gray-800 leading-normal mb-4 markdown leading-tight w-full",
                   staticStyle: { "word-break": "break-word" },
                   domProps: { innerHTML: _vm._s(_vm.package.abstract) }
                 }),
@@ -87757,7 +87757,7 @@ var render = function() {
                   "a",
                   {
                     staticClass:
-                      "absolute block text-indigo font-bold no-underline bottom-0 left-0",
+                      "absolute block text-indigo-600 font-bold no-underline bottom-0 left-0",
                     attrs: {
                       href: _vm.route("packages.show", {
                         namespace: _vm.package.packagist_namespace,
@@ -87775,7 +87775,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "bg-grey-lightest flex text-sm border-t border-grey-light px-4 py-4 items-center"
+                "bg-gray-100 flex text-sm border-t border-gray-300 px-4 py-4 items-center"
             },
             [
               _c("img", {
@@ -87790,7 +87790,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "text-indigo font-bold no-underline uppercase text-xs hover:text-indigo-dark",
+                    "text-indigo-600 font-bold no-underline uppercase text-xs hover:text-indigo-700",
                   attrs: {
                     href: "/collaborators/" + _vm.package.author.github_username
                   }
@@ -88277,7 +88277,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "relative mx-auto m-h-screen max-w-xl flex items-center justify-center"
+            "relative mx-auto m-h-screen max-w-4xl flex items-center justify-center"
         },
         [
           _c(
@@ -89067,7 +89067,7 @@ var render = function() {
                 ],
                 ref: "review",
                 staticClass:
-                  "w-full leading-tight mb-1 p-2 border border-indigo-darker",
+                  "w-full leading-tight mb-1 p-2 border border-indigo-700",
                 attrs: {
                   maxLength: "5000",
                   minlength: "20",
@@ -89089,7 +89089,7 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "flex justify-center items-center w-full md:w-auto cursor-pointer no-underline text-white bg-indigo hover:bg-indigo-dark py-4 px-4 sm:px-6",
+                    "flex justify-center items-center w-full md:w-auto cursor-pointer no-underline text-white bg-indigo-600 hover:bg-indigo-700 py-4 px-4 sm:px-6",
                   attrs: { type: "button" },
                   on: { click: _vm.update }
                 },
@@ -89120,13 +89120,13 @@ var render = function() {
               })
             ],
             _vm._v(" "),
-            _c("p", { staticClass: "text-grey-dark text-sm py-1" }, [
+            _c("p", { staticClass: "text-gray-600 text-sm py-1" }, [
               _vm._v(
                 "By " + _vm._s(_vm.author.name) + " on " + _vm._s(_vm.date)
               )
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-grey-darkest py-1" }, [
+            _c("p", { staticClass: "text-gray-800 py-1" }, [
               _vm._v(_vm._s(_vm.content))
             ]),
             _vm._v(" "),
@@ -89136,7 +89136,7 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "cursor-pointer bg-indigo text-white no-underline hover:bg-indigo-dark flex justify-center items-center py-2 px-4 md:px-6",
+                        "cursor-pointer bg-indigo-600 text-white no-underline hover:bg-indigo-700 flex justify-center items-center py-2 px-4 md:px-6",
                       on: { click: _vm.edit }
                     },
                     [_vm._v("\n                Edit\n            ")]
@@ -89206,14 +89206,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.package.possibly_abandoned
-      ? _c("div", { staticClass: "bg-red-light text-white p-4" }, [
+      ? _c("div", { staticClass: "bg-red-600 text-white p-4" }, [
           _vm._v(
             "\n        This package is possibly abandoned. Please proceed with care.\n    "
           )
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "bg-grey-darker" }, [
+    _c("div", { staticClass: "bg-gray-700" }, [
       _c("ul", { staticClass: "flex" }, [
         _vm._m(0),
         _vm._v(" "),
@@ -89223,7 +89223,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "block bg-grey-darkest hover:bg-grey-lighter text-grey-lighter hover:text-grey-darkest text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6",
+                    "block bg-gray-800 hover:bg-gray-100 text-gray-100 hover:text-gray-800 text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6",
                   attrs: { href: "#screenshots" }
                 },
                 [_vm._v("Screenshots")]
@@ -89237,7 +89237,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "block bg-grey-darkest hover:bg-grey-lighter text-grey-lighter hover:text-grey-darkest text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6",
+                    "block bg-gray-800 hover:bg-gray-100 text-gray-100 hover:text-gray-800 text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6",
                   attrs: { href: "#reviews" }
                 },
                 [_vm._v("Reviews")]
@@ -89287,7 +89287,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "bg-indigo shadow rounded border overflow-hidden",
+                    "bg-indigo-600 shadow rounded border overflow-hidden",
                   attrs: { slot: "dropdown" },
                   slot: "dropdown"
                 },
@@ -89297,7 +89297,7 @@ var render = function() {
                         "a",
                         {
                           staticClass:
-                            "no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue",
+                            "no-underline block px-4 py-3 border-b text-white bg-indigo-600 hover:text-white hover:bg-blue",
                           attrs: {
                             href: _vm.route(
                               "app.admin.enable-package",
@@ -89315,7 +89315,7 @@ var render = function() {
                         "a",
                         {
                           staticClass:
-                            "no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue",
+                            "no-underline block px-4 py-3 border-b text-white bg-indigo-600 hover:text-white hover:bg-blue",
                           attrs: {
                             href: _vm.route(
                               "app.admin.disable-package",
@@ -89339,12 +89339,12 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "m-4 md:m-10 break-words" }, [
       _vm.package.instructions
-        ? _c("div", { staticClass: "border-b border-grey-light pb-6" }, [
+        ? _c("div", { staticClass: "border-b border-gray-300 pb-6" }, [
             _c(
               "h2",
               {
                 staticClass:
-                  "border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-grey-darkest"
+                  "border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-gray-800"
               },
               [
                 _vm._v(
@@ -89354,25 +89354,25 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", {
-              staticClass: "text-grey-darker leading-normal mb-4",
+              staticClass: "text-gray-600 leading-normal mb-4",
               domProps: { innerHTML: _vm._s(_vm.package.instructions) }
             })
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "border-b border-grey-light pb-6" }, [
+      _c("div", { staticClass: "border-b border-gray-300 pb-6" }, [
         _c(
           "h2",
           {
             staticClass:
-              "border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8",
+              "border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-gray-800 font-bold mb-4 mt-8",
             attrs: { id: "readme" }
           },
           [_vm._v("\n                Readme\n            ")]
         ),
         _vm._v(" "),
         _c("div", {
-          staticClass: "text-grey-darker leading-normal mb-4",
+          staticClass: "text-gray-600 leading-normal mb-4",
           domProps: { innerHTML: _vm._s(_vm.packageReadme) }
         })
       ]),
@@ -89380,13 +89380,13 @@ var render = function() {
       _vm.screenshots.length
         ? _c(
             "div",
-            { staticClass: "border-b border-grey-light pb-6" },
+            { staticClass: "border-b border-gray-300 pb-6" },
             [
               _c(
                 "h2",
                 {
                   staticClass:
-                    "border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-2xl text-grey-darkest font-bold mb-4 mt-8",
+                    "border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-2xl text-gray-800 font-bold mb-4 mt-8",
                   attrs: { id: "screenshots" }
                 },
                 [_vm._v("\n                Screenshots\n            ")]
@@ -89403,13 +89403,13 @@ var render = function() {
       _vm.package.reviews.length
         ? _c(
             "div",
-            { staticClass: "border-b border-grey-light pb-6" },
+            { staticClass: "border-b border-gray-300 pb-6" },
             [
               _c(
                 "h2",
                 {
                   staticClass:
-                    "border-b-2 border-grey-light bg-grey-lighter -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-grey-darkest font-bold mb-4 mt-8",
+                    "border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-gray-800 font-bold mb-4 mt-8",
                   attrs: { id: "reviews" }
                 },
                 [_vm._v("\n                Reviews\n            ")]
@@ -89430,7 +89430,7 @@ var render = function() {
         "a",
         {
           staticClass:
-            "mt-8 block text-center text-indigo hover:text-grey-darkest font-semibold no-underline",
+            "mt-8 block text-center text-indigo-600 hover:text-gray-800 font-semibold no-underline",
           attrs: { href: "#top" }
         },
         [_vm._v("\n            Back to Top\n        ")]
@@ -89448,7 +89448,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass:
-            "block bg-grey-darkest hover:bg-grey-lighter text-grey-lighter hover:text-grey-darkest text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6",
+            "block bg-gray-800 hover:bg-gray-100 text-gray-100 hover:text-gray-800 text-inherit font-semibold no-underline p-4 sm:mr-2 md:mr-4 md:px-6",
           attrs: { href: "#readme" }
         },
         [_vm._v("Readme")]
@@ -91131,7 +91131,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "self-start text-indigo font-bold text-sm uppercase no-underline inline-block text-center hover:text-indigo-darkest cursor-pointer",
+              "self-start text-indigo-600 font-bold text-sm uppercase no-underline inline-block text-center hover:text-indigo-900 cursor-pointer",
             attrs: { type: "button" },
             on: { click: _vm.goBack }
           },
@@ -91158,7 +91158,7 @@ var render = function() {
                 "h1",
                 {
                   staticClass:
-                    "inline text-grey-darkest text-2xl md:text-4xl font-bold"
+                    "inline text-gray-800 text-2xl md:text-4xl font-bold"
                 },
                 [
                   _vm._v(
@@ -91197,7 +91197,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "block cursor-pointer md:inline-block w-full md:w-auto py-4 px-4 sm:px-6 bg-indigo text-white md:rounded-l-full md:rounded-r-full no-underline hover:bg-indigo-dark flex flex-row justify-center items-center content-center",
+                    "block cursor-pointer md:inline-block w-full md:w-auto py-4 px-4 sm:px-6 bg-indigo-600 text-white md:rounded-l-full md:rounded-r-full no-underline hover:bg-indigo-700 flex flex-row justify-center items-center content-center",
                   on: {
                     click: function($event) {
                       _vm.toggleInstallBox()
@@ -91287,12 +91287,12 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "flex flex-row w-full p-6 px-8 items-center text-grey"
+                        "flex flex-row w-full p-6 px-8 items-center text-gray-500"
                     },
                     [
                       _c("input", {
                         staticClass:
-                          "rounded flex-grow block border py-2 px-2 mr-4 font-mono text-xs outline-none",
+                          "rounded flex-grow block border py-2 px-2 mr-4 font-mono text-xs text-black outline-none",
                         class: _vm.copyWasSuccessful
                           ? "border-green border-2"
                           : "",
@@ -91305,7 +91305,7 @@ var render = function() {
                             "svg",
                             {
                               staticClass:
-                                "fill-current w-6 h-6 hover:text-indigo pointer-cursor",
+                                "fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor",
                               attrs: {
                                 xmlns: "http://www.w3.org/2000/svg",
                                 viewBox: "0 0 20 20"
@@ -91321,7 +91321,7 @@ var render = function() {
                             "svg",
                             {
                               staticClass:
-                                "fill-current w-6 h-6 hover:text-indigo pointer-cursor",
+                                "fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor",
                               attrs: {
                                 id: "copy-button",
                                 xmlns: "http://www.w3.org/2000/svg",
@@ -91347,14 +91347,14 @@ var render = function() {
                         "div",
                         {
                           staticClass:
-                            "border border-t border-grey-lighter flex flex-row flex-no-wrap"
+                            "border border-t border-gray-300er flex flex-row flex-no-wrap"
                         },
                         [
                           _c(
                             "a",
                             {
                               staticClass:
-                                "no-underline text-center text-indigo uppercase text-sm font-bold w-1/2 py-4 border-r border-grey-light hover:bg-indigo-lightest",
+                                "no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 border-r border-gray-300 hover:bg-indigo-100",
                               attrs: {
                                 href:
                                   _vm.package.composer_data.package.repository
@@ -91369,7 +91369,7 @@ var render = function() {
                                 "a",
                                 {
                                   staticClass:
-                                    "no-underline text-center text-indigo uppercase text-sm font-bold w-1/2 py-4 hover:bg-indigo-lightest",
+                                    "no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 hover:bg-indigo-100",
                                   attrs: {
                                     href: _vm.package.composer_latest.dist.url
                                   }
@@ -91410,7 +91410,7 @@ var render = function() {
                   "a",
                   {
                     staticClass:
-                      "block bg-indigo hover:bg-indigo-dark text-white no-underline font-bold p-4 md:p-8 py-4 border-grey-light border-b",
+                      "block bg-indigo-600 hover:bg-indigo-700 text-white no-underline font-bold p-4 md:p-8 py-4 border-gray-300 border-b",
                     attrs: { href: "/app/packages/" + _vm.package.id + "/edit" }
                   },
                   [_vm._v("\n                Edit this package\n            ")]
@@ -91419,7 +91419,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "px-4 md:px-6 py-4 border-grey-light border-b" },
+              { staticClass: "px-4 md:px-6 py-4 border-gray-300 border-b" },
               [
                 _c(
                   "table",
@@ -91479,7 +91479,7 @@ var render = function() {
                                 _c(
                                   "a",
                                   {
-                                    staticClass: "text-blue underline",
+                                    staticClass: "text-indigo-600 underline",
                                     attrs: {
                                       href:
                                         "https://packagist.org/packages/" +
@@ -91645,7 +91645,7 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "p-4 md:p-6 border-solid border-grey-light border-b overflow-hidden",
+                      "p-4 md:p-6 border-solid border-gray-300 border-b overflow-hidden",
                     staticStyle: {
                       "text-overflow": "ellipsis",
                       "white-space": "nowrap"
@@ -91656,7 +91656,7 @@ var render = function() {
                       "h3",
                       {
                         staticClass:
-                          "uppercase text-grey-dark text-sm pb-2 font-bold"
+                          "uppercase text-gray-600 text-sm pb-2 font-bold"
                       },
                       [_vm._v("URL")]
                     ),
@@ -91664,7 +91664,7 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        staticClass: "text-blue underline",
+                        staticClass: "text-indigo-600 underline",
                         attrs: { href: _vm.package.url }
                       },
                       [_vm._v(_vm._s(_vm.package.url))]
@@ -91676,13 +91676,12 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass:
-                  "p-4 pb-0 md:p-6 md:pb-2 border-grey-light border-b"
+                staticClass: "p-4 pb-0 md:p-6 md:pb-2 border-gray-300 border-b"
               },
               [
                 _c(
                   "h3",
-                  { staticClass: "uppercase text-grey-dark text-sm font-bold" },
+                  { staticClass: "uppercase text-gray-600 text-sm font-bold" },
                   [_vm._v("Favorites")]
                 ),
                 _vm._v(" "),
@@ -91699,7 +91698,7 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "block text-indigo no-underline font-bold text-sm cursor-pointer pb-4",
+                          "block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4",
                         on: { click: _vm.toggleFavorite }
                       },
                       [
@@ -91717,13 +91716,12 @@ var render = function() {
             !_vm.creatingReview
               ? _c(
                   "div",
-                  { staticClass: "p-4 md:p-6 pb-4 border-grey-light border-b" },
+                  { staticClass: "p-4 md:p-6 pb-4 border-gray-300 border-b" },
                   [
                     _c(
                       "h3",
                       {
-                        staticClass:
-                          "uppercase text-grey-dark text-sm font-bold"
+                        staticClass: "uppercase text-gray-600 text-sm font-bold"
                       },
                       [_vm._v("Rating")]
                     ),
@@ -91748,7 +91746,9 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "w-1/2 mb-6 text-grey self-end" },
+                            {
+                              staticClass: "w-1/2 mb-6 text-gray-500 self-end"
+                            },
                             [
                               _vm._v(
                                 "\n                        (out of 5)\n                    "
@@ -91766,7 +91766,7 @@ var render = function() {
                       ? _c("div", { staticClass: "mb-4 flex" }, [
                           _c(
                             "div",
-                            { staticClass: "w-1/3 pt-1 text-grey-darker" },
+                            { staticClass: "w-1/3 pt-1 text-gray-600" },
                             [
                               _vm._v(
                                 "\n                        Tap to rate:\n                    "
@@ -91819,7 +91819,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "text-right text-sm text-grey-dark mt-2 mb-2"
+                          "text-right text-sm text-gray-600 mt-2 mb-2"
                       },
                       [
                         _vm._v(
@@ -91839,7 +91839,7 @@ var render = function() {
                             "a",
                             {
                               staticClass:
-                                "block text-indigo no-underline font-bold text-sm cursor-pointer pb-4",
+                                "block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4",
                               attrs: {
                                 href: _vm.route("reviews.create", {
                                   namespace: _vm.package.packagist_namespace,
@@ -91860,57 +91860,52 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "p-4 md:p-6 border-grey-light border-b" },
-              [
-                _c(
-                  "h3",
-                  { staticClass: "uppercase text-grey-dark text-sm font-bold" },
-                  [_vm._v("Author")]
-                ),
+            _c("div", { staticClass: "p-4 md:p-6 border-gray-300 border-b" }, [
+              _c(
+                "h3",
+                { staticClass: "uppercase text-gray-600 text-sm font-bold" },
+                [_vm._v("Author")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex text-sm pt-4 items-center" }, [
+                _c("img", {
+                  staticClass: "rounded-full h-10 w-10 mr-4",
+                  attrs: {
+                    src: _vm.package.author.avatar_url,
+                    alt: _vm.package.author.name
+                  }
+                }),
                 _vm._v(" "),
-                _c("div", { staticClass: "flex text-sm pt-4 items-center" }, [
-                  _c("img", {
-                    staticClass: "rounded-full h-10 w-10 mr-4",
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "text-indigo-600 font-bold no-underline uppercase text-sm hover:text-indigo-700",
                     attrs: {
-                      src: _vm.package.author.avatar_url,
-                      alt: _vm.package.author.name
+                      href:
+                        "/collaborators/" + _vm.package.author.github_username
                     }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "text-indigo font-bold no-underline uppercase text-sm hover:text-indigo-dark",
-                      attrs: {
-                        href:
-                          "/collaborators/" + _vm.package.author.github_username
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(_vm.package.author.name) +
-                          "\n                    "
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.package.author.name) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              ])
+            ]),
             _vm._v(" "),
             _vm.package.contributors.length
               ? _c(
                   "div",
-                  { staticClass: "p-4 pb-2 md:p-6 border-grey-light border-b" },
+                  { staticClass: "p-4 pb-2 md:p-6 border-gray-300 border-b" },
                   [
                     _c(
                       "h3",
                       {
-                        staticClass:
-                          "uppercase text-grey-dark text-sm font-bold"
+                        staticClass: "uppercase text-gray-600 text-sm font-bold"
                       },
                       [
                         _vm._v(
@@ -91936,7 +91931,7 @@ var render = function() {
                             "a",
                             {
                               staticClass:
-                                "text-indigo font-bold no-underline uppercase text-sm hover:text-indigo-dark"
+                                "text-indigo-600 font-bold no-underline uppercase text-sm hover:text-indigo-700"
                             },
                             [
                               _vm._v(
@@ -91958,13 +91953,12 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass:
-                  "p-4 pb-0 md:p-6 md:pb-2 border-grey-light border-b"
+                staticClass: "p-4 pb-0 md:p-6 md:pb-2 border-gray-300 border-b"
               },
               [
                 _c(
                   "h3",
-                  { staticClass: "uppercase text-grey-dark text-sm font-bold" },
+                  { staticClass: "uppercase text-gray-600 text-sm font-bold" },
                   [_vm._v("Tags")]
                 ),
                 _vm._v(" "),
@@ -91977,7 +91971,7 @@ var render = function() {
                       {
                         key: tag.slug,
                         staticClass:
-                          "bg-indigo-lightest text-indigo rounded-l-full rounded-r-full px-4 py-2 mr-2 mb-2 inline-block font-bold",
+                          "bg-indigo-200 text-indigo-600 rounded-l-full rounded-r-full px-4 py-2 mr-2 mb-2 inline-block font-bold",
                         on: {
                           click: function($event) {
                             _vm.viewTag(tag)
@@ -92184,18 +92178,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "m-4 md:m-10" }, [
-    _c(
-      "h1",
-      { staticClass: "text-lg text-indigo-dark font-normal pt-2 pb-6" },
-      [
-        _vm._v(
-          "\n        To submit a review, select a star rating and enter your comments below.\n    "
-        )
-      ]
-    ),
+    _c("h1", { staticClass: "text-lg text-indigo-700 font-normal pt-2 pb-6" }, [
+      _vm._v(
+        "\n        To submit a review, select a star rating and enter your comments below.\n    "
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container mb-4 flex" }, [
-      _c("div", { staticClass: "pt-1 text-grey-darker" }, [
+      _c("div", { staticClass: "pt-1 text-gray-600" }, [
         _vm._v("Your Rating:")
       ]),
       _vm._v(" "),
@@ -92226,7 +92216,7 @@ var render = function() {
         }
       ],
       ref: "review",
-      staticClass: "w-full mb-1 p-2 border border-indigo-darker",
+      staticClass: "w-full mb-1 p-2 border border-indigo-700",
       attrs: {
         autofocus: "",
         maxLength: "5000",
@@ -92251,7 +92241,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "cursor-pointer bg-indigo hover:bg-indigo-dark w-full md:w-auto text-white rounded-sm no-underline flex justify-center items-center mt-2 py-4 px-4 sm:px-6",
+              "cursor-pointer bg-indigo-600 hover:bg-indigo-700 w-full md:w-auto text-white rounded-sm no-underline flex justify-center items-center mt-2 py-4 px-4 sm:px-6",
             on: {
               click: function($event) {
                 $event.preventDefault()
@@ -92376,7 +92366,7 @@ var render = function() {
       "button",
       {
         staticClass:
-          "bg-red hover:bg-red-dark text-white font-bold py-1 px-2 rounded",
+          "bg-red hover:bg-red-600 text-white font-bold py-1 px-2 rounded",
         on: { click: _vm.deleteScreenshot }
       },
       [_vm._v("Delete")]
@@ -96433,11 +96423,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "flex my-1" }, [
-    _c("div", { staticClass: "w-1/3 text-xs pr-1 text-grey-dark text-right" }, [
+    _c("div", { staticClass: "w-1/3 text-xs pr-1 text-gray-500 text-right" }, [
       _vm._v(_vm._s("".padStart(_vm.stars, "★")))
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "w-2/3 w-full bg-grey-lighter h-2 mt-1" }, [
+    _c("div", { staticClass: "w-2/3 w-full bg-gray-200 h-2 mt-1" }, [
       _c("div", {
         staticClass: "bg-yellow h-2",
         style: "width: " + _vm.percent + "%"
@@ -96684,7 +96674,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'large': 'h-16 w-16 mr-4 text-lg',
                 'xlarge': 'h-24 w-24 mr-6 text-xl'
             },
-            imageAdditionalClasses: 'rounded-full inline-block bg-grey-dark',
+            imageAdditionalClasses: 'rounded-full inline-block bg-gray-600',
             noImageAdditionalClasses: 'rounded-full inline-block text-white text-center leading-none flex flex-row items-center justify-center'
         };
     },
@@ -97145,7 +97135,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "flex flex-col my-8 rounded-lg text-grey-darker" },
+    { staticClass: "flex flex-col my-8 rounded-lg text-gray-600" },
     [
       _c(
         "div",
@@ -97156,10 +97146,7 @@ var render = function() {
         [
           _c(
             "h3",
-            {
-              staticClass:
-                "text-grey-darkest text-xl font-semibold mb-4 sm:mb-0"
-            },
+            { staticClass: "text-gray-800 text-xl font-semibold mb-4 sm:mb-0" },
             [_vm._v("OAuth Clients")]
           ),
           _vm._v(" "),
@@ -97247,7 +97234,7 @@ var render = function() {
                               "a",
                               {
                                 staticClass:
-                                  "cursor-pointer border inline-block mb-2 p-2 hover:bg-grey-lightest sm:mr-2 hover:border-grey-dark",
+                                  "cursor-pointer border inline-block mb-2 p-2 hover:bg-gray-100 sm:mr-2 hover:border-gray-600",
                                 attrs: { tabindex: "-1" },
                                 on: {
                                   click: function($event) {
@@ -97266,7 +97253,7 @@ var render = function() {
                               "a",
                               {
                                 staticClass:
-                                  "cursor-pointer border inline-block mb-2 p-2 text-red hover:bg-grey-lightest hover:border-grey-dark",
+                                  "cursor-pointer border inline-block mb-2 p-2 text-red hover:bg-gray-100 hover:border-gray-600",
                                 on: {
                                   click: function($event) {
                                     _vm.destroy(client)
@@ -97307,7 +97294,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "relative px-3 py-3 mb-4 border rounded text-red-darker border-red-dark bg-red-lighter"
+                          "relative px-3 py-3 mb-4 border rounded text-red-900 border-red-700 bg-red-300"
                       },
                       [
                         _vm._m(2),
@@ -97352,7 +97339,7 @@ var render = function() {
                           }
                         ],
                         staticClass:
-                          "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded",
+                          "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded",
                         attrs: { id: "create-client-name", type: "text" },
                         domProps: { value: _vm.createForm.name },
                         on: {
@@ -97413,7 +97400,7 @@ var render = function() {
                           }
                         ],
                         staticClass:
-                          "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded",
+                          "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded",
                         attrs: { type: "text", name: "redirect" },
                         domProps: { value: _vm.createForm.redirect },
                         on: {
@@ -97460,7 +97447,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-grey-lightest bg-grey hover:bg-grey-light",
+                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400",
                     attrs: { type: "button", "data-dismiss": "modal" }
                   },
                   [_vm._v("Close")]
@@ -97470,7 +97457,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-lightest bg-blue hover:bg-blue-light",
+                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-100 bg-blue-500 hover:bg-blue-400",
                     attrs: { type: "button" },
                     on: { click: _vm.store }
                   },
@@ -97503,7 +97490,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "relative px-3 py-3 mb-4 border rounded text-red-darker border-red-dark bg-red-lighter"
+                          "relative px-3 py-3 mb-4 border rounded text-red-900 border-red-700 bg-red-300"
                       },
                       [
                         _vm._m(4),
@@ -97548,7 +97535,7 @@ var render = function() {
                           }
                         ],
                         staticClass:
-                          "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded",
+                          "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded",
                         attrs: { id: "edit-client-name", type: "text" },
                         domProps: { value: _vm.editForm.name },
                         on: {
@@ -97605,7 +97592,7 @@ var render = function() {
                           }
                         ],
                         staticClass:
-                          "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded",
+                          "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded",
                         attrs: { type: "text", name: "redirect" },
                         domProps: { value: _vm.editForm.redirect },
                         on: {
@@ -97652,7 +97639,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-grey-lightest bg-grey hover:bg-grey-light",
+                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400",
                     attrs: { type: "button", "data-dismiss": "modal" }
                   },
                   [_vm._v("Close")]
@@ -97662,7 +97649,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-lightest bg-blue hover:bg-blue-light",
+                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-100 bg-blue-500 hover:bg-blue-400",
                     attrs: { type: "button" },
                     on: { click: _vm.update }
                   },
@@ -97687,29 +97674,25 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "thead",
-      { staticClass: "border-b border-grey-light p-6 sm:p-8 pb-4" },
+      { staticClass: "border-b border-gray-300 p-6 sm:p-8 pb-4" },
       [
-        _c(
-          "tr",
-          { staticClass: "flex pb-2 justify-between text-grey-darkest" },
-          [
-            _c(
-              "th",
-              { staticClass: "text-left w-1/5 font-semibold hidden md:block" },
-              [_vm._v("Client ID")]
-            ),
-            _vm._v(" "),
-            _c("th", { staticClass: "text-left font-semibold w-1/5" }, [
-              _vm._v("Name")
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "text-left font-semibold w-1/2" }, [
-              _vm._v("Secret")
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "text-left font-semibold w-1/5" })
-          ]
-        )
+        _c("tr", { staticClass: "flex pb-2 justify-between text-gray-800" }, [
+          _c(
+            "th",
+            { staticClass: "text-left w-1/5 font-semibold hidden md:block" },
+            [_vm._v("Client ID")]
+          ),
+          _vm._v(" "),
+          _c("th", { staticClass: "text-left font-semibold w-1/5" }, [
+            _vm._v("Name")
+          ]),
+          _vm._v(" "),
+          _c("th", { staticClass: "text-left font-semibold w-1/2" }, [
+            _vm._v("Secret")
+          ]),
+          _vm._v(" "),
+          _c("th", { staticClass: "text-left font-semibold w-1/5" })
+        ])
       ]
     )
   },
@@ -98013,14 +97996,14 @@ var render = function() {
             "div",
             {
               staticClass:
-                "relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-grey-light card-default"
+                "relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-400 card-default"
             },
             [
               _c(
                 "div",
                 {
                   staticClass:
-                    "py-3 px-6 mb-0 bg-grey-lighter border-b-1 border-grey-light text-grey-darkest"
+                    "py-3 px-6 mb-0 bg-gray-100 border-b-1 border-gray-400 text-gray-800"
                 },
                 [_vm._v("Authorized Applications")]
               ),
@@ -98491,7 +98474,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "flex flex-col my-8 rounded-lg text-grey-darker" },
+    { staticClass: "flex flex-col my-8 rounded-lg text-gray-600" },
     [
       _c(
         "div",
@@ -98502,10 +98485,7 @@ var render = function() {
         [
           _c(
             "h3",
-            {
-              staticClass:
-                "text-grey-darkest text-xl font-semibold mb-4 sm:mb-0"
-            },
+            { staticClass: "text-gray-800 text-xl font-semibold mb-4 sm:mb-0" },
             [_vm._v("Personal Access Tokens")]
           ),
           _vm._v(" "),
@@ -98570,7 +98550,7 @@ var render = function() {
                               "a",
                               {
                                 staticClass:
-                                  "cursor-pointer border p-2 text-red text-xs sm:text-sm hover:bg-grey-lightest hover:border-grey-dark",
+                                  "cursor-pointer border p-2 text-red text-xs sm:text-sm hover:bg-gray-100 hover:border-gray-600",
                                 on: {
                                   click: function($event) {
                                     _vm.revoke(token)
@@ -98611,7 +98591,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "relative px-3 py-3 mb-4 border rounded text-red-darker border-red-dark bg-red-lighter"
+                          "relative px-3 py-3 mb-4 border rounded text-red-900 border-red-700 bg-red-300"
                       },
                       [
                         _vm._m(2),
@@ -98667,7 +98647,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded",
+                            "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded",
                           attrs: {
                             id: "create-token-name",
                             type: "text",
@@ -98736,7 +98716,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-grey-lightest bg-grey hover:bg-grey-light",
+                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400",
                     attrs: { type: "button", "data-dismiss": "modal" }
                   },
                   [_vm._v("Close")]
@@ -98746,7 +98726,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-lightest bg-blue hover:bg-blue-light",
+                      "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-100 bg-blue-500 hover:bg-blue-400",
                     attrs: { type: "button" },
                     on: { click: _vm.store }
                   },
@@ -98784,7 +98764,7 @@ var render = function() {
                   "textarea",
                   {
                     staticClass:
-                      "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded",
+                      "block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded",
                     attrs: { rows: "10" }
                   },
                   [_vm._v(_vm._s(_vm.accessToken))]
@@ -98804,11 +98784,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "border-b border-grey-light p-8 pb-4" }, [
-      _c("tr", { staticClass: "flex pb-2 justify-between text-grey-darkest" }, [
+    return _c("thead", { staticClass: "border-b border-gray-300 p-8 pb-4" }, [
+      _c("tr", { staticClass: "flex pb-2 justify-between text-gray-800" }, [
         _c(
           "th",
-          { staticClass: "w-2/3 text-left text-semibold text-grey-darkest" },
+          { staticClass: "w-2/3 text-left text-semibold text-gray-800" },
           [_vm._v("Name")]
         ),
         _vm._v(" "),
@@ -98882,7 +98862,7 @@ var staticRenderFns = [
         "button",
         {
           staticClass:
-            "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-grey-lightest bg-grey hover:bg-grey-light",
+            "inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Close")]

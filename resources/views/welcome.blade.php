@@ -17,7 +17,7 @@
         <img src="/images/hero.svg" alt="Laravel Nova hero" class="w-full md:w-2/3 lg:w-1/2 mx-auto block">
     </div>
     @if (session('status'))
-        <div class="bg-green-lightest border border-green-light text-green-dark text-sm px-4 py-3 rounded mb-4">
+        <div class="bg-green-100 border border-green-300 text-green-600 text-sm px-4 py-3 rounded mb-4">
             {{ session('status') }}
         </div>
     @endif

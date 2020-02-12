@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-full fixed top-0 left-0 text-center" style="background: rgba(0,0,0,0.9);" @click.self="closeLightbox">
-        <div class="relative mx-auto m-h-screen max-w-xl flex items-center justify-center">
+        <div class="relative mx-auto m-h-screen max-w-4xl flex items-center justify-center">
             <a class="text-white text-center cursor-pointer pr-4" @click="previous">
                 <svg class="fill-current text-white inline-block h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3.828 9l6.071-6.071-1.414-1.414L0 10l.707.707 7.778 7.778 1.414-1.414L3.828 11H20V9H3.828z"/></svg>
             </a>

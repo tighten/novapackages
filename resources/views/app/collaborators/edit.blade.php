@@ -19,27 +19,27 @@
                     <label class="block">*Name:</label>
                     <input name="name"
                            placeholder="Matt Stauffer"
-                           class="border border-grey-dark p-2 mb-6"
+                           class="border border-gray-600 p-2 mb-6"
                            value="{{ old('name', $collaborator->name) }}"
                            required>
 
                     <label class="block">*GitHub username:</label>
                     <input name="github_username"
                            placeholder="mattstauffer"
-                           class="border border-grey-dark p-2 mb-6"
+                           class="border border-gray-600 p-2 mb-6"
                            value="{{ old('github_username', $collaborator->github_username) }}"
                            required>
 
                     <label class="block">URL (e.g. personal web site):</label>
                     <input name="url"
                            placeholder="https://mattstauffer.com/"
-                           class="border border-grey-dark p-2 mb-6"
+                           class="border border-gray-600 p-2 mb-6"
                            value="{{ old('url', $collaborator->url) }}">
 
                     <label class="block">Description:</label>
-                    <textarea name="description" class="border border-grey-dark p-2 mb-6">{{ old('description', $collaborator->description) }}</textarea>
+                    <textarea name="description" class="border border-gray-600 p-2 mb-6">{{ old('description', $collaborator->description) }}</textarea>
 
-                    <input type="submit" value="Update collaborator" class="block border border-grey-dark p-2 px-6">
+                    <input type="submit" value="Update collaborator" class="block border border-gray-600 p-2 px-6">
                 </form>
             </div>
         </div>

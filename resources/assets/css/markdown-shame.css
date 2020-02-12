@@ -8,7 +8,7 @@
 }
 
 .markdown a {
-    @apply .text-indigo-dark;
+    @apply .text-indigo-600;
     text-decoration: none;
 }
 

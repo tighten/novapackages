@@ -29,7 +29,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
         <div class="flex flex-row mt-4 px-4 pb-4" style="height: 14em">
             <div class="pb-2 w-full relative">
                 <a href="{{ route('packages.show', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']]) }}" class="block mb-2 no-underline">
-                    <h2 class="text-xl font-bold text-grey-darkest flex flex-row items-center">
+                    <h2 class="text-xl font-bold text-gray-800 flex flex-row items-center">
                         @include('livewire.partials.title-icon', [
                             'color' => $package['accent'],
                             'size' => 'small',
@@ -38,7 +38,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
                         {{ str_replace(['Laravel Nova ', 'Nova '], [], $package['name']) }}
 
                         @if ($package['is_disabled'])
-                            <span class="text-xs uppercase text-grey-light">Disabled</span>
+                            <span class="text-xs uppercase text-gray-400">Disabled</span>
                         @endif
                     </h2>
                 </a>
@@ -48,25 +48,25 @@ $package['accent'] = app(App\Colors::class)->nextColor();
                         @include('partials.stars', ['stars' => $package['average_rating']])
                     </div>
 
-                    <div class="flex text-grey-dark pt-1 pl-1 text-xs">
+                    <div class="flex text-gray-500 pt-1 pl-1 text-xs">
                         ({{ $package['rating_count'] }})
                     </div>
                 </div>
 
-                <div class="text-grey-darkest leading-normal mb-4 markdown leading-tight w-full" style="word-break: break-word;">
+                <div class="text-gray-800 leading-normal mb-4 markdown leading-tight w-full" style="word-break: break-word;">
                     {!! $package['abstract'] !!}
                 </div>
 
-                <a href="{{ route('packages.show', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']]) }}" class="absolute block text-indigo font-bold no-underline bottom-0 left-0">
+                <a href="{{ route('packages.show', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']]) }}" class="absolute block text-indigo-600 font-bold no-underline bottom-0 left-0">
                     Learn More
                 </a>
             </div>
         </div>
 
-        <div class="bg-grey-lightest flex text-sm border-t border-grey-light px-4 py-4 items-center rounded-b">
+        <div class="bg-gray-100 flex text-sm border-t border-gray-300 px-4 py-4 items-center rounded-b">
             <img src="{{ $package['author']['avatar_url'] }}" class="rounded-full h-6 w-6 mr-4" alt="{{ $package['author']['name'] }}" />
 
-            <a href="/collaborators/{{ $package['author']['github_username'] }}" class="text-indigo font-bold no-underline uppercase text-xs hover:text-indigo-dark">
+            <a href="/collaborators/{{ $package['author']['github_username'] }}" class="text-indigo-600 font-bold no-underline uppercase text-xs hover:text-indigo-700">
                 {{ $package['author']['name'] }}
             </a>
         </div>

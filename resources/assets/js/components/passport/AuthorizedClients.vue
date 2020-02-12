@@ -7,8 +7,8 @@
 <template>
     <div>
         <div v-if="tokens.length > 0">
-            <div class="relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-grey-light card-default">
-                <div class="py-3 px-6 mb-0 bg-grey-lighter border-b-1 border-grey-light text-grey-darkest">Authorized Applications</div>
+            <div class="relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-400 card-default">
+                <div class="py-3 px-6 mb-0 bg-gray-100 border-b-1 border-gray-400 text-gray-800">Authorized Applications</div>
 
                 <div class="flex-auto p-6">
                     <!-- Authorized Tokens -->

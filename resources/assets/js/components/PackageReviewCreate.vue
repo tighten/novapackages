@@ -1,11 +1,11 @@
 <template>
     <div class="m-4 md:m-10">
-        <h1 class="text-lg text-indigo-dark font-normal pt-2 pb-6">
+        <h1 class="text-lg text-indigo-700 font-normal pt-2 pb-6">
             To submit a review, select a star rating and enter your comments below.
         </h1>
 
         <div class="container mb-4 flex">
-            <div class="pt-1 text-grey-darker">Your Rating:</div>
+            <div class="pt-1 text-gray-600">Your Rating:</div>
 
             <div class="w-2/3 pl-2 flex-row">
                 <star-rating
@@ -19,7 +19,7 @@
 
         <textarea
             v-model="review"
-            class="w-full mb-1 p-2 border border-indigo-darker"
+            class="w-full mb-1 p-2 border border-indigo-700"
             autofocus
             maxLength="5000"
             minlength="20"
@@ -30,7 +30,7 @@
         ></textarea>
 
         <button v-if="canSubmit"
-            class="cursor-pointer bg-indigo hover:bg-indigo-dark w-full md:w-auto text-white rounded-sm no-underline flex justify-center items-center mt-2 py-4 px-4 sm:px-6"
+            class="cursor-pointer bg-indigo-600 hover:bg-indigo-700 w-full md:w-auto text-white rounded-sm no-underline flex justify-center items-center mt-2 py-4 px-4 sm:px-6"
             @click.prevent="save"
         >
             Submit Review
