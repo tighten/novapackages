@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div id="app" class="pt-8">
+    <div id="@yield('top-id', 'app')" class="pt-8">
         @yield('content')
     </div>
 
