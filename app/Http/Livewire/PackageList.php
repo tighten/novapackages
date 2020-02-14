@@ -20,6 +20,8 @@ class PackageList extends Component
     public $tag = 'popular--and--recent';
     public $search;
 
+    protected $updatesQueryString = ['tag', 'search', 'page'];
+
     public function render()
     {
         if ($this->tag === self::POPULAR_TAG) {
@@ -87,6 +89,11 @@ class PackageList extends Component
             $this->tag = 'all';
         }
 
+        // Prefer null over empty string to remove from query string
+        if (! $this->search) {
+            $this->search = null;
+        }
+
         $this->gotoPage(1);
     }
 
@@ -97,12 +104,8 @@ class PackageList extends Component
 
     public function mount()
     {
-        return;
-
-        // @todo later when we are handling query string updates
-        // in updated version of Livewire
-        if (request()->has('query')) {
-            // initial scope based on query
+        foreach (request()->only(['tag', 'search', 'page']) as $key => $value) {
+            $this->$key = $value;
         }
     }
 
