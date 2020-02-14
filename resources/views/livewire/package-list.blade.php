@@ -24,3 +24,24 @@
     {!! $packages->links() !!}
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.onkeydown = function(e) {
+            e = e || window.event;
+
+            switch(e.which || e.keyCode) {
+                case 37: // left
+                    @this.call('previousPage');
+                break;
+                case 39: // right
+                    @this.call('nextPage');
+                break;
+
+                default: return;
+            }
+
+            e.preventDefault();
+        }
+    </script>
+@endpush

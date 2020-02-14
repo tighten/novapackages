@@ -109,7 +109,7 @@ class PackageList extends Component
         }
     }
 
-    /* Temporary override of WithPagination -- wwhile we have Tailwind pre-1.0 */
+    /* Temporary override of WithPagination -- while we have Tailwind pre-1.0 */
     public function paginationView()
     {
         return 'livewire.partials.tailwind-beta-pagination';
