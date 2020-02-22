@@ -6,6 +6,7 @@ use Algolia\AlgoliaSearch\SearchIndex;
 use App\CacheKeys;
 use App\Package;
 use App\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -21,7 +22,11 @@ class PackageList extends Component
     public $search;
     public $totalPages = 1;
 
-    protected $updatesQueryString = ['tag', 'search', 'page'];
+    protected $updatesQueryString = [
+        'tag' => ['except' => 'popular--and--recent'],
+        'search',
+        'page'
+    ];
 
     public function render()
     {
@@ -107,11 +112,11 @@ class PackageList extends Component
         $this->goToPage(1);
     }
 
-    public function mount()
+    public function mount(Request $request)
     {
-        foreach (request()->only(['tag', 'search', 'page']) as $key => $value) {
-            $this->$key = $value;
-        }
+        $this->fill(
+            $request->only(['tag', 'search', 'page'])
+        );
     }
 
     /* Fix nextPage/previousPage to disallow overflows */
