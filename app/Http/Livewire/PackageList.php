@@ -25,7 +25,7 @@ class PackageList extends Component
     protected $updatesQueryString = [
         'tag' => ['except' => 'popular--and--recent'],
         'search',
-        'page'
+        'page',
     ];
 
     public function render()
@@ -58,12 +58,12 @@ class PackageList extends Component
                 }
 
                 return $algolia->search($query, $options);
-            })->paginate(6);
+            })->paginate(9);
 
             $packages->load(['author', 'ratings']);
         } else {
             $packages = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
-            $packages = $packages->latest()->with(['author', 'ratings'])->paginate(6);
+            $packages = $packages->latest()->with(['author', 'ratings'])->paginate(9);
         }
 
         $this->totalPages = $packages->lastPage();
