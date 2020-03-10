@@ -24,4 +24,11 @@ class PackagePolicy
     {
         return $this->userIsAdminOrAuthorOrCollaboratorOrUnclaimedSubmitter($user, $package);
     }
+
+    public function rate(User $user, Package $package)
+    {
+        // return true if user neither authored or contributed to it
+        // @todo
+        return true;
+    }
 }

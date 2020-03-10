@@ -77,6 +77,11 @@ class User extends Authenticatable
         return $this->favorites()->has('package')->with('package')->get()->map->package;
     }
 
+    public function reviews()
+    {
+        return $this->hasmany(Review::class);
+    }
+
     public function getRoleNameAttribute()
     {
         return $this->roles[$this->attributes['role']];
@@ -87,6 +92,15 @@ class User extends Authenticatable
         return $this->role === self::ADMIN_ROLE;
     }
 
+    public function hasReviewed($packageId)
+    {
+        if (is_object($packageId)) {
+            $packageId = $packageId->id;
+        }
+
+        return $this->reviews()->where('package_id', $packageId)->count() > 0;
+    }
+
     public function ratePackage($packageId, $stars)
     {
         if (is_object($packageId)) {
@@ -94,15 +108,6 @@ class User extends Authenticatable
         }
 
         dispatch(new UserRatePackage($this->id, $packageId, $stars));
-    }
-
-    public function reviewPackage($packageId, $reviewContent)
-    {
-        if (is_object($packageId)) {
-            $packageId = $packageId->id;
-        }
-
-        $this->submitReview($packageId, $reviewContent);
     }
 
     public function favoritePackage($packageId)

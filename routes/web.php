@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('test', function () {
+    return view('partials.package-detail-ratings', ['package' => App\Package::first()]);
+});
+
 Route::get('/', 'PackageController@index')->name('home');
 Route::get('packages/{namespace}/{name}', 'PackageController@show')->name('packages.show');
 Route::get('packages/{package}', 'PackageController@showId')->name('packages.show-id');
