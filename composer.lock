@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0411502b03ce1aba4139f5dfd4b30a0",
+    "content-hash": "4490d22ec29062fe0a1707524272b3b8",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -2645,16 +2645,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v0.7.4",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "15355e1e160891d35d53986fc64686e226378c72"
+                "reference": "6193160cc63d4b9d2adf6f43f6f72a56093ea432"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/15355e1e160891d35d53986fc64686e226378c72",
-                "reference": "15355e1e160891d35d53986fc64686e226378c72",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/6193160cc63d4b9d2adf6f43f6f72a56093ea432",
+                "reference": "6193160cc63d4b9d2adf6f43f6f72a56093ea432",
                 "shasum": ""
             },
             "require": {
@@ -2698,7 +2698,7 @@
                 }
             ],
             "description": "A front-end framework for Laravel.",
-            "time": "2020-02-10T14:57:26+00:00"
+            "time": "2020-03-09T14:47:09+00:00"
         },
         {
             "name": "monolog/monolog",

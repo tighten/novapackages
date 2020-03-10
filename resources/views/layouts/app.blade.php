@@ -96,7 +96,7 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
 
-    @if(app()->environment() =='local')
+    @if (app()->environment() =='local')
     <script>
         let logComponentsData = function () {
             window.livewire.components.components().forEach(component => {
