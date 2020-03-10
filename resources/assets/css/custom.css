@@ -31,6 +31,10 @@
     @apply .hidden;
 }
 
+[x-cloak] {
+    @apply .hidden;
+}
+
 .text-inherit {
     color: inherit;
 }

@@ -32,6 +32,10 @@
   display: none;
 }
 
+[x-cloak] {
+  display: none;
+}
+
 .text-inherit {
   color: inherit;
 }

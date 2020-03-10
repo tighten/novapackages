@@ -6,23 +6,28 @@ $package['accent'] = app(App\Colors::class)->nextColor();
     <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded">
         @if (optional(auth()->user())->isAdmin())
             <div class="text-right -mb-6">
-                <admin-dropdown>
-                    <span slot="link" class="appearance-none flex items-center inline-block text-white font-medium">
-                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                    </span>
-
-                    <div slot="dropdown" class="bg-indigo shadow rounded border overflow-hidden">
-                        <a v-if="package.is_disabled == true" :href="route('app.admin.enable-package', package)" class="no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue">
-                            Enable
-                        </a>
-
-                        <a v-else :href="route('app.admin.disable-package', package)" class="no-underline block px-4 py-3 border-b text-white bg-indigo hover:text-white hover:bg-blue">
-                            Disable
-                        </a>
+                <div class="relative" x-data="{ open: false }">
+                    <div role="button" class="inline-block select-none p-2" @click="open = !open">
+                        <span class="appearance-none flex items-center inline-block text-white font-medium">
+                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </span>
                     </div>
-                </admin-dropdown>
+                    <div class="absolute right-0 w-auto mr-2 z-50" x-show="open">
+                        <div class="bg-indigo shadow rounded border overflow-hidden" x-cloak>
+                            @if ($package['is_disabled'])
+                                <a href="{{ route('app.admin.enable-package', $package['id']) }}" class="no-underline block px-4 py-3 border-b text-white bg-indigo-500 hover:text-white hover:bg-blue-500">
+                                    Enable
+                                </a>
+                            @else
+                                <a href="{{ route('app.admin.disable-package', $package['id']) }}" class="no-underline block px-4 py-3 border-b text-white bg-indigo-500 hover:text-white hover:bg-blue-500">
+                                    Disable
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
         @endif
 
