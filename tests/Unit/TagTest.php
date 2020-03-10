@@ -77,4 +77,12 @@ class TagTest extends TestCase
         $tag = Tag::where('name', Str::lower($name))->first();
         $this->assertTrue(strcmp(Str::lower($name), $tag->name) === 0);
     }
+
+    /** @test */
+    public function it_can_generate_its_own_url()
+    {
+        $tag = factory(Tag::class)->create(['slug' => 'abc']);
+
+        $this->assertEquals(url('?tag=abc'), $tag->url());
+    }
 }

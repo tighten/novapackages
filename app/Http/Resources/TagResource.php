@@ -15,6 +15,7 @@ class TagResource extends ModelResource
             'id' => $tag->id,
             'name' => Str::title($tag->name),
             'slug' => $tag->slug,
+            'url' => $tag->url(),
         ];
     }
 }

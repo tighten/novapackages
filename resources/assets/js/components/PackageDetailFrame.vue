@@ -600,7 +600,7 @@ export default {
         },
 
         viewTag(tag) {
-            window.location = route('home') + '#' + tag.slug;
+            window.location = tag.url;
         },
 
         toggleFavorite() {

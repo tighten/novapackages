@@ -90103,7 +90103,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.history.back();
         },
         viewTag: function viewTag(tag) {
-            window.location = route('home') + '#' + tag.slug;
+            window.location = tag.url;
         },
         toggleFavorite: function toggleFavorite() {
             if (this.isFavorite) {

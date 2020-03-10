@@ -60,4 +60,9 @@ class Tag extends Model
     {
         $this->attributes['name'] = Str::lower($value);
     }
+
+    public function url()
+    {
+        return url('?tag=' . $this->slug);
+    }
 }
