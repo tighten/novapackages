@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -95,5 +95,23 @@
     @stack('scripts')
 
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @if(app()->environment() =='local')
+    <script>
+        let logComponentsData = function () {
+            window.livewire.components.components().forEach(component => {
+                console.log("%cComponent: " + component.name, "font-weight:bold");
+                console.log(component.data);
+            });
+        };
+        document.addEventListener("livewire:load", function(event) {
+            logComponentsData();
+
+            window.livewire.hook('afterDomUpdate', () => {
+                logComponentsData();
+            });
+        });
+    </script>
+    @endif
 </body>
 </html>
