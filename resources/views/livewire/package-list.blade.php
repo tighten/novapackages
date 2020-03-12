@@ -22,6 +22,18 @@
     @endif
 
     {!! $packages->links() !!}
+
+    @if ($tag !== 'all')
+        <div class="mt-4 text-gray-700">
+            <span class="inline-block mr-2">Per page</span>
+            @foreach ([6, 12, 18, 24] as $thisPageSize)
+            <span class="text-gray-500">|</span>
+            <a href="#"
+                class="{{ $pageSize == $thisPageSize ? 'font-bold' : '' }} hover:text-gray-900 inline-block p-2"
+                wire:click.prevent="changePageSize({{ $thisPageSize }})">{{ $thisPageSize }}</a>
+            @endforeach
+        </div>
+    @endif
 </div>
 @endsection
 

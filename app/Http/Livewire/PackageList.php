@@ -21,6 +21,7 @@ class PackageList extends Component
     public $tag = 'popular--and--recent';
     public $search;
     public $totalPages = 1;
+    public $pageSize = 6;
 
     protected $updatesQueryString = [
         'tag' => ['except' => 'popular--and--recent'],
@@ -58,12 +59,12 @@ class PackageList extends Component
                 }
 
                 return $algolia->search($query, $options);
-            })->paginate(9);
+            })->paginate($this->pageSize);
 
             $packages->load(['author', 'ratings']);
         } else {
             $packages = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
-            $packages = $packages->latest()->with(['author', 'ratings'])->paginate(9);
+            $packages = $packages->latest()->with(['author', 'ratings'])->paginate($this->pageSize);
         }
 
         $this->totalPages = $packages->lastPage();
@@ -90,6 +91,11 @@ class PackageList extends Component
     {
         $this->tag = $tagSlug;
         $this->goToPage(1);
+    }
+
+    public function changePageSize($size)
+    {
+        $this->pageSize = $size;
     }
 
     /** Livewire Hooks and lifecycle methods */
