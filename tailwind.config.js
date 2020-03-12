@@ -20,6 +20,9 @@ module.exports = {
           'brand-dark': colors.blue[600],
           'brand-darker': colors.blue[800],
       },
+      spacing: {
+          '9': '2.25rem',
+      }
     },
 },
   plugins: [],
