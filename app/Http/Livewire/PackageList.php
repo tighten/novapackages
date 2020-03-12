@@ -8,6 +8,7 @@ use App\Package;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -97,6 +98,8 @@ class PackageList extends Component
     {
         $this->pageSize = $size;
         $this->goToPage(1);
+
+        Cookie::queue('pageSize', $size, 2880);
     }
 
     /** Livewire Hooks and lifecycle methods */
@@ -124,6 +127,8 @@ class PackageList extends Component
         $this->fill(
             $request->only(['tag', 'search', 'page'])
         );
+
+        $this->pageSize = Cookie::get('pageSize', $this->pageSize);
     }
 
     /* Fix nextPage/previousPage to disallow overflows */

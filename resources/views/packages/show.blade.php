@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('top-id', 'vue-app')
+
 @section('title', $package['name'])
 @section('meta')
     @og('title', $package['name'])
