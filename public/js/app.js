@@ -47850,76 +47850,80 @@ module.exports = __webpack_require__(424);
 
 __webpack_require__(146);
 
-window.Vue = __webpack_require__(166);
 window.hljs = __webpack_require__(169);
 
 hljs.initHighlightingOnLoad();
 
-Vue.directive('click-outside', {
-    bind: function bind(el, binding, vNode) {
-        // Provided expression must evaluate to a function.
-        if (typeof binding.value !== 'function') {
-            var compName = vNode.context.name;
-            var warn = '[Vue-click-outside:] provided expression \'' + binding.expression + '\' is not a function, but has to be';
-            if (compName) {
-                warn += 'Found in component \'' + compName + '\'';
+if (!!document.getElementById('vue-app')) {
+
+    window.Vue = __webpack_require__(166);
+
+    Vue.directive('click-outside', {
+        bind: function bind(el, binding, vNode) {
+            // Provided expression must evaluate to a function.
+            if (typeof binding.value !== 'function') {
+                var compName = vNode.context.name;
+                var warn = '[Vue-click-outside:] provided expression \'' + binding.expression + '\' is not a function, but has to be';
+                if (compName) {
+                    warn += 'Found in component \'' + compName + '\'';
+                }
+
+                console.warn(warn);
             }
+            // Define Handler and cache it on the element
+            var bubble = binding.modifiers.bubble;
+            var handler = function handler(e) {
+                if (bubble || !el.contains(e.target) && el !== e.target) {
+                    binding.value(e);
+                }
+            };
+            el.__vueClickOutside__ = handler;
 
-            console.warn(warn);
+            // add Event Listeners
+            document.addEventListener('click', handler);
+        },
+
+        unbind: function unbind(el, binding) {
+            // Remove Event Listeners
+            document.removeEventListener('click', el.__vueClickOutside__);
+            el.__vueClickOutside__ = null;
         }
-        // Define Handler and cache it on the element
-        var bubble = binding.modifiers.bubble;
-        var handler = function handler(e) {
-            if (bubble || !el.contains(e.target) && el !== e.target) {
-                binding.value(e);
+    });
+
+    Vue.component('admin-dropdown', __webpack_require__(356));
+    Vue.component('collaborator-select', __webpack_require__(359));
+    Vue.component('package-card', __webpack_require__(362));
+    Vue.component('package-detail', __webpack_require__(365));
+    Vue.component('package-detail-frame', __webpack_require__(381));
+    Vue.component('package-review-create', __webpack_require__(385));
+    Vue.component('package-screenshot', __webpack_require__(388));
+    Vue.component('package-screenshots', __webpack_require__(391));
+    Vue.component('package-screenshots-dropzone', __webpack_require__(394));
+    Vue.component('package-screenshots-list', __webpack_require__(401));
+    Vue.component('rating-count-bar', __webpack_require__(404));
+    Vue.component('tag-select', __webpack_require__(407));
+    Vue.component('title-icon', __webpack_require__(410));
+
+    Vue.component('passport-clients', __webpack_require__(413));
+    Vue.component('passport-authorized-clients', __webpack_require__(416));
+    Vue.component('passport-personal-access-tokens', __webpack_require__(421));
+
+    Vue.mixin({
+        methods: {
+            route: route
+        },
+        computed: {
+            novapackages: function novapackages() {
+                return window.novapackages;
             }
-        };
-        el.__vueClickOutside__ = handler;
-
-        // add Event Listeners
-        document.addEventListener('click', handler);
-    },
-
-    unbind: function unbind(el, binding) {
-        // Remove Event Listeners
-        document.removeEventListener('click', el.__vueClickOutside__);
-        el.__vueClickOutside__ = null;
-    }
-});
-
-Vue.component('admin-dropdown', __webpack_require__(356));
-Vue.component('collaborator-select', __webpack_require__(359));
-Vue.component('package-card', __webpack_require__(362));
-Vue.component('package-detail', __webpack_require__(365));
-Vue.component('package-detail-frame', __webpack_require__(381));
-Vue.component('package-review-create', __webpack_require__(385));
-Vue.component('package-screenshot', __webpack_require__(388));
-Vue.component('package-screenshots', __webpack_require__(391));
-Vue.component('package-screenshots-dropzone', __webpack_require__(394));
-Vue.component('package-screenshots-list', __webpack_require__(401));
-Vue.component('rating-count-bar', __webpack_require__(404));
-Vue.component('tag-select', __webpack_require__(407));
-Vue.component('title-icon', __webpack_require__(410));
-
-Vue.component('passport-clients', __webpack_require__(413));
-Vue.component('passport-authorized-clients', __webpack_require__(416));
-Vue.component('passport-personal-access-tokens', __webpack_require__(421));
-
-Vue.mixin({
-    methods: {
-        route: route
-    },
-    computed: {
-        novapackages: function novapackages() {
-            return window.novapackages;
         }
-    }
-});
+    });
 
-var app = new Vue({
-    el: '#app',
-    delimiters: ['${', '}']
-});
+    var app = new Vue({
+        el: '#vue-app',
+        delimiters: ['${', '}']
+    });
+}
 
 /***/ }),
 /* 146 */
