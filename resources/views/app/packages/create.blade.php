@@ -2,6 +2,8 @@
 
 @section('title', 'Create package')
 
+@section('top-id', 'vue-app')
+
 @section('content')
 <div class="flex items-center">
     <div class="md:w-1/2 mx-4 md:mx-auto">
