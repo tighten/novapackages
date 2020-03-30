@@ -31,9 +31,9 @@
             <div class="hover:bg-white inline-block border border-gray-400 cursor-pointer p-2 rounded-sm" x-on:click="open = true" :class="{ 'bg-white': open}">
                 <span class="inline-block" x-text="pageSize"></span>
                 <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="inline-block fill-current text-gray-700 h-4 w-4">
-                    <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
-                        <g id="icon-shape">
-                            <polygon id="Combined-Shape" points="9.29289322 12.9497475 10 13.6568542 15.6568542 8 14.2426407 6.58578644 10 10.8284271 5.75735931 6.58578644 4.34314575 8"></polygon>
+                    <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                        <g>
+                            <polygon points="9.29289322 12.9497475 10 13.6568542 15.6568542 8 14.2426407 6.58578644 10 10.8284271 5.75735931 6.58578644 4.34314575 8"></polygon>
                         </g>
                     </g>
                 </svg>

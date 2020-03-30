@@ -87,5 +87,7 @@ class DatabaseSeeder extends Seeder
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
         });
+
+        // @todo make sure tags get synced up when pushing *anything* up to algolia
     }
 }
