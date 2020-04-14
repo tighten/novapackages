@@ -39,8 +39,12 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
         $path = 'app/public/og/';
         $file = str_slug($this->packageName, '-') . '.png';
 
-        if (Storage::disk('public')->exists('og/' . $file)) {
-            return;
+        if (! Storage::exists('og/')) {
+            Storage::makeDirectory('og/');
+        } else {
+            if (Storage::disk('public')->exists('og/' . $file)) {
+                return;
+            }
         }
 
         $basePadding = 50;
