@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Package;
 use App\Http\Resources\PackageDetailResource;
+use App\Jobs\GeneratePackageOpenGraphImage;
+use App\Package;
 
 class PackageController extends Controller
 {
@@ -14,17 +15,23 @@ class PackageController extends Controller
 
     public function show($namespace, $name)
     {
-        $query = Package::where('composer_name', $namespace.'/'.$name);
+        $query = Package::where('composer_name', $namespace . '/' . $name);
 
         if (auth()->user() && auth()->user()->isAdmin()) {
-            $query = Package::withoutGlobalScopes()->where('composer_name', $namespace.'/'.$name);
+            $query = Package::withoutGlobalScopes()->where('composer_name', $namespace . '/' . $name);
         }
 
         $package = $query->firstOrFail();
 
-        return view('packages.show')
-            ->with('package', PackageDetailResource::from($package))
-            ->with('screenshots', $package->screenshots);
+        dispatch(new GeneratePackageOpenGraphImage($package->name, $package->author->name));
+
+        $packageOgImage = str_slug($package->name, '-') . '.png';
+
+        return view('packages.show', [
+            'package' => PackageDetailResource::from($package),
+            'screenshots' => $package->screenshots,
+            'packageOgImage' => $packageOgImage,
+        ]);
     }
 
     public function showId(Package $package)
