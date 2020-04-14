@@ -67,7 +67,7 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
         );
 
         $box = new Box($image);
-        $box->setBox(($basePadding + ($gutter * 2)), 0, $width, $height);
+        $box->setBox(($basePadding + ($gutter * 2)), 0, $width - ($basePadding * 2), $height - ($basePadding * 2));
         $box->setFontFace(resource_path('fonts/Roboto/Roboto-Bold.ttf'));
         $box->setTextAlign('left', 'center');
         $box->setFontColor(new Color(44, 49, 88));
