@@ -47,14 +47,16 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
     /** @test */
     function it_creates_a_new_image_and_saves_to_storage()
     {
-        GeneratePackageOpenGraphImage::dispatch('Alphabets', 'Sesame Street');
+        $file = Str::slug('Alphabets') . '.png';
 
-        $file = 'og/' . Str::slug('Alphabets') . '.png';
+        $filePath = 'og/' . $file;
 
-        Storage::disk('public')->assertExists($file);
+        GeneratePackageOpenGraphImage::dispatch('Alphabets', 'Sesame Street', $file);
 
-        Storage::delete($file);
+        Storage::disk('public')->assertExists($filePath);
 
-        Storage::disk('public')->assertMissing($file);
+        Storage::delete($filePath);
+
+        Storage::disk('public')->assertMissing($filePath);
     }
 }

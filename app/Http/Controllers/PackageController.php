@@ -24,14 +24,16 @@ class PackageController extends Controller
 
         $package = $query->firstOrFail();
 
-        dispatch(new GeneratePackageOpenGraphImage($package->name, $package->author->name));
-
-        $packageOgImage = Str::slug($package->name, '-') . '.png';
+        dispatch(new GeneratePackageOpenGraphImage(
+            $package->name,
+            $package->author->name,
+            $package->og_image_name
+        ));
 
         return view('packages.show', [
             'package' => PackageDetailResource::from($package),
             'screenshots' => $package->screenshots,
-            'packageOgImage' => $packageOgImage,
+            'packageOgImage' => $package->og_image_name,
         ]);
     }
 

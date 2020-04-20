@@ -129,6 +129,11 @@ class Package extends Model implements Feedable
         return $this->attributes['abstract'] ?: abstractify(markdown($this->attributes['readme']));
     }
 
+    public function getOgImageNameAttribute()
+    {
+        return Str::slug($this->name, '-') . '.png';
+    }
+
     /**
      * Output package for RSS feed.
      *
@@ -164,7 +169,7 @@ class Package extends Model implements Feedable
     public function readmeIsHtml()
     {
         return $this->readme_format == 'html';
-	}
+    }
 
     public function addReview($ratingId, $reviewContent)
     {
