@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PackageDetailResource;
-use App\Jobs\GeneratePackageOpenGraphImage;
 use App\Package;
+use Illuminate\Support\Str;
+use App\Jobs\GeneratePackageOpenGraphImage;
+use App\Http\Resources\PackageDetailResource;
 
 class PackageController extends Controller
 {
@@ -25,7 +26,7 @@ class PackageController extends Controller
 
         dispatch(new GeneratePackageOpenGraphImage($package->name, $package->author->name));
 
-        $packageOgImage = str_slug($package->name, '-') . '.png';
+        $packageOgImage = Str::slug($package->name, '-') . '.png';
 
         return view('packages.show', [
             'package' => PackageDetailResource::from($package),

@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 /** @runTestsInSeparateProcesses */
@@ -48,7 +49,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
     {
         GeneratePackageOpenGraphImage::dispatch('Alphabets', 'Sesame Street');
 
-        $file = 'og/' . str_slug('Alphabets') . '.png';
+        $file = 'og/' . Str::slug('Alphabets') . '.png';
 
         Storage::disk('public')->assertExists($file);
 

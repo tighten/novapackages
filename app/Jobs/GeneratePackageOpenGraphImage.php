@@ -4,12 +4,13 @@ namespace App\Jobs;
 
 use GDText\Box;
 use GDText\Color;
+use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 
 class GeneratePackageOpenGraphImage implements ShouldQueue
 {
@@ -23,7 +24,7 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(String $packageName, String $packageAuthor)
+    public function __construct(string $packageName, string $packageAuthor)
     {
         $this->packageName = $packageName;
         $this->packageAuthor = $packageAuthor;
@@ -37,7 +38,7 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
     public function handle()
     {
         $path = 'app/public/og/';
-        $file = str_slug($this->packageName, '-') . '.png';
+        $file = Str::slug($this->packageName, '-') . '.png';
 
         if (! Storage::exists('og/')) {
             Storage::makeDirectory('og/');
