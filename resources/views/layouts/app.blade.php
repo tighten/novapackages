@@ -11,7 +11,7 @@
     <title>@yield('title', 'Home') - {{ config('app.name', 'Nova Packages') }}</title>
     @yield('meta')
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     @include('feed::links')
 
@@ -96,7 +96,7 @@
     @livewireScripts
     @stack('scripts')
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     @if (app()->environment() =='local')
     <script>
