@@ -97,6 +97,8 @@
     @stack('scripts')
 
     <script src="{{ mix('js/app.js') }}"></script>
+    {{--@todo only load this on Vue pages--}}
+    <script src="{{ mix('js/app-vue-pages.js') }}"></script>
 
     @if (app()->environment() =='local')
     <script>
