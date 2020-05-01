@@ -20,6 +20,8 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
     protected $packageAuthor;
     protected $packageOgImageName;
 
+    private $storageDir = 'ogimage/';
+
     /**
      * Create a new job instance.
      *
@@ -39,19 +41,48 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
      */
     public function handle()
     {
-        $path = 'app/public/ogimage/';
-        $file = $this->packageOgImageName;
-
-        if (! Storage::exists('ogimage/')) {
-            Storage::makeDirectory('ogimage/');
-        } else {
-            $files = Storage::files('ogimage/');
-            $id = explode('_', $file)[0];
-            $matches = preg_grep("/{$id}\_/", $files);
-
-            Storage::delete($matches);
+        if (! $this->createStorageDirectory()) {
+            $this->removeExistingImagesForPackage();
         }
 
+        $image = $this->createImage();
+
+        $this->saveImageToStorage($image);
+    }
+
+    private function createStorageDirectory(): bool
+    {
+        if (Storage::exists($this->storageDir)) {
+            return false;
+        }
+
+        Storage::makeDirectory($this->storageDir);
+        return true;
+    }
+
+    private function removeExistingImagesForPackage()
+    {
+        $files = Storage::files($this->storageDir);
+        $packageId = explode('_', $this->packageOgImageName)[0];
+        $matches = preg_grep("/{$packageId}\_/", $files);
+
+        Storage::delete($matches);
+    }
+
+    private function saveImageToStorage($image)
+    {
+        imagepng($image, storage_path($this->getImageStoragePath()));
+
+        imagedestroy($image);
+    }
+
+    private function getImageStoragePath()
+    {
+        return "app/public/{$this->storageDir}{$this->packageOgImageName}";
+    }
+
+    private function createImage()
+    {
         $basePadding = 50;
         $gutter = 15;
         $height = 630;
@@ -87,7 +118,6 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
         $box->setFontSize(30);
         $box->draw('By ' . $this->packageAuthor);
 
-        imagepng($image, storage_path($path . $file));
-        imagedestroy($image);
+        return $image;
     }
 }
