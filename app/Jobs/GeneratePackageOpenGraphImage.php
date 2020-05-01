@@ -87,8 +87,6 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
         $box->setFontSize(30);
         $box->draw('By ' . $this->packageAuthor);
 
-        header('Content-type: image/png');
-
         imagepng($image, storage_path($path . $file));
         imagedestroy($image);
     }

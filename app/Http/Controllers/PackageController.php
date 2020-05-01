@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Package;
-use Illuminate\Support\Str;
-use App\Jobs\GeneratePackageOpenGraphImage;
 use App\Http\Resources\PackageDetailResource;
+use App\Package;
 
 class PackageController extends Controller
 {
