@@ -131,7 +131,7 @@ class Package extends Model implements Feedable
 
     public function getOgImageNameAttribute()
     {
-        return Str::slug($this->name, '-') . '.png';
+        return $this->id . '_' . Str::slug($this->name, '-') . '.png';
     }
 
     /**

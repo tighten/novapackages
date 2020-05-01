@@ -5,11 +5,12 @@ namespace App\Jobs;
 use GDText\Box;
 use GDText\Color;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class GeneratePackageOpenGraphImage implements ShouldQueue
 {
@@ -38,15 +39,17 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
      */
     public function handle()
     {
-        $path = 'app/public/og/';
+        $path = 'app/public/ogimage/';
         $file = $this->packageOgImageName;
 
-        if (! Storage::exists('og/')) {
-            Storage::makeDirectory('og/');
+        if (! Storage::exists('ogimage/')) {
+            Storage::makeDirectory('ogimage/');
         } else {
-            if (Storage::disk('public')->exists('og/' . $file)) {
-                return;
-            }
+            $files = Storage::files('ogimage/');
+            $id = explode('_', $file)[0];
+            $matches = preg_grep("/{$id}\_/", $files);
+
+            Storage::delete($matches);
         }
 
         $basePadding = 50;
@@ -69,15 +72,15 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
         );
 
         $box = new Box($image);
-        $box->setBox(($basePadding + ($gutter * 2)), 0, $width - ($basePadding * 2), $height - ($basePadding * 2));
+        $box->setBox(($basePadding + ($gutter * 3)), 0, $width - ($basePadding * 4), $height - ($basePadding * 2));
         $box->setFontFace(resource_path('fonts/Roboto/Roboto-Bold.ttf'));
         $box->setTextAlign('left', 'center');
         $box->setFontColor(new Color(44, 49, 88));
-        $box->setFontSize(80);
-        $box->draw($this->packageName);
+        $box->setFontSize(75);
+        $box->draw(Str::limit($this->packageName, 70, '...'));
 
         $box = new Box($image);
-        $box->setBox(($basePadding + ($gutter * 2)), 0, $width, $height - ($basePadding + ($gutter * 2)));
+        $box->setBox(($basePadding + ($gutter * 3)), 0, $width, $height - ($basePadding + ($gutter * 3)));
         $box->setFontFace(resource_path('fonts/Roboto/Roboto-Italic.ttf'));
         $box->setTextAlign('left', 'bottom');
         $box->setFontColor(new Color(44, 49, 88));

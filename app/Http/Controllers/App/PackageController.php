@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App;
 
 use App\Collaborator;
 use App\Events\PackageCreated;
+use App\Events\PackageUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageFormRequest;
 use App\Package;
@@ -108,6 +109,8 @@ class PackageController extends Controller
         });
 
         $package->refresh()->searchable();
+
+        event(new PackageUpdated($package));
 
         $package->syncScreenshots($request->input('screenshots', []));
 
