@@ -133,7 +133,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
     function createANewOpenGraphImage($packageName)
     {
         $file = '123_' . Str::slug($packageName) . '.png';
-        $filePath = 'ogimage/' . $file;
+        $filePath = config('opengraph.image_directory_name') . "/{$file}";
 
         GeneratePackageOpenGraphImage::dispatch($packageName, 'Sesame Street', $file);
 

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\OpenGraphImage;
 use App\Screenshot;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -131,7 +132,7 @@ class Package extends Model implements Feedable
 
     public function getOgImageNameAttribute()
     {
-        return $this->id . '_' . Str::slug($this->name, '-') . '.png';
+        return OpenGraphImage::makeFileName($this->id, $this->name);
     }
 
     /**
