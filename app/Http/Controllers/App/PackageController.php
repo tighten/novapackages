@@ -109,9 +109,7 @@ class PackageController extends Controller
         });
 
         $package->refresh()->searchable();
-
         event(new PackageUpdated($package));
-
         $package->syncScreenshots($request->input('screenshots', []));
 
         return redirect()->route('app.packages.index');

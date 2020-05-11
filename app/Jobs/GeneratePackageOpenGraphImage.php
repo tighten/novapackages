@@ -36,18 +36,6 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
      */
     public function handle()
     {
-        $ogi = new OpenGraphImage($this->packageOgImageName);
-
-        if (! $ogi->makeStorageDirectory()) {
-            $ogi->removeDuplicates();
-        }
-
-        $image = $ogi->make(
-            $this->packageName,
-            "By {$this->packageAuthor}",
-            public_path('images/package-opengraph-base.png')
-        );
-
-        $ogi->save($image);
+        (new OpenGraphImage($this->packageName, $this->packageAuthor, $this->packageOgImageName))->generate();
     }
 }

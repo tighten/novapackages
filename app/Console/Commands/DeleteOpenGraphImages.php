@@ -22,7 +22,6 @@ class DeleteOpenGraphImages extends Command
         }
 
         $package = Package::where('id', $this->argument('package'))->first();
-
         $file = config('opengraph.image_directory_name') . "/{$package->og_image_name}";
 
         Storage::delete($file);

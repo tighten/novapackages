@@ -9,10 +9,29 @@ use Illuminate\Support\Str;
 
 class OpenGraphImage
 {
-    const PADDING = 50;
     const GUTTER = 15;
+    const IMAGE_HEIGHT = 630;
+    const IMAGE_WIDTH = 1200;
+    const PADDING = 50;
 
     protected $fileName;
+    protected $subtitle;
+    protected $title;
+
+    /**
+     * __construct
+     *
+     * @param  string $title Main text for the image.
+     * @param  string $subtitle Subtext for the image.
+     * @param  string $fileName Image filename (e.g. my-image.png)
+     * @return void
+     */
+    public function __construct($title, $subtitle, $fileName)
+    {
+        $this->title = $title;
+        $this->subtitle = $subtitle;
+        $this->fileName = $fileName;
+    }
 
     /**
      * Generate an open graph image file name.
@@ -25,32 +44,38 @@ class OpenGraphImage
         return "{$uniqueId}_" . Str::slug($name, '-') . '.png';
     }
 
-    public function __construct($fileName)
+    public function generate()
     {
-        $this->fileName = $fileName;
+
+        if (! $this->makeStorageDirectory()) {
+            $this->deleteImagesForProject();
+        }
+
+        $image = $this->make();
+        $this->save($image);
     }
 
-    public function storageDirectory(): string
+    protected function storageDirectory(): string
     {
         return config('opengraph.image_directory_name') . '/';
     }
 
-    public function storagePath(): string
+    protected function storagePath(): string
     {
         return Storage::disk('public')->path('') . $this->storageDirectory() . "{$this->fileName}";
     }
 
-    public function makeStorageDirectory(): bool
+    protected function makeStorageDirectory(): bool
     {
         if (Storage::exists($this->storageDirectory())) {
             return false;
         }
 
-        Storage::makeDirectory($this->storageDirectory());
+        Storage::ensureDirectoryExists($this->storageDirectory());
         return true;
     }
 
-    public function removeDuplicates()
+    protected function deleteImagesForProject()
     {
         $files = Storage::files($this->storageDirectory());
         $id = explode('_', $this->fileName)[0];
@@ -59,28 +84,18 @@ class OpenGraphImage
         Storage::delete($matches);
     }
 
-    public function save($image)
+    protected function save($image)
     {
         imagepng($image, $this->storagePath($this->fileName));
-
         imagedestroy($image);
     }
 
-    /**
-     * Create a new image
-     *
-     * @param  string $title Main text for the image.
-     * @param  string $subtitle Subtext for the image.
-     * @param  string $baseImagePath Path to a pre-designed png image base.
-     * @param  int $width Width of the image.
-     * @param  int $height Height of the image.
-     */
-    public function make($title, $subtitle, $baseImagePath = null, $width = 1200, $height = 630)
+    protected function make()
     {
-        if ($baseImagePath) {
-            $image = imagecreatefrompng($baseImagePath);
+        if (public_path('images/package-opengraph-base.png')) {
+            $image = imagecreatefrompng(public_path('images/package-opengraph-base.png'));
         } else {
-            $image = imagecreatetruecolor($width, $height);
+            $image = imagecreatetruecolor(self::IMAGE_WIDTH, self::IMAGE_HEIGHT);
 
             imagefill($image, 0, 0, imagecolorallocate($image, 255, 255, 255));
             imagesetthickness($image, 5);
@@ -88,8 +103,8 @@ class OpenGraphImage
                 $image,
                 self::PADDING,
                 self::PADDING,
-                ($width - self::PADDING),
-                ($height - self::PADDING),
+                (self::IMAGE_WIDTH - self::PADDING),
+                (self::IMAGE_HEIGHT - self::PADDING),
                 imagecolorallocate($image, 44, 49, 88)
             );
         }
@@ -98,27 +113,27 @@ class OpenGraphImage
         $box->setBox(
             self::PADDING * 2,
             0,
-            $width - (self::PADDING * 4),
-            $height - (self::PADDING * 2)
+            self::IMAGE_WIDTH - (self::PADDING * 4),
+            self::IMAGE_HEIGHT - (self::PADDING * 2)
         );
         $box->setFontFace(resource_path('fonts/Roboto/Roboto-Bold.ttf'));
         $box->setTextAlign('left', 'center');
         $box->setFontColor(new Color(44, 49, 88));
         $box->setFontSize(75);
-        $box->draw(Str::limit($title, 70, '...'));
+        $box->draw(Str::limit($this->title, 70, '...'));
 
         $box = new Box($image);
         $box->setBox(
             self::PADDING * 2,
             0,
-            $width,
-            $height - (self::PADDING * 2)
+            self::IMAGE_WIDTH,
+            self::IMAGE_HEIGHT - (self::PADDING * 2)
         );
         $box->setFontFace(resource_path('fonts/Roboto/Roboto-Italic.ttf'));
         $box->setTextAlign('left', 'bottom');
         $box->setFontColor(new Color(44, 49, 88));
         $box->setFontSize(30);
-        $box->draw($subtitle);
+        $box->draw("By {$this->subtitle}");
 
         return $image;
     }

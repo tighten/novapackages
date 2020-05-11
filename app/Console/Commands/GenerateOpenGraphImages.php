@@ -14,18 +14,14 @@ class GenerateOpenGraphImages extends Command
 
     public function handle()
     {
-        $this->argument('package')
-            ? $this->callSilent('purge:ogimage', ['package' => $this->argument('package')])
-            : $this->callSilent('purge:ogimage');
+        $this->callSilent('purge:ogimage', ['package' => $this->argument('package')]);
 
         $packages = $this->argument('package')
             ? Package::where('id', $this->argument('package'))->get()
             : Package::all();
 
         $bar = $this->output->createProgressBar(count($packages));
-
         $this->info('Generating images ...');
-
         $bar->start();
 
         foreach ($packages as $package) {
@@ -34,7 +30,6 @@ class GenerateOpenGraphImages extends Command
                 $package->author->name,
                 $package->og_image_name,
             ));
-
             $bar->advance();
         }
 
