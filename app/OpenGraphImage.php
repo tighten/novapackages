@@ -4,6 +4,7 @@ namespace App;
 
 use GDText\Box;
 use GDText\Color;
+use Illuminate\Support\Facades\File as Filesystem;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -46,13 +47,9 @@ class OpenGraphImage
 
     public function generate()
     {
-
-        if (! $this->makeStorageDirectory()) {
-            $this->deleteImagesForProject();
-        }
-
-        $image = $this->make();
-        $this->save($image);
+        Filesystem::ensureDirectoryExists(Storage::disk('public')->path('') . $this->storageDirectory());
+        $this->deleteImagesForProject();
+        $this->save($this->make());
     }
 
     protected function storageDirectory(): string
@@ -63,16 +60,6 @@ class OpenGraphImage
     protected function storagePath(): string
     {
         return Storage::disk('public')->path('') . $this->storageDirectory() . "{$this->fileName}";
-    }
-
-    protected function makeStorageDirectory(): bool
-    {
-        if (Storage::exists($this->storageDirectory())) {
-            return false;
-        }
-
-        Storage::ensureDirectoryExists($this->storageDirectory());
-        return true;
     }
 
     protected function deleteImagesForProject()
