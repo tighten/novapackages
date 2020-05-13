@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\OpenGraphImage;
 use App\Screenshot;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -129,6 +130,11 @@ class Package extends Model implements Feedable
         return $this->attributes['abstract'] ?: abstractify(markdown($this->attributes['readme']));
     }
 
+    public function getOgImageNameAttribute()
+    {
+        return OpenGraphImage::makeFileName($this->id, $this->name);
+    }
+
     /**
      * Output package for RSS feed.
      *
@@ -164,7 +170,7 @@ class Package extends Model implements Feedable
     public function readmeIsHtml()
     {
         return $this->readme_format == 'html';
-	}
+    }
 
     public function addReview($ratingId, $reviewContent)
     {

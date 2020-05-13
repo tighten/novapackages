@@ -7,14 +7,16 @@
     @og('title', $package['name'])
     @og('type', 'object')
     @og('url', route('packages.show', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']]))
-    @og('image', url('images/package-opengraph-fallback.png'))
+    @og('image', url(config('opengraph.image_directory_name') . "/{$packageOgImage}"))
     @og('description', e($package['abstract']))
     @og('site_name', 'Nova Packages')
+
+    <meta name="twitter:card" content="summary_large_image">
 @endsection
 
 @section('content')
     @if (session('status'))
-        <div class="bg-green-100 border border-green-300 text-green-600 text-sm px-4 py-3 rounded mb-4">
+        <div class="px-4 py-3 mb-4 text-sm text-green-600 bg-green-100 border border-green-300 rounded">
             {{ session('status') }}
         </div>
     @endif

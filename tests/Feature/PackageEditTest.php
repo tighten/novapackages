@@ -7,23 +7,19 @@ use App\Package;
 use App\Screenshot;
 use App\Tag;
 use App\User;
-use Facades\App\Repo;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\Testing\File;
+use Illuminate\Foundation\Testing\WithoutEvents;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PackageEditTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase, WithFaker, WithoutEvents;
 
     /** @test */
     public function user_can_update_a_package()
     {
-        $this->withoutEvents();
-
         list($package, $user) = $this->createPackageWithUser();
         $formData = [
             'name' => 'BAE Package',
@@ -91,7 +87,6 @@ class PackageEditTest extends TestCase
     /** @test */
     public function the_composer_name_must_be_unique()
     {
-        $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
         $existingPackage = factory(Package::class)->create(['composer_name' => 'tightenco/bae']);
@@ -109,7 +104,6 @@ class PackageEditTest extends TestCase
     /** @test */
     public function the_composer_can_remain_the_same()
     {
-        $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
         $package = factory(Package::class)->create(['composer_name' => 'tightenco/bae']);
@@ -214,8 +208,6 @@ class PackageEditTest extends TestCase
     /** @test */
     public function the_selected_author_is_returned_to_the_view_when_validation_fails()
     {
-        $this->withoutEvents();
-
         list($package, $user) = $this->createPackageWithUser();
         $author = factory(Collaborator::class)->create();
 
@@ -233,8 +225,6 @@ class PackageEditTest extends TestCase
     /** @test */
     public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails()
     {
-        $this->withoutEvents();
-
         list($package, $user) = $this->createPackageWithUser();
         list($selectedCollaboratorA, $author, $selectedCollaboratorB) = factory(Collaborator::class, 3)->create();
         $unselectedCollaborator = factory(Collaborator::class)->create();
@@ -264,8 +254,6 @@ class PackageEditTest extends TestCase
     /** @test */
     public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails()
     {
-        $this->withoutEvents();
-
         list($package, $user) = $this->createPackageWithUser();
         $newTagName = 'New Tag';
         $selectedTags = collect([
@@ -296,7 +284,6 @@ class PackageEditTest extends TestCase
     public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case()
     {
         $this->withoutExceptionHandling();
-        $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
         list($package, $user) = $this->createPackageWithUser();
@@ -327,7 +314,6 @@ class PackageEditTest extends TestCase
     public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added()
     {
         $this->withoutExceptionHandling();
-        $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
         list($package, $user) = $this->createPackageWithUser();
