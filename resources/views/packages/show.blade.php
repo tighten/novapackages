@@ -7,7 +7,7 @@
     @og('title', $package['name'])
     @og('type', 'object')
     @og('url', route('packages.show', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']]))
-    @og('image', url(config('opengraph.image_directory_name') . "/{$packageOgImage}"))
+    @og('image', $packageOgImageUrl)
     @og('description', e($package['abstract']))
     @og('site_name', 'Nova Packages')
 

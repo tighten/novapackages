@@ -25,7 +25,7 @@ class PackageController extends Controller
         return view('packages.show', [
             'package' => PackageDetailResource::from($package),
             'screenshots' => $package->screenshots,
-            'packageOgImage' => $package->og_image_name,
+            'packageOgImageUrl' => $package->og_image_public_url,
         ]);
     }
 
