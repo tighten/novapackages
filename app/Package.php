@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Spatie\Feed\Feedable;
@@ -133,6 +134,11 @@ class Package extends Model implements Feedable
     public function getOgImageNameAttribute()
     {
         return OpenGraphImage::makeFileName($this->id, $this->name);
+    }
+
+    public function getOgImagePublicUrlAttribute()
+    {
+        return Storage::url(config('opengraph.image_directory_name') . "/{$this->og_image_name}");
     }
 
     /**
