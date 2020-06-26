@@ -8,6 +8,7 @@
     @og('image', url('images/package-opengraph-fallback.png'))
     @og('description', 'Package ideas, from the community, for anyone looking to get started making packages for Laravel Nova.')
     @og('site_name', 'Nova Packages')
+    <meta name="twitter:card" content="summary_large_image">
 @endsection
 
 @section('content')

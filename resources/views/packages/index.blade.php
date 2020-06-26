@@ -10,6 +10,7 @@
     @og('site_name', 'Nova Packages')
 
     <meta name="description" content="Discover new packages for Laravel Nova. Search, browse, or submit your own packages" />
+    <meta name="twitter:card" content="summary_large_image">
 @endsection
 
 @section('content')
