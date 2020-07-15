@@ -85,7 +85,7 @@ export default {
         return {
             author: this.review.user,
             content: this.review.content,
-            date: moment(this.review.update_at).format('MMMM D, YYYY'),
+            date: moment(this.review.updated_at).format('MMMM D, YYYY'),
             isEditing: false,
             showReview: true,
         };
