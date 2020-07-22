@@ -127,7 +127,6 @@ class PackageDetailResource extends PackageResource
                 'json' => [
                     'text' => $package->readme,
                     'mode' => 'gfm',
-                    'context' => '',
                 ],
             ])->getBody()->getContents();
         });
