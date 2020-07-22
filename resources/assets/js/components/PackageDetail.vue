@@ -95,7 +95,7 @@
 
                 <div
                     v-html="packageReadme"
-                    class="markdown-body"
+                    class="markdown-body bg-white min-h-full"
                 ></div>
             </div>
 
@@ -164,3 +164,24 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+    .markdown-body {
+        font-family: Inter;
+        font-size: 15px;
+        @apply w-full;
+    }
+
+    .markdown-body >>> ul {
+        list-style-type: disc;
+    }
+
+    .markdown-body >>> ol {
+        list-style-type: decimal;
+    }
+
+    .markdown-body >>> code,
+    .markdown-body >>> pre {
+        @apply tracking-wide;
+    }
+</style>

@@ -1,4 +1,4 @@
-.header-underline {
+@import url(https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css);.header-underline {
   border-bottom: 1px solid #aabac5;
   padding-bottom: 0.1rem;
 }

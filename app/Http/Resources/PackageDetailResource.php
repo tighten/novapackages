@@ -8,6 +8,7 @@ use App\Favorite;
 use App\Http\Remotes\Packagist;
 use App\Http\Resources\TagResource;
 use App\ReadmeFormatter;
+use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -26,7 +27,7 @@ class PackageDetailResource extends PackageResource
             'composer_data' => $packagistData ?? false,
             'composer_latest' => $composer_latest ?? null,
             'description' => $this->renderedText($package, 'description'),
-            'readme' => $this->renderedText($package, 'readme'),
+            'readme' => $this->formatReadme($package),
             'instructions' => $package->instructions ? markdown($package->instructions) : null,
             'current_user_rating' => $this->userRating($package),
             'current_user_review' => $this->userReview($package),
@@ -112,5 +113,22 @@ class PackageDetailResource extends PackageResource
     protected function favoritesCount($package)
     {
         return $package->favorites_count ?? Favorite::where('package_id', $package->id)->count();
+    }
+
+    private function formatReadme($package)
+    {
+        if ($package->readmeIsHtml()) {
+            return $package->readme;
+        }
+
+        $response = (new Client)->post('https://api.github.com/markdown', [
+            'json' => [
+                'text' => $package->readme,
+                'mode' => 'gfm',
+                'context' => '',
+            ],
+        ]);
+
+        return $response->getBody()->getContents();
     }
 }
