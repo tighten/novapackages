@@ -95,7 +95,7 @@
 
                 <div
                     v-html="packageReadme"
-                    class="text-gray-600 leading-normal mb-4"
+                    class="markdown-body"
                 ></div>
             </div>
 
