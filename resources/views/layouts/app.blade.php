@@ -12,7 +12,6 @@
     @yield('meta')
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" rel="stylesheet">
 
     @include('feed::links')
 
