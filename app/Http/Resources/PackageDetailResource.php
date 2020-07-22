@@ -118,18 +118,18 @@ class PackageDetailResource extends PackageResource
 
     private function formatReadme($package)
     {
-        if ($package->readmeIsHtml()) {
-            return $package->readme;
-        }
+        return cache()->remember("package-readme-{$package->id}", 600, function () use ($package) {
+            if ($package->readmeIsHtml()) {
+                return $package->readme;
+            }
 
-        $response = app(ClientInterface::class)->post('https://api.github.com/markdown', [
-            'json' => [
-                'text' => $package->readme,
-                'mode' => 'gfm',
-                'context' => '',
-            ],
-        ]);
-
-        return $response->getBody()->getContents();
+            return app(ClientInterface::class)->post('https://api.github.com/markdown', [
+                'json' => [
+                    'text' => $package->readme,
+                    'mode' => 'gfm',
+                    'context' => '',
+                ],
+            ])->getBody()->getContents();
+        });
     }
 }
