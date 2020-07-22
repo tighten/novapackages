@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Tighten;
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Tighten::class, function () {
             return new Tighten;
+        });
+
+        $this->app->bind(ClientInterface::class, function () {
+            return new Client;
         });
     }
 }

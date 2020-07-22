@@ -9,6 +9,7 @@ use App\Http\Remotes\Packagist;
 use App\Http\Resources\TagResource;
 use App\ReadmeFormatter;
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -121,7 +122,7 @@ class PackageDetailResource extends PackageResource
             return $package->readme;
         }
 
-        $response = (new Client)->post('https://api.github.com/markdown', [
+        $response = app(ClientInterface::class)->post('https://api.github.com/markdown', [
             'json' => [
                 'text' => $package->readme,
                 'mode' => 'gfm',
