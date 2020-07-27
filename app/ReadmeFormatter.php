@@ -74,13 +74,13 @@ class ReadmeFormatter
 
     public function replaceNonImageUrlsHtml($html)
     {
-        $pattern = '/<a href="((?!http)(?!mailto).*?)"/i';
+        $pattern = '/<a(.+)href="((?!http)(?!mailto).*?)"/i';
 
         $baseUrl = $this->url.'/'.$this->nonImageFormat().'/'.$this->latestVersion.'/';
 
         return preg_replace(
             $pattern,
-            '<a href="'.$baseUrl.'$1'.'"',
+            '<a$1href="'.$baseUrl.'$2"',
             $html
         );
     }
