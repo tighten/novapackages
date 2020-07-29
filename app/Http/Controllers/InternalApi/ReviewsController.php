@@ -24,6 +24,14 @@ class ReviewsController extends Controller
 
     public function update()
     {
+        request()->validate([
+            'package_id' => [
+                'required',
+                'exists:App\Package,id'
+            ],
+            'review' => 'required',
+        ]);
+
         Package::findOrFail(request('package_id'))->updateReview(request('review'));
 
         return ['status' => 'success', 'message' => 'Review edited successfully'];
