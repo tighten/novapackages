@@ -14,6 +14,14 @@ class RatingsController extends Controller
 {
     public function store()
     {
+        request()->validate([
+            'package_id' => [
+                'required',
+                'exists:App\Package,id',
+            ],
+            'rating' => 'required',
+        ]);
+
         try {
             auth()->user()->ratePackage(request('package_id'), request('rating'));
         } catch (SelfAuthoredRatingException $e) {
