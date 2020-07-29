@@ -13,6 +13,14 @@ class ReviewsController extends Controller
 {
     public function store()
     {
+        request()->validate([
+            'package_id' => [
+                'required',
+                'exists:App\Package,id',
+            ],
+            'review' => 'required',
+        ]);
+
         Package::findOrFail(request('package_id'))
             ->addReview(
                 Rating::where('rateable_id', request('package_id'))->where('user_id', auth()->id())->first()->id,
@@ -27,7 +35,7 @@ class ReviewsController extends Controller
         request()->validate([
             'package_id' => [
                 'required',
-                'exists:App\Package,id'
+                'exists:App\Package,id',
             ],
             'review' => 'required',
         ]);
