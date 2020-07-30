@@ -38,3 +38,15 @@
 .text-inherit {
     color: inherit;
 }
+
+.markdown-body ul {
+    list-style-type: disc;
+}
+
+.markdown-body ol {
+    list-style-type: decimal;
+}
+
+.markdown-body code, .markdown-body pre {
+    @apply tracking-wide;
+}
