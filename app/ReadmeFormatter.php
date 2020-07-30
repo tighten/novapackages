@@ -24,6 +24,8 @@ class ReadmeFormatter
 
     public function format($text)
     {
+        $text = $this->removeAnchors($text);
+
         if ($this->readmeIsHtml) {
             return $this->formatHtml($text);
         }
@@ -40,6 +42,11 @@ class ReadmeFormatter
 
         // wrap with .markdown
         return '<div class="markdown">'.$formattedHtml.'</div>';
+    }
+
+    private function removeAnchors($text)
+    {
+        return preg_replace('/<a .+class=\"anchor\".+>.+<\/a>/i', '', $text);
     }
 
     public function replaceImageUrls($markdown)
