@@ -46,7 +46,7 @@ class ReadmeFormatter
 
     private function removeAnchors($text)
     {
-        return preg_replace('/<a .+class=\"anchor\".+>.+<\/a>/i', '', $text);
+        return preg_replace('/<a .*?class=\"anchor\".*?>.*?<\/a>/i', '', $text);
     }
 
     public function replaceImageUrls($markdown)
@@ -81,7 +81,7 @@ class ReadmeFormatter
 
     public function replaceNonImageUrlsHtml($html)
     {
-        $pattern = '/<a(.+)href="((?!http)(?!mailto).*?)"/i';
+        $pattern = '/<a(.+?)href="((?!http)(?!mailto).*?)"/i';
 
         $baseUrl = $this->url.'/'.$this->nonImageFormat().'/'.$this->latestVersion.'/';
 
