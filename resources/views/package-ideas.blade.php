@@ -21,7 +21,7 @@
             <div class="bg-white p-3 md:p-6 rounded-b leading-normal">
                 <p class="mb-4">Looking to get started developing packages for the Nova community? Here are some suggestions for you to choose from.</p>
                 <h2 class="text-lg font-bold">How does this work?</h2>
-                <p class="mb-4">These package ideas can be <a href="https://github.com/tightenco/nova-package-development/issues/new">added on GitHub</a> by adding the <code>package-idea</code> label to any issue. Anyone can "claim" an idea by leaving a comment "staking" your claim (and then the author or someone at Tighten will add the <code>challenge-accepted</code> label); it doesn't give you magical rights to it, but it is a signal that you intend to work on it so two people don't accidentally both work on the same package idea.</p>
+                <p class="mb-4">These package ideas can be <a href="https://github.com/tighten/nova-package-development/issues/new">added on GitHub</a> by adding the <code>package-idea</code> label to any issue. Anyone can "claim" an idea by leaving a comment "staking" your claim (and then the author or someone at Tighten will add the <code>challenge-accepted</code> label); it doesn't give you magical rights to it, but it is a signal that you intend to work on it so two people don't accidentally both work on the same package idea.</p>
 
                 <p class="mb-4">Launch your package? Put a link in a comment so the original author (or someone from Tighten) can close the issue.</p>
 

@@ -35,7 +35,7 @@ class GitHub
     public function packageIdeaIssues()
     {
         return Cache::remember(CacheKeys::packageIdeaIssues(), 1, function () {
-            $issues = collect($this->github->api('search')->issues('state:open label:package-idea repo:tightenco/nova-package-development')['items']);
+            $issues = collect($this->github->api('search')->issues('state:open label:package-idea repo:tighten/nova-package-development')['items']);
 
             return $this->sortIssuesByPositiveReactions($issues);
         });

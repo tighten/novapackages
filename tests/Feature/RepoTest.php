@@ -35,7 +35,7 @@ class RepoTest extends TestCase
         $this->assertNotNull($repo->repo());
         $this->assertInstanceOf(GitHubRepo::class, $repo->repo());
         $this->assertEquals('github', $repo->source());
-        $this->assertEquals('https://github.com/tightenco/nova-stripe', $repo->url());
+        $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
         $this->assertNotNull($repo->readme());
         $this->assertNotNull($repo->latestReleaseVersion());
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -44,7 +44,7 @@ class RepoTest extends TestCase
     /** @test */
     public function can_get_a_repo_from_a_the_package_url_if_the_composer_name_is_not_valid()
     {
-        $url = 'https://github.com/tightenco/nova-stripe';
+        $url = 'https://github.com/tighten/nova-stripe';
         $package = factory(Package::class)->make([
             'composer_name' => 'invalid-namespace/invalid-name',
             'url' => $url,
@@ -54,7 +54,7 @@ class RepoTest extends TestCase
 
         $this->assertInstanceOf(GitHubRepo::class, $repo);
         $this->assertEquals('github', $repo->source());
-        $this->assertEquals('https://github.com/tightenco/nova-stripe', $repo->url());
+        $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
         $this->assertNotNull($repo->readme());
         $this->assertNotNull($repo->latestReleaseVersion());
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -73,7 +73,7 @@ class RepoTest extends TestCase
         $this->assertNotNull($repo->repo());
         $this->assertInstanceOf(GitHubRepo::class, $repo->repo());
         $this->assertEquals('github', $repo->source());
-        $this->assertEquals('https://github.com/tightenco/nova-stripe', $repo->url());
+        $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
         $this->assertNotNull($repo->readme());
         $this->assertNotNull($repo->latestReleaseVersion());
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -82,7 +82,7 @@ class RepoTest extends TestCase
     /** @test */
     public function can_get_a_repo_from_a_the_request_url_if_the_composer_name_is_not_valid()
     {
-        $url = 'https://github.com/tightenco/nova-stripe';
+        $url = 'https://github.com/tighten/nova-stripe';
         $mock = Mockery::mock(PackageFormRequest::class);
         $mock->shouldReceive('input')->with('url')->andReturn($url);
         $mock->shouldReceive('getComposerName')->andReturn('invalid-namespace/invalid-name');
@@ -91,7 +91,7 @@ class RepoTest extends TestCase
 
         $this->assertInstanceOf(GitHubRepo::class, $repo);
         $this->assertEquals('github', $repo->source());
-        $this->assertEquals('https://github.com/tightenco/nova-stripe', $repo->url());
+        $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
         $this->assertNotNull($repo->readme());
         $this->assertNotNull($repo->latestReleaseVersion());
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -100,7 +100,7 @@ class RepoTest extends TestCase
     /** @test */
     public function can_fetch_data_from_a_github_repo()
     {
-        $githubUrl = 'https://github.com/tightenco/nova-stripe';
+        $githubUrl = 'https://github.com/tighten/nova-stripe';
 
         $repo = Repo::fromUrl($githubUrl);
 
@@ -266,7 +266,7 @@ class RepoTest extends TestCase
         $this->assertNotNull($repo->repo());
         $this->assertInstanceOf(GitHubRepo::class, $repo->repo());
         $this->assertEquals('github', $repo->source());
-        $this->assertEquals('https://github.com/tightenco/nova-stripe', $repo->url());
+        $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
         $this->assertNotNull($repo->readme());
         $this->assertNotNull($repo->latestReleaseVersion());
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
