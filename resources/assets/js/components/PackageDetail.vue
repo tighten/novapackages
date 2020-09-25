@@ -80,7 +80,7 @@
                 </h2>
 
                 <div
-                    class="text-gray-600 leading-normal mb-4"
+                    class="markdown-body bg-white min-h-full mb-4"
                     v-html="package.instructions"
                 ></div>
             </div>
@@ -95,7 +95,7 @@
 
                 <div
                     v-html="packageReadme"
-                    class="text-gray-600 leading-normal mb-4"
+                    class="markdown-body bg-white min-h-full"
                 ></div>
             </div>
 
