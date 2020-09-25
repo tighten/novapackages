@@ -10,7 +10,6 @@ use App\GitHubRepo;
 use App\GitLabRepo;
 use App\Http\Requests\PackageFormRequest;
 use App\NpmRepo;
-use App\NullRepo;
 use App\Package;
 use Facades\App\Repo;
 use Illuminate\Foundation\Testing\RefreshDatabase;

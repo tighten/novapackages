@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Remotes\GitHub;
 use Github\Client as GitHubClient;
-use Github\HttpClient\Builder;
 use Illuminate\Support\ServiceProvider;
 
 class GitHubServiceProvider extends ServiceProvider

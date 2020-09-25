@@ -4,7 +4,6 @@ namespace App;
 
 use App\Favorite;
 use App\Jobs\UserRatePackage;
-use App\Jobs\UserReviewPackage;
 use App\Package;
 use App\Review;
 use Illuminate\Foundation\Auth\User as Authenticatable;

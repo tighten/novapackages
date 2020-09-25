@@ -18,7 +18,7 @@ if (! function_exists('abstractify')) {
     }
 }
 
-if (! function_exists('translate_github_emoji($key')) {
+if (! function_exists('translate_github_emoji')) {
     function translate_github_emoji($key)
     {
         return Arr::get([
