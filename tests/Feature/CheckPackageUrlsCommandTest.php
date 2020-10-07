@@ -30,7 +30,7 @@ class CheckPackageUrlsCommandTest extends TestCase
             ])->id
         ]);
 
-        $this->packageWithInvalidURL = factory(Package::class)->create([
+        $this->packageWithInvalidUrl = factory(Package::class)->create([
             'name' => 'Package with Invalid URL',
             'url' => 'https://github.com/some-dev/package-name',
             'repo_url' => 'https://github.com/some-dev/package-name',
@@ -39,7 +39,7 @@ class CheckPackageUrlsCommandTest extends TestCase
             ])->id
         ]);
 
-        $this->packageWithInvalidRepoURL = factory(Package::class)->create([
+        $this->packageWithInvalidRepoUrl = factory(Package::class)->create([
             'name' => 'Package with Invalid Repo URL',
             'url' => 'https://github.com/tighten/novapackages',
             'repo_url' => 'https://github.com/tighten/mispelled-package-name',
@@ -69,23 +69,23 @@ class CheckPackageUrlsCommandTest extends TestCase
             ]
         ))->assertDontSee('404 Error');
 
-        $this->assertEquals($this->packageWithInvalidURL->tags()->count(), 1);
-        $this->assertTrue($this->packageWithInvalidURL->tags()->where('tags.name', '404 error')->exists());
+        $this->assertEquals($this->packageWithInvalidUrl->tags()->count(), 1);
+        $this->assertTrue($this->packageWithInvalidUrl->tags()->where('tags.name', '404 error')->exists());
         $this->get(route(
             'packages.show',
             [
-                $this->packageWithInvalidURL->composer_vendor,
-                $this->packageWithInvalidURL->composer_package
+                $this->packageWithInvalidUrl->composer_vendor,
+                $this->packageWithInvalidUrl->composer_package
             ]
         ))->assertSee('404 Error');
 
-        $this->assertEquals($this->packageWithInvalidRepoURL->tags()->count(), 1);
-        $this->assertTrue($this->packageWithInvalidRepoURL->tags()->where('tags.name', '404 error')->exists());
+        $this->assertEquals($this->packageWithInvalidRepoUrl->tags()->count(), 1);
+        $this->assertTrue($this->packageWithInvalidRepoUrl->tags()->where('tags.name', '404 error')->exists());
         $this->get(route(
             'packages.show',
             [
-                $this->packageWithInvalidRepoURL->composer_vendor,
-                $this->packageWithInvalidRepoURL->composer_package
+                $this->packageWithInvalidRepoUrl->composer_vendor,
+                $this->packageWithInvalidRepoUrl->composer_package
             ]
         ))->assertSee('404 Error');
 
@@ -115,7 +115,7 @@ class CheckPackageUrlsCommandTest extends TestCase
         $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
             'user_id' => factory(User::class)->create()->id
         ]);
-        $this->packageWithInvalidURL->contributors()->sync($contributorsWithInvalidPackage);
+        $this->packageWithInvalidUrl->contributors()->sync($contributorsWithInvalidPackage);
 
         $this->artisan('check:package-urls');
 
@@ -130,7 +130,7 @@ class CheckPackageUrlsCommandTest extends TestCase
         );
 
         Notification::assertSentTo(
-            $this->packageWithInvalidURL->author->user,
+            $this->packageWithInvalidUrl->author->user,
             NotifyContributorOfInvalidPackageUrl::class,
         );
 
@@ -154,16 +154,16 @@ class CheckPackageUrlsCommandTest extends TestCase
             'slug' => '404-error'
         ]);
 
-        $this->packageWithInvalidURL->tags()->sync($errorTag);
+        $this->packageWithInvalidUrl->tags()->sync($errorTag);
         $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
             'user_id' => factory(User::class)->create()->id
         ]);
-        $this->packageWithInvalidURL->contributors()->sync($contributorsWithInvalidPackage);
+        $this->packageWithInvalidUrl->contributors()->sync($contributorsWithInvalidPackage);
 
         $this->artisan('check:package-urls');
 
         Notification::assertNotSentTo(
-            $this->packageWithInvalidURL->author->user,
+            $this->packageWithInvalidUrl->author->user,
             NotifyContributorOfInvalidPackageUrl::class,
         );
 
