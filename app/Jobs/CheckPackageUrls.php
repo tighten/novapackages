@@ -50,8 +50,7 @@ class CheckPackageUrls implements ShouldQueue
         if (!$urlsAreInvalid) return;
 
         // Attach error tag
-        $errorTag = $this->returnErrorTag();
-        $this->package->tags()->syncWithoutDetaching($errorTag->id);
+        $this->package->tags()->syncWithoutDetaching($this->fetchErrorTagId());
 
         // Notify authors and contributors
         if ($this->package->author && $this->package->authorIsUser()) {
@@ -65,18 +64,18 @@ class CheckPackageUrls implements ShouldQueue
     }
 
     /**
-     * Find or create 404 tag
-     * @return Tag
+     * Find or create 404 tag, and return tag ID
+     * @return int
      */
-    private function returnErrorTag()
+    private function fetchErrorTagId()
     {
         $errorTag = Tag::where('name', '404 error')
             ->first();
-        if ($errorTag) return $errorTag;
+        if ($errorTag) return $errorTag->id;
 
         return Tag::create([
             'name' => '404 error',
             'slug' => '404-error'
-        ]);
+        ])->id;
     }
 }
