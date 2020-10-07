@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Collaborator;
 use App\Package;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Notifications\NotifyContributorOfInvalidPackageUrl;
 
 class CheckPackageUrlsCommandTest extends TestCase
 {
@@ -19,12 +23,18 @@ class CheckPackageUrlsCommandTest extends TestCase
             'name' => 'Valid Package',
             'url' => 'https://github.com/tighten/novapackages',
             'repo_url' => 'https://github.com/tighten/novapackages',
+            'author_id' => factory(Collaborator::class)->create([
+                'user_id' => factory(User::class)->create()->id
+            ])->id
         ]);
 
         $this->packageWithInvalidURL = factory(Package::class)->create([
             'name' => 'Package with Invalid URL',
             'url' => 'https://github.com/some-dev/package-name',
             'repo_url' => 'https://github.com/some-dev/package-name',
+            'author_id' => factory(Collaborator::class)->create([
+                'user_id' => factory(User::class)->create()->id
+            ])->id
         ]);
 
         $this->packageWithInvalidRepoURL = factory(Package::class)->create([
@@ -86,5 +96,48 @@ class CheckPackageUrlsCommandTest extends TestCase
                 $this->packageWithInvalidDomain->composer_package
             ]
         ))->assertSee('404 Error');
+    }
+
+    /**
+     * @test
+     */
+    public function calling_command_sends_notification_to_author_and_contributors_of_invalid_packages()
+    {
+        Notification::fake();
+
+        $collaboratorWithValidPackage = factory(Collaborator::class)->create([
+            'user_id' => factory(User::class)->create()->id
+        ]);
+        $this->validPackage->contributors()->sync($collaboratorWithValidPackage);
+
+        $this->packageWithInvalidURL->update([]);
+        $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
+            'user_id' => factory(User::class)->create()->id
+        ]);
+        $this->packageWithInvalidURL->contributors()->sync($contributorsWithInvalidPackage);
+
+        $this->artisan('check:package-urls');
+
+        Notification::assertNotSentTo(
+            $this->validPackage->author->user,
+            NotifyContributorOfInvalidPackageUrl::class
+        );
+
+        Notification::assertNotSentTo(
+            $collaboratorWithValidPackage->user,
+            NotifyContributorOfInvalidPackageUrl::class
+        );
+
+        Notification::assertSentTo(
+            $this->packageWithInvalidURL->author->user,
+            NotifyContributorOfInvalidPackageUrl::class,
+        );
+
+        foreach ($contributorsWithInvalidPackage as $contributor) {
+            Notification::assertSentTo(
+                $contributor->user,
+                NotifyContributorOfInvalidPackageUrl::class,
+            );
+        }
     }
 }

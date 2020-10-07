@@ -6,11 +6,12 @@ use App\Tag;
 use Exception;
 use Zttp\Zttp;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Log;
+use App\Notifications\NotifyContributorOfInvalidPackageUrl;
 
 class CheckPackageUrls implements ShouldQueue
 {
@@ -48,8 +49,19 @@ class CheckPackageUrls implements ShouldQueue
         });
         if (!$urlsAreInvalid) return;
 
+        // Attach error tag
         $errorTag = $this->returnErrorTag();
         $this->package->tags()->syncWithoutDetaching($errorTag->id);
+
+        // Notify authors and contributors
+        if ($this->package->author && $this->package->authorIsUser()) {
+            $this->package->author->user->notify(new NotifyContributorOfInvalidPackageUrl($this->package));
+        }
+
+        foreach ($this->package->contributors as $contributor) {
+            if (!$contributor->user) return;
+            $contributor->user->notify(new NotifyContributorOfInvalidPackageUrl($this->package));
+        }
     }
 
     /**
