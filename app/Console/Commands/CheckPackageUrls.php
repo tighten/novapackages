@@ -42,7 +42,9 @@ class CheckPackageUrls extends Command
     {
         $validPackages = Package::whereHas('tags', function ($query) {
             $query->where('name', '!=', '404 error');
-        })->orWhereDoesntHave('tags')
+        })
+        ->orWhereDoesntHave('tags')
+        ->with(['author', 'contributors'])
         ->get();
 
         foreach ($validPackages as $package) {
