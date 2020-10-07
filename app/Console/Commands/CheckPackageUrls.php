@@ -21,7 +21,7 @@ class CheckPackageUrls extends Command
      *
      * @var string
      */
-    protected $description = 'Loop through all packages, checking repo and Packagist URLs for 404 errors.';
+    protected $description = 'Check all package URLs for 404 errors';
 
     /**
      * Create a new command instance.
