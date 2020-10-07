@@ -40,7 +40,12 @@ class CheckPackageUrls extends Command
      */
     public function handle()
     {
-        foreach (Package::all() as $package) {
+        $validPackages = Package::whereHas('tags', function ($query) {
+            $query->where('name', '!=', '404 error');
+        })->orWhereDoesntHave('tags')
+        ->get();
+
+        foreach ($validPackages as $package) {
             dispatch(new CheckPackageUrlsJob($package));
         }
     }

@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Collaborator;
-use App\Package;
+use App\Tag;
 use App\User;
+use App\Package;
 use Tests\TestCase;
+use App\Collaborator;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -110,7 +111,6 @@ class CheckPackageUrlsCommandTest extends TestCase
         ]);
         $this->validPackage->contributors()->sync($collaboratorWithValidPackage);
 
-        $this->packageWithInvalidURL->update([]);
         $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
             'user_id' => factory(User::class)->create()->id
         ]);
@@ -135,6 +135,39 @@ class CheckPackageUrlsCommandTest extends TestCase
 
         foreach ($contributorsWithInvalidPackage as $contributor) {
             Notification::assertSentTo(
+                $contributor->user,
+                NotifyContributorOfInvalidPackageUrl::class,
+            );
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function command_ignores_packages_that_already_have_404_tag()
+    {
+        Notification::fake();
+
+        $errorTag = factory(Tag::class)->create([
+            'name' => '404 error',
+            'slug' => '404-error'
+        ]);
+
+        $this->packageWithInvalidURL->tags()->sync($errorTag);
+        $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
+            'user_id' => factory(User::class)->create()->id
+        ]);
+        $this->packageWithInvalidURL->contributors()->sync($contributorsWithInvalidPackage);
+
+        $this->artisan('check:package-urls');
+
+        Notification::assertNotSentTo(
+            $this->packageWithInvalidURL->author->user,
+            NotifyContributorOfInvalidPackageUrl::class,
+        );
+
+        foreach ($contributorsWithInvalidPackage as $contributor) {
+            Notification::assertNotSentTo(
                 $contributor->user,
                 NotifyContributorOfInvalidPackageUrl::class,
             );
