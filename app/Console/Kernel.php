@@ -2,10 +2,11 @@
 
 namespace App\Console;
 
-use App\Console\Commands\DeleteAbandonedScreenshots;
+use App\Console\Commands\CheckPackageUrls;
 use App\Console\Commands\SyncPackagistData;
-use App\Console\Commands\SyncRepositoryData;
 use Illuminate\Console\Scheduling\Schedule;
+use App\Console\Commands\SyncRepositoryData;
+use App\Console\Commands\DeleteAbandonedScreenshots;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
         SyncPackagistData::class,
         DeleteAbandonedScreenshots::class,
         SyncRepositoryData::class,
+        CheckPackageUrls::class
     ];
 
     /**
@@ -33,6 +35,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('sync:repo')->hourlyAt(30);
         $schedule->command('purge:abandonedscreenshots')->dailyAt('1:00');
         $schedule->command('telescope:prune')->daily();
+        $schedule->command('check:package-urls')->weeklyOn(7, '20:00');
     }
 
     /**
