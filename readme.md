@@ -29,7 +29,7 @@
 
 ## Testing
 
-Some of the tests in this suite depend on an active internet connection, and will run by default. `tests/Feature/RepoTest.php` provides coverage for the ReadMe import feature, and `tests/Feature/CheckPackageUrlsCommandTest` provides coverage for the command that periodically validates package urls.
+Some of the tests in this suite depend on an active internet connection, and will run by default. `tests/Feature/RepoTest.php` provides coverage for the ReadMe import feature, and `tests/Feature/CheckPackageUrlsCommandTest.php` provides coverage for the command that periodically validates package urls.
 
 For convenience, these tests have been added to the `integration` group. If you would like to exlude these tests from running, you may do so by using phpunit's `--exclude-group` option:
 
