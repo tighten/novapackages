@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Notifications\NotifyContributorOfInvalidPackageUrl;
 
+/** @group integration */
 class CheckPackageUrlsCommandTest extends TestCase
 {
 
