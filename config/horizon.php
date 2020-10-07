@@ -1,6 +1,34 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Horizon Domain
+    |--------------------------------------------------------------------------
+    |
+    | This is the subdomain where Horizon will be accessible from. If this
+    | setting is null, Horizon will reside under the same domain as the
+    | application. Otherwise, this value will serve as the subdomain.
+    |
+    */
+
+    'domain' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Horizon Path
+    |--------------------------------------------------------------------------
+    |
+    | This is the URI path where Horizon will be accessible from. Feel free
+    | to change this path to anything you like. Note that the URI will not
+    | affect the paths of its internal API that aren't exposed to users.
+    |
+    */
+
+    'path' => 'horizon',
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +54,10 @@ return [
     |
     */
 
-    'prefix' => env('HORIZON_PREFIX', 'horizon:'),
+    'prefix' => env(
+        'HORIZON_PREFIX',
+        Str::slug(env('APP_NAME', 'laravel'), '_').'_horizon:'
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,8 +100,29 @@ return [
 
     'trim' => [
         'recent' => 60,
+        'pending' => 60,
+        'completed' => 60,
+        'recent_failed' => 10080,
         'failed' => 10080,
         'monitored' => 10080,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Metrics
+    |--------------------------------------------------------------------------
+    |
+    | Here you can configure how many snapshots should be kept to display in
+    | the metrics graph. This will get used in combination with Horizon's
+    | `horizon:snapshot` schedule to define how long to retain metrics.
+    |
+    */
+
+    'metrics' => [
+        'trim_snapshots' => [
+            'job' => 24,
+            'queue' => 24,
+        ],
     ],
 
     /*
@@ -120,6 +172,7 @@ return [
                 'balance' => 'simple',
                 'processes' => 2,
                 'tries' => 3,
+                'nice' => 0,
             ],
         ],
 
@@ -130,6 +183,7 @@ return [
                 'balance' => 'simple',
                 'processes' => 2,
                 'tries' => 3,
+                'nice' => 0,
             ],
         ],
     ],

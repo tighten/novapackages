@@ -24,7 +24,7 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-$factory->defineAs(User::class, 'admin', function ($faker) use ($factory) {
+$factory->state(User::class, 'admin', function ($faker) use ($factory) {
     return array_merge($factory->raw(User::class), [
         'role' => User::ADMIN_ROLE,
     ]);

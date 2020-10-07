@@ -17,7 +17,7 @@ class AdminPanelViewTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class, 'admin')->create();
+        $this->user = factory(User::class)->state('admin')->create();
     }
 
     /** @test */

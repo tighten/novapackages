@@ -107,10 +107,8 @@ class Package extends Model implements Feedable
         return $packageAttributes;
     }
 
-    protected static function boot()
+    protected static function booted()
     {
-        parent::boot();
-
         static::addGlobalScope('notDisabled', function (Builder $builder) {
             $builder->where('is_disabled', false);
         });

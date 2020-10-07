@@ -45,9 +45,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public static function boot()
+    public static function booted()
     {
-        parent::boot();
         self::updated(function ($user) {
             if ($user->isDirty('name')) {
                 $user->updateCollaboratorNames();

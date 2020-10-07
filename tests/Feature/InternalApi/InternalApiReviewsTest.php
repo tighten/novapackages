@@ -15,7 +15,7 @@ class InternalApiReviewsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function unauthenticated_users_cant_post_review()
+    public function unauthenticated_users_cant_post_review()
     {
         $package = factory(Package::class)->create();
         $review = factory(Review::class)->make();
@@ -29,7 +29,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function authenticated_user_cannot_see_link_to_post_review_before_reviewing_package()
+    public function authenticated_user_cannot_see_link_to_post_review_before_reviewing_package()
     {
         $package = factory(Package::class)->create();
         $user = factory(User::class)->create();
@@ -40,7 +40,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function the_same_user_cant_add_two_reviews_to_a_package()
+    public function the_same_user_cant_add_two_reviews_to_a_package()
     {
         $package = factory(Package::class)->create();
         $user = factory(User::class)->create();
@@ -62,7 +62,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function users_can_modify_their_reviews()
+    public function users_can_modify_their_reviews()
     {
         $package = factory(Package::class)->create();
         $user = factory(User::class)->create();
@@ -83,7 +83,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_delete_their_review()
+    public function a_user_can_delete_their_review()
     {
         $review = factory(Review::class)->create();
 
@@ -97,7 +97,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function a_user_cannot_delete_a_review_belonging_to_another_user()
+    public function a_user_cannot_delete_a_review_belonging_to_another_user()
     {
         $review = factory(Review::class)->create();
         $otherUser = factory(User::class)->create();
@@ -112,10 +112,10 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function an_admin_can_delete_another_users_review()
+    public function an_admin_can_delete_another_users_review()
     {
         $review = factory(Review::class)->create();
-        $adminUser = factory(User::class, 'admin')->create();
+        $adminUser = factory(User::class)->state('admin')->create();
 
         $this->be($adminUser)
             ->delete(route('internalapi.reviews.delete', [$review->id]))

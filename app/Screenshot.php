@@ -31,10 +31,8 @@ class Screenshot extends Model
             ->where('created_at', '<', Carbon::now()->subHours(24));
     }
 
-    public static function boot()
+    public static function booted()
     {
-        parent::boot();
-
         static::deleted(function ($screenshot) {
             Storage::delete($screenshot->path);
         });
