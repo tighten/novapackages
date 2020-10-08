@@ -47,11 +47,13 @@ class GitHubRepo extends BaseRepo
     {
         // Github throws an exception if a readme doesn't exist for the repo so we catch it and return null
         try {
-            return $this->github->readme(
+            $res = $this->github->readme(
                 $this->username,
                 $this->repo,
                 $format
             );
+
+            dd($res);
         } catch (Exception $e) {
             return;
         }

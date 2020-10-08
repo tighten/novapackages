@@ -115,7 +115,7 @@ class InternalApiReviewsTest extends TestCase
     function an_admin_can_delete_another_users_review()
     {
         $review = factory(Review::class)->create();
-        $adminUser = factory(User::class, 'admin')->create();
+        $adminUser = factory(User::class)->state('admin')->create();
 
         $this->be($adminUser)
             ->delete(route('internalapi.reviews.delete', [$review->id]))

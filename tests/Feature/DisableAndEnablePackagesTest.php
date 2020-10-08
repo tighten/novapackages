@@ -14,7 +14,7 @@ class DisableAndEnablePackagesTest extends TestCase
     /** @test */
     public function admin_user_can_disable_a_package()
     {
-        $user = factory(User::class, 'admin')->create();
+        $user = factory(User::class)->state('admin')->create();
         $package = factory(Package::class)->create();
 
         $response = $this->be($user->fresh())->get(route('app.admin.disable-package', [$package]));
@@ -27,7 +27,7 @@ class DisableAndEnablePackagesTest extends TestCase
     /** @test */
     public function admin_user_can_enable_a_package()
     {
-        $user = factory(User::class, 'admin')->create();
+        $user = factory(User::class)->state('admin')->create();
         $package = factory(Package::class)->state('disabled')->create();
 
         $response = $this->be($user->fresh())->get(route('app.admin.enable-package', [$package]));

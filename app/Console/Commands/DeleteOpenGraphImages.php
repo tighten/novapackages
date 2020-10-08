@@ -18,7 +18,7 @@ class DeleteOpenGraphImages extends Command
             $files = Storage::allFiles(config('opengraph.image_directory_name') . '/');
             Storage::delete($files);
 
-            return;
+            return 0;
         }
 
         $package = Package::where('id', $this->argument('package'))->first();
