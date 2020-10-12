@@ -17,13 +17,13 @@ class AdminPanelViewTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->state('admin')->create();
+        $this->user = User::factory()->admin()->create();
     }
 
     /** @test */
     public function admin_panel_shows_enabled_packages_if_there_are_any()
     {
-        $enabledPackage = factory(Package::class)->create();
+        $enabledPackage = Package::factory()->create();
 
         $this->be($this->user)
             ->get(route('app.admin.index'))
@@ -35,7 +35,7 @@ class AdminPanelViewTest extends TestCase
     /** @test */
     public function admin_panel_shows_disabled_packages_if_there_are_any()
     {
-        $disabledPackage = factory(Package::class)->states('disabled')->create();
+        $disabledPackage = Package::factory()->disabled()->create();
 
         $this->be($this->user)
             ->get(route('app.admin.index'))
@@ -47,7 +47,7 @@ class AdminPanelViewTest extends TestCase
     /** @test */
     public function admin_panel_does_not_show_disabled_package_list_if_there_are_none()
     {
-        $enabledPackage = factory(Package::class)->create();
+        $enabledPackage = Package::factory()->create();
 
         $this->be($this->user)
             ->get(route('app.admin.index'))
@@ -57,7 +57,7 @@ class AdminPanelViewTest extends TestCase
     /** @test */
     public function admin_panel_does_not_show_enabled_package_list_if_there_are_none()
     {
-        $disabledPackage = factory(Package::class)->states('disabled')->create();
+        $disabledPackage = Package::factory()->disabled()->create();
 
         $this->be($this->user)
             ->get(route('app.admin.index'))
@@ -67,7 +67,7 @@ class AdminPanelViewTest extends TestCase
     /** @test */
     public function admin_user_can_view_individual_page_for_disabled_package()
     {
-        $disabledPackage = factory(Package::class)->states('disabled')->create();
+        $disabledPackage = Package::factory()->disabled()->create();
 
         $this->be($this->user)
             ->get(route('packages.show', [
@@ -80,7 +80,7 @@ class AdminPanelViewTest extends TestCase
     /** @test */
     public function admin_user_can_view_edit_page_for_disabled_package()
     {
-        $disabledPackage = factory(Package::class)->states('disabled')->create();
+        $disabledPackage = Package::factory()->disabled()->create();
 
         $this->be($this->user)
             ->get(route('app.packages.edit', $disabledPackage->id))

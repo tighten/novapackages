@@ -16,8 +16,8 @@ class TagsOnApiTest extends TestCase
     /** @test */
     public function it_attaches_tags_to_api_responses()
     {
-        $package = factory(Package::class)->create();
-        $tag = factory(Tag::class)->create();
+        $package = Package::factory()->create();
+        $tag = Tag::factory()->create();
         $package->tags()->attach($tag);
 
         $apiCall = $this->get('api/recent')->json();

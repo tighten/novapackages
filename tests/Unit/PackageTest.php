@@ -19,7 +19,7 @@ class PackageTest extends TestCase
     public function it_returns_the_abstact_when_the_abstract_is_set()
     {
         $abstract = 'This is the test abstract';
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'abstract' => $abstract,
         ]);
 
@@ -32,7 +32,7 @@ class PackageTest extends TestCase
         $readme = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
         $truncatedReadme = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris';
 
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'abstract' => null,
             'readme' => $readme,
         ]);
@@ -51,7 +51,7 @@ class PackageTest extends TestCase
             'updated_at',
         ];
 
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'description' => 'Test description',
             'packagist_downloads' => 1,
             'github_stars' => 1,
@@ -69,7 +69,7 @@ class PackageTest extends TestCase
     /** @test */
     public function the_readme_is_truncated_to_500_characters_when_being_synchronized_with_the_scout_index()
     {
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme' => Str::random(1400),
         ]);
 

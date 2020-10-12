@@ -20,17 +20,17 @@ class ScreenshotsArePassedToPackageTest extends TestCase
     {
         $packageNamespace = 'tightenco';
         $packageName = 'bae';
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->make();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->make();
         $user->collaborators()->save($collaborator);
-        $packageA = factory(Package::class)->make([
+        $packageA = Package::factory()->make([
             'composer_name' => "{$packageNamespace}/{$packageName}",
         ]);
         $collaborator->authoredPackages()->save($packageA);
-        $screenshotA = factory(Screenshot::class)->create(['uploader_id' => $user->id]);
+        $screenshotA = Screenshot::factory()->create(['uploader_id' => $user->id]);
         $packageA->screenshots()->save($screenshotA);
-        $packageB = factory(Package::class)->create();
-        $screenshotB = factory(Screenshot::class)->create(['uploader_id' => $user->id]);
+        $packageB = Package::factory()->create();
+        $screenshotB = Screenshot::factory()->create(['uploader_id' => $user->id]);
         $packageB->screenshots()->save($screenshotB);
 
         $response = $this->actingAs($user)

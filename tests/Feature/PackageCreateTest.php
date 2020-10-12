@@ -23,9 +23,9 @@ class PackageCreateTest extends TestCase
         $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
-        $user = factory(User::class)->create();
-        list($screenshotA, $screenshotB) = factory(Screenshot::class, 2)->create(['uploader_id' => $user->id]);
-        $validPackageData = array_merge($package = factory(Package::class)->make()->toArray(), [
+        $user = User::factory()->create();
+        list($screenshotA, $screenshotB) = Screenshot::factory(2)->create(['uploader_id' => $user->id]);
+        $validPackageData = array_merge($package = Package::factory()->make()->toArray(), [
             'packagist_namespace' => explode('/', $package['composer_name'])[0],
             'packagist_name' => explode('/', $package['composer_name'])[1],
         ]);
@@ -50,8 +50,8 @@ class PackageCreateTest extends TestCase
         $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
-        $user = factory(User::class)->create();
-        $validPackageData = array_merge($package = factory(Package::class)->make()->toArray(), [
+        $user = User::factory()->create();
+        $validPackageData = array_merge($package = Package::factory()->make()->toArray(), [
             'packagist_namespace' => explode('/', $package['composer_name'])[0],
             'packagist_name' => explode('/', $package['composer_name'])[1],
         ]);
@@ -66,7 +66,7 @@ class PackageCreateTest extends TestCase
     /** @test */
     public function screenshots_must_be_an_array()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post(route('app.packages.store'), [
             'screenshots' => 'not-an-array',
@@ -79,8 +79,8 @@ class PackageCreateTest extends TestCase
     /** @test */
     public function can_not_attach_more_than_20_screenshots()
     {
-        $user = factory(User::class)->create();
-        $screenshots = factory(Screenshot::class, 21)->create(['uploader_id' => $user->id]);
+        $user = User::factory()->create();
+        $screenshots = Screenshot::factory(21)->create(['uploader_id' => $user->id]);
 
         $response = $this->actingAs($user)->post(route('app.packages.store'), [
             'screenshots' => $screenshots->pluck('id'),
@@ -93,8 +93,8 @@ class PackageCreateTest extends TestCase
     /** @test */
     public function all_uploaded_screenshots_are_returned_when_validation_fails()
     {
-        $user = factory(User::class)->create();
-        list($screenshotA, $screenshotB) = factory(Screenshot::class, 2)->create(['uploader_id' => $user->id]);
+        $user = User::factory()->create();
+        list($screenshotA, $screenshotB) = Screenshot::factory(2)->create(['uploader_id' => $user->id]);
 
         $response = $this->actingAs($user)->post(route('app.packages.store'), [
             'packagist_namespace' => null,
@@ -117,8 +117,8 @@ class PackageCreateTest extends TestCase
     {
         $this->withoutEvents();
 
-        $user = factory(User::class)->create();
-        $author = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $author = Collaborator::factory()->create();
 
         $response = $this->actingAs($user)->post(route('app.packages.store'), [
             'packagist_namespace' => null,
@@ -136,9 +136,9 @@ class PackageCreateTest extends TestCase
     {
         $this->withoutEvents();
 
-        $user = factory(User::class)->create();
-        list($selectedCollaboratorA, $author, $selectedCollaboratorB) = factory(Collaborator::class, 3)->create();
-        $unselectedCollaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        list($selectedCollaboratorA, $author, $selectedCollaboratorB) = Collaborator::factory(3)->create();
+        $unselectedCollaborator = Collaborator::factory()->create();
 
         $response = $this->actingAs($user)->post(route('app.packages.store'), [
             'packagist_namespace' => null,
@@ -167,14 +167,14 @@ class PackageCreateTest extends TestCase
     {
         $this->withoutEvents();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $newTagName = 'New Tag';
         $selectedTags = collect([
-            $tagA = factory(Tag::class)->create(['name' => 'Tag A']),
-            $tagB = factory(Tag::class)->create(['name' => 'Tag B']),
+            $tagA = Tag::factory()->create(['name' => 'Tag A']),
+            $tagB = Tag::factory()->create(['name' => 'Tag B']),
             ['name' => $newTagName],
         ]);
-        factory(Tag::class)->create(['name' => 'Excluded Tag']);
+        Tag::factory()->create(['name' => 'Excluded Tag']);
 
         $response = $this->actingAs($user)->post(route('app.packages.store'), [
             'packagist_namespace' => null,
@@ -211,8 +211,8 @@ class PackageCreateTest extends TestCase
         $github->shouldReceive('api')->andReturn($github);
         app()->instance(GitHub::class, $github);
 
-        $user = factory(User::class)->create();
-        $author = factory(Collaborator::class)->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $author = Collaborator::factory()->create(['user_id' => $user->id]);
 
         $this->actingAs($user)->post(route('app.packages.store'), [
             'author_id' => $author->id,
@@ -249,10 +249,10 @@ class PackageCreateTest extends TestCase
         $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
-        $existingTagA = factory(Tag::class)->create(['name' => 'test tag a', 'slug' => 'test-tag-a']);
-        $existingTagB = factory(Tag::class)->create(['name' => 'test tag b', 'slug' => 'test-tag-b']);
-        $user = factory(User::class)->create();
-        $validPackageData = array_merge($package = factory(Package::class)->make()->toArray(), [
+        $existingTagA = Tag::factory()->create(['name' => 'test tag a', 'slug' => 'test-tag-a']);
+        $existingTagB = Tag::factory()->create(['name' => 'test tag b', 'slug' => 'test-tag-b']);
+        $user = User::factory()->create();
+        $validPackageData = array_merge($package = Package::factory()->make()->toArray(), [
             'packagist_namespace' => explode('/', $package['composer_name'])[0],
             'packagist_name' => explode('/', $package['composer_name'])[1],
         ]);
@@ -277,9 +277,9 @@ class PackageCreateTest extends TestCase
         $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
-        $existingTag = factory(Tag::class)->create(['name' => 'test tag', 'slug' => 'test-tag']);
-        $user = factory(User::class)->create();
-        $validPackageData = array_merge($package = factory(Package::class)->make()->toArray(), [
+        $existingTag = Tag::factory()->create(['name' => 'test tag', 'slug' => 'test-tag']);
+        $user = User::factory()->create();
+        $validPackageData = array_merge($package = Package::factory()->make()->toArray(), [
             'packagist_namespace' => explode('/', $package['composer_name'])[0],
             'packagist_name' => explode('/', $package['composer_name'])[1],
         ]);

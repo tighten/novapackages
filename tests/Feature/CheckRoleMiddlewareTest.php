@@ -13,7 +13,7 @@ class CheckRoleMiddlewareTest extends TestCase
     /** @test */
     public function users_cannot_visit_admin_protected_routes()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->be($user->fresh())->get(route('app.admin.index'));
 
@@ -23,7 +23,7 @@ class CheckRoleMiddlewareTest extends TestCase
     /** @test */
     public function admins_can_visit_admin_protected_routes()
     {
-        $user = factory(User::class)->state('admin')->create();
+        $user = User::factory()->admin()->create();
 
         $response = $this->be($user->fresh())->get(route('app.admin.index'));
 

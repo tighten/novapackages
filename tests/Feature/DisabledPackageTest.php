@@ -14,8 +14,8 @@ class DisabledPackageTest extends TestCase
     /** @test */
     public function packages_show_on_main_page()
     {
-        $user = factory(User::class)->state('admin')->create();
-        $package = factory(Package::class)->create();
+        $user = User::factory()->admin()->create();
+        $package = Package::factory()->create();
 
         $response = $this->be($user)->get(route('home'));
         $response->assertSee($package->name);
@@ -24,8 +24,8 @@ class DisabledPackageTest extends TestCase
     /** @test */
     public function disabled_packages_dont_show_on_main_page()
     {
-        $user = factory(User::class)->state('admin')->create();
-        $package = factory(Package::class)->states('disabled')->create();
+        $user = User::factory()->admin()->create();
+        $package = Package::factory()->disabled()->create();
 
         $response = $this->be($user)->get(route('home'));
         $response->assertDontSee($package->name);

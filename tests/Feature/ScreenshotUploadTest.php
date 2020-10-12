@@ -18,8 +18,8 @@ class ScreenshotUploadTest extends TestCase
     {
         Storage::fake();
 
-        $userA = factory(User::class)->create();
-        $userB = factory(User::class)->create();
+        $userA = User::factory()->create();
+        $userB = User::factory()->create();
 
         $response = $this->actingAs($userB)->json('POST', route('app.screenshot-uploads.store'), [
             'screenshot' => File::image('screenshot.jpg'),
@@ -55,7 +55,7 @@ class ScreenshotUploadTest extends TestCase
     /** @test */
     public function the_uploaded_screenshot_must_be_smaller_than_2mb()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->json('POST', route('app.screenshot-uploads.store'), [
             'screenshot' => File::create('screenshot.jpg', 2049),
@@ -71,7 +71,7 @@ class ScreenshotUploadTest extends TestCase
     /** @test */
     public function the_upload_screenshot_must_be_an_image()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->json('POST', route('app.screenshot-uploads.store'), [
             'screenshot' => File::create('invlaid-image.pdf'),

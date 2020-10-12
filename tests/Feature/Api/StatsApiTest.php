@@ -16,8 +16,8 @@ class StatsApiTest extends TestCase
     /** @test */
     public function it_counts_live_packages()
     {
-        factory(Package::class, 2)->create();
-        factory(Package::class)->create(['is_disabled' => true]);
+        Package::factory(2)->create();
+        Package::factory()->disabled()->create();
 
         $apiCall = $this->get('api/stats')->json();
 
@@ -27,9 +27,9 @@ class StatsApiTest extends TestCase
     /** @test */
     public function it_sums_live_package_download_counts()
     {
-        factory(Package::class)->create(['packagist_downloads' => 123]);
-        factory(Package::class)->create(['packagist_downloads' => 234]);
-        factory(Package::class)->create(['is_disabled' => true, 'packagist_downloads' => 999]);
+        Package::factory()->create(['packagist_downloads' => 123]);
+        Package::factory()->create(['packagist_downloads' => 234]);
+        Package::factory()->disabled()->create(['packagist_downloads' => 999]);
 
         $apiCall = $this->get('api/stats')->json();
 
@@ -39,9 +39,9 @@ class StatsApiTest extends TestCase
     /** @test */
     public function it_sums_live_package_star_counts()
     {
-        factory(Package::class)->create(['github_stars' => 123]);
-        factory(Package::class)->create(['github_stars' => 234]);
-        factory(Package::class)->create(['is_disabled' => true, 'github_stars' => 999]);
+        Package::factory()->create(['github_stars' => 123]);
+        Package::factory()->create(['github_stars' => 234]);
+        Package::factory()->disabled()->create(['github_stars' => 999]);
 
         $apiCall = $this->get('api/stats')->json();
 
@@ -51,7 +51,7 @@ class StatsApiTest extends TestCase
     /** @test */
     public function it_counts_collaborators()
     {
-        factory(Collaborator::class, 4)->create();
+        Collaborator::factory(4)->create();
 
         $apiCall = $this->get('api/stats')->json();
 
@@ -62,12 +62,12 @@ class StatsApiTest extends TestCase
     public function it_counts_ratings()
     {
         $this->markTestIncomplete('Waiting on latest PR to merge');
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
 
-        $package1 = factory(User::class)->create();
-        $package2 = factory(User::class)->create();
-        $package3 = factory(User::class)->create();
+        $package1 = User::factory()->create();
+        $package2 = User::factory()->create();
+        $package3 = User::factory()->create();
 
         $user1->ratePackage($package1, 5);
         $user1->ratePackage($package2, 3);
@@ -85,12 +85,12 @@ class StatsApiTest extends TestCase
     public function it_averages_global_rating()
     {
         $this->markTestIncomplete('Waiting on latest PR to merge');
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
 
-        $package1 = factory(User::class)->create();
-        $package2 = factory(User::class)->create();
-        $package3 = factory(User::class)->create();
+        $package1 = User::factory()->create();
+        $package2 = User::factory()->create();
+        $package3 = User::factory()->create();
 
         $user1->ratePackage($package1, 5);
         $user1->ratePackage($package2, 3);

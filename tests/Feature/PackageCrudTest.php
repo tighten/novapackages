@@ -26,11 +26,11 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function app_package_index_shows_my_packages()
     {
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
         $user->collaborators()->save($collaborator);
 
-        $package = $collaborator->authoredPackages()->save(factory(Package::class)->make());
+        $package = $collaborator->authoredPackages()->save(Package::factory()->make());
 
         $response = $this->be($user)->get(route('app.packages.index'));
 
@@ -47,13 +47,13 @@ class PackageCrudTest extends TestCase
     {
         $this->markTestIncomplete('Needs to scope just to the "My Packages" section');
 
-        $user1 = factory(User::class)->create();
-        $collaborator1 = factory(Collaborator::class)->create();
+        $user1 = User::factory()->create();
+        $collaborator1 = Collaborator::factory()->create();
         $user1->collaborators()->save($collaborator1);
 
-        $collaborator2 = factory(Collaborator::class)->create();
+        $collaborator2 = Collaborator::factory()->create();
 
-        $package = $collaborator2->authoredPackages()->save(factory(Package::class)->make());
+        $package = $collaborator2->authoredPackages()->save(Package::factory()->make());
 
         $response = $this->be($user1)->get(route('app.packages.index'));
 
@@ -63,12 +63,12 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function app_package_index_shows_my_favorited_packages()
     {
-        $userA = factory(User::class)->create();
-        $userAFavorites = factory(Favorite::class, 2)->create([
+        $userA = User::factory()->create();
+        $userAFavorites = Favorite::factory(2)->create([
             'user_id' => $userA->id,
         ]);
-        $userB = factory(User::class)->create();
-        $userBFavorite = factory(Favorite::class)->create([
+        $userB = User::factory()->create();
+        $userBFavorite = Favorite::factory()->create([
             'user_id' => $userB->id,
         ]);
 
@@ -84,7 +84,7 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function authenticated_user_can_see_create_package_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('app.packages.create'))
@@ -104,11 +104,11 @@ class PackageCrudTest extends TestCase
     {
         Event::fake();
 
-        $existingTag = factory(Tag::class)->create();
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->make();
+        $existingTag = Tag::factory()->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->make();
         $user->collaborators()->save($collaborator);
-        $packageData = factory(Package::class)->make([
+        $packageData = Package::factory()->make([
             'author_id' => $user->collaborators->first()->id,
             'url' => 'https://www.example.com/tightenco/bae',
         ]);
@@ -151,7 +151,7 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function non_user_cannot_submit_a_package()
     {
-        $package = factory(Package::class)->make();
+        $package = Package::factory()->make();
         $this->followingRedirects()
             ->post(route('app.packages.store'), $this->postFromPackage($package))
             ->assertNotFound();
@@ -162,8 +162,8 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function user_cannot_submit_package_without_author()
     {
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->make(['author_id' => null]);
+        $user = User::factory()->create();
+        $package = Package::factory()->make(['author_id' => null]);
 
         $this->actingAs($user)
             ->post(route('app.packages.store'), $this->postFromPackage($package))
@@ -175,8 +175,8 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function user_cannot_submit_package_without_package_name()
     {
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->make(['name' => null]);
+        $user = User::factory()->create();
+        $package = Package::factory()->make(['name' => null]);
 
         $this->actingAs($user)
             ->post(route('app.packages.store'), $this->postFromPackage($package))
@@ -188,8 +188,8 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function user_cannot_submit_package_without_packagist_namespace()
     {
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->make(['composer_name' => '/test-name']);
+        $user = User::factory()->create();
+        $package = Package::factory()->make(['composer_name' => '/test-name']);
 
         $this->actingAs($user)
             ->post(route('app.packages.store'), $this->postFromPackage($package))
@@ -201,8 +201,8 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function user_cannot_submit_package_without_packagist_name()
     {
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->make(['composer_name' => 'testing/']);
+        $user = User::factory()->create();
+        $package = Package::factory()->make(['composer_name' => 'testing/']);
 
         $this->actingAs($user)
             ->post(route('app.packages.store'), $this->postFromPackage($package))
@@ -214,8 +214,8 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function user_cannot_submit_package_without_url()
     {
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->make(['url' => null]);
+        $user = User::factory()->create();
+        $package = Package::factory()->make(['url' => null]);
 
         $this->actingAs($user)
             ->post(route('app.packages.store'), $this->postFromPackage($package))
@@ -230,9 +230,9 @@ class PackageCrudTest extends TestCase
         $this->withoutEvents();
         $this->fakesRepoFromRequest();
 
-        $user = factory(User::class)->create();
-        $originalPackage = factory(Package::class)->make();
-        $duplicatePackage = factory(Package::class)->make(['composer_name' => $originalPackage->composer_name]);
+        $user = User::factory()->create();
+        $originalPackage = Package::factory()->make();
+        $duplicatePackage = Package::factory()->make(['composer_name' => $originalPackage->composer_name]);
 
         $this->actingAs($user)
             ->post(route('app.packages.store'), $this->postfromPackage($originalPackage));
@@ -250,10 +250,10 @@ class PackageCrudTest extends TestCase
         Event::fake();
         $this->fakesRepoFromRequest();
 
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
         $user->collaborators()->save($collaborator);
-        $package = factory(Package::class)->make([
+        $package = Package::factory()->make([
             'author_id' => $user->collaborators()->first()->id,
         ]);
 
@@ -272,8 +272,8 @@ class PackageCrudTest extends TestCase
         Event::fake();
         $this->fakesRepoFromRequest();
 
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->make();
+        $user = User::factory()->create();
+        $package = Package::factory()->make();
 
         $this->actingAs($user)->post(route('app.packages.store'), $this->postFromPackage($package));
 
@@ -295,11 +295,11 @@ class PackageCrudTest extends TestCase
         Event::fake();
         $this->fakesRepoFromRequest();
 
-        $collaborator = factory(Collaborator::class)->create();
-        $user = factory(User::class)->create();
+        $collaborator = Collaborator::factory()->create();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
 
-        $package = factory(Package::class)->make([
+        $package = Package::factory()->make([
             'author_id' => $collaborator->id,
         ]);
 

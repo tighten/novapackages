@@ -17,7 +17,7 @@ class PackageResourceTest extends TestCase
     public function the_abstract_is_returned_if_the_resource_has_an_abstract()
     {
         $abstract = 'This is the test abstract';
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'abstract' => $abstract,
             'description' => 'This is the test description',
         ]);
@@ -30,7 +30,7 @@ class PackageResourceTest extends TestCase
     /** @test */
     public function an_abstractified_value_is_returned_when_the_abstract_is_null()
     {
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'abstract' => null,
         ]);
 
