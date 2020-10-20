@@ -50,7 +50,5 @@ class NewPackage extends Notification implements ShouldQueue
                     ->fields($this->fields)
                     ->timestamp(Carbon::now());
             });
-
-        return $slackMessage;
     }
 }
