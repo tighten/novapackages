@@ -7,7 +7,7 @@ on:
       - master
 jobs:
   test:
-    name: PHP 7.2, Laravel 6.*
+    name: PHP 7.3, Laravel 6.*
     runs-on: ubuntu-latest
 
     steps:
@@ -17,14 +17,14 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.2
+          php-version: 7.3
 
       - name: Cache Composer dependencies
         uses: actions/cache@v1
         with:
           path: ~/.composer/cache/files
-          key: php-7.2-laravel-6.*-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: php-7.2-laravel-6.*-composer-
+          key: php-7.3-laravel-6.*-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: php-7.3-laravel-6.*-composer-
 
       - name: Cache npm dependencies
         uses: actions/cache@v1
