@@ -4,12 +4,12 @@ namespace App\Notifications;
 
 use App\Package;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 
-class NotifyContributorOfInvalidPackageUrl extends Notification
+class NotifyContributorOfInvalidPackageUrl extends Notification implements ShouldQueue
 {
 
     use Queueable;

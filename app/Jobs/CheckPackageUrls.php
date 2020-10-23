@@ -2,16 +2,15 @@
 
 namespace App\Jobs;
 
+use App\Notifications\NotifyContributorOfInvalidPackageUrl;
 use App\Tag;
 use Exception;
-use Zttp\Zttp;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Notifications\NotifyContributorOfInvalidPackageUrl;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Zttp\Zttp;
 
 class CheckPackageUrls implements ShouldQueue
 {
@@ -20,21 +19,11 @@ class CheckPackageUrls implements ShouldQueue
 
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public function __construct($package)
     {
         $this->package = $package;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         $urlsAreInvalid = collect([
