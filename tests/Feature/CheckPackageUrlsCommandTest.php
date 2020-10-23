@@ -2,15 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Collaborator;
+use App\Notifications\NotifyContributorOfInvalidPackageUrl;
+use App\Package;
 use App\Tag;
 use App\User;
-use App\Package;
-use Tests\TestCase;
-use App\Collaborator;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Notifications\NotifyContributorOfInvalidPackageUrl;
+use Illuminate\Support\Facades\Notification;
+use Tests\TestCase;
 
 /** @group integration */
 class CheckPackageUrlsCommandTest extends TestCase
@@ -37,12 +36,6 @@ class CheckPackageUrlsCommandTest extends TestCase
             'author_id' => factory(Collaborator::class)->create([
                 'user_id' => factory(User::class)->create()->id
             ])->id
-        ]);
-
-        $this->packageWithInvalidRepoUrl = factory(Package::class)->create([
-            'name' => 'Package with Invalid Repo URL',
-            'url' => 'https://github.com/tighten/novapackages',
-            'repo_url' => 'https://github.com/tighten/mispelled-package-name',
         ]);
 
         $this->packageWithInvalidDomain = factory(Package::class)->create([
@@ -76,16 +69,6 @@ class CheckPackageUrlsCommandTest extends TestCase
             [
                 $this->packageWithInvalidUrl->composer_vendor,
                 $this->packageWithInvalidUrl->composer_package
-            ]
-        ))->assertSee('404 Error');
-
-        $this->assertEquals($this->packageWithInvalidRepoUrl->tags()->count(), 1);
-        $this->assertTrue($this->packageWithInvalidRepoUrl->tags()->where('tags.name', '404 error')->exists());
-        $this->get(route(
-            'packages.show',
-            [
-                $this->packageWithInvalidRepoUrl->composer_vendor,
-                $this->packageWithInvalidRepoUrl->composer_package
             ]
         ))->assertSee('404 Error');
 

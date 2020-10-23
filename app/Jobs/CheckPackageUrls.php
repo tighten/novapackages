@@ -26,17 +26,17 @@ class CheckPackageUrls implements ShouldQueue
 
     public function handle()
     {
-        $urlsAreInvalid = collect([
-            $this->package->url,
-            $this->package->repo_url, // ToDo: is this attribute still in use? If no, we can refactor to remove this collection.
-        ])->contains(function ($url) {
-            try {
-                return Zttp::get($url)->status() != 200;
-            } catch (Exception $e) {
-                return true; // If domain can't be reached, confirm URL is invalid
-            }
-        });
-        if (!$urlsAreInvalid) return;
+        $urlIsValid = true;
+        try {
+            $status = Zttp::get($this->package->url);
+            if ($status->isSuccess()) return;
+            if ($status->isServerError()) return; // if 500, issue probably isn't with URL
+            $urlIsValid = false;
+        } catch (Exception $e) {
+            $urlIsValid = false;
+        }
+
+        if ($urlIsValid) return;
 
         $this->package->tags()->syncWithoutDetaching($this->fetchErrorTagId());
 
