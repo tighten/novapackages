@@ -18,7 +18,7 @@ class CheckPackageUrlsCommandTest extends TestCase
 
     use RefreshDatabase;
 
-    public function setUp(): void
+    public function setUp():void
     {
         parent::setUp();
         $this->validPackage = factory(Package::class)->create([
@@ -107,10 +107,10 @@ class CheckPackageUrlsCommandTest extends TestCase
     {
         Notification::fake();
 
-        $collaboratorWithValidPackage = factory(Collaborator::class)->create([
+        $contributorWithValidPackage = factory(Collaborator::class)->create([
             'user_id' => factory(User::class)->create()->id
         ]);
-        $this->validPackage->contributors()->sync($collaboratorWithValidPackage);
+        $this->validPackage->contributors()->sync($contributorWithValidPackage);
 
         $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
             'user_id' => factory(User::class)->create()->id
@@ -125,7 +125,7 @@ class CheckPackageUrlsCommandTest extends TestCase
         );
 
         Notification::assertNotSentTo(
-            $collaboratorWithValidPackage->user,
+            $contributorWithValidPackage->user,
             NotifyContributorOfInvalidPackageUrl::class
         );
 
@@ -153,8 +153,8 @@ class CheckPackageUrlsCommandTest extends TestCase
             'name' => '404 error',
             'slug' => '404-error'
         ]);
-
         $this->packageWithInvalidUrl->tags()->sync($errorTag);
+
         $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
             'user_id' => factory(User::class)->create()->id
         ]);

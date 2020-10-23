@@ -39,7 +39,7 @@ class CheckPackageUrls implements ShouldQueue
     {
         $urlsAreInvalid = collect([
             $this->package->url,
-            $this->package->repo_url,
+            $this->package->repo_url, // ToDo: is this attribute still in use? If no, we can refactor to remove this collection.
         ])->contains(function ($url) {
             try {
                 return Zttp::get($url)->status() != 200;
@@ -49,10 +49,8 @@ class CheckPackageUrls implements ShouldQueue
         });
         if (!$urlsAreInvalid) return;
 
-        // Attach error tag
         $this->package->tags()->syncWithoutDetaching($this->fetchErrorTagId());
 
-        // Notify authors and contributors
         if ($this->package->author && $this->package->authorIsUser()) {
             $this->package->author->user->notify(new NotifyContributorOfInvalidPackageUrl($this->package));
         }

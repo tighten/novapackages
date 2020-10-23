@@ -4,9 +4,10 @@ namespace App\Console;
 
 use App\Console\Commands\CheckPackageUrls;
 use App\Console\Commands\SyncPackagistData;
-use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\SyncRepositoryData;
 use App\Console\Commands\DeleteAbandonedScreenshots;
+
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
