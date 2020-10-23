@@ -39,7 +39,7 @@ class PackageEditTest extends TestCase
             'readme' => $readme,
             'latest_version' => $version,
         ]);
-        $existingTag = factory(Tag::class)->create();
+        $existingTag = Tag::factory()->create();
         $package->tags()->save($existingTag);
         $formData = array_merge($formData, [
             'tags-new' => ['New tag'],
@@ -69,9 +69,9 @@ class PackageEditTest extends TestCase
     public function an_authenticated_user_can_view_the_edit_package_page()
     {
         list($packageA, $user) = $this->createPackageWithUser();
-        $screenshot = factory(Screenshot::class)->create(['uploader_id' => $user->id]);
+        $screenshot = Screenshot::factory()->create(['uploader_id' => $user->id]);
         $packageA->screenshots()->save($screenshot);
-        $packageB = factory(Package::class)->create();
+        $packageB = Package::factory()->create();
 
         $response = $this->actingAs($user)->get(route('app.packages.edit', $packageA));
 
@@ -89,7 +89,7 @@ class PackageEditTest extends TestCase
     {
         $this->fakesRepoFromRequest();
 
-        $existingPackage = factory(Package::class)->create(['composer_name' => 'tightenco/bae']);
+        $existingPackage = Package::factory()->create(['composer_name' => 'tightenco/bae']);
         list($package, $user) = $this->createPackageWithUser();
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
@@ -106,9 +106,9 @@ class PackageEditTest extends TestCase
     {
         $this->fakesRepoFromRequest();
 
-        $package = factory(Package::class)->create(['composer_name' => 'tightenco/bae']);
-        $collaborator = factory(Collaborator::class)->make();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->create(['composer_name' => 'tightenco/bae']);
+        $collaborator = Collaborator::factory()->make();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
 
@@ -126,7 +126,7 @@ class PackageEditTest extends TestCase
         $this->fakesRepoFromRequest();
 
         list($package, $user) = $this->createPackageWithUser();
-        list($oldScreenshot, $screenshotA, $screenshotB) = factory(Screenshot::class, 3)->create(['uploader_id' => $user->id]);
+        list($oldScreenshot, $screenshotA, $screenshotB) = Screenshot::factory(3)->create(['uploader_id' => $user->id]);
         $package->screenshots()->save($oldScreenshot);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), array_merge($this->getValidPackageData(), [
@@ -163,7 +163,7 @@ class PackageEditTest extends TestCase
     public function can_not_upload_more_than_20_screenshots()
     {
         list($package, $user) = $this->createPackageWithUser();
-        $screenshots = factory(Screenshot::class, 21)->create(['uploader_id' => $user->id]);
+        $screenshots = Screenshot::factory(21)->create(['uploader_id' => $user->id]);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'screenshots' => $screenshots->pluck('id'),
@@ -190,7 +190,7 @@ class PackageEditTest extends TestCase
     public function all_uploaded_screenshots_are_returned_when_validation_fails()
     {
         list($package, $user) = $this->createPackageWithUser();
-        list($oldScreenshot, $screenshotA, $screenshotB) = factory(Screenshot::class, 3)->create(['uploader_id' => $user->id]);
+        list($oldScreenshot, $screenshotA, $screenshotB) = Screenshot::factory(3)->create(['uploader_id' => $user->id]);
         $package->screenshots()->save($oldScreenshot);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
@@ -209,7 +209,7 @@ class PackageEditTest extends TestCase
     public function the_selected_author_is_returned_to_the_view_when_validation_fails()
     {
         list($package, $user) = $this->createPackageWithUser();
-        $author = factory(Collaborator::class)->create();
+        $author = Collaborator::factory()->create();
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'packagist_namespace' => null,
@@ -226,8 +226,8 @@ class PackageEditTest extends TestCase
     public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails()
     {
         list($package, $user) = $this->createPackageWithUser();
-        list($selectedCollaboratorA, $author, $selectedCollaboratorB) = factory(Collaborator::class, 3)->create();
-        $unselectedCollaborator = factory(Collaborator::class)->create();
+        list($selectedCollaboratorA, $author, $selectedCollaboratorB) = Collaborator::factory(3)->create();
+        $unselectedCollaborator = Collaborator::factory()->create();
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'packagist_namespace' => null,
@@ -257,11 +257,11 @@ class PackageEditTest extends TestCase
         list($package, $user) = $this->createPackageWithUser();
         $newTagName = 'New Tag';
         $selectedTags = collect([
-            $tagA = factory(Tag::class)->create(['name' => 'Tag A']),
-            $tagB = factory(Tag::class)->create(['name' => 'Tag B']),
+            $tagA = Tag::factory()->create(['name' => 'Tag A']),
+            $tagB = Tag::factory()->create(['name' => 'Tag B']),
             ['name' => $newTagName],
         ]);
-        factory(Tag::class)->create(['name' => 'Excluded Tag']);
+        Tag::factory()->create(['name' => 'Excluded Tag']);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'packagist_namespace' => null,
@@ -287,8 +287,8 @@ class PackageEditTest extends TestCase
         $this->fakesRepoFromRequest();
 
         list($package, $user) = $this->createPackageWithUser();
-        $existingTagA = factory(Tag::class)->create(['name' => 'test tag a', 'slug' => 'test-tag-a']);
-        $existingTagB = factory(Tag::class)->create(['name' => 'test tag b', 'slug' => 'test-tag-b']);
+        $existingTagA = Tag::factory()->create(['name' => 'test tag a', 'slug' => 'test-tag-a']);
+        $existingTagB = Tag::factory()->create(['name' => 'test tag b', 'slug' => 'test-tag-b']);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'name' => $this->faker->company,
@@ -317,7 +317,7 @@ class PackageEditTest extends TestCase
         $this->fakesRepoFromRequest();
 
         list($package, $user) = $this->createPackageWithUser();
-        $existingTag = factory(Tag::class)->create(['name' => 'test tag', 'slug' => 'test-tag']);
+        $existingTag = Tag::factory()->create(['name' => 'test tag', 'slug' => 'test-tag']);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'name' => $this->faker->company,
@@ -343,7 +343,7 @@ class PackageEditTest extends TestCase
 
     private function getValidPackageData()
     {
-        return array_merge(factory(Package::class)->make()->toArray(), [
+        return array_merge(Package::factory()->make()->toArray(), [
             'packagist_namespace' => 'tightenco',
             'packagist_name' => 'bae',
         ]);
@@ -351,12 +351,12 @@ class PackageEditTest extends TestCase
 
     private function createPackageWithUser()
     {
-        $package = factory(Package::class)->make();
-        $collaborator = factory(Collaborator::class)->make();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->make();
+        $collaborator = Collaborator::factory()->make();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
-        $package->tags()->save(factory(Tag::class)->create());
+        $package->tags()->save(Tag::factory()->create());
 
         return [$package, $user];
     }

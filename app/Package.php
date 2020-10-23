@@ -5,6 +5,7 @@ namespace App;
 use App\OpenGraphImage;
 use App\Screenshot;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,7 @@ use willvincent\Rateable\Rating;
 
 class Package extends Model implements Feedable
 {
+    use HasFactory;
     // @todo add algolia logo next to the search results if it's used in not-api
     use Searchable;
     use Rateable, RatingCountable {
@@ -107,10 +109,8 @@ class Package extends Model implements Feedable
         return $packageAttributes;
     }
 
-    protected static function boot()
+    protected static function booted()
     {
-        parent::boot();
-
         static::addGlobalScope('notDisabled', function (Builder $builder) {
             $builder->where('is_disabled', false);
         });

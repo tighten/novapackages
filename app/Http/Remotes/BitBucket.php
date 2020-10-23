@@ -4,7 +4,7 @@ namespace App\Http\Remotes;
 
 use App\Exceptions\BitBucketException;
 use Illuminate\Support\Arr;
-use Zttp\Zttp;
+use Illuminate\Support\Facades\Http;
 
 class BitBucket
 {
@@ -24,7 +24,7 @@ class BitBucket
 
     public function fetchData($endpoint, $asJson = false)
     {
-        $response = Zttp::get('https://api.bitbucket.org/'.self::API_VERSION.'/'.$endpoint);
+        $response = Http::get('https://api.bitbucket.org/'.self::API_VERSION.'/'.$endpoint);
         $responseContents = $response->getBody()->getContents();
         $responseJson = json_decode($responseContents, true);
 

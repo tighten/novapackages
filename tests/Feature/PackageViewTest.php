@@ -19,16 +19,16 @@ class PackageViewTest extends TestCase
     {
         $packageNamespace = 'tightenco';
         $packageName = 'bae';
-        $packageA = factory(Package::class)->make([
+        $packageA = Package::factory()->make([
             'composer_name' => "{$packageNamespace}/{$packageName}",
         ]);
-        $collaborator = factory(Collaborator::class)->make();
-        $user = factory(User::class)->create();
+        $collaborator = Collaborator::factory()->make();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($packageA);
-        $screenshot = factory(Screenshot::class)->create(['uploader_id' => $user->id]);
+        $screenshot = Screenshot::factory()->create(['uploader_id' => $user->id]);
         $packageA->screenshots()->save($screenshot);
-        $packageB = factory(Package::class)->create();
+        $packageB = Package::factory()->create();
 
         $response = $this->actingAs($user)
             ->get(route('packages.show', ['namespace' => $packageNamespace, 'name' => $packageName]));
@@ -43,11 +43,11 @@ class PackageViewTest extends TestCase
     {
         $packageNamespace = 'tightenco';
         $packageName = 'bae';
-        $package = factory(Package::class)->make([
+        $package = Package::factory()->make([
             'composer_name' => "{$packageNamespace}/{$packageName}",
         ]);
-        $collaborator = factory(Collaborator::class)->make();
-        $user = factory(User::class)->create();
+        $collaborator = Collaborator::factory()->make();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
 

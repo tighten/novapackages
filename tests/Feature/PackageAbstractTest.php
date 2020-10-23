@@ -16,11 +16,11 @@ class PackageAbstractTest extends TestCase
     /** @test */
     public function package_abstracts_default_to_truncated_readme_if_no_abstract()
     {
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
         $user->collaborators()->save($collaborator);
 
-        $package = $collaborator->authoredPackages()->save(factory(Package::class)->make([
+        $package = $collaborator->authoredPackages()->save(Package::factory()->make([
             'abstract' => '',
             'readme' => 'Abcdef8181',
         ]));
@@ -38,11 +38,11 @@ class PackageAbstractTest extends TestCase
     /** @test */
     public function long_package_readmes_are_truncated_to_190_characters_for_abstract()
     {
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
         $user->collaborators()->save($collaborator);
 
-        $package = $collaborator->authoredPackages()->save(factory(Package::class)->make([
+        $package = $collaborator->authoredPackages()->save(Package::factory()->make([
             'abstract' => '',
             'readme' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lorem erat, luctus at diam sed, dapibus facilisis purus. In laoreet enim nunc, ut pretium arcu scelerisque in. Nunc eu cursus nibh.', // 195 characters
         ]));
@@ -56,11 +56,11 @@ class PackageAbstractTest extends TestCase
     /** @test */
     public function api_abstract_never_null()
     {
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
         $user->collaborators()->save($collaborator);
 
-        $package = $collaborator->authoredPackages()->save(factory(Package::class)->make([
+        $package = $collaborator->authoredPackages()->save(Package::factory()->make([
             'abstract' => '',
         ]));
 

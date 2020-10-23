@@ -14,7 +14,7 @@ class SyncRepositoryDataCommandTest extends TestCase
     /** @test */
     public function calling_the_command_without_an_argument_updates_all_packages_with_data_from_their_remote_repos()
     {
-        $packageA = factory(Package::class)->create([
+        $packageA = Package::factory()->create([
             'readme' => 'old readme A',
             'readme_source' => 'old source A',
             'repo_url' => 'http://example.com/my-repoA',
@@ -27,7 +27,7 @@ class SyncRepositoryDataCommandTest extends TestCase
             'latest_version' => 'v2.3.4',
         ];
 
-        $packageB = factory(Package::class)->create([
+        $packageB = Package::factory()->create([
             'readme' => 'old readme B',
             'readme_source' => 'old source B',
             'repo_url' => 'http://example.com/my-repoB',
@@ -60,7 +60,7 @@ class SyncRepositoryDataCommandTest extends TestCase
     /** @test */
     public function calling_the_command_with_a_package_id_only_updates_that_package_with_data_from_its_remote_repo()
     {
-        $packageA = factory(Package::class)->create([
+        $packageA = Package::factory()->create([
             'readme' => 'old readme A',
             'readme_source' => 'old source A',
             'repo_url' => 'http://example.com/my-repoA',
@@ -78,7 +78,7 @@ class SyncRepositoryDataCommandTest extends TestCase
             'repo_url' => 'http://example.com/my-repoB',
             'latest_version' => 'v3.4.5',
         ];
-        $packageB = factory(Package::class)->create($packageBAttributes);
+        $packageB = Package::factory()->create($packageBAttributes);
         $repoAttributesB = [
             'url' => 'https://fake-github.com/fake-user/fake-repo',
             'source' => 'github',
@@ -107,7 +107,7 @@ class SyncRepositoryDataCommandTest extends TestCase
     public function local_data_is_not_updated_if_there_are_no_changes_in_the_remote_repo()
     {
         $updatedAt = Carbon::now()->subHour();
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'repo_url' => 'https://fake-github.com/fake-user/fake-repo',
             'readme_source' => 'github',
             'readme' => '# Fake readme',

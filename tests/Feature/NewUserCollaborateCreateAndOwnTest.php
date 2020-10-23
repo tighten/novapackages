@@ -24,7 +24,7 @@ class NewUserCollaborateCreateAndOwnTest extends TestCase
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         event(new NewUserSignedUp($user));
 
@@ -36,11 +36,11 @@ class NewUserCollaborateCreateAndOwnTest extends TestCase
     {
         Notification::fake();
 
-        $collaborator = factory(Collaborator::class)->create([
+        $collaborator = Collaborator::factory()->create([
             'github_username' => 'josecanhelp',
         ]);
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'github_username' => 'josecanhelp',
         ]);
 

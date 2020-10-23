@@ -15,8 +15,8 @@ class RatingCountableTest extends TestCase
     /** @test */
     public function it_counts_average_rating()
     {
-        $package = factory(Package::class)->create();
-        $users = factory(User::class, 4)->create();
+        $package = Package::factory()->create();
+        $users = User::factory(4)->create();
 
         $i = 1;
         foreach ($users as $user) {
@@ -29,8 +29,8 @@ class RatingCountableTest extends TestCase
     /** @test */
     public function it_counts_each_rating_correctly()
     {
-        $package = factory(Package::class)->create();
-        $users = factory(User::class, 15)->create();
+        $package = Package::factory()->create();
+        $users = User::factory(15)->create();
 
         // Generate 1 5-star ratings, 2 4-star, etc.
         foreach (range(1, 5) as $i) {
@@ -61,8 +61,8 @@ class RatingCountableTest extends TestCase
     /** @test */
     public function it_counts_each_rating_correctly_when_eager_loaded()
     {
-        $package = factory(Package::class)->create();
-        $users = factory(User::class, 15)->create();
+        $package = Package::factory()->create();
+        $users = User::factory(15)->create();
 
         // Generate 1 5-star ratings, 2 4-star, etc.
         foreach (range(1, 5) as $i) {
@@ -95,8 +95,8 @@ class RatingCountableTest extends TestCase
     /** @test */
     public function average_rating_rounded_to_1_decimal()
     {
-        $package = factory(Package::class)->create();
-        $users = factory(User::class, 3)->create();
+        $package = Package::factory()->create();
+        $users = User::factory(3)->create();
         $ratings = [3, 5, 5];
 
         $i = 0;

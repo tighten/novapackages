@@ -16,8 +16,8 @@ class CollaboratorClaimTest extends TestCase
     {
         $this->withoutEvents();
 
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
 
         $this->assertNull($collaborator->user_id);
 
@@ -31,9 +31,9 @@ class CollaboratorClaimTest extends TestCase
     {
         $this->withoutEvents();
 
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
-        $secondCollaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
+        $secondCollaborator = Collaborator::factory()->create();
 
         $response = $this->be($user)->post(route('app.collaborators.claims.store', [$collaborator]));
         $response = $this->be($user)->post(route('app.collaborators.claims.store', [$secondCollaborator]));
