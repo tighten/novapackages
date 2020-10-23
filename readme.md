@@ -7,9 +7,14 @@
 
 ## Setting up Scout
 
-1. Make a new Algolia app
-2. Put its key and ID into your `.env`
-3. `php artisan scout:import "App\Package"`
+1. Make a new [Algolia app](https://www.algolia.com/)
+2. From your Algolia app, copy the Admin API key and ID into your `.env`. If you see a "Not enough rights to update an object near line:1" error when seeding your database, you're using the Search-Only key—swap it out for the Admin key.
+3. In your Algolia app, create a new index called "packages".
+4. After seeding your database, run `php artisan scout:import "App\Package"`
+
+## Seeding the Database
+
+1. `php artisan db:seed`
 
 ## Setting up GitHub Authentication
 
