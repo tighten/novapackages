@@ -28,12 +28,9 @@ class CheckPackageUrls implements ShouldQueue
     {
         $urlIsValid = true;
         try {
-            $status = Zttp::get($this->package->url);
-            if ($status->isSuccess()) return;
-            if ($status->isServerError()) return; // if 500, issue probably isn't with URL
-            $urlIsValid = false;
+            if (Zttp::get($this->package->url)->isClientError()) $urlIsValid = false;
         } catch (Exception $e) {
-            $urlIsValid = false;
+            $urlIsValid = false; // If we can't reach the domain at all, mark as invalid
         }
 
         if ($urlIsValid) return;
