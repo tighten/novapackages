@@ -33,7 +33,7 @@ class NotifyContributorOfInvalidPackageUrl extends Notification implements Shoul
 
         return (new MailMessage)
             ->subject('Please double-check your NovaPackages listing for "' . $this->package->name . '"')
-            ->line(new HtmlString("You are receiving this email because you have been identified as an author or contributor on {$packageLink}."))
+            ->line(new HtmlString("You are receiving this email because you have been identified as an author on {$packageLink}."))
             ->line('NovaPackages recently found an error with the URL that we have listed for that package: ')
             ->line(new HtmlString("<a target='_blank' href='{$this->package->url}'>{$this->package->url}</a>"))
             ->line('Could you please verify that URL is still correct? Or, if your package is no longer being maintained, could you please remove it from the directory?')

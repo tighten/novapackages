@@ -90,16 +90,6 @@ class CheckPackageUrlsCommandTest extends TestCase
     {
         Notification::fake();
 
-        $contributorWithValidPackage = factory(Collaborator::class)->create([
-            'user_id' => factory(User::class)->create()->id
-        ]);
-        $this->validPackage->contributors()->sync($contributorWithValidPackage);
-
-        $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
-            'user_id' => factory(User::class)->create()->id
-        ]);
-        $this->packageWithInvalidUrl->contributors()->sync($contributorsWithInvalidPackage);
-
         $this->artisan('check:package-urls');
 
         Notification::assertNotSentTo(
@@ -107,22 +97,10 @@ class CheckPackageUrlsCommandTest extends TestCase
             NotifyContributorOfInvalidPackageUrl::class
         );
 
-        Notification::assertNotSentTo(
-            $contributorWithValidPackage->user,
-            NotifyContributorOfInvalidPackageUrl::class
-        );
-
         Notification::assertSentTo(
             $this->packageWithInvalidUrl->author->user,
             NotifyContributorOfInvalidPackageUrl::class,
         );
-
-        foreach ($contributorsWithInvalidPackage as $contributor) {
-            Notification::assertSentTo(
-                $contributor->user,
-                NotifyContributorOfInvalidPackageUrl::class,
-            );
-        }
     }
 
     /**
@@ -138,23 +116,11 @@ class CheckPackageUrlsCommandTest extends TestCase
         ]);
         $this->packageWithInvalidUrl->tags()->sync($errorTag);
 
-        $contributorsWithInvalidPackage = factory(Collaborator::class, 2)->create([
-            'user_id' => factory(User::class)->create()->id
-        ]);
-        $this->packageWithInvalidUrl->contributors()->sync($contributorsWithInvalidPackage);
-
         $this->artisan('check:package-urls');
 
         Notification::assertNotSentTo(
             $this->packageWithInvalidUrl->author->user,
             NotifyContributorOfInvalidPackageUrl::class,
         );
-
-        foreach ($contributorsWithInvalidPackage as $contributor) {
-            Notification::assertNotSentTo(
-                $contributor->user,
-                NotifyContributorOfInvalidPackageUrl::class,
-            );
-        }
     }
 }

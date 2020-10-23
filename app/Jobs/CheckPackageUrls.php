@@ -40,11 +40,6 @@ class CheckPackageUrls implements ShouldQueue
         if ($this->package->author && $this->package->authorIsUser()) {
             $this->package->author->user->notify(new NotifyContributorOfInvalidPackageUrl($this->package));
         }
-
-        foreach ($this->package->contributors as $contributor) {
-            if (!$contributor->user) return;
-            $contributor->user->notify(new NotifyContributorOfInvalidPackageUrl($this->package));
-        }
     }
 
     /**
