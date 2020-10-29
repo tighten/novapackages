@@ -5,6 +5,7 @@ namespace Tests\Unit\Http\Resources;
 use App\Http\Resources\PackageDetailResource;
 use App\Package;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -49,5 +50,24 @@ class PackageDetailResourceTest extends TestCase
         $packageDetailResource = (PackageDetailResource::from($package));
 
         $this->assertEquals(2, $packageDetailResource['favorites_count']);
+    }
+
+    /** @test */
+    public function includes_whether_package_has_been_marked_as_unavailable()
+    {
+        $now = now();
+        Carbon::setTestNow($now);
+
+        $invalidPackage = factory(Package::class)->create([
+            'marked_as_unavailable_at' => now()
+        ]);
+        $invalidPackageDetailResource = (PackageDetailResource::from($invalidPackage));
+        $this->assertEquals($invalidPackageDetailResource['marked_as_unavailable_at'], $now);
+
+        $validPackage = factory(Package::class)->create([
+            'marked_as_unavailable_at' => null
+        ]);
+        $validPackageDetailResource = (PackageDetailResource::from($validPackage));
+        $this->assertNull($validPackageDetailResource['marked_as_unavailable_at']);
     }
 }

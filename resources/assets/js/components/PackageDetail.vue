@@ -3,6 +3,9 @@
         <div class="bg-red-600 text-white p-4" v-if="package.possibly_abandoned">
             This package is possibly abandoned. Please proceed with care.
         </div>
+        <div class="bg-orange-500 text-white p-4" v-if="package.marked_as_unavailable_at">
+            This package seems to have a broken documentation URL. Please proceed with care.
+        </div>
         <div class="bg-gray-700">
             <ul class="flex">
                 <li class="ml-4">
