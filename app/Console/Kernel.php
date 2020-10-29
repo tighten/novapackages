@@ -36,7 +36,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('sync:repo')->hourlyAt(30);
         $schedule->command('purge:abandonedscreenshots')->dailyAt('1:00');
         $schedule->command('telescope:prune')->daily();
+
         $schedule->command('check:package-urls')->weeklyOn(7, '20:00');
+        $schedule->command('novapackages:send-unavailable-package-followup')->weeklyOn(7, '21:00');
     }
 
     /**
