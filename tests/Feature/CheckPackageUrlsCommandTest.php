@@ -5,8 +5,8 @@ namespace Tests\Feature;
 use App\Collaborator;
 use App\Notifications\NotifyContributorOfInvalidPackageUrl;
 use App\Package;
-use App\Tag;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
@@ -48,45 +48,44 @@ class CheckPackageUrlsCommandTest extends TestCase
     /**
      * @test
      */
-    public function calling_command_tags_invalid_packages_with_404_tag()
+    public function calling_command_marks_invalid_packages_as_unavailable()
     {
+        $now = now();
+        Carbon::setTestNow($now);
         $this->artisan('check:package-urls');
 
-        $this->assertEquals($this->validPackage->tags()->count(), 0);
-        $this->assertFalse($this->validPackage->tags()->where('tags.name', '404 error')->exists());
-        $this->get(route(
-            'packages.show',
-            [
-                $this->validPackage->composer_vendor,
-                $this->validPackage->composer_package
-            ]
-        ))->assertDontSee('404 Error');
+        $this->assertNull($this->validPackage->marked_as_unavailable_at);
+        // $this->get(route(
+        //     'packages.show',
+        //     [
+        //         $this->validPackage->composer_vendor,
+        //         $this->validPackage->composer_package
+        //     ]
+        // ))->assertDontSee('404 Error');
 
-        $this->assertEquals($this->packageWithInvalidUrl->tags()->count(), 1);
-        $this->assertTrue($this->packageWithInvalidUrl->tags()->where('tags.name', '404 error')->exists());
-        $this->get(route(
-            'packages.show',
-            [
-                $this->packageWithInvalidUrl->composer_vendor,
-                $this->packageWithInvalidUrl->composer_package
-            ]
-        ))->assertSee('404 Error');
+        $this->assertEquals($this->packageWithInvalidUrl->refresh()->marked_as_unavailable_at, $now);
+        // $this->get(route(
+        //     'packages.show',
+        //     [
+        //         $this->packageWithInvalidUrl->composer_vendor,
+        //         $this->packageWithInvalidUrl->composer_package
+        //     ]
+        // ))->assertSee('404 Error');
 
-        $this->assertEquals($this->packageWithInvalidDomain->tags()->count(), 1);
-        $this->assertTrue($this->packageWithInvalidDomain->tags()->where('tags.name', '404 error')->exists());
-        $this->get(route(
-            'packages.show',
-            [
-                $this->packageWithInvalidDomain->composer_vendor,
-                $this->packageWithInvalidDomain->composer_package
-            ]
-        ))->assertSee('404 Error');
+        $this->assertEquals($this->packageWithInvalidDomain->refresh()->marked_as_unavailable_at, $now);
+        // $this->get(route(
+        //     'packages.show',
+        //     [
+        //         $this->packageWithInvalidDomain->composer_vendor,
+        //         $this->packageWithInvalidDomain->composer_package
+        //     ]
+        // ))->assertSee('404 Error');
     }
 
     /**
      * @test
      */
-    public function calling_command_sends_notification_to_author_and_contributors_of_invalid_packages()
+    public function calling_command_sends_notification_to_author_of_invalid_packages()
     {
         Notification::fake();
 
@@ -110,11 +109,8 @@ class CheckPackageUrlsCommandTest extends TestCase
     {
         Notification::fake();
 
-        $errorTag = factory(Tag::class)->create([
-            'name' => '404 error',
-            'slug' => '404-error'
-        ]);
-        $this->packageWithInvalidUrl->tags()->sync($errorTag);
+         $this->packageWithInvalidUrl->marked_as_unavailable_at = now();
+         $this->packageWithInvalidUrl->save();
 
         $this->artisan('check:package-urls');
 

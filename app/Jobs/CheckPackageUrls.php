@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Notifications\NotifyContributorOfInvalidPackageUrl;
-use App\Tag;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -35,26 +34,11 @@ class CheckPackageUrls implements ShouldQueue
 
         if ($urlIsValid) return;
 
-        $this->package->tags()->syncWithoutDetaching($this->fetchErrorTagId());
+        $this->package->marked_as_unavailable_at = now();
+        $this->package->save();
 
         if ($this->package->author && $this->package->authorIsUser()) {
             $this->package->author->user->notify(new NotifyContributorOfInvalidPackageUrl($this->package));
         }
-    }
-
-    /**
-     * Find or create 404 tag, and return tag ID
-     * @return int
-     */
-    private function fetchErrorTagId()
-    {
-        $errorTag = Tag::where('name', '404 error')
-            ->first();
-        if ($errorTag) return $errorTag->id;
-
-        return Tag::create([
-            'name' => '404 error',
-            'slug' => '404-error'
-        ])->id;
     }
 }

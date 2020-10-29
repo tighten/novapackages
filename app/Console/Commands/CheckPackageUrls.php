@@ -15,12 +15,9 @@ class CheckPackageUrls extends Command
 
     public function handle()
     {
-        $validPackages = Package::whereHas('tags', function ($query) {
-            $query->where('name', '!=', '404 error');
-        })
-        ->orWhereDoesntHave('tags')
-        ->with(['author', 'contributors'])
-        ->get();
+        $validPackages = Package::whereNull('marked_as_unavailable_at')
+            ->with(['author', 'contributors'])
+            ->get();
 
         foreach ($validPackages as $package) {
             dispatch(new CheckPackageUrlsJob($package));
