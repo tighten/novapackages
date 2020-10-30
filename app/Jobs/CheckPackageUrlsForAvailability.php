@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Notifications\NotifyContributorOfInvalidPackageUrl;
+use App\Notifications\NotifyContributorOfUnavailablePackageUrl;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Zttp\Zttp;
 
-class CheckPackageUrls implements ShouldQueue
+class CheckPackageUrlsForAvailability implements ShouldQueue
 {
 
     private $package;
@@ -38,7 +38,7 @@ class CheckPackageUrls implements ShouldQueue
         $this->package->save();
 
         if ($this->package->author && $this->package->authorIsUser()) {
-            $this->package->author->user->notify(new NotifyContributorOfInvalidPackageUrl($this->package));
+            $this->package->author->user->notify(new NotifyContributorOfUnavailablePackageUrl($this->package));
         }
     }
 }
