@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Notifications\NotifyAuthorOfDisabledPackage;
 use App\Package;
 use Illuminate\Console\Command;
 
@@ -25,6 +26,10 @@ class DisableUnavailablePackages extends Command
             $package->is_disabled = 1;
             $package->save();
             $this->info("{$package->name} has been disabled.");
+
+            if ($package->author && $package->authorIsUser()) {
+                $package->author->user->notify(new NotifyAuthorOfDisabledPackage($package));
+            }
         });
     }
 }

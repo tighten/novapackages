@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 
-class RemindAuthorOfUnavailablePackage extends Notification
+class NotifyAuthorOfDisabledPackage extends Notification
 {
     use Queueable;
 
@@ -34,8 +34,8 @@ class RemindAuthorOfUnavailablePackage extends Notification
             ->line(new HtmlString("You are receiving this email because you have been identified as an author on {$packageLink}."))
             ->line('This is a reminder that NovaPackages recently found an error with the URL that we have listed for that package:')
             ->line(new HtmlString("<a target='_blank' href='{$this->package->url}'>{$this->package->url}</a>"))
-            ->line('Could you please verify that URL is still correct? Or, if your package is no longer being maintained, could you please remove it from the directory?')
+            ->line('In an effort to keep NovaPackages up to date, we have disabled your package in our directory. To re-enable the package, please sign in and update the package URL:')
             ->action('Update Package', route('app.packages.edit', $this->package))
-            ->line('If we cannot verify the package URL within two weeks, we will disable the package. Thank you for helping us keep NovaPackages up to date!');
+            ->line('Thank you for helping us keep NovaPackages up to date!');
     }
 }
