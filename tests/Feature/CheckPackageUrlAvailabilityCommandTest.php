@@ -88,7 +88,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     /**
      * @test
      */
-    public function command_ignores_packages_that_already_have_404_tag()
+    public function command_ignores_packages_that_are_already_unavailable()
     {
         Notification::fake();
 
