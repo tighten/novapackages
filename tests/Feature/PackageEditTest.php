@@ -399,9 +399,6 @@ class PackageEditTest extends TestCase
     /** @test */
     public function updating_url_attribute_removes_unavailable_timestamp()
     {
-        $this->withoutExceptionHandling();
-        $this->fakesRepoFromRequest();
-
         list($package, $user) = $this->createPackageWithUser();
 
         $package->marked_as_unavailable_at = now();
@@ -438,9 +435,6 @@ class PackageEditTest extends TestCase
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
         $package->tags()->save(factory(Tag::class)->create());
-
-        // dd($user->collaborators()->first()->authoredPackages);
-
         return [$package, $user];
     }
 }
