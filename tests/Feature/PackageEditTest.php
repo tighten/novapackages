@@ -82,6 +82,19 @@ class PackageEditTest extends TestCase
         $response->assertViewHas('screenshots', function ($viewScreenshots) use ($screenshot) {
             return $viewScreenshots->count() === 1 && $viewScreenshots->first()['public_url'] == Storage::url($screenshot->path);
         });
+        $response->assertDontSee('This URL was recently marked as inaccessible. Please review and update as necessary!');
+    }
+
+    /** @test */
+    public function if_package_is_unavailable_user_sees_notice_on_form()
+    {
+        list($package, $user) = $this->createPackageWithUser();
+        $package->update([
+            'marked_as_unavailable_at' => now()
+        ]);
+        $this->actingAs($user)->get(route('app.packages.edit', $package))
+            ->assertSuccessful()
+            ->assertSee('This URL was recently marked as inaccessible. Please review and update as necessary!');
     }
 
     /** @test */
