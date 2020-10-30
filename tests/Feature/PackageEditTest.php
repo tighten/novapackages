@@ -341,6 +341,58 @@ class PackageEditTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
+    /** @test */
+    public function not_updating_url_does_not_change_package_availability()
+    {
+        $this->withoutExceptionHandling();
+        $this->fakesRepoFromRequest();
+
+        list($package, $user) = $this->createPackageWithUser();
+
+        $package->marked_as_unavailable_at = now();
+        $package->is_disabled = true;
+        $package->save();
+
+        $this->actingAs($user)->put(route('app.packages.update', $package), [
+            'name' => $this->faker->company,
+            'author_id' => $user->id,
+            'url' =>  $package->url,
+            'abstract' =>  $this->faker->sentence,
+            'packagist_namespace' => $this->faker->word,
+            'packagist_name' => $this->faker->word,
+        ])
+        ->assertRedirect(route('app.packages.index'));
+
+        $this->assertNotNull($package->refresh()->marked_as_unavailable_at);
+        $this->assertTrue($package->refresh()->is_disabled);
+    }
+
+    /** @test */
+    public function updating_url_attribute_removes_unavailable_timestamp()
+    {
+        $this->withoutExceptionHandling();
+        $this->fakesRepoFromRequest();
+
+        list($package, $user) = $this->createPackageWithUser();
+
+        $package->marked_as_unavailable_at = now();
+        $package->is_disabled = true;
+        $package->save();
+
+        $this->actingAs($user)->put(route('app.packages.update', $package), [
+            'name' => $this->faker->company,
+            'author_id' => $user->id,
+            'url' =>  $this->faker->url,
+            'abstract' =>  $this->faker->sentence,
+            'packagist_namespace' => $this->faker->word,
+            'packagist_name' => $this->faker->word,
+        ])
+            ->assertRedirect(route('app.packages.index'));
+
+        $this->assertNull($package->refresh()->marked_as_unavailable_at);
+        $this->assertFalse($package->refresh()->is_disabled);
+    }
+
     private function getValidPackageData()
     {
         return array_merge(factory(Package::class)->make()->toArray(), [
