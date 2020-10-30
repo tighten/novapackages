@@ -86,6 +86,22 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
+    public function package_author_can_view_disabled_package_form()
+    {
+        list($package, $author) = $this->createPackageWithUser();
+
+        $package->is_disabled = true;
+        $package->save();
+
+        $this->actingAs($author)->get(route('app.packages.edit', $package))
+            ->assertSuccessful();
+
+        $otherUser = factory(User::class)->create();
+        $this->actingAs($otherUser)->get(route('app.packages.edit', $package))
+            ->assertStatus(404);
+    }
+
+    /** @test */
     public function if_package_is_unavailable_user_sees_notice_on_form()
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -422,6 +438,8 @@ class PackageEditTest extends TestCase
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
         $package->tags()->save(factory(Tag::class)->create());
+
+        // dd($user->collaborators()->first()->authoredPackages);
 
         return [$package, $user];
     }
