@@ -15,11 +15,11 @@ class SendUnavailablePackageFollowUp extends Command
 
     public function handle()
     {
-        $invalidPackages = Package::whereNotNull('marked_as_unavailable_at')
+        $unavailablePackages = Package::whereNotNull('marked_as_unavailable_at')
             ->where('is_disabled', 0)
             ->get();
 
-        $invalidPackages->each(function($package) {
+        $unavailablePackages->each(function($package) {
             $diffInDays = now()->diffInDays($package->marked_as_unavailable_at);
             if ($diffInDays != 14) return;
 
