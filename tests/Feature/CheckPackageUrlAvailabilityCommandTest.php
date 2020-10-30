@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Collaborator;
-use App\Notifications\NotifyContributorOfUnavailablePackageUrl;
+use App\Notifications\NotifyAuthorOfUnavailablePackageUrl;
 use App\Package;
 use App\User;
 use Carbon\Carbon;
@@ -76,12 +76,12 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
 
         Notification::assertNotSentTo(
             $this->validPackage->author->user,
-            NotifyContributorOfUnavailablePackageUrl::class
+            NotifyAuthorOfUnavailablePackageUrl::class
         );
 
         Notification::assertSentTo(
             $this->packageWithUnavailableUrl->author->user,
-            NotifyContributorOfUnavailablePackageUrl::class,
+            NotifyAuthorOfUnavailablePackageUrl::class,
         );
     }
 
@@ -99,7 +99,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
 
         Notification::assertNotSentTo(
             $this->packageWithUnavailableUrl->author->user,
-            NotifyContributorOfUnavailablePackageUrl::class,
+            NotifyAuthorOfUnavailablePackageUrl::class,
         );
     }
 }

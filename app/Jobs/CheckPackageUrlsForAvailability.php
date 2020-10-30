@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Notifications\NotifyContributorOfUnavailablePackageUrl;
+use App\Notifications\NotifyAuthorOfUnavailablePackageUrl;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -38,7 +38,7 @@ class CheckPackageUrlsForAvailability implements ShouldQueue
         $this->package->save();
 
         if ($this->package->author && $this->package->authorIsUser()) {
-            $this->package->author->user->notify(new NotifyContributorOfUnavailablePackageUrl($this->package));
+            $this->package->author->user->notify(new NotifyAuthorOfUnavailablePackageUrl($this->package));
         }
     }
 }
