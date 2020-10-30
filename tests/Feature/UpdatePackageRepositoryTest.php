@@ -20,9 +20,9 @@ class UpdatePackageRepositoryTest extends TestCase
     {
         Bus::fake();
 
-        $package = factory(Package::class)->make();
-        $collaborator = factory(Collaborator::class)->make();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->make();
+        $collaborator = Collaborator::factory()->make();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
 
@@ -39,7 +39,7 @@ class UpdatePackageRepositoryTest extends TestCase
     {
         Bus::fake();
 
-        $package = factory(Package::class)->create();
+        $package = Package::factory()->create();
 
         $response = $this->json('POST', route('app.packages.repository.refresh', $package));
 

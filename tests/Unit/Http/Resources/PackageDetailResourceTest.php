@@ -16,8 +16,8 @@ class PackageDetailResourceTest extends TestCase
     /** @test */
     public function can_determine_if_the_package_is_favorited_by_the_authenticated_user()
     {
-        $package = factory(Package::class)->create();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->create();
+        $user = User::factory()->create();
         $user->favoritePackage($package->id);
 
         $this->actingAs($user);
@@ -29,8 +29,8 @@ class PackageDetailResourceTest extends TestCase
     /** @test */
     public function can_determine_if_the_package_is_unfavorited_by_the_authenticated_user()
     {
-        $package = factory(Package::class)->create();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user);
         $packageDetailResource = (PackageDetailResource::from($package));
@@ -41,10 +41,10 @@ class PackageDetailResourceTest extends TestCase
     /** @test */
     public function return_the_count_of_favorites_for_a_package()
     {
-        $package = factory(Package::class)->create();
-        $userA = factory(User::class)->create();
+        $package = Package::factory()->create();
+        $userA = User::factory()->create();
         $userA->favoritePackage($package->id);
-        $userB = factory(User::class)->create();
+        $userB = User::factory()->create();
         $userB->favoritePackage($package->id);
 
         $packageDetailResource = (PackageDetailResource::from($package));

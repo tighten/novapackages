@@ -4,7 +4,7 @@ namespace App\Http\Remotes;
 
 use App\Exceptions\GitLabException;
 use Illuminate\Support\Arr;
-use Zttp\Zttp;
+use Illuminate\Support\Facades\Http;
 
 class GitLab
 {
@@ -26,7 +26,7 @@ class GitLab
 
     public function fetchData($endpoint)
     {
-        $this->response = Zttp::get('https://gitlab.com/api/'.self::API_VERSION.'/'.$endpoint)->json();
+        $this->response = Http::get('https://gitlab.com/api/'.self::API_VERSION.'/'.$endpoint)->json();
 
         if ($this->responseHasErrors() && $this->isNotFileNotFoundError()) {
             throw new GitLabException("GitLab error fetching data for [{$this->url}]: ".Arr::get($this->response, 'message'));

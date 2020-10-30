@@ -15,7 +15,7 @@ class ReadmeFormatterTest extends TestCase
     /** @test */
     public function it_formats_github_sources()
     {
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'github',
             'readme_format' => 'md',
             'repo_url' => 'https://github.com/tightenco/nova-stripe',
@@ -34,7 +34,7 @@ class ReadmeFormatterTest extends TestCase
     /** @test */
     public function it_formats_gitlab_sources()
     {
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'gitlab',
             'readme_format' => 'md',
             'repo_url' => 'https://gitlab.com/ctroms/test-project',
@@ -53,7 +53,7 @@ class ReadmeFormatterTest extends TestCase
     /** @test */
     public function it_formats_bitbucket_sources()
     {
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'bitbucket',
             'readme_format' => 'md',
             'repo_url' => 'https://bitbucket.org/tightenco/novapackages-test',
@@ -71,7 +71,7 @@ class ReadmeFormatterTest extends TestCase
     /** @test */
     public function it_wraps_html_readme_with_markdown_div()
     {
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'github',
             'readme_format' => 'html',
             'repo_url' => 'https://github.com/tightenco/nova-stripe',
@@ -92,7 +92,7 @@ class ReadmeFormatterTest extends TestCase
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
         $latestVersion = 'v1.0.0';
 
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'github',
             'readme_format' => 'html',
             'repo_url' => $repoUrl,
@@ -130,7 +130,7 @@ class ReadmeFormatterTest extends TestCase
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
         $latestVersion = 'v1.0.0';
 
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'github',
             'readme_format' => 'html',
             'repo_url' => $repoUrl,
@@ -150,7 +150,7 @@ class ReadmeFormatterTest extends TestCase
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
         $latestVersion = 'v1.0.0';
 
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'github',
             'repo_url' => $repoUrl,
             'latest_version' => $latestVersion,
@@ -187,7 +187,7 @@ class ReadmeFormatterTest extends TestCase
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
         $latestVersion = 'v1.0.0';
 
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'github',
             'repo_url' => $repoUrl,
             'latest_version' => $latestVersion,
@@ -207,7 +207,7 @@ class ReadmeFormatterTest extends TestCase
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
         $latestVersion = 'v1.0.0';
 
-        $package = factory(Package::class)->create([
+        $package = Package::factory()->create([
             'readme_source' => 'github',
             'repo_url' => $repoUrl,
             'latest_version' => $latestVersion,
@@ -225,7 +225,7 @@ class ReadmeFormatterTest extends TestCase
     {
         $mailtoUrl = '[email](mailto:me@example.com)';
 
-        $readmeFormatter = new ReadmeFormatter(factory(Package::class)->create());
+        $readmeFormatter = new ReadmeFormatter(Package::factory()->create());
 
         $unformattedUrl = $readmeFormatter->format($mailtoUrl);
 

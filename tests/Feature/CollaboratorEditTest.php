@@ -16,9 +16,9 @@ class CollaboratorEditTest extends TestCase
     /** @test */
     public function a_user_can_not_view_the_edit_collaborator_form_for_a_collaborator_that_is_not_assigned_to_them()
     {
-        $userA = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->make();
+        $userA = User::factory()->create();
+        $userB = User::factory()->create();
+        $collaborator = Collaborator::factory()->make();
         $userB->collaborators()->save($collaborator);
 
         $response = $this->actingAs($userA)->get(route('app.collaborators.edit', $collaborator));
@@ -29,8 +29,8 @@ class CollaboratorEditTest extends TestCase
     /** @test */
     public function a_user_can_view_the_edit_collaborator_form()
     {
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->make();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->make();
         $user->collaborators()->save($collaborator);
 
         $response = $this->actingAs($user)->get(route('app.collaborators.edit', $collaborator));
@@ -47,15 +47,15 @@ class CollaboratorEditTest extends TestCase
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
 
-        $userA = factory(User::class)->create();
-        $userB = factory(User::class)->create();
+        $userA = User::factory()->create();
+        $userB = User::factory()->create();
         $collaboratorAttributes = [
             'name' => 'John Smith',
             'url' => 'http://johnsplace.com',
             'description' => 'This is a description for John',
             'github_username' => 'johnsmith',
         ];
-        $collaborator = factory(Collaborator::class)->make($collaboratorAttributes);
+        $collaborator = Collaborator::factory()->make($collaboratorAttributes);
         $userB->collaborators()->save($collaborator);
 
         $response = $this->actingAs($userA)->patch(route('app.collaborators.update', $collaborator), [
@@ -81,8 +81,8 @@ class CollaboratorEditTest extends TestCase
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
 
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->make([
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->make([
             'name' => 'John Smith',
             'url' => 'http://johnsplace.com',
             'description' => 'This is a description for John',
@@ -109,14 +109,14 @@ class CollaboratorEditTest extends TestCase
     /** @test */
     public function the_name_field_is_required()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $collaboratorAttributes = [
             'name' => 'John Smith',
             'url' => 'http://johnsplace.com',
             'description' => 'This is a description for John',
             'github_username' => 'johnsmith',
         ];
-        $collaborator = factory(Collaborator::class)->make($collaboratorAttributes);
+        $collaborator = Collaborator::factory()->make($collaboratorAttributes);
         $user->collaborators()->save($collaborator);
 
         $response = $this->actingAs($user)->patch(route('app.collaborators.update', $collaborator), [
@@ -131,14 +131,14 @@ class CollaboratorEditTest extends TestCase
     /** @test */
     public function the_url_field_is_optional()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $collaboratorAttributes = [
             'name' => 'John Smith',
             'url' => 'http://johnsplace.com',
             'description' => 'This is a description for John',
             'github_username' => 'johnsmith',
         ];
-        $collaborator = factory(Collaborator::class)->make($collaboratorAttributes);
+        $collaborator = Collaborator::factory()->make($collaboratorAttributes);
         $user->collaborators()->save($collaborator);
 
         $response = $this->actingAs($user)->patch(route('app.collaborators.update', $collaborator), [
@@ -155,14 +155,14 @@ class CollaboratorEditTest extends TestCase
     /** @test */
     public function the_url_field_must_be_valid()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $collaboratorAttributes = [
             'name' => 'John Smith',
             'url' => 'http://johnsplace.com',
             'description' => 'This is a description for John',
             'github_username' => 'johnsmith',
         ];
-        $collaborator = factory(Collaborator::class)->make($collaboratorAttributes);
+        $collaborator = Collaborator::factory()->make($collaboratorAttributes);
         $user->collaborators()->save($collaborator);
 
         $response = $this->actingAs($user)->patch(route('app.collaborators.update', $collaborator), [
@@ -177,14 +177,14 @@ class CollaboratorEditTest extends TestCase
     /** @test */
     public function the_github_username_field_is_required()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $collaboratorAttributes = [
             'name' => 'John Smith',
             'url' => 'http://johnsplace.com',
             'description' => 'This is a description for John',
             'github_username' => 'johnsmith',
         ];
-        $collaborator = factory(Collaborator::class)->make($collaboratorAttributes);
+        $collaborator = Collaborator::factory()->make($collaboratorAttributes);
         $user->collaborators()->save($collaborator);
 
         $response = $this->actingAs($user)->patch(route('app.collaborators.update', $collaborator), [
@@ -199,14 +199,14 @@ class CollaboratorEditTest extends TestCase
     /** @test */
     public function the_github_username_can_be_unchanged()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $collaboratorAttributes = [
             'name' => 'John Smith',
             'url' => 'http://johnsplace.com',
             'description' => 'This is a description for John',
             'github_username' => 'johnsmith',
         ];
-        $collaborator = factory(Collaborator::class)->make($collaboratorAttributes);
+        $collaborator = Collaborator::factory()->make($collaboratorAttributes);
         $user->collaborators()->save($collaborator);
 
         $response = $this->actingAs($user)->patch(route('app.collaborators.update', $collaborator), [

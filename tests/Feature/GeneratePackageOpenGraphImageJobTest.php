@@ -22,23 +22,23 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function it_is_dispatched_when_a_package_is_created()
+    public function it_is_dispatched_when_a_package_is_created()
     {
         Bus::fake();
 
         Event::fake();
 
-        $collaborator = factory(Collaborator::class)->make();
-        $user = factory(User::class)->create();
+        $collaborator = Collaborator::factory()->make();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
-        $package = factory(Package::class)->make([
+        $package = Package::factory()->make([
             'author_id' => $user->collaborators->first()->id,
             'url' => 'https://www.example.com/abcs/lmnop',
         ]);
 
         $formData = array_merge($this->postFromPackage($package), [
             'tags-new' => ['New tag'],
-            'tags' => [factory(Tag::class)->create()->id],
+            'tags' => [Tag::factory()->create()->id],
         ]);
 
         $this->fakesRepoFromRequest([
@@ -61,21 +61,21 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
     }
 
     /** @test */
-    function it_is_dispatched_when_a_package_is_updated()
+    public function it_is_dispatched_when_a_package_is_updated()
     {
         Bus::fake();
 
         Event::fake();
 
-        $package = factory(Package::class)->make();
-        $collaborator = factory(Collaborator::class)->make();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->make();
+        $collaborator = Collaborator::factory()->make();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
 
         $formData = array_merge($this->postFromPackage($package), [
             'tags-new' => ['New tag'],
-            'tags' => [factory(Tag::class)->create()->id],
+            'tags' => [Tag::factory()->create()->id],
         ]);
 
         $this->fakesRepoFromRequest([
@@ -95,7 +95,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
     }
 
     /** @test */
-    function it_creates_a_new_image_and_saves_to_storage()
+    public function it_creates_a_new_image_and_saves_to_storage()
     {
         $packageName = 'Alphabets';
 
@@ -109,7 +109,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
     }
 
     /** @test */
-    function it_removes_the_old_image_from_storage_when_a_package_name_is_updated()
+    public function it_removes_the_old_image_from_storage_when_a_package_name_is_updated()
     {
         $originalPackageName = 'Alphabets';
         $updatedPackageName = 'Alphabets And Numbers';
@@ -130,7 +130,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
         Storage::disk('public')->assertMissing($newFilePath);
     }
 
-    function createANewOpenGraphImage($packageName)
+    public function createANewOpenGraphImage($packageName)
     {
         $file = '123_' . Str::slug($packageName) . '.png';
         $filePath = config('opengraph.image_directory_name') . "/{$file}";
@@ -140,7 +140,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
         return $filePath;
     }
 
-    function postFromPackage($package)
+    public function postFromPackage($package)
     {
         $packagistInformation = explode('/', $package->composer_name);
 

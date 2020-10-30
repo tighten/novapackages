@@ -16,7 +16,7 @@ class FavoritesTest extends TestCase
     /** @test */
     public function a_guest_user_can_not_favorite_a_package()
     {
-        $package = factory(Package::class)->create();
+        $package = Package::factory()->create();
 
         $response = $this->json('POST', route('internalapi.package.favorites.store', $package->id));
 
@@ -27,8 +27,8 @@ class FavoritesTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_add_a_package_to_their_favorites()
     {
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->create();
+        $user = User::factory()->create();
+        $package = Package::factory()->create();
 
         $response = $this->actingAs($user)->json('POST', route('internalapi.package.favorites.store', $package));
 
@@ -39,8 +39,8 @@ class FavoritesTest extends TestCase
     /** @test */
     public function a_user_can_not_favorite_the_same_package_twice()
     {
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->create();
+        $user = User::factory()->create();
+        $package = Package::factory()->create();
         $user->favoritePackage($package->id);
 
         $response = $this->actingAs($user)->json('POST', route('internalapi.package.favorites.store', $package));
@@ -52,9 +52,9 @@ class FavoritesTest extends TestCase
     /** @test */
     public function a_user_can_remove_a_favorite()
     {
-        $user = factory(User::class)->create();
-        $packageA = factory(Package::class)->create();
-        $packageB = factory(Package::class)->create();
+        $user = User::factory()->create();
+        $packageA = Package::factory()->create();
+        $packageB = Package::factory()->create();
         $user->favoritePackage($packageA->id);
         $user->favoritePackage($packageB->id);
 

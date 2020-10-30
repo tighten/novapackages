@@ -3,7 +3,7 @@
 namespace App\Http\Remotes;
 
 use App\Exceptions\NpmException;
-use Zttp\Zttp;
+use Illuminate\Support\Facades\Http;
 
 class Npm
 {
@@ -40,7 +40,7 @@ class Npm
 
     protected function fetchData($url)
     {
-        return Zttp::get($this->registryUrl)->json();
+        return Http::get($this->registryUrl)->json();
     }
 
     public function data()

@@ -6,7 +6,7 @@ use App\CacheKeys;
 use App\Exceptions\PackagistException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
-use Zttp\Zttp;
+use Illuminate\Support\Facades\Http;
 
 class Packagist
 {
@@ -33,7 +33,7 @@ class Packagist
     public function fetchData($name)
     {
         $this->data = Cache::remember(CacheKeys::packagistData($name), 5, function () use ($name) {
-            return Zttp::get("{$this->url}.json")->json();
+            return Http::get("{$this->url}.json")->json();
         });
 
         if (Arr::get($this->data, 'status') === 'error') {

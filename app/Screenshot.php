@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class Screenshot extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'uploader_id',
         'path',
@@ -31,10 +34,8 @@ class Screenshot extends Model
             ->where('created_at', '<', Carbon::now()->subHours(24));
     }
 
-    public static function boot()
+    public static function booted()
     {
-        parent::boot();
-
         static::deleted(function ($screenshot) {
             Storage::delete($screenshot->path);
         });

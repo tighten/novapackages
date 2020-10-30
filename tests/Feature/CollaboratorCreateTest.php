@@ -22,7 +22,7 @@ class CollaboratorCreateTest extends TestCase
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $userData = [
             'name' => 'John Smith',
             'url' => '',

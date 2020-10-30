@@ -1,13 +1,31 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Favorite;
 use App\Package;
 use App\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Favorite::class, function (Faker $faker) {
-    return [
-        'user_id' => factory(User::class)->create(),
-        'package_id' => factory(Package::class)->create(),
-    ];
-});
+class FavoriteFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Favorite::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'user_id' => User::factory(),
+            'package_id' => Package::factory(),
+        ];
+    }
+}
