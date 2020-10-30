@@ -82,6 +82,35 @@ class PackageEditTest extends TestCase
         $response->assertViewHas('screenshots', function ($viewScreenshots) use ($screenshot) {
             return $viewScreenshots->count() === 1 && $viewScreenshots->first()['public_url'] == Storage::url($screenshot->path);
         });
+        $response->assertDontSee('This URL was recently marked as inaccessible. Please review and update as necessary!');
+    }
+
+    /** @test */
+    public function package_author_can_view_disabled_package_form()
+    {
+        list($package, $author) = $this->createPackageWithUser();
+
+        $package->is_disabled = true;
+        $package->save();
+
+        $this->actingAs($author)->get(route('app.packages.edit', $package))
+            ->assertSuccessful();
+
+        $otherUser = User::factory()->create();
+        $this->actingAs($otherUser)->get(route('app.packages.edit', $package))
+            ->assertStatus(404);
+    }
+
+    /** @test */
+    public function if_package_is_unavailable_user_sees_notice_on_form()
+    {
+        list($package, $user) = $this->createPackageWithUser();
+        $package->update([
+            'marked_as_unavailable_at' => now()
+        ]);
+        $this->actingAs($user)->get(route('app.packages.edit', $package))
+            ->assertSuccessful()
+            ->assertSee('This URL was recently marked as inaccessible. Please review and update as necessary!');
     }
 
     /** @test */
@@ -341,6 +370,55 @@ class PackageEditTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
+    /** @test */
+    public function not_updating_url_does_not_change_package_availability()
+    {
+        $this->withoutExceptionHandling();
+        $this->fakesRepoFromRequest();
+
+        list($package, $user) = $this->createPackageWithUser();
+
+        $package->marked_as_unavailable_at = now();
+        $package->is_disabled = true;
+        $package->save();
+
+        $this->actingAs($user)->put(route('app.packages.update', $package), [
+            'name' => $this->faker->company,
+            'author_id' => $user->id,
+            'url' =>  $package->url,
+            'abstract' =>  $this->faker->sentence,
+            'packagist_namespace' => $this->faker->word,
+            'packagist_name' => $this->faker->word,
+        ])
+        ->assertRedirect(route('app.packages.index'));
+
+        $this->assertNotNull($package->refresh()->marked_as_unavailable_at);
+        $this->assertTrue($package->refresh()->is_disabled);
+    }
+
+    /** @test */
+    public function updating_url_attribute_removes_unavailable_timestamp()
+    {
+        list($package, $user) = $this->createPackageWithUser();
+
+        $package->marked_as_unavailable_at = now();
+        $package->is_disabled = true;
+        $package->save();
+
+        $this->actingAs($user)->put(route('app.packages.update', $package), [
+            'name' => $this->faker->company,
+            'author_id' => $user->id,
+            'url' =>  $this->faker->url,
+            'abstract' =>  $this->faker->sentence,
+            'packagist_namespace' => $this->faker->word,
+            'packagist_name' => $this->faker->word,
+        ])
+            ->assertRedirect(route('app.packages.index'));
+
+        $this->assertNull($package->refresh()->marked_as_unavailable_at);
+        $this->assertFalse($package->refresh()->is_disabled);
+    }
+
     private function getValidPackageData()
     {
         return array_merge(Package::factory()->make()->toArray(), [
@@ -357,7 +435,6 @@ class PackageEditTest extends TestCase
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
         $package->tags()->save(Tag::factory()->create());
-
         return [$package, $user];
     }
 }

@@ -86,6 +86,13 @@ class User extends Authenticatable
         return $this->role === self::ADMIN_ROLE;
     }
 
+    public function isPackageAuthor($packageId)
+    {
+        return $this->collaborators->contains(function($collaborator) use ($packageId) {
+            return $collaborator->allAuthoredPackages->contains('id', $packageId);
+        });
+    }
+
     public function ratePackage($packageId, $stars)
     {
         if (is_object($packageId)) {

@@ -13,6 +13,11 @@ class Collaborator extends Model
 
     protected $casts = ['user_id' => 'integer'];
 
+    public function allAuthoredPackages()
+    {
+        return $this->hasMany(Package::class, 'author_id')->withoutGlobalScope('notDisabled');
+    }
+
     public function authoredPackages()
     {
         return $this->hasMany(Package::class, 'author_id');

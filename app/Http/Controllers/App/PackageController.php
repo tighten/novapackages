@@ -105,6 +105,8 @@ class PackageController extends Controller
             $newTagsCreated = $this->createNewTags($request->input('tags-new', []));
             $package->tags()->sync(array_merge($request->input('tags', []), $newTagsCreated));
 
+            $package->updateAvailabilityFromNewUrl();
+
             return $package;
         });
 

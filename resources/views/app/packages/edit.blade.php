@@ -39,7 +39,13 @@
                     <tag-select :tags="{{ $tags }}" :initial-selected="{{ old('selectedTags', $package->tags) }}" name="tags"></tag-select>
 
                     <label class="block font-bold">URL (e.g. GitHub)*</label>
-                    <input name="url" placeholder="https://github.com/tightenco/nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-128 max-w-full" value="{{ old('url', $package->url) }}">
+                    <input name="url" placeholder="https://github.com/tightenco/nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-128 w-full max-w-full" value="{{ old('url', $package->url) }}">
+                    @if ($package->marked_as_unavailable_at)
+                    <span class="block text-red -mt-4 mb-4 text-sm text-red-400">
+                        This URL was recently marked as inaccessible. Please review and update as necessary!
+                    </span>
+                    @endif
+
 
                     <label class="block font-bold">Abstract*</label>
                     <p class="max-w-sm text-gray-800 text-sm mb-2">The short description that shows on a list page; not required; will be parsed from the description if not provided</p>
@@ -48,7 +54,7 @@
                     {{-- @todo show a character counter --}}
 
                     <label class="block font-bold">Installation Instructions</label>
-                    <p class="max-w-sm text-gray-800 text-sm mb-2">Optional, but will be shown <i>before</i> your readme. If you'd like to give quick installation steps up-front, write them here.</p>                    <textarea name="instructions" class="border border-gray-600 p-2 w-full" rows="7" cols="40">{{ old('instructions', $package->instructions) }}</textarea>
+                    <p class="max-w-sm text-gray-800 text-sm mb-2">Optional, but will be shown <i>before</i> your readme. If you'd like to give quick installation steps up-front, write them here.</p> <textarea name="instructions" class="border border-gray-600 p-2 w-full" rows="7" cols="40">{{ old('instructions', $package->instructions) }}</textarea>
                     <p class="mb-6 text-gray-600 text-sm italic">(Write in Markdown)</p>
 
                     <label class="block font-bold">Screenshots</label>

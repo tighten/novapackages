@@ -192,4 +192,15 @@ class Package extends Model implements Feedable
             'content' => $reviewContent,
         ]);
     }
+
+    public function updateAvailabilityFromNewUrl()
+    {
+        if (is_null($this->marked_as_unavailable_at)) return;
+
+        if (array_key_exists('url', $this->getChanges())) {
+            $this->marked_as_unavailable_at = null;
+            $this->is_disabled = false;
+            $this->save();
+        }
+    }
 }
