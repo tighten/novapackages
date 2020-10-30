@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Zttp\Zttp;
+use Illuminate\Support\Facades\Http;
 
 class CheckPackageUrlsForAvailability implements ShouldQueue
 {
@@ -27,7 +27,10 @@ class CheckPackageUrlsForAvailability implements ShouldQueue
     {
         $urlIsValid = true;
         try {
-            if (Zttp::get($this->package->url)->isClientError()) $urlIsValid = false;
+            $response = Http::get($this->package->url);
+            if ($response->clientError()) {
+                 $urlIsValid = false;
+            }
         } catch (Exception $e) {
             $urlIsValid = false; // If we can't reach the domain at all, mark as invalid
         }

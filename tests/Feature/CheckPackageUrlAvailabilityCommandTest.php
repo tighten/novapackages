@@ -20,25 +20,25 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     public function setUp():void
     {
         parent::setUp();
-        $this->validPackage = factory(Package::class)->create([
+        $this->validPackage = Package::factory()->create([
             'name' => 'Valid Package',
             'url' => 'https://github.com/tighten/novapackages',
             'repo_url' => 'https://github.com/tighten/novapackages',
-            'author_id' => factory(Collaborator::class)->create([
-                'user_id' => factory(User::class)->create()->id
+            'author_id' => Collaborator::factory()->create([
+                'user_id' => User::factory()->create()->id
             ])->id
         ]);
 
-        $this->packageWithUnavailableUrl = factory(Package::class)->create([
+        $this->packageWithUnavailableUrl = Package::factory()->create([
             'name' => 'Package with Unavailable URL',
             'url' => 'https://github.com/some-dev/package-name',
             'repo_url' => 'https://github.com/some-dev/package-name',
-            'author_id' => factory(Collaborator::class)->create([
-                'user_id' => factory(User::class)->create()->id
+            'author_id' => Collaborator::factory()->create([
+                'user_id' => User::factory()->create()->id
             ])->id
         ]);
 
-        $this->packageWithUnavailableDomain = factory(Package::class)->create([
+        $this->packageWithUnavailableDomain = Package::factory()->create([
             'name' => 'Package with Unavailable Domain',
             'url' => 'https://not-github.com/other-dev/package-name',
             'repo_url' => 'https://github.com/tighten/novapackages',
@@ -50,6 +50,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
      */
     public function calling_command_marks_unavailable_packages_as_unavailable()
     {
+        Notification::fake();
         $now = now();
         Carbon::setTestNow($now);
         $this->artisan('novapackages:check-package-urls');

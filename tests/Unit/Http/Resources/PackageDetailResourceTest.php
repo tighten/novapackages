@@ -58,13 +58,13 @@ class PackageDetailResourceTest extends TestCase
         $now = now();
         Carbon::setTestNow($now);
 
-        $unavailablePackage = factory(Package::class)->create([
+        $unavailablePackage = Package::factory()->create([
             'marked_as_unavailable_at' => now()
         ]);
         $unavailablePackageDetailResource = (PackageDetailResource::from($unavailablePackage));
         $this->assertEquals($unavailablePackageDetailResource['marked_as_unavailable_at'], $now);
 
-        $validPackage = factory(Package::class)->create([
+        $validPackage = Package::factory()->create([
             'marked_as_unavailable_at' => null
         ]);
         $validPackageDetailResource = (PackageDetailResource::from($validPackage));

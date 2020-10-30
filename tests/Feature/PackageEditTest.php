@@ -96,7 +96,7 @@ class PackageEditTest extends TestCase
         $this->actingAs($author)->get(route('app.packages.edit', $package))
             ->assertSuccessful();
 
-        $otherUser = factory(User::class)->create();
+        $otherUser = User::factory()->create();
         $this->actingAs($otherUser)->get(route('app.packages.edit', $package))
             ->assertStatus(404);
     }

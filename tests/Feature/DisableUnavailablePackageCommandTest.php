@@ -23,17 +23,17 @@ class DisableUnavailablePackageCommandTest extends TestCase
 
         Notification::fake();
 
-        $packageThatShouldBeDisabled = factory(Package::class)->create([
+        $packageThatShouldBeDisabled = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subDays(30),
-            'author_id' => factory(Collaborator::class)->create([
-                'user_id' => factory(User::class)->create()->id
+            'author_id' => Collaborator::factory()->create([
+                'user_id' => User::factory()->create()->id
             ])->id
         ]);
 
-        $packageThatShouldNotBeDisabled = factory(Package::class)->create([
+        $packageThatShouldNotBeDisabled = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subDays(29),
-            'author_id' => factory(Collaborator::class)->create([
-                'user_id' => factory(User::class)->create()->id
+            'author_id' => Collaborator::factory()->create([
+                'user_id' => User::factory()->create()->id
             ])->id
         ]);
 

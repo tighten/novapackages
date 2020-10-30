@@ -23,25 +23,25 @@ class RemindPackageAuthorOfUnavailablePackageCommandTest extends TestCase
 
         Notification::fake();
 
-        $packageThatShouldReceiveNotification = factory(Package::class)->create([
+        $packageThatShouldReceiveNotification = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subWeeks(2),
-            'author_id' => factory(Collaborator::class)->create([
-                'user_id' => factory(User::class)->create()->id
+            'author_id' => Collaborator::factory()->create([
+                'user_id' => User::factory()->create()->id
             ])->id
         ]);
 
-        $packageThatShouldNotReceiveNotification = factory(Package::class)->create([
+        $packageThatShouldNotReceiveNotification = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subWeeks(1),
-            'author_id' => factory(Collaborator::class)->create([
-                'user_id' => factory(User::class)->create()->id
+            'author_id' => Collaborator::factory()->create([
+                'user_id' => User::factory()->create()->id
             ])->id
         ]);
 
-        $disabledPackage = factory(Package::class)->create([
+        $disabledPackage = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subWeeks(1),
             'is_disabled' => 1,
-            'author_id' => factory(Collaborator::class)->create([
-                'user_id' => factory(User::class)->create()->id
+            'author_id' => Collaborator::factory()->create([
+                'user_id' => User::factory()->create()->id
             ])->id
         ]);
 
