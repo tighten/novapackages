@@ -37,6 +37,14 @@ class RemindPackageAuthorOfUnavailablePackageCommandTest extends TestCase
             ])->id
         ]);
 
+        $disabledPackage = factory(Package::class)->create([
+            'marked_as_unavailable_at' => today()->subWeeks(1),
+            'is_disabled' => 1,
+            'author_id' => factory(Collaborator::class)->create([
+                'user_id' => factory(User::class)->create()->id
+            ])->id
+        ]);
+
         $this->artisan('novapackages:send-unavailable-package-followup');
 
         Notification::assertSentTo(
@@ -46,6 +54,11 @@ class RemindPackageAuthorOfUnavailablePackageCommandTest extends TestCase
 
         Notification::assertNotSentTo(
             $packageThatShouldNotReceiveNotification->author->user,
+            RemindAuthorOfUnavailablePackage::class,
+        );
+
+        Notification::assertNotSentTo(
+            $disabledPackage->author->user,
             RemindAuthorOfUnavailablePackage::class,
         );
     }

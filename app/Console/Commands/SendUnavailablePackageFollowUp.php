@@ -16,6 +16,7 @@ class SendUnavailablePackageFollowUp extends Command
     public function handle()
     {
         $invalidPackages = Package::whereNotNull('marked_as_unavailable_at')
+            ->where('is_disabled', 0)
             ->get();
 
         $invalidPackages->each(function($package) {
