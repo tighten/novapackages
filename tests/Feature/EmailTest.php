@@ -14,7 +14,7 @@ class EmailTest extends TestCase
     /** @test */
     public function users_with_no_email_must_submit_an_email()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email' => null,
         ]);
 
@@ -27,7 +27,7 @@ class EmailTest extends TestCase
     public function user_can_submit_a_email_address_if_the_github_oauth_handshake_doesnt_return_one()
     {
         $updatedEmail = 'john@example.com';
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email' => null,
         ]);
 
@@ -42,7 +42,7 @@ class EmailTest extends TestCase
     /** @test */
     public function the_email_address_is_required()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email' => null,
         ]);
 
@@ -57,7 +57,7 @@ class EmailTest extends TestCase
     /** @test */
     public function the_email_address_must_be_valid()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email' => null,
         ]);
 
@@ -73,8 +73,8 @@ class EmailTest extends TestCase
     public function the_email_address_must_be_unique()
     {
         $existingEmail = 'john@example.com';
-        factory(User::class)->create(['email' => $existingEmail]);
-        $user = factory(User::class)->create([
+        User::factory()->create(['email' => $existingEmail]);
+        $user = User::factory()->create([
             'email' => null,
         ]);
 

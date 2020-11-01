@@ -15,10 +15,10 @@ class InternalApiReviewsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function unauthenticated_users_cant_post_review()
+    public function unauthenticated_users_cant_post_review()
     {
-        $package = factory(Package::class)->create();
-        $review = factory(Review::class)->make();
+        $package = Package::factory()->create();
+        $review = Review::factory()->make();
 
         $response = $this->post(route('internalapi.reviews.store'), [
             'package_id' => $package->id,
@@ -29,10 +29,10 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function authenticated_user_cannot_see_link_to_post_review_before_reviewing_package()
+    public function authenticated_user_cannot_see_link_to_post_review_before_reviewing_package()
     {
-        $package = factory(Package::class)->create();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->create();
+        $user = User::factory()->create();
 
         $this->be($user)
             ->get('/packages/' . $package->composer_name)
@@ -40,11 +40,11 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function the_same_user_cant_add_two_reviews_to_a_package()
+    public function the_same_user_cant_add_two_reviews_to_a_package()
     {
-        $package = factory(Package::class)->create();
-        $user = factory(User::class)->create();
-        $review = factory(Review::class)->make();
+        $package = Package::factory()->create();
+        $user = User::factory()->create();
+        $review = Review::factory()->make();
 
         $user->ratePackage($package->id, 3);
 
@@ -62,10 +62,10 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function users_can_modify_their_reviews()
+    public function users_can_modify_their_reviews()
     {
-        $package = factory(Package::class)->create();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->create();
+        $user = User::factory()->create();
 
         $user->ratePackage($package->id, 3);
 
@@ -83,9 +83,9 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_delete_their_review()
+    public function a_user_can_delete_their_review()
     {
-        $review = factory(Review::class)->create();
+        $review = Review::factory()->create();
 
         $this->be($review->user)
             ->delete(route('internalapi.reviews.delete', [$review->id]))
@@ -97,10 +97,10 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function a_user_cannot_delete_a_review_belonging_to_another_user()
+    public function a_user_cannot_delete_a_review_belonging_to_another_user()
     {
-        $review = factory(Review::class)->create();
-        $otherUser = factory(User::class)->create();
+        $review = Review::factory()->create();
+        $otherUser = User::factory()->create();
 
         $this->be($otherUser)
             ->delete(route('internalapi.reviews.delete', [$review->id]))
@@ -112,10 +112,10 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    function an_admin_can_delete_another_users_review()
+    public function an_admin_can_delete_another_users_review()
     {
-        $review = factory(Review::class)->create();
-        $adminUser = factory(User::class, 'admin')->create();
+        $review = Review::factory()->create();
+        $adminUser = User::factory()->admin()->create();
 
         $this->be($adminUser)
             ->delete(route('internalapi.reviews.delete', [$review->id]))

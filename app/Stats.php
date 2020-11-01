@@ -6,8 +6,8 @@ use App\CacheKeys;
 use App\Collaborator;
 use App\Package;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use willvincent\Rateable\Rating;
-use Zttp\Zttp;
 
 class Stats
 {
@@ -37,7 +37,7 @@ class Stats
     public function novaLatestVersion()
     {
         $data = Cache::remember(CacheKeys::novaReleases(), self::CACHE_LENGTH, function () {
-            return Zttp::get('https://nova.laravel.com/api/releases')->json();
+            return Http::get('https://nova.laravel.com/api/releases')->json();
         });
 
         return 'v'.$data['current_version'];

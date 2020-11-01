@@ -16,7 +16,7 @@ class InternalApiRatingsTest extends TestCase
     /** @test */
     public function unauthenticated_users_cant_post_ratings()
     {
-        $package = factory(Package::class)->create();
+        $package = Package::factory()->create();
         $response = $this->post(route('internalapi.ratings.store'), [
             'package_id' => $package->id,
             'rating' => 4,
@@ -28,8 +28,8 @@ class InternalApiRatingsTest extends TestCase
     /** @test */
     public function posting_a_rating_increases_the_packages_overall_rating()
     {
-        $package = factory(Package::class)->create();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->create();
+        $user = User::factory()->create();
 
         $this->be($user)->post(route('internalapi.ratings.store'), [
             'package_id' => $package->id,
@@ -42,8 +42,8 @@ class InternalApiRatingsTest extends TestCase
     /** @test */
     public function the_same_user_cant_add_two_ratings_to_a_package()
     {
-        $package = factory(Package::class)->create();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->create();
+        $user = User::factory()->create();
 
         $this->be($user)->post(route('internalapi.ratings.store'), [
             'package_id' => $package->id,
@@ -61,8 +61,8 @@ class InternalApiRatingsTest extends TestCase
     /** @test */
     public function users_can_modify_their_ratings()
     {
-        $package = factory(Package::class)->create();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->create();
+        $user = User::factory()->create();
 
         $this->be($user)->post(route('internalapi.ratings.store'), [
             'package_id' => $package->id,
@@ -78,11 +78,11 @@ class InternalApiRatingsTest extends TestCase
     }
 
     /** @test */
-    function a_user_cannot_rate_a_package_they_authored()
+    public function a_user_cannot_rate_a_package_they_authored()
     {
-        $user = factory(User::class)->create();
-        $package = factory(Package::class)->create([
-            'author_id' => factory(Collaborator::class)->create([
+        $user = User::factory()->create();
+        $package = Package::factory()->create([
+            'author_id' => Collaborator::factory()->create([
                 'user_id' => $user->id,
             ]),
         ]);
@@ -101,12 +101,12 @@ class InternalApiRatingsTest extends TestCase
     }
 
     /** @test */
-    function a_user_cannot_rate_a_package_they_collaborated_on()
+    public function a_user_cannot_rate_a_package_they_collaborated_on()
     {
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->make();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->make();
         $user->collaborators()->save($collaborator);
-        $package = factory(Package::class)->create();
+        $package = Package::factory()->create();
         $package->contributors()->save($collaborator);
 
         $request = $this->be($user)->post(route('internalapi.ratings.store'), [

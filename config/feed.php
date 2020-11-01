@@ -19,11 +19,18 @@ return [
             'url' => '/feeds/recent',
 
             'title' => 'Recent Packages',
+            'description' => 'Recent Packages',
+            'language' => 'en-US',
 
             /*
              * The view that will render the feed.
              */
-            'view' => 'feed::feed',
+            'view' => 'feed::atom',
+
+            /*
+             * The type to be used in the <link> tag
+             */
+            'type' => 'application/atom+xml',
         ],
     ],
 ];

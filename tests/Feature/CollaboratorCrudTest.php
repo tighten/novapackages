@@ -32,7 +32,7 @@ class CollaboratorCrudTest extends TestCase
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->be($user)->post(route('app.collaborators.store'), [
             'name' => 'Matt Stauffer',
@@ -50,7 +50,7 @@ class CollaboratorCrudTest extends TestCase
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->be($user)->post(route('app.collaborators.store'), [
             'name' => 'Matt Stauffer',
@@ -77,7 +77,7 @@ class CollaboratorCrudTest extends TestCase
 
         $this->app->instance(GitHub::class, $github);
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->be($user)->post(route('app.collaborators.store'), [
             'name' => 'Matt Stauffer',

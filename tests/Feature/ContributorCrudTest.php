@@ -15,11 +15,11 @@ class ContributorCrudTest extends TestCase
     /** @test */
     public function packages_can_have_contributors()
     {
-        $user = factory(User::class)->create();
-        $contributor = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $contributor = Collaborator::factory()->create();
         $user->collaborators()->save($contributor);
 
-        $package = $contributor->contributedPackages()->save(factory(Package::class)->make());
+        $package = $contributor->contributedPackages()->save(Package::factory()->make());
 
         $this->assertEquals($contributor->id, $package->contributors()->first()->id);
     }

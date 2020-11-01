@@ -20,8 +20,8 @@ class TagTest extends TestCase
             Tag::create(['name' => $name, 'slug' => Str::slug($name)]);
         }
 
-        $tags = factory(Tag::class, 5)->create();
-        $packages = factory(Package::class, 20)->create();
+        $tags = Tag::factory(5)->create();
+        $packages = Package::factory(20)->create();
 
         $tags->each(function ($tag) use ($packages) {
             $packages->shuffle()->take(rand(10, 15))->each(function ($package) use ($tag) {
@@ -65,7 +65,7 @@ class TagTest extends TestCase
     public function the_name_attribute_is_stored_as_lowercase()
     {
         $name = 'Test name';
-        $tag = factory(Tag::class)->make([
+        $tag = Tag::factory()->make([
             'name' => $name,
         ]);
 
@@ -81,7 +81,7 @@ class TagTest extends TestCase
     /** @test */
     public function it_can_generate_its_own_url()
     {
-        $tag = factory(Tag::class)->create(['slug' => 'abc']);
+        $tag = Tag::factory()->create(['slug' => 'abc']);
 
         $this->assertEquals(url('?tag=abc'), $tag->url());
     }

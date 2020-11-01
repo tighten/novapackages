@@ -15,11 +15,11 @@ class PopularityTest extends TestCase
     /** @test */
     public function github_stars_influence_popularity()
     {
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
         $user->collaborators()->save($collaborator);
 
-        $collaborator->authoredPackages()->saveMany(factory(Package::class, 20)->make());
+        $collaborator->authoredPackages()->saveMany(Package::factory(20)->make());
 
         $popularPackages = Package::inRandomOrder()->take(10)->get();
 
@@ -34,11 +34,11 @@ class PopularityTest extends TestCase
     /** @test */
     public function packagist_downloads_influence_popularity()
     {
-        $user = factory(User::class)->create();
-        $collaborator = factory(Collaborator::class)->create();
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
         $user->collaborators()->save($collaborator);
 
-        $collaborator->authoredPackages()->saveMany(factory(Package::class, 20)->make());
+        $collaborator->authoredPackages()->saveMany(Package::factory(20)->make());
 
         $popularPackages = Package::inRandomOrder()->take(10)->get();
 

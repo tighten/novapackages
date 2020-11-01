@@ -10,51 +10,55 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.2",
-        "algolia/algoliasearch-client-php": "^2.2",
-        "barryvdh/laravel-cors": "^0.11.4",
-        "bugsnag/bugsnag-laravel": "^2.0",
-        "doctrine/dbal": "^2.8",
+        "php": "^7.3",
+        "algolia/algoliasearch-client-php": "^2.7",
+        "bugsnag/bugsnag-laravel": "^2.20",
+        "doctrine/dbal": "^2.11",
         "erusev/parsedown": "^1.7",
-        "fideloper/proxy": "^4.0",
-        "guzzlehttp/guzzle": "^6.3",
-        "kitetail/zttp": "^0.3.0",
-        "knplabs/github-api": "^2.9",
-        "laravel/framework": "^6.0",
-        "laravel/helpers": "^1.2",
-        "laravel/horizon": "^3.2.7",
-        "laravel/passport": "^7.3.3",
-        "laravel/scout": "^7.0",
+        "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "knplabs/github-api": "^2.15",
+        "laravel/framework": "^8.0",
+        "laravel/helpers": "^1.3",
+        "laravel/horizon": "^5.0",
+        "laravel/passport": "^10.0",
+        "laravel/scout": "^8.0",
         "laravel/slack-notification-channel": "^2.0",
-        "laravel/socialite": "^4.3",
-        "laravel/telescope": "^2.1",
-        "laravel/tinker": "^1.0",
-        "laravelium/sitemap": "6.0.*",
+        "laravel/socialite": "^5.0",
+        "laravel/telescope": "^4.0",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^3.0",
+        "laravelium/sitemap": "^8.0",
         "livewire/livewire": "^1.0",
-        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/guzzle7-adapter": "^0.1.0",
         "predis/predis": "^1.1",
-        "spatie/laravel-feed": "^2.4",
+        "spatie/laravel-feed": "^2.7",
         "stil/gd-text": "^1.1",
-        "tightenco/ziggy": "^0.8.0",
-        "willvincent/laravel-rateable": "^2.0"
+        "tightenco/ziggy": "^0.9.0",
+        "willvincent/laravel-rateable": "dev-master"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.1",
-        "codedungeon/phpunit-result-printer": "^0.26.1",
-        "dms/phpunit-arraysubset-asserts": "^0.1.0",
-        "facade/ignition": "^1.4",
+        "barryvdh/laravel-debugbar": "^3.5",
+        "codedungeon/phpunit-result-printer": "^0.29.0",
+        "dms/phpunit-arraysubset-asserts": "^0.2.0",
+        "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.4",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "mockery/mockery": "^1.3.1",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/MimisK13/laravel-rateable"
+        }
+    ],
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
             "app/helpers.php"

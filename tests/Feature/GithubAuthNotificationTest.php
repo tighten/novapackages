@@ -16,11 +16,11 @@ class GithubAuthNotificationTest extends TestCase
     /** @test */
     public function users_not_authenticated_with_github_are_notified()
     {
-        $oldUser = factory(User::class)->create([
+        $oldUser = User::factory()->create([
             'github_username' => null,
         ]);
 
-        $newUser = factory(User::class)->create();
+        $newUser = User::factory()->create();
 
         Notification::fake();
 

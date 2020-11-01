@@ -1,11 +1,32 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Review::class, function (Faker $faker) {
-    return [
-        'user_id' => factory(App\User::class)->create()->id,
-        'package_id' => factory(App\Package::class)->create()->id,
-        'content' => implode(' ', $faker->sentences(4)) . "\n\n" . implode(' ', $faker->sentences(3)),
-    ];
-});
+use App\Package;
+use App\Review;
+use App\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class ReviewFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Review::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'user_id' => User::factory(),
+            'package_id' => Package::factory(),
+            'content' => implode(' ', $this->faker->sentences(4)) . "\n\n" . implode(' ', $this->faker->sentences(3)),
+        ];
+    }
+}

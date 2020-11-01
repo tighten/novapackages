@@ -77,7 +77,7 @@ class LoginTest extends TestCase
 
         $this->mockSocialiteWithUserData($fakeUserData);
 
-        $existingUser = factory(User::class)->create([
+        $existingUser = User::factory()->create([
             'name' => 'John Smith',
             'email' => 'test@example.com',
             'avatar' => 'http://test-avatar.jpg',
@@ -109,7 +109,7 @@ class LoginTest extends TestCase
 
         $this->mockSocialiteWithUserData($fakeUserData);
 
-        $existingUser = factory(User::class)->create([
+        $existingUser = User::factory()->create([
             'name' => 'John Smith',
             'email' => 'test@example.com',
             'avatar' => 'http://test-avatar.jpg',
@@ -127,7 +127,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    function the_github_user_id_is_updated_if_it_is_null()
+    public function the_github_user_id_is_updated_if_it_is_null()
     {
         Event::fake();
 
@@ -141,7 +141,7 @@ class LoginTest extends TestCase
 
         $this->mockSocialiteWithUserData($fakeUserData);
 
-        $existingUser = factory(User::class)->create([
+        $existingUser = User::factory()->create([
             'name' => 'Ahsoka Tano',
             'email' => 'ahsoka@example.com',
             'avatar' => 'http://test-avatar.jpg',

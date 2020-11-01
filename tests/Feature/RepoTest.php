@@ -25,7 +25,7 @@ class RepoTest extends TestCase
     public function can_get_a_repo_from_a_package_composer_name()
     {
         $composerName = 'tightenco/nova-stripe';
-        $package = factory(Package::class)->make([
+        $package = Package::factory()->make([
             'composer_name' => $composerName,
         ]);
 
@@ -44,7 +44,7 @@ class RepoTest extends TestCase
     public function can_get_a_repo_from_a_the_package_url_if_the_composer_name_is_not_valid()
     {
         $url = 'https://github.com/tighten/nova-stripe';
-        $package = factory(Package::class)->make([
+        $package = Package::factory()->make([
             'composer_name' => 'invalid-namespace/invalid-name',
             'url' => $url,
         ]);

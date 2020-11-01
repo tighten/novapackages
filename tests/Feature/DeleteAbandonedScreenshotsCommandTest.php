@@ -21,17 +21,17 @@ class DeleteAbandonedScreenshotsCommandTest extends TestCase
     {
         Storage::fake();
 
-        $package = factory(Package::class)->create();
-        $packageScreenshot = factory(Screenshot::class)->create([
+        $package = Package::factory()->create();
+        $packageScreenshot = Screenshot::factory()->create([
             'path' => Storage::putFile('screenshots', File::create('screenshot.jpg')),
             'created_at' => Carbon::now()->subHours(25),
         ]);
         $package->screenshots()->save($packageScreenshot);
-        $abandonedScreenshot = factory(Screenshot::class)->create([
+        $abandonedScreenshot = Screenshot::factory()->create([
             'path' => Storage::putFile('screenshots', File::create('screenshot.jpg')),
             'created_at' => Carbon::now()->subHours(25),
         ]);
-        $newScreenshot = factory(Screenshot::class)->create([
+        $newScreenshot = Screenshot::factory()->create([
             'path' => Storage::putFile('screenshots', File::create('screenshot.jpg')),
             'created_at' => Carbon::now(),
         ]);

@@ -20,12 +20,12 @@ class ScreenshotDeleteTest extends TestCase
     {
         Storage::fake();
 
-        $user = factory(User::class)->create();
-        $screenshotA = factory(Screenshot::class)->create([
+        $user = User::factory()->create();
+        $screenshotA = Screenshot::factory()->create([
             'uploader_id' => $user->id,
             'path' => File::create('screenshot.jpg')->store('screenshots'),
         ]);
-        $screenshotB = factory(Screenshot::class)->create([
+        $screenshotB = Screenshot::factory()->create([
             'uploader_id' => $user->id,
             'path' => File::create('screenshot.jpg')->store('screenshots'),
         ]);
@@ -48,8 +48,8 @@ class ScreenshotDeleteTest extends TestCase
         Storage::fake();
 
         list($package, $collaboratorUser) = $this->createPackageWithUser();
-        $uploader = factory(User::class)->create();
-        $packageScreenshot = factory(Screenshot::class)->create([
+        $uploader = User::factory()->create();
+        $packageScreenshot = Screenshot::factory()->create([
             'uploader_id' => $uploader->id,
             'path' => File::create('screenshotA.jpg')->store('screenshots'),
         ]);
@@ -69,8 +69,8 @@ class ScreenshotDeleteTest extends TestCase
     {
         Storage::fake();
 
-        $user = factory(User::class)->create();
-        $screenshot = factory(Screenshot::class)->create([
+        $user = User::factory()->create();
+        $screenshot = Screenshot::factory()->create([
             'path' => File::create('screenshot.jpg')->store('screenshots'),
         ]);
 
@@ -90,7 +90,7 @@ class ScreenshotDeleteTest extends TestCase
     {
         Storage::fake();
 
-        $screenshot = factory(Screenshot::class)->create([
+        $screenshot = Screenshot::factory()->create([
             'path' => File::create('screenshotA.jpg')->store('screenshots'),
         ]);
 
@@ -106,9 +106,9 @@ class ScreenshotDeleteTest extends TestCase
 
     private function createPackageWithUser()
     {
-        $package = factory(Package::class)->make();
-        $collaborator = factory(Collaborator::class)->make();
-        $user = factory(User::class)->create();
+        $package = Package::factory()->make();
+        $collaborator = Collaborator::factory()->make();
+        $user = User::factory()->create();
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
 

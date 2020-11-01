@@ -21,7 +21,7 @@ class SearchTest extends TestCase
     /** @test */
     public function it_returns_matching_results()
     {
-        $package = factory(Package::class)->create(['name' => 'Dancing hyenas']);
+        $package = Package::factory()->create(['name' => 'Dancing hyenas']);
 
         $response = $this->get(route('search', ['q' => 'hyenas']));
 
@@ -31,7 +31,7 @@ class SearchTest extends TestCase
     /** @test */
     public function it_doesnt_return_non_matching_results()
     {
-        $package = factory(Package::class)->create(['name' => 'Dancing hyenas']);
+        $package = Package::factory()->create(['name' => 'Dancing hyenas']);
 
         $response = $this->get(route('search', ['q' => 'acrobats']));
 
@@ -41,7 +41,7 @@ class SearchTest extends TestCase
     /** @test */
     public function it_ignores_disabled_packages()
     {
-        $package2 = factory(Package::class)->states('disabled')->create(['name' => 'An alligator']);
+        $package2 = Package::factory()->disabled()->create(['name' => 'An alligator']);
 
         $response = $this->get(route('search', ['q' => 'a']));
 

@@ -1,0 +1,58 @@
+name: Test Build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    name: PHP 7.3, Laravel 8.*
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.3
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: php-7.3-laravel-8.*-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: php-7.3-laravel-8.*-composer-
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-
+
+      - name: Copy ENV Laravel Configuration for CI
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Install dependencies
+        run: |
+          composer install --prefer-dist --no-interaction --no-progress --no-suggest
+          npm install
+      - name: Build Assets
+        run: npm run prod
+
+      - name: Generate key
+        run: php artisan key:generate
+
+      - name: Create DB and schemas
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/novapackages.sqlite
+        run: |
+          mkdir -p database
+          touch database/novapackages.sqlite
+          php artisan migrate
+      - name: Run PHP tests
+        run: vendor/bin/phpunit

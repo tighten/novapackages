@@ -48,6 +48,7 @@ class PackageDetailResource extends PackageResource
                 ];
             })->toArray(),
             'possibly_abandoned' => $this->isPossiblyAbandoned($package, $composer_latest ?? null, $packagistData ?? []),
+            'marked_as_unavailable_at' => $package->marked_as_unavailable_at,
             'github_stars' => $package->github_stars,
             'packagist_downloads' => $package->packagist_downloads,
             'tags' => TagResource::from($package->tags),

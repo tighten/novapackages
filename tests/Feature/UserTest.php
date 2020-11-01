@@ -13,13 +13,13 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function updating_collaborator_names_when_the_user_name_changes()
+    public function updating_collaborator_names_when_the_user_name_changes()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'name' => 'Caleb Dume',
             'github_username' => 'calebdume',
         ]);
-        $collaborator = factory(Collaborator::class)->make([
+        $collaborator = Collaborator::factory()->make([
             'name' => 'Caleb Dume',
             'github_username' => 'calebdume',
         ]);
@@ -31,17 +31,17 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    function updating_collaborator_names_only_updates_where_same_github_username()
+    public function updating_collaborator_names_only_updates_where_same_github_username()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'name' => 'Caleb Dume',
             'github_username' => 'calebdume',
         ]);
-        $collaborator = factory(Collaborator::class)->make([
+        $collaborator = Collaborator::factory()->make([
             'name' => 'Caleb Dume',
             'github_username' => 'calebdume',
         ]);
-        $newCollaborator = factory(Collaborator::class)->make([
+        $newCollaborator = Collaborator::factory()->make([
             'name' => 'Ezra Bridger',
             'github_username' => 'ezrabridger',
         ]);
@@ -55,13 +55,13 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    function updating_collaborator_github_usernames_when_the_user_github_username_changes()
+    public function updating_collaborator_github_usernames_when_the_user_github_username_changes()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'github_user_id' => 123,
             'github_username' => 'calebdume',
         ]);
-        $collaborator = factory(Collaborator::class)->make([
+        $collaborator = Collaborator::factory()->make([
             'github_user_id' => 123,
             'github_username' => 'calebdume',
         ]);
@@ -73,17 +73,17 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    function updating_collaborator_github_usernames_only_updates_where_same_github_user_id()
+    public function updating_collaborator_github_usernames_only_updates_where_same_github_user_id()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'github_user_id' => 123,
             'github_username' => 'calebdume',
         ]);
-        $collaborator = factory(Collaborator::class)->make([
+        $collaborator = Collaborator::factory()->make([
             'github_user_id' => 123,
             'github_username' => 'calebdume',
         ]);
-        $newCollaborator = factory(Collaborator::class)->make([
+        $newCollaborator = Collaborator::factory()->make([
             'github_user_id' => 321,
             'github_username' => 'ezrabridger',
         ]);
@@ -97,13 +97,13 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    function collaborator_github_usernames_are_only_updated_when_github_user_id_is_set()
+    public function collaborator_github_usernames_are_only_updated_when_github_user_id_is_set()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'github_user_id' => null,
             'github_username' => 'calebdume',
         ]);
-        $collaborator = factory(Collaborator::class)->make([
+        $collaborator = Collaborator::factory()->make([
             'github_user_id' => null,
             'github_username' => 'calebdume',
         ]);
@@ -115,13 +115,13 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    function updating_collaborator_github_user_id_on_user_update()
+    public function updating_collaborator_github_user_id_on_user_update()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'github_user_id' => null,
             'github_username' => 'calebdume',
         ]);
-        $collaborator = factory(Collaborator::class)->make([
+        $collaborator = Collaborator::factory()->make([
             'github_user_id' => null,
             'github_username' => 'calebdume',
         ]);
@@ -133,17 +133,17 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    function collaborator_github_user_ids_are_only_updated_where_github_username_matches()
+    public function collaborator_github_user_ids_are_only_updated_where_github_username_matches()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'github_user_id' => null,
             'github_username' => 'calebdume',
         ]);
-        $collaborator = factory(Collaborator::class)->make([
+        $collaborator = Collaborator::factory()->make([
             'github_user_id' => null,
             'github_username' => 'calebdume',
         ]);
-        $newCollaborator = factory(Collaborator::class)->make([
+        $newCollaborator = Collaborator::factory()->make([
             'github_user_id' => null,
             'github_username' => 'ezrabridger',
         ]);
@@ -157,13 +157,13 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    function collaborator_github_user_id_is_only_updated_when_it_is_null()
+    public function collaborator_github_user_id_is_only_updated_when_it_is_null()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'github_user_id' => null,
             'github_username' => 'calebdume',
         ]);
-        $collaborator = factory(Collaborator::class)->make([
+        $collaborator = Collaborator::factory()->make([
             'github_user_id' => 321,
             'github_username' => 'calebdume',
         ]);

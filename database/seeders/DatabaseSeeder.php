@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Collaborator;
 use App\Package;
 use App\Tag;
