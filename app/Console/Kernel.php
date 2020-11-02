@@ -26,9 +26,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('purge:abandonedscreenshots')->dailyAt('1:00');
         $schedule->command('telescope:prune')->daily();
 
-        $schedule->command('novapackages:check-package-urls')->weeklyOn(7, '20:00');
-        $schedule->command('novapackages:send-unavailable-package-followup')->dailyAt('21:00');
-        $schedule->command('novapackages:disable-unavailable-packages')->dailyAt('21:30');
+        // $schedule->command('novapackages:check-package-urls')->weeklyOn(7, '20:00');
+        // $schedule->command('novapackages:send-unavailable-package-followup')->dailyAt('21:00');
+        // $schedule->command('novapackages:disable-unavailable-packages')->dailyAt('21:30');
     }
 
     protected function commands()
