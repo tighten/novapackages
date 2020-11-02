@@ -30,7 +30,12 @@
                                 'name' => $package->composer_package,
                             ]) }}"
                     >{{ $package->name }}</a>
-                    (<a href="{{ route('app.packages.edit', [$package]) }}">edit</a>) - Author</li>
+                    (<a href="{{ route('app.packages.edit', [$package]) }}">edit</a>)
+                    <form action="{{ route('app.packages.destroy', [$package]) }}" method="post" class="text-red-400 inline-block">
+                        @method('delete')
+                        @csrf
+                        <button type="submit">(delete)</button>
+                    </form>- Author</li>
             @endforeach
             @foreach ($collaborator->submittedPackages as $package)
                 @if (($package->author->id == $collaborator->id) || $package->contributors->contains($collaborator->id))

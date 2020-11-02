@@ -11,7 +11,6 @@ use App\Package;
 use App\Tag;
 use DateTime;
 use Facades\App\Repo;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class PackageController extends Controller
@@ -147,5 +146,15 @@ class PackageController extends Controller
             ->pluck('id')
             ->merge(Tag::whereIn('name', $tagsToCreate)->get()->pluck('id'))
             ->toArray();
+    }
+
+    public function destroy(Package $package)
+    {
+        $package->delete();
+
+        return back()->with([
+            'package' => $package,
+            'status' => 'Package deleted: ' . $package->name,
+        ]);
     }
 }
