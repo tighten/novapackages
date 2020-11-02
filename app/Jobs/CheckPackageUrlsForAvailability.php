@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Http;
 
 class CheckPackageUrlsForAvailability implements ShouldQueue
 {
-
-    private $package;
-
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    protected $package;
 
     public function __construct($package)
     {
@@ -25,23 +24,33 @@ class CheckPackageUrlsForAvailability implements ShouldQueue
 
     public function handle()
     {
-        $urlIsValid = true;
-        try {
-            $response = Http::get($this->package->url);
-            if ($response->clientError()) {
-                 $urlIsValid = false;
-            }
-        } catch (Exception $e) {
-            $urlIsValid = false; // If we can't reach the domain at all, mark as invalid
+        $urlIsValid = $this->urlIsAccessible();
+
+        if ($urlIsValid) {
+            return;
         }
 
-        if ($urlIsValid) return;
-
-        $this->package->marked_as_unavailable_at = now();
-        $this->package->save();
+        $this->package->update(['marked_as_unavailable_at' => now()]);
 
         if ($this->package->author && $this->package->authorIsUser()) {
             $this->package->author->user->notify(new NotifyAuthorOfUnavailablePackageUrl($this->package));
         }
+    }
+
+    protected function urlIsAccessible()
+    {
+        try {
+            $response = Http::get($this->package->url);
+
+            // @todo: ensure we're only returning false if the package is actually missing; for other errors (e.g. GitHub is down or rate limit) delay the job
+            if ($response->clientError()) {
+                return false;
+            }
+        } catch (Exception $e) {
+            // @todo: ensure we're only returning false if the package is actually missing; for other errors (e.g. GitHub is down or rate limit) delay the job
+            return false;
+        }
+
+        return true;
     }
 }
