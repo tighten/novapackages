@@ -151,10 +151,6 @@ class PackageController extends Controller
     public function destroy(Package $package)
     {
         $package->delete();
-
-        return back()->with([
-            'package' => $package,
-            'status' => 'Package deleted: ' . $package->name,
-        ]);
+        return back();
     }
 }
