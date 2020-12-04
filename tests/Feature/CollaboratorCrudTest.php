@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Collaborator;
 use App\Events\CollaboratorCreated;
 use App\Http\Remotes\GitHub;
-use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
@@ -17,7 +16,7 @@ class CollaboratorCrudTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

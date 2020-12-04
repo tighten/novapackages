@@ -4,8 +4,6 @@ namespace Tests\Unit;
 
 use App\GitLabRepo;
 use App\Http\Remotes\GitLab;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Mockery;
 use Tests\TestCase;
 

@@ -2,13 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Jobs\DeleteAbandonedScreenshots;
 use App\Package;
 use App\Screenshot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 

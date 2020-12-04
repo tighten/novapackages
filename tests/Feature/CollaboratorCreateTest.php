@@ -6,7 +6,6 @@ use App\Collaborator;
 use App\Http\Remotes\GitHub;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Mockery as m;
 use Tests\TestCase;
 

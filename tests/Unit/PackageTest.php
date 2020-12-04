@@ -2,11 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Http\Resources\PackageDetailResource;
 use App\Package;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Tests\TestCase;
