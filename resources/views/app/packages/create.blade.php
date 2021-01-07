@@ -40,7 +40,7 @@
                     <input name="url" placeholder="https://github.com/tightenco/nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-128 max-w-full" value="{{ old('url') }}">
 
                     <label class="block font-bold">Abstract*</label>
-                    <p class="max-w-sm text-gray-800 text-sm mb-2">The short description that shows on a list page; not required; will be parsed from the description if not provided</p>
+                    <p class="max-w-sm text-gray-800 text-sm mb-2">The short description that shows on a list page</p>
                     <textarea name="abstract" class="border border-gray-600 p-2" maxlength="190" cols="40">{{ old('abstract') }}</textarea>
                     <p class="mb-6 text-gray-600 text-sm italic">Max length 190 characters</p>
                     {{-- @todo show a character counter --}}
