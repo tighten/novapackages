@@ -8,6 +8,7 @@ use App\Favorite;
 use App\Http\Remotes\Packagist;
 use App\Http\Resources\TagResource;
 use App\ReadmeFormatter;
+use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -18,7 +19,10 @@ class PackageDetailResource extends PackageResource
     {
         try {
             $packagistData = Packagist::make($package->composer_name)->data();
-            $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
+
+            if (! is_null($packagistData)) {
+                $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
+            }
         } catch (PackagistException $e) {
         }
 
@@ -55,6 +59,25 @@ class PackageDetailResource extends PackageResource
             'is_favorite' => $this->isFavorite($package),
             'favorites_count' => $this->favoritesCount($package),
         ]);
+    }
+
+    /**
+     * If a package is old *and* not on Packagist, mark it as likely abandoned
+     */
+    public function isPossiblyAbandoned($package, $composer_latest, $packagistData)
+    {
+        return Arr::get($packagistData, 'package.abandoned', false) ||
+            ($package->created_at->diffInDays(now()) > 15 && ! $composer_latest);
+    }
+
+    protected function isFavorite($package)
+    {
+        return auth()->user() && (auth()->user()->favorites()->where('package_id', $package->id)->count() > 0);
+    }
+
+    protected function favoritesCount($package)
+    {
+        return $package->favorites_count ?? Favorite::where('package_id', $package->id)->count();
     }
 
     private function userRating($package)
@@ -94,24 +117,5 @@ class PackageDetailResource extends PackageResource
     private function userReview($package)
     {
         return $package->reviews->where('user_id', auth()->id());
-    }
-
-    /**
-     * If a package is old *and* not on Packagist, mark it as likely abandoned
-     */
-    public function isPossiblyAbandoned($package, $composer_latest, $packagistData)
-    {
-        return Arr::get($packagistData, 'package.abandoned', false) ||
-            ($package->created_at->diffInDays(now()) > 15 && ! $composer_latest);
-    }
-
-    protected function isFavorite($package)
-    {
-        return auth()->user() && (auth()->user()->favorites()->where('package_id', $package->id)->count() > 0);
-    }
-
-    protected function favoritesCount($package)
-    {
-        return $package->favorites_count ?? Favorite::where('package_id', $package->id)->count();
     }
 }
