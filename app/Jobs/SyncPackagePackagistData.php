@@ -42,6 +42,10 @@ class SyncPackagePackagistData implements ShouldQueue
             return;
         }
 
+        if (! $packagistData) {
+            return;
+        }
+
         Package::withoutSyncingToSearch(function () use ($packagistData) {
             $this->package->update([
                 'packagist_downloads' => Arr::get($packagistData, 'package.downloads.total', 0) ?: 0,
@@ -50,6 +54,6 @@ class SyncPackagePackagistData implements ShouldQueue
             ]);
         });
 
-        Log::info('Synced packagist data for package #'.$this->package->id.' ('.$this->package->name.')');
+        Log::info('Synced packagist data for package #' . $this->package->id . ' (' . $this->package->name . ')');
     }
 }
