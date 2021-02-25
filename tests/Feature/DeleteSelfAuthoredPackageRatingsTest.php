@@ -49,9 +49,9 @@ class DeleteSelfAuthoredPackageRatingsTest extends TestCase
     public function deleting_self_contributed_package_ratings()
     {
         $packageAuthor = User::factory()->create();
-        $packageContributer = User::factory()->create();
+        $packageContributor = User::factory()->create();
         $collaborator = Collaborator::factory()->create([
-            'user_id' => $packageContributer->id,
+            'user_id' => $packageContributor->id,
         ]);
         $otherUser = User::factory()->create();
         $package = Package::factory()->create([
@@ -60,7 +60,7 @@ class DeleteSelfAuthoredPackageRatingsTest extends TestCase
         $package->contributors()->sync([$collaborator->id]);
 
         $invalidRating = new Rating(['rating' => 5]);
-        $invalidRating->user_id = $packageContributer->id;
+        $invalidRating->user_id = $packageContributor->id;
 
         $validRating = new Rating(['rating' => 5]);
         $validRating->user_id = $otherUser->id;
