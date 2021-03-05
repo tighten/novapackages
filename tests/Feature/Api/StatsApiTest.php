@@ -6,7 +6,6 @@ use App\Collaborator;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class StatsApiTest extends TestCase

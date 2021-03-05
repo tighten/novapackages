@@ -4,8 +4,6 @@ namespace Tests\Unit;
 
 use App\GitHubRepo;
 use App\Http\Remotes\GitHub;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Mockery;
 use Tests\TestCase;
 

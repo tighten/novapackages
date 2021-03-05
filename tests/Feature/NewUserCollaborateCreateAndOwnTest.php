@@ -7,7 +7,6 @@ use App\Events\NewUserSignedUp;
 use App\Http\Remotes\GitHub;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Mockery as m;
 use Tests\TestCase;
