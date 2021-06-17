@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "368a9db5f21df0cefff07387e5522091",
+    "content-hash": "7ea2b39f7b185d4472538551564cd578",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -3294,32 +3294,30 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v2.4.3",
+            "version": "v1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "69575f50bb7f8a49a41f9bd6bd16c73a6ef4fda3"
+                "reference": "b1673ff9fc78a3296ca4a3b0d1ca26da0a5cdf82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/69575f50bb7f8a49a41f9bd6bd16c73a6ef4fda3",
-                "reference": "69575f50bb7f8a49a41f9bd6bd16c73a6ef4fda3",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/b1673ff9fc78a3296ca4a3b0d1ca26da0a5cdf82",
+                "reference": "b1673ff9fc78a3296ca4a3b0d1ca26da0a5cdf82",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^7.0|^8.0",
-                "illuminate/support": "^7.0|^8.0",
-                "illuminate/validation": "^7.0|^8.0",
-                "php": "^7.2.5|^8.0",
-                "symfony/http-kernel": "^5.0"
+                "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+                "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+                "illuminate/validation": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+                "php": "^7.1.3",
+                "symfony/http-kernel": "^4.0|^5.0"
             },
             "require-dev": {
-                "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^7.0|^8.0",
+                "laravel/framework": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
                 "mockery/mockery": "^1.3.1",
-                "orchestra/testbench": "^5.0|^6.0",
-                "orchestra/testbench-dusk": "^5.2|^6.0",
-                "phpunit/phpunit": "^8.4|^9.0",
+                "orchestra/testbench": "~3.6.0|~3.7.0|~3.8.0|^4.0|^5.0",
+                "phpunit/phpunit": "^7.5.15|^8.4|^9.0",
                 "psy/psysh": "@stable"
             },
             "type": "library",
@@ -3334,9 +3332,6 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
                 "psr-4": {
                     "Livewire\\": "src/"
                 }
@@ -3354,7 +3349,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v2.4.3"
+                "source": "https://github.com/livewire/livewire/tree/v1.3.5"
             },
             "funding": [
                 {
@@ -3362,7 +3357,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-16T14:27:45+00:00"
+            "time": "2020-09-17T04:38:16+00:00"
         },
         {
             "name": "monolog/monolog",

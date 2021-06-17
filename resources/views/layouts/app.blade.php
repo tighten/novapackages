@@ -109,7 +109,7 @@
         document.addEventListener("livewire:load", function(event) {
             logComponentsData();
 
-            window.livewire.hook('message.processed', () => {
+            window.livewire.hook('afterDomUpdate', () => {
                 logComponentsData();
             });
         });

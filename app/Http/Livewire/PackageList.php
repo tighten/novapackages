@@ -21,12 +21,13 @@ class PackageList extends Component
 
     public $tag = 'popular--and--recent';
     public $search;
+    public $totalPages = 1;
     public $pageSize = 6;
 
-    protected $queryString = [
+    protected $updatesQueryString = [
         'tag' => ['except' => 'popular--and--recent'],
-        'search' => ['except' => ''],
-        'page' => ['except' => 1],
+        'search',
+        'page',
     ];
 
     public function render()
@@ -40,6 +41,8 @@ class PackageList extends Component
 
     public function renderPopularAndRecent()
     {
+        $this->totalPages = 1;
+
         return view('livewire.popular-and-recent-packages', [
             'popularPackages' => Package::popular()->with(['author', 'ratings'])->paginate(6),
             'recentPackages' => Package::latest()->take(3)->with(['author', 'ratings'])->get(),
@@ -64,6 +67,8 @@ class PackageList extends Component
             $packages = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
             $packages = $packages->latest()->with(['author', 'ratings'])->paginate($this->pageSize);
         }
+
+        $this->totalPages = $packages->lastPage();
 
         return view('livewire.package-list', [
             'packages' => $packages->onEachSide(3),
@@ -104,6 +109,11 @@ class PackageList extends Component
             $this->tag = 'all';
         }
 
+        // Prefer null over empty string to remove from query string
+        if (! $this->search) {
+            $this->search = null;
+        }
+
         $this->gotoPage(1);
     }
 
@@ -112,9 +122,28 @@ class PackageList extends Component
         $this->goToPage(1);
     }
 
-    public function mount()
+    public function mount(Request $request)
     {
+        $this->fill(
+            $request->only(['tag', 'search', 'page'])
+        );
+
         $this->pageSize = Cookie::get('pageSize', $this->pageSize);
+    }
+
+    /* Fix nextPage/previousPage to disallow overflows */
+    public function previousPage()
+    {
+        if ($this->page > 1) {
+            $this->page = $this->page - 1;
+        }
+    }
+
+    public function nextPage()
+    {
+        if ($this->page < $this->totalPages) {
+            $this->page = $this->page + 1;
+        }
     }
 
     /* Temporary override of WithPagination -- while we have Tailwind pre-1.0 */
