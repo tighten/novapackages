@@ -23,7 +23,7 @@
         };
     </script>
 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.x/dist/alpine.min.js" defer></script>
 
     @livewireStyles
 </head>
@@ -109,7 +109,7 @@
         document.addEventListener("livewire:load", function(event) {
             logComponentsData();
 
-            window.livewire.hook('afterDomUpdate', () => {
+            window.livewire.hook('message.processed', () => {
                 logComponentsData();
             });
         });
