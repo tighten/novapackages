@@ -15,11 +15,7 @@
 @endsection
 
 @section('content')
-    @if (session('status'))
-        <div class="px-4 py-3 mb-4 text-sm text-green-600 bg-green-100 border border-green-300 rounded">
-            {{ session('status') }}
-        </div>
-    @endif
+    <x-status class="container mx-auto mb-4"/>
 
     <package-detail-frame
         :auth="{{ auth()->check() ? 'true' : 'false' }}"
