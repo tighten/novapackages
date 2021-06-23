@@ -1,3 +1,5 @@
+![Nova Packages- Discover new packages. Build amazing things.](novapackages-banner.png?version=1)
+
 # Nova Packages
 
 ## Setting up Passport
