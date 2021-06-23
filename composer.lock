@@ -4,27 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e407aa522752d5fae01bf3c074942f9",
+    "content-hash": "a0050a5d29fb83199618a335893a0e6a",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "2.8.0",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "d9781147ae433f5bdbfd902497d748d60e70d693"
+                "reference": "421abbfb085c8ae74d298a6f259ebfd69897e625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/d9781147ae433f5bdbfd902497d748d60e70d693",
-                "reference": "d9781147ae433f5bdbfd902497d748d60e70d693",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/421abbfb085c8ae74d298a6f259ebfd69897e625",
+                "reference": "421abbfb085c8ae74d298a6f259ebfd69897e625",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": "^5.3 || ^7.0 || ^8.0",
+                "php": "^7.2 || ^8.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0",
                 "psr/simple-cache": "^1.0"
@@ -32,7 +32,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
                 "fzaninotto/faker": "^1.8",
-                "julienbourdeau/phpunit": "4.8.37",
+                "phpunit/phpunit": "^8.0 || ^9.0",
                 "symfony/yaml": "^2.0 || ^4.0"
             },
             "suggest": {
@@ -76,9 +76,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/2.8.0"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/3.0.2"
             },
-            "time": "2021-04-07T16:50:58+00:00"
+            "time": "2021-05-04T09:15:35+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -1348,16 +1348,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v5.3.0",
+            "version": "v5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "3c2d70f2e64e2922345e89f2ceae47d2463faae1"
+                "reference": "d2113d9b2e0e349796e72d2a63cf9319100382d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/3c2d70f2e64e2922345e89f2ceae47d2463faae1",
-                "reference": "3c2d70f2e64e2922345e89f2ceae47d2463faae1",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/d2113d9b2e0e349796e72d2a63cf9319100382d2",
+                "reference": "d2113d9b2e0e349796e72d2a63cf9319100382d2",
                 "shasum": ""
             },
             "require": {
@@ -1365,6 +1365,9 @@
             },
             "require-dev": {
                 "phpunit/phpunit": ">=4.8 <=9"
+            },
+            "suggest": {
+                "paragonie/sodium_compat": "Support EdDSA (Ed25519) signatures when libsodium is not present"
             },
             "type": "library",
             "autoload": {
@@ -1396,9 +1399,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v5.3.0"
+                "source": "https://github.com/firebase/php-jwt/tree/v5.4.0"
             },
-            "time": "2021-05-20T17:37:02+00:00"
+            "time": "2021-06-23T19:00:23+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -2235,39 +2238,42 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v8.6.1",
+            "version": "v9.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "7fb1c860a2fd904f0e084a7cc3641eb1448ba278"
+                "reference": "ccd34d0efd99489059e3e2bcd223aaa360af62cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/7fb1c860a2fd904f0e084a7cc3641eb1448ba278",
-                "reference": "7fb1c860a2fd904f0e084a7cc3641eb1448ba278",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/ccd34d0efd99489059e3e2bcd223aaa360af62cf",
+                "reference": "ccd34d0efd99489059e3e2bcd223aaa360af62cf",
                 "shasum": ""
             },
             "require": {
-                "illuminate/bus": "^6.0|^7.0|^8.0",
-                "illuminate/contracts": "^6.0|^7.0|^8.0",
-                "illuminate/database": "^6.0|^7.0|^8.0",
-                "illuminate/http": "^6.0|^7.0|^8.0",
-                "illuminate/pagination": "^6.0|^7.0|^8.0",
-                "illuminate/queue": "^6.0|^7.0|^8.0",
-                "illuminate/support": "^6.0|^7.0|^8.0",
-                "php": "^7.2|^8.0"
+                "illuminate/bus": "^8.0",
+                "illuminate/contracts": "^8.0",
+                "illuminate/database": "^8.0",
+                "illuminate/http": "^8.0",
+                "illuminate/pagination": "^8.0",
+                "illuminate/queue": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.3|^8.0"
             },
             "require-dev": {
+                "meilisearch/meilisearch-php": "^0.17",
                 "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^8.0|^9.3"
+                "orchestra/testbench": "^6.17",
+                "phpunit/phpunit": "^9.3"
             },
             "suggest": {
-                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^2.2)."
+                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^2.2).",
+                "meilisearch/meilisearch-php": "Required to use the MeiliSearch engine (^0.17)."
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.x-dev"
+                    "dev-master": "9.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -2300,7 +2306,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2021-04-06T14:35:41+00:00"
+            "time": "2021-06-15T16:00:14+00:00"
         },
         {
             "name": "laravel/slack-notification-channel",
@@ -4074,16 +4080,16 @@
         },
         {
             "name": "php-http/guzzle7-adapter",
-            "version": "0.1.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/guzzle7-adapter.git",
-                "reference": "1967de656b9679a2a6a66d0e4e16fa99bbed1ad1"
+                "reference": "fb075a71dbfa4847cf0c2938c4e5a9c478ef8b01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/guzzle7-adapter/zipball/1967de656b9679a2a6a66d0e4e16fa99bbed1ad1",
-                "reference": "1967de656b9679a2a6a66d0e4e16fa99bbed1ad1",
+                "url": "https://api.github.com/repos/php-http/guzzle7-adapter/zipball/fb075a71dbfa4847cf0c2938c4e5a9c478ef8b01",
+                "reference": "fb075a71dbfa4847cf0c2938c4e5a9c478ef8b01",
                 "shasum": ""
             },
             "require": {
@@ -4130,9 +4136,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/guzzle7-adapter/issues",
-                "source": "https://github.com/php-http/guzzle7-adapter/tree/0.1.1"
+                "source": "https://github.com/php-http/guzzle7-adapter/tree/1.0.0"
             },
-            "time": "2020-10-21T17:30:51+00:00"
+            "time": "2021-03-09T07:35:15+00:00"
         },
         {
             "name": "php-http/httplug",
@@ -11258,5 +11264,5 @@
         "php": "^7.4"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
