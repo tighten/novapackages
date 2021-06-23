@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Algolia\AlgoliaSearch\SearchIndex;
 use App\CacheKeys;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Package as PackageResource;
@@ -28,7 +29,10 @@ class SearchController extends Controller
     private function searchFor($q)
     {
         return Cache::remember(CacheKeys::packageSearchResults($q), self::CACHE_LENGTH, function () use ($q) {
-            return Package::search($q)->get()->load(['tags', 'author']);
+            return Package::search($q, function (SearchIndex $algolia, string $query, array $options) {
+                $options['advancedSyntax'] = true;
+                return $algolia->search($query, $options);
+            })->get()->load(['tags', 'author']);
         });
     }
 }
