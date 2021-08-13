@@ -52,6 +52,8 @@ class PackageList extends Component
     {
         if ($this->search) {
             $packages = Package::search($this->search, function (SearchIndex $algolia, string $query, array $options) {
+                $options['advancedSyntax'] = true;
+
                 if ($this->tag !== 'all') {
                     $options['tagFilters'] = [$this->tag];
                 }
