@@ -7,7 +7,7 @@ on:
       - main
 jobs:
   test:
-    name: PHP 7.4, Laravel 8.*
+    name: PHP 8.0, Laravel 8.*
     runs-on: ubuntu-latest
 
     steps:
@@ -17,14 +17,14 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.0
 
       - name: Cache Composer dependencies
         uses: actions/cache@v1
         with:
           path: ~/.composer/cache/files
-          key: php-7.4-laravel-8.*-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: php-7.4-laravel-8.*-composer-
+          key: php-8.0-laravel-8.*-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: php-8.0-laravel-8.*-composer-
 
       - name: Cache npm dependencies
         uses: actions/cache@v1
