@@ -6,6 +6,7 @@ use App\BaseRepo;
 use App\Http\Remotes\GitLab;
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
 
 class GitLabRepo extends BaseRepo
 {
@@ -31,6 +32,19 @@ class GitLabRepo extends BaseRepo
 
     public static function make($url)
     {
+        // If a user changes their name on GitLab, requests
+        // sent in a browser will redirect to the new
+        // repository while the API will just return a 404.
+        // To prevent this, we'll send an HTTP request first
+        // and see if the response is a redirect. If it is
+        // then we will use the url that the request was
+        // going to be redirected to for future requests.
+        $response = Http::withoutRedirecting()->get($url);
+
+        if ($response->status() === 301) {
+            $url = $response->headers()['Location'][0];
+        }
+
         return new static($url, app(GitLab::class, ['url' => $url]));
     }
 
