@@ -5,7 +5,6 @@ namespace App;
 use App\BaseRepo;
 use App\Exceptions\GitHubException;
 use App\Http\Remotes\GitHub;
-use Exception;
 use Github\Exception\RuntimeException as GitHubRunTimeException;
 use Illuminate\Support\Arr;
 
@@ -52,8 +51,12 @@ class GitHubRepo extends BaseRepo
                 $this->repo,
                 $format
             );
-        } catch (Exception $e) {
-            return;
+        } catch (GitHubRunTimeException $e) {
+            if ($e->getCode() === 404) {
+                return;
+            }
+
+            throw $e;
         }
     }
 

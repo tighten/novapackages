@@ -7,7 +7,6 @@ use App\Events\CollaboratorCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Remotes\GitHub;
 use Github\Exception\RuntimeException as GitHubException;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class CollaboratorController extends Controller
@@ -30,7 +29,7 @@ class CollaboratorController extends Controller
             'name' => 'required',
             'github_username' => 'required|unique:collaborators,github_username',
             'url' => 'nullable|url',
-            'description' => '',
+            'description' => 'nullable',
         ]);
 
         try {
@@ -62,13 +61,13 @@ class CollaboratorController extends Controller
                 Rule::unique('collaborators')->ignore($collaborator),
             ],
             'url' => 'nullable|url',
-            'description' => '',
+            'description' => 'nullable',
         ]);
 
         try {
             $githubData = ($collaborator->github_username != request('github_username'))
-                            ? $this->getCollaboratorGitHubData($input['github_username'])
-                            : [];
+                ? $this->getCollaboratorGitHubData($input['github_username'])
+                : [];
         } catch (GitHubException $e) {
             return redirect()->back()->withInput()->withErrors([
                 'github_username' => 'Sorry, but that is not a valid GitHub username.',

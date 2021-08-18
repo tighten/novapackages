@@ -12,7 +12,7 @@ class GitHubServiceProvider extends ServiceProvider
     {
         $this->app->bind(GitHubClient::class, function ($app) {
             $client = new GitHubClient(null, 'squirrel-girl-preview');
-            $client->authenticate(config('services.github.client_id'), config('services.github.client_secret'), GitHubClient::AUTH_HTTP_PASSWORD);
+            $client->authenticate(config('services.github.token'), GitHubClient::AUTH_ACCESS_TOKEN);
 
             return $client;
         });

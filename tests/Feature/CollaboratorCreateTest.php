@@ -34,11 +34,11 @@ class CollaboratorCreateTest extends TestCase
         $response->assertSessionHasNoErrors();
         $this->assertCount(1, Collaborator::all());
 
-        tap(Collaborator::first(), function ($collaborator) use ($userData) {
-            $this->assertEquals($userData['name'], $collaborator->name);
-            $this->assertEquals($userData['url'], $collaborator->url);
-            $this->assertEquals($userData['description'], $collaborator->description);
-            $this->assertEquals($userData['github_username'], $collaborator->github_username);
-        });
+        $collaborator = Collaborator::first();
+
+        $this->assertEquals($userData['name'], $collaborator->name);
+        $this->assertEquals($userData['url'], $collaborator->url);
+        $this->assertEquals($userData['description'], $collaborator->description);
+        $this->assertEquals($userData['github_username'], $collaborator->github_username);
     }
 }

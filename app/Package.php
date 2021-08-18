@@ -143,10 +143,8 @@ class Package extends Model implements Feedable
 
     /**
      * Output package for RSS feed.
-     *
-     * @return Spatie\Feed\FeedItem
      */
-    public function toFeedItem()
+    public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
             ->id($this->id)

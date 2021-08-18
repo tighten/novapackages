@@ -96,14 +96,15 @@ class CollaboratorEditTest extends TestCase
             'github_username' => 'jimsmith',
         ];
 
-        $this->actingAs($user)->patch(route('app.collaborators.update', $collaborator), $userData);
+        $response = $this->actingAs($user)->patch(route('app.collaborators.update', $collaborator), $userData);
+        $response->assertSessionDoesntHaveErrors();
 
-        tap($collaborator->fresh(), function ($collaborator) use ($userData) {
-            $this->assertEquals($userData['name'], $collaborator->name);
-            $this->assertEquals($userData['url'], $collaborator->url);
-            $this->assertEquals($userData['description'], $collaborator->description);
-            $this->assertEquals($userData['github_username'], $collaborator->github_username);
-        });
+        $collaborator->refresh();
+
+        $this->assertEquals($userData['name'], $collaborator->name);
+        $this->assertEquals($userData['url'], $collaborator->url);
+        $this->assertEquals($userData['description'], $collaborator->description);
+        $this->assertEquals($userData['github_username'], $collaborator->github_username);
     }
 
     /** @test */
