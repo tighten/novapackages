@@ -20,7 +20,6 @@ use willvincent\Rateable\Rating;
 class Package extends Model implements Feedable
 {
     use HasFactory;
-    // @todo add algolia logo next to the search results if it's used in not-api
     use Searchable;
     use Rateable, RatingCountable {
         RatingCountable::averageRating insteadof Rateable;
