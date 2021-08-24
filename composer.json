@@ -19,7 +19,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "knplabs/github-api": "^3.0",
-        "laravel/framework": "^8.48",
+        "laravel/framework": "^8.56",
         "laravel/helpers": "^1.4",
         "laravel/horizon": "^5.6",
         "laravel/passport": "^10.0",
