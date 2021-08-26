@@ -54,5 +54,6 @@ jobs:
           mkdir -p database
           touch database/novapackages.sqlite
           php artisan migrate
+
       - name: Run PHP tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --exclude-group integration
