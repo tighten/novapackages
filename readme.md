@@ -20,9 +20,11 @@
 
 ## Setting up GitHub Authentication
 
-1. Make a new [GitHub OAuth application](https://github.com/settings/tokens)
+1. Make a new [GitHub OAuth application](https://github.com/settings/developers)
 2. Set `http://novapackages.test/login/github/callback` as the Authorized Callback URL
-3. Copy the GitHub app id and secret to `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in the `.env` file.
+3. Copy the GitHub app id and secret to `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in the `.env` file
+4. Create a new [Personal Access Token](https://github.com/settings/tokens) with the `public_repo` scope enabled
+5. Copy the token to `GITHUB_TOKEN` in the `.env` file.
 
 ## Setting up Slack Test Webhook
 
