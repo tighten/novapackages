@@ -8,6 +8,10 @@
                 All Packages
             </option>
 
+            <option value="popular">
+                Popular Packages
+            </option>
+
             <optgroup label="Package types">
                 @foreach ($typeTags as $thisTag)
                     <option value="{{ $thisTag->slug }}">{{ $thisTag->name }}</option>
@@ -36,6 +40,11 @@
                 wire:click="filterTag('all')"
                 class="block px-8 py-2 cursor-pointer hover:text-indigo-700 {{ $tag === 'all' ? 'text-gray-800 font-bold' : 'text-gray-700' }}"
                 >All packages</a>
+
+                <a
+                wire:click="filterTag('popular')"
+                class="block px-8 py-2 cursor-pointer hover:text-indigo-700 {{ $tag === 'popular' ? 'text-gray-800 font-bold' : 'text-gray-700' }}"
+                >Popular packages</a>
 
             <span class="block mt-4 mb-2 mx-4 pb-2 px-4 mt-6 border-b border-grey uppercase text-sm">Package types</span>
 
