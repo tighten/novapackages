@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\Exceptions\PackagistException;
+use App\Http\Remotes\Packagist;
 use App\OpenGraphImage;
 use App\Screenshot;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -14,8 +16,8 @@ use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
-use willvincent\Rateable\Rateable;
 use willvincent\Rateable\Rating;
+use willvincent\Rateable\Rateable;
 
 class Package extends Model implements Feedable
 {
@@ -41,6 +43,7 @@ class Package extends Model implements Feedable
     ];
 
     protected $githubStarVsPackagistDownloadsMultiplier = 100;
+    protected $isAbandoned = null;
 
     public function author()
     {
@@ -165,6 +168,14 @@ class Package extends Model implements Feedable
         Screenshot::whereIn('id', $screenshots)->update(['package_id' => $this->id]);
     }
 
+    public function isPossiblyAbandoned()
+    {
+        $packagistData = $this->fetchPackagistData();
+        $composer_latest = $this->fetchLatestStableVersion($packagistData);
+        return Arr::get($packagistData, 'package.abandoned', false) ||
+            ($this->created_at->diffInDays(now()) > 15 && ! $composer_latest);
+    }
+
     public function authorIsUser()
     {
         return $this->author->user()->exists();
@@ -199,5 +210,30 @@ class Package extends Model implements Feedable
             $this->is_disabled = false;
             $this->save();
         }
+    }
+
+    public function fetchPackagistData()
+    {
+        $packagistData = null;
+        try {
+            $packagistData = Packagist::make($this->composer_name)->data();
+        } catch (PackagistException $e) {
+        }
+
+        return $packagistData;
+    }
+
+    public function fetchLatestStableVersion($packagistData)
+    {
+        return ! is_null($packagistData)
+            ? $this->extractStableVersionsFromPackages($packagistData)->first()
+            : null;
+    }
+
+    private function extractStableVersionsFromPackages($packagist)
+    {
+        return collect($packagist['package']['versions'])->reject(function ($version) {
+            return strpos($version['version'], 'dev') !== false;
+        });
     }
 }

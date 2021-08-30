@@ -3,13 +3,9 @@
 namespace App\Http\Resources;
 
 use App\CacheKeys;
-use App\Exceptions\PackagistException;
 use App\Favorite;
-use App\Http\Remotes\Packagist;
 use App\Http\Resources\TagResource;
 use App\ReadmeFormatter;
-use Exception;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
@@ -17,18 +13,12 @@ class PackageDetailResource extends PackageResource
 {
     public function toArray($package)
     {
-        try {
-            $packagistData = Packagist::make($package->composer_name)->data();
-
-            if (! is_null($packagistData)) {
-                $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
-            }
-        } catch (PackagistException $e) {
-        }
+        $packagistData = $package->fetchPackagistData();
+        $composer_latest = $package->fetchLatestStableVersion($packagistData);
 
         return array_merge(parent::toArray($package), [
             'composer_data' => $packagistData ?? false,
-            'composer_latest' => $composer_latest ?? null,
+            'composer_latest' => $composer_latest,
             'description' => $this->renderedText($package, 'description'),
             'readme' => $this->renderedText($package, 'readme'),
             'instructions' => $package->instructions ? markdown($package->instructions) : null,
@@ -51,7 +41,8 @@ class PackageDetailResource extends PackageResource
                     'avatar_url' => $contributor->avatar ?: 'https://api.adorable.io/avatars/285/' . Str::slug($contributor->name) . '.png',
                 ];
             })->toArray(),
-            'possibly_abandoned' => $this->isPossiblyAbandoned($package, $composer_latest ?? null, $packagistData ?? []),
+            // reload possibly_abandoned with the mutator from the class ($package->is_abandoned)
+            'possibly_abandoned' => $package->isPossiblyAbandoned(),
             'marked_as_unavailable_at' => $package->marked_as_unavailable_at,
             'github_stars' => $package->github_stars,
             'packagist_downloads' => $package->packagist_downloads,
@@ -59,15 +50,6 @@ class PackageDetailResource extends PackageResource
             'is_favorite' => $this->isFavorite($package),
             'favorites_count' => $this->favoritesCount($package),
         ]);
-    }
-
-    /**
-     * If a package is old *and* not on Packagist, mark it as likely abandoned
-     */
-    public function isPossiblyAbandoned($package, $composer_latest, $packagistData)
-    {
-        return Arr::get($packagistData, 'package.abandoned', false) ||
-            ($package->created_at->diffInDays(now()) > 15 && ! $composer_latest);
     }
 
     protected function isFavorite($package)
@@ -90,13 +72,6 @@ class PackageDetailResource extends PackageResource
 
         return Cache::remember($key, self::CACHE_RATINGS_LENGTH, function () use ($package) {
             return (int)$package->user_average_rating;
-        });
-    }
-
-    private function extractStableVersionsFromPackages($packagist)
-    {
-        return collect($packagist['package']['versions'])->reject(function ($version) {
-            return strpos($version['version'], 'dev') !== false;
         });
     }
 
