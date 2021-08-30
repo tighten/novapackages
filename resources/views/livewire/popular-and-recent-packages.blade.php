@@ -16,7 +16,7 @@
             @include('livewire.partials.package-card', ['context' => 'popular'])
         @endforeach
 
-        {!! $popularPackages->links() !!}
+        <a href="#" wire:click.prevent="filterTag('popular')" class="text-indigo-600 underline font-bold ml-2 mb-6">See More...</a>
     </div>
 </div>
 @endsection

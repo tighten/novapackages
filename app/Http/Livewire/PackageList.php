@@ -63,7 +63,18 @@ class PackageList extends Component
 
             $packages->load(['author', 'ratings']);
         } else {
-            $packages = $this->tag === 'all' ? Package::query() : Package::tagged($this->tag);
+            switch ($this->tag) {
+                case 'all':
+                    $packages = Package::query();
+                    break;
+                case 'popular':
+                    $packages = Package::popular();
+                    break;
+                default:
+                    $packages = Package::tagged($this->tag);
+                    break;
+            }
+
             $packages = $packages->latest()->with(['author', 'ratings'])->paginate($this->pageSize);
         }
 
