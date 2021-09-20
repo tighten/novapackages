@@ -546,17 +546,13 @@ export default {
         setRating(rating) {
             http.post('/internalapi/ratings', {
                 package_id: this.package.id,
-                rating: rating
-            }).then(
-                response => {
-                    this.rating = rating;
-                    this.rated = true;
-                },
-
-                response => {
-                    alert('Error: ' + response.message);
-                }
-            );
+                rating: rating,
+            }).then(response => {
+                this.rating = rating;
+                this.rated = true;
+            }).catch((error) => {
+                alert('Error: ' + error.response.data.message);
+            });
         },
 
         requestPackagistRefresh() {

@@ -67,21 +67,15 @@ export default {
 
     methods: {
         setRating(rating) {
-            axios
-                .post('/internalapi/ratings', {
-                    package_id: this.package.id,
-                    rating: rating
-                })
-                .then(
-                    response => {
-                        console.log(response);
-                        this.rating = rating;
-                        this.rated = true;
-                    },
-                    response => {
-                        alert('Error: ' + response.message);
-                    }
-                );
+            axios.post('/internalapi/ratings', {
+                package_id: this.package.id,
+                rating: rating,
+            }).then(response => {
+                this.rating = rating;
+                this.rated = true;
+            }).catch((error) => {
+                alert('Error: ' + error.response.data.message);
+            });
         },
         save() {
             let composerData = this.package.composer_name.split('/');
