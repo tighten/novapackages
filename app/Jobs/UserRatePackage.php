@@ -5,14 +5,10 @@ namespace App\Jobs;
 use App\Collaborator;
 use App\Exceptions\SelfAuthoredRatingException;
 use App\Package;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use willvincent\Rateable\Rating;
 
-class UserRatePackage implements ShouldQueue
+class UserRatePackage
 {
     private $user;
 
@@ -20,7 +16,7 @@ class UserRatePackage implements ShouldQueue
 
     private $stars;
 
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable;
 
     public function __construct($userId, $packageId, $stars)
     {
