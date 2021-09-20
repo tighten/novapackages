@@ -11,7 +11,7 @@
     "type": "project",
     "require": {
         "php": "^7.4|^8.0",
-        "algolia/algoliasearch-client-php": "^3.0",
+        "algolia/algoliasearch-client-php": "^3.1",
         "bugsnag/bugsnag-laravel": "^2.22",
         "doctrine/dbal": "^2.11",
         "erusev/parsedown": "^1.7",
@@ -19,7 +19,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "knplabs/github-api": "^3.0",
-        "laravel/framework": "^8.56",
+        "laravel/framework": "^8.61",
         "laravel/helpers": "^1.4",
         "laravel/horizon": "^5.7",
         "laravel/passport": "^10.1",
