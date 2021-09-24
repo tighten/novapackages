@@ -8,14 +8,19 @@ use App\Favorite;
 use App\Listeners\SendNewPackageNotification;
 use App\Notifications\NewPackage;
 use App\Package;
+use App\Review;
+use App\Screenshot;
 use App\Tag;
 use App\Tighten;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Testing\File;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
+use willvincent\Rateable\Rating;
 
 class PackageCrudTest extends TestCase
 {
@@ -312,6 +317,65 @@ class PackageCrudTest extends TestCase
                 return ! Arr::has($notification->toSlack(new Tighten)->attachments[0]->fields, 'Created By');
             }
         );
+    }
+
+    /** @test */
+    public function author_can_delete_their_packages()
+    {
+        $this->withoutEvents();
+
+        Storage::fake();
+
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
+        $user->collaborators()->save($collaborator);
+        $package = Package::factory()->create([
+            'author_id' => $collaborator->id,
+        ]);
+
+        $tag = Tag::factory()->create();
+        $package->tags()->save($tag);
+
+        $screenshot = Screenshot::factory()->create([
+            'uploader_id' => $package->author->user->id,
+            'path' => File::create('screenshot.jpg')->store('screenshots'),
+            'package_id' => $package,
+        ]);
+
+        $review = Review::factory()->create(['package_id' => $package]);
+
+        $fanOfPackage = User::factory()->create();
+        $fanOfPackage->ratePackage($package->id, 5);
+        $rating = Rating::where([
+            'user_id' => $fanOfPackage->id,
+            'rateable_type' => Package::class,
+            'rateable_id' => $package->id,
+        ])->first();
+
+        $favorite = $fanOfPackage->favoritePackage($package->id);
+
+        $this->actingAs($user)
+            ->delete(route('app.packages.delete', $package))
+            ->assertRedirect(route('app.packages.index'))
+            ->assertSessionHas('status');
+
+        $this->assertDeleted($package);
+        $this->assertDeleted($screenshot);
+        $this->assertDeleted($review);
+        $this->assertDeleted($rating);
+        $this->assertDeleted($favorite);
+    }
+
+    /** @test */
+    function collaborators_can_delete_their_packages()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /** @test */
+    public function users_that_are_not_a_packages_author_cannot_delete_it()
+    {
+        $this->markTestIncomplete();
     }
 
     private function postFromPackage($package)

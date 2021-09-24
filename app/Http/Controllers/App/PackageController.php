@@ -11,6 +11,7 @@ use App\Package;
 use App\Tag;
 use DateTime;
 use Facades\App\Repo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -113,6 +114,27 @@ class PackageController extends Controller
         $package->refresh()->searchable();
         event(new PackageUpdated($package));
         $package->syncScreenshots($request->input('screenshots', []));
+
+        return redirect()->route('app.packages.index');
+    }
+
+    public function destroy(Package $package)
+    {
+        $name = $package->name;
+
+        DB::transaction(function () use ($package) {
+            $package->contributors()->sync([]);
+            $package->tags()->sync([]);
+            $package->reviews->each->delete();
+            $package->ratings->each->delete();
+            $package->favorites->each->delete();
+            $package->screenshots->each->delete();
+            $package->delete();
+        });
+
+        session()->flash('status', "{$name} has been deleted.");
+
+        Log::notice("Package {$name} was deleted by user " . auth()->user()->id);
 
         return redirect()->route('app.packages.index');
     }

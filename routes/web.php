@@ -42,6 +42,7 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'email'], 'as' => 'app
         Route::middleware(['can:update,any_package'])->group(function () {
             Route::put('{any_package}', 'App\PackageController@update')->name('update');
             Route::get('{any_package}/edit', 'App\PackageController@edit')->name('edit');
+            Route::delete('{any_package}/delete', 'App\PackageController@destroy')->name('delete');
             Route::delete('{any_package}/packagist-cache', 'App\PackagePackagistCacheController@destroy')->name('packagistcache.destroy');
             Route::post('{any_package}/repository-refresh', 'App\RefreshPackageRepositoryController')->name('repository.refresh');
         });

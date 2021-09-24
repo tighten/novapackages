@@ -15,7 +15,7 @@
 
                 @include('partials.errors')
 
-                <form method="post" action="{{ route('app.packages.update', [$package]) }}">
+                <form id="edit_package" method="post" action="{{ route('app.packages.update', [$package]) }}">
                     @method('PUT')
                     @csrf
 
@@ -62,9 +62,19 @@
 
                     <label class="block font-bold">Readme</label>
                     <p class="max-w-sm text-gray-800 text-sm mb-6">The readme for this project is consumed from the URL you specify. If your package is on Packagist, we will pull the VCS source Packagist points to and consume its readme. If you provide a GitHub URL in the "URL" field, we will bypass Packagist and pull the readme directly from that repo.</p>
-
-                    <input type="submit" value="Save package" class="block border border-gray-600 py-2 px-6">
                 </form>
+                <div class="flex justify-between">
+                    <input form="edit_package" type="submit" value="Save package" class="block border border-gray-600 py-2 px-6">
+                    <form
+                        method="post"
+                        action="{{ route('app.packages.delete', [$package]) }}"
+                        onsubmit="return confirm('Do you really want to delete this package? Associated data like ratings and reviews will be deleted as well.')"
+                    >
+                        @method('DELETE')
+                        @csrf
+                        <input type="submit" value="Delete Package" class="block border bg-red-300 border-red-700 py-2 px-6">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
