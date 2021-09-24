@@ -326,18 +326,18 @@ class PackageCrudTest extends TestCase
 
         Storage::fake();
 
-        $user = User::factory()->create();
-        $collaborator = Collaborator::factory()->create();
-        $user->collaborators()->save($collaborator);
+        $authorUser = User::factory()->create();
+        $authorCollaborator = Collaborator::factory()->create();
+        $authorUser->collaborators()->save($authorCollaborator);
         $package = Package::factory()->create([
-            'author_id' => $collaborator->id,
+            'author_id' => $authorCollaborator->id,
         ]);
 
         $tag = Tag::factory()->create();
         $package->tags()->save($tag);
 
         $screenshot = Screenshot::factory()->create([
-            'uploader_id' => $package->author->user->id,
+            'uploader_id' => $authorUser->id,
             'path' => File::create('screenshot.jpg')->store('screenshots'),
             'package_id' => $package,
         ]);
@@ -354,7 +354,7 @@ class PackageCrudTest extends TestCase
 
         $favorite = $fanOfPackage->favoritePackage($package->id);
 
-        $this->actingAs($user)
+        $this->actingAs($authorUser)
             ->delete(route('app.packages.delete', $package))
             ->assertRedirect(route('app.packages.index'))
             ->assertSessionHas('status');
@@ -367,15 +367,36 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    function collaborators_can_delete_their_packages()
+    public function collaborators_can_delete_their_packages()
     {
-        $this->markTestIncomplete();
+        $this->withoutEvents();
+
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
+        $user->collaborators()->save($collaborator);
+
+        $package = Package::factory()->create();
+        $package->contributors()->sync($collaborator);
+
+        $this->actingAs($user)
+            ->delete(route('app.packages.delete', $package))
+            ->assertRedirect(route('app.packages.index'))
+            ->assertSessionHas('status');
+
+        $this->assertDeleted($package);
     }
 
     /** @test */
     public function users_that_are_not_a_packages_author_cannot_delete_it()
     {
-        $this->markTestIncomplete();
+        $user = User::factory()->create();
+        $package = Package::factory()->create();
+
+        $this->actingAs($user)
+            ->delete(route('app.packages.delete', $package))
+            ->assertStatus(403);
+
+        $this->assertModelExists($package);
     }
 
     private function postFromPackage($package)
