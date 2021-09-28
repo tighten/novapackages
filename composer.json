@@ -30,7 +30,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "laravelium/sitemap": "^8.0",
-        "livewire/livewire": "^2.5",
+        "livewire/livewire": "^2.6",
         "php-http/guzzle7-adapter": "^1.0",
         "predis/predis": "^1.1",
         "spatie/laravel-feed": "^3.2",
