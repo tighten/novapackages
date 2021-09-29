@@ -35,6 +35,7 @@ class PackageDetailResource extends PackageResource
             'current_user_rating' => $this->userRating($package),
             'current_user_review' => $this->userReview($package),
             'current_user_owns' => $this->userOwns($package),
+            'total_number_of_ratings' => $package->ratings->count(),
             'rating_counts' => [
                 ['number' => 5, 'count' => $package->countStarRatings(5)],
                 ['number' => 4, 'count' => $package->countStarRatings(4)],

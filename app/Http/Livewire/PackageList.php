@@ -6,7 +6,6 @@ use Algolia\AlgoliaSearch\SearchIndex;
 use App\CacheKeys;
 use App\Package;
 use App\Tag;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
