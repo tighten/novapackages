@@ -59,6 +59,8 @@ class PackageDetailResource extends PackageResource
             'tags' => TagResource::from($package->tags),
             'is_favorite' => $this->isFavorite($package),
             'favorites_count' => $this->favoritesCount($package),
+            'is_self_authored' => $this->isSelfAuthored($package),
+            'is_self_contributed' => $this->isSelfContributed($package),
         ]);
     }
 
@@ -117,6 +119,22 @@ class PackageDetailResource extends PackageResource
 
     private function userReview($package)
     {
-        return $package->reviews->where('user_id', auth()->id());
+        return $package->reviews->where('user_id', auth()->id())->first();
+    }
+
+    private function isSelfAuthored($package)
+    {
+        if (! auth()->check()) {
+            return false;
+        }
+
+        return $package->author->user_id === auth()->id();
+    }
+
+    private function isSelfContributed($package)
+    {
+        return $package->contributors->contains(function ($contributor) {
+            return $contributor->user_id === auth()->id();
+        });
     }
 }

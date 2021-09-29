@@ -2,18 +2,25 @@
     id="top"
     class="container mx-auto flex flex-col items-center mb-8 px-2"
 >
-    {{--<div class="w-full">--}}
-    {{--    <button--}}
-    {{--        type="button"--}}
-    {{--        class="self-start text-indigo-600 font-bold text-sm uppercase no-underline inline-block text-center hover:text-indigo-900 cursor-pointer"--}}
-    {{--    >--}}
-    {{--        &#8592; Back--}}
-    {{--    </button>--}}
-    {{--</div>--}}
+    <div class="w-full">
+        @if (url()->previous() !== url()->current())
+            <a
+                href="{{ url()->previous() }}"
+                class="self-start text-indigo-600 font-bold text-sm uppercase no-underline inline-block text-center hover:text-indigo-900 cursor-pointer"
+            >&#8592; Back</a>
+        @else
+            <a
+                href="{{ route('home') }}"
+                class="self-start text-indigo-600 font-bold text-sm uppercase no-underline inline-block text-center hover:text-indigo-900 cursor-pointer"
+            >&#8592; Home</a>
+        @endif
+    </div>
     <div class="w-full flex flex-col md:flex-row items-center justify-between pt-2 md:pt-6 md:pb-8">
         <div class="flex flex-row items-center mb-4 sm:mb-0">
-            {{--<title-icon :title="package.name" size="large"></title-icon>--}}
-
+            @include('livewire.partials.title-icon', [
+                'size' => 'large',
+                'title' => $package['name'],
+            ])
             <h1 class="inline text-gray-800 text-2xl md:text-4xl font-bold">
                 {{ $package['name'] }}
                 @if ($package['is_disabled'])
@@ -21,107 +28,112 @@
                 @endif
             </h1>
         </div>
-        {{--<div--}}
-        {{--    class="relative"--}}
-        {{--     --}}{{--v-click-outside="closeInstallBox"--}}
-        {{-->--}}
-        {{--    <a--}}
-        {{--        class="block cursor-pointer md:inline-block w-full md:w-auto py-4 px-4 sm:px-6 bg-indigo-600 text-white md:rounded-l-full md:rounded-r-full no-underline hover:bg-indigo-700 flex flex-row justify-center items-center content-center"--}}
-        {{--        --}}{{--@click="toggleInstallBox()"--}}
-        {{--    >--}}
-        {{--        <svg--}}
-        {{--            class="mr-4 inline-block fill-current w-4"--}}
-        {{--            xmlns="http://www.w3.org/2000/svg"--}}
-        {{--            viewBox="0 0 20 20"--}}
-        {{--        >--}}
-        {{--            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>--}}
-        {{--        </svg>--}}
-        {{--        <span class="mr-4 inline-block leading-none inline-block uppercase">Install</span>--}}
-        {{--        <svg--}}
-        {{--            --}}{{--v-if="installBoxOpen"--}}
-        {{--            class="inline-block fill-current w-4 h-4"--}}
-        {{--            xmlns="http://www.w3.org/2000/svg"--}}
-        {{--            viewBox="0 0 20 20"--}}
-        {{--        >--}}
-        {{--            <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z"/>--}}
-        {{--        </svg>--}}
-        {{--        <svg--}}
-        {{--            --}}{{--v-else--}}
-        {{--            class="inline-block fill-current w-4"--}}
-        {{--            xmlns="http://www.w3.org/2000/svg"--}}
-        {{--            viewBox="0 0 20 20"--}}
-        {{--        >--}}
-        {{--            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>--}}
-        {{--        </svg>--}}
-        {{--    </a>--}}
-
-        {{--    <div--}}
-        {{--        class="absolute shadow rounded bg-white right-0"--}}
-        {{--        --}}{{--:class="installBoxOpen ? 'visible' : 'hidden'"--}}
-        {{--        style="top: calc(100% + 1rem); min-width: 380px;"--}}
-        {{--    >--}}
-        {{--        <div class="flex flex-row w-full p-6 px-8 items-center text-gray-500">--}}
-        {{--            <input--}}
-        {{--                id="packagist-install"--}}
-        {{--                type="text"--}}
-        {{--                class="rounded flex-grow block border py-2 px-2 mr-4 font-mono text-xs text-black outline-none"--}}
-        {{--                --}}{{--:class="copyWasSuccessful ? 'border-green border-2' : ''"--}}
-        {{--                --}}{{--:value="composerString"--}}
-        {{--                value="composer require {{ $package['composer_name'] }}"--}}
-        {{--            />--}}
-        {{--            <svg--}}
-        {{--                --}}{{--v-if="copyWasSuccessful"--}}
-        {{--                class="fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor"--}}
-        {{--                xmlns="http://www.w3.org/2000/svg"--}}
-        {{--                viewBox="0 0 20 20"--}}
-        {{--            >--}}
-        {{--                <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/>--}}
-        {{--            </svg>--}}
-        {{--            <svg--}}
-        {{--                --}}{{--v-else--}}
-        {{--                id="copy-button"--}}
-        {{--                class="fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor"--}}
-        {{--                xmlns="http://www.w3.org/2000/svg"--}}
-        {{--                viewBox="0 0 20 20"--}}
-        {{--                data-clipboard-target="#packagist-install"--}}
-        {{--                --}}{{--@click="copySuccessful"--}}
-        {{--            >--}}
-        {{--                <path d="M6 6V2c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2h4zm2 0h4a2 2 0 0 1 2 2v4h4V2H8v4zM2 8v10h10V8H2z"/>--}}
-        {{--            </svg>--}}
-        {{--        </div>--}}
-        {{--        <div--}}
-        {{--            --}}{{--v-if="package.composer_data.package"--}}
-        {{--            class="border border-t border-gray-300er flex flex-row flex-no-wrap"--}}
-        {{--        >--}}
-        {{--            <a--}}
-        {{--                href="{{ $package['composer_data']['package']['repository'] }}"--}}
-        {{--                class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 border-r border-gray-300 hover:bg-indigo-100"--}}
-        {{--            >--}}
-        {{--                GitHub--}}
-        {{--            </a>--}}
-        {{--            @if ($package['composer_latest'] && $package['composer_latest']['dist'])--}}
-        {{--                <a--}}
-        {{--                    href="{{ $package['composer_latest']['dist']['url'] }}"--}}
-        {{--                    class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 hover:bg-indigo-100"--}}
-        {{--                >--}}
-        {{--                    Download Zip--}}
-        {{--                </a>--}}
-        {{--            @endif--}}
-        {{--        </div>--}}
-        {{--    </div>--}}
-        {{--</div>--}}
+        <div
+            class="relative"
+            x-data="{ open: false }"
+            x-on:click.away="open = false"
+        >
+            <a
+                class="block cursor-pointer md:inline-block w-full md:w-auto py-4 px-4 sm:px-6 bg-indigo-600 text-white md:rounded-l-full md:rounded-r-full no-underline hover:bg-indigo-700 flex flex-row justify-center items-center content-center"
+                x-on:click="open = ! open"
+            >
+                <svg
+                    class="mr-4 inline-block fill-current w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                >
+                    <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
+                </svg>
+                <span class="mr-4 inline-block leading-none inline-block uppercase">Install</span>
+                <svg
+                    x-show="open"
+                    class="inline-block fill-current w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                >
+                    <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z"/>
+                </svg>
+                <svg
+                    x-show="! open"
+                    class="inline-block fill-current w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                </svg>
+            </a>
+            <div
+                class="absolute shadow rounded bg-white right-0"
+                x-show="open"
+                style="top: calc(100% + 1rem); min-width: 380px;"
+            >
+                <div
+                    class="flex flex-row w-full p-6 px-8 items-center text-gray-500"
+                    x-data="{ copySuccessful: false }"
+                >
+                    <input
+                        id="packagist-install"
+                        type="text"
+                        class="rounded flex-grow block border py-2 px-2 mr-4 font-mono text-xs text-black outline-none"
+                        x-bind:class="{ 'border-green-500 border-2': copySuccessful }"
+                        value="composer require {{ $package['composer_name'] }}"
+                    />
+                    <svg
+                        x-show="copySuccessful"
+                        class="fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/>
+                    </svg>
+                    <svg
+                        x-show="! copySuccessful"
+                        id="copy-button"
+                        class="fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        data-clipboard-target="#packagist-install"
+                        x-on:click="copySuccessful = true; setTimeout(() => {copySuccessful = false;}, 3000)"
+                    >
+                        <path d="M6 6V2c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2h4zm2 0h4a2 2 0 0 1 2 2v4h4V2H8v4zM2 8v10h10V8H2z"/>
+                    </svg>
+                </div>
+                @if ($package['composer_data']['package'])
+                    <div
+                        class="border border-t border-gray-300er flex flex-row flex-no-wrap"
+                    >
+                        <a
+                            href="{{ $package['composer_data']['package']['repository'] }}"
+                            class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 border-r border-gray-300 hover:bg-indigo-100"
+                        >
+                            GitHub
+                        </a>
+                        @if ($package['composer_latest'] && $package['composer_latest']['dist'])
+                            <a
+                                href="{{ $package['composer_latest']['dist']['url'] }}"
+                                class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 hover:bg-indigo-100"
+                            >
+                                Download Zip
+                            </a>
+                        @endif
+                    </div>
+                @endif
+            </div>
+        </div>
     </div>
     <div class="w-full flex flex-col md:flex-row">
         <div
-            class="w-full md:w-3/4 bg-white shadow"
-            {{--:class="[package.is_disabled ? 'border-red' : 'border-indigo']"--}}
+            @class([
+                'w-full md:w-3/4 bg-white shadow border',
+                'border-red-500' => $package['is_disabled'],
+            ])
         >
             {{--<slot/>--}}
         </div>
         <div class="w-full md:w-1/4 bg-white md:ml-4 md:mt-12 shadow text-sm border-t sm:border-t-0">
             @if ($package['current_user_owns'])
                 <a
-                    {{--href="{{ route('app.packages.edit', $package) }}"--}}
+                    href="{{ route('app.packages.edit', $package['id']) }}"
                     class="block bg-indigo-600 hover:bg-indigo-700 text-white no-underline font-bold p-4 md:p-8 py-4 border-gray-300 border-b"
                 >
                     Edit this package
@@ -137,7 +149,7 @@
                         <tr>
                             <td class="font-bold py-2">Last updated</td>
                             <td class="py-2">
-{{--                                {{ \Illuminate\Support\Facades\Date::parse($package['composer_latest']['time'])->diffForHumans() }}--}}
+                                {{ \Illuminate\Support\Facades\Date::parse($package['composer_latest']['time'])->diffForHumans() }}
                             </td>
                         </tr>
                         <tr>
@@ -172,7 +184,7 @@
                     @endif
                 </table>
                 @if (! $package['composer_latest'])
-                    <div>
+                    <div x-data="{ packagistRefreshRequested = false }">
                         @if ($package['composer_data'])
                             <p class="mb-2">
                                 This package is listed on <a href="https://packagist.org/packages/{{ $package['composer_name'] }}.json">the Packagist API</a>, but has no stable tags.
@@ -232,16 +244,16 @@
             <div class="p-4 pb-0 md:p-6 md:pb-2 border-gray-300 border-b">
                 <h3 class="uppercase text-gray-600 text-sm font-bold">Favorites</h3>
                 <div class="block py-4">
-{{--                    {{ favoritesCountString }} favorited--}}
+                    {{ $package['favorites_count'] }} {{ Str::plural('user', $package['favorites_count']) }} favorited
                 </div>
-{{--                @auth--}}
-{{--                    <a--}}
-{{--                        --}}{{--@click="toggleFavorite"--}}
-{{--                        class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"--}}
-{{--                    >--}}
-{{--                        {{ favoritePackageLinkText }}--}}
-{{--                    </a>--}}
-{{--                @endauth--}}
+                @auth
+                    <a
+                        {{--@click="toggleFavorite"--}}
+                        class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"
+                    >
+                        {{ $package['is_favorite'] ? 'Remove Favorite' : 'Add to Favorites' }}
+                    </a>
+                @endauth
             </div>
             <div
                 {{--v-if="!creatingReview" --}}
@@ -303,19 +315,16 @@
                 <div class="text-right text-sm text-gray-600 mt-2 mb-2">
                     {{ $package['total_number_of_ratings'] }} ratings
                 </div>
-                {{--<div --}}
-                {{--    --}}{{--v-if="auth && !package.current_user_review.length && !isSelfAuthored && !isSelfContributed"--}}
-                {{-->--}}
-                {{--    <a--}}
-                {{--        class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"--}}
-                {{--        --}}{{--:href="route('reviews.create', {--}}
-                {{--        --}}{{--        namespace: package.packagist_namespace,--}}
-                {{--        --}}{{--        name: package.packagist_name,--}}
-                {{--        --}}{{--    })"--}}
-                {{--    >--}}
-                {{--        Review This Package--}}
-                {{--    </a>--}}
-                {{--</div>--}}
+                @if (auth()->check() && ! $package['current_user_review'] && ! $package['is_self_authored'] && ! $package['is_self_contributed'])
+                    <div>
+                        <a
+                            class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"
+                            href="{{ route('reviews.create', [$package['packagist_namespace'], $package['packagist_name']]) }}"
+                        >
+                            Review This Package
+                        </a>
+                    </div>
+                @endif
             </div>
             <div class="p-4 md:p-6 border-gray-300 border-b">
                 <h3 class="uppercase text-gray-600 text-sm font-bold">Author</h3>
@@ -326,49 +335,43 @@
                         alt="{{ $package['author']['name'] }}"
                     />
                     <a
-                        {{--:href="--}}
-                        {{--        '/collaborators/' +--}}
-                        {{--            package.author.github_username--}}
-                        {{--    "--}}
+                        href="{{ route('collaborators.show', $package['author']['github_username']) }}"
                         class="text-indigo-600 font-bold no-underline uppercase text-sm hover:text-indigo-700"
                     >
                         {{ $package['author']['name'] }}
                     </a>
+
                 </div>
             </div>
             @if ($package['contributors'])
                 <div class="p-4 pb-2 md:p-6 border-gray-300 border-b">
                     <h3 class="uppercase text-gray-600 text-sm font-bold">Contributors</h3>
-                    {{--<div--}}
-                    {{--    v-for="contributor in package.contributors"--}}
-                    {{--    class="flex text-sm pt-4 items-center"--}}
-                    {{-->--}}
-                    {{--    <title-icon--}}
-                    {{--        :title="contributor.name"--}}
-                    {{--        size="medium"--}}
-                    {{--        :image="contributor.avatar_url"--}}
-                    {{--    ></title-icon>--}}
-
-                    {{--    <a--}}
-                    {{--        class="text-indigo-600 font-bold no-underline uppercase text-sm hover:text-indigo-700"--}}
-                    {{--    >--}}
-                    {{--        {{ contributor.name }}--}}
-                    {{--    </a>--}}
-                    {{--</div>--}}
+                    @foreach ($package['contributors'] as $contributor)
+                        <div class="flex text-sm pt-4 items-center">
+                            <img
+                                src="{{ $contributor['avatar_url'] }}"
+                                class="rounded-full h-10 w-10 mr-4"
+                                alt="{{ $contributor['name'] }}"
+                            />
+                            <a class="text-indigo-600 font-bold no-underline uppercase text-sm hover:text-indigo-700">
+                                {{ $contributor['name'] }}
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             @endif
             <div class="p-4 pb-0 md:p-6 md:pb-2 border-gray-300 border-b">
                 <h3 class="uppercase text-gray-600 text-sm font-bold">Tags</h3>
-                {{--<div class="block py-4">--}}
-                {{--    <button--}}
-                {{--        class="bg-indigo-200 text-indigo-600 rounded-l-full rounded-r-full px-4 py-2 mr-2 mb-2 inline-block font-bold"--}}
-                {{--        @click="viewTag(tag)"--}}
-                {{--        v-for="tag in package.tags"--}}
-                {{--        :key="tag.slug"--}}
-                {{--    >--}}
-                {{--        {{ tag.name }}--}}
-                {{--    </button>--}}
-                {{--</div>--}}
+                <div class="block py-4">
+                    @foreach ($package['tags'] as $tag)
+                        <a
+                            href="{{ $tag['url'] }}"
+                            class="bg-indigo-200 text-indigo-600 rounded-l-full rounded-r-full px-4 py-2 mr-2 mb-2 inline-block font-bold"
+                        >
+                            {{ $tag['name'] }}
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
