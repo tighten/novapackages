@@ -32,7 +32,7 @@
 }
 
 [x-cloak] {
-    @apply .hidden;
+    @apply .hidden !important;
 }
 
 .text-inherit {

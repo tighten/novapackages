@@ -30,7 +30,7 @@
         </div>
         <div
             class="relative"
-            x-data="{ open: false }"
+            x-data="{ open: @entangle('showInstallDropdown') }"
             x-on:click.away="open = false"
         >
             <a
@@ -47,6 +47,7 @@
                 <span class="mr-4 inline-block leading-none inline-block uppercase">Install</span>
                 <svg
                     x-show="open"
+                    x-cloak
                     class="inline-block fill-current w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -63,8 +64,9 @@
                 </svg>
             </a>
             <div
-                class="absolute shadow rounded bg-white right-0"
                 x-show="open"
+                x-cloak
+                class="absolute shadow rounded bg-white right-0"
                 style="top: calc(100% + 1rem); min-width: 380px;"
             >
                 <div
@@ -184,7 +186,7 @@
                     @endif
                 </table>
                 @if (! $package['composer_latest'])
-                    <div x-data="{ packagistRefreshRequested = false }">
+                    <div x-data="{ packagistRefreshRequested: @entangle('packagistRefreshRequested') }">
                         @if ($package['composer_data'])
                             <p class="mb-2">
                                 This package is listed on <a href="https://packagist.org/packages/{{ $package['composer_name'] }}.json">the Packagist API</a>, but has no stable tags.
@@ -197,37 +199,37 @@
                         <p class="mb-2">
                             Please note that the Packagist cache is pretty long, so some times you just need to check back in an hour.
                         </p>
-                        <a
-                            href="#"
-                            {{--@click.prevent="requestPackagistRefresh"--}}
-                            {{--v-if="package.current_user_owns && !refreshRequested"--}}
-                            class="block mt-8 mb-2"
-                        >
-                            Request a cache refresh from Packagist (the cache lasts 5 minutes)
-                        </a>
-                        {{--<span--}}
-                        {{--    --}}{{--v-if="refreshRequested" --}}
-                        {{--    class="block mt-8 mb-2"--}}
-                        {{-->--}}
-                        {{--    Refresh requested--}}
-                        {{--</span>--}}
+                        @if ($package['current_user_owns'])
+                            <button
+                                x-show="! packagistRefreshRequested"
+                                wire:click="requestPackagistRefresh"
+                                class="block mt-8 mb-2 text-left"
+                            >
+                                Request a cache refresh from Packagist (the cache lasts 5 minutes)
+                            </button>
+                        @endif
+                        <span x-show="packagistRefreshRequested" x-cloak class="block mt-8 mb-2">
+                            Refresh requested
+                        </span>
                     </div>
                 @endif
-                <div>
-                    <a
-                        href="#"
-                        {{--@click.prevent="requestRepositoryRefresh"--}}
-                        {{--v-if="package.current_user_owns && !repositoryRefreshRequested"--}}
+                <div x-data="{ repositoryRefreshRequested: @entangle('repositoryRefreshRequested') }">
+                    @if ($package['current_user_owns'])
+                        <button
+                            x-show="! repositoryRefreshRequested"
+                            wire:click="requestRepositoryRefresh"
+                            class="block mt-8 mb-2 text-left"
+                        >
+                            Request a refresh of the readme from your package registry or VCS provider.
+                        </button>
+                    @endif
+                    <span
+                        x-show="repositoryRefreshRequested"
+                        x-cloak
                         class="block mt-8 mb-2"
                     >
-                        Request a refresh of the readme from your package registry or VCS provider.
-                    </a>
-                    {{--<span--}}
-                    {{--    --}}{{--v-if="repositoryRefreshRequested"--}}
-                    {{--    class="block mt-8 mb-2"--}}
-                    {{-->--}}
-                    {{--    Refresh requested--}}
-                    {{--</span>--}}
+                        Refresh requested
+                    </span>
                 </div>
             </div>
             @if ($package['url'])
@@ -247,12 +249,12 @@
                     {{ $package['favorites_count'] }} {{ Str::plural('user', $package['favorites_count']) }} favorited
                 </div>
                 @auth
-                    <a
-                        {{--@click="toggleFavorite"--}}
+                    <button
+                        wire:click="favorite"
                         class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"
                     >
                         {{ $package['is_favorite'] ? 'Remove Favorite' : 'Add to Favorites' }}
-                    </a>
+                    </button>
                 @endauth
             </div>
             <div
@@ -260,60 +262,53 @@
                 class="p-4 md:p-6 pb-4 border-gray-300 border-b"
             >
                 <h3 class="uppercase text-gray-600 text-sm font-bold">Rating</h3>
-                {{--<div--}}
-                {{--    class="flex"--}}
-                {{--    --}}{{--v-if="!rated"--}}
-                {{-->--}}
-                {{--    <div class="mt-2 mb-4 text-5xl w-1/2">--}}
-                {{--        @if ($package['average_rating'])--}}
-                {{--            {{ $package['average_rating'] }}--}}
-                {{--        @else--}}
-                {{--            None yet--}}
-                {{--        @endif--}}
-                {{--    </div>--}}
 
-                {{--    <div class="w-1/2 mb-6 text-gray-500 self-end">--}}
-                {{--        (out of 5)--}}
-                {{--    </div>--}}
-                {{--</div>--}}
+{{--                @if ($package['current_user_rating'] < 0)--}}
+{{--                    <div--}}
+{{--                        class="flex"--}}
+{{--                    >--}}
+{{--                        <div class="mt-2 mb-4 text-5xl w-1/2">--}}
+{{--                            @if ($package['average_rating'])--}}
+{{--                                {{ $package['average_rating'] }}--}}
+{{--                            @else--}}
+{{--                                None yet--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                        <div class="w-1/2 mb-6 text-gray-500 self-end">(out of 5)</div>--}}
+{{--                    </div>--}}
+{{--                @else--}}
+{{--                    <div class="mt-2 mb-4">Thanks for rating this package!</div>--}}
+{{--                @endif--}}
 
-                {{--<div --}}
-                {{--    class="mt-2 mb-4" --}}
-                {{--    --}}{{--v-else--}}
-                {{-->--}}
-                {{--    Thanks for rating this package!--}}
-                {{--</div>--}}
+{{--                @auth--}}
+{{--                    @if (! $package['is_self_authored'] && ! $package['is_self_contributed'])--}}
+{{--                        <div class="mb-4 flex">--}}
+{{--                            <div class="w-1/3 pt-1 text-gray-600">Tap to rate:</div>--}}
 
-                {{--<div --}}
-                {{--    v-if="auth && !isSelfAuthored && !isSelfContributed" --}}
-                {{--    class="mb-4 flex"--}}
-                {{-->--}}
-                {{--    <div class="w-1/3 pt-1 text-gray-600">--}}
-                {{--        Tap to rate:--}}
-                {{--    </div>--}}
+{{--                            --}}{{--<div class="w-2/3 pl-2">--}}
+{{--                            --}}{{--    <star-rating--}}
+{{--                            --}}{{--        v-model="package.current_user_rating"--}}
+{{--                            --}}{{--        :rating="package.current_user_rating"--}}
+{{--                            --}}{{--        :read-only="!auth"--}}
+{{--                            --}}{{--        :star-size="20"--}}
+{{--                            --}}{{--        :show-rating="false"--}}
+{{--                            --}}{{--        @rating-selected="setRating"--}}
+{{--                            --}}{{--    ></star-rating>--}}
+{{--                            --}}{{--</div>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                @endauth--}}
 
-                {{--    <div class="w-2/3 pl-2">--}}
-                {{--        <star-rating--}}
-                {{--            v-model="package.current_user_rating"--}}
-                {{--            :rating="package.current_user_rating"--}}
-                {{--            :read-only="!auth"--}}
-                {{--            :star-size="20"--}}
-                {{--            :show-rating="false"--}}
-                {{--            @rating-selected="setRating"--}}
-                {{--        ></star-rating>--}}
-                {{--    </div>--}}
-                {{--</div>--}}
-
-                {{--<rating-count-bar--}}
-                {{--    :totalCount="totalRatings"--}}
-                {{--    :stars="rating_count.number"--}}
-                {{--    :count="rating_count.count"--}}
-                {{--    :key="package.id + 'rate' + rating_count.number"--}}
-                {{--    v-for="rating_count in package.rating_counts"--}}
-                {{--/>--}}
+{{--                @foreach ($package['rating_counts'] as $ratingCount)--}}
+{{--                    <rating-count-bar--}}
+{{--                        :total-count="{{ $package['rating_count'] }}"--}}
+{{--                        :stars="{{ $ratingCount['number'] }}"--}}
+{{--                        :count="{{ $ratingCount['count'] }}"--}}
+{{--                    />--}}
+{{--                @endforeach--}}
 
                 <div class="text-right text-sm text-gray-600 mt-2 mb-2">
-                    {{ $package['total_number_of_ratings'] }} ratings
+                    {{ $package['rating_count'] }} ratings
                 </div>
                 @if (auth()->check() && ! $package['current_user_review'] && ! $package['is_self_authored'] && ! $package['is_self_contributed'])
                     <div>
