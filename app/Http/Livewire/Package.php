@@ -12,8 +12,6 @@ class Package extends Component
 {
     public $package;
 
-    // @todo: Use entangle for the following and to hide dropdown on load
-    // https://laravel-livewire.com/docs/2.x/alpine-js
     public $packagistRefreshRequested = false;
 
     public $repositoryRefreshRequested = false;
@@ -49,5 +47,10 @@ class Package extends Component
         auth()->user()->favoritePackage($this->package['id']);
         $this->package['is_favorite'] = true;
         $this->package['favorites_count']++;
+    }
+
+    public function rate($rating)
+    {
+        // todo
     }
 }

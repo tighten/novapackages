@@ -257,56 +257,71 @@
                     </button>
                 @endauth
             </div>
-            <div
-                {{--v-if="!creatingReview" --}}
-                class="p-4 md:p-6 pb-4 border-gray-300 border-b"
-            >
+            <div class="p-4 md:p-6 pb-4 border-gray-300 border-b">
                 <h3 class="uppercase text-gray-600 text-sm font-bold">Rating</h3>
+                <div class="flex">
+                    <div class="mt-2 mb-4 text-5xl w-1/2">
+                        @if ($package['average_rating'])
+                            {{ $package['average_rating'] }}
+                        @else
+                            None yet
+                        @endif
+                    </div>
+                    <div class="w-1/2 mb-6 text-gray-500 self-end">(out of 5)</div>
+                </div>
+                @auth
+                    @if (! $package['is_self_authored'] && ! $package['is_self_contributed'])
+                        <div class="mb-4 flex items-center">
+                            <div class="w-1/3 text-gray-600">Tap to rate:</div>
+                            <div class="flex">
+                                @foreach (range(1, 5) as $point)
+                                    <svg
+                                        wire:click="rate({{ $point }})"
+                                        @class([
+                                            'inline-block fill-current h-5 w-5 cursor-pointer',
+                                            'text-yellow-500' => $package['current_user_rating'] >= $point,
+                                            'text-gray-400' => $package['current_user_rating'] <= $point,
+                                        ])
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                                            <g>
+                                                <polygon id="Star-3" points="10 15 4.12214748 18.0901699 5.24471742 11.545085 0.489434837 6.90983006 7.06107374 5.95491503 10 0 12.9389263 5.95491503 19.5105652 6.90983006 14.7552826 11.545085 15.8778525 18.0901699"></polygon>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                @endauth
+                @foreach ($package['rating_counts'] as $ratingCount)
+                    <div class="flex my-1">
+                        <div class="w-1/3 text-xs pr-1 text-gray-500 text-right">
+                            @foreach (range(1, $ratingCount['number']) as $number)
+                                <svg
+                                    class="inline-block text-gray-400 fill-current h-2 w-2 cursor-pointer"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                                        <g>
+                                            <polygon id="Star-3" points="10 15 4.12214748 18.0901699 5.24471742 11.545085 0.489434837 6.90983006 7.06107374 5.95491503 10 0 12.9389263 5.95491503 19.5105652 6.90983006 14.7552826 11.545085 15.8778525 18.0901699"></polygon>
+                                        </g>
+                                    </g>
+                                </svg>
 
-{{--                @if ($package['current_user_rating'] < 0)--}}
-{{--                    <div--}}
-{{--                        class="flex"--}}
-{{--                    >--}}
-{{--                        <div class="mt-2 mb-4 text-5xl w-1/2">--}}
-{{--                            @if ($package['average_rating'])--}}
-{{--                                {{ $package['average_rating'] }}--}}
-{{--                            @else--}}
-{{--                                None yet--}}
-{{--                            @endif--}}
-{{--                        </div>--}}
-{{--                        <div class="w-1/2 mb-6 text-gray-500 self-end">(out of 5)</div>--}}
-{{--                    </div>--}}
-{{--                @else--}}
-{{--                    <div class="mt-2 mb-4">Thanks for rating this package!</div>--}}
-{{--                @endif--}}
-
-{{--                @auth--}}
-{{--                    @if (! $package['is_self_authored'] && ! $package['is_self_contributed'])--}}
-{{--                        <div class="mb-4 flex">--}}
-{{--                            <div class="w-1/3 pt-1 text-gray-600">Tap to rate:</div>--}}
-
-{{--                            --}}{{--<div class="w-2/3 pl-2">--}}
-{{--                            --}}{{--    <star-rating--}}
-{{--                            --}}{{--        v-model="package.current_user_rating"--}}
-{{--                            --}}{{--        :rating="package.current_user_rating"--}}
-{{--                            --}}{{--        :read-only="!auth"--}}
-{{--                            --}}{{--        :star-size="20"--}}
-{{--                            --}}{{--        :show-rating="false"--}}
-{{--                            --}}{{--        @rating-selected="setRating"--}}
-{{--                            --}}{{--    ></star-rating>--}}
-{{--                            --}}{{--</div>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-{{--                @endauth--}}
-
-{{--                @foreach ($package['rating_counts'] as $ratingCount)--}}
-{{--                    <rating-count-bar--}}
-{{--                        :total-count="{{ $package['rating_count'] }}"--}}
-{{--                        :stars="{{ $ratingCount['number'] }}"--}}
-{{--                        :count="{{ $ratingCount['count'] }}"--}}
-{{--                    />--}}
-{{--                @endforeach--}}
-
+                            @endforeach
+                        </div>
+                        <div class="w-2/3 w-full bg-gray-200 h-2 mt-1">
+                            <div class="bg-yellow-500 h-2" style="width: {{ $ratingCount['count'] / $package['rating_count'] * 100 }}%">
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
                 <div class="text-right text-sm text-gray-600 mt-2 mb-2">
                     {{ $package['rating_count'] }} ratings
                 </div>
