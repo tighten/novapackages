@@ -130,7 +130,7 @@
                 'border-red-500' => $package['is_disabled'],
             ])
         >
-            {{--<slot/>--}}
+            <livewire:package-details :package="$package" :screenshots="$screenshots" />
         </div>
         <div class="w-full md:w-1/4 bg-white md:ml-4 md:mt-12 shadow text-sm border-t sm:border-t-0">
             @if ($package['current_user_owns'])
@@ -317,7 +317,7 @@
                             @endforeach
                         </div>
                         <div class="w-2/3 w-full bg-gray-200 h-2 mt-1">
-                            <div class="bg-yellow-500 h-2" style="width: {{ $ratingCount['count'] / $package['rating_count'] * 100 }}%">
+                            <div class="bg-yellow-500 h-2" style="width: {{ $package['total_number_of_ratings'] === 0 ? 0 : $ratingCount['count'] / $package['rating_count'] * 100 }}%">
                             </div>
                         </div>
                     </div>

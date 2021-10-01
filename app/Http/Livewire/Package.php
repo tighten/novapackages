@@ -16,6 +16,8 @@ class Package extends Component
 
     public $repositoryRefreshRequested = false;
 
+    public $screenshots;
+
     public $showInstallDropdown = false;
 
     public function render()

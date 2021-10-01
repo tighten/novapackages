@@ -17,7 +17,7 @@
 @section('content')
     <x-status class="container mx-auto mb-4"/>
 
-    <livewire:package :package="$package" />
+    <livewire:package :package="$package" :screenshots="$screenshots"/>
 
     <package-detail-frame
         :auth="{{ auth()->check() ? 'true' : 'false' }}"
