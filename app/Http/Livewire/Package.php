@@ -20,6 +20,11 @@ class Package extends Component
 
     public $showInstallDropdown = false;
 
+    protected $listeners = [
+        'packageDisabled',
+        'packageEnabled',
+    ];
+
     public function render()
     {
         return view('livewire.package');
@@ -54,5 +59,15 @@ class Package extends Component
     public function rate($rating)
     {
         // todo
+    }
+
+    public function packageDisabled()
+    {
+        $this->package['is_disabled'] = true;
+    }
+
+    public function packageEnabled()
+    {
+        $this->package['is_disabled'] = false;
     }
 }

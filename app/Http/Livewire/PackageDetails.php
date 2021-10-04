@@ -21,6 +21,9 @@ class PackageDetails extends Component
         tap(EloquentPackage::find($this->package['id']), function ($package) {
             $package->is_disabled = true;
             $package->save();
+
+            $this->package['is_disabled'] = true;
+            $this->emit('packageDisabled');
         });
     }
 
@@ -29,6 +32,9 @@ class PackageDetails extends Component
         tap(EloquentPackage::withoutGlobalScope('notDisabled')->find($this->package['id']), function ($package) {
             $package->is_disabled = false;
             $package->save();
+
+            $this->package['is_disabled'] = false;
+            $this->emit('packageEnabled');
         });
     }
 }

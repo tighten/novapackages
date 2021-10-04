@@ -89,65 +89,66 @@
             </div>
         </div>
     @endif
+    <div class="m-4 md:m-10 break-words">
+        @if ($package['instructions'])
+            <div class="border-b border-gray-300 pb-6">
+                <h2 class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-gray-800">
+                    Installation Instructions
+                </h2>
+                <div class="markdown-body bg-white min-h-full mb-4">
+                    {!! $package['instructions'] !!}
+                </div>
+            </div>
+        @endif
+        <div class="border-b border-gray-300 pb-6">
+            <h2
+                id="readme"
+                class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-gray-800 font-bold mb-4 mt-8"
+            >
+                Readme
+            </h2>
+            <div class="markdown-body bg-white min-h-full">
+                @if ($package['readme'])
+                    {!! $package['readme'] !!}
+                @else
+                    <p>Readme not found. Refer to the project website: <a href="{{ $package['url'] }}">{{ $package['url'] }}</a></p>
+                @endif
+            </div>
+        </div>
+        {{--<div--}}
+        {{--    --}}{{--v-if="screenshots.length" --}}
+        {{--    class="border-b border-gray-300 pb-6"--}}
+        {{-->--}}
+        {{--    <h2--}}
+        {{--        id="screenshots"--}}
+        {{--        class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-2xl text-gray-800 font-bold mb-4 mt-8"--}}
+        {{--    >--}}
+        {{--        Screenshots--}}
+        {{--    </h2>--}}
+        {{--    --}}{{--<package-screenshot-gallery--}}
+        {{--    --}}{{--    :screenshots="screenshots"--}}
+        {{--    --}}{{--/>--}}
+        {{--</div>--}}
 
-    {{--<div class="m-4 md:m-10 break-words">--}}
-    {{--    <div v-if="package.instructions" class="border-b border-gray-300 pb-6">--}}
-    {{--        <h2 class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 font-bold mb-4 text-2xl text-gray-800">--}}
-    {{--            Installation Instructions--}}
-    {{--        </h2>--}}
-
-    {{--        <div--}}
-    {{--            class="markdown-body bg-white min-h-full mb-4"--}}
-    {{--            v-html="package.instructions"--}}
-    {{--        ></div>--}}
-    {{--    </div>--}}
-
-    {{--    <div class="border-b border-gray-300 pb-6">--}}
-    {{--        <h2--}}
-    {{--            id="readme"--}}
-    {{--            class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-gray-800 font-bold mb-4 mt-8"--}}
-    {{--        >--}}
-    {{--            Readme--}}
-    {{--        </h2>--}}
-
-    {{--        <div--}}
-    {{--            v-html="packageReadme"--}}
-    {{--            class="markdown-body bg-white min-h-full"--}}
-    {{--        ></div>--}}
-    {{--    </div>--}}
-
-    {{--    <div v-if="screenshots.length" class="border-b border-gray-300 pb-6">--}}
-    {{--        <h2--}}
-    {{--            id="screenshots"--}}
-    {{--            class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-2xl text-gray-800 font-bold mb-4 mt-8"--}}
-    {{--        >--}}
-    {{--            Screenshots--}}
-    {{--        </h2>--}}
-
-    {{--        <package-screenshot-gallery--}}
-    {{--            :screenshots="screenshots"--}}
-    {{--        />--}}
-    {{--    </div>--}}
-
-    {{--    <div v-if="package.reviews.length" class="border-b border-gray-300 pb-6">--}}
-    {{--        <h2--}}
-    {{--            id="reviews"--}}
-    {{--            class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-gray-800 font-bold mb-4 mt-8"--}}
-    {{--        >--}}
-    {{--            Reviews--}}
-    {{--        </h2>--}}
-
-    {{--        <review-list--}}
-    {{--            :package_id="package.id"--}}
-    {{--            :reviewList="package.reviews"--}}
-    {{--        />--}}
-    {{--    </div>--}}
-
-    {{--    <a--}}
-    {{--        href="#top"--}}
-    {{--        class="mt-8 block text-center text-indigo-600 hover:text-gray-800 font-semibold no-underline"--}}
-    {{--    >--}}
-    {{--        Back to Top--}}
-    {{--    </a>--}}
-    {{--</div>--}}
+        @if (count($package['reviews']))
+            <div class="border-b border-gray-300 pb-6">
+                <h2
+                    id="reviews"
+                    class="border-b-2 border-gray-300 bg-gray-200 -mx-4 pl-4 py-2 pt-3 text-xl md:text-2xl text-gray-800 font-bold mb-4 mt-8"
+                >
+                    Reviews
+                </h2>
+                {{--<review-list--}}
+                {{--    :package_id="package.id"--}}
+                {{--    :reviewList="package.reviews"--}}
+                {{--/>--}}
+            </div>
+        @endif
+        <a
+            href="#top"
+            class="mt-8 block text-center text-indigo-600 hover:text-gray-800 font-semibold no-underline"
+        >
+            Back to Top
+        </a>
+    </div>
 </div>
