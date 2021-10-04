@@ -69,66 +69,24 @@
                     x-cloak
                 >
                     <div class="bg-indigo-600 shadow rounded border overflow-hidden">
-                        <a
-                           {{-- v-if="package.is_disabled"--}}
-                           {{--:href="--}}
-                           {{--     route('app.admin.enable-package', package)--}}
-                           {{-- "--}}
-                           class="no-underline block px-4 py-3 border-b text-white bg-indigo-600 hover:text-white hover:bg-blue"
-                        >
-                            Enable
-                        </a>
-                        <a
-                            {{--v-else--}}
-                           {{--:href="--}}
-                           {{--     route('app.admin.disable-package', package)--}}
-                           {{-- "--}}
-                           class="no-underline block px-4 py-3 border-b text-white bg-indigo-600 hover:text-white hover:bg-blue"
-                        >
-                            Disable
-                        </a>
+                        @if ($package['is_disabled'])
+                            <a
+                               wire:click="enablePackage"
+                               class="no-underline block px-4 py-3 border-b bg-indigo-100 cursor-pointer hover:text-white hover:bg-indigo-600"
+                            >
+                                Enable Package
+                            </a>
+                        @else
+                            <a
+                               wire:click="disablePackage"
+                               class="no-underline block px-4 py-3 border-b bg-indigo-100 cursor-pointer hover:text-white hover:bg-indigo-600"
+                            >
+                                Disable Package
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
-            {{--<admin-dropdown>--}}
-            {{--        <span--}}
-            {{--            slot="link"--}}
-            {{--            class="appearance-none flex items-center inline-block text-white font-medium"--}}
-            {{--        >--}}
-            {{--            <svg--}}
-            {{--                class="h-4 w-4"--}}
-            {{--                xmlns="http://www.w3.org/2000/svg"--}}
-            {{--                viewBox="0 0 20 20"--}}
-            {{--            >--}}
-            {{--                <path--}}
-            {{--                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"--}}
-            {{--                />--}}
-            {{--            </svg>--}}
-            {{--        </span>--}}
-
-            {{--    <div--}}
-            {{--        slot="dropdown"--}}
-            {{--        class="bg-indigo-600 shadow rounded border overflow-hidden"--}}
-            {{--    >--}}
-            {{--        <a v-if="package.is_disabled"--}}
-            {{--           :href="--}}
-            {{--                    route('app.admin.enable-package', package)--}}
-            {{--                "--}}
-            {{--           class="no-underline block px-4 py-3 border-b text-white bg-indigo-600 hover:text-white hover:bg-blue"--}}
-            {{--        >--}}
-            {{--            Enable--}}
-            {{--        </a>--}}
-
-            {{--        <a v-else--}}
-            {{--           :href="--}}
-            {{--                    route('app.admin.disable-package', package)--}}
-            {{--                "--}}
-            {{--           class="no-underline block px-4 py-3 border-b text-white bg-indigo-600 hover:text-white hover:bg-blue"--}}
-            {{--        >--}}
-            {{--            Disable--}}
-            {{--        </a>--}}
-            {{--    </div>--}}
-            {{--</admin-dropdown>--}}
         </div>
     @endif
 
