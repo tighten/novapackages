@@ -43,7 +43,7 @@ class PackageDetailResource extends PackageResource
                 ['number' => 2, 'count' => $package->countStarRatings(2)],
                 ['number' => 1, 'count' => $package->countStarRatings(1)],
             ],
-            'reviews' => $package->reviews()->with('user')->get() ?? null,
+            'reviews' => $package->reviews()->orderBy('updated_at', 'desc')->with('user')->get() ?? null,
             'ratings' => $package->ratings ?? null,
             'contributors' => $package->contributors->map(function ($contributor) {
                 return [
