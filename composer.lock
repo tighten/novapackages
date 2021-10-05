@@ -2330,16 +2330,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v9.2.10",
+            "version": "v9.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "214ef71d4f9979b24c1ac30f8199d8da1cabff53"
+                "reference": "db9f4b955ee57434b2b38767734f08ea746aaa94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/214ef71d4f9979b24c1ac30f8199d8da1cabff53",
-                "reference": "214ef71d4f9979b24c1ac30f8199d8da1cabff53",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/db9f4b955ee57434b2b38767734f08ea746aaa94",
+                "reference": "db9f4b955ee57434b2b38767734f08ea746aaa94",
                 "shasum": ""
             },
             "require": {
@@ -2398,7 +2398,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2021-09-28T15:36:01+00:00"
+            "time": "2021-10-05T18:55:48+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -2591,16 +2591,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v4.6.4",
+            "version": "v4.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "e39423d3ee18898eeb1e0adf2fbe7b74a4cc4996"
+                "reference": "06ce2890dd9f1f6aab218a922746161e6870a29a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/e39423d3ee18898eeb1e0adf2fbe7b74a4cc4996",
-                "reference": "e39423d3ee18898eeb1e0adf2fbe7b74a4cc4996",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/06ce2890dd9f1f6aab218a922746161e6870a29a",
+                "reference": "06ce2890dd9f1f6aab218a922746161e6870a29a",
                 "shasum": ""
             },
             "require": {
@@ -2649,9 +2649,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/telescope/issues",
-                "source": "https://github.com/laravel/telescope/tree/v4.6.4"
+                "source": "https://github.com/laravel/telescope/tree/v4.6.5"
             },
-            "time": "2021-09-16T17:44:49+00:00"
+            "time": "2021-10-05T19:06:40+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -5025,16 +5025,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "v1.1.8",
+            "version": "v1.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/predis/predis.git",
-                "reference": "cf5c118a077fbab8b9af1482c20952173125c041"
+                "reference": "c50c3393bb9f47fa012d0cdfb727a266b0818259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/predis/predis/zipball/cf5c118a077fbab8b9af1482c20952173125c041",
-                "reference": "cf5c118a077fbab8b9af1482c20952173125c041",
+                "url": "https://api.github.com/repos/predis/predis/zipball/c50c3393bb9f47fa012d0cdfb727a266b0818259",
+                "reference": "c50c3393bb9f47fa012d0cdfb727a266b0818259",
                 "shasum": ""
             },
             "require": {
@@ -5079,7 +5079,7 @@
             ],
             "support": {
                 "issues": "https://github.com/predis/predis/issues",
-                "source": "https://github.com/predis/predis/tree/v1.1.8"
+                "source": "https://github.com/predis/predis/tree/v1.1.9"
             },
             "funding": [
                 {
@@ -5087,7 +5087,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-29T17:48:39+00:00"
+            "time": "2021-10-05T19:02:38+00:00"
         },
         {
             "name": "psr/cache",
@@ -11877,5 +11877,5 @@
         "php": "^7.4|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
