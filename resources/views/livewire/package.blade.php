@@ -273,27 +273,7 @@
                     @if (! $package['is_self_authored'] && ! $package['is_self_contributed'])
                         <div class="mb-4 flex items-center">
                             <div class="w-1/3 text-gray-600">Tap to rate:</div>
-                            <div class="flex">
-                                @foreach (range(1, 5) as $point)
-                                    <svg
-                                        wire:click="rate({{ $point }})"
-                                        @class([
-                                            'inline-block fill-current h-5 w-5 cursor-pointer',
-                                            'text-yellow-500' => $package['current_user_rating'] >= $point,
-                                            'text-gray-400' => $package['current_user_rating'] <= $point,
-                                        ])
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <g stroke="none" stroke-width="1" fill-rule="evenodd">
-                                            <g>
-                                                <polygon id="Star-3" points="10 15 4.12214748 18.0901699 5.24471742 11.545085 0.489434837 6.90983006 7.06107374 5.95491503 10 0 12.9389263 5.95491503 19.5105652 6.90983006 14.7552826 11.545085 15.8778525 18.0901699"></polygon>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                @endforeach
-                            </div>
+                            <livewire:star-rating :rating="$package['current_user_rating']" :read-only="false" />
                         </div>
                     @endif
                 @endauth

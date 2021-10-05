@@ -8,6 +8,8 @@ class PackageReview extends Component
 {
     public $isEditing = false;
 
+    public $package;
+
     public $review;
 
     protected $rules = [

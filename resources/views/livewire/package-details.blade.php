@@ -143,7 +143,7 @@
                 {{--    :reviewList="package.reviews"--}}
                 {{--/>--}}
                 @foreach ($package['reviews'] as $review)
-                    <livewire:package-review :review="$review" :wire:key="$review['id']" />
+                    <livewire:package-review :package="$package" :review="$review" :wire:key="$review['id']" />
                 @endforeach
             </div>
         @endif

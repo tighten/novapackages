@@ -56,11 +56,6 @@ class Package extends Component
         $this->package['favorites_count']++;
     }
 
-    public function rate($rating)
-    {
-        // todo
-    }
-
     public function packageDisabled()
     {
         $this->package['is_disabled'] = true;

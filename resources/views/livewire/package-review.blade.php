@@ -2,15 +2,7 @@
     class="container leading-tight py-4 w-full"
     x-data="{ isEditing: @entangle('isEditing') }"
 >
-    {{--<template>--}}
-    {{--    <star-rating--}}
-    {{--        v-model="user_rating"--}}
-    {{--        :rating="user_rating"--}}
-    {{--        :read-only="true"--}}
-    {{--        :show-rating="false"--}}
-    {{--        :star-size="20"--}}
-    {{--    />--}}
-    {{--</template>--}}
+    <livewire:star-rating :rating="$package['current_user_rating']" :read-only="true"/>
     <div x-show="! isEditing">
         <p class="text-gray-600 text-sm py-1">
             By {{ $review->user->name }} on {{ $review->updated_at->format('M d, Y') }}
