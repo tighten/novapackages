@@ -273,7 +273,7 @@
                     @if (! $package['is_self_authored'] && ! $package['is_self_contributed'])
                         <div class="mb-4 flex items-center">
                             <div class="w-1/3 text-gray-600">Tap to rate:</div>
-                            <livewire:star-rating :rating="$package['current_user_rating']" :read-only="false" />
+                            <livewire:star-rating :package="$package" :rating="$package['current_user_rating']" :read-only="false" />
                         </div>
                     @endif
                 @endauth

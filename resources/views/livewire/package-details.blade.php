@@ -138,12 +138,14 @@
                 >
                     Reviews
                 </h2>
-                {{--<review-list--}}
-                {{--    :package_id="package.id"--}}
-                {{--    :reviewList="package.reviews"--}}
-                {{--/>--}}
                 @foreach ($package['reviews'] as $review)
-                    <livewire:package-review :package="$package" :review="$review" :wire:key="$review['id']" />
+                    <div>
+                        <livewire:package-review
+                            :package="$package"
+                            :review="$review"
+                            :wire:key="$review->id"
+                        />
+                    </div>
                 @endforeach
             </div>
         @endif

@@ -26,6 +26,8 @@ class PackageReview extends Component
         $this->validate();
 
         $this->review->save();
+
+        $this->isEditing = false;
     }
 
     public function delete()
