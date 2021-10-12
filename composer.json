@@ -23,7 +23,7 @@
         "laravel/helpers": "^1.4",
         "laravel/horizon": "^5.7",
         "laravel/passport": "^10.1",
-        "laravel/scout": "^9.2",
+        "laravel/scout": "^9.3",
         "laravel/slack-notification-channel": "^2.3",
         "laravel/socialite": "^5.2",
         "laravel/telescope": "^4.6",
