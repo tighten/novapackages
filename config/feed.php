@@ -28,6 +28,11 @@ return [
             'view' => 'feed::atom',
 
             /*
+             * The format of the feed.  Acceptable values are 'rss', 'atom', or 'json'.
+             */
+            'format' => 'atom',
+
+            /*
              * The type to be used in the <link> tag
              */
             'type' => 'application/atom+xml',
