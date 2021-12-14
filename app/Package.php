@@ -151,7 +151,7 @@ class Package extends Model implements Feedable
             ->summary($this->abstract)
             ->updated($this->updated_at)
             ->link(route('packages.show', [$this->composer_vendor, $this->composer_package]))
-            ->author($this->author->name);
+            ->authorName($this->author->name);
     }
 
     public static function getRecentFeedItems()
