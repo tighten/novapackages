@@ -2,33 +2,33 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "mix --production"
     },
     "devDependencies": {
         "axios": "^0.21",
         "bootstrap": "^4.0.0",
-        "cross-env": "^5.1",
-        "jquery": "^3.2",
-        "laravel-mix": "^2.1",
-        "laravel-mix-purgecss": "^2.0",
-        "laravel-mix-tailwind": "^0.1.0",
-        "lodash": "^4.17.4",
-        "popper.js": "^1.12",
-        "tailwindcss": "^1.2.0",
-        "vue": "^2.5.7"
-    },
-    "dependencies": {
         "clipboard": "^2.0.1",
+        "cross-env": "^5.1",
         "dropzone": "^5.5.1",
         "highlight.js": "^10.4.1",
+        "jquery": "^3.2",
+        "laravel-mix": "^6.0",
+        "lodash": "^4.17.19",
         "moment": "^2.22.2",
-        "node-sass": "^4.13.1",
+        "popper.js": "^1.12",
+        "postcss": "^8.4.5",
+        "vue": "^2.5.7",
+        "vue-loader": "^15.9.8",
         "vue-select": "^2.4.0",
-        "vue-star-rating": "^1.6.0"
+        "vue-star-rating": "^1.6.0",
+        "vue-template-compiler": "^2.6.14"
+    },
+    "dependencies": {
+        "tailwindcss": "^3.0.2"
     }
 }

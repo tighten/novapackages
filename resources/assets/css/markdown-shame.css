@@ -8,7 +8,7 @@
 }
 
 .markdown a {
-    @apply .text-indigo-600;
+    @apply text-indigo-600;
     text-decoration: none;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .markdown p {
-    @apply .mb-4;
+    @apply mb-4;
 }
 
 .markdown ul,
@@ -81,15 +81,15 @@
 }
 
 .markdown code.hljs {
-    @apply .bg-transparent;
-    @apply .p-0;
+    @apply bg-transparent;
+    @apply p-0;
 }
 
 .markdown code.hljs .hljs-comment,
 .hljs-keyword,
 .hljs-meta {
-    @apply .font-normal;
-    @apply .not-italic;
+    @apply font-normal;
+    @apply not-italic;
 }
 
 .markdown blockquote {

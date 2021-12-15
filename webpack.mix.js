@@ -1,8 +1,5 @@
 let mix = require("laravel-mix");
 
-require("laravel-mix-tailwind");
-require("laravel-mix-purgecss");
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -15,13 +12,15 @@ require("laravel-mix-purgecss");
  */
 
 mix.js("resources/assets/js/app.js", "public/js")
+    .vue()
     .postCss("resources/assets/css/app.css", "public/css", [
         require('tailwindcss'),
     ]);
 
 if (mix.inProduction()) {
     mix.version()
-        .purgeCss({
-            whitelistPatterns: [/language/, /hljs/],
-        });
+        // @todo handle adding purge to the updated tailwind
+        // .purgeCss({
+        //     whitelistPatterns: [/language/, /hljs/],
+        // });
 }
