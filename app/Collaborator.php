@@ -13,6 +13,8 @@ class Collaborator extends Model
 
     protected $casts = ['user_id' => 'integer'];
 
+    protected $appends = ['name_with_username'];
+
     public function allAuthoredPackages()
     {
         return $this->hasMany(Package::class, 'author_id')->withoutGlobalScope('notDisabled');
@@ -36,6 +38,15 @@ class Collaborator extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getnameWithUsernameAttribute()
+    {
+        if (! $this->github_username) {
+            return $this->name;
+        }
+
+        return "{$this->name} ({$this->github_username})";
     }
 
     public function getRouteKeyName()
