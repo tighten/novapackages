@@ -36,7 +36,7 @@
         "spatie/laravel-feed": "^4.0",
         "stil/gd-text": "^1.1",
         "tightenco/ziggy": "^1.4.2",
-        "willvincent/laravel-rateable": "dev-master"
+        "willvincent/laravel-rateable": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -48,12 +48,6 @@
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/MimisK13/laravel-rateable"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",
