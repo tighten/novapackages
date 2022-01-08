@@ -34,24 +34,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      selected: this.initialSelected || (this.multiple ? [] : null),
-      useCollaborators: []
+      selected: this.initialSelected || (this.multiple ? [] : null)
     };
-  },
-  mounted: function mounted() {
-    this.useCollaborators = this.collaborators.map(function (collaborator) {
-      collaborator.labelName = "".concat(collaborator.name, " (").concat(collaborator.github_username, ")");
-      return collaborator;
-    });
-
-    if (this.multiple) {
-      this.selected = this.selected.map(function (collaborator) {
-        collaborator.labelName = "".concat(collaborator.name, " (").concat(collaborator.github_username, ")");
-        return collaborator;
-      });
-    } else {
-      this.$set(this.selected, 'labelName', "".concat(this.selected.name, " (").concat(this.selected.github_username, ")"));
-    }
   }
 });
 
@@ -153,7 +137,7 @@ var render = function () {
         attrs: {
           multiple: _vm.multiple,
           options: _vm.collaborators,
-          label: "labelName",
+          label: "name_with_username",
           inputId: "collaborators",
         },
         model: {
