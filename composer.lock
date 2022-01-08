@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e6bfe3e712d3dfdfa7bc51603fc9a107",
+    "content-hash": "2d89c929f000b0b87cde596a619ef0f0",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -8905,7 +8905,7 @@
         },
         {
             "name": "willvincent/laravel-rateable",
-            "version": "dev-master",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willvincent/laravel-rateable.git",
@@ -8929,7 +8929,6 @@
                 "psalm/plugin-laravel": "^1.2",
                 "vimeo/psalm": "^3.11"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -11973,9 +11972,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "willvincent/laravel-rateable": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
