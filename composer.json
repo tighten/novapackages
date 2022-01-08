@@ -48,12 +48,6 @@
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/MimisK13/laravel-rateable"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",
