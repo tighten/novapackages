@@ -325,16 +325,16 @@
         },
         {
             "name": "clue/stream-filter",
-            "version": "v1.5.0",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clue/stream-filter.git",
-                "reference": "aeb7d8ea49c7963d3b581378955dbf5bc49aa320"
+                "reference": "d6169430c7731d8509da7aecd0af756a5747b78e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clue/stream-filter/zipball/aeb7d8ea49c7963d3b581378955dbf5bc49aa320",
-                "reference": "aeb7d8ea49c7963d3b581378955dbf5bc49aa320",
+                "url": "https://api.github.com/repos/clue/stream-filter/zipball/d6169430c7731d8509da7aecd0af756a5747b78e",
+                "reference": "d6169430c7731d8509da7aecd0af756a5747b78e",
                 "shasum": ""
             },
             "require": {
@@ -375,7 +375,7 @@
             ],
             "support": {
                 "issues": "https://github.com/clue/stream-filter/issues",
-                "source": "https://github.com/clue/stream-filter/tree/v1.5.0"
+                "source": "https://github.com/clue/stream-filter/tree/v1.6.0"
             },
             "funding": [
                 {
@@ -387,7 +387,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-02T12:38:20+00:00"
+            "time": "2022-02-21T13:15:14+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -2039,16 +2039,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.83.1",
+            "version": "v8.83.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "bddba117f8bce2f3c9875ca1ca375a96350d0f4d"
+                "reference": "b91b3b5b39fbbdc763746f5714e08d50a4dd7857"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/bddba117f8bce2f3c9875ca1ca375a96350d0f4d",
-                "reference": "bddba117f8bce2f3c9875ca1ca375a96350d0f4d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b91b3b5b39fbbdc763746f5714e08d50a4dd7857",
+                "reference": "b91b3b5b39fbbdc763746f5714e08d50a4dd7857",
                 "shasum": ""
             },
             "require": {
@@ -2208,7 +2208,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-02-15T15:05:20+00:00"
+            "time": "2022-02-22T15:10:17+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -2268,16 +2268,16 @@
         },
         {
             "name": "laravel/horizon",
-            "version": "v5.9.1",
+            "version": "v5.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/horizon.git",
-                "reference": "fbe7e80a0aacb596984c66415afcae357f0231f2"
+                "reference": "69486d5e4fad8b6ee02c97ed0bea39ef241df956"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/horizon/zipball/fbe7e80a0aacb596984c66415afcae357f0231f2",
-                "reference": "fbe7e80a0aacb596984c66415afcae357f0231f2",
+                "url": "https://api.github.com/repos/laravel/horizon/zipball/69486d5e4fad8b6ee02c97ed0bea39ef241df956",
+                "reference": "69486d5e4fad8b6ee02c97ed0bea39ef241df956",
                 "shasum": ""
             },
             "require": {
@@ -2339,22 +2339,22 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/horizon/issues",
-                "source": "https://github.com/laravel/horizon/tree/v5.9.1"
+                "source": "https://github.com/laravel/horizon/tree/v5.9.2"
             },
-            "time": "2022-02-14T17:22:27+00:00"
+            "time": "2022-02-21T19:55:13+00:00"
         },
         {
             "name": "laravel/passport",
-            "version": "v10.3.1",
+            "version": "v10.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "779e34f0152f42fb76b258d814956313fa38857c"
+                "reference": "c56207e9a37c849da0164842a609a9f38747e95b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/779e34f0152f42fb76b258d814956313fa38857c",
-                "reference": "779e34f0152f42fb76b258d814956313fa38857c",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/c56207e9a37c849da0164842a609a9f38747e95b",
+                "reference": "c56207e9a37c849da0164842a609a9f38747e95b",
                 "shasum": ""
             },
             "require": {
@@ -2418,20 +2418,20 @@
                 "issues": "https://github.com/laravel/passport/issues",
                 "source": "https://github.com/laravel/passport"
             },
-            "time": "2022-01-25T20:06:06+00:00"
+            "time": "2022-02-15T21:44:15+00:00"
         },
         {
             "name": "laravel/scout",
-            "version": "v9.4.4",
+            "version": "v9.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "06c6da8eb76b98229d8e6bee13ca23904956667e"
+                "reference": "ac962d2e052e90ca271e9bb1b30229ed870c4963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/06c6da8eb76b98229d8e6bee13ca23904956667e",
-                "reference": "06c6da8eb76b98229d8e6bee13ca23904956667e",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/ac962d2e052e90ca271e9bb1b30229ed870c4963",
+                "reference": "ac962d2e052e90ca271e9bb1b30229ed870c4963",
                 "shasum": ""
             },
             "require": {
@@ -2490,7 +2490,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2022-02-15T18:13:05+00:00"
+            "time": "2022-02-22T16:20:15+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -2819,16 +2819,16 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v3.4.4",
+            "version": "v3.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "1596de849ecafc0bcc891389da939012b67f9d5c"
+                "reference": "f11d295de1508c5bb56206a620b00b6616de414c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/1596de849ecafc0bcc891389da939012b67f9d5c",
-                "reference": "1596de849ecafc0bcc891389da939012b67f9d5c",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/f11d295de1508c5bb56206a620b00b6616de414c",
+                "reference": "f11d295de1508c5bb56206a620b00b6616de414c",
                 "shasum": ""
             },
             "require": {
@@ -2874,9 +2874,9 @@
                 "ui"
             ],
             "support": {
-                "source": "https://github.com/laravel/ui/tree/v3.4.4"
+                "source": "https://github.com/laravel/ui/tree/v3.4.5"
             },
-            "time": "2022-02-10T22:38:33+00:00"
+            "time": "2022-02-21T14:59:16+00:00"
         },
         {
             "name": "laravelium/sitemap",
@@ -4631,16 +4631,16 @@
         },
         {
             "name": "php-http/httplug",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/httplug.git",
-                "reference": "191a0a1b41ed026b717421931f8d3bd2514ffbf9"
+                "reference": "f640739f80dfa1152533976e3c112477f69274eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/httplug/zipball/191a0a1b41ed026b717421931f8d3bd2514ffbf9",
-                "reference": "191a0a1b41ed026b717421931f8d3bd2514ffbf9",
+                "url": "https://api.github.com/repos/php-http/httplug/zipball/f640739f80dfa1152533976e3c112477f69274eb",
+                "reference": "f640739f80dfa1152533976e3c112477f69274eb",
                 "shasum": ""
             },
             "require": {
@@ -4687,9 +4687,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/httplug/issues",
-                "source": "https://github.com/php-http/httplug/tree/master"
+                "source": "https://github.com/php-http/httplug/tree/2.3.0"
             },
-            "time": "2020-07-13T15:43:23+00:00"
+            "time": "2022-02-21T09:52:22+00:00"
         },
         {
             "name": "php-http/message",
@@ -5984,16 +5984,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.11.1",
+            "version": "1.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "e933f14dae0b31b1f6a45aa769dbd97ce781031a"
+                "reference": "16a8de828e7f1f32d580c667e1de5bf2943abd6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/e933f14dae0b31b1f6a45aa769dbd97ce781031a",
-                "reference": "e933f14dae0b31b1f6a45aa769dbd97ce781031a",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/16a8de828e7f1f32d580c667e1de5bf2943abd6b",
+                "reference": "16a8de828e7f1f32d580c667e1de5bf2943abd6b",
                 "shasum": ""
             },
             "require": {
@@ -6031,7 +6031,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.11.1"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.11.2"
             },
             "funding": [
                 {
@@ -6039,7 +6039,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-16T11:14:09+00:00"
+            "time": "2022-02-22T08:55:13+00:00"
         },
         {
             "name": "stil/gd-text",
@@ -10053,16 +10053,16 @@
         },
         {
             "name": "phar-io/version",
-            "version": "3.1.1",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/version.git",
-                "reference": "15a90844ad40f127afd244c0cad228de2a80052a"
+                "reference": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/version/zipball/15a90844ad40f127afd244c0cad228de2a80052a",
-                "reference": "15a90844ad40f127afd244c0cad228de2a80052a",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
+                "reference": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
                 "shasum": ""
             },
             "require": {
@@ -10098,9 +10098,9 @@
             "description": "Library for handling version information and constraints",
             "support": {
                 "issues": "https://github.com/phar-io/version/issues",
-                "source": "https://github.com/phar-io/version/tree/3.1.1"
+                "source": "https://github.com/phar-io/version/tree/3.2.1"
             },
-            "time": "2022-02-07T21:56:48+00:00"
+            "time": "2022-02-21T01:04:05+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -11917,5 +11917,5 @@
         "php": "^7.4|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
