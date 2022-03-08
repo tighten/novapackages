@@ -40,7 +40,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
-        "codedungeon/phpunit-result-printer": "^0.31",
+        "codedungeon/phpunit-result-printer": "^0.32",
         "dms/phpunit-arraysubset-asserts": "^0.2.0",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
