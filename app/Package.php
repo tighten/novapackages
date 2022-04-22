@@ -92,6 +92,14 @@ class Package extends Model implements Feedable
             ->orderBy('popularity', 'desc');
     }
 
+    public function scopeNovaCurrent($query)
+    {
+        return $query->select(
+            DB::Raw('packages.*, nova_version')
+        )
+            ->where('nova_version', config('novapackages.nova.latest_major_version'));
+    }
+
     public function toSearchableArray()
     {
         $packageAttributes = $this->toArray();
