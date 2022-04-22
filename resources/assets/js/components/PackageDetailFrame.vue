@@ -186,6 +186,14 @@
                                 </td>
                             </tr>
 
+                            <tr v-if="package.nova_version">
+                                <td class="py-2 font-bold">Nova Version</td>
+
+                                <td class="py-2">
+                                    {{ package.nova_version }}
+                                </td>
+                            </tr>
+
                             <tr>
                                 <td class="font-bold pt-2" colspan="2>">Composer</td>
                             </tr>

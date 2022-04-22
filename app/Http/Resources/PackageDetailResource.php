@@ -22,6 +22,16 @@ class PackageDetailResource extends PackageResource
 
             if (! is_null($packagistData)) {
                 $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
+
+                if (! is_null($composer_latest)) {
+                    $composer_requirements = $composer_latest['require'];
+
+                    if (! is_null($composer_requirements)) {
+                        if (array_key_exists("laravel/nova", $composer_requirements)){
+                            $novaVersion = $composer_requirements["laravel/nova"];
+                        }
+                    }
+                }
             }
         } catch (PackagistException $e) {
         }
@@ -58,6 +68,7 @@ class PackageDetailResource extends PackageResource
             'tags' => TagResource::from($package->tags),
             'is_favorite' => $this->isFavorite($package),
             'favorites_count' => $this->favoritesCount($package),
+            'nova_version' => $novaVersion ?? null,
         ]);
     }
 

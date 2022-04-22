@@ -2,7 +2,7 @@
 $package = (new App\Http\Resources\PackageResource($package))->toArray($package);
 $package['accent'] = app(App\Colors::class)->nextColor();
 @endphp
-<div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs rounded" wire:key="{{ $context ?? 'no-context' }}-{{ $package['id'] }}">
+<div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs rounded relative" wire:key="{{ $context ?? 'no-context' }}-{{ $package['id'] }}">
     <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded">
         @if (optional(auth()->user())->isAdmin())
             <div class="text-right -mb-6">
@@ -31,7 +31,11 @@ $package['accent'] = app(App\Colors::class)->nextColor();
             </div>
         @endif
 
-        <div class="flex flex-row mt-4 px-4 pb-4" style="height: 14em">
+        @if ($package['nova_version'] == config('novapackages.nova.latest_major_version'))
+            <span class="absolute top-0 right-0 px-3 py-1 text-xs tracking-widest text-white rounded-bl" style="background-color: {{ $package['accent'] }}">Nova {{ config('novapackages.nova.latest_major_version') ?? 'N/A' }} Support</span>
+        @endif
+
+        <div class="flex flex-row mt-6 px-4 pb-4" style="height: 14em">
             <div class="pb-2 w-full relative">
                 <a href="{{ route('packages.show', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']]) }}" class="block mb-2 no-underline">
                     <h2 class="text-xl font-bold text-gray-800 flex flex-row items-center">
