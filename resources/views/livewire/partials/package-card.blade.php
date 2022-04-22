@@ -32,7 +32,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
         @endif
 
         @if ($package['nova_version'] == config('novapackages.nova.latest_major_version'))
-            <span class="absolute top-0 right-0 px-3 py-1 text-xs tracking-widest text-white rounded-bl" style="background-color: {{ $package['accent'] }}">Nova {{ config('novapackages.nova.latest_major_version') ?? 'N/A' }} Support</span>
+            <span class="absolute top-0 right-0 px-3 py-1 text-xs tracking-widest text-white rounded-bl rounded-tr" style="background-color: {{ $package['accent'] }}">Nova {{ config('novapackages.nova.latest_major_version') ?? 'N/A' }} Support</span>
         @endif
 
         <div class="flex flex-row mt-6 px-4 pb-4" style="height: 14em">
