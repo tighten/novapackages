@@ -10,7 +10,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "algolia/algoliasearch-client-php": "^3.2",
         "bugsnag/bugsnag-laravel": "^2.23",
         "doctrine/dbal": "^3.3",
