@@ -26,7 +26,7 @@
         "laravel/scout": "^9.4",
         "laravel/slack-notification-channel": "^2.4",
         "laravel/socialite": "^5.5",
-        "laravel/telescope": "^4.8",
+        "laravel/telescope": "4.8.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "laravelium/sitemap": "^8.0",
