@@ -94,10 +94,7 @@ class Package extends Model implements Feedable
 
     public function scopeNovaCurrent($query)
     {
-        return $query->select(
-            DB::Raw('packages.*, nova_version')
-        )
-            ->where('nova_version', config('novapackages.nova.latest_major_version'));
+        return $query->where('nova_version', config('novapackages.nova.latest_major_version'));
     }
 
     public function toSearchableArray()
