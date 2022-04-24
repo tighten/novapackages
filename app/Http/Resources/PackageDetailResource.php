@@ -23,15 +23,7 @@ class PackageDetailResource extends PackageResource
             if (! is_null($packagistData)) {
                 $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
 
-                if (! is_null($composer_latest)) {
-                    $composer_requirements = $composer_latest['require'];
-
-                    if (! is_null($composer_requirements)) {
-                        if (array_key_exists("laravel/nova", $composer_requirements)){
-                            $novaVersion = $composer_requirements["laravel/nova"];
-                        }
-                    }
-                }
+                $novaVersion = $composer_latest['require']['laravel/nova'] ?? null;
             }
         } catch (PackagistException $e) {
         }
