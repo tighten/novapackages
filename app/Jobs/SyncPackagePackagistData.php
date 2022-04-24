@@ -45,22 +45,15 @@ class SyncPackagePackagistData implements ShouldQueue
                 $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
 
 
-                if (! is_null($composer_latest)) {
-                    $composer_requirements = $composer_latest['require'];
+                $novaVersion = $composer_latest['require']['laravel/nova'] ?? null;
 
-                    if (! is_null($composer_requirements)) {
-                        if (array_key_exists("laravel/nova", $composer_requirements)){
-                            $composer_requirements_nova_version = $composer_requirements["laravel/nova"];
+                // Filter version numbers
+                $novaVersion = preg_replace('/[^0-9]/', '', $novaVersion);
 
-                            // Filter numbers version
-                            $composer_requirements_nova_version = preg_replace('/[^0-9]/', '', $composer_requirements_nova_version);
-
-                            if (strlen($composer_requirements_nova_version) > 0) {
-                                $novaVersion = substr($composer_requirements_nova_version, 0, 1);
-                            }
-
-                        }
-                    }
+                if (strlen($novaVersion) > 0) {
+                    $novaVersion = substr($novaVersion, 0, 1);
+                }else {
+                    $novaVersion = null;
                 }
             }
         } catch (PackagistException $e) {
