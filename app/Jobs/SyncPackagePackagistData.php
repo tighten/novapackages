@@ -69,7 +69,7 @@ class SyncPackagePackagistData implements ShouldQueue
                 'packagist_downloads' => Arr::get($packagistData, 'package.downloads.total', 0) ?: 0,
                 'github_stars' => Arr::get($packagistData, 'package.github_stars', 0) ?: 0,
                 'repo_url' => $packagistData['package']['repository'],
-                'nova_version' => $novaVersion ?? null,
+                'nova_version' => $novaVersion,
             ]);
         });
 
