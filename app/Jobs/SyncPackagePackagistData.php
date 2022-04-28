@@ -42,10 +42,9 @@ class SyncPackagePackagistData implements ShouldQueue
             $novaVersion = null;
 
             if (! is_null($packagistData)) {
-                $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
+                $composerLatest = $this->extractStableVersionsFromPackages($packagistData)->first();
 
-
-                $novaVersion = $composer_latest['require']['laravel/nova'] ?? null;
+                $novaVersion = $composerLatest['require']['laravel/nova'] ?? null;
 
                 // Filter version numbers
                 $novaVersion = preg_replace('/[^0-9]/', '', $novaVersion);
@@ -69,7 +68,7 @@ class SyncPackagePackagistData implements ShouldQueue
                 'packagist_downloads' => Arr::get($packagistData, 'package.downloads.total', 0) ?: 0,
                 'github_stars' => Arr::get($packagistData, 'package.github_stars', 0) ?: 0,
                 'repo_url' => $packagistData['package']['repository'],
-                'nova_version' => $novaVersion ?? null,
+                'nova_version' => $novaVersion,
             ]);
         });
 
