@@ -60,7 +60,7 @@ class PackageDetailResource extends PackageResource
             'tags' => TagResource::from($package->tags),
             'is_favorite' => $this->isFavorite($package),
             'favorites_count' => $this->favoritesCount($package),
-            'nova_version' => $novaVersion,
+            'nova_version' => $novaVersion ?? null,
         ]);
     }
 
