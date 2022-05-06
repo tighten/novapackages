@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Favorite;
 use App\Package;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class PackageResource extends ModelResource
 {
@@ -35,7 +36,17 @@ class PackageResource extends ModelResource
                 'github_username' => $package->author->github_username,
             ],
             'nova_version' => $package->nova_version ?? null,
+            'possibly_abandoned' => $this->isPossiblyAbandoned($package, $composer_latest ?? null, $packagistData ?? []),
         ];
+    }
+
+    /**
+     * If a package is old *and* not on Packagist, mark it as likely abandoned
+     */
+    public function isPossiblyAbandoned($package, $composer_latest, $packagistData)
+    {
+        return Arr::get($packagistData, 'package.abandoned', false) ||
+            ($package->created_at->diffInDays(now()) > 15 && ! $composer_latest);
     }
 
     protected function averageRating($package)
