@@ -34,6 +34,7 @@ class PackageResource extends ModelResource
                 'avatar_url' => $package->author->avatar ?: 'https://api.adorable.io/avatars/285/'.Str::slug($package->author->name).'.png',
                 'github_username' => $package->author->github_username,
             ],
+            'nova_version' => $package->nova_version ?? null,
         ];
     }
 

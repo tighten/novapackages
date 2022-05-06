@@ -70,6 +70,9 @@ class PackageList extends Component
                 case 'popular':
                     $packages = Package::popular();
                     break;
+                case 'nova_current':
+                    $packages = Package::novaCurrent();
+                    break;
                 default:
                     $packages = Package::tagged($this->tag);
                     break;
