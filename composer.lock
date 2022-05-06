@@ -2407,16 +2407,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v9.4.8",
+            "version": "v9.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "9a3a4d88ba8ddf8c4a88297851ae59957cc88090"
+                "reference": "61ce79ce87fbebb28dcc0dd8f95776aa0dec00c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/9a3a4d88ba8ddf8c4a88297851ae59957cc88090",
-                "reference": "9a3a4d88ba8ddf8c4a88297851ae59957cc88090",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/61ce79ce87fbebb28dcc0dd8f95776aa0dec00c8",
+                "reference": "61ce79ce87fbebb28dcc0dd8f95776aa0dec00c8",
                 "shasum": ""
             },
             "require": {
@@ -2475,7 +2475,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2022-05-03T15:54:00+00:00"
+            "time": "2022-05-05T14:24:18+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -5751,16 +5751,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.2",
+            "version": "v0.11.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "7f7da640d68b9c9fec819caae7c744a213df6514"
+                "reference": "05c544b339b112226ad14803e1e5b09a61957454"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/7f7da640d68b9c9fec819caae7c744a213df6514",
-                "reference": "7f7da640d68b9c9fec819caae7c744a213df6514",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/05c544b339b112226ad14803e1e5b09a61957454",
+                "reference": "05c544b339b112226ad14803e1e5b09a61957454",
                 "shasum": ""
             },
             "require": {
@@ -5775,15 +5775,13 @@
                 "symfony/console": "4.4.37 || 5.3.14 || 5.3.15 || 5.4.3 || 5.4.4 || 6.0.3 || 6.0.4"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.2",
-                "hoa/console": "3.17.05.02"
+                "bamarni/composer-bin-plugin": "^1.2"
             },
             "suggest": {
                 "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
                 "ext-pdo-sqlite": "The doc command requires SQLite to work.",
                 "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well.",
-                "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history.",
-                "hoa/console": "A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit."
+                "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history."
             },
             "bin": [
                 "bin/psysh"
@@ -5823,9 +5821,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.2"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.4"
             },
-            "time": "2022-02-28T15:28:54+00:00"
+            "time": "2022-05-06T12:49:14+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
