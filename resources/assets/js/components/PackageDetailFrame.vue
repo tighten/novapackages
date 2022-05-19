@@ -105,8 +105,7 @@
                             class="fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
-                            data-clipboard-target="#packagist-install"
-                            @click="copySuccessful"
+                            @click="copyTextToClipboard"
                         >
                             <path
                                 d="M6 6V2c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2h4zm2 0h4a2 2 0 0 1 2 2v4h4V2H8v4zM2 8v10h10V8H2z"
@@ -461,7 +460,6 @@
 <script>
 import _ from 'lodash';
 import moment from 'moment';
-import ClipboardJS from 'clipboard';
 import StarRating from 'vue-star-rating';
 import http from '../http';
 
@@ -598,7 +596,6 @@ export default {
                 this.copyWasSuccessful = false;
             }, 3000);
         },
-
         goBack() {
             window.history.back();
         },
@@ -666,11 +663,50 @@ export default {
                     alert('Error: ' + response.message);
                 }
             );
-        }
-    },
+        },
 
-    mounted() {
-        new ClipboardJS('#copy-button');
+        fallbackCopyTextToClipboard() {
+            /* Get the text field */
+            var textArea = document.createElement("textarea");
+            textArea.value = this.composerString;
+
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Fallback: Copying text command was ' + msg);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+                return;
+            }
+
+            document.body.removeChild(textArea);
+
+            this.copySuccessful();
+        },
+
+        copyTextToClipboard() {
+            if (!navigator.clipboard) {
+                fallbackCopyTextToClipboard();
+                return;
+            }
+            navigator.clipboard.writeText(this.composerString).then(function() {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function(err) {
+                console.error('Async: Could not copy text: ', err);
+                return;
+            });
+
+            this.copySuccessful();
+        }
     }
 };
 </script>
