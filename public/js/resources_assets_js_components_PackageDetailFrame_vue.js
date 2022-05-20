@@ -657,11 +657,8 @@ __webpack_require__.r(__webpack_exports__);
       textArea.select();
 
       try {
-        var successful = document.execCommand('copy');
-        var msg = successful ? 'successful' : 'unsuccessful';
-        console.log('Fallback: Copying text command was ' + msg);
+        document.execCommand('copy');
       } catch (err) {
-        console.error('Fallback: Oops, unable to copy', err);
         return;
       }
 
@@ -670,14 +667,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     copyTextToClipboard: function copyTextToClipboard() {
       if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard();
+        this.fallbackCopyTextToClipboard();
         return;
       }
 
-      navigator.clipboard.writeText(this.composerString).then(function () {
-        console.log('Async: Copying to clipboard was successful!');
-      }, function (err) {
-        console.error('Async: Could not copy text: ', err);
+      navigator.clipboard.writeText(this.composerString).then(function () {}, function (err) {
         return;
       });
       this.copySuccessful();

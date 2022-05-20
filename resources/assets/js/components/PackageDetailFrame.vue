@@ -680,11 +680,8 @@ export default {
             textArea.select();
 
             try {
-                var successful = document.execCommand('copy');
-                var msg = successful ? 'successful' : 'unsuccessful';
-                console.log('Fallback: Copying text command was ' + msg);
+                document.execCommand('copy');
             } catch (err) {
-                console.error('Fallback: Oops, unable to copy', err);
                 return;
             }
 
@@ -695,13 +692,11 @@ export default {
 
         copyTextToClipboard() {
             if (!navigator.clipboard) {
-                fallbackCopyTextToClipboard();
+                this.fallbackCopyTextToClipboard();
                 return;
             }
             navigator.clipboard.writeText(this.composerString).then(function() {
-                console.log('Async: Copying to clipboard was successful!');
             }, function(err) {
-                console.error('Async: Could not copy text: ', err);
                 return;
             });
 
