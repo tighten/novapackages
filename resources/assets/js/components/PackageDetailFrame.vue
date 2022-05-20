@@ -669,10 +669,8 @@ export default {
             if (!navigator.clipboard) {
                 return;
             }
-            navigator.clipboard.writeText(this.composerString).then(function() {
-            }, function(err) {
-                return;
-            });
+            
+            navigator.clipboard.writeText(this.composerString);
 
             this.copySuccessful();
         }
