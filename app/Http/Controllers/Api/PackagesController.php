@@ -11,6 +11,20 @@ class PackagesController extends Controller
 {
     public function __invoke(Request $request)
     {
-        return PackageResource::collection(Package::orderBy('created_at', 'desc')->with(['author', 'tags'])->paginate(10));
+        $githubUsername = $request->input('github_username');
+        $authorName = $request->input('author_name');
+
+        return PackageResource::collection(Package::orderBy('created_at', 'desc')
+            ->when($githubUsername, function ($query) use ($githubUsername) {
+                $query->whereHas('author', function ($query) use ($githubUsername) {
+                    $query->where('github_username', $githubUsername);
+                });
+            })
+            ->when($authorName, function ($query) use ($authorName) {
+                $query->whereHas('author', function ($query) use ($authorName) {
+                    $query->where('name', $authorName);
+                });
+            })
+            ->with(['author', 'tags'])->paginate(10));
     }
 }
