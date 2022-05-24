@@ -42,9 +42,9 @@ $package['accent'] = app(App\Colors::class)->nextColor();
                         @include('livewire.partials.title-icon', [
                             'color' => $package['accent'],
                             'size' => 'small',
-                            'title' => str_replace(['Laravel Nova ', 'Nova '], [], $package['name']),
+                            'title' => $package['name'],
                         ])
-                        {{ str_replace(['Laravel Nova ', 'Nova '], [], $package['name']) }}
+                        {{ $package['name'] }}
 
                         @if ($package['is_disabled'])
                             <span class="text-xs uppercase text-gray-400">Disabled</span>

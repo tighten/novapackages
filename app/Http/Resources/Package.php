@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Exceptions\PackagistException;
+use App\Helpers\TrimPackageName;
 use App\Http\Remotes\Packagist;
 use App\Http\Resources\Collaborator;
 use App\Http\Resources\Tag;
@@ -19,7 +20,7 @@ class Package extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
+            'name' => TrimPackageName::trim($this->composer_name),
             'author' => new Collaborator($this->author),
             'composer_name' => $this->composer_name,
             'url' => $this->url,
