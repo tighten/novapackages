@@ -2,9 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Exceptions\PackagistException;
 use App\Helpers\TrimPackageName;
-use App\Http\Remotes\Packagist;
 use App\Http\Resources\Collaborator;
 use App\Http\Resources\Tag;
 use Illuminate\Http\Resources\Json\JsonResource;
