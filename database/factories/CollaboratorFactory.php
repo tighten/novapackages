@@ -22,10 +22,10 @@ class CollaboratorFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->firstName.' '.$this->faker->lastName,
-            'url' => $this->faker->url,
+            'name' => $this->faker->firstName().' '.$this->faker->lastName(),
+            'url' => $this->faker->url(),
             'description' => implode(' ', $this->faker->sentences(2))."\n\n".implode(' ', $this->faker->sentences(2)),
-            'github_username' => $this->faker->slug,
+            'github_username' => $this->faker->slug(),
         ];
     }
 }

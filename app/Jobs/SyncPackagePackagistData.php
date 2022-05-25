@@ -51,7 +51,7 @@ class SyncPackagePackagistData implements ShouldQueue
 
                 if (strlen($novaVersion) > 0) {
                     $novaVersion = substr($novaVersion, 0, 1);
-                }else {
+                } else {
                     $novaVersion = null;
                 }
             }

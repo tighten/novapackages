@@ -19,9 +19,11 @@ class SendUnavailablePackageFollowUp extends Command
             ->where('is_disabled', 0)
             ->get();
 
-        $unavailablePackages->each(function($package) {
+        $unavailablePackages->each(function ($package) {
             $diffInDays = now()->diffInDays($package->marked_as_unavailable_at);
-            if ($diffInDays != 14) return;
+            if ($diffInDays != 14) {
+                return;
+            }
 
             if ($package->author && $package->authorIsUser()) {
                 $package->author->user->notify(new RemindAuthorOfUnavailablePackage($package));

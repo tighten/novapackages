@@ -4,7 +4,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
 @endphp
 <div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs rounded relative" wire:key="{{ $context ?? 'no-context' }}-{{ $package['id'] }}">
     <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded">
-        @if (optional(auth()->user())->isAdmin())
+        @if (auth()->user()?->isAdmin())
             <div class="text-right -mb-6">
                 <div class="relative" x-data="{ open: false }">
                     <div role="button" class="inline-block select-none p-2" @click="open = !open">

@@ -320,13 +320,13 @@ class PackageEditTest extends TestCase
         $existingTagB = Tag::factory()->create(['name' => 'test tag b', 'slug' => 'test-tag-b']);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
-            'name' => $this->faker->company,
+            'name' => $this->faker->company(),
             'author_id' => $user->id,
-            'url' =>  $this->faker->url,
-            'abstract' =>  $this->faker->sentence,
-            'instructions' => $this->faker->sentence,
-            'packagist_namespace' => $this->faker->word,
-            'packagist_name' => $this->faker->word,
+            'url' =>  $this->faker->url(),
+            'abstract' =>  $this->faker->sentence(),
+            'instructions' => $this->faker->sentence(),
+            'packagist_namespace' => $this->faker->word(),
+            'packagist_name' => $this->faker->word(),
             'tags-new' => [
                 'Test tag A',
                 'Test tag B',
@@ -349,13 +349,13 @@ class PackageEditTest extends TestCase
         $existingTag = Tag::factory()->create(['name' => 'test tag', 'slug' => 'test-tag']);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
-            'name' => $this->faker->company,
+            'name' => $this->faker->company(),
             'author_id' => $user->id,
-            'url' =>  $this->faker->url,
-            'abstract' =>  $this->faker->sentence,
-            'instructions' => $this->faker->sentence,
-            'packagist_namespace' => $this->faker->word,
-            'packagist_name' => $this->faker->word,
+            'url' =>  $this->faker->url(),
+            'abstract' =>  $this->faker->sentence(),
+            'instructions' => $this->faker->sentence(),
+            'packagist_namespace' => $this->faker->word(),
+            'packagist_name' => $this->faker->word(),
             'tags-new' => [
                 'Test tag',
                 'New Tag',
@@ -383,12 +383,12 @@ class PackageEditTest extends TestCase
         $package->save();
 
         $this->actingAs($user)->put(route('app.packages.update', $package), [
-            'name' => $this->faker->company,
+            'name' => $this->faker->company(),
             'author_id' => $user->id,
             'url' =>  $package->url,
-            'abstract' =>  $this->faker->sentence,
-            'packagist_namespace' => $this->faker->word,
-            'packagist_name' => $this->faker->word,
+            'abstract' =>  $this->faker->sentence(),
+            'packagist_namespace' => $this->faker->word(),
+            'packagist_name' => $this->faker->word(),
         ])
         ->assertRedirect(route('app.packages.index'));
 
@@ -406,12 +406,12 @@ class PackageEditTest extends TestCase
         $package->save();
 
         $this->actingAs($user)->put(route('app.packages.update', $package), [
-            'name' => $this->faker->company,
+            'name' => $this->faker->company(),
             'author_id' => $user->id,
-            'url' =>  $this->faker->url,
-            'abstract' =>  $this->faker->sentence,
-            'packagist_namespace' => $this->faker->word,
-            'packagist_name' => $this->faker->word,
+            'url' =>  $this->faker->url(),
+            'abstract' =>  $this->faker->sentence(),
+            'packagist_namespace' => $this->faker->word(),
+            'packagist_name' => $this->faker->word(),
         ])
             ->assertRedirect(route('app.packages.index'));
 

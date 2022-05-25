@@ -35,7 +35,9 @@ class CheckPackageUrlsForAvailability implements ShouldQueue
             $urlIsValid = false; // If we can't reach the domain at all, mark as invalid
         }
 
-        if ($urlIsValid) return;
+        if ($urlIsValid) {
+            return;
+        }
 
         $this->package->marked_as_unavailable_at = now();
         $this->package->save();
