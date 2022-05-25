@@ -40,11 +40,11 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('any_package', function ($id) {
 
-            if (optional(auth()->user())->isAdmin()) {
+            if (auth()->user()?->isAdmin()) {
                 return Package::withoutGlobalScope('notDisabled')->findOrFail($id);
             }
 
-            if (optional(auth()->user())->isPackageAuthor($id)) {
+            if (auth()->user()?->isPackageAuthor($id)) {
                 return Package::withoutGlobalScope('notDisabled')->findOrFail($id);
             }
 
