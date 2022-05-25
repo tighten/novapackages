@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Helpers\TrimPackageName;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Package extends JsonResource
@@ -15,7 +16,7 @@ class Package extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
+            'name' => TrimPackageName::trim($this->composer_name),
             'author' => new Collaborator($this->author),
             'composer_name' => $this->composer_name,
             'url' => $this->url,
