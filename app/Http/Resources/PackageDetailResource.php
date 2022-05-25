@@ -92,7 +92,7 @@ class PackageDetailResource extends PackageResource
         $key = CacheKeys::userPackageRating(auth()->id(), $package->id);
 
         return Cache::remember($key, self::CACHE_RATINGS_LENGTH, function () use ($package) {
-            return (int)$package->user_average_rating;
+            return (int) $package->user_average_rating;
         });
     }
 

@@ -197,7 +197,9 @@ class Package extends Model implements Feedable
 
     public function updateAvailabilityFromNewUrl()
     {
-        if (is_null($this->marked_as_unavailable_at)) return;
+        if (is_null($this->marked_as_unavailable_at)) {
+            return;
+        }
 
         if (array_key_exists('url', $this->getChanges())) {
             $this->marked_as_unavailable_at = null;
