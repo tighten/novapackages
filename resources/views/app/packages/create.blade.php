@@ -18,7 +18,11 @@
                     @csrf
 
                     <label class="block font-bold">Package name*</label>
-                    <p class="max-w-sm text-gray-800 text-sm mb-2">Important note: When this package is displayed on a listing page, we will trim <code>"Laravel Nova "</code> and <code>"Nova "</code> from the beginning and we'll trim <code>" for Nova"</code> off the end.</p>
+                    <p class="max-w-sm text-gray-800 text-sm mb-2">Important note: When this package is displayed on a
+                        listing page, we will trim references to "Nova", "Laravel" and mentions of version numbers such as "Nova
+                        {{ config('novapackages.nova.latest_major_version') }}",
+                        "V{{ config('novapackages.nova.latest_major_version') }}" and
+                        "N{{ config('novapackages.nova.latest_major_version') }}". Instead, we encourage you to require Laravel Nova's version in your "composer.json" which will show in the detail page and on the listing page if its the latest major version of Nova.</p>
                     <input name="name" placeholder="Nova Stock Ticker" class="border border-gray-600 p-2 mb-6 w-64" value="{{ old('name') }}">
 
                     <label class="block font-bold">Packagist namespace*</label>
