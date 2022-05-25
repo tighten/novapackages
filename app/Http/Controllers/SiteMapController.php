@@ -3,34 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Package;
-use Carbon\Carbon;
-use Laravelium\Sitemap\Sitemap;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 
 class SiteMapController extends Controller
 {
-    public function __invoke(Sitemap $sitemap)
+    public function __invoke()
     {
-        // set cache key (string), duration in minutes (Carbon|Datetime|int), turn on/off (boolean)
-        $sitemap->setCache('laravel.sitemap', 60);
+        return cache()->remember('sitemap', now()->addHour(), function () {
+            $sitemap = Sitemap::create();
 
-        // check if there is cached sitemap and build new only if is not
-        if (! $sitemap->isCached()) {
-            $now = Carbon::now()->format('c');
-            $sitemap->add(url('/'), $now, '1.0', 'daily');
-
-            $packages = Package::orderBy('created_at', 'desc')->get();
-
-            foreach ($packages as $package) {
+            foreach (Package::orderBy('created_at', 'desc')->get() as $package) {
                 $sitemap->add(
-                    route('packages.show', [$package->composer_vendor, $package->composer_package]),
-                    $package->updated_at,
-                    '1.0',
-                    'daily'
+                    Url::create(route('packages.show', [$package->composer_vendor, $package->composer_package]))
+                        ->setLastModificationDate($package->updated_at)
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
+                        ->setPriority(1.0)
                 );
             }
-        }
 
-        // show your sitemap (options: 'xml' (default), 'html', 'txt', 'ror-rss', 'ror-rdf')
-        return $sitemap->render('xml');
+            return $sitemap;
+        });
     }
 }
