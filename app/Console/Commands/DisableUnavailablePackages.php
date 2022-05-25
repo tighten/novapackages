@@ -21,7 +21,9 @@ class DisableUnavailablePackages extends Command
 
         $unavailablePackages->each(function ($package) {
             $diffInDays = now()->diffInDays($package->marked_as_unavailable_at);
-            if ($diffInDays < 30) return;
+            if ($diffInDays < 30) {
+                return;
+            }
 
             $package->is_disabled = 1;
             $package->save();
