@@ -16,7 +16,6 @@
         "doctrine/dbal": "^3.3",
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "knplabs/github-api": "^3.6",
         "laravel/framework": "^8.83",
