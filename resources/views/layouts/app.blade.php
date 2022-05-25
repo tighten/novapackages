@@ -17,7 +17,7 @@
 
     <script>
         window.novapackages = {
-            is_admin: {{ optional(auth()->user())->isAdmin() ? "true" : "false" }},
+            is_admin: {{ auth()->user()?->isAdmin() ? "true" : "false" }},
             csrf_token: '{{ csrf_token() }}',
             user_id: '{{ auth()->id() ?? null }}'
         };
