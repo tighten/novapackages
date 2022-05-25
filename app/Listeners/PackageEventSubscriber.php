@@ -18,12 +18,12 @@ class PackageEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\PackageCreated',
+            \App\Events\PackageCreated::class,
             'App\Listeners\PackageEventSubscriber@handle'
         );
 
         $events->listen(
-            'App\Events\PackageUpdated',
+            \App\Events\PackageUpdated::class,
             'App\Listeners\PackageEventSubscriber@handle'
         );
     }
