@@ -126,14 +126,14 @@ class Package extends Model implements Feedable
         $toRemove = [];
 
         // Create the version haystack for each version of Laravel Nova.
-        $v = config('novapackages.nova.latest_major_version');
-        while ($v >= 1) {
-            foreach (config('novapackages.filtering.package_name') as $subject) {
+        foreach (config('novapackages.filtering.package_name') as $subject) {
+            $v = config('novapackages.nova.latest_major_version');
+            while ($v >= 1) {
                 // Replace ! with the version number.
                 $toRemove[] = Str::replace('!', $v, $subject);
+                
+                $v--;
             }
-
-            $v--;
         }
 
         // Remove matches, trim the string and remove double spaces.
