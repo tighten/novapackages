@@ -120,6 +120,26 @@ class Package extends Model implements Feedable
         });
     }
 
+    public function getDisplayNameAttribute()
+    {
+        // The haystack used to check if the string contains any of the invalid substrings.
+        $toRemove = [];
+
+        // Create the version haystack for each version of Laravel Nova.
+        $v = config('novapackages.nova.latest_major_version');
+        while ($v >= 1) {
+            foreach (config('novapackages.filtering.package_name') as $subject) {
+                // Replace ! with the version number.
+                $toRemove[] = Str::replace('!', $v, $subject);
+            }
+
+            $v--;
+        }
+
+        // Remove matches, trim the string and remove double spaces.
+        return Str::of($this->name)->remove($toRemove, false)->trim()->replaceMatches('!\s+!', ' ');
+    }
+
     public function getComposerVendorAttribute()
     {
         return Str::before($this->composer_name, '/');

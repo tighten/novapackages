@@ -17,7 +17,7 @@ class PackageResource extends ModelResource
     {
         return [
             'id' => $package->id,
-            'name' => TrimPackageName::trim($package->name),
+            'name' => $package->display_name,
             'composer_name' => $package->composer_name,
             'packagist_namespace' => $package->composer_vendor,
             'packagist_name' => $package->composer_package,
