@@ -6,7 +6,7 @@ Route::get('/', 'PackageController@index')->name('home');
 Route::get('packages/{namespace}/{name}', 'PackageController@show')->name('packages.show');
 Route::get('packages/{package}', 'PackageController@showId')->name('packages.show-id');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware('auth')->group(function () {
     Route::get('packages/{namespace}/{name}/reviews/create', 'PackageReviewController@create')->name('reviews.create');
 });
 
@@ -23,18 +23,18 @@ Route::feeds();
 
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::group(['prefix' => 'app/email', 'middleware' => 'auth', 'as' => 'app.email.'], function () {
+Route::prefix('app/email')->middleware('auth')->name('app.email.')->group(function () {
     Route::get('', 'App\EmailController@create')->name('create');
     Route::post('', 'App\EmailController@store')->name('store');
 });
 
-Route::group(['prefix' => 'app', 'middleware' => ['auth', 'email'], 'as' => 'app.'], function () {
+Route::prefix('app')->middleware('auth', 'email')->name('app.')->group(function () {
     Route::post('screenshot-uploads', 'App\ScreenshotUploadController@store')->name('screenshot-uploads.store');
     Route::middleware(['can:delete,screenshot'])->group(function () {
         Route::delete('screenshot-uploads/{screenshot}', 'App\ScreenshotUploadController@destroy')->name('screenshot-uploads.destroy');
     });
 
-    Route::group(['prefix' => 'packages', 'as' => 'packages.'], function () {
+    Route::prefix('packages')->name('packages.')->group(function () {
         Route::get('/', 'App\PackageController@index')->name('index');
         Route::get('create', 'App\PackageController@create')->name('create');
         Route::post('/', 'App\PackageController@store')->name('store');
@@ -47,7 +47,7 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'email'], 'as' => 'app
         });
     });
 
-    Route::group(['prefix' => 'collaborators', 'as' => 'collaborators.'], function () {
+    Route::prefix('collaborators')->name('collaborators.')->group(function () {
         Route::get('/', 'App\CollaboratorController@index')->name('index');
         Route::get('create', 'App\CollaboratorController@create')->name('create');
         Route::post('/', 'App\CollaboratorController@store')->name('store');
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'email'], 'as' => 'app
         Route::post('{collaborator}/claim', 'App\CollaboratorClaimController@store')->name('claims.store');
     });
 
-    Route::group(['prefix' => 'admin', 'middleware' => 'role:admin', 'as' => 'admin.'], function () {
+    Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
         Route::get('/', 'AdminController@index')->name('index');
         Route::get('disable-package/{any_package}', 'DisablePackageController')->name('disable-package');
         Route::get('enable-package/{any_package}', 'EnablePackageController')->name('enable-package');
@@ -68,12 +68,12 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth', 'email'], 'as' => 'app
 });
 
 /* Internal API */
-Route::group(['prefix' => 'internalapi', 'as' => 'internalapi.', 'middleware' => 'auth'], function () {
-    Route::group(['prefix' => 'ratings', 'as' => 'ratings.'], function () {
+Route::prefix('internalapi')->name('internalapi.')->middleware('auth')->group(function () {
+    Route::prefix('ratings')->name('ratings.')->group(function () {
         Route::post('', 'InternalApi\RatingsController@store')->name('store');
     });
 
-    Route::group(['prefix' => 'reviews', 'as' => 'reviews.'], function () {
+    Route::prefix('reviews')->name('reviews.')->group(function () {
         Route::post('/', 'InternalApi\ReviewsController@store')->name('store');
         Route::patch('/', 'InternalApi\ReviewsController@update')->name('update');
         Route::middleware(['can:delete,review'])->group(function () {
@@ -81,7 +81,7 @@ Route::group(['prefix' => 'internalapi', 'as' => 'internalapi.', 'middleware' =>
         });
     });
 
-    Route::group(['prefix' => 'packages/{package}/favorites', 'as' => 'package.favorites.'], function () {
+    Route::prefix('packages/{package}/favorites')->name('package.favorites.')->group(function () {
         Route::post('/', 'InternalApi\PackageFavoritesController@store')->name('store');
         Route::delete('/', 'InternalApi\PackageFavoritesController@destroy')->name('destroy');
     });
