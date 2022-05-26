@@ -168,6 +168,66 @@ class PackageTest extends TestCase
                 'input' => 'R63 Fields',
                 'expected' => 'R63 Fields',
             ],
+            [
+                'input' => 'ABC Laravel Nova 3',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'Laravel Nova 3 ABC',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC For Laravel Nova 3',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC For Laravel Nova v3',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC For n3',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC For N 3',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'Nova ABC',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'Nova 3 ABC',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'Nova3 ABC',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC for Nova v3',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC nova v3',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC for v3',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC (Nova 3)',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC (Nova3)',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC v3',
+                'expected' => 'ABC',
+            ],
         ];
     }
 }
