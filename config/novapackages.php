@@ -34,17 +34,33 @@ return [
          * otherwise it will leave the string before the version number.
          */
         'package_name' => [
-            'For Nova',
+            'For Laravel Nova !',
+            'For Laravel Nova!',
+            'For Laravel Nova',
+            'Laravel Nova !',
+            'Laravel Nova!',
+            'Laravel Nova',
             'For Nova !',
             'For Nova!',
+            'For Nova',
+            'For N !',
+            'For N!',
+            'For N',
+            'For V !',
+            'For V!',
+            'For V',
+            '(Nova !)',
+            '(Nova!)',
+            '(Nova)',
             'Nova !',
             'Nova!',
-            'N!',
-            'V!',
+            'Nova',
             'N !',
+            'N!',
             'V !',
+            'V!',
             '(!)', // Place at bottom
-            '!', // Place at bottom
+            ' !', // Place at bottom
         ]
     ]
 ];

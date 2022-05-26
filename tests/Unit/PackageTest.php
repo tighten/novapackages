@@ -74,4 +74,100 @@ class PackageTest extends TestCase
 
         $this->assertEquals(500, strlen($searchableArray['readme']));
     }
+
+    /**
+     * @test
+     * @dataProvider packageNameProvider
+     */
+    public function it_returns_the_display_name_of_the_package($input, $expected)
+    {
+        $package = Package::factory()->create([
+            'name' => $input,
+        ]);
+
+        $this->assertEquals($expected, $package->display_name);
+    }
+
+    /** Data Provider for the package name test. */
+    public function packageNameProvider()
+    {
+        return [
+            [
+                'input' => 'CKEditor4',
+                'expected' => 'CKEditor4',
+            ],
+            [
+                'input' => 'R64 Fields',
+                'expected' => 'R64 Fields',
+            ],
+            [
+                'input' => 'ABC Laravel Nova 4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'Laravel Nova 4 ABC',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC For Laravel Nova 4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC For Laravel Nova v4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC For n4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC For N 4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'Nova ABC',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'Nova 4 ABC',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'Nova4 ABC',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC for Nova v4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC nova v4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC for v4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC (Nova 4)',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC (Nova4)',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'ABC v4',
+                'expected' => 'ABC',
+            ],
+            [
+                'input' => 'CKEditor3',
+                'expected' => 'CKEditor3',
+            ],
+            [
+                'input' => 'R63 Fields',
+                'expected' => 'R63 Fields',
+            ],
+        ];
+    }
 }
