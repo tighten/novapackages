@@ -131,7 +131,7 @@ class Package extends Model implements Feedable
             while ($v >= 1) {
                 // Replace ! with the version number.
                 $toRemove[] = Str::replace('!', $v, $subject);
-                
+
                 $v--;
             }
         }

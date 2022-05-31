@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Helpers\TrimPackageName;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Package extends JsonResource

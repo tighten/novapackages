@@ -3,9 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Package;
-use App\Favorite;
 use Illuminate\Support\Str;
-use App\Helpers\TrimPackageName;
 
 class PackageResource extends ModelResource
 {
