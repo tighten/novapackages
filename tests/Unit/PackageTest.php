@@ -81,7 +81,7 @@ class PackageTest extends TestCase
      */
     public function it_returns_the_display_name_of_the_package($input, $expected)
     {
-        $package = Package::factory()->create([
+        $package = Package::make([
             'name' => $input,
         ]);
 
@@ -227,6 +227,22 @@ class PackageTest extends TestCase
             [
                 'input' => 'ABC v3',
                 'expected' => 'ABC',
+            ],
+            [
+                'input' => ' ABC ',
+                'expected' => 'ABC'
+            ],
+            [
+                'input' => 'ABC For Laravel Nova 4!',
+                'expected' => 'ABC !'
+            ],
+            [
+                'input' => 'Nova Oh Dear! Tool',
+                'expected' => 'Oh Dear! Tool'
+            ],
+            [
+                'input' => 'Package  with  DoubleSpaces',
+                'expected' => 'Package with DoubleSpaces'
             ],
         ];
     }
