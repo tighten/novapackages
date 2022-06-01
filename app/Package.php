@@ -77,7 +77,7 @@ class Package extends Model implements Feedable
         return $this->hasMany(Favorite::class);
     }
 
-    public static function scopeFilter($query, string $tag)
+    public function scopeFilter($query, string $tag)
     {
         switch ($tag) {
             case 'popular':
