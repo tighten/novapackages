@@ -61,31 +61,15 @@ class PackageList extends Component
                 return $algolia->search($query, $options);
             })->query(function (Builder $builder) {
                 // Ensure search results use the same query scopes as non-filtered results
-                switch ($this->tag) {
-                    case 'popular':
-                        return $builder->popular();
-                    case 'nova_current':
-                        return $builder->novaCurrent();
-                    default:
-                        return $builder;
-                }
+                return $builder->filter($this->tag);
             })->paginate($this->pageSize);
 
             $packages->load(['author', 'ratings']);
         } else {
-            switch ($this->tag) {
-                case 'all':
-                    $packages = Package::query();
-                    break;
-                case 'popular':
-                    $packages = Package::popular();
-                    break;
-                case 'nova_current':
-                    $packages = Package::novaCurrent();
-                    break;
-                default:
-                    $packages = Package::tagged($this->tag);
-                    break;
+            if (in_array($this->tag, ['all', 'popular', 'nova_current'])) {
+                $packages = Package::filter($this->tag);
+            } else {
+                $packages = Package::tagged($this->tag);
             }
 
             $packages = $packages->latest()->with(['author', 'ratings'])->paginate($this->pageSize);
