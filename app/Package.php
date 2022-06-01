@@ -77,6 +77,18 @@ class Package extends Model implements Feedable
         return $this->hasMany(Favorite::class);
     }
 
+    public function scopeFilter($query, string $tag)
+    {
+        switch ($tag) {
+            case 'popular':
+                return $query->popular();
+            case 'nova_current':
+                return $query->novaCurrent();
+            default:
+                return $query;
+        }
+    }
+
     public function scopeTagged($query, $tagSlug)
     {
         $query->whereHas('tags', function ($query) use ($tagSlug) {
