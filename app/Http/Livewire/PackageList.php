@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\SearchIndex;
 use App\CacheKeys;
 use App\Package;
 use App\Tag;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
@@ -59,6 +59,16 @@ class PackageList extends Component
                 }
 
                 return $algolia->search($query, $options);
+            })->query(function (Builder $builder) {
+                // Ensure search results use the same query scopes as non-filtered results
+                switch ($this->tag) {
+                    case 'popular':
+                        return $builder->popular();
+                    case 'nova_current':
+                        return $builder->novaCurrent();
+                    default:
+                        return $builder;
+                }
             })->paginate($this->pageSize);
 
             $packages->load(['author', 'ratings']);
