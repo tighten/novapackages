@@ -15,7 +15,7 @@ class Package extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
+            'name' => $this->display_name,
             'author' => new Collaborator($this->author),
             'composer_name' => $this->composer_name,
             'url' => $this->url,
