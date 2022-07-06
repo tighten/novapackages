@@ -671,9 +671,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      navigator.clipboard.writeText(this.composerString).then(function () {}, function (err) {
-        return;
-      });
+      navigator.clipboard.writeText(this.composerString);
       this.copySuccessful();
     }
   }
