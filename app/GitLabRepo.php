@@ -83,7 +83,7 @@ class GitLabRepo extends BaseRepo
             return;
         }
 
-        return ($file['encoding'] == 'base64')
+        return (isset($file['encoding']) && $file['encoding'] === 'base64')
             ? base64_decode($file['content'])
             : $file;
     }
