@@ -13,6 +13,7 @@ use App\NpmRepo;
 use App\Package;
 use Facades\App\Repo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Mockery;
 use Tests\TestCase;
 
@@ -24,6 +25,12 @@ class RepoTest extends TestCase
     /** @test */
     public function can_get_a_repo_from_a_package_composer_name()
     {
+        Http::fake([
+            'https://packagist.org/packages/tightenco/nova-stripe.json' => Http::response([
+                'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
+            ]),
+        ]);
+
         $composerName = 'tightenco/nova-stripe';
         $package = Package::factory()->make([
             'composer_name' => $composerName,
@@ -43,17 +50,25 @@ class RepoTest extends TestCase
     /** @test */
     public function can_get_a_repo_from_a_the_package_url_if_the_composer_name_is_not_valid()
     {
-        $url = 'https://github.com/tighten/nova-stripe';
+        $packageUrl = 'https://github.com/tighten/nova-stripe';
+
+        Http::fake([
+            'https://packagist.org/packages/invalid-namespace/invalid-name.json' => Http::response([
+                'status' => 'error',
+                'message' => 'Package not found',
+            ]),
+        ]);
+
         $package = Package::factory()->make([
             'composer_name' => 'invalid-namespace/invalid-name',
-            'url' => $url,
+            'url' => $packageUrl,
         ]);
 
         $repo = Repo::fromPackageModel($package);
 
         $this->assertInstanceOf(GitHubRepo::class, $repo);
         $this->assertEquals('github', $repo->source());
-        $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
+        $this->assertEquals($packageUrl, $repo->url());
         $this->assertNotNull($repo->readme());
         $this->assertNotNull($repo->latestReleaseVersion());
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -62,10 +77,16 @@ class RepoTest extends TestCase
     /** @test */
     public function can_get_a_repo_from_a_packagist_composer_name()
     {
+        Http::fake([
+            'https://packagist.org/packages/tightenco/nova-stripe.json' => Http::response([
+                'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
+            ]),
+        ]);
+
         $url = 'https://packagist.org/packages/tightenco/nova-stripe';
         $mock = Mockery::mock(PackageFormRequest::class);
         $mock->shouldReceive('input')->with('url')->andReturn($url);
-        $mock->shouldReceive('getComposerName')->andReturn('tigtenco/nova-stripe');
+        $mock->shouldReceive('getComposerName')->andReturn('tightenco/nova-stripe');
 
         $repo = Repo::fromRequest($mock);
 
@@ -81,6 +102,13 @@ class RepoTest extends TestCase
     /** @test */
     public function can_get_a_repo_from_a_the_request_url_if_the_composer_name_is_not_valid()
     {
+        Http::fake([
+            'https://packagist.org/packages/invalid-namespace/invalid-name.json' => Http::response([
+                'status' => 'error',
+                'message' => 'Package not found',
+            ]),
+        ]);
+
         $url = 'https://github.com/tighten/nova-stripe';
         $mock = Mockery::mock(PackageFormRequest::class);
         $mock->shouldReceive('input')->with('url')->andReturn($url);
@@ -128,6 +156,12 @@ class RepoTest extends TestCase
     /** @test */
     public function can_fetch_data_from_a_bitbucket_repo()
     {
+        Http::fake([
+            'https://api.bitbucket.org/2.0/repositories/tightenco/novapackages-test/refs' => Http::response(),
+            'https://api.bitbucket.org/2.0/repositories/tightenco/novapackages-test/src/master/README.md' =>
+                Http::response(['# novapackages-test']),
+        ]);
+
         $bitBucketUrl = 'https://bitbucket.org/tightenco/novapackages-test';
 
         $repo = Repo::fromUrl($bitBucketUrl);
@@ -135,8 +169,7 @@ class RepoTest extends TestCase
         $this->assertInstanceOf(BitBucketRepo::class, $repo);
         $this->assertEquals('bitbucket', $repo->source());
         $this->assertEquals($bitBucketUrl, $repo->url());
-        $this->assertNotNull($repo->readme());
-        $this->assertTrue(strpos($repo->readme(), '# novapackages-test') !== false);
+        $this->assertTrue(str_contains($repo->readme(), '# novapackages-test'));
         $this->assertNotNull($repo->latestReleaseVersion());
         $this->assertEquals('master', $repo->latestReleaseVersion());
     }
@@ -144,6 +177,12 @@ class RepoTest extends TestCase
     /** @test */
     public function an_exception_is_thrown_if_bitbucket_response_has_errors_that_are_not_file_not_found_errors()
     {
+        Http::fake([
+            'https://api.bitbucket.org/2.0/repositories/invalid-user/invalid-repo/refs' => Http::response([
+                'type' => 'error',
+            ]),
+        ]);
+
         $bitBucketUrl = 'https://bitbucket.org/invalid-user/invalid-repo';
 
         $this->expectException(BitBucketException::class);
@@ -156,13 +195,20 @@ class RepoTest extends TestCase
     {
         $url = 'https://gitlab.com/ctroms/test-project';
 
+        Http::fake([
+            $url => Http::response(),
+            'https://gitlab.com/api/v4/projects/ctroms%2Ftest-project/repository/tags' => Http::response(),
+            'https://gitlab.com/api/v4/projects/ctroms%2Ftest-project/repository/files/README%2Emd?ref=master' =>
+                Http::response($this->fakeResponse('gitlab-repository-readme.json')),
+        ]);
+
         $repo = Repo::fromUrl($url);
 
         $this->assertInstanceOf(GitLabRepo::class, $repo);
         $this->assertEquals('gitlab', $repo->source());
         $this->assertEquals($url, $repo->url());
         $this->assertNotNull($repo->readme());
-        $this->assertTrue(strpos($repo->readme(), '# Test Project') !== false);
+        $this->assertTrue(str_contains($repo->readme(), '# Test Project'));
         $this->assertNotNull($repo->latestReleaseVersion());
         $this->assertEquals('master', $repo->latestReleaseVersion());
     }

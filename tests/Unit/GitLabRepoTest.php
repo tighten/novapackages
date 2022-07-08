@@ -27,6 +27,8 @@ class GitLabRepoTest extends TestCase
     /** @test */
     public function it_gets_the_latest_release_version_for_tagged_releases()
     {
+        Http::fake(['https://gitlab.com/starwars/lightsabers' => Http::response()]);
+
         $this->mockGitLabWith([
             'fetchData' => collect([
                 [
@@ -43,6 +45,8 @@ class GitLabRepoTest extends TestCase
     /** @test */
     public function it_falls_back_to_master_when_there_are_no_releases()
     {
+        Http::fake(['https://gitlab.com/starwars/x-wings' => Http::response()]);
+
         $this->mockGitLabWith([
             'fetchData' => collect(),
         ]);
