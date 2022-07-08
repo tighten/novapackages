@@ -4,11 +4,26 @@ namespace Tests\Unit;
 
 use App\GitLabRepo;
 use App\Http\Remotes\GitLab;
+use Illuminate\Support\Facades\Http;
 use Mockery;
 use Tests\TestCase;
 
 class GitLabRepoTest extends TestCase
 {
+    /** @test */
+    function it_sets_the_url_for_a_changed_username_to_the_new_repository_location()
+    {
+        Http::fake([
+            'https://gitlab.com/senator-palpatine/masterplan' => Http::response(null, 301, [
+                'Location' => ['https://gitlab.com/emperor-palpatine/masterplan'],
+            ]),
+        ]);
+
+        $repo = GitLabRepo::make('https://gitlab.com/senator-palpatine/masterplan');
+
+        $this->assertEquals('https://gitlab.com/emperor-palpatine/masterplan', $repo->url());
+    }
+
     /** @test */
     public function it_gets_the_latest_release_version_for_tagged_releases()
     {
