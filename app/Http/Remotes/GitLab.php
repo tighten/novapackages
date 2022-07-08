@@ -26,10 +26,12 @@ class GitLab
 
     public function fetchData($endpoint)
     {
-        $this->response = Http::get('https://gitlab.com/api/'.self::API_VERSION.'/'.$endpoint)->json();
+        $this->response = Http::get('https://gitlab.com/api/' . self::API_VERSION . '/' . $endpoint)->json();
 
-        if ($this->responseHasErrors() && $this->isNotFileNotFoundError()) {
-            throw new GitLabException("GitLab error fetching data for [{$this->url}]: ".Arr::get($this->response, 'message'));
+        if ($this->responseHasErrors() && ($this->isNotFileNotFoundError() || $this->isCommitNotFoundError())) {
+            throw new GitLabException(
+                "GitLab error fetching data for [{$this->url}]: " . Arr::get($this->response, 'message')
+            );
         }
 
         return $this->response;
@@ -48,5 +50,10 @@ class GitLab
     public function hasFileNotFoundError()
     {
         return Arr::get($this->response, 'message') === '404 File Not Found';
+    }
+
+    public function isCommitNotFoundError()
+    {
+        return Arr::get($this->response, 'message') === '404 Commit Not Found';
     }
 }

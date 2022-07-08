@@ -216,26 +216,52 @@ class RepoTest extends TestCase
     /** @test */
     public function an_exception_is_thrown_if_gitlab_response_has_errors_that_are_not_file_not_found_errors()
     {
-        $bitBucketUrl = 'https://gitlab.com/invalid-user/invalid-repo';
+        $gitlabUrl = 'https://gitlab.com/invalid-user/invalid-repo';
+
+        Http::fake([
+            $gitlabUrl => Http::response([]),
+            'https://gitlab.com/api/v4/projects/invalid-user%2Finvalid-repo/repository/tags' => Http::response([
+                'message' => '404 Project Not Found',
+            ]),
+        ]);
 
         $this->expectException(GitLabException::class);
 
-        Repo::fromUrl($bitBucketUrl)->readme();
+        Repo::fromUrl($gitlabUrl)->readme();
     }
 
     /** @test */
     public function gitlab_readme_is_returned_as_null_if_one_is_not_present()
     {
-        $this->markTestIncomplete('Need to find/create a package that matches this use case');
+        $url = 'https://gitlab.com/jedi/how-to-join-the-sith';
+
+        Http::fake([
+            $url => Http::response(),
+            'https://gitlab.com/api/v4/projects/jedi%2Fhow-to-join-the-sith/repository/tags' => Http::response([]),
+            'https://gitlab.com/api/v4/projects/jedi%2Fhow-to-join-the-sith/repository/files/README%2Emd?ref=master' =>
+                Http::response(['message' => '404 Commit Not Found']),
+
+        ]);
+
+        $this->expectException(GitLabException::class);
+
+        $repo = Repo::fromUrl($url);
+
+        $this->assertNull($repo->readme());
     }
 
     /** @test */
     public function can_fetch_the_github_data_from_an_npm_package_with_a_github_vcs()
     {
-        // This package was selected because this test needs a package that has been published
-        // on npm with a github VCS. At the moment, Tighten does not own an npm packages that
-        // meets this criteria.
+        // lodash is an example of a package that has been
+        // published to npm with a GitHub VCS.
         $npmUrl = 'https://www.npmjs.com/package/lodash';
+
+        Http::fake([
+            'https://registry.npmjs.org/lodash/' => Http::response(
+                $this->fakeResponse('npm-registry-package-with-github-vcs.json')
+            ),
+        ]);
 
         $repo = Repo::fromUrl($npmUrl);
 
@@ -251,7 +277,14 @@ class RepoTest extends TestCase
     /** @test */
     public function can_fetch_the_npm_data_if_the_package_doesnt_have_a_vcs()
     {
+        // vue-form-state is an example of a package that has been
+        // published to npm without a VCS.
         $npmUrl = 'https://www.npmjs.com/package/vue-form-state';
+
+        Http::fake([
+            'https://registry.npmjs.org/vue-form-state/' =>
+                Http::response($this->fakeResponse('npm-registry-package-without-vcs.json')),
+        ]);
 
         $repo = Repo::fromUrl($npmUrl);
 
