@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class AdminPanelViewTest extends TestCase
@@ -67,6 +68,10 @@ class AdminPanelViewTest extends TestCase
     /** @test */
     public function admin_user_can_view_individual_page_for_disabled_package()
     {
+        Http::fake([
+            "https://packagist.org/packages/*.json" => Http::response(),
+        ]);
+
         $disabledPackage = Package::factory()->disabled()->create();
 
         $this->be($this->user)
