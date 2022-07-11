@@ -193,13 +193,13 @@ class RepoTest extends TestCase
     /** @test */
     public function can_fetch_data_from_a_gitlab_repo()
     {
-        $url = 'https://gitlab.com/ctroms/test-project';
+        $url = 'https://gitlab.com/alphayax/rancher-api';
 
         Http::fake([
             $url => Http::response(),
-            'https://gitlab.com/api/v4/projects/ctroms%2Ftest-project/repository/tags' => Http::response(),
-            'https://gitlab.com/api/v4/projects/ctroms%2Ftest-project/repository/files/README%2Emd?ref=master' =>
-                Http::response($this->fakeResponse('gitlab-repository-readme.json')),
+            'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/tags' => Http::response($this->fakeResponse('gitlab.repo-tags.json')),
+            'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/files/README%2Emd?ref=2.0.4' =>
+                Http::response($this->fakeResponse('gitlab.repo-readme.json')),
         ]);
 
         $repo = Repo::fromUrl($url);
@@ -208,9 +208,8 @@ class RepoTest extends TestCase
         $this->assertEquals('gitlab', $repo->source());
         $this->assertEquals($url, $repo->url());
         $this->assertNotNull($repo->readme());
-        $this->assertTrue(str_contains($repo->readme(), '# Test Project'));
-        $this->assertNotNull($repo->latestReleaseVersion());
-        $this->assertEquals('master', $repo->latestReleaseVersion());
+        $this->assertTrue(str_contains($repo->readme(), '# Rancher-API'));
+        $this->assertEquals('2.0.4', $repo->latestReleaseVersion());
     }
 
     /** @test */
@@ -259,7 +258,7 @@ class RepoTest extends TestCase
 
         Http::fake([
             'https://registry.npmjs.org/lodash/' => Http::response(
-                $this->fakeResponse('npm-registry-package-with-github-vcs.json')
+                $this->fakeResponse('npm.repo-with-github-vcs.json')
             ),
         ]);
 
@@ -283,7 +282,7 @@ class RepoTest extends TestCase
 
         Http::fake([
             'https://registry.npmjs.org/vue-form-state/' =>
-                Http::response($this->fakeResponse('npm-registry-package-without-vcs.json')),
+                Http::response($this->fakeResponse('npm.package-without-vcs.json')),
         ]);
 
         $repo = Repo::fromUrl($npmUrl);
@@ -339,6 +338,11 @@ class RepoTest extends TestCase
     {
         $url = 'https://packagist.org/packages/tightenco/nova-stripe';
 
+        Http::fake([
+            "{$url}.json" =>
+                Http::response($this->fakeResponse('packagist.repo-with-github-vcs.json')),
+        ]);
+
         $repo = Repo::fromUrl($url);
 
         $this->assertNotNull($repo->repo());
@@ -347,46 +351,64 @@ class RepoTest extends TestCase
         $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
         $this->assertNotNull($repo->readme());
         $this->assertNotNull($repo->latestReleaseVersion());
-        $this->assertNotEquals('master', $repo->latestReleaseVersion());
+        $this->assertEquals('v1.0.0', $repo->latestReleaseVersion());
     }
 
     /** @test */
     public function can_fetch_the_bitbucket_data_from_a_packagist_package_with_a_bitbucket_vcs()
     {
-        // This package was selected because this test needs a package that has been published
-        // on packagist with a bitbucket VCS. At the moment, Tighten does not own a package
-        // that meet this criteria.
-        $bitBucketUrl = 'https://packagist.org/packages/adnanchowdhury/uploadcare-image';
+        // This package is an example of a package that is
+        // backed by a Bitbucket repository.
+        $packagistUrl = 'https://packagist.org/packages/adnanchowdhury/uploadcare-image';
 
-        $repo = Repo::fromUrl($bitBucketUrl);
+        Http::fake([
+            "{$packagistUrl}.json" =>
+                Http::response($this->fakeResponse('packagist.repo-with-bitbucket-vcs.json')),
+            // This request is currently run twice in this test case
+            // for $repo->readme() and $repo->latestReleaseVersion().
+            // Caching should be introduced to avoid this.
+            'https://api.bitbucket.org/2.0/repositories/adnanchowdhury/nova-uploadcare-imagefield/refs' =>
+                Http::sequence()
+                    ->push($this->fakeResponse('bitbucket.repo-refs.json'))
+                    ->push($this->fakeResponse('bitbucket.repo-refs.json')),
+            'https://api.bitbucket.org/2.0/repositories/adnanchowdhury/nova-uploadcare-imagefield/src/0.0.3/README.md' =>
+                Http::response($this->fakeResponse('bitbucket.repo-readme.md')),
+        ]);
+
+        $repo = Repo::fromUrl($packagistUrl);
 
         $this->assertNotNull($repo->repo());
         $this->assertInstanceOf(BitBucketRepo::class, $repo->repo());
         $this->assertEquals('bitbucket', $repo->source());
         $this->assertEquals('https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield.git', $repo->url());
         $this->assertNotNull($repo->readme());
-        $this->assertNotNull($repo->latestReleaseVersion());
-        $this->assertNotEquals('master', $repo->latestReleaseVersion());
+        $this->assertEquals('0.0.3', $repo->latestReleaseVersion());
     }
 
     /** @test */
     public function can_fetch_the_gitlab_data_from_a_packagist_package_with_a_gitlab_vcs()
     {
-        // This package was selected because this test needs a package that has been published
-        // on packagist with a gitlab VCS. At the moment, Tighten does not own any packages
-        // that meet this criteria.
         $packagistUrl = 'https://packagist.org/packages/alphayax/rancher-api';
+        $repoUrl = 'https://gitlab.com/alphayax/rancher-api';
+
+        Http::fake([
+            "{$packagistUrl}.json" => Http::response($this->fakeResponse('packagist.repo-with-gitlab-vcs.json')),
+            $repoUrl => Http::response(),
+            'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/tags' => Http::response($this->fakeResponse('gitlab.repo-tags.json')),
+            'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/files/README%2Emd?ref=2.0.4' =>
+                Http::response($this->fakeResponse('gitlab.repo-readme.json')),
+        ]);
 
         $repo = Repo::fromUrl($packagistUrl);
 
         $this->assertNotNull($repo->repo());
         $this->assertInstanceOf(GitLabRepo::class, $repo->repo());
         $this->assertEquals('gitlab', $repo->source());
-        $this->assertEquals('https://gitlab.com/alphayax/rancher-api', $repo->url());
+        $this->assertEquals($repoUrl, $repo->url());
         $this->assertNotNull($repo->readme());
-        $this->assertTrue(strpos($repo->readme(), '# Rancher-API') !== false);
+        $this->assertTrue(str_contains($repo->readme(), '# Rancher-API'));
         $this->assertNotNull($repo->latestReleaseVersion());
-        $this->assertNotEquals('master', $repo->latestReleaseVersion());
+        $this->assertEquals('2.0.4', $repo->latestReleaseVersion());
     }
 
     /** @test */

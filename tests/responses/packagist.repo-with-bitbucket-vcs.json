@@ -1,0 +1,271 @@
+{
+    "package":
+    {
+        "name": "adnanchowdhury/uploadcare-image",
+        "description": "A Laravel Nova field.",
+        "time": "2018-09-13T15:58:43+00:00",
+        "maintainers":
+        [
+            {
+                "name": "adnanchowdhury",
+                "avatar_url": "https://www.gravatar.com/avatar/243f9ae2509b469fc033f00cf1fb4276?d=identicon"
+            }
+        ],
+        "versions":
+        {
+            "dev-master":
+            {
+                "name": "adnanchowdhury/uploadcare-image",
+                "description": "A Laravel Nova field.",
+                "keywords":
+                [
+                    "nova",
+                    "laravel"
+                ],
+                "homepage": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield",
+                "version": "dev-master",
+                "version_normalized": "dev-master",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [],
+                "source":
+                {
+                    "url": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield.git",
+                    "type": "git",
+                    "reference": "fd2e7210497520299d633f5154dc0d4a5ff85982"
+                },
+                "dist":
+                {
+                    "url": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield/get/fd2e7210497520299d633f5154dc0d4a5ff85982.zip",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "fd2e7210497520299d633f5154dc0d4a5ff85982"
+                },
+                "type": "library",
+                "support":
+                {
+                    "source": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield/src/fd2e7210497520299d633f5154dc0d4a5ff85982/?at=master"
+                },
+                "time": "2018-09-13T17:22:00+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Adnanchowdhury\\UploadcareImage\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Adnanchowdhury\\UploadcareImage\\FieldServiceProvider"
+                        ]
+                    }
+                },
+                "default-branch": true,
+                "require":
+                {
+                    "php": ">=7.1.0"
+                }
+            },
+            "0.0.3":
+            {
+                "name": "adnanchowdhury/uploadcare-image",
+                "description": "A Laravel Nova field.",
+                "keywords":
+                [
+                    "nova",
+                    "laravel"
+                ],
+                "homepage": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield",
+                "version": "0.0.3",
+                "version_normalized": "0.0.3.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [],
+                "source":
+                {
+                    "url": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield.git",
+                    "type": "git",
+                    "reference": "89323a48df3915744453d6074f413d5dbc290589"
+                },
+                "dist":
+                {
+                    "url": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield/get/89323a48df3915744453d6074f413d5dbc290589.zip",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "89323a48df3915744453d6074f413d5dbc290589"
+                },
+                "type": "library",
+                "support":
+                {
+                    "source": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield/src/89323a48df3915744453d6074f413d5dbc290589/?at=branch1"
+                },
+                "time": "2018-09-13T17:19:23+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Adnanchowdhury\\UploadcareImage\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Adnanchowdhury\\UploadcareImage\\FieldServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0"
+                }
+            },
+            "0.0.2":
+            {
+                "name": "adnanchowdhury/uploadcare-image",
+                "description": "A Laravel Nova field.",
+                "keywords":
+                [
+                    "nova",
+                    "laravel"
+                ],
+                "homepage": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield",
+                "version": "0.0.2",
+                "version_normalized": "0.0.2.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [],
+                "source":
+                {
+                    "url": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield.git",
+                    "type": "git",
+                    "reference": "553a57ffffb9549bd8aa71c3b4412417a5260007"
+                },
+                "dist":
+                {
+                    "url": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield/get/553a57ffffb9549bd8aa71c3b4412417a5260007.zip",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "553a57ffffb9549bd8aa71c3b4412417a5260007"
+                },
+                "type": "library",
+                "support":
+                {
+                    "source": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield/src/553a57ffffb9549bd8aa71c3b4412417a5260007/?at=branch1"
+                },
+                "time": "2018-09-13T16:36:54+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Adnanchowdhury\\UploadcareImage\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Adnanchowdhury\\UploadcareImage\\FieldServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0"
+                }
+            },
+            "0.0.1":
+            {
+                "name": "adnanchowdhury/uploadcare-image",
+                "description": "A Laravel Nova field.",
+                "keywords":
+                [
+                    "nova",
+                    "laravel"
+                ],
+                "homepage": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield",
+                "version": "0.0.1",
+                "version_normalized": "0.0.1.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [],
+                "source":
+                {
+                    "url": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield.git",
+                    "type": "git",
+                    "reference": "063102a0fa5f6ada6bf08f54422d9c75f89b4d20"
+                },
+                "dist":
+                {
+                    "url": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield/get/063102a0fa5f6ada6bf08f54422d9c75f89b4d20.zip",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "063102a0fa5f6ada6bf08f54422d9c75f89b4d20"
+                },
+                "type": "library",
+                "support":
+                {
+                    "source": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield/src/063102a0fa5f6ada6bf08f54422d9c75f89b4d20/?at=branch1"
+                },
+                "time": "2018-09-13T16:10:50+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Adnanchowdhury\\UploadcareImage\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Adnanchowdhury\\UploadcareImage\\FieldServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0"
+                }
+            }
+        },
+        "type": "library",
+        "repository": "https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield.git",
+        "github_stars": null,
+        "github_watchers": null,
+        "github_forks": null,
+        "github_open_issues": null,
+        "language": null,
+        "dependents": 0,
+        "suggesters": 0,
+        "downloads":
+        {
+            "total": 4981,
+            "monthly": 95,
+            "daily": 3
+        },
+        "favers": 0
+    }
+}
