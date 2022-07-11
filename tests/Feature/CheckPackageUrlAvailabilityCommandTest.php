@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-/** @group integration */
 class CheckPackageUrlAvailabilityCommandTest extends TestCase
 {
     use RefreshDatabase;
