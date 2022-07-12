@@ -208,7 +208,7 @@ class PackageCreateTest extends TestCase
             ]),
             'readme' => '<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content p-5" itemprop="text"><p>Finding a <a href="kyber-crystal">kyber crystal</a> for your lightsaber</p></article></div>',
         ]);
-        $github->shouldReceive('api')->andReturn($github);
+        $github->shouldReceive('api')->once()->andReturn($github);
         app()->instance(GitHub::class, $github);
 
         $user = User::factory()->create();

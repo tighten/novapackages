@@ -1,0 +1,491 @@
+{
+    "package":
+    {
+        "name": "alphayax/rancher-api",
+        "description": "Basic API for Rancher",
+        "time": "2017-09-16T19:39:39+00:00",
+        "maintainers":
+        [
+            {
+                "name": "alphayax",
+                "avatar_url": "https://www.gravatar.com/avatar/7af0a9c18e153836c6325b0fba2de909?d=identicon"
+            }
+        ],
+        "versions":
+        {
+            "dev-master":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "dev-master",
+                "version_normalized": "dev-master",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "git@gitlab.com:alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "e7b83236ade688bca5b0215fc58e9f287677ce37"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=e7b83236ade688bca5b0215fc58e9f287677ce37",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "e7b83236ade688bca5b0215fc58e9f287677ce37"
+                },
+                "type": "library",
+                "time": "2018-05-31T09:33:56+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "bin":
+                [
+                    "bin/rancher_update.php"
+                ],
+                "default-branch": true,
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^3.0.0"
+                }
+            },
+            "2.0.4":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "2.0.4",
+                "version_normalized": "2.0.4.0",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://gitlab.com/alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "e7b83236ade688bca5b0215fc58e9f287677ce37"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=e7b83236ade688bca5b0215fc58e9f287677ce37",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "e7b83236ade688bca5b0215fc58e9f287677ce37"
+                },
+                "type": "library",
+                "time": "2018-05-31T09:33:56+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "bin":
+                [
+                    "bin/rancher_update.php"
+                ],
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^3.0.0"
+                }
+            },
+            "2.0.3":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "2.0.3",
+                "version_normalized": "2.0.3.0",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://gitlab.com/alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "1bdf2b0e6e9aa06de9af268361d907ec67be5b04"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=1bdf2b0e6e9aa06de9af268361d907ec67be5b04",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "1bdf2b0e6e9aa06de9af268361d907ec67be5b04"
+                },
+                "type": "library",
+                "time": "2018-05-31T09:06:04+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "bin":
+                [
+                    "bin/rancher_update.php"
+                ],
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^3.0.0"
+                }
+            },
+            "2.0.2":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "2.0.2",
+                "version_normalized": "2.0.2.0",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://gitlab.com/alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "debf1081d4d761730ff5064b1e1cfc2b32b26b4e"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=debf1081d4d761730ff5064b1e1cfc2b32b26b4e",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "debf1081d4d761730ff5064b1e1cfc2b32b26b4e"
+                },
+                "type": "library",
+                "time": "2018-05-31T07:24:37+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "bin":
+                [
+                    "bin/rancher_update.php"
+                ],
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^3.0.0"
+                }
+            },
+            "2.0.1":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "2.0.1",
+                "version_normalized": "2.0.1.0",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://gitlab.com/alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "91e0b8f3ffcbebd66eb76b057e1ddcd1a7dcd47e"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=91e0b8f3ffcbebd66eb76b057e1ddcd1a7dcd47e",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "91e0b8f3ffcbebd66eb76b057e1ddcd1a7dcd47e"
+                },
+                "type": "library",
+                "time": "2018-05-30T13:41:24+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "bin":
+                [
+                    "bin/rancher_update.php"
+                ],
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^3.0.0"
+                }
+            },
+            "2.0.0":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "2.0.0",
+                "version_normalized": "2.0.0.0",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://gitlab.com/alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "b9bd3b53b2e28ddf5b93308e75bc9dbdd022aea6"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=b9bd3b53b2e28ddf5b93308e75bc9dbdd022aea6",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "b9bd3b53b2e28ddf5b93308e75bc9dbdd022aea6"
+                },
+                "type": "library",
+                "time": "2018-05-30T13:31:55+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "bin":
+                [
+                    "bin/rancher_update.php"
+                ],
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^3.0.0"
+                }
+            },
+            "1.0.2":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "1.0.2",
+                "version_normalized": "1.0.2.0",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://gitlab.com/alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "abd2122138825c6768442737e3b9f0274896baa7"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=abd2122138825c6768442737e3b9f0274896baa7",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "abd2122138825c6768442737e3b9f0274896baa7"
+                },
+                "type": "library",
+                "time": "2017-11-30T10:06:52+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^3.0.0"
+                }
+            },
+            "1.0.1":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "1.0.1",
+                "version_normalized": "1.0.1.0",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://gitlab.com/alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "3ed66124b7241acd64209022e4ee11931f3eae2e"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=3ed66124b7241acd64209022e4ee11931f3eae2e",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "3ed66124b7241acd64209022e4ee11931f3eae2e"
+                },
+                "type": "library",
+                "time": "2017-11-30T09:52:18+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^3.0.0"
+                }
+            },
+            "1.0.0":
+            {
+                "name": "alphayax/rancher-api",
+                "description": "Basic API for Rancher",
+                "keywords":
+                [],
+                "homepage": "",
+                "version": "1.0.0",
+                "version_normalized": "1.0.0.0",
+                "license":
+                [
+                    "LGPL-3.0"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "alphayax",
+                        "email": "alphayax@gmail.com"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://gitlab.com/alphayax/rancher-api.git",
+                    "type": "git",
+                    "reference": "db46f39f2554a0ad38ecec494ca9980187d018c6"
+                },
+                "dist":
+                {
+                    "url": "https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/archive.zip?sha=db46f39f2554a0ad38ecec494ca9980187d018c6",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "db46f39f2554a0ad38ecec494ca9980187d018c6"
+                },
+                "type": "library",
+                "time": "2017-09-16T21:45:07+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "alphayax\\rancher_api\\": "src"
+                    }
+                },
+                "require":
+                {
+                    "guzzlehttp/guzzle": "~6.0",
+                    "alphayax/get_opt": "^1.0.0"
+                }
+            }
+        },
+        "type": "library",
+        "repository": "https://gitlab.com/alphayax/rancher-api",
+        "github_stars": null,
+        "github_watchers": null,
+        "github_forks": null,
+        "github_open_issues": null,
+        "language": null,
+        "dependents": 0,
+        "suggesters": 0,
+        "downloads":
+        {
+            "total": 112,
+            "monthly": 0,
+            "daily": 0
+        },
+        "favers": 0
+    }
+}

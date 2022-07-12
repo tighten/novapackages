@@ -7,6 +7,7 @@ use App\Package;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class PackageDetailResourceTest extends TestCase
@@ -16,6 +17,8 @@ class PackageDetailResourceTest extends TestCase
     /** @test */
     public function can_determine_if_the_package_is_favorited_by_the_authenticated_user()
     {
+        $this->fakePackagistRequest();
+
         $package = Package::factory()->create();
         $user = User::factory()->create();
         $user->favoritePackage($package->id);
@@ -29,6 +32,8 @@ class PackageDetailResourceTest extends TestCase
     /** @test */
     public function can_determine_if_the_package_is_unfavorited_by_the_authenticated_user()
     {
+        $this->fakePackagistRequest();
+
         $package = Package::factory()->create();
         $user = User::factory()->create();
 
@@ -41,6 +46,8 @@ class PackageDetailResourceTest extends TestCase
     /** @test */
     public function return_the_count_of_favorites_for_a_package()
     {
+        $this->fakePackagistRequest();
+
         $package = Package::factory()->create();
         $userA = User::factory()->create();
         $userA->favoritePackage($package->id);
@@ -55,19 +62,28 @@ class PackageDetailResourceTest extends TestCase
     /** @test */
     public function includes_whether_package_has_been_marked_as_unavailable()
     {
+        $this->fakePackagistRequest();
+
         $now = now();
         Carbon::setTestNow($now);
 
         $unavailablePackage = Package::factory()->create([
-            'marked_as_unavailable_at' => now()
+            'marked_as_unavailable_at' => now(),
         ]);
         $unavailablePackageDetailResource = (PackageDetailResource::from($unavailablePackage));
         $this->assertEquals($unavailablePackageDetailResource['marked_as_unavailable_at'], $now);
 
         $validPackage = Package::factory()->create([
-            'marked_as_unavailable_at' => null
+            'marked_as_unavailable_at' => null,
         ]);
         $validPackageDetailResource = (PackageDetailResource::from($validPackage));
         $this->assertNull($validPackageDetailResource['marked_as_unavailable_at']);
+    }
+
+    private function fakePackagistRequest(): void
+    {
+        Http::fake([
+            "https://packagist.org/packages/*.json" => Http::response(),
+        ]);
     }
 }

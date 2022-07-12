@@ -7,6 +7,7 @@ use App\Package;
 use App\Screenshot;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class PackageViewTest extends TestCase
@@ -28,6 +29,10 @@ class PackageViewTest extends TestCase
         $screenshot = Screenshot::factory()->create(['uploader_id' => $user->id]);
         $packageA->screenshots()->save($screenshot);
         $packageB = Package::factory()->create();
+
+        Http::fake([
+            "https://packagist.org/packages/{$packageA->composer_name}.json" => Http::response(),
+        ]);
 
         $response = $this->actingAs($user)
             ->get(route('packages.show', ['namespace' => $packageNamespace, 'name' => $packageName]));

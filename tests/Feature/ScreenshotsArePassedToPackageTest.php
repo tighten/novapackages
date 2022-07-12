@@ -7,6 +7,7 @@ use App\Package;
 use App\Screenshot;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class ScreenshotsArePassedToPackageTest extends TestCase
@@ -16,6 +17,8 @@ class ScreenshotsArePassedToPackageTest extends TestCase
     /** @test */
     public function a_packages_screenshots_are_passed_to_the_view()
     {
+        Http::fake(['https://packagist.org/packages/tightenco/bae.json' => Http::response()]);
+
         $packageNamespace = 'tightenco';
         $packageName = 'bae';
         $user = User::factory()->create();

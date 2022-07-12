@@ -1,0 +1,1034 @@
+{
+    "current_series": "Silver Surfer",
+    "current_version": "4.11.1",
+    "released_at": "2022-06-29 19:17:39",
+    "releases":
+    [
+        {
+            "notes": "- Fixed an issue where external user menu items didn't open in a new window.",
+            "version": "4.11.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-29 19:17:39"
+        },
+        {
+            "notes": "- Added ability to use dependent fields on actions.\r\n- Added new `Nova::__()` translation method which fixes issues where Nova would return JSON incorrectly.\r\n- Nova will now force a full page reload when redirecting to the login page.\r\n- Fixed an issue where cancel buttons in the confirmation action modal didn't use customized cancel button text.\r\n- Fixed an issue where a unique rule used on a `HasMany` field would receive the wrong resource ID.\r\n- Fixed an issue where the user menu was hidden on mobile viewsports.\r\n- Fixed an issue where help text was not reactive unless defined on first page load.\r\n- Fixed an issue with `Number` fields min and max attributes being incorrectly set in HTML.\r\n- Fixed an issue with action events casting values incorrectly.\r\n- Fixed an issue where boolean filters were not correctly reset.\r\n- Fixed an issue where `BelongsTo` fields were missing in `HasOne` detail panels.\r\n- Fixed a visual issue where `Trix` field list items had no style type.",
+            "version": "4.11.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-28 17:24:57"
+        },
+        {
+            "notes": "- Extend action dropdown width changes to the detail view",
+            "version": "4.10.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-23 15:07:51"
+        },
+        {
+            "notes": "- Added preliminary support for right-to-left languages vis `Nova::enableRTL()`.\r\n- Added the ability for `MenuItem` labels to be translatable. \r\n- Nova will now show more of the name when displaying actions with long names.\r\n- Nova will now avoid logging the underlying model's hidden attributes when updating resources.\r\n- Fixed a visual issue with the alignment of resource table row icons in certain scenarios.\r\n- Fixed an issue with Dashboards when using PHP 7.\r\n- Fixed an issue when creating related `MorphOne` relations.\r\n- Fixed an issue preventing the usage of `ID` fields inside panels.\r\n- Fixed a visual issue with `copyable` fields.\r\n- Fixed an issue where impersonated users wouldn't see the \"Stop Impersonating\" menu item.\r\n- Fixed an issue where the index was incorrectly determining which preview fields to use.",
+            "version": "4.10.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-21 18:05:59"
+        },
+        {
+            "notes": "- Fixed a regression with the delete notification modal.",
+            "version": "4.9.2",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-16 16:00:12"
+        },
+        {
+            "notes": "- Added a missing translation.\r\n- Fixed an issue where Dashboard and Resource menu items couldn't be customized.",
+            "version": "4.9.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-15 18:21:16"
+        },
+        {
+            "notes": "- Added ability to have badges on user menu items.\r\n- Added a loading indicator to Dashboards when fetching cards.\r\n- Added new `onlyOnPreview` helper method for fields.\r\n- Added all of Tailwind's colors variables as root CSS declarations.\r\n- Nova will now hide the inline actions dropdown if there are no options available to the user.\r\n- Fix an issue preventing fields marked as full width from being the correct size.\r\n- Fixed a visual issue with Global Search's z-index.\r\n- Fixes an issue where `HasOne` relationships resolved incorrectly via nested resources.\r\n- Fixes an issue where `MorphOne` relationships stopped working on edit views.\r\n- Fixed an issue where a form cancel button wouldn't do anything if there was no browser history.\r\n- Fixed an issue where the select all checkbox would be incorrectly shown in an indeterminate state.\r\n- Fixed an issue with `Date` and `DateTime` fields in Chrome.",
+            "version": "4.9.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-14 17:58:45"
+        },
+        {
+            "notes": "- Fixed an issue with truthy `false` request parameters.",
+            "version": "4.8.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-08 18:43:32"
+        },
+        {
+            "notes": "- Added new `MenuSection::lens`, `MenuSection::resource`, and `MenuItem::lens` helpers.\r\n- Added new `withBadgeIf` to allow for conditional badges.\r\n- Added ability to customize the fields used for inline creation modals.\r\n- `MenuSection`, `MenuGroup`, and `MenuItem` classes are now `Macroable`.\r\n- Improved logic in Metric date ranges.\r\n- Improved the visual look of stacked fields.\r\n- Nova assets are now compiled with the `exposeFilename` option to allow for easier theming overrides.\r\n- Nova will now load only the current `BelongsTo` resource when the fields is set to readonly.\r\n- Nova is now compiled using Tailwind CSS version 3.\r\n- `Heading` fields now support `dependsOn`.\r\n- Nova nows runs the `Authenticate` middleware on Intertia routes for custom tools.\r\n- Fixed an issue preventing Lenses from being reusable.\r\n- Fixed a visual issue with the soft-delete badge in dark mode.\r\n- Fixed an issue where `Number` fields would display as `null` when the value was `0`.\r\n- Fixes an issue where `Currency` fields as minor unit were not displaying correct output.\r\n- Fixed an issue with login redirects not being interpreted by the browser correctly.\r\n- Fixed an issue where bigInt IDs were not being handled correctly in Global Search.\r\n- Fixed a visual issue with the app logo on mobile.\r\n- Fixed an issue with keys named 'length' inside `KeyValue` field.\r\n- Fixed a visual glitch with the index table row checkbox in certain scenarios.\r\n- Fixed an issue with pivot IDs showing a confusing link.\r\n- Fixed an issue where fields would be resolved even if excluded from update forms.\r\n- Fixed an issue where navigating to Lenses would trigger a full page load.",
+            "version": "4.8.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-06-08 16:45:41"
+        },
+        {
+            "notes": "- Added ability to have badges on `MenuSection` and `MenuItem`s.\r\n- Added preview fields to action resources.\r\n- Improved compatibility with Vite.\r\n- Improved compatibility for copyable fields.\r\n- Fixed an issue with Icons being sent the wrong prop types.\r\n- Fixed an issue with Dashboards causing scrolling to lock intermittently.\r\n- Fixed an issue where focusing an input and pressing enter key caused the create modal to open\r\n- Fixed a visual issue where long single words would break the layout on mobile screens.\r\n- Fixed an issue with dependent `Select` fields when options are dynamically changed.\r\n- Fixed an issue preventing dependent `BooleanGroup` fields from being reactive.\r\n- Fixed an issue with lenses not filtering their fields correctly.\r\n- Fixed an issue with `Currency::fillUsing` not being used when using an inline `HasOne` field.\r\n- `Heading` fields now support `dependsOn`.\r\n- Fixed an issue where the trashed filter didn't work correctly on lenses.\r\n- Fixed an issue causing namespace collisions when using a resource named \"Notification\".",
+            "version": "4.7.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-25 17:06:24"
+        },
+        {
+            "notes": "- `tabindex` will be set to 0 when `KeyValue` fields are configured with read-only keys.\r\n- Fixed and issue where scrolling locked incorrectly.",
+            "version": "4.6.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-18 21:40:48"
+        },
+        {
+            "notes": "- Added support for multiple layer relationship search.\r\n- Nova will now hide the mobile menu when clicking or tapping a menu item.\r\n- Adds missing translation for \"Remember me\".\r\n- Fixed an issue preventing third-party addons from overriding core Nova components.\r\n- Fixed an issue with an incorrect exit code for the `license-check` command.\r\n- Fixed an issue with Slug fields and attributes with multiple words.\r\n- Fixed an issue preventing field dependency events from being fired when creating inline relations.\r\n- Fixed an issue where `KeyValue` fields did not focus the key field when creating a new entry.\r\n- Fixed an issue where tooltips would sometimes not be hidden.\r\n- Fixed an issue with page reloading with active search queries.",
+            "version": "4.6.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-17 20:12:50"
+        },
+        {
+            "notes": "- Fixed a visual regression from the previous release.",
+            "version": "4.5.4",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-12 18:44:33"
+        },
+        {
+            "notes": "- Improved support for using `BackedEnum` with fields.\r\n- Improved dependent fields with show and hide toggling.\r\n- Reverted a change that caused scrolling issues with the sidebar.\r\n- Fixed some visual issues with dark mode and ring colors.\r\n- Fixed a visual issue with dropdowns.\r\n- Fixed a visual issue with `KeyValue` fields in Safari.\r\n- Fixed a visual issue with images in portrait orientation on index views.\r\n- Fixed an issue preventing panels from receiving extra data via `withMeta`.\r\n- Fixed an issue with `Trix` fields emitting change events on mount.",
+            "version": "4.5.3",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-12 16:55:17"
+        },
+        {
+            "notes": "- Added partial `resources/views/partials/meta.blade.php`\r\n- Added ability to customize more colors inside of Nova when theming.\r\n- Improved `Badge` and `Status` visual styling.\r\n- Fixed issue where Nova's sidebar was not scrollable with a lot of resources.\r\n- Fixed an issue with Panels when no fields were present.\r\n- Fixed visual issues with dark focus ring styles.\r\n- Fixed some visual issues with dark mode.\r\n- Fixed an issue with duplicate `failed` case logic in `Status` fields.",
+            "version": "4.5.2",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-11 20:32:55"
+        },
+        {
+            "notes": "- Updated `intertia-laravel` dep to support 0.6.0.\r\n- Improved themability of Nova.\r\n- Removed a stray `ray` call in `Badge` field.\r\n- Fixed incorrect return type in `Badge` field.",
+            "version": "4.5.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-10 21:12:59"
+        },
+        {
+            "notes": "- Added ability to copy `Text` fields on index views.\r\n- Added new `Email` field for showing email columns with a `mailto` link.\r\n- Added ability to show icons in `Badge` fields.\r\n- Added ability to configure the `step`, `min`, and `max` value of `Date` and `DateTime` fields.\r\n- Improved visual styling of `KeyValue` fields.\r\n- Fixed a visual issue with restore icon on trashed resources.\r\n- Fixed an issue with fetching related fields when defined using `fieldsForDetail`.\r\n- Fixed a visual issue with search inputs squishing the preview avatar when using long subtitles.\r\n- Fixed an issue with recursion `refreshWhenActionsRun` on metrics.\r\n- Fixed an issue preventing using a separate user table in Nova and using custom policies.\r\n- Fixed an issue with dependent `Select` fields when set to `searchable`.\r\n- Fixed an issue when clicking \"Create and add another\".",
+            "version": "4.5.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-10 17:44:09"
+        },
+        {
+            "notes": "- Added friendly date with full date hover to Notifications.",
+            "version": "4.4.2",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-05 20:24:46"
+        },
+        {
+            "notes": "- Added hover style for copyable fields on dark mode.",
+            "version": "4.4.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-05 19:15:58"
+        },
+        {
+            "notes": "- Added search type to global search input.\r\n- Added ability to disable and hide Global Search, Light/Dark mode dropdown, and Notifications.\r\n- Added ability to set full-width Cards to have the same fixed height as non-full-width ones.\r\n- Added 'YESTERDAY' constant helper to `Value` metrics.\r\n- Added ability to copy text field values on detail views and the preview modal to the system clipboard.\r\n- Fixed visual issue with the cursor color for `Markdown` and `Code` fields in dark mode.",
+            "version": "4.4.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-05 19:01:40"
+        },
+        {
+            "notes": "- Added missing translations for Notifications.",
+            "version": "4.3.4",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-04 17:10:41"
+        },
+        {
+            "notes": "- Fixed issue with notifications.",
+            "version": "4.3.3",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-03 19:50:17"
+        },
+        {
+            "notes": "- Fixed issue where choosing \"read all\" on Notifications wouldn't mark all unread notifications as read.",
+            "version": "4.3.2",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-03 19:47:15"
+        },
+        {
+            "notes": "- Fixed a visual issue with notification delete and read buttons.",
+            "version": "4.3.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-03 19:35:29"
+        },
+        {
+            "notes": "Make sure to run `php artisan migrate` to use Nova's new notification improvments.\r\n\r\n- Added visual improvements to `Status` fields.\r\n- Added ability to mark notifications as viewed and deleted.\r\n- Added ability to customize Nova's footer text using `Nova::footer`.\r\n- Fixed an issue where the page would jump when using searchable fields.\r\n- Fixed an issue when hitting enter key when composing using IME characters.\r\n- Fixed a typehint issue when using custom `ActionResource` classes.",
+            "version": "4.3.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-05-03 19:27:23"
+        },
+        {
+            "notes": "- Improved visual style of the `Status` field.",
+            "version": "4.2.7",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-26 22:37:35"
+        },
+        {
+            "notes": "- Added ability for panels to be collapsible.\r\n- Fixed a visual issue with `KeyValue` fields on dark mode.\r\n- Fixed a visual issue with date icons in dark mode.\r\n- Fixed an issue with empty panels.\r\n- Nova will now transform trend result values with the same strategy as the main value.\r\n- Fixed an issue with dependent fields and readonly fields.\r\n- Fixed an issue with `DateTime` fields and null values.\r\n- Foxed an issue with dependent fields showing incorrect values on edit views.\r\n- Fixed an issue with filters causing the page to jump when clicked.\r\n- Fixed an issue with memory leaks when using Laravel Octane.\r\n- Fixed an issue with clearing `Select` fields.",
+            "version": "4.2.6",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-26 18:57:59"
+        },
+        {
+            "notes": "- Added new `authorizedToSee` method to menu sections, items, and groups.\r\n- Added few other code cleanups and small improvements.\r\n- Fixed visual issue with excerpt buttons.\r\n- Fixed timezone issues when using `firstDayOfQuarter` and `firstDayOfPreviousQuarter` on metrics.",
+            "version": "4.2.5",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-21 15:46:05"
+        },
+        {
+            "notes": "- Added hover with full date value to `DateTime` and `Date` fields.\r\n- Fixed an issue with `Date` and `DateTime` formatting when using `displayUsing`.\r\n- Fixed an issue with `BelongsTo` relatinonship guesser.\r\n- Fixed an issue with Eloquent filters not showing when the parent field is `searchable`.\r\n- Fixed a visual issue with empty dropdowns\r\n- Fixed a visual issue with rounded corners `Avatar` and `Image`\r\n- Fixed a visual issue with the sort icons in dark mode.\r\n- Fixed an issue preventing global search from appearing in certain setups.\r\n- Fixed an issue with showing active states on the sidebar menu.\r\n- Nova will now install its NPM modules when creating custom fields.",
+            "version": "4.2.4",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-20 19:29:39"
+        },
+        {
+            "notes": "- Added a new `nova:check-license` command to help verify license configuration.\r\n- Fixed a visual issue with progress metrics in dark mode.\r\n- Fixed an issue with custom tools showing the wrong path to edit the tool.\r\n- Fixed visual issues with dropdown menu items when displayed as buttons.\r\n- Fixed a visual issue with global search positioning.\r\n- Fixed an issue preventing panel collapsing not being applied.\r\n- Fixed a visual issue on `Status` fields on detail pages.\r\n- Fixed an issue preventing menu items from being highlighted when visiting sub pages.\r\n- Fixed a visual issue with action menus.\r\n- Fixed an issue with `MultiSelect` fields when using numeric keys.\r\n- Fixed an issue with the resource detail screen when using `morphOne` relationships.\r\n- Fixed an issue preventing `dependsOn` from working with multiple dependencies.\r\n- Fixed an issue with `belongsToMany` relationship references to the same model with different resources.",
+            "version": "4.2.3",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-19 18:42:45"
+        },
+        {
+            "notes": "- Fixed an issue with a translation.\r\n- Fixed an issue preventing stacked fields from displaying correctly.\r\n- Fixed an issue with the styling of `Heading` fields on detail and forms.\r\n- Fixed an issue with the display of checkboxes in dark mode.\r\n- Fixed an issue with pivot column ordering for `BelongsToMany` fields.\r\n- Fixed an issue with the styling of action menu buttons.\r\n- Fixed an issue with default values on select controls\r\n- Fixed an issue with `MultiSelect` fields.\r\n- Fixed an issue with `BelongsToMany` filterable fields.\r\n- Fixed an issue with `Date` and `DateTime` fields resetting when validation fails.",
+            "version": "4.2.2",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-15 17:27:29"
+        },
+        {
+            "notes": "- Added `transform` helper to progress and trend results.",
+            "version": "4.2.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-13 23:30:25"
+        },
+        {
+            "notes": "- Added `transform` helper to value results.\r\n- Fixed issue with filterable `BelongsToMany` fields.",
+            "version": "4.2.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-13 23:28:43"
+        },
+        {
+            "notes": "- Fixed an issue with Main dashboard name function.\r\n- Fixed an issue where click events from table rows displayed as html would bubble out.\r\n- Fixed an issue preventing `globalSearchResults` value to not be honored.\r\n- Added missing translations.\r\n- Fixed an issue preventing avatars from displaying when viewing custom tools.\r\n- Nova will now hide certain dropdowns when no value is present.\r\n- Fixed display issue with stacked fields.\r\n- Fixed an issue with `DateTime` fields and timezones.\r\n- Fixed visual issue with the new notification center badge.\r\n- Fixed an issue preventing `DateTime` fields from being able to clear their value.\r\n- Fixed an issue when guessing relation names.\r\n- Removed Nova's requirement for using `JsonResource::withoutWrapping`.\r\n- Fixed missing `VaporFileField` components.\r\n- Fixed an issue preventing `MorphTo` fields from submitting their relation data.\r\n- Fixed an issue where Nova would throw a 403 error when editing resources with `HasOne` relationships.\r\n- Fixed an issue where native functions match certain column names.\r\n- Fixed an issue with inconsistent local time formats with `DateTime` fields.",
+            "version": "4.1.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-12 23:15:04"
+        },
+        {
+            "notes": "- Added ability to toggle between light, dark, and system mode themes\r\n- Added a few missing translations\r\n- Added a default height to the logo\r\n- Fixed an issue preventing syncing between more than one field depending on another field\r\n- Fixed an issue where options weren't being synced on `MultiSelect` fields.\r\n- Fixed an issue when using filterable fields marked as readonly\r\n- Fixed an issue with setting Nova's base url to an empty string\r\n- Fixed an issue with Nova's exception handling\r\n- Fixed an issue with invalid user foreign keys in action events",
+            "version": "4.1.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-07 14:43:25"
+        },
+        {
+            "notes": "- Fixed a few visual issues.\r\n- Fixed issue causing password resets to not work.\r\n- Fixed issue with submitting `Select` fields.",
+            "version": "4.0.6",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-06 21:40:29"
+        },
+        {
+            "notes": "- Fixed issue preventing HTML from being displayed in help text.",
+            "version": "4.0.5",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-06 17:35:52"
+        },
+        {
+            "notes": "- Fixed issue where previous card widths were not available.",
+            "version": "4.0.4",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-06 15:15:49"
+        },
+        {
+            "notes": "Includes various bugfixes and improvements.",
+            "version": "4.0.3",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-06 15:11:37"
+        },
+        {
+            "notes": "- Address release issue with 4.0.1.",
+            "version": "4.0.2",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-06 13:38:49"
+        },
+        {
+            "notes": "- Fixed issue with Nova's use of `JsonResource::withoutWrapping()` affecting the host application.\r\n- Fixed issue with flushing session data when stopping impersonation.",
+            "version": "4.0.1",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-06 04:09:36"
+        },
+        {
+            "notes": "Last release before Nova 4 launch. Includes various updates and bugfixes.",
+            "version": "3.32.0",
+            "series": "Orion",
+            "released_at": "2022-04-05 05:19:57"
+        },
+        {
+            "notes": "Initial release of Nova 4.0. 🥳\r\n\r\nCheck out the [release notes](https://nova.laravel.com/docs/4.0/releases.html) and [upgrade guide](https://nova.laravel.com/docs/4.0/upgrade.html) to learn more about this amazing update!",
+            "version": "4.0.0",
+            "series": "Silver Surfer",
+            "released_at": "2022-04-03 08:40:49"
+        },
+        {
+            "notes": "- Added support for PHP 8.1. [#1534](https://github.com/laravel/nova/pull/1534)\r\n- Added Laravel 9 support and removed support for Laravel 7. [#1638](https://github.com/laravel/nova/pull/1638)\r\n- Improved support for Laravel Octane. [#1644](https://github.com/laravel/nova/pull/1644)\r\n- Nova now allows passing an instance of `Field` to the `from` method. [#1531](https://github.com/laravel/nova/pull/1531)\r\n- Fixed redundant call on `Sparklink` fields. [#1542](https://github.com/laravel/nova/pull/1542)\r\n- Fixed issue where Actions not showing on a `Lens`. [#1563](https://github.com/laravel/nova/pull/1563)\r\n- Fixed issue with `KeyValueField` showing undefined errors. [#1562](https://github.com/laravel/nova/pull/1562)\r\n- Fixed issue with `BelongsTo` fields skipping validation when the field is set to `readonly`. [#1578](https://github.com/laravel/nova/pull/1578)\r\n- Fixed issue with using JSON columns in many to many relationships. [#1573](https://github.com/laravel/nova/pull/1573)\r\n- Fixed issue with `MorphTo` fields relation not working correctly with readonly and searchable options on the update view. [#1594](https://github.com/laravel/nova/pull/1594)\r\n- Fixed issue with `MorphTo` fields loading all resources when creating via a related resource. [#1613](https://github.com/laravel/nova/pull/1613)",
+            "version": "3.31.0",
+            "series": "Orion",
+            "released_at": "2022-02-08 17:53:51"
+        },
+        {
+            "notes": "- Nova will now reset its pagination if the current page has be reset to the first page. [#1512](https://github.com/laravel/nova/pull/1512)\n- Nova will now avoid file running pruning code when unneccesary in certain contexts. [#1528](https://github.com/laravel/nova/pull/1528)\n- Nova now supports using `redirectAfterDelete` when doing a force deletion. [#1517](https://github.com/laravel/nova/pull/1517)\n- Nova now handles 502 errors when loading resources on the index view. [#1519](https://github.com/laravel/nova/pull/1519)\n- Fixed issue when accessing pivot fields from a related Resource index. [#1480](https://github.com/laravel/nova/pull/1480)\n- Fixed issue where computed fields were used in `NotExactlyAttached` validation. [#1481](https://github.com/laravel/nova/pull/1481)\n- Fixed issue with clicking away from a modal when using an iPad. [#1448](https://github.com/laravel/nova/pull/1448)\n- Fixed issue with eager loading in Global Search not working correctly. [#1509](https://github.com/laravel/nova/pull/1509)\n- Fixed issue with action field default values when launched from lenses. [#1518](https://github.com/laravel/nova/pull/1518)",
+            "version": "3.30.0",
+            "series": "Orion",
+            "released_at": "2021-10-19 20:51:01"
+        },
+        {
+            "notes": "- Fixed issue with `BelongsTo` fields causing N+1 issues when eager loading with soft deleted records. [#1465](https://github.com/laravel/nova/pull/1465)\r\n- Fixed issue with attaching `MorphToMany` fields when using non-standard pivot keys. [#1468](https://github.com/laravel/nova/pull/1468)\r\n- Fixed regression when refreshing resources when using action response modals. [#1472](https://github.com/laravel/nova/pull/1472)",
+            "version": "3.29.0",
+            "series": "Orion",
+            "released_at": "2021-08-17 18:59:37"
+        },
+        {
+            "notes": "- Actions are now macroable. [#1410](https://github.com/laravel/nova/pull/1410)\r\n- Nova now disables global search for action events. [#1406](https://github.com/laravel/nova/pull/1406)\r\n- Nova now handles errors due to network loss and attempts to preserve form state. [#1413](https://github.com/laravel/nova/pull/1413) \r\n- Nova will now refresh the parent index view when executing actions with `openInNewTab`, `download` and `modal` methods. [#1408](https://github.com/laravel/nova/pull/1408)\r\n- Nova will now disable resource index sorting when retrieving search results via Scout. [#1458](https://github.com/laravel/nova/pull/1458)\r\n- Various code and test improvements.\r\n- Fixed issue with PHP 7.2 syntax compatibility. [#1403](https://github.com/laravel/nova/pull/1403)\r\n- Fixed issue with new `incrementPickerHourBy` and `incrementPickerMinuteBy` method. [#1418](https://github.com/laravel/nova/pull/1418)\r\n- Fixes issue with ambiguous ID columns on deletes with join queries. [#1417](https://github.com/laravel/nova/pull/1417)\r\n- Fixed issue with `ManyToMany` fields using `RelatableAttachment::relationshipIsFull()` check. [#1414](https://github.com/laravel/nova/pull/1414)\r\n- Fixed issue with `Slug` fields listening to events emitted from relation modals. [#1426), [#1436](https://github.com/laravel/nova/pull/1436)\r\n- Fixed issue with `BelongsTo` and `MorphTo` fields throwing exceptions when used in `fieldsForCreate` and `fieldsForUpdate` methods. [#1432](https://github.com/laravel/nova/pull/1432)",
+            "version": "3.28.0",
+            "series": "Orion",
+            "released_at": "2021-08-04 16:13:35"
+        },
+        {
+            "notes": "- Added better support for overridden `trashed` methods from Laravel's `SoftDeletes` trait. [#1339](https://github.com/laravel/nova/pull/1339)\r\n- Added new `Nova::whenServing` method for detecting Nova inside model event callbacks and observers. [#1390](https://github.com/laravel/nova/pull/1390)\r\n- Added new `Observable::make` helper for registering observers just for Nova. [#1390](https://github.com/laravel/nova/pull/1390)\r\n- Added ability to customize datetime picker hour and minute increments. [#1374](https://github.com/laravel/nova/pull/1374)\r\n- Nova will now error when trying to edit an unsupported polymorphic relationship type. [#1373](https://github.com/laravel/nova/pull/1373)\r\n- Nova will no longer show an `ID` field link if the user isn't allowed to view the resource. [#1365](https://github.com/laravel/nova/pull/1365)\r\n- Form error handling is now more consistent. [#1369](https://github.com/laravel/nova/pull/1369)\r\n- Fixed issue where generated password reset URLS were incorrect when using subdomains. [#1359](https://github.com/laravel/nova/pull/1359)",
+            "version": "3.27.0",
+            "series": "Orion",
+            "released_at": "2021-06-29 17:40:02"
+        },
+        {
+            "notes": "* Fixes duplicate SQL statements when generating query for pagination count.",
+            "version": "3.26.1",
+            "series": "Orion",
+            "released_at": "2021-06-02 07:43:02"
+        },
+        {
+            "notes": "- Nova now shows a loading idicator when deleting resources from an index view. [#1334](https://github.com/laravel/nova/pull/1334)\r\n- Nova now allows `Laravel\\Nova\\Query\\Builder` to be resolved via the IoC container. [#1335](https://github.com/laravel/nova/pull/1335)\r\n- Nova will now skip showing the form validation error for 500 errors. [#1353](https://github.com/laravel/nova/pull/1353)\r\n- Fixed issue where an Action defined as `onlyOnDetail` would show up in a Lens resource index. [#1350](https://github.com/laravel/nova/pull/1350)\r\n- Updated JavaScript dependencies to more secure versions.\r\n- Various code and performance improvements",
+            "version": "3.26.0",
+            "series": "Orion",
+            "released_at": "2021-06-01 21:26:07"
+        },
+        {
+            "notes": "- Fixes issue with default values not showing on index views. [#1314](https://github.com/laravel/nova/pull/1314)\r\n- Nova will now only refresh metrics after a resource has been deleted or restored. [#1317](https://github.com/laravel/nova/pull/1317)\r\n- Fixed current related resource not selected after \"Update & Continue\" action. [#1316](https://github.com/laravel/nova/pull/1316)\r\n- Fixed issue where Nova didn't prefix some SQL queries. [#1324](https://github.com/laravel/nova/pull/1324)\r\n- Nova will now use the `getMorphClass` method for `Trix` field attachments. [#1326](https://github.com/laravel/nova/pull/1326)\r\n- Nova now allows you to use an action for both resources and standalone. [#1321](https://github.com/laravel/nova/pull/1321)",
+            "version": "3.25.0",
+            "series": "Orion",
+            "released_at": "2021-05-12 03:08:36"
+        },
+        {
+            "notes": "- Nova will now use the cursor when using Scout v9.0. [#1311](https://github.com/laravel/nova/pull/1311)\r\n- Fixed issue preventing users from creating resources via a `HasManyThrough` field. [#1301](https://github.com/laravel/nova/pull/1301)\r\n- Fixed issue causing pivot actions to be duplicated. [#1302](https://github.com/laravel/nova/pull/1302)\r\n- Fixed issue using \"Update and Continue Updating\" when the resource ID changed. [#1304](https://github.com/laravel/nova/pull/1304)\r\n- Fixed issue with IDs larget than JavaScript's max allowed integer. [#1303](https://github.com/laravel/nova/pull/1303)\r\n- Fixed issue with resolving `Date` and `DateTime` field values. [#1309](https://github.com/laravel/nova/pull/1309)\r\n- Fixed issue with showing the \"Create and Add Another\" button on `HasOne` relationships. [#3358](https://github.com/laravel/nova/pull/3358)",
+            "version": "3.24.0",
+            "series": "Orion",
+            "released_at": "2021-04-27 14:55:24"
+        },
+        {
+            "notes": "* Fixes invalid total calculation when building partition metric when totals over 1000. [#1296](https://github.com/laravel/nova/pull/1296)\r\n* Fixes related fields not transform using asBigInt. [#1295](https://github.com/laravel/nova/pull/1295)",
+            "version": "3.23.2",
+            "series": "Orion",
+            "released_at": "2021-04-14 08:25:40"
+        },
+        {
+            "notes": "- Fixed issue with published assets from previous version.",
+            "version": "3.23.1",
+            "series": "Orion",
+            "released_at": "2021-04-07 22:10:37"
+        },
+        {
+            "notes": "- Added support for Laravel Octane. [#1291](https://github.com/laravel/nova/pull/1291)\n- Fixed an issue with Laravel routing when declaring domains with a port number. [#1220](https://github.com/laravel/nova/pull/1220)\n- Fixed some visual issues with pagination.\n- Fixed an issue where Trend metrics didn't display correctly when a suffix is used. [#1232](https://github.com/laravel/nova/pull/1232)\n- Fixed an issue preventing passing `Collections` as Trend ranges. [#1239](https://github.com/laravel/nova/pull/1239)\n- Nova will now use a cursor when executing actions. [#1237](https://github.com/laravel/nova/pull/1237)\n- Fixed an issue preventing the proper display of the app name. [#1236](https://github.com/laravel/nova/pull/1236)\n- Added new `allowDuplicateRelations` method to relations. Fixed ability to add multiple same relationships with different pivot values. Added ability to edit specific relationship pivot data. Added ability to delete specific pivot data. Also adds ability to handle multiple, separate relationships using the same Nova Resource. [#1214](https://github.com/laravel/nova/pull/1214)\n- Fixed visual issue with stacked field labels. [#1256](https://github.com/laravel/nova/pull/1256)\n- Added ability to pause shortcuts inside Nova tools using `Nova.pauseShortcuts()`. [#1253](https://github.com/laravel/nova/pull/1253)\n- Fixed visual issue with `Place` field suggestions. [#1257](https://github.com/laravel/nova/pull/1257)\n- Nova will now display the deleted model and ID on action events. [#1286](https://github.com/laravel/nova/pull/1286)\n- Fixed issue preventing partition metrics from rounding correctly. [#1280](https://github.com/laravel/nova/pull/1280)\n- Fixed issue that allows specifying arbitrary `perPage` params for pagination. [#1287](https://github.com/laravel/nova/pull/1287)",
+            "version": "3.23.0",
+            "series": "Orion",
+            "released_at": "2021-04-06 17:44:37"
+        },
+        {
+            "notes": "- Added ability to use `hideFromIndex` and `hideFromDetail` on fields and line-items inside `Stack` fields. [#1215](https://github.com/laravel/nova/pull/1215)",
+            "version": "3.22.0",
+            "series": "Orion",
+            "released_at": "2021-02-16 22:02:58"
+        },
+        {
+            "notes": "- Added ability to differentiate between global and local search inside Nova. [#1204](https://github.com/laravel/nova/pull/1204)\n- Fixed issue with metric tooltip position. [#1203](https://github.com/laravel/nova/pull/1203)\n- Resource titles now accept a JSON/array attribute. [#1202](https://github.com/laravel/nova/pull/1202)\n- Nova will now automatically convert an ID to a string if out of range. [#1210](https://github.com/laravel/nova/pull/1210)\n- Fixed issue preventing `HasOne` creations when using the `withDefault` method on the relation. [#1211](https://github.com/laravel/nova/pull/1211)\n- Fixed issue preventing Action Response Modals from showing when initiated from the table row. [@c68be](https://github.com/laravel/nova/commit/c68bed5828bee349f2ffa66e91bf3a12443a8dfe)",
+            "version": "3.21.1",
+            "series": "Orion",
+            "released_at": "2021-02-12 15:56:54"
+        },
+        {
+            "notes": "- Added new `Action Response Modals` for showing cutom modals after running actions. [#1194](https://github.com/laravel/nova/pull/1194)\n- Added new `afterValidation` method to actions. [#1183](https://github.com/laravel/nova/pull/1183)\n- Nova will now display the parent resource when attaching relations. [#1181](https://github.com/laravel/nova/pull/1181)\n- Fixed issue with action logging and `BooleanGroup` and `Json` fields. [#1174](https://github.com/laravel/nova/pull/1174)\n- Fixed regression with relatable search results limiting. [#1177](https://github.com/laravel/nova/pull/1177)\n- Fixed issue where the create relation button was incorrectly shown. [#1180](https://github.com/laravel/nova/pull/1180)\n- Fixed issues related to `BelongsTo` and `MorphTo` fields when using `bigInt`. [#1176](https://github.com/laravel/nova/pull/1176)\n- Fixed issue where index and lens views wouldn't correctly reload when URI parameters change. [#1179](https://github.com/laravel/nova/pull/1179)\n- Fixed issues with timezones when using trend and value metrics. [#1193](https://github.com/laravel/nova/pull/1193), [#1192](https://github.com/laravel/nova/pull/1192), [#1196](https://github.com/laravel/nova/pull/1196) \n- Fixed issue where related models could be accessed and manipulated incorrectly. [#1198](https://github.com/laravel/nova/pull/1198)\n- Fixed issue with `KeyValue` field deleting the first item when updating. [#1197](https://github.com/laravel/nova/pull/1197)",
+            "version": "3.21.0",
+            "series": "Orion",
+            "released_at": "2021-02-02 17:53:49"
+        },
+        {
+            "notes": "- Added \"spellcheck=false\" to search inputs. [#1154](https://github.com/laravel/nova/pull/1154)\r\n- Nova will now rerender Trend metric charts when chart size has changed. [#1162](https://github.com/laravel/nova/pull/1162)\r\n- You may now pass a `boolean` or `Closure` to a field's `searchable` method. [#1164](https://github.com/laravel/nova/pull/1164)\r\n- Added new `ALL` helper option for filtering `Value` metrics. [#1167](https://github.com/laravel/nova/pull/1167)\r\n- Nova will now cancel previous resource requests if new ones are initiated. [#1163](https://github.com/laravel/nova/pull/1163)\r\n- Nova now includes all default languages for its Numbro dependency. [#1168](https://github.com/laravel/nova/pull/1168)\r\n- Nova will now respect the `initialPerPage` value when index is shown as a relationship. [#1171](https://github.com/laravel/nova/pull/1171)\r\n- Fixed an issue preventing Nova's filter menu dropdown from staying open when using date filters. [#1160](https://github.com/laravel/nova/pull/1160)\r\n- Fixed issue with `Currency` fields when trying to fill `null` values. [#1159](https://github.com/laravel/nova/pull/1159)\r\n- Fixed issue with `callable` inside Nova's `provideToScript` method. [#1170](https://github.com/laravel/nova/pull/1170)\r\n- Fixed issue with broken links inside of `Stack` fields. [#1169](https://github.com/laravel/nova/pull/1169)\r\n- Fixed issue with invalid event typehint inside `Nova::booted` method. [#1172](https://github.com/laravel/nova/pull/1172)\r\n- Add `Resource::$relatableSearchResults` to limit searchable results. [#1166](https://github.com/laravel/nova/pull/1166)",
+            "version": "3.20.0",
+            "series": "Orion",
+            "released_at": "2021-01-19 18:56:56"
+        },
+        {
+            "notes": "- Fixes `Resource` with Scout Search having an incorrect initial `order by`. [#1155](https://github.com/laravel/nova/pull/1155)\n- Fixes popup `Filter` date opening. [#1156](https://github.com/laravel/nova/pull/1156)\n- Add Tool constructor method for compatibility with existing Tools. [#1157](https://github.com/laravel/nova/pull/1157)",
+            "version": "3.19.1",
+            "series": "Orion",
+            "released_at": "2021-01-06 09:29:23"
+        },
+        {
+            "notes": "- Nova is now compatible with PHP 8. [#1109](https://github.com/laravel/nova/pull/1109)\n- Added new `remoteStyle` method for loading remotes CSS stylesheets. [#1144](https://github.com/laravel/nova/pull/1144)\n- Nova now allows usage of `spatie/once` v3. [#1145](https://github.com/laravel/nova/pull/1145)\n- Added page titles to 404 and 403 views. [#1150](https://github.com/laravel/nova/pull/1150)\n- Refactored some code to reduce redundancy. [#1146](https://github.com/laravel/nova/pull/1146)\n- Fixed `DateTime::createFromFormat` issue when using strict types mode. [#1153](https://github.com/laravel/nova/pull/1153)\n- Fixed issue where Scout search queries were not displayed in rank order. [#1149](https://github.com/laravel/nova/pull/1149)\n- Updated Nova's migrations to store larger action events data. [#1147](https://github.com/laravel/nova/pull/1147)\n- Fixed issue with using unsupported `withMeta` method on Tools. [#1148](https://github.com/laravel/nova/pull/1148)\n- Updated axios depencency. [#1152](https://github.com/laravel/nova/pull/1152)",
+            "version": "3.19.0",
+            "series": "Orion",
+            "released_at": "2021-01-05 16:40:53"
+        },
+        {
+            "notes": "- Fixed an issue preventing lens actions from resetting. [#1139](https://github.com/laravel/nova/pull/1139)\n- Nova will now scroll to the top of the page when redirecting after update and deleting from resource detail. [#1142](https://github.com/laravel/nova/pull/1142)\n- Added new Nova `booted` alias for listening to the `NovaServiceProviderRegistered` event. [#1136](https://github.com/laravel/nova/pull/1136)\n- Fixed an issue preventing metrics from using the application timezone. [#1133](https://github.com/laravel/nova/pull/1133)\n- Updated Nova event handling to respect the values returned by the `dontReport` method. [#1138](https://github.com/laravel/nova/pull/1138)\n- Nova will now show the currency symbol on index and detail views. [#1140](https://github.com/laravel/nova/pull/1140)\n- Improved performance by including the current resource count when fetching resources. [#1134](https://github.com/laravel/nova/pull/1134)\n- Nova will now look for the singular label on the related resource for relationship fields. [#1121](https://github.com/laravel/nova/pull/1121)\n- Various internal testing improvments.",
+            "version": "3.18.0",
+            "series": "Orion",
+            "released_at": "2020-12-22 19:07:38"
+        },
+        {
+            "notes": "- Fixed an issue preventing `Boolean` fields from respecting their default values. [#1125](https://github.com/laravel/nova/pull/1125)\n- Fixed an issue causing users to be redirected to /nova-api when session expires. [#1123](https://github.com/laravel/nova/pull/1123)\n- Fixed issue where filter URI parameters could get too long. [#1126](https://github.com/laravel/nova/pull/1126)\n- Reduced XHR requests when updates Lens views. [#1124](https://github.com/laravel/nova/pull/1124)\n- Nova's Tool generator now sets the page title. [#1118](https://github.com/laravel/nova/pull/1118)\n- Nova will now set the page title for lenses. [#1129](https://github.com/laravel/nova/pull/1129)\n- Nova will now limit the ranges used with Trend metrics to avoid loading large amounts of data. [#1131](https://github.com/laravel/nova/pull/1131)\n- Nova will now eager-load relations when running actions via selected resources. [#1119](https://github.com/laravel/nova/pull/1119)\n- Nova will now reset the query string when navigating between resources. [#1128](https://github.com/laravel/nova/pull/1128)",
+            "version": "3.17.0",
+            "series": "Orion",
+            "released_at": "2020-12-15 17:33:57"
+        },
+        {
+            "notes": "- Handle nova path `/` on domain with custom port [#1116](https://github.com/laravel/nova/pull/1116)\n- Fixes invalid `yarn.lock` on `v3.16.1` and v`3.16.2` [#1115](https://github.com/laravel/nova/pull/1115)",
+            "version": "3.16.3",
+            "series": "Orion",
+            "released_at": "2020-12-04 09:43:28"
+        },
+        {
+            "notes": "- Fixed broken `package.json` that was loading a local `laravel-nova` dependency",
+            "version": "3.16.2",
+            "series": "Orion",
+            "released_at": "2020-12-03 10:26:07"
+        },
+        {
+            "notes": "- Fix Nova running on a subdomain under the `/` path [#1114](https://github.com/laravel/nova/pull/1114)",
+            "version": "3.16.1",
+            "series": "Orion",
+            "released_at": "2020-12-03 10:22:44"
+        },
+        {
+            "notes": "- Added new testing improvements. [#1075](https://github.com/laravel/nova/pull/1075), [#1077](https://github.com/laravel/nova/pull/1077), [#1078](https://github.com/laravel/nova/pull/1078), [#1105](https://github.com/laravel/nova/pull/1105)\r\n- Added documentation on running tests. [#1090](https://github.com/laravel/nova/pull/1090)\r\n- Added visual improvements to `Slug` fields. [#1084](https://github.com/laravel/nova/pull/1084)\r\n- Added resource ID segment to creation pivot fields route. [#1094](https://github.com/laravel/nova/pull/1094)\r\n- Nova will now force reload session is expired. [#1097](https://github.com/laravel/nova/pull/1097)\r\n- Added the `Field` instance as a paramater to `relatableQuery` method. [#1098](https://github.com/laravel/nova/pull/1098)\r\n- Added UX improvements to index field sorting. [#1099](https://github.com/laravel/nova/pull/1099)\r\n- Nova will now unbind `NovaRequest` when the HTTP kernel has finished. [#1074](https://github.com/laravel/nova/pull/1074)\r\n- Nova will now reset lens filters when navigating between lenses. [#1100](https://github.com/laravel/nova/pull/1100)\r\n- Added memory usage improvments. [#1096](https://github.com/laravel/nova/pull/1096) \r\n- Added suggestions support to `Text` fields when used via an action. [#1107](https://github.com/laravel/nova/pull/1107)\r\n- Added ability to display morphable relations even if they're not defined in the `MorphTo` field. [#1106](https://github.com/laravel/nova/pull/1106)\r\n- Fixed an issue when constructing `HasManyThrough` fields with custom resource classes. [#1080](https://github.com/laravel/nova/pull/1080)\r\n- Nova will now avoid loading its service provider when served via subdomain on the root. [#1081](https://github.com/laravel/nova/pull/1081)\r\n- Fixed issue with lenses not applying `authorizedToSee` logic. [#1079](https://github.com/laravel/nova/pull/1079)\r\n- Fixed visual bug with menus and standalone actions. [#1082](https://github.com/laravel/nova/pull/1082)\r\n- Fixed an issue with updating resource IDs and repulling fields. [#1083](https://github.com/laravel/nova/pull/1083)\r\n- Fixed an issue with overwriting exisiting values in `BelongsTo` and `MorphTo` fields. [#1047](https://github.com/laravel/nova/pull/1047)\r\n- Fixed an issue preventing validation errors from hiding when successfulling attaching. [#1092](https://github.com/laravel/nova/pull/1092)\r\n- Fixed an issue preventing `Currency` and `Textarea` fields from triggering form abandonment prevention. [#1093](https://github.com/laravel/nova/pull/1093)\r\n- Fixed an issue with Nova's `ActionEvent` auth guard model. [#1086](https://github.com/laravel/nova/pull/1086)\r\n- Fixed an issue where resource attachment page title would show `undefined`. [#1102](https://github.com/laravel/nova/pull/1102)\r\n- Fixed partition metric styling when set to full-width. [#1108](https://github.com/laravel/nova/pull/1108)\r\n- Fixed an issue where navigating to a non-existent resource would not trigger a 404 error. [#1111](https://github.com/laravel/nova/pull/1111)\r\n- Nova will now on delete `ActionEvents` when a resource is force-deleted. [#1110](https://github.com/laravel/nova/pull/1110)",
+            "version": "3.16.0",
+            "series": "Orion",
+            "released_at": "2020-12-01 21:08:45"
+        },
+        {
+            "notes": "- Added \"Start Polling\" and \"Stop Polling\" language translations. [#1041](https://github.com/laravel/nova/pull/1041)\r\n- Added various testing improvements. [#1046](https://github.com/laravel/nova/pull/1046), [#1043](https://github.com/laravel/nova/pull/1043), [#1052](https://github.com/laravel/nova/pull/1052), [#1062](https://github.com/laravel/nova/pull/1062), [#1073](https://github.com/laravel/nova/pull/1073)\r\n- Nova will now use `getQualifiedCreatedAtColumn` method when calculating values for `Value` and `Trend` metrics. [#1049](https://github.com/laravel/nova/pull/1049)\r\n- Nova will now keep track of pending file uploads before enabling the submit button. [#1056](https://github.com/laravel/nova/pull/1056)\r\n- Nova version is now defined inside of `composer.json`. [#1061](https://github.com/laravel/nova/pull/1061)\r\n- Added ability to customize the search keyword based on the column. [#1059](https://github.com/laravel/nova/pull/1059)\r\n- Added support for displaying `DateTime` fields with fractional seconds. [#1057](https://github.com/laravel/nova/pull/1057)\r\n- Nova will now apply `indexQuery` to make selecting resources and select all matching more consistent when not viewing from viaRelationship. [#1060](https://github.com/laravel/nova/pull/1060)\r\n- Nova will now only execute a database query if the `Request` has a `resourceId`. [#1058](https://github.com/laravel/nova/pull/1058)\r\n- Added ability to wrap metric `$column` using `DB::raw()` [#1063](https://github.com/laravel/nova/pull/1063)\r\n- Added ability to use a custom `dashboard.stub` when present. [#1065](https://github.com/laravel/nova/pull/1065)\r\n- Nova will now show an error if an uploaded attachment triggers a server error. [#1064](https://github.com/laravel/nova/pull/1064)\r\n- Nova actions will now use the guard set inside Nova's configuration to match user models. [#1071](https://github.com/laravel/nova/pull/1071)\r\n- Added new `nova:translate` Artisan command to make creating custom translations easier. [#1070](https://github.com/laravel/nova/pull/1070)\r\n- Nova will bind the current request type to `NovaRequest`. [#1068](https://github.com/laravel/nova/pull/1068)\r\n- Fixed issue causing \"Update undefined\" in title when updating `BelongsToMany` fields. [#1044](https://github.com/laravel/nova/pull/1044)\r\n- Fixed issue with page titles when using a `HasOne` field on a resource. [#1045](https://github.com/laravel/nova/pull/1045)\r\n- Fixed issue preventing `HasOne` field from being filled when creating via a resource. [#1042](https://github.com/laravel/nova/pull/1042)\r\n- Fixed issue when using `NULL` values inside searches. [#1033](https://github.com/laravel/nova/pull/1033)\r\n- Fixed issue with z-index on `Value` and `Trend` metrics. [#1054](https://github.com/laravel/nova/pull/1054)\r\n- Fixed \"ErrorException - no failed  method\" error when using actions. [#1055](https://github.com/laravel/nova/pull/1055)\r\n- Fixed issue where having resource polling enabled closed open modals. [#1053](https://github.com/laravel/nova/pull/1053)\r\n- Fixed issue causing the `perPage` option to be overwritten. [#1036](https://github.com/laravel/nova/pull/1036)\r\n- Fixed issue where `Trix` fields wouldn't trigger form abandonment prevention. [#1072](https://github.com/laravel/nova/pull/1072)\r\n- Fixed issue where `File` fields weren't prunable if hidden from the detail view. [#1067](https://github.com/laravel/nova/pull/1067)\r\n- Fixed issue with `VaporFile` fields when its key is undefined. [#1048](https://github.com/laravel/nova/pull/1048)\r\n- Fixed issue where filters would close when using `Date` filters. [#36](https://github.com/laravel/nova-js/pull/36)-js",
+            "version": "3.15.0",
+            "series": "Orion",
+            "released_at": "2020-11-10 16:06:44"
+        },
+        {
+            "notes": "- Added new `HasManyThroughField` field type. [#1028](https://github.com/laravel/nova/pull/1028)\n- Added new `HasOneThroughField` field type. [#1038](https://github.com/laravel/nova/pull/1038)\n- Added new button to toggle polling. [#1037](https://github.com/laravel/nova/pull/1037)\n- Improvements to `detailQuery` and actions. [#1035](https://github.com/laravel/nova/pull/1035)\n- Fixed regression issue with `redirectAfterDelete`. [#1026](https://github.com/laravel/nova/pull/1026)\n- Fixed serialization issue with Partition metrics. [#1027](https://github.com/laravel/nova/pull/1027)\n- Fixed issue with long titles being truncated too soon. [#1032](https://github.com/laravel/nova/pull/1032)\n- Fixed issue when using inline relations with `BelongsTo` and `Image` fields. [#1030](https://github.com/laravel/nova/pull/1030)\n- Fixed \"Invalid text representation\" error with search. [#1031](https://github.com/laravel/nova/pull/1031)\n- Nova will now avoid filling a `VaporFile` attribute when missing from the request. [#1039](https://github.com/laravel/nova/pull/1039)\n- Nova will now show proper validation errors when a multiple duplicate relations. [#1040](https://github.com/laravel/nova/pull/1040)\n- Fixed issue with computed fields being resolve twice for index. [#1029](https://github.com/laravel/nova/pull/1029)",
+            "version": "3.14.0",
+            "series": "Orion",
+            "released_at": "2020-10-27 20:29:09"
+        },
+        {
+            "notes": "- `Select` fields now broadcast field attribute change events. [#1024](https://github.com/laravel/nova/pull/1024)\r\n- Added missing translations keys for page titles. [#1015](https://github.com/laravel/nova/pull/1015)\r\n- Improved resource usage when using `suggestions` option. [#1012](https://github.com/laravel/nova/pull/1012) \r\n- Added Nova Dusk tests to the main Nova repository. [#1020](https://github.com/laravel/nova/pull/1020)\r\n- Fixed issue with flatpickr not being available in Vue watch events. [#1009](https://github.com/laravel/nova/pull/1009)\r\n- Fixed display issue with long page titles on detail views.\r\n- Fixed width issue with default `Gravatar` configuration. \r\n- Fixed issue with ordering when resetting Lenses. [#1018](https://github.com/laravel/nova/pull/1018)\r\n- Fixed incorrect lens pagination when using a \"having\" query. [#1017](https://github.com/laravel/nova/pull/1017)\r\n- Fixed issue where `contenteditable` fields would trigger global shortcuts. [#1013](https://github.com/laravel/nova/pull/1013)\r\n- Fixed regression in `Currency` field when using `nullable` option. [#1008](https://github.com/laravel/nova/pull/1008)\r\n- Fixed issue with field names in action validation error messages. [#1010](https://github.com/laravel/nova/pull/1010)\r\n- Fixed an issue where all cases were required when customizing partition metric colors. [#1022](https://github.com/laravel/nova/pull/1022)\r\n- Fixed issue preventing `BelongsTo` fields from being sortable on on Lenses. [#1023](https://github.com/laravel/nova/pull/1023)\r\n- Fixed issue when using \"select all matching\" with MSSQL databases. [#1025](https://github.com/laravel/nova/pull/1025)",
+            "version": "3.13.0",
+            "series": "Orion",
+            "released_at": "2020-10-20 16:55:35"
+        },
+        {
+            "notes": "- Fixed regression with causing duplicate fields on the index view. [#1004](https://github.com/laravel/nova/pull/1004)\r\n- Inline Actions are now correctly resolved for Lenses. [#1006](https://github.com/laravel/nova/pull/1006)\r\n- Fixed issue showing help text on attachment update view for pivot fields. [#1007](https://github.com/laravel/nova/pull/1007)",
+            "version": "3.12.1",
+            "series": "Orion",
+            "released_at": "2020-10-07 18:14:24"
+        },
+        {
+            "notes": "- Added support for friendly page titles. [#1000](https://github.com/laravel/nova/pull/1000)\r\n- Fixed an issue with `BelongsTo` fields and default values. [#983](https://github.com/laravel/nova/pull/983)\r\n- Fixed a regression in the `Resource` `searchable` method.\r\n- Fixed an issue with `Date` filters that prevented them from clearing their input when reset. [#984](https://github.com/laravel/nova/pull/984)\r\n- Fixed an issue with incorrect model namespacing when generating new resources. [#989](https://github.com/laravel/nova/pull/989)\r\n- Fixed errors that occurred when firing change events for fields. [#992](https://github.com/laravel/nova/pull/992)\r\n- Fixed an issue preventing `Code` fields from displaying their data on edit forms. [#993](https://github.com/laravel/nova/pull/993)\r\n- Fixed an issue preventing `MorphTo` fields from fill their values correctly. [#988](https://github.com/laravel/nova/pull/988)\r\n- Fixed an issue with preventing form abandonment in `BelongsToMany` fields. [#997](https://github.com/laravel/nova/pull/997)\r\n- Fixed an inconsistency between `Currency` and `Number` fields when handling `NULL` values. [#991](https://github.com/laravel/nova/pull/991)\r\n- Fixed an issue preventing the deletion of images on `HasMany` fields. [#999](https://github.com/laravel/nova/pull/999)\r\n- Fixed an issue preventing `File` and `Image` fields from being downloadable if only defined in `fieldsForDetail` method. [#994](https://github.com/laravel/nova/pull/994)\r\n- Fixed an issue preventing fields from filling when using polymorphic relations. [#1002](https://github.com/laravel/nova/pull/1002)\r\n- Fixed a regression causing translation naming collisions when using `label` and `singularLabel` methods on `Resource`s. [#910](https://github.com/laravel/nova/pull/910)",
+            "version": "3.12.0",
+            "series": "Orion",
+            "released_at": "2020-10-06 17:16:34"
+        },
+        {
+            "notes": "- Fix regression with \"undefined constant 'searchable'\".",
+            "version": "3.11.1",
+            "series": "Orion",
+            "released_at": "2020-09-29 20:36:12"
+        },
+        {
+            "notes": "- Added ability to specify `viewable` method for `MorphTo` fields. [#966](https://github.com/laravel/nova/pull/966)\n- Added ability to specify \"Standalone Actions\" for Lenses. [#971](https://github.com/laravel/nova/pull/971)\n- Added ability to set custom context on `Currency` fields. [#973](https://github.com/laravel/nova/pull/973)\n- Added support for default values inside `BelongsTo` and `MorphTo` fields. [#975](https://github.com/laravel/nova/pull/975)\n- Added selection change JavaScript events for `BelongsTo`, `MorphTo`, `Attach`, and `UpdateAttached` views. [#980](https://github.com/laravel/nova/pull/980)\n- Added support for help text when using `Action` fields. [#981](https://github.com/laravel/nova/pull/981)\n- Fixed an issue causing `Trend` metrics to use incorrect suffix inflection. [#967](https://github.com/laravel/nova/pull/967) \n- Fixed an issue preventing the \"required\" field indicator from showing on `Action` fields. [#972](https://github.com/laravel/nova/pull/972)\n- Fixed an issue preventing default values from working correctly on `Date` fields. [#972](https://github.com/laravel/nova/pull/972)\n- Fixed an issue when resolving reverse relations for prefilling fields. [#974](https://github.com/laravel/nova/pull/974), [#908](https://github.com/laravel/nova/pull/908)\n- Fixed an issue preventing the index search field from correctly showing. [#977](https://github.com/laravel/nova/pull/977)\n- Fixed an issue where the trashed filter would disappear in certain scenarios. [#978](https://github.com/laravel/nova/pull/978)",
+            "version": "3.11.0",
+            "series": "Orion",
+            "released_at": "2020-09-29 16:04:07"
+        },
+        {
+            "notes": "- Added new \"standalone\" actions for running actions without selecting resources. [#961](https://github.com/laravel/nova/pull/961)\r\n- Added ability for resources to auto-refresh their index listing. [#957](https://github.com/laravel/nova/pull/957)\r\n- Added ability to customize the debounce of global search. [#963](https://github.com/laravel/nova/pull/963)\r\n- Added ability to customize the search debounce of individual resources. [#963](https://github.com/laravel/nova/pull/963) \r\n- Added ability to customize the number of results returned from Laravel Scout search queries. [#964](https://github.com/laravel/nova/pull/964)\r\n- Fixed an issue preventing the `Slug` field from showing on create forms. [#965](https://github.com/laravel/nova/pull/965)\r\n- Fixed an issue where the search parameter for a resource was `undefined`.\r\n- Fixed an issue preventing users from using version 3.0 of `laravel/ui`. [#962](https://github.com/laravel/nova/pull/962)",
+            "version": "3.10.0",
+            "series": "Orion",
+            "released_at": "2020-09-15 15:34:47"
+        },
+        {
+            "notes": "- Fixes issue with `Trix` field where it's value wasn't being correctly sent.",
+            "version": "3.9.4",
+            "series": "Orion",
+            "released_at": "2020-09-14 18:11:33"
+        },
+        {
+            "notes": "- Fixes issue with picking dates using the Date field.\n- Fixes incorrect version number in footer.\n- Adds translation for the `Slug` field's \"Customize\" text.",
+            "version": "3.9.3",
+            "series": "Orion",
+            "released_at": "2020-09-14 18:00:19"
+        },
+        {
+            "notes": "- Fix issue where `Slug` field could not be both readonly and listen for change events when creating resources.",
+            "version": "3.9.2",
+            "series": "Orion",
+            "released_at": "2020-09-09 15:35:52"
+        },
+        {
+            "notes": "Fixed issue with `Slug` field where its from attribute was hard-coded.",
+            "version": "3.9.1",
+            "series": "Orion",
+            "released_at": "2020-09-08 20:02:43"
+        },
+        {
+            "notes": "- Nova has been updated for compatibility with Laravel 8. [@d016dc](https://github.com/laravel/nova/commit/d016dccf8e905081d162c7b40ff9047a85052771)\r\n- Added a new `Slug` field which allows for creating a unique URL identifier from another `Text` fields value. [#951](https://github.com/laravel/nova/pull/951)\r\n- Added a new `placeholder` helper method to set placeholdre values for form fields. [#952](https://github.com/laravel/nova/pull/952)\r\n- Action fields now support providing default values. [#941](https://github.com/laravel/nova/pull/941)\r\n- Added ability to change the \"update resource\" button label. [#943](https://github.com/laravel/nova/pull/943)\r\n- Nova's search debounce is now user-configurable. [#942](https://github.com/laravel/nova/pull/942)\r\n- Added ability to prevent accidental form abandonment. [#948](https://github.com/laravel/nova/pull/948)\r\n- Nova will now scroll to the top of the page after failed form validation. [#949](https://github.com/laravel/nova/pull/949)\r\n- Nova will now restore the scroll position when the browser's back and forward buttons are used. [#949](https://github.com/laravel/nova/pull/949)\r\n- Fixed several issues where extra visible space was being used. [#946](https://github.com/laravel/nova/pull/946), [#950](https://github.com/laravel/nova/pull/950)\r\n- Nova will now throw an error if translation strings are incorrectly configured. [#931](https://github.com/laravel/nova/pull/931)\r\n- Nova will prevent its Service Provider from being loaded multiple times. [#953](https://github.com/laravel/nova/pull/953)\r\n- Nova will now only default the `MorphTo` selection to its `viaResource` value if it's an allow resource type. [#937](https://github.com/laravel/nova/pull/937)\r\n- Nova will now show subtitles on `MorphToMany` field selection options. [#954](https://github.com/laravel/nova/pull/954)",
+            "version": "3.9.0",
+            "series": "Orion",
+            "released_at": "2020-09-08 15:05:21"
+        },
+        {
+            "notes": "- Fixed an issue when passing a callable to a `Field`'s `default` method. [#938](https://github.com/laravel/nova/pull/938)\n- Added ability to specify the maximum primary key size on `Resource` classes. [#906](https://github.com/laravel/nova/pull/906)\n- Fixed a regression with search in `BelongsTo` and `MorphTo` fields. [#940](https://github.com/laravel/nova/pull/940)",
+            "version": "3.8.4",
+            "series": "Orion",
+            "released_at": "2020-08-21 17:46:10"
+        },
+        {
+            "notes": "- Fixed an issue where search input's weren't honoring their debounce property value. [#932](https://github.com/laravel/nova/pull/932)\r\n- Nova now allows setting the `attribute` for sorting when using `Stack` fields. [#935](https://github.com/laravel/nova/pull/935)\r\n- Added ability to completely customize the \"Create\" button label text for resources. [#893](https://github.com/laravel/nova/pull/893), [#936](https://github.com/laravel/nova/pull/936)\r\n- Nova will now use the field names for validator attribute names. [#845](https://github.com/laravel/nova/pull/845)\r\n- Action fields will now properly set their required visual state. [#934](https://github.com/laravel/nova/pull/934)",
+            "version": "3.8.3",
+            "series": "Orion",
+            "released_at": "2020-08-18 17:39:02"
+        },
+        {
+            "notes": "- Fixed issue where Partition metrics were not displaying their totals correctly. [#930](https://github.com/laravel/nova/pull/930)",
+            "version": "3.8.2",
+            "series": "Orion",
+            "released_at": "2020-07-24 17:58:37"
+        },
+        {
+            "notes": "- Re-compiled assets to fix issue with new `ID` field",
+            "version": "3.8.1",
+            "series": "Orion",
+            "released_at": "2020-07-22 08:57:42"
+        },
+        {
+            "notes": "- Added link to the detail view of a resource when clicking the `ID` field. [#913](https://github.com/laravel/nova/pull/913)\r\n- Added ability to show column border and tighter table rows. [#912](https://github.com/laravel/nova/pull/912)\r\n- The `BelongsToMany` is now searchable. [#916](https://github.com/laravel/nova/pull/916)\r\n- Nova now supports Laravel's localization case-replacement syntax. [#920](https://github.com/laravel/nova/pull/920)\r\n- Added new `CustomLensHeader` component for user-land overriding. [#921](https://github.com/laravel/nova/pull/921)\r\n- Added new `showSumValue` to `Trend` metrics to allow you to show the sum of the `Trend` data. [#919](https://github.com/laravel/nova/pull/919)\r\n- Added the ability to customize the CSS classes used for `Action` and inline `Action` confirmation buttons. [#927](https://github.com/laravel/nova/pull/927)\r\n- `Panel`s are now `Macroable`. [#925](https://github.com/laravel/nova/pull/925)\r\n- Fixed issue when saving 2 Vapor file fields on the same resource. [#911](https://github.com/laravel/nova/pull/911)\r\n- Fixed issue when using Nova themes when using a reverse-proxy setup. [#917](https://github.com/laravel/nova/pull/917)\r\n- Fixed visual issue with `Metric` help icon z-index. [#924](https://github.com/laravel/nova/pull/924)\r\n- Nova will now use refs when initializing `Place` fields. [#922](https://github.com/laravel/nova/pull/922)\r\n- Nova will now use translations on many of its default stubs. [#915](https://github.com/laravel/nova/pull/915)\r\n- Fixed issue with the `DateTime` field's picker display formats. [#870](https://github.com/laravel/nova/pull/870)",
+            "version": "3.8.0",
+            "series": "Orion",
+            "released_at": "2020-07-21 17:47:20"
+        },
+        {
+            "notes": "- Fix issue with using `--no-interaction` option when creating tools.\r\n- Fix PHPStan typehint issue",
+            "version": "3.7.1",
+            "series": "Orion",
+            "released_at": "2020-06-30 21:51:32"
+        },
+        {
+            "notes": "- *New*: Stack Fields allow you to display multiple `BelongsTo`, `Text`, and new `Line` fields with additional formatting features. [#905](https://github.com/laravel/nova/pull/905)\r\n- Added ability to have dynamic pivot fields. [#899](https://github.com/laravel/nova/pull/899)\r\n- Added `--no-interaction` option to `make:tool` command to speed up process. [#901](https://github.com/laravel/nova/pull/901)\r\n- You can now change the guard used for Nova's forgot-password feature. [#903](https://github.com/laravel/nova/pull/903)\r\n- Fixed issue when resolving `null` values in `Currency` fields. [#902](https://github.com/laravel/nova/pull/902)\r\n- Fixed some default styles introduced in recent Chrome updates.\r\n- Create and Update forms will now show any additional non-validation errors via popup. [#897](https://github.com/laravel/nova/pull/897)",
+            "version": "3.7.0",
+            "series": "Orion",
+            "released_at": "2020-06-23 16:59:22"
+        },
+        {
+            "notes": "- Added filtering ability to `Select` fields. [#892](https://github.com/laravel/nova/pull/892)  \r\n- Added option to set precision for Trend metrics. [#891](https://github.com/laravel/nova/pull/891)\r\n- Fixed visual issue with Nova sidebar. [#895](https://github.com/laravel/nova/pull/895)",
+            "version": "3.6.0",
+            "series": "Orion",
+            "released_at": "2020-05-12 15:27:20"
+        },
+        {
+            "notes": "- Fixed issue where the resource manager was not correctly honoring Resource `availableForNavigation` visibility. [#887](https://github.com/laravel/nova/pull/887)\r\n- Added `storeAs` and `path` helpers to `VaporFile` and `VaporImage` fields. [#888](https://github.com/laravel/nova/pull/888)\r\n- Searchable relation fields can now optionally show the resource subtitle in their results. [#884](https://github.com/laravel/nova/pull/884)\r\n- Added ability to lock keys for editing on `KeyValue` fields. [#877](https://github.com/laravel/nova/pull/877), [#889](https://github.com/laravel/nova/pull/889)\r\n- Added ability to prevent adding and removing rows on `KeyValue` fields. [#877](https://github.com/laravel/nova/pull/877), [#889](https://github.com/laravel/nova/pull/889)",
+            "version": "3.5.0",
+            "series": "Orion",
+            "released_at": "2020-04-28 19:55:02"
+        },
+        {
+            "notes": "- Nova now supports using Chronos v2. [#876](https://github.com/laravel/nova/pull/876)\r\n- Fixed an issue with deletable `File` input visibility. [#883](https://github.com/laravel/nova/pull/883)\r\n- Extracted Resource Collection helpers [#882](https://github.com/laravel/nova/pull/882)",
+            "version": "3.4.1",
+            "series": "Orion",
+            "released_at": "2020-04-23 17:28:33"
+        },
+        {
+            "notes": "- Added new `default` method for specifying default values within `Field`s. [#866](https://github.com/laravel/nova/pull/866)\r\n- Added new `Hidden` input field. [#869](https://github.com/laravel/nova/pull/869)\r\n- Nova's `availableForNavigation` method now honors the `displayInNavigation` property of resources. [#872](https://github.com/laravel/nova/pull/872)\r\n- Fixed visual alignment issues with `BooleanGroup` fields. [#867](https://github.com/laravel/nova/pull/867)\r\n- Fixed issue resolving fields with default attributes on create forms. [#873](https://github.com/laravel/nova/pull/873)",
+            "version": "3.4.0",
+            "series": "Orion",
+            "released_at": "2020-04-14 19:10:23"
+        },
+        {
+            "notes": "- Fixed `nova:install` command not resolving stub paths. [#864](https://github.com/laravel/nova/pull/864)",
+            "version": "3.3.2",
+            "series": "Orion",
+            "released_at": "2020-04-09 07:51:52"
+        },
+        {
+            "notes": "- Fixed stub path when stubs haven't been published.\n- `FileField` will now honor the `rounded` settings.\n- Creation fields will no longer be resolved unnecessarily. [#865](https://github.com/laravel/nova/pull/865)",
+            "version": "3.3.1",
+            "series": "Orion",
+            "released_at": "2020-04-09 07:48:55"
+        },
+        {
+            "notes": "- Added support for Computed fields using a display callback. Previously this worked by accident, but it's now an official feature. [#852](https://github.com/laravel/nova/pull/852) \r\n- Added support for adding help text to `Panel`s. [#860](https://github.com/laravel/nova/pull/860)\r\n- `Panel` fields now support the `make` method allowing for a cleaner syntax. [#857](https://github.com/laravel/nova/pull/857)\r\n- Added a few visual improvements to File fields.\r\n- Nova will now use the `globalSearchResults` limit amount when searching using Scout. [#858](https://github.com/laravel/nova/pull/858)\r\n- Added support for hiding `true` or `false` values from `BooleanGroup` fields. [#849](https://github.com/laravel/nova/pull/849)\r\n- Nova's stubs are now able to be published for customization. [#862](https://github.com/laravel/nova/pull/862)\r\n- Added `withoutTrashed` method to disable showing the trash checkbox on `MorphTo` fields. [#861](https://github.com/laravel/nova/pull/861)\r\n- Added minor units support to `Currency` fields. [#818](https://github.com/laravel/nova/pull/818)\r\n- Fixed an issue with resolving fields when using Laravel 7.3. [#850](https://github.com/laravel/nova/pull/850)\r\n- Fixed some performance issues with `Code` fields and large documents. [#851](https://github.com/laravel/nova/pull/851)\r\n- Fixed an issue where pivot fields were not being filled correctly when updating relations. [#853](https://github.com/laravel/nova/pull/853)\r\n- Fixed an issue with modals closing when adding attachments to a `Trix` fields. [#854](https://github.com/laravel/nova/pull/854)   \r\n- Fixed an issue with `File` fields showing the delete button when set to read-only mode. [#856](https://github.com/laravel/nova/pull/856)\r\n- Fixed showing of the create-relation button on `MorphTo` fields. [#860](https://github.com/laravel/nova/pull/860)",
+            "version": "3.3.0",
+            "series": "Orion",
+            "released_at": "2020-04-08 18:05:51"
+        },
+        {
+            "notes": "- Use Tailwind's default leading classes. [#846](https://github.com/laravel/nova/pull/846)\n- Show button for inline action selector when only one inline action exists. [#847](https://github.com/laravel/nova/pull/847)\n- Fix `MorphTo` fields not displaying correctly. [#848](https://github.com/laravel/nova/pull/848)",
+            "version": "3.2.1",
+            "series": "Orion",
+            "released_at": "2020-04-03 16:21:20"
+        },
+        {
+            "notes": "- Fixed several issues with inconsistent Markdown editing and rendering. [#834](https://github.com/laravel/nova/pull/834) \r\n- Fixed an issue where Pivot Field visibility settings were not being honored. [#837](https://github.com/laravel/nova/pull/837)\r\n- Fixed issue where custom attachable relationship attributes were not being validated. [#836](https://github.com/laravel/nova/pull/836)\r\n- Fixed issue preventing computed fields from resolving for display. [#842](https://github.com/laravel/nova/pull/842)\r\n- Added new `warning` notification type for use with `Nova.warning` method. [#844](https://github.com/laravel/nova/pull/844) [#840](https://github.com/laravel/nova/pull/840)\r\n- Added ability to completely hide `ID` fields from Nova. [@debe56](https://github.com/laravel/nova/commit/debe56400581f3abe14983f1e47d64f749a59407)",
+            "version": "3.2.0",
+            "series": "Orion",
+            "released_at": "2020-04-01 20:27:35"
+        },
+        {
+            "notes": "- Added new `VaporFile` and `VaporImage` fields to provide upload capability for Laravel Vapor projects. [#829](https://github.com/laravel/nova/pull/829)\r\n- Added new `fieldsForIndex`, `fieldsForDetail`, `fieldsForCreate`, and `fieldsForUpdate` methods for defining resource fields only on those screens. [#827](https://github.com/laravel/nova/pull/827)\r\n- `BooleanGroup` fields can now be marked as read-only. [#826](https://github.com/laravel/nova/pull/826)\r\n- Nova will now lowercase the email passed to `Gravatar`. [#820](https://github.com/laravel/nova/pull/820)\r\n- Fixed an issue preventing `Currency` fields from being treated as HTML correctly. [#819](https://github.com/laravel/nova/pull/819)\r\n- Fixed an issue preventing validation errors from being correctly passed to `Currency` fields. [#830](https://github.com/laravel/nova/pull/830)\r\n- Updated the inline action selector to use a select box instead of a dropdown menu. [#831](https://github.com/laravel/nova/pull/831)\r\n- Nova will now only show the trashed filter when a user can force delete or restore a resource [#817](https://github.com/laravel/nova/pull/817)\r\n- You may now specify a range to be the default when registering `Value` and `Trend` metrics. [#832](https://github.com/laravel/nova/pull/832)",
+            "version": "3.1.0",
+            "series": "Orion",
+            "released_at": "2020-03-17 18:34:01"
+        },
+        {
+            "notes": "- Address issues with Laravel Nova and Laravel 7.x route caching.",
+            "version": "3.0.2",
+            "series": "Orion",
+            "released_at": "2020-03-07 14:34:29"
+        },
+        {
+            "notes": "- Fixed an issue with Nova commands being incompatible with Symfony 5.0 [#816](https://github.com/laravel/nova/pull/816)",
+            "version": "3.0.1",
+            "series": "Orion",
+            "released_at": "2020-03-03 17:12:25"
+        },
+        {
+            "notes": "Laravel Nova v3.0.0 provides compatibility with Laravel 7.x. Applications that are utilizing Laravel 6.x should continue using the Nova 2.x release series.",
+            "version": "3.0.0",
+            "series": "Orion",
+            "released_at": "2020-03-03 13:35:37"
+        },
+        {
+            "notes": "- \"Create relation\" button can now be hidden [#808](https://github.com/laravel/nova/pull/808)\n- A redirect can now be specified after deleting a single resource [#809](https://github.com/laravel/nova/pull/809)\n- Fixed a couple of issues when storing files with `Trix` fields [#813](https://github.com/laravel/nova/pull/813)\n- Header components are now properly registered [#810](https://github.com/laravel/nova/pull/810)\n- Fixed “Create & Add Another” button not showing on `HasMany` fields [#805](https://github.com/laravel/nova/pull/805)\n- `ActionEvent`s will now write to the correct connection [#806](https://github.com/laravel/nova/pull/806)\n- Fixed event listeners for `CheckboxWithLabel` component [#804](https://github.com/laravel/nova/pull/804)\n- `BelongsTo` fields now respect custom placeholders [#815](https://github.com/laravel/nova/pull/815)",
+            "version": "2.12.0",
+            "series": "Orion",
+            "released_at": "2020-03-03 13:34:43"
+        },
+        {
+            "notes": "- Fix regression for some users caused by wrapping all operations in transactions [#802](https://github.com/laravel/nova/pull/802)\r\n- Fix some issues with `Currency` field [#801](https://github.com/laravel/nova/pull/801)",
+            "version": "2.11.1",
+            "series": "Orion",
+            "released_at": "2020-02-19 21:41:07"
+        },
+        {
+            "notes": "- Fixed issue where `BelongsTo` and `MorphTo` fields would show the 'create relation' button, even if the field was set to readonly mode. [#788](https://github.com/laravel/nova/pull/788)\r\n- Fixed issue where Lens action field validation was not being honored. [#791](https://github.com/laravel/nova/pull/791)\r\n- Fixed issue preventing `BelongsTo` fields from displaying the correct label [#792](https://github.com/laravel/nova/pull/792)\r\n- Nova will now use a database transactions for detachment, destroy, force-delete, and restoration of resources. [#786](https://github.com/laravel/nova/pull/792)\r\n- Added ability for `Text` fields to offer suggestions in supported browsers. [#799](https://github.com/laravel/nova/pull/799)\r\n- Nova vendor requests will now be included in `isNovaRequest` checks. [#797](https://github.com/laravel/nova/pull/797)\r\n- Fixed issue which prevented nested resources from being generated correctly. [#798](https://github.com/laravel/nova/pull/798)\r\n- Added custom headers to create forms, lenses, and dashaboard views. [#796](https://github.com/laravel/nova/pull/796)\r\n- Fixed `Currency` field to be compatible with PHP 7.4. [#747](https://github.com/laravel/nova/pull/747)",
+            "version": "2.11.0",
+            "series": "Orion",
+            "released_at": "2020-02-18 19:51:13"
+        },
+        {
+            "notes": "- Fixed issue which prevented users from creating resources when using shortcuts.",
+            "version": "2.10.1",
+            "series": "Orion",
+            "released_at": "2020-02-05 19:21:44"
+        },
+        {
+            "notes": "- Added ability for users to create related resources on `BelongsTo` and `MorphsTo` relation type on create and update views. [#697](https://github.com/laravel/nova/pull/697)\r\n- Added ability for users to clear table sorting by clicking table headings to remove sorting. [#780](https://github.com/laravel/nova/pull/780)\r\n- Added ability to use custom resource sorting in Nova's sidebar [#779](https://github.com/laravel/nova/pull/779)\r\n- Metrics now honor a custom user timezone set with the `Nova::userTimezone(callback)` helper method. [#784](https://github.com/laravel/nova/pull/784)\r\n- Metrics will now refresh their data when resources are deleted or restored in the table view. Also added a new event custom tools and metric can listen for. [#781](https://github.com/laravel/nova/pull/781)\r\n- Decoding filters values from the UI has been extracted to a helper class to enable use in calculating metrics and custom tools. [#783](https://github.com/laravel/nova/pull/783)\r\n- Fixed issue where Nova allowed users to create extra `HasOne` relationships via the UI [#697](https://github.com/laravel/nova/pull/697)",
+            "version": "2.10.0",
+            "series": "Orion",
+            "released_at": "2020-02-04 19:27:49"
+        },
+        {
+            "notes": "- Nova will now use the configured `ActionEvent` model defined in any configured custom `ActionResource` resource. [#772](https://github.com/laravel/nova/pull/772), [#773](https://github.com/laravel/nova/pull/773)\r\n- Nova's default configuration now includes the previously-hidden `domain` option. [#776](https://github.com/laravel/nova/pull/776)\r\n- Nova's default migrations have been changed to `bigInteger` types. [#775](https://github.com/laravel/nova/pull/775)\r\n- Fixed an issue decoding filters with PHP 7.4 [@fe1660](https://github.com/laravel/nova/commit/fe16604e6a3c687ee4a1b774e172e72312bd27fd)",
+            "version": "2.9.4",
+            "series": "Orion",
+            "released_at": "2020-01-21 18:45:49"
+        },
+        {
+            "notes": "- Adds ability to add more-descriptive class names to Nova's Vue components using new `Nova::enableThemingClasses()` method. [#763](https://github.com/laravel/nova/pull/763/files)\r\n- Nova will now use the give field name first for determining a field's label.. [#764](https://github.com/laravel/nova/pull/764/files)\r\n- Fixed issue where Nova wasn't detaching all resources in \"Select All\" scenarios on large resource amounts. [#765](https://github.com/laravel/nova/pull/765)\r\n- Changed `Markdown` link insertion to use GitHub's `url` placeholder text instead of `http://`. [#766](https://github.com/laravel/nova/pull/766)\r\n- Fixed issue with Lenses where an `ID` field was required. [#745](https://github.com/laravel/nova/pull/745)\r\n- Fixed issue with Lenses where executing an action did not reload the resource listing. [#745](https://github.com/laravel/nova/pull/745)\r\n- Nova will now correctly disable select all fields when no `ID` field exists. [#745](https://github.com/laravel/nova/pull/745)\r\n- Nova will now look for Resources in the application namespace. [#746](https://github.com/laravel/nova/pull/746)\r\n- Fixed issue in Edge browsers where checkboxes would not correctly fire their events. [#771](https://github.com/laravel/nova/pull/771)",
+            "version": "2.9.3",
+            "series": "Orion",
+            "released_at": "2020-01-07 18:38:18"
+        },
+        {
+            "notes": "- Fixed regression where NULL Date values were not allowed. [#761](https://github.com/laravel/nova/pull/761)",
+            "version": "2.9.2",
+            "series": "Orion",
+            "released_at": "2019-12-11 17:23:59"
+        },
+        {
+            "notes": "- Fixed inability to translate the \"View\" text for BooleanGroup fields. [#760](https://github.com/laravel/nova/pull/760)\r\n- Fixed regression where NULL DateTime values were not allowed. [#761](https://github.com/laravel/nova/pull/761)",
+            "version": "2.9.1",
+            "series": "Orion",
+            "released_at": "2019-12-11 16:08:07"
+        },
+        {
+            "notes": "- Fixed updated country names to be more correct and fix some typos.\r\n- Fixed an issue where readonly wasn't working correctly for KeyValue fields. [#743](https://github.com/laravel/nova/pull/743)\r\n- Fixed issue which required one to put the BelongsTo and BelongsToMany fields in a certain order. [#744](https://github.com/laravel/nova/pull/744)\r\n- Fixed issue where singularLabel wasn't being respected on BelongsTo and HasOne fields. [#748](https://github.com/laravel/nova/pull/748)\r\n- Fixed issue where Nova wasn't using the correct guest guard for the ResetPasswordController [@6cd92ea](https://github.com/laravel/nova/commit/6cd92eac70372ff381d6b348c9037bfdb9439c39)\r\n- Fixed URI keys for Cards. [#750](https://github.com/laravel/nova/pull/750)\r\n- Added ability for File and Image fields to set the Accept attribute. [#751](https://github.com/laravel/nova/pull/751)\r\n- Fixed issue with duplicate Resources. [#752](https://github.com/laravel/nova/pull/752)\r\n- Nova will now send extra parameters when fetching Filters. [#753](https://github.com/laravel/nova/pull/753)\r\n- Nova will now call the resolver callback even if the field attribute isn't present on the underlying model. [#756](https://github.com/laravel/nova/pull/756)\r\n- Nova will now use the Model instance being updated to retrieve validation rules. [#638](https://github.com/laravel/nova/pull/638)\r\n- Nova now allows you to set Policy rules for ActionEvents. [#656](https://github.com/laravel/nova/pull/656)",
+            "version": "2.9.0",
+            "series": "Orion",
+            "released_at": "2019-12-10 20:12:05"
+        },
+        {
+            "notes": "- Added new `withoutTrashed` method to explicitly hide the `Show Trashed` checkbox on `BelongsTo` fields. [#721](https://github.com/laravel/nova/pull/721)\r\n- Added ability to customize where Global Search links should point. [#719](https://github.com/laravel/nova/pull/719)\r\n- Nova will now avoid resolving non-related fields when resolving `Avatar` fields. [#703](https://github.com/laravel/nova/pull/703)\r\n- Added ability to disable Nova's 'traffic cop' feature when updating resources. [#727](https://github.com/laravel/nova/pull/727)\r\n- Added ability to specify the language for `Place` fields. [#2e050c](https://github.com/laravel/nova/commit/2e050c9357f91e5b234f4f4dddf1ebfda10c5ecc)\r\n- Nova will now resolve the preview for searches. [#469](https://github.com/laravel/nova/pull/469)\r\n- Nova will now use its `nova.guest` setting when determining guests for its \"forgot password\" flow. [#735](https://github.com/laravel/nova/pull/735)\r\n- Nova now allows you to set the rounding precision for partition metrics. [#711](https://github.com/laravel/nova/pull/711)\r\n- Fixes issue where `withMeta` calls were not being serialized with their payload. [#718](https://github.com/laravel/nova/pull/718)\r\n- Fixes issue where `Sparkline` fields where not hidden from Create and Update views. [#717](https://github.com/laravel/nova/pull/717)\r\n- Fixes issue with creating uri keys for non-English Lens, Metric, and Action names. [@abaa36](https://github.com/laravel/nova/commit/abaa360bc8214d05610b1dfc1cba7d1403c51303), [@e52c7e](https://github.com/laravel/nova/commit/e52c7ea4d93f4e1a42ca427db01aeb48b28bbd1b)\r\n- Fixes issue where a two-item `Collection` wouold trigger errors in `Select` fields. [@206571](https://github.com/laravel/nova/commit/2065710843b790fbae605627ac6a7154ba7d1249)\r\n- Fixes visual alignment of resource table row icons. [@899c68](899c683b0eefd5c8efecdd75a58812c02672aed5)\r\n- Fixed issue where Nova fields would not stack correctly. [#730](https://github.com/laravel/nova/pull/730)",
+            "version": "2.8.0",
+            "series": "Orion",
+            "released_at": "2019-11-26 20:50:08"
+        },
+        {
+            "notes": "- Adds ability for third-party packages to register their own shortcuts [#712](https://github.com/laravel/nova/pull/712)\r\n- Fixes issue with new Value metric `allowZeroValue` functionality. [#713](https://github.com/laravel/nova/pull/713)\r\n- Fixes issue with international keyboards and Global Search [#712](https://github.com/laravel/nova/pull/712)",
+            "version": "2.7.1",
+            "series": "Orion",
+            "released_at": "2019-11-13 17:19:11"
+        },
+        {
+            "notes": "- Added new `allowZeroResult` to have values of zero to not be considered as \"no data\". [#692](https://github.com/laravel/nova/pull/692)\r\n- Added ability for Markdown and Trix fields to listen to field update events. [#677](https://github.com/laravel/nova/pull/677)\r\n- Added ability for search results to be limited per-resource via a new `globalSearchResults` option on the resource. [#696](https://github.com/laravel/nova/pull/696)\r\n- Added ability to use a custom `ActionResource` class, which is useful for adding fields and other functionality. [#694](https://github.com/laravel/nova/pull/694)\r\n- Added new `Nova::report` method, which allows for customizing Nova's error reporting. [#695](https://github.com/laravel/nova/pull/695)\r\n- Added ability for `BooleanGroup` field to use a `Collection` or `Closure` to return options [@c48980](https://github.com/laravel/nova/commit/c48980ef2d54551d47aedb40791ed7b10c8329b4)\r\n- Added ability to add custom header components for all Nova's views. [#679](https://github.com/laravel/nova/pull/679)\r\n- Added abiltity for Nova custom scripts and styles to be cached by the browser. [701](https://github.com/laravel/nova/pull/701)\r\n- Added new `Sparkline` field for showing small line graphs on resources detail and table row views. [#655](https://github.com/laravel/nova/pull/655)\r\n- Nova now includes updated `Country` field translations to match the current ISO standard [#617](https://github.com/laravel/nova/pull/617)\r\n- Added ability for custom connection-based Trend date expressions [#599](https://github.com/laravel/nova/pull/599)\r\n- Added ability to store Trix attachments in sub-folders [#562](https://github.com/laravel/nova/pull/562)\r\n- Nova will now pass an instance of `NovaRequest` to metrics [#704](https://github.com/laravel/nova/pull/704)\r\n- Fixed issue where pagination was showing for `HasOne` fields. [@0a8b551](https://github.com/laravel/nova/commit/0a8b5510951ee74b6a9fa2e231246c07842bd06e)\r\n- Nova will now escape `Textarea` field content when displaying it. [@69106b2](https://github.com/laravel/nova/commit/69106b2308909dd28517b801c43a6efcc1593f70)\r\n- Nova now allows for installation of `spatie/once` at version 2.0 [#615](https://github.com/laravel/nova/pull/615)\r\n- Nova will now avoid resolving fields for certain situations where the value isn't needed. [#645](https://github.com/laravel/nova/pull/645)\r\n- Fixed issue with \"Select All\" menu on Lenses. [@610bde9](https://github.com/laravel/nova/commit/610bde938234b260b5130993a8eb298d8bec2732)\r\n- Fixed issue with validation not working when trying to add value to a nullable `BelongsTo` field. [@1c8a90f](https://github.com/laravel/nova/commit/1c8a90f3dedb4415198f80222bb15930a900e3e9)\r\n- Nova will now check if a method exists when using a callable array for `Select` field options. [#698](https://github.com/laravel/nova/pull/689)\r\n- Nova will now return `FieldCollection` objects. [#627](https://github.com/laravel/nova/pull/627)\r\n- Fixed issue which broke 3rd-party packages when checking if a field is required. [#684](https://github.com/laravel/nova/pull/684)",
+            "version": "2.7.0",
+            "series": "Orion",
+            "released_at": "2019-11-12 20:23:59"
+        },
+        {
+            "notes": "Fixed issue with user menu not showing when upgrading Nova.",
+            "version": "2.6.1",
+            "series": "Orion",
+            "released_at": "2019-10-29 20:06:17"
+        },
+        {
+            "notes": "- Added new Boolean Group field type. [See docs](https://nova.laravel.com/docs/2.0/resources/fields.html#boolean-group-field)\r\n- Improved checkbox handling and accessibility.\r\n- Improved visual style of the \"Select All\" dropdown.\r\n- Fixed issues with menu positioning.\r\n- Fixed several issues with the display of tooltips.\r\n- Fixed issue with incorrect parameter names in BelongsTo fields.\r\n- Fixed issue with timezone parameters in Value metrics.\r\n- Fixed issue with Tool stubs not getting compiled correctly.\r\n- Nova will now correctly check the primary key is within the `search` array on a resource.",
+            "version": "2.6.0",
+            "series": "Orion",
+            "released_at": "2019-10-29 17:43:09"
+        },
+        {
+            "notes": "- Nova will now refresh resources in the index list when inline actions are ran.\r\n- Added ability to customize an action modal's confirmation, cancel button, and run button text.\r\n- Added ability to mark fields as required using boolean or closure.\r\n- Added ability to refresh metrics when actions are run.\r\n- Added ability to show help text inside metrics.\r\n- Improved styling of Image loader while loading.\r\n- Added ability to customize Nova's password broker.\r\n- Nova will now pass `viaResource`, `viaResourceId`, and `viaRelationship` parameters for `BelongsTo` and `MorphTo` field types.\r\n- Nova now allows you to set the precision amount for Value metrics.\r\n- Nova will now emit a `resource-loaded` event on its update form.\r\n- Added new `withoutTableOrderPrefix` to customize how lens data is pulled from the database.\r\n- Added ability to pass unique parameters to Dashboard.\r\n- Nova will now apply formatting logic to metric tooltips.\r\n- Fixed issue where some forms requests were being sent multiple times.\r\n- Fixed issue where metric charts were not filling correctly.\r\n- Fixed issue with autocomplete on Date filters.\r\n- Fixed issue where modal's would close when picking dates.\r\n- Fixed issue with Value metric timezones being calculated incorrectly.\r\n- Fixed issue where padding was not correctly applied for resouce index views with filters.\r\n- Fixed isse where `displayUsing` was no longer working on `BelongsTo` fields.",
+            "version": "2.5.0",
+            "series": "Orion",
+            "released_at": "2019-10-15 19:50:51"
+        },
+        {
+            "notes": "- \"Inline Actions\": added ability to show Actions inline in their own menu on individual resource table rows.\r\n- \"Load More Pagination\": added third pagination type which allows you to load more resources on the same index view.\r\n- Added ability to set the placeholder on Select fields.\r\n- Added ability to translate form submission error text.\r\n- Added support for negative value trends.\r\n- Nova will now honor HTML 5 validation on Create and Update forms.\r\n- Fixed the `today` metric calculation method.\r\n- Fixed regression where Nova no longer honored the initial value of `perPageOptions` when fetching resources.\r\n- Fixed issue with special characters being used inside Nova's site name.\r\n- Fixed an issue where Nova would fetch a resource twice during updating it.\r\n- Added a \"show more\" SVG icon.\r\n- Miscellaneous refactoring and code-cleanups.",
+            "version": "2.4.0",
+            "series": "Orion",
+            "released_at": "2019-10-01 18:04:24"
+        },
+        {
+            "notes": "- Fixed some styling issues in Search inputs.\n- Fixed an issue where Image fields were incorrectly rounded by default.\n- Text fields now show a dash when their values are null.\n- DateTime fields now show a dash when their values are null.\n- Metric select boxes visual style has been improved across different browsers.\n- The Boolean field's visual style has been updated to use icons for showing values.",
+            "version": "2.3.1",
+            "series": "Orion",
+            "released_at": "2019-09-17 16:06:28"
+        },
+        {
+            "notes": "- Added ability to configure Algolia app ID and API keys for the Place field.\r\n- Added Nova's cancel buttons to the tab index.\r\n- Nova's search inputs have been updated for a cleaner appearance.\r\n- The KeyValue field has been updated for a cleaner appearance.\r\n- Nova will now show a popup error message to the user if a validation error prevents a form from being submitted.\r\n- Added new `success` and `error` methods to Nova's global JavaScript object to handle toast messages.\r\n- Fixed issue where `ActionResource` couldn't find it's columns if the labels had been translated.\r\n- Nova's global search will now honor the rounded setting for the avatar which represents it.\r\n- Added ability to create a theme that would be applied to Nova's auth, password reset, and registration views in addition to the app itself.",
+            "version": "2.3.0",
+            "series": "Orion",
+            "released_at": "2019-09-10 16:42:07"
+        },
+        {
+            "notes": "- Added ability to limit the number of fields displayed in a panel.\r\n- Added ability to customize the rounding of Avatar, Gravatar, and Image fields.\r\n- Added ability to disable suffix inflection on Metric value labels.\r\n- Added ability to customize the date picker format used in the flatpickr JavaScript component.\r\n- Added \"Today\" date range for metrics.\r\n- Fixed an issue where the \"last retrieved at\" data for a resource was not being updated correctly.\r\n- Fixed issue where long strings would overflow a panel field.\r\n- Fixed issue where Trend Metrics were not displaying 0 values.\r\n- Fixed various visual issues.",
+            "version": "2.2.0",
+            "series": "Orion",
+            "released_at": "2019-09-03 20:33:50"
+        },
+        {
+            "notes": "- Adds ability to stack field labels and form elements.\r\n- Improves Laravel 6 compatibility.\r\n- Fixes issue with determining the uri key for Dashboards.\r\n- Fixes issue with determining the `sortableUriKey`",
+            "version": "2.1.1",
+            "series": "Orion",
+            "released_at": "2019-08-22 20:09:17"
+        },
+        {
+            "notes": "- Nova now supports multiple Dashboards.\r\n- Improved support for MSSQL.\r\n- The Boolean field is now color blind friendly.\r\n- Nova now uses Numbro instead of Numeral for JS number formatting.\r\n- Nova now correctly filters different resources but which use the same base-relationship.\r\n- Fields can now change their text alignment.\r\n- Added ability to pass a `Closure` to field visibility methods.\r\n- Fixed a UX issue with Metrics.\r\n- The Lens stub now comes with the `cards` method already defined.\r\n- Nova will now warn the user when a Resource name conflicts with one of its reserved words.\r\n- BelongsTo fields can now be sorted.\r\n- Trix field can now store data outside of the database\r\n- Several Laravel v6 fixes.",
+            "version": "2.1.0",
+            "series": "Orion",
+            "released_at": "2019-08-20 19:30:47"
+        },
+        {
+            "notes": "- Added new `meta` partial to allow for customizing the `<head>` element of Nova. This is useful for adding things like favicons, meta tags, etc.\r\n- Added ability for users to load their own custom translations.\r\n- Added ability to redirect using Vue instead of a hard redirect.\r\n- Increased tooltip width on Metrics.\r\n- Nova will no longer show the trashed state on readonly resources.\r\n- Nova will now show a warning label when no morphTo types are available.\r\n- Nova now allows Select fields to not be nullable.\r\n- Nova will now use the fully-qualified class name inside of its Blade templates.\r\n- Fixed cursor position within MarkdownField when switching to write mode\r\n- Fixed `SelectControl` on Edge.\r\n- Fixed issue where SQLite doesn't use ISO week numbers\r\n- Fixed visual issues with error views.",
+            "version": "2.0.11",
+            "series": "Orion",
+            "released_at": "2019-08-13 17:18:27"
+        },
+        {
+            "notes": "- Nova is now comptaible with Laravel v6.\r\n- Nova will now correctly send the `editing` and `editMode` parameters when doing create, update, attach, and update-attached requests.\r\n- Added some missing translation keys\r\n- Nova will now reset validation errors when an action is cancelled.\r\n- Added `suburb` method to `Place` field.\r\n- Nova now allows you to translate `Action` status labels.\r\n- Queued collections now dequeue in the same order\r\n- Nova will now check for a `package.json` in the application root before attempting to add Nova `Tool` scripts.\r\n- Fixed issue with using `Esc` key when closing modals.\r\n- Apply `JSON_UNESCAPED_UNICODE` to `Code` field options.\r\n- Apply `JSON_UNESCAPED_UNICODE` to `AssetCommand` field options.\r\n- Remove some unused styles from Tailwind\r\n- Nova will now use natural ordering for attachable resources.\r\n- Nova now allows you to specify a `Closure` for `Select` fields options.\r\n- Resolved Metrics caching issues.\r\n- Resolved Vue property type issues.\r\n- FirstDayOfPreviousQuarter is now fixed.\r\n- Added `Nova.config.locale` configuration option, which is then passed to `Numeral.js`.",
+            "version": "2.0.10",
+            "series": "Orion",
+            "released_at": "2019-08-07 16:08:43"
+        },
+        {
+            "notes": "- Fixes issue where the existing resource ID was not being passed to Panels, breaking some third-party Nova packages and fields.",
+            "version": "2.0.9",
+            "series": "Orion",
+            "released_at": "2019-07-03 14:40:43"
+        },
+        {
+            "notes": "- Nova will now display `Panel`s on the Create and Update views in addition to the Detail view.\r\n- Adds ability to customize the pagination options per resource. [docs](https://nova.laravel.com/docs/2.0/resources/#customizing-pagination)\r\n- Adds ability to add additional types to the `Badge` field.\r\n- Action resources will now show any exceptions recorded when running the action\r\n- Nova will now use the app's locale inside the HTML `lang` attribute\r\n- Fixes issue where fields marked as `readonly` were still validated, causing issues where a user couldn't partially update a resource.\r\n- Fixes issue where Metrics wouldn't reload when the resource changes in the URL.",
+            "version": "2.0.8",
+            "series": "Orion",
+            "released_at": "2019-07-02 15:36:04"
+        },
+        {
+            "notes": "- Fix migration definition of action `original` and `changes` columns to be `text` types instead of `json`. This allows Nova to continue to support older versions of MySQL.",
+            "version": "2.0.7",
+            "series": "Orion",
+            "released_at": "2019-06-25 20:51:52"
+        },
+        {
+            "notes": "*This version of Nova includes a migration. Make sure to run `php artisan migrate` to receive the latest database changes.*\n\n- **Beta**: Added `Badge` field type which enables displaying a custom status badge in the resource index and detail views. [Read More](https://github.com/laravel/nova/pull/429)\n- Add resource changes to `ActionResource` when creating and updating resources. [Read More](https://github.com/laravel/nova/pull/410)\n- The `BelongsTo` field will now pass the resource ID when fetching available resources\n- Add ability to translate the Download button on `Field` fields. \n- Decrease minimum waiting time to 300ms in resource index views.\n- Fix issue with lenses when fetching data never stopped loading\n- Fix attaching BelongsToMany when using non-standard pivot keys.",
+            "version": "2.0.6",
+            "series": "Orion",
+            "released_at": "2019-06-10 17:24:31"
+        },
+        {
+            "notes": "- Fixes issue where new translations were not added to Nova's published assets.",
+            "version": "2.0.5",
+            "series": "Orion",
+            "released_at": "2019-05-15 19:23:33"
+        },
+        {
+            "notes": "- Fix issue where Lens pagination would be stuck after fetching a new page.\n- Fix regression where Per Page filter selector didn't update the amount of resources in the index listing.\n- Fix select controls inside `Metric` Vue components.\n- Fix issue where Gravatar and Avatar images get squished on dense resource table views.\n- Adds cancel button to Attach, Create, Update, and UpdateAttached views.\n- Adds a few missing translation keys for `Resource` deleted and restored confirmations.\n- Nova will now prevent a user from using create and edit shortcuts when a policy or gate forbids the action.\n- Nova will now show non-viewable relations as normal text instead of bold.\n- Changes minimum password length inside the `UserResource` stub to the recommended 8 character minimum.\n- Changes location of Nova's logout route registration.\n- Changes global search to show hotkey help text.\n- Nova will now show loading indicators for the resource table when fetching new records.\n- Adds ability to specify where a user is redirected after saving and updating a resource.\n- Improves how multi-word Resource names are labeled by default.\n- Updates translation keys to support more translation scenarios where gender and word order are important.\n- Adds `KeyValue` translation keys.\n- Adds the ability to customize the headings for the `KeyValue` field.",
+            "version": "2.0.4",
+            "series": "Orion",
+            "released_at": "2019-05-14 15:40:38"
+        },
+        {
+            "notes": "- Reverts PR that introduced an infinite request loading issue on Detail views.",
+            "version": "2.0.3",
+            "series": "Orion",
+            "released_at": "2019-05-01 17:04:15"
+        },
+        {
+            "notes": "- **Beta**: Added new `KeyValue` field type to enable editing of flat JSON data columns. \n- Partition Metric colors may now be specified as a flat list for instances where the Metric labels are unknown at runtime.\n- Pagination links will now be disabled when fetching new resources to avoid errant clicks.\n- Nova will now disable autofill on `Password` fields.\n- You can now specify readonly fields without passing a boolean to the method.\n- Nova will now avoid refreshing the action log when its tab is not focused.\n- The underlying resource's model will now be passed to computed field's callback.\n- Custom owner key's are now supported in the BelongsTo field.\n- Dusk selectors are now added to `Select` fields to better facilitate user Dusk tests.\n- Nova will now not allow a user to clear the search input of relation fields if the relation is not nullable.\n- Fixed issue with serializing resources using a `Request` instance instead of `NovaRequest`.\n- Fixed issue with `Password` fields where certain request attributes would be resolved incorrectly.\n- Fixed issue with Postgres and searching larger numbers.\n- Fixed regression with pagination.\n- Fixed issue where pagination events were sent when they didn't need to be.",
+            "version": "2.0.2",
+            "series": "Orion",
+            "released_at": "2019-04-29 17:54:08"
+        },
+        {
+            "notes": "- Security: prevent escaping the CSV parsing logic when validating unique values on resource update.\r\n- Added ability for Actions to open URLs in a new tab.\r\n- Nova will now pass along the resource ID when fetching cards on detail views.\r\n- Nova will now pass along the relationship type when fetching resource actions.\r\n- Reduced queries for eager loaded relations.\r\n- Added ability for all fields to be read-only on create and update forms.\r\n- Nova now uses its own Exception handler class instead of the hosting app's one.\r\n- Nova will now avoid resolving Computed fields in create and update views.\r\n- Fixed issue with pagination not using the `perPage` property from the response.\r\n- Fixed issue with resources named \"Resource\".\r\n- Fixed visual issue with the File field on index listing.\r\n- Fixed issue with showing help text and errors.",
+            "version": "2.0.1",
+            "series": "Orion",
+            "released_at": "2019-03-27 16:49:52"
+        },
+        {
+            "notes": "- Provides compatibility with Laravel 5.8.\r\n\r\nNova 2.0 is primarily a maintenance release to provide compatibility with Laravel 5.8. Nova 2.0 should **only** be used with Laravel 5.8, as it is not compatible with previous releases of Laravel. Your Nova resources will not require any changes during this upgrade; however, you should review the entire [Laravel 5.8 upgrade guide](https://laravel.com/docs/5.8/upgrade).",
+            "version": "2.0.0",
+            "series": "Orion",
+            "released_at": "2019-02-26 16:54:06"
+        },
+        {
+            "notes": "- Nova's layout will now be hidden while Vue is mounting.\r\n- Added ability for Lenses to have their own separate Actions.\r\n- Added ability for Lenses to have their own Cards.\r\n- Added \"Select All Matching\" ability on Lenses.\r\n- Added ability to disable writing to the Action Log when running.\r\n- Improved formatting for Metric values\r\n- Fixed an issue with counting resources on SQL Server.\r\n- Fixed an issue with using a custom connection when counting resources.\r\n- Fixed an issue in File fields where long file names wouldn't be truncated in the UI.\r\n- Fixed regression in disabling morphTo field on relationship creation.\r\n- Fixed miscellaneous visual issues.",
+            "version": "1.3.2",
+            "series": "Orion",
+            "released_at": "2019-02-11 20:07:15"
+        },
+        {
+            "notes": "- Added Heading field type: [https://nova.laravel.com/docs/1.0/resources/fields.html#heading-field](https://nova.laravel.com/docs/1.0/resources/fields.html#heading-field)\n- Trend and Value metrics now support customization of their formatting.\n- Nova now shows an error message when your CSRF token has expired.\n- You can now customize the filling strategy for Password fields.\n- MorphToFields resource search fields are now disabled when a type hasn't been selected.\n- Resource counts in Lenses are now correct when the query uses GROUP BY clauses.\n- Fixed issue where no results would be returned when using Laravel Scout.\n- Fixed issue where custom primary keys were not being returned on resource creation and updates.\n- Fixed issue where certain values were not translatable inside of error views.\n- Filter requests are now reduced to a minimum.\n- Several General fixes, formatting changes, and improvements.",
+            "version": "1.3.1",
+            "series": "Orion",
+            "released_at": "2019-01-21 21:53:44"
+        },
+        {
+            "notes": "- Adds support for setting the placeholder attribute on Date, DateTime, and Trix fields.\n- Adds support for setting the placeholder attribute on the Date filter.\n- Adds support for customizing the Value and Trend value formatting.\n- Adds support for registering your own Vuex stores inside custom Nova components.\n- Adds method singularLabel to better support localization of ActionResource.\n- Adds Kosovo to Country field and translations.\n- Adds ability to set maxWidth of Avatar, Gravatar, and Image fields.\n- Fixes an issue when triggering actions on User resources that don't have name attributes.\n- Fixes issue where the MorphTo field wasn't using the morph map.\n- Fixes regression in Filters where Filters were using the same component state.\n- Fixes issue when closing the confirm action modal.\n- Fixes issue affecting the display of resource fields in Lenses.\n- Fixes 404s with assets where the file doesn't exist.\n- Fixes issue where the morph map wouldn't be honored on ActionEvents.\n- Fixes untranslatable label on File field when no file is selected.\n- Removes extra delete requests if \"Select all Matching\" is selected.",
+            "version": "1.3.0",
+            "series": "Orion",
+            "released_at": "2019-01-07 21:05:29"
+        },
+        {
+            "notes": "- Add ability to pass custom rules as the first argument.\n- Add support for resolving from JSON field in boolean and gravatar fields.\n- Add support for Twig inside of code fields.\n- Add helper method to resolve BIGINT ID fields as strings for the front-end.\n- Add ability to set the first day of the week on Date and DateTime fields and Actions.\n- Add support for custom filter keys, which enables you to reuse an action in the same resource, but configure it differently.\n- Nova will now format with whitespace for `Textarea` fields.\n- Nova will now delete the previous file from storage if the field is updated and `prunable`.\n- Nova will now send invalid resource names in the URI to 404 view.\n- Allow footer to be published alongside other views.\n- Improve handling of custom `Authenticable` models in the user navigation.\n- Nova will now pass the value and disk name to File field callbacks\n- Fix issue with File fields colliding when the attribute name was \"files\".\n- Fix browser compatibility issue with dropdowns using `flatMap`.\n- Fix issue with action events and authenticable identifiers.\n- Fix issue generating the uri key of lens and partition, trend, and value metrics.\n- Fix z-index of search results when visible over a card.\n- Fix issue that kept code and markdown fields from showing their full content on load.\n- Fix visual regression in empty index buttons.\n- Fix issue where date fields would close the action modal but leave the calendar visible.\n- Fix mapping of integer keys in Boolean filter.\n- Fix issue that kept action resource counts from being updated correctly.\n- Fix issue where resource count labels couldn't be translated into their proper plural in non-english languages.\n- Fix issue with showing image previews on detail and form screens.\n- Fix issue where empty resource groups were shown in the sidebar.\n- Fix morph map inside action log.\n- Fix scrollbar overflow on actions menu.\n- Fix collision of action fields when field is using the name `action`.",
+            "version": "1.2.1",
+            "series": "Orion",
+            "released_at": "2018-12-12 15:48:16"
+        },
+        {
+            "notes": "- Fix resource ID on custom detail toolbars\n- Fix missing error border color for date fields\n- Allow translation of password reset email subject\n- Improve handling of empty filter value\n- Allow translation of action log header\n- Add loading state to form buttons\n- Enable middle click on create/attach buttons\n- Allow to set custom label colors of a partition metric\n- Extract dropdown inline style to class to help RTL conversion\n- Add support for latitude and longitude in the place field\n- Allow actions to only be shown on the index view",
+            "version": "1.2.0",
+            "series": "Orion",
+            "released_at": "2018-11-28 15:48:43"
+        },
+        {
+            "notes": "- Fix empty select filter value regression\n- Fix issue with filter stub component property visibility\n- Fix NaN in partition metric if all values are zero\n- Fix regression in buttons labels\n- Fix hardcoded icon colors\n- Add ability to localize 'Run Action', 'Edit', 'Delete', 'Force Delete', and 'Restore' on detail views\n- Add ability to localize Value metric labels\n- Use Nova's configured site name for the page title",
+            "version": "1.1.9",
+            "series": "Orion",
+            "released_at": "2018-11-27 15:30:07"
+        },
+        {
+            "notes": "- Support for the [boolean filter type](https://nova.laravel.com/docs/1.0/filters/defining-filters.html#boolean-filters)\n- Support for the [date filter type](https://nova.laravel.com/docs/1.0/filters/defining-filters.html#date-filters)\n- Support for [custom filter types](https://nova.laravel.com/docs/1.0/customization/filters.html#overview)\n- Allow null values on select fields\n- Reload actions menu after executing an action\n- Adds default placeholder text for textarea field\n- Fix issue where lens wouldn't reload if the lens changed in the URL\n- Fix `document.createElement` error from Trix field\n- Fix for disappearing filters menu when paginating out of range and there are no resources\n- Fix select all/select all matching checkboxes on Safari and Firefox\n- Fix general checkbox issues in Safari and Firefox\n- Fix `for` attributes on text fields\n- Fix action downloads responses in Firefox",
+            "version": "1.1.8",
+            "series": "Orion",
+            "released_at": "2018-11-21 14:58:43"
+        },
+        {
+            "notes": "- Support for nullable BelongsTo and MorphTo relationships.\n- Respect custom singular label on BelongsTo relationships.",
+            "version": "1.1.7",
+            "series": "Orion",
+            "released_at": "2018-10-25 19:29:31"
+        },
+        {
+            "notes": "- Fix regression with file deleting / pruning behavior.",
+            "version": "1.1.6",
+            "series": "Orion",
+            "released_at": "2018-10-24 22:20:06"
+        },
+        {
+            "notes": "- Fix creating Trix attachments model creation.",
+            "version": "1.1.5",
+            "series": "Orion",
+            "released_at": "2018-10-23 21:54:46"
+        },
+        {
+            "notes": "- Custom relationship labels are now respected.\n- Nova authentication guard is now configurable.\n- Allow Textarea, Markdown, and Trix fields to always show content if desired.\n- Fix bug that prevented files from being deleted if they were only displayed on forms.\n- Added Password Confirmation field\n- Added currency method to ValueResult\n- Allow for plugins to be added to Nova's Vue-toasted config\n- Allow textareas fields to specify row height\n- Allow setting any attribute on text and textarea fields\n- Removed autocompletion for create/update forms\n- Fix display of null date fields on index\n- Fix issue with modal widths and long action fields\n- Fix issue with modal and long forms\n- Fix issue where help text wasn't being shown for Trix fields\n- Improvements to global shortcuts\n- Fix issue where long help text would break form\n- Add ability to use HTML in help text",
+            "version": "1.1.4",
+            "series": "Orion",
+            "released_at": "2018-10-01 13:39:09"
+        },
+        {
+            "notes": "- Fix regression.\n- Fix action event log when using `morphMap` method.",
+            "version": "1.1.3",
+            "series": "Orion",
+            "released_at": "2018-09-21 19:31:37"
+        },
+        {
+            "notes": "- Fix bug with `HasOne` validating that prevented resources with a `BelongsTo` relationship that references a `HasOne` from being updated.",
+            "version": "1.1.2",
+            "series": "Orion",
+            "released_at": "2018-09-21 19:09:24"
+        },
+        {
+            "notes": "- Fix `Date` field not respecting `format` on index and detail screens.\r\n- Fix inability to attach resources when related resources were not authorized for creation.\r\n- Fix bug that prevented the deletion of resources that had non-nullable `Trix` fields that accepted file uploads.",
+            "version": "1.1.1",
+            "series": "Orion",
+            "released_at": "2018-09-20 20:38:19"
+        },
+        {
+            "notes": "- Add place-holder Vue components for index and detail headers and toolbars that may be customized for your own Nova installation.\r\n- Fix Postgres case sensitivity during search.\r\n- Allow passing options to `Code` field `json` method.\r\n- If a `canRun` callback is defined on an action, it now takes precedence over the `update` policy method.\r\n- Fix `Currency` field `null` check when $0.00.\r\n- Fix bug that caused Markdown excerpts to not show on detail page.\r\n- Added SQL syntax highlighting support to `Code` field.\r\n- Fix sidebar display issues.\r\n- Fix typing “/“ in Trix field triggering global search.",
+            "version": "1.1.0",
+            "series": "Orion",
+            "released_at": "2018-09-20 14:14:15"
+        },
+        {
+            "notes": "- Fix bug with JSON attributes.\r\n- Add `nova:asset` command.",
+            "version": "1.0.19",
+            "series": "Orion",
+            "released_at": "2018-09-19 18:45:06"
+        },
+        {
+            "notes": "- Fixes custom date columns not being utilized by Trend metric.\n- Add support for custom date columns in Value metric.\n- Filters may now accept constructor arguments.\n- Custom application namespace now respected on `nova:install`.\n- Resource action event labels are now translatable.\n- Search on Postgres will be fixed on upcoming Laravel 5.7 release.\n- Resources may be grouped using group() method or $group property.\n- Fix bug that caused validation errors to still show on update screen after update and continue editing.\n- Fix bug that caused image loader to not show images on remote disks.\n- Fix auto-completion bug with states and `Place` field.\n- Fix pivot fields not displaying on index and detail screens.\n- Fix resolve callbacks from JSON fields.\n- Fix displaying zero (0) in `Number` field.",
+            "version": "1.0.18",
+            "series": "Orion",
+            "released_at": "2018-09-19 16:11:20"
+        },
+        {
+            "notes": "- Update location of Nova resources to `public/vendor/nova` to bring location into consistency with other Laravel tools.\r\n- Fixed issue that caused buttons to be shown on custom panels that had \"Details\" in the title.\r\n- Fixed issue with sortable and callable attribute names.\r\n- Fixed \"stuck on 95%\" Nova asset compilation issue on Windows.\r\n- Changed Tool.vue stub to show the correct output folder.\r\n- Fixed issue with Gravatar field when email addresses have uppercase letters.\r\n- Removed `/dist` from `.gitignore` file in card, tool, resource tool, custom field, and theme stubs.\r\n- Hide \"Show Content\" link when there is no content for textarea, Trix, and Markdown fields.\r\n- Various other bug fixes and feature improvements.\r\n\r\n**This update changes the location of Nova's assets to `public/vendor/nova`. After updating, run the `nova:publish` command as noted in Nova's upgrade documentation.**",
+            "version": "1.0.17",
+            "series": "Orion",
+            "released_at": "2018-09-18 16:10:30"
+        },
+        {
+            "notes": "- Improvements to search.\r\n- Improvements to search localization.",
+            "version": "1.0.16",
+            "series": "Orion",
+            "released_at": "2018-09-12 19:35:42"
+        },
+        {
+            "notes": "- Allow numeric searches to search on fields other than the primary key.\r\n- The `belongsTo` and `morphTo` fields now respect custom labels.",
+            "version": "1.0.15",
+            "series": "Orion",
+            "released_at": "2018-09-11 20:07:21"
+        },
+        {
+            "notes": "- Various bug fixes.",
+            "version": "1.0.14",
+            "series": "Orion",
+            "released_at": "2018-09-09 19:27:59"
+        },
+        {
+            "notes": "- Various bug fixes.\r\n- Add `Macroable` to `Field`.\r\n- Fix help text on `Code` field.",
+            "version": "1.0.13",
+            "series": "Orion",
+            "released_at": "2018-09-07 22:25:14"
+        },
+        {
+            "notes": "- Bug fixes and performance improvements.",
+            "version": "1.0.12",
+            "series": "Orion",
+            "released_at": "2018-09-04 19:34:15"
+        },
+        {
+            "notes": "- Fix Trix bug.",
+            "version": "1.0.11",
+            "series": "Orion",
+            "released_at": "2018-09-04 18:28:17"
+        },
+        {
+            "notes": "- Fix front-end date handling bug.",
+            "version": "1.0.10",
+            "series": "Orion",
+            "released_at": "2018-09-04 15:38:02"
+        },
+        {
+            "notes": "- Added support for [drag-and-drop file](https://nova.laravel.com/docs/1.0/resources/fields.html#field-types) upload when using the Trix field.\r\n- Added `nova:theme` command.\r\n- Support for running Nova at the root of the application.\r\n- Support for returning HTML from computed Text fields.",
+            "version": "1.0.9",
+            "series": "Orion",
+            "released_at": "2018-09-04 13:30:29"
+        },
+        {
+            "notes": "- Various bug fixes.",
+            "version": "1.0.8",
+            "series": "Orion",
+            "released_at": "2018-08-29 10:58:59"
+        },
+        {
+            "notes": "- Fix some Nova commands on Windows.",
+            "version": "1.0.7",
+            "series": "Orion",
+            "released_at": "2018-08-28 14:12:56"
+        },
+        {
+            "notes": "- Fixed an issue with DateFields not showing.\r\n- Fixed an issue with non-secure assets on authentication pages.\r\n- Fixed an issue with global search items not being clickable.\r\n- Fixed an issue where validation wouldn't be reset when \"adding another\" resource.\r\n- Fixed an issue on Windows with scrollbars always being shown on Partition metrics.\r\n- Fixed an issue in Firefox where loader animations were too big.\r\n- Added links to documentation on the default Help card.\r\n- Highlight side navigation links when active.\r\n- Made global search respect custom labels for resources.\r\n- Made more buttons honor the custom labels for resources.\r\n- Fixed Lens table views to allow scrolling",
+            "version": "1.0.6",
+            "series": "Orion",
+            "released_at": "2018-08-24 15:27:11"
+        },
+        {
+            "notes": "- Localize singular resource name in several instances.\r\n- Add `view:clear` command to `nova:publish` command.",
+            "version": "1.0.5",
+            "series": "Orion",
+            "released_at": "2018-08-23 13:56:20"
+        },
+        {
+            "notes": "- Fix `date` field.\r\n- Fix translation problems when installed with Spark.",
+            "version": "1.0.4",
+            "series": "Orion",
+            "released_at": "2018-08-23 12:48:16"
+        },
+        {
+            "notes": "- Fix trend amounts for large numbers.\r\n- Fix modals on Safari.",
+            "version": "1.0.3",
+            "series": "Orion",
+            "released_at": "2018-08-22 18:40:29"
+        },
+        {
+            "notes": "- Fix issue with fields that have name matching a global PHP function.",
+            "version": "1.0.2",
+            "series": "Orion",
+            "released_at": "2018-08-22 17:07:31"
+        },
+        {
+            "notes": "- Add \"register\" method to PendingRouteRegistration.\r\n- Address route caching issue.",
+            "version": "1.0.1",
+            "series": "Orion",
+            "released_at": "2018-08-22 16:04:59"
+        },
+        {
+            "notes": "Official release of Laravel Nova.\r\n\r\nNova is a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.",
+            "version": "1.0.0",
+            "series": "Orion",
+            "released_at": "2018-08-22 13:51:18"
+        },
+        {
+            "notes": "- Various bug fixes.",
+            "version": "0.1.1",
+            "series": "Orion",
+            "released_at": "2018-08-21 15:31:39"
+        },
+        {
+            "notes": "Official Nova Pre-Release.",
+            "version": "0.1.0",
+            "series": "Orion",
+            "released_at": "2018-08-21 14:32:17"
+        }
+    ]
+}

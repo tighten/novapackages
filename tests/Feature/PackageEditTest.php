@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutEvents;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -401,6 +402,17 @@ class PackageEditTest extends TestCase
     {
         list($package, $user) = $this->createPackageWithUser();
 
+        $packagistNamespace = 'jedi';
+        $packagistName = 'field-guide';
+
+        $package->update(['url' => "https://github.com/{$packagistNamespace}/{$packagistName}"]);
+
+        Http::fake([
+            "https://github.com/{$packagistNamespace}/{$packagistName}.json" => Http::response(),
+            "https://github.com/{$packagistNamespace}/{$packagistName}" => Http::response(),
+            "https://packagist.org/packages/{$packagistNamespace}/{$packagistName}.json" => Http::response(),
+        ]);
+
         $package->marked_as_unavailable_at = now();
         $package->is_disabled = true;
         $package->save();
@@ -410,8 +422,8 @@ class PackageEditTest extends TestCase
             'author_id' => $user->id,
             'url' =>  $this->faker->url(),
             'abstract' =>  $this->faker->sentence(),
-            'packagist_namespace' => $this->faker->word(),
-            'packagist_name' => $this->faker->word(),
+            'packagist_namespace' => $packagistNamespace,
+            'packagist_name' => $packagistName,
         ])
             ->assertRedirect(route('app.packages.index'));
 

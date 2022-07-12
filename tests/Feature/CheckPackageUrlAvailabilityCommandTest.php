@@ -8,25 +8,29 @@ use App\Package;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-/** @group integration */
 class CheckPackageUrlAvailabilityCommandTest extends TestCase
 {
-
     use RefreshDatabase;
+
+    private Package $validPackage;
+    private Package $packageWithUnavailableUrl;
+    private Package $packageWithUnavailableDomain;
 
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->validPackage = Package::factory()->create([
             'name' => 'Valid Package',
             'url' => 'https://github.com/tighten/novapackages',
             'repo_url' => 'https://github.com/tighten/novapackages',
             'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id
-            ])->id
+                'user_id' => User::factory()->create()->id,
+            ])->id,
         ]);
 
         $this->packageWithUnavailableUrl = Package::factory()->create([
@@ -34,8 +38,8 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
             'url' => 'https://github.com/some-dev/package-name',
             'repo_url' => 'https://github.com/some-dev/package-name',
             'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id
-            ])->id
+                'user_id' => User::factory()->create()->id,
+            ])->id,
         ]);
 
         $this->packageWithUnavailableDomain = Package::factory()->create([
@@ -72,6 +76,11 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     public function calling_command_sends_notification_to_author_of_unavailable_packages()
     {
         Notification::fake();
+
+        Http::fake([
+            $this->validPackage->url => Http::response(null, 200),
+            $this->packageWithUnavailableUrl->url => Http::response(null, 404),
+        ]);
 
         $this->artisan('novapackages:check-package-urls');
 

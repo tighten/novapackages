@@ -1,0 +1,760 @@
+{
+    "package":
+    {
+        "name": "tightenco/nova-stripe",
+        "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+        "time": "2018-08-29T19:33:24+00:00",
+        "maintainers":
+        [
+            {
+                "name": "mattstauffer",
+                "avatar_url": "https://www.gravatar.com/avatar/60187fe0ab07ea5a46572a3ab05f61dd?d=identicon"
+            },
+            {
+                "name": "samanthamichele7",
+                "avatar_url": "https://www.gravatar.com/avatar/b901ac8d7c6c67959e225d6ab2d660b2?d=identicon"
+            }
+        ],
+        "versions":
+        {
+            "dev-alk/update-github-actions":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel",
+                    "tightenco",
+                    "tighten"
+                ],
+                "homepage": "",
+                "version": "dev-alk/update-github-actions",
+                "version_normalized": "dev-alk/update-github-actions",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    },
+                    {
+                        "name": "Alison Kirk",
+                        "email": "alison.kirk@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "0a614785d817017d610c75acfe6ca5d3ddc5a4d1"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/0a614785d817017d610c75acfe6ca5d3ddc5a4d1",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "0a614785d817017d610c75acfe6ca5d3ddc5a4d1"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/alk/update-github-actions"
+                },
+                "time": "2022-04-15T15:36:17+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tighten\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tighten\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "laravel/nova": "~3.0",
+                    "stripe/stripe-php": ">=5.0"
+                },
+                "require-dev":
+                {
+                    "orchestra/testbench": ">=3.6.x-dev",
+                    "phpunit/phpunit": "9.5.*",
+                    "tightenco/duster": "^0.3.2"
+                }
+            },
+            "dev-alk/update-readme":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel",
+                    "tightenco",
+                    "tighten"
+                ],
+                "homepage": "",
+                "version": "dev-alk/update-readme",
+                "version_normalized": "dev-alk/update-readme",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    },
+                    {
+                        "name": "Alison Kirk",
+                        "email": "alison.kirk@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "6bd77f92bc13d24fab7456a90a17a7ba61578b43"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/6bd77f92bc13d24fab7456a90a17a7ba61578b43",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "6bd77f92bc13d24fab7456a90a17a7ba61578b43"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/alk/update-readme"
+                },
+                "time": "2022-02-04T18:07:52+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tighten\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tighten\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": ">=5.0"
+                },
+                "require-dev":
+                {
+                    "laravel/framework": ">=6.20.26",
+                    "laravel/nova": "*@dev",
+                    "orchestra/testbench": ">=3.6.x-dev",
+                    "phpunit/phpunit": "9.5.*",
+                    "tightenco/duster": "^0.3.2"
+                }
+            },
+            "dev-main":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel",
+                    "tightenco",
+                    "tighten"
+                ],
+                "homepage": "",
+                "version": "dev-main",
+                "version_normalized": "dev-main",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    },
+                    {
+                        "name": "Alison Kirk",
+                        "email": "alison.kirk@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "f7d17e154ec6881dfbdc8b3cea187408dd001186"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/f7d17e154ec6881dfbdc8b3cea187408dd001186",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "f7d17e154ec6881dfbdc8b3cea187408dd001186"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/main"
+                },
+                "time": "2021-12-09T01:55:55+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tighten\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tighten\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "default-branch": true,
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": ">=5.0"
+                },
+                "require-dev":
+                {
+                    "laravel/nova": "*@dev",
+                    "phpunit/phpunit": "9.5.*",
+                    "orchestra/testbench": ">=3.6.x-dev",
+                    "laravel/framework": ">=6.20.26",
+                    "tightenco/duster": "^0.3.2"
+                }
+            },
+            "v1.0.0":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel",
+                    "tightenco"
+                ],
+                "homepage": "",
+                "version": "v1.0.0",
+                "version_normalized": "1.0.0.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "3960165f196929ed429e9cbfc655f8eec860bc42"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/3960165f196929ed429e9cbfc655f8eec860bc42",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "3960165f196929ed429e9cbfc655f8eec860bc42"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/v1.0.0"
+                },
+                "time": "2021-08-17T12:07:41+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tighten\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tighten\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": ">=5.0"
+                },
+                "require-dev":
+                {
+                    "phpunit/phpunit": "9.5.*",
+                    "orchestra/testbench": ">=3.6.x-dev",
+                    "laravel/framework": ">=6.20.26",
+                    "laravel/nova": "*@dev"
+                }
+            },
+            "v0.2.4":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel",
+                    "tightenco"
+                ],
+                "homepage": "",
+                "version": "v0.2.4",
+                "version_normalized": "0.2.4.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "00cef6bd9c8d5bf74f42ad1a98839bb2aba00780"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/00cef6bd9c8d5bf74f42ad1a98839bb2aba00780",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "00cef6bd9c8d5bf74f42ad1a98839bb2aba00780"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/v0.2.4"
+                },
+                "time": "2019-11-11T13:30:09+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tightenco\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tightenco\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": ">=5.0"
+                }
+            },
+            "v0.2.3":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel",
+                    "tightenco"
+                ],
+                "homepage": "",
+                "version": "v0.2.3",
+                "version_normalized": "0.2.3.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "78413a877331efecb440802e856e16e464d8c970"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/78413a877331efecb440802e856e16e464d8c970",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "78413a877331efecb440802e856e16e464d8c970"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/v0.2.3"
+                },
+                "time": "2019-11-01T16:18:20+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tightenco\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tightenco\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": ">=5.0"
+                }
+            },
+            "v0.2.2":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel"
+                ],
+                "homepage": "",
+                "version": "v0.2.2",
+                "version_normalized": "0.2.2.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "c7c6c570fdcb8be8678f543eb9b2fd9d08e78157"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/c7c6c570fdcb8be8678f543eb9b2fd9d08e78157",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "c7c6c570fdcb8be8678f543eb9b2fd9d08e78157"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/v0.2.2"
+                },
+                "time": "2019-05-14T19:37:19+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tightenco\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tightenco\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": ">=5.0"
+                }
+            },
+            "v0.2.1":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel"
+                ],
+                "homepage": "",
+                "version": "v0.2.1",
+                "version_normalized": "0.2.1.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "b229f0274631157146572479e4e9624dc99f834f"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/b229f0274631157146572479e4e9624dc99f834f",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "b229f0274631157146572479e4e9624dc99f834f"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/v0.2.1"
+                },
+                "time": "2018-08-30T18:37:26+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tightenco\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tightenco\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": ">=5.0"
+                }
+            },
+            "v0.1.0":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel"
+                ],
+                "homepage": "",
+                "version": "v0.1.0",
+                "version_normalized": "0.1.0.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "e372dce49b89e3ed4673dd55c17b7a7911ec6b2e"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/e372dce49b89e3ed4673dd55c17b7a7911ec6b2e",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "e372dce49b89e3ed4673dd55c17b7a7911ec6b2e"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/v0.2.0"
+                },
+                "time": "2018-08-30T02:17:20+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tightenco\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tightenco\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": "^6.16"
+                }
+            },
+            "v0.2.0":
+            {
+                "name": "tightenco/nova-stripe",
+                "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
+                "keywords":
+                [
+                    "nova",
+                    "stripe",
+                    "laravel"
+                ],
+                "homepage": "",
+                "version": "v0.2.0",
+                "version_normalized": "0.2.0.0",
+                "license":
+                [
+                    "MIT"
+                ],
+                "authors":
+                [
+                    {
+                        "name": "Samantha Geitz",
+                        "email": "samantha@tighten.co"
+                    }
+                ],
+                "source":
+                {
+                    "url": "https://github.com/tighten/nova-stripe.git",
+                    "type": "git",
+                    "reference": "e372dce49b89e3ed4673dd55c17b7a7911ec6b2e"
+                },
+                "dist":
+                {
+                    "url": "https://api.github.com/repos/tighten/nova-stripe/zipball/e372dce49b89e3ed4673dd55c17b7a7911ec6b2e",
+                    "type": "zip",
+                    "shasum": "",
+                    "reference": "e372dce49b89e3ed4673dd55c17b7a7911ec6b2e"
+                },
+                "type": "library",
+                "support":
+                {
+                    "issues": "https://github.com/tighten/nova-stripe/issues",
+                    "source": "https://github.com/tighten/nova-stripe/tree/v0.2.0"
+                },
+                "time": "2018-08-30T02:17:20+00:00",
+                "autoload":
+                {
+                    "psr-4":
+                    {
+                        "Tightenco\\NovaStripe\\": "src/"
+                    }
+                },
+                "extra":
+                {
+                    "laravel":
+                    {
+                        "providers":
+                        [
+                            "Tightenco\\NovaStripe\\ToolServiceProvider"
+                        ]
+                    }
+                },
+                "require":
+                {
+                    "php": ">=7.1.0",
+                    "stripe/stripe-php": "^6.16"
+                }
+            }
+        },
+        "type": "library",
+        "repository": "https://github.com/tighten/nova-stripe",
+        "github_stars": 94,
+        "github_watchers": 12,
+        "github_forks": 16,
+        "github_open_issues": 16,
+        "language": "JavaScript",
+        "dependents": 0,
+        "suggesters": 0,
+        "downloads":
+        {
+            "total": 136651,
+            "monthly": 4457,
+            "daily": 107
+        },
+        "favers": 94
+    }
+}

@@ -31,6 +31,11 @@ abstract class TestCase extends BaseTestCase
         });
     }
 
+    protected function fakeResponse($path)
+    {
+        return file_get_contents(base_path("/tests/responses/{$path}"));
+    }
+
     protected function mockSocialiteWithUserData($userData)
     {
         $socialiteUser = (new SocialiteUser)->map([
