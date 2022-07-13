@@ -17,7 +17,7 @@
         "erusev/parsedown": "^1.7",
         "guzzlehttp/guzzle": "^7.2",
         "knplabs/github-api": "^3.6",
-        "laravel/framework": "^9.14",
+        "laravel/framework": "^9.20",
         "laravel/helpers": "^1.5",
         "laravel/horizon": "^5.9",
         "laravel/passport": "^10.4",
