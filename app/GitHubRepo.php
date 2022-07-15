@@ -5,8 +5,8 @@ namespace App;
 use App\BaseRepo;
 use App\Exceptions\GitHubException;
 use App\Http\Remotes\GitHub;
-use Github\Exception\RuntimeException as GitHubRunTimeException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
 
 class GitHubRepo extends BaseRepo
 {
@@ -44,38 +44,26 @@ class GitHubRepo extends BaseRepo
     // Media types for GitHub: https://developer.github.com/v3/media
     public function readme($format = 'html')
     {
-        // Github throws an exception if a readme doesn't exist for the repo so we catch it and return null
-        try {
-            return $this->github->readme(
-                $this->username,
-                $this->repo,
-                $format
-            );
-        } catch (GitHubRunTimeException $e) {
-            if ($e->getCode() === 404) {
-                return;
-            }
-
-            throw $e;
-        }
+        // @todo: handle exceptions. May throw an exception if readme does not exist.
+        // If the exception is a 404, return null. Otherwise, re-throw the exception.
+        return Http::github()
+            ->withHeaders(['Accept' => "application/vnd.github.{$format}"])
+            ->get("/repos/{$this->username}/{$this->repo}/readme")
+            ->body();
     }
 
     public function releases()
     {
-        return $this->github->releases();
+        // @todo: handle exceptions.
+        // If the exception is a "Not Found", return an empty array. Otherwise, re-throw the exception.
+        return Http::github()
+            ->get("/repos/{$this->username}/{$this->repo}/releases")
+            ->json();
     }
 
     public function latestRelease()
     {
-        try {
-            return $this->releases()->all($this->username, $this->repo)[0] ?? [];
-        } catch (GitHubRunTimeException $e) {
-            if ($e->getMessage() == 'Not Found') {
-                return [];
-            }
-
-            throw $e;
-        }
+        return $this->releases()[0];
     }
 
     public function latestReleaseVersion()

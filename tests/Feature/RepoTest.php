@@ -26,9 +26,14 @@ class RepoTest extends TestCase
     public function can_get_a_repo_from_a_package_composer_name()
     {
         Http::fake([
-            'https://packagist.org/packages/tightenco/nova-stripe.json' => Http::response([
-                'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
-            ]),
+            'https://packagist.org/packages/tightenco/nova-stripe.json' =>
+                Http::response([
+                    'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
+                ]),
+            'https://api.github.com/repos/tighten/nova-stripe/readme' =>
+                Http::response($this->fakeResponse('github.repo-readme.html')),
+            'https://api.github.com/repos/tighten/nova-stripe/releases' =>
+                Http::response($this->fakeResponse('github.repo-releases.json')),
         ]);
 
         $composerName = 'tightenco/nova-stripe';
