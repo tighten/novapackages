@@ -61,8 +61,8 @@ class GitHub
         return $this->github->api($api);
     }
 
-    public static function validateUrl($url)
+    public static function validateUrl($url): bool
     {
-        return (bool) preg_match('/github.com\/([\w-]+)\/([\w-]+)/i', $url);
+        return (bool) preg_match('/^https?:\/\/github.com\/([\w-]+)\/([\w-]+)/i', $url);
     }
 }
