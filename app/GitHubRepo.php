@@ -16,20 +16,17 @@ class GitHubRepo extends BaseRepo
 
     protected $url;
 
-    protected $github;
-
     protected $username;
 
     protected $repo;
 
-    private function __construct($url, GitHub $github)
+    private function __construct($url)
     {
-        if (! $github->validateUrl($url)) {
+        if (! GitHub::validateUrl($url)) {
             throw new GitHubException('Invalid Url Provided');
         }
 
         $this->url = $url;
-        $this->github = $github->api('repo');
 
         preg_match('/github.com\/([\w-]+)\/([\w-]+)/i', $url, $parts);
         $this->username = $parts[1];
@@ -38,32 +35,36 @@ class GitHubRepo extends BaseRepo
 
     public static function make($url)
     {
-        return new static($url, app(GitHub::class));
+        return new static($url);
     }
 
     // Media types for GitHub: https://developer.github.com/v3/media
-    public function readme($format = 'html')
+    public function readme()
     {
-        // @todo: handle exceptions. May throw an exception if readme does not exist.
-        // If the exception is a 404, return null. Otherwise, re-throw the exception.
-        return Http::github()
-            ->withHeaders(['Accept' => "application/vnd.github.{$format}"])
-            ->get("/repos/{$this->username}/{$this->repo}/readme")
-            ->body();
+        // @todo: handle exceptions
+        $response = Http::github()
+            ->withHeaders(['Accept' => 'application/vnd.github.html'])
+            ->get("/repos/{$this->username}/{$this->repo}/readme");
+
+        if ($response->status() === 404) {
+            return null;
+        }
+
+        return $response->body();
     }
 
     public function releases()
     {
-        // @todo: handle exceptions.
-        // If the exception is a "Not Found", return an empty array. Otherwise, re-throw the exception.
+        // @todo: handle exceptions
         return Http::github()
+            ->withHeaders(['Accept' => 'application/vnd.github+json'])
             ->get("/repos/{$this->username}/{$this->repo}/releases")
-            ->json();
+            ->collect();
     }
 
     public function latestRelease()
     {
-        return $this->releases()[0];
+        return $this->releases()->first();
     }
 
     public function latestReleaseVersion()
