@@ -31,6 +31,17 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.x/dist/alpine.min.js" defer></script>
 
     @livewireStyles
+
+    @production
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVEM0Q7HZ8"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-ZVEM0Q7HZ8');
+        </script>
+    @endproduction
 </head>
 
 <body class="bg-gray-200 font-sans font-normal">
