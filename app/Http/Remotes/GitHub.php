@@ -6,6 +6,7 @@ use App\CacheKeys;
 use Github\Client as GitHubClient;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class GitHub
 {
@@ -64,5 +65,28 @@ class GitHub
     public static function validateUrl($url): bool
     {
         return (bool) preg_match('/^https?:\/\/github.com\/([\w-]+)\/([\w-]+)/i', $url);
+    }
+
+    public function readme(string $repository)
+    {
+        // @todo: handle exceptions
+        $response = Http::github()
+            ->withHeaders(['Accept' => 'application/vnd.github.html'])
+            ->get("/repos/{$repository}/readme");
+
+        if ($response->status() === 404) {
+            return null;
+        }
+
+        return $response->body();
+    }
+
+    public function releases(string $repository)
+    {
+        // @todo: handle exceptions
+        return Http::github()
+            ->withHeaders(['Accept' => 'application/vnd.github+json'])
+            ->get("/repos/{$repository}/releases")
+            ->json();
     }
 }

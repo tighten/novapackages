@@ -6,7 +6,6 @@ use App\BaseRepo;
 use App\Exceptions\GitHubException;
 use App\Http\Remotes\GitHub;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Http;
 
 class GitHubRepo extends BaseRepo
 {
@@ -16,17 +15,20 @@ class GitHubRepo extends BaseRepo
 
     protected $url;
 
+    protected $github;
+
     protected $username;
 
     protected $repo;
 
-    private function __construct($url)
+    private function __construct($url, GitHub $github)
     {
         if (! GitHub::validateUrl($url)) {
             throw new GitHubException('Invalid Url Provided');
         }
 
         $this->url = $url;
+        $this->github = $github;
 
         preg_match('/github.com\/([\w-]+)\/([\w-]+)/i', $url, $parts);
         $this->username = $parts[1];
@@ -35,31 +37,17 @@ class GitHubRepo extends BaseRepo
 
     public static function make($url)
     {
-        return new static($url);
+        return new static($url, app(GitHub::class));
     }
 
-    // Media types for GitHub: https://developer.github.com/v3/media
     public function readme()
     {
-        // @todo: handle exceptions
-        $response = Http::github()
-            ->withHeaders(['Accept' => 'application/vnd.github.html'])
-            ->get("/repos/{$this->username}/{$this->repo}/readme");
-
-        if ($response->status() === 404) {
-            return null;
-        }
-
-        return $response->body();
+        return $this->github->readme("{$this->username}/{$this->repo}");
     }
 
     public function releases()
     {
-        // @todo: handle exceptions
-        return Http::github()
-            ->withHeaders(['Accept' => 'application/vnd.github+json'])
-            ->get("/repos/{$this->username}/{$this->repo}/releases")
-            ->collect();
+        return collect($this->github->releases("{$this->username}/{$this->repo}"));
     }
 
     public function latestRelease()
