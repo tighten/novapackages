@@ -39,6 +39,28 @@ class GitHubApiTest extends TestCase
     }
 
     /** @test */
+    function searching_issues_response_in_expected_format()
+    {
+        $response = app(GitHub::class)->packageIdeaIssues();
+
+        (new AssertableJsonString($response))->assertStructure([
+            [
+                'body',
+                'html_url',
+                'labels',
+                'reactions' => [
+                    'total_count',
+                ],
+                'title',
+                'url',
+                'user' => [
+                    'login',
+                ],
+            ],
+        ]);
+    }
+
+    /** @test */
     function user_response_in_expected_format()
     {
         $response = app(GitHub::class)->user('marcusmoore');

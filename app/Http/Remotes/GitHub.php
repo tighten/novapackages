@@ -37,15 +37,23 @@ class GitHub
     public function packageIdeaIssues()
     {
         return Cache::remember(CacheKeys::packageIdeaIssues(), 1, function () {
-            $issues = collect($this->github->api('search')->issues('state:open label:package-idea repo:tighten/nova-package-development')['items']);
+            // @todo: handle exceptions
+            $issues = Http::github()
+                ->withHeaders(['Accept' => 'application/vnd.github+json'])
+                ->get('/search/issues', [
+                    'q' => 'state:open label:package-idea repo:tighten/nova-package-development',
+                    'sort' => 'updated',
+                    'order' => 'desc',
+                ])
+                ->json();
 
-            return $this->sortIssuesByPositiveReactions($issues);
+            return $this->sortIssuesByPositiveReactions($issues['items']);
         });
     }
 
     protected function sortIssuesByPositiveReactions($issues)
     {
-        return $issues->sortByDesc(function ($issue) {
+        return collect($issues)->sortByDesc(function ($issue) {
             $countReactionTypes = collect($issue['reactions'])
                 ->except(['url', 'total_count'])
                 ->filter()
@@ -55,7 +63,7 @@ class GitHub
              + Arr::get($issue, 'reactions.total_count')
              - (2 * Arr::get($issue, 'reactions.-1'))
              - Arr::get($issue, 'reactions.confused');
-        });
+        })->values();
     }
 
     public function api($api)
