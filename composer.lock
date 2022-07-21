@@ -132,16 +132,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.231.10",
+            "version": "3.231.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e46b7c5fcb70fadf38079755982cc1d3f0583c41"
+                "reference": "6a37c3d5fe2d6b401f689aa37c9f962df55e680b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e46b7c5fcb70fadf38079755982cc1d3f0583c41",
-                "reference": "e46b7c5fcb70fadf38079755982cc1d3f0583c41",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6a37c3d5fe2d6b401f689aa37c9f962df55e680b",
+                "reference": "6a37c3d5fe2d6b401f689aa37c9f962df55e680b",
                 "shasum": ""
             },
             "require": {
@@ -218,9 +218,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.10"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.11"
             },
-            "time": "2022-07-20T18:17:18+00:00"
+            "time": "2022-07-21T18:17:02+00:00"
         },
         {
             "name": "brick/math",
@@ -2127,16 +2127,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.21.4",
+            "version": "v9.21.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7707d6a16c70da1561bf80964e89b1b94ca78a48"
+                "reference": "a1944cd0d160a2cc423ef5a451d002711c5f014f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7707d6a16c70da1561bf80964e89b1b94ca78a48",
-                "reference": "7707d6a16c70da1561bf80964e89b1b94ca78a48",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a1944cd0d160a2cc423ef5a451d002711c5f014f",
+                "reference": "a1944cd0d160a2cc423ef5a451d002711c5f014f",
                 "shasum": ""
             },
             "require": {
@@ -2303,7 +2303,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-07-21T13:30:12+00:00"
+            "time": "2022-07-21T19:38:16+00:00"
         },
         {
             "name": "laravel/helpers",
