@@ -4,6 +4,7 @@ namespace App\Http\Remotes;
 
 use App\CacheKeys;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
@@ -14,12 +15,7 @@ class GitHub
         return (bool) preg_match('/^https?:\/\/github.com\/([\w-]+)\/([\w-]+)/i', $url);
     }
 
-    /**
-     * Get all issues labeled "suggestion".
-     *
-     * @return array of items
-     */
-    public function packageIdeaIssues()
+    public function packageIdeaIssues(): Collection
     {
         return Cache::remember(CacheKeys::packageIdeaIssues(), 1, function () {
             // @todo: handle exceptions
@@ -34,18 +30,6 @@ class GitHub
 
             return $this->sortIssuesByPositiveReactions($issues['items']);
         });
-    }
-
-    /**
-     * Return user by username.
-     *
-     * @param string $username GitHub username
-     * @return array            User associative array
-     */
-    public function user($username)
-    {
-        // @todo: handle exceptions
-        return Http::github()->get("/users/{$username}")->json();
     }
 
     public function readme(string $repository): string|null
@@ -71,7 +55,13 @@ class GitHub
             ->json();
     }
 
-    private function sortIssuesByPositiveReactions($issues)
+    public function user(string $username): array
+    {
+        // @todo: handle exceptions
+        return Http::github()->get("/users/{$username}")->json();
+    }
+
+    private function sortIssuesByPositiveReactions(array $issues): Collection
     {
         return collect($issues)->sortByDesc(function ($issue) {
             $countReactionTypes = collect($issue['reactions'])
