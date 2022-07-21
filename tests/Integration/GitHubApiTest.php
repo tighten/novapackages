@@ -24,17 +24,33 @@ class GitHubApiTest extends TestCase
 
         (new AssertableJsonString($response))->assertStructure([
             [
-                'url',
-                'id',
                 'author',
-                'tag_name',
-                'name',
-                'draft',
-                'prerelease',
-                'created_at',
-                'published_at',
                 'body',
+                'created_at',
+                'draft',
+                'id',
+                'name',
+                'prerelease',
+                'published_at',
+                'tag_name',
+                'url',
             ],
+        ]);
+    }
+
+    /** @test */
+    function user_response_in_expected_format()
+    {
+        $response = app(GitHub::class)->user('marcusmoore');
+
+        (new AssertableJsonString($response))->assertStructure([
+            'avatar_url',
+            'html_url',
+            'id',
+            'name',
+            'type',
+            'url',
+            'login',
         ]);
     }
 }

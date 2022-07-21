@@ -25,7 +25,8 @@ class GitHub
      */
     public function user($username)
     {
-        return $this->github->api('user')->show($username);
+        // @todo: handle exceptions
+        return Http::github()->get("/users/{$username}")->json();
     }
 
     /**
@@ -67,7 +68,7 @@ class GitHub
         return (bool) preg_match('/^https?:\/\/github.com\/([\w-]+)\/([\w-]+)/i', $url);
     }
 
-    public function readme(string $repository)
+    public function readme(string $repository): string|null
     {
         // @todo: handle exceptions
         $response = Http::github()
@@ -81,7 +82,7 @@ class GitHub
         return $response->body();
     }
 
-    public function releases(string $repository)
+    public function releases(string $repository): array
     {
         // @todo: handle exceptions
         return Http::github()
