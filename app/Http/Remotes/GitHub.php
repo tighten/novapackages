@@ -9,16 +9,9 @@ use Illuminate\Support\Facades\Http;
 
 class GitHub
 {
-    /**
-     * Return user by username.
-     *
-     * @param  string $username GitHub username
-     * @return array            User associative array
-     */
-    public function user($username)
+    public static function validateUrl($url): bool
     {
-        // @todo: handle exceptions
-        return Http::github()->get("/users/{$username}")->json();
+        return (bool) preg_match('/^https?:\/\/github.com\/([\w-]+)\/([\w-]+)/i', $url);
     }
 
     /**
@@ -43,24 +36,16 @@ class GitHub
         });
     }
 
-    protected function sortIssuesByPositiveReactions($issues)
+    /**
+     * Return user by username.
+     *
+     * @param string $username GitHub username
+     * @return array            User associative array
+     */
+    public function user($username)
     {
-        return collect($issues)->sortByDesc(function ($issue) {
-            $countReactionTypes = collect($issue['reactions'])
-                ->except(['url', 'total_count'])
-                ->filter()
-                ->count();
-
-            return $countReactionTypes
-             + Arr::get($issue, 'reactions.total_count')
-             - (2 * Arr::get($issue, 'reactions.-1'))
-             - Arr::get($issue, 'reactions.confused');
-        })->values();
-    }
-
-    public static function validateUrl($url): bool
-    {
-        return (bool) preg_match('/^https?:\/\/github.com\/([\w-]+)\/([\w-]+)/i', $url);
+        // @todo: handle exceptions
+        return Http::github()->get("/users/{$username}")->json();
     }
 
     public function readme(string $repository): string|null
@@ -84,5 +69,20 @@ class GitHub
             ->withHeaders(['Accept' => 'application/vnd.github+json'])
             ->get("/repos/{$repository}/releases")
             ->json();
+    }
+
+    private function sortIssuesByPositiveReactions($issues)
+    {
+        return collect($issues)->sortByDesc(function ($issue) {
+            $countReactionTypes = collect($issue['reactions'])
+                ->except(['url', 'total_count'])
+                ->filter()
+                ->count();
+
+            return $countReactionTypes
+                + Arr::get($issue, 'reactions.total_count')
+                - (2 * Arr::get($issue, 'reactions.-1'))
+                - Arr::get($issue, 'reactions.confused');
+        })->values();
     }
 }
