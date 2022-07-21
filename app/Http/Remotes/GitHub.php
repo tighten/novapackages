@@ -3,20 +3,12 @@
 namespace App\Http\Remotes;
 
 use App\CacheKeys;
-use Github\Client as GitHubClient;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class GitHub
 {
-    protected $github;
-
-    public function __construct(GitHubClient $github)
-    {
-        $this->github = $github;
-    }
-
     /**
      * Return user by username.
      *
@@ -64,11 +56,6 @@ class GitHub
              - (2 * Arr::get($issue, 'reactions.-1'))
              - Arr::get($issue, 'reactions.confused');
         })->values();
-    }
-
-    public function api($api)
-    {
-        return $this->github->api($api);
     }
 
     public static function validateUrl($url): bool
