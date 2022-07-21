@@ -30,7 +30,7 @@
                     <input name="packagist_name" placeholder="nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-64" value="{{ old('packagist_name', $package->composer_package) }}">
 
                     <label class="block font-bold">Package author*</label>
-                    <collaborator-select :collaborators="{{ $collaborators }}" :initial-selected="{{ old('selectedAuthor', $package->author) }}" name="author_id"></collaborator-select>
+                    <collaborator-select :collaborators="{{ $collaborators }}" :initial-selected="{{ old('selectedAuthor', json_encode($package->author)) }}" name="author_id"></collaborator-select>
 
                     <label class="block font-bold">Contributors</label>
                     <collaborator-select multiple :collaborators="{{ $collaborators }}" :initial-selected="{{ old('selectedCollaborators', $package->contributors) }}" name="contributors"></collaborator-select>
