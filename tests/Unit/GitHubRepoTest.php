@@ -43,4 +43,12 @@ class GitHubRepoTest extends TestCase
 
         $this->assertEquals('master', $repo->latestReleaseVersion());
     }
+
+    /** @test */
+    function it_returns_proper_readme_format()
+    {
+        $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
+
+        $this->assertEquals(GitHubRepo::README_FORMAT, $repo->readmeFormat());
+    }
 }
