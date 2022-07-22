@@ -3,6 +3,7 @@
 namespace App\Http\Remotes;
 
 use App\CacheKeys;
+use App\Exceptions\GitHubException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -18,47 +19,52 @@ class GitHub
     public function packageIdeaIssues(): Collection
     {
         return Cache::remember(CacheKeys::packageIdeaIssues(), 1, function () {
-            // @todo: handle exceptions
             $issues = Http::github()
                 ->withHeaders(['Accept' => 'application/vnd.github+json'])
-                ->get('/search/issues', [
+                ->get('search/issues', [
                     'q' => 'state:open label:package-idea repo:tighten/nova-package-development',
                     'sort' => 'updated',
                     'order' => 'desc',
                 ])
+                ->throw()
                 ->json();
 
             return $this->sortIssuesByPositiveReactions($issues['items']);
         });
     }
 
-    public function readme(string $repository): string|null
+    public function readme(string $repositoryPath): string|null
     {
-        // @todo: handle exceptions
+        $this->guardAgainstInvalidRepositoryPath($repositoryPath);
+
         $response = Http::github()
             ->withHeaders(['Accept' => 'application/vnd.github.html'])
-            ->get("/repos/{$repository}/readme");
+            ->get("repos/{$repositoryPath}/readme");
 
         if ($response->status() === 404) {
             return null;
         }
 
+        $response->throw();
+
         return $response->body();
     }
 
-    public function releases(string $repository): array
+    public function releases(string $repositoryPath): array
     {
-        // @todo: handle exceptions
+        $this->guardAgainstInvalidRepositoryPath($repositoryPath);
+
         return Http::github()
             ->withHeaders(['Accept' => 'application/vnd.github+json'])
-            ->get("/repos/{$repository}/releases")
+            ->get("repos/{$repositoryPath}/releases")
+            ->throw()
             ->json();
     }
 
     public function user(string $username): array
     {
-        // @todo: handle exceptions
-        return Http::github()->get("/users/{$username}")->json();
+
+        return Http::github()->get("users/{$username}")->throw()->json();
     }
 
     private function sortIssuesByPositiveReactions(array $issues): Collection
@@ -74,5 +80,12 @@ class GitHub
                 - (2 * Arr::get($issue, 'reactions.-1'))
                 - Arr::get($issue, 'reactions.confused');
         })->values();
+    }
+
+    private function guardAgainstInvalidRepositoryPath(string $repositoryPath): void
+    {
+        if (! preg_match('/^([\w-]+)\/([\w-]+)/', $repositoryPath)) {
+            throw new GitHubException("Invalid repository path provided: {$repositoryPath}");
+        }
     }
 }
