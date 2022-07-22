@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Http;
 use Mockery;
 use Tests\TestCase;
 
-/** @group integration */
 class RepoTest extends TestCase
 {
     use RefreshDatabase;
