@@ -3,12 +3,20 @@
 namespace Tests\Integration;
 
 use App\Http\Remotes\GitHub;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\AssertableJsonString;
 use Tests\TestCase;
 
 /** @group integration */
 class GitHubApiTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Http::allowStrayRequests();
+    }
+
     /** @test */
     function readme_response_in_expected_format()
     {
