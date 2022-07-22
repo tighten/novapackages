@@ -3,14 +3,13 @@
 namespace Tests\Feature;
 
 use App\Collaborator;
-use App\Http\Remotes\GitHub;
 use App\Package;
 use App\Screenshot;
 use App\Tag;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use Mockery;
 use Tests\TestCase;
 
 class PackageCreateTest extends TestCase
@@ -198,18 +197,26 @@ class PackageCreateTest extends TestCase
     {
         $this->withoutEvents();
 
-        $github = Mockery::mock(GitHub::class, [
-            'validateUrl' => true,
-            'releases' => collect([
-                [
-                    'name' => 'Release',
-                    'tag_name' => 'v1.0',
-                ],
-            ]),
-            'readme' => '<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content p-5" itemprop="text"><p>Finding a <a href="kyber-crystal">kyber crystal</a> for your lightsaber</p></article></div>',
+        Http::fake([
+            'https://packagist.org/packages/starwars/lightsabers.json' =>
+                Http::response([
+                    'package' => [
+                        'repository' => 'https://github.com/starwars/lightsabers',
+                        'versions' => [
+
+                        ],
+                    ],
+                ]),
+            'https://api.github.com/repos/starwars/lightsabers/readme' =>
+                Http::response('<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content p-5" itemprop="text"><p>Finding a <a href="kyber-crystal">kyber crystal</a> for your lightsaber</p></article></div>'),
+            'https://api.github.com/repos/starwars/lightsabers/releases' =>
+                Http::response([
+                    [
+                        'name' => 'Release',
+                        'tag_name' => 'v1.0',
+                    ],
+                ]),
         ]);
-        $github->shouldReceive('api')->once()->andReturn($github);
-        app()->instance(GitHub::class, $github);
 
         $user = User::factory()->create();
         $author = Collaborator::factory()->create(['user_id' => $user->id]);
