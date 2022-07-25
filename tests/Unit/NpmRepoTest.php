@@ -39,7 +39,6 @@ class NpmRepoTest extends TestCase
     /** @test */
     function it_returns_master_if_latest_release_is_not_set()
     {
-
         Http::fake([
             'https://registry.npmjs.org/lodash/' => Http::response(),
             'https://api.github.com/repos/lodash/lodash/releases' =>

@@ -14,8 +14,6 @@ class PopularPackageApiTest extends TestCase
     /** @test */
     function returns_popular_packages_in_order()
     {
-        $tag = Tag::factory()->create();
-
         $lessPopularPackage = Package::factory()->create([
             'github_stars' => 10,
             'packagist_downloads' => 1000,
@@ -25,6 +23,8 @@ class PopularPackageApiTest extends TestCase
             'github_stars' => 20,
             'packagist_downloads' => 2000,
         ]);
+
+        $tag = Tag::factory()->create();
 
         $morePopularPackage->tags()->attach($tag);
 
