@@ -266,6 +266,9 @@ class RepoTest extends TestCase
             'https://registry.npmjs.org/lodash/' => Http::response(
                 $this->fakeResponse('npm.repo-with-github-vcs.json')
             ),
+            'https://api.github.com/repos/lodash/lodash/readme' => Http::response(),
+            'https://api.github.com/repos/lodash/lodash/releases' =>
+                Http::response($this->fakeResponse('github.repo-releases.json')),
         ]);
 
         $repo = Repo::fromUrl($npmUrl);
@@ -274,6 +277,8 @@ class RepoTest extends TestCase
         $this->assertInstanceOf(GitHubRepo::class, $repo->repo());
         $this->assertEquals('github', $repo->source());
         $this->assertEquals('https://github.com/lodash/lodash.git', $repo->url());
+        $this->assertNotNull($repo->readme());
+        $this->assertNotNull($repo->latestReleaseVersion());
     }
 
     /** @test */
