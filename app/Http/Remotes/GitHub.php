@@ -3,66 +3,89 @@
 namespace App\Http\Remotes;
 
 use App\CacheKeys;
-use Github\Client as GitHubClient;
+use App\Exceptions\GitHubException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class GitHub
 {
-    protected $github;
-
-    public function __construct(GitHubClient $github)
+    public static function validateUrl($url): bool
     {
-        $this->github = $github;
+        return (bool) preg_match('/^https?:\/\/github.com\/([\w-]+)\/([\w-]+)/i', $url);
     }
 
-    /**
-     * Return user by username.
-     *
-     * @param  string $username GitHub username
-     * @return array            User associative array
-     */
-    public function user($username)
-    {
-        return $this->github->api('user')->show($username);
-    }
-
-    /**
-     * Get all issues labeled "suggestion".
-     *
-     * @return array of items
-     */
-    public function packageIdeaIssues()
+    public function packageIdeaIssues(): Collection
     {
         return Cache::remember(CacheKeys::packageIdeaIssues(), 1, function () {
-            $issues = collect($this->github->api('search')->issues('state:open label:package-idea repo:tighten/nova-package-development')['items']);
+            $issues = Http::github()
+                ->withHeaders(['Accept' => 'application/vnd.github+json'])
+                ->get('search/issues', [
+                    'q' => 'state:open label:package-idea repo:tighten/nova-package-development',
+                    'sort' => 'updated',
+                    'order' => 'desc',
+                ])
+                ->throw()
+                ->json();
 
-            return $this->sortIssuesByPositiveReactions($issues);
+            return $this->sortIssuesByPositiveReactions($issues['items']);
         });
     }
 
-    protected function sortIssuesByPositiveReactions($issues)
+    public function readme(string $repositoryPath): string|null
     {
-        return $issues->sortByDesc(function ($issue) {
+        $this->guardAgainstInvalidRepositoryPath($repositoryPath);
+
+        $response = Http::github()
+            ->withHeaders(['Accept' => 'application/vnd.github.html'])
+            ->get("repos/{$repositoryPath}/readme");
+
+        if ($response->status() === 404) {
+            return null;
+        }
+
+        $response->throw();
+
+        return $response->body();
+    }
+
+    public function releases(string $repositoryPath): array
+    {
+        $this->guardAgainstInvalidRepositoryPath($repositoryPath);
+
+        return Http::github()
+            ->withHeaders(['Accept' => 'application/vnd.github+json'])
+            ->get("repos/{$repositoryPath}/releases")
+            ->throw()
+            ->json();
+    }
+
+    public function user(string $username): array
+    {
+
+        return Http::github()->get("users/{$username}")->throw()->json();
+    }
+
+    private function sortIssuesByPositiveReactions(array $issues): Collection
+    {
+        return collect($issues)->sortByDesc(function ($issue) {
             $countReactionTypes = collect($issue['reactions'])
                 ->except(['url', 'total_count'])
                 ->filter()
                 ->count();
 
             return $countReactionTypes
-             + Arr::get($issue, 'reactions.total_count')
-             - (2 * Arr::get($issue, 'reactions.-1'))
-             - Arr::get($issue, 'reactions.confused');
-        });
+                + Arr::get($issue, 'reactions.total_count')
+                - (2 * Arr::get($issue, 'reactions.-1'))
+                - Arr::get($issue, 'reactions.confused');
+        })->values();
     }
 
-    public function api($api)
+    private function guardAgainstInvalidRepositoryPath(string $repositoryPath): void
     {
-        return $this->github->api($api);
-    }
-
-    public static function validateUrl($url)
-    {
-        return (bool) preg_match('/github.com\/([\w-]+)\/([\w-]+)/i', $url);
+        if (! preg_match('/^([\w-]+)\/([\w-]+)/', $repositoryPath)) {
+            throw new GitHubException("Invalid repository path provided: {$repositoryPath}");
+        }
     }
 }
