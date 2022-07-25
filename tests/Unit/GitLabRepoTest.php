@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\BaseRepo;
 use App\GitLabRepo;
 use App\Http\Remotes\GitLab;
 use Illuminate\Support\Facades\Http;
@@ -55,16 +54,6 @@ class GitLabRepoTest extends TestCase
         $repo = GitLabRepo::make('https://gitlab.com/starwars/x-wings');
 
         $this->assertEquals('master', $repo->latestReleaseVersion());
-    }
-
-    /** @test */
-    function it_returns_proper_readme_format()
-    {
-        Http::fake(['https://gitlab.com/starwars/lightsabers' => Http::response()]);
-
-        $repo = GitLabRepo::make('https://gitlab.com/starwars/lightsabers');
-
-        $this->assertEquals(BaseRepo::README_FORMAT, $repo->readmeFormat());
     }
 
     protected function mockGitLabWith($expectations)

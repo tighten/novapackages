@@ -30,7 +30,7 @@ Route::get('package-ideas', PackageIdeaController::class)->name('package-ideas')
 Route::get('login/github', [Auth\LoginController::class, 'redirectToProvider'])->name('login');
 Route::get('login/github/callback', [Auth\LoginController::class, 'handleProviderCallback']);
 
-Route::get('sitemap.xml', SiteMapController::class)->name('sitemap');
+Route::get('sitemap.xml', SiteMapController::class);
 Route::feeds();
 
 Route::post('logout', [Auth\LoginController::class, 'logout'])->name('logout');

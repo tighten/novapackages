@@ -17,29 +17,20 @@ use Illuminate\Support\Facades\Http;
 use Mockery;
 use Tests\TestCase;
 
+/** @group integration */
 class RepoTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Http::fake([
-            'https://packagist.org/packages/tightenco/nova-stripe.json' =>
-                Http::response([
-                    'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
-                ]),
-            'https://api.github.com/repos/tighten/nova-stripe/readme' =>
-                Http::response($this->fakeResponse('github.repo-readme.html')),
-            'https://api.github.com/repos/tighten/nova-stripe/releases' =>
-                Http::response($this->fakeResponse('github.repo-releases.json')),
-        ]);
-    }
-
     /** @test */
     public function can_get_a_repo_from_a_package_composer_name()
     {
+        Http::fake([
+            'https://packagist.org/packages/tightenco/nova-stripe.json' => Http::response([
+                'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
+            ]),
+        ]);
+
         $composerName = 'tightenco/nova-stripe';
         $package = Package::factory()->make([
             'composer_name' => $composerName,
@@ -86,6 +77,12 @@ class RepoTest extends TestCase
     /** @test */
     public function can_get_a_repo_from_a_packagist_composer_name()
     {
+        Http::fake([
+            'https://packagist.org/packages/tightenco/nova-stripe.json' => Http::response([
+                'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
+            ]),
+        ]);
+
         $url = 'https://packagist.org/packages/tightenco/nova-stripe';
         $mock = Mockery::mock(PackageFormRequest::class);
         $mock->shouldReceive('input')->with('url')->andReturn($url);
@@ -145,18 +142,15 @@ class RepoTest extends TestCase
     /** @test */
     public function github_readme_is_returned_as_null_if_one_is_not_present()
     {
-        $repositoryPath = 'ctroms/no-readme-test';
-
-        $url = "https://github.com/{$repositoryPath}";
-
-        Http::fake([
-            "https://api.github.com/repos/{$repositoryPath}/readme" =>
-                Http::response($this->fakeResponse('github.repo-readme-404.json'), 404),
-        ]);
+        $url = 'https://github.com/ctroms/no-readme-test';
 
         $repo = Repo::fromUrl($url);
 
+        $this->assertEquals('github', $repo->source());
+        $this->assertEquals($url, $repo->url());
         $this->assertNull($repo->readme());
+        $this->assertNotNull($repo->latestReleaseVersion());
+        $this->assertEquals('master', $repo->latestReleaseVersion());
     }
 
     /** @test */
@@ -266,9 +260,6 @@ class RepoTest extends TestCase
             'https://registry.npmjs.org/lodash/' => Http::response(
                 $this->fakeResponse('npm.repo-with-github-vcs.json')
             ),
-            'https://api.github.com/repos/lodash/lodash/readme' => Http::response(),
-            'https://api.github.com/repos/lodash/lodash/releases' =>
-                Http::response($this->fakeResponse('github.repo-releases.json')),
         ]);
 
         $repo = Repo::fromUrl($npmUrl);
@@ -279,6 +270,7 @@ class RepoTest extends TestCase
         $this->assertEquals('https://github.com/lodash/lodash.git', $repo->url());
         $this->assertNotNull($repo->readme());
         $this->assertNotNull($repo->latestReleaseVersion());
+        $this->assertNotEquals('master', $repo->latestReleaseVersion());
     }
 
     /** @test */
