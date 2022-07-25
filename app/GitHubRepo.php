@@ -5,6 +5,7 @@ namespace App;
 use App\BaseRepo;
 use App\Exceptions\GitHubException;
 use App\Http\Remotes\GitHub;
+use Github\Exception\RuntimeException as GitHubRunTimeException;
 use Illuminate\Support\Arr;
 
 class GitHubRepo extends BaseRepo
@@ -23,12 +24,12 @@ class GitHubRepo extends BaseRepo
 
     private function __construct($url, GitHub $github)
     {
-        if (! GitHub::validateUrl($url)) {
+        if (! $github->validateUrl($url)) {
             throw new GitHubException('Invalid Url Provided');
         }
 
         $this->url = $url;
-        $this->github = $github;
+        $this->github = $github->api('repo');
 
         preg_match('/github.com\/([\w-]+)\/([\w-]+)/i', $url, $parts);
         $this->username = $parts[1];
@@ -40,19 +41,41 @@ class GitHubRepo extends BaseRepo
         return new static($url, app(GitHub::class));
     }
 
-    public function readme()
+    // Media types for GitHub: https://developer.github.com/v3/media
+    public function readme($format = 'html')
     {
-        return $this->github->readme("{$this->username}/{$this->repo}");
+        // Github throws an exception if a readme doesn't exist for the repo so we catch it and return null
+        try {
+            return $this->github->readme(
+                $this->username,
+                $this->repo,
+                $format
+            );
+        } catch (GitHubRunTimeException $e) {
+            if ($e->getCode() === 404) {
+                return;
+            }
+
+            throw $e;
+        }
     }
 
     public function releases()
     {
-        return collect($this->github->releases("{$this->username}/{$this->repo}"));
+        return $this->github->releases();
     }
 
     public function latestRelease()
     {
-        return $this->releases()->first();
+        try {
+            return $this->releases()->all($this->username, $this->repo)[0] ?? [];
+        } catch (GitHubRunTimeException $e) {
+            if ($e->getMessage() == 'Not Found') {
+                return [];
+            }
+
+            throw $e;
+        }
     }
 
     public function latestReleaseVersion()

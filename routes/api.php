@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('search', Api\SearchController::class)->middleware('throttle:60')->name('search');
 Route::get('recent', Api\RecentController::class)->middleware('throttle:60');
-Route::get('popular', Api\PopularController::class)->middleware('throttle:60')->name('api.popular-packages');
+Route::get('popular', Api\PopularController::class)->middleware('throttle:60');
 Route::get('stats', Api\StatsController::class)->middleware('throttle:60');
 
 Route::middleware('auth:api')->group(function () {

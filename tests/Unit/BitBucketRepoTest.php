@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\BaseRepo;
 use App\BitBucketRepo;
 use App\Http\Remotes\BitBucket;
 use Mockery;
@@ -38,14 +37,6 @@ class BitBucketRepoTest extends TestCase
         $repo = BitBucketRepo::make('https://bitbucket.org/starwars/x-wings');
 
         $this->assertEquals('master', $repo->latestReleaseVersion());
-    }
-
-    /** @test */
-    function it_returns_proper_readme_format()
-    {
-        $repo = BitBucketRepo::make('https://bitbucket.org/starwars/lightsabers');
-
-        $this->assertEquals(BaseRepo::README_FORMAT, $repo->readmeFormat());
     }
 
     protected function mockBitBucketWith($expectations)
