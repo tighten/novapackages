@@ -167,7 +167,7 @@ return [
     'defaults' => [
         'supervisor-1' => [
             'connection' => 'redis',
-            'queue' => ['default'],
+            'queue' => [env('REDIS_QUEUE', 'novapackages-default')],
             'balance' => 'simple',
             'processes' => 2,
             'tries' => 3,
