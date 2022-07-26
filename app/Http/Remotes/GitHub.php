@@ -54,11 +54,17 @@ class GitHub
     {
         $this->guardAgainstInvalidRepositoryPath($repositoryPath);
 
-        return Http::github()
+        $response = Http::github()
             ->withHeaders(['Accept' => 'application/vnd.github+json'])
-            ->get("repos/{$repositoryPath}/releases")
-            ->throw()
-            ->json();
+            ->get("repos/{$repositoryPath}/releases");
+
+        if ($response->status() === 404) {
+            return [];
+        }
+
+        $response->throw();
+
+        return $response->json();
     }
 
     public function user(string $username): array
