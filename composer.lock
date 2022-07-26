@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c467660fbecedea6d94a663f324d37be",
+    "content-hash": "47d0784e6b4a3bc2a160eb93650c2d53",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -132,16 +132,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.231.13",
+            "version": "3.231.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "7bff685fea578276c28d5476197f6c3fa7cff116"
+                "reference": "6b79b9c8204813d9674ffa7badcd567d7f608165"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7bff685fea578276c28d5476197f6c3fa7cff116",
-                "reference": "7bff685fea578276c28d5476197f6c3fa7cff116",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6b79b9c8204813d9674ffa7badcd567d7f608165",
+                "reference": "6b79b9c8204813d9674ffa7badcd567d7f608165",
                 "shasum": ""
             },
             "require": {
@@ -218,9 +218,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.13"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.14"
             },
-            "time": "2022-07-25T18:21:23+00:00"
+            "time": "2022-07-26T18:20:14+00:00"
         },
         {
             "name": "brick/math",
@@ -1973,16 +1973,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.21.6",
+            "version": "v9.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "569d7a2e361895f90e66bb4e02db89c27691a0e7"
+                "reference": "b3b3dd43b9899f23df6d1d3e5390bd4662947a46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/569d7a2e361895f90e66bb4e02db89c27691a0e7",
-                "reference": "569d7a2e361895f90e66bb4e02db89c27691a0e7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b3b3dd43b9899f23df6d1d3e5390bd4662947a46",
+                "reference": "b3b3dd43b9899f23df6d1d3e5390bd4662947a46",
                 "shasum": ""
             },
             "require": {
@@ -2149,7 +2149,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-07-22T14:16:44+00:00"
+            "time": "2022-07-26T16:16:33+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -2209,16 +2209,16 @@
         },
         {
             "name": "laravel/horizon",
-            "version": "v5.9.9",
+            "version": "v5.9.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/horizon.git",
-                "reference": "93f5d74e1b6126d0de4416c230cb35aaddbe51bc"
+                "reference": "09b2031b3077f22aaca07f1dbe4ee2cc8eacad78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/horizon/zipball/93f5d74e1b6126d0de4416c230cb35aaddbe51bc",
-                "reference": "93f5d74e1b6126d0de4416c230cb35aaddbe51bc",
+                "url": "https://api.github.com/repos/laravel/horizon/zipball/09b2031b3077f22aaca07f1dbe4ee2cc8eacad78",
+                "reference": "09b2031b3077f22aaca07f1dbe4ee2cc8eacad78",
                 "shasum": ""
             },
             "require": {
@@ -2280,9 +2280,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/horizon/issues",
-                "source": "https://github.com/laravel/horizon/tree/v5.9.9"
+                "source": "https://github.com/laravel/horizon/tree/v5.9.10"
             },
-            "time": "2022-07-11T18:08:25+00:00"
+            "time": "2022-07-25T13:24:03+00:00"
         },
         {
             "name": "laravel/passport",
@@ -2555,28 +2555,28 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v5.5.2",
+            "version": "v5.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/socialite.git",
-                "reference": "68afb03259b82d898c68196cbcacd48596a9dd72"
+                "reference": "9dfc76b31ee041c45a7cae86f23339784abde46d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/68afb03259b82d898c68196cbcacd48596a9dd72",
-                "reference": "68afb03259b82d898c68196cbcacd48596a9dd72",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/9dfc76b31ee041c45a7cae86f23339784abde46d",
+                "reference": "9dfc76b31ee041c45a7cae86f23339784abde46d",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0",
                 "illuminate/http": "^6.0|^7.0|^8.0|^9.0",
                 "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
-                "league/oauth1-client": "^1.0",
+                "league/oauth1-client": "^1.10.1",
                 "php": "^7.2|^8.0"
             },
             "require-dev": {
-                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0",
                 "mockery/mockery": "^1.0",
                 "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0",
                 "phpunit/phpunit": "^8.0|^9.3"
@@ -2620,7 +2620,7 @@
                 "issues": "https://github.com/laravel/socialite/issues",
                 "source": "https://github.com/laravel/socialite"
             },
-            "time": "2022-03-10T15:26:19+00:00"
+            "time": "2022-07-18T13:51:19+00:00"
         },
         {
             "name": "laravel/telescope",
@@ -3198,16 +3198,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.1.1",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "1a941703dfb649f9b821e7bc425e782f576a805e"
+                "reference": "ed0ecc7f9b5c2f4a9872185846974a808a3b052a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1a941703dfb649f9b821e7bc425e782f576a805e",
-                "reference": "1a941703dfb649f9b821e7bc425e782f576a805e",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/ed0ecc7f9b5c2f4a9872185846974a808a3b052a",
+                "reference": "ed0ecc7f9b5c2f4a9872185846974a808a3b052a",
                 "shasum": ""
             },
             "require": {
@@ -3268,7 +3268,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.1.1"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.2.0"
             },
             "funding": [
                 {
@@ -3284,20 +3284,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-18T09:59:40+00:00"
+            "time": "2022-07-26T07:26:36+00:00"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
-            "version": "3.1.1",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-aws-s3-v3.git",
-                "reference": "fa46ce9fbad9bfc73d8b160ffeb2c1793fe9c73b"
+                "reference": "257893ef7398b3c9255b26dff8b0118bb93fc5ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/fa46ce9fbad9bfc73d8b160ffeb2c1793fe9c73b",
-                "reference": "fa46ce9fbad9bfc73d8b160ffeb2c1793fe9c73b",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/257893ef7398b3c9255b26dff8b0118bb93fc5ff",
+                "reference": "257893ef7398b3c9255b26dff8b0118bb93fc5ff",
                 "shasum": ""
             },
             "require": {
@@ -3338,7 +3338,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem-aws-s3-v3/issues",
-                "source": "https://github.com/thephpleague/flysystem-aws-s3-v3/tree/3.1.1"
+                "source": "https://github.com/thephpleague/flysystem-aws-s3-v3/tree/3.2.0"
             },
             "funding": [
                 {
@@ -3354,7 +3354,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-18T09:31:34+00:00"
+            "time": "2022-07-26T07:22:40+00:00"
         },
         {
             "name": "league/glide",
