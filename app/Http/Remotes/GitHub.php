@@ -20,7 +20,7 @@ class GitHub
     {
         return Cache::remember(CacheKeys::packageIdeaIssues(), 1, function () {
             $issues = Http::github()
-                ->withHeaders(['Accept' => 'application/vnd.github+json'])
+                ->accept('application/vnd.github+json')
                 ->get('search/issues', [
                     'q' => 'state:open label:package-idea repo:tighten/nova-package-development',
                     'sort' => 'updated',
@@ -38,7 +38,7 @@ class GitHub
         $this->guardAgainstInvalidRepositoryPath($repositoryPath);
 
         $response = Http::github()
-            ->withHeaders(['Accept' => 'application/vnd.github.html'])
+            ->accept('application/vnd.github.html')
             ->get("repos/{$repositoryPath}/readme");
 
         if ($response->status() === 404) {
@@ -55,7 +55,7 @@ class GitHub
         $this->guardAgainstInvalidRepositoryPath($repositoryPath);
 
         $response = Http::github()
-            ->withHeaders(['Accept' => 'application/vnd.github+json'])
+            ->accept('application/vnd.github+json')
             ->get("repos/{$repositoryPath}/releases");
 
         if ($response->status() === 404) {
@@ -69,7 +69,6 @@ class GitHub
 
     public function user(string $username): array
     {
-
         return Http::github()->get("users/{$username}")->throw()->json();
     }
 

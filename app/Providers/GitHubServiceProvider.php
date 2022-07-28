@@ -11,8 +11,7 @@ class GitHubServiceProvider extends ServiceProvider
     {
         Http::macro('github', function () {
             return Http::withToken(config('services.github.token'))
-                ->baseUrl('https://api.github.com')
-                ->withHeaders(['Accept' => 'application/vnd.github+json']);
+                ->baseUrl('https://api.github.com');
         });
     }
 }
