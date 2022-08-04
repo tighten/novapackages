@@ -164,7 +164,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\GitHubServiceProvider::class,
+        App\Providers\HttpClientServiceProvider::class,
 
     ],
 
