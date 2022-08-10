@@ -65,7 +65,7 @@ class NpmRepo extends BaseRepo
 
     public function latestReleaseVersion()
     {
-        return optional($this->repo)->latestReleaseVersion() ?? 'master';
+        return $this->repo?->latestReleaseVersion() ?? 'master';
     }
 
     public function readme()

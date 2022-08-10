@@ -12,6 +12,10 @@
                 Popular Packages
             </option>
 
+            <option value="nova_current">
+                Nova {{ config('novapackages.nova.latest_major_version') }} Packages
+            </option>
+
             <optgroup label="Package types">
                 @foreach ($typeTags as $thisTag)
                     <option value="{{ $thisTag->slug }}">{{ $thisTag->name }}</option>
@@ -41,10 +45,15 @@
                 class="block px-8 py-2 cursor-pointer hover:text-indigo-700 {{ $tag === 'all' ? 'text-gray-800 font-bold' : 'text-gray-700' }}"
                 >All packages</a>
 
-                <a
+            <a
                 wire:click="filterTag('popular')"
                 class="block px-8 py-2 cursor-pointer hover:text-indigo-700 {{ $tag === 'popular' ? 'text-gray-800 font-bold' : 'text-gray-700' }}"
                 >Popular packages</a>
+
+            <a
+                wire:click="filterTag('nova_current')"
+                class="block px-8 py-2 cursor-pointer hover:text-indigo-700 {{ $tag === 'nova_current' ? 'text-gray-800 font-bold' : 'text-gray-700' }}"
+                >Nova {{ config('novapackages.nova.latest_major_version') }} packages</a>
 
             <span class="block mt-4 mb-2 mx-4 pb-2 px-4 mt-6 border-b border-grey uppercase text-sm">Package types</span>
 

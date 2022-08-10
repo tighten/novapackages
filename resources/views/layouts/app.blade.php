@@ -13,11 +13,16 @@
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#2b3157">
+
     @include('feed::links')
 
     <script>
         window.novapackages = {
-            is_admin: {{ optional(auth()->user())->isAdmin() ? "true" : "false" }},
+            is_admin: {{ auth()->user()?->isAdmin() ? "true" : "false" }},
             csrf_token: '{{ csrf_token() }}',
             user_id: '{{ auth()->id() ?? null }}'
         };
@@ -26,6 +31,17 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.x/dist/alpine.min.js" defer></script>
 
     @livewireStyles
+
+    @production
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVEM0Q7HZ8"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-ZVEM0Q7HZ8');
+        </script>
+    @endproduction
 </head>
 
 <body class="bg-gray-200 font-sans font-normal">

@@ -77,6 +77,18 @@ class Package extends Model implements Feedable
         return $this->hasMany(Favorite::class);
     }
 
+    public function scopeFilter($query, string $tag)
+    {
+        switch ($tag) {
+            case 'popular':
+                return $query->popular();
+            case 'nova_current':
+                return $query->novaCurrent();
+            default:
+                return $query;
+        }
+    }
+
     public function scopeTagged($query, $tagSlug)
     {
         $query->whereHas('tags', function ($query) use ($tagSlug) {
@@ -90,6 +102,11 @@ class Package extends Model implements Feedable
             DB::Raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
         )
             ->orderBy('popularity', 'desc');
+    }
+
+    public function scopeNovaCurrent($query)
+    {
+        return $query->where('nova_version', config('novapackages.nova.latest_major_version'));
     }
 
     public function toSearchableArray()
@@ -113,6 +130,26 @@ class Package extends Model implements Feedable
         static::addGlobalScope('notDisabled', function (Builder $builder) {
             $builder->where('is_disabled', false);
         });
+    }
+
+    public function getDisplayNameAttribute()
+    {
+        // The haystack used to check if the string contains any of the invalid substrings.
+        $toRemove = [];
+
+        // Create the version haystack for each version of Laravel Nova.
+        foreach (config('novapackages.filtering.package_name') as $subject) {
+            $v = config('novapackages.nova.latest_major_version');
+            while ($v >= 1) {
+                // Replace ! with the version number.
+                $toRemove[] = Str::replace('!', $v, $subject);
+
+                $v--;
+            }
+        }
+
+        // Remove matches, trim the string and remove double spaces.
+        return Str::of($this->name)->remove($toRemove, false)->trim()->replaceMatches('!\s+!', ' ');
     }
 
     public function getComposerVendorAttribute()
@@ -151,7 +188,7 @@ class Package extends Model implements Feedable
             ->summary($this->abstract)
             ->updated($this->updated_at)
             ->link(route('packages.show', [$this->composer_vendor, $this->composer_package]))
-            ->author($this->author->name);
+            ->authorName($this->author->name);
     }
 
     public static function getRecentFeedItems()
@@ -192,7 +229,9 @@ class Package extends Model implements Feedable
 
     public function updateAvailabilityFromNewUrl()
     {
-        if (is_null($this->marked_as_unavailable_at)) return;
+        if (is_null($this->marked_as_unavailable_at)) {
+            return;
+        }
 
         if (array_key_exists('url', $this->getChanges())) {
             $this->marked_as_unavailable_at = null;

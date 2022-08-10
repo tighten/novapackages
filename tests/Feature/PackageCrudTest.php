@@ -359,11 +359,11 @@ class PackageCrudTest extends TestCase
             ->assertRedirect(route('app.packages.index'))
             ->assertSessionHas('status');
 
-        $this->assertDeleted($package);
-        $this->assertDeleted($screenshot);
-        $this->assertDeleted($review);
-        $this->assertDeleted($rating);
-        $this->assertDeleted($favorite);
+        $this->assertModelMissing($package);
+        $this->assertModelMissing($screenshot);
+        $this->assertModelMissing($review);
+        $this->assertModelMissing($rating);
+        $this->assertModelMissing($favorite);
     }
 
     /** @test */
@@ -383,7 +383,7 @@ class PackageCrudTest extends TestCase
             ->assertRedirect(route('app.packages.index'))
             ->assertSessionHas('status');
 
-        $this->assertDeleted($package);
+        $this->assertModelMissing($package);
     }
 
     /** @test */

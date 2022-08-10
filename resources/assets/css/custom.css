@@ -5,34 +5,27 @@
 }
 
 .button--indigo {
-    @apply .bg-indigo-600;
-    @apply .cursor-pointer;
-    @apply .no-underline;
-    @apply .px-6;
-    @apply .py-3;
-    @apply .rounded-full;
-    @apply .text-xs;
-    @apply .text-white;
+    @apply px-6 py-3 text-xs text-white no-underline bg-indigo-600 rounded-full cursor-pointer;
 
     transition: background .3s ease-out;
 }
 
     .button--indigo:hover {
-        @apply .bg-indigo-700;
+        @apply bg-indigo-700;
     }
 
     @screen sm {
         .button--indigo {
-            @apply .text-sm;
+            @apply text-sm;
         }
     }
 
 .v-cloak {
-    @apply .hidden;
+    @apply hidden;
 }
 
 [x-cloak] {
-    @apply .hidden;
+    @apply hidden;
 }
 
 .text-inherit {

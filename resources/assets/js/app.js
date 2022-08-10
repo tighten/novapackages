@@ -1,13 +1,12 @@
 require('./bootstrap');
 
+import Vue from 'vue';
+
 window.hljs = require('highlight.js');
 
-hljs.initHighlightingOnLoad();
+hljs.highlightAll();
 
 if (!! document.getElementById('vue-app')) {
-
-    window.Vue = require('vue');
-
     Vue.directive('click-outside', {
         bind: function(el, binding, vNode) {
             // Provided expression must evaluate to a function.
@@ -42,23 +41,23 @@ if (!! document.getElementById('vue-app')) {
         }
     });
 
-    Vue.component('admin-dropdown', require('./components/AdminDropDown.vue'));
-    Vue.component('collaborator-select', require('./components/CollaboratorSelect.vue'));
-    Vue.component('package-card', require('./components/PackageCard.vue'));
-    Vue.component('package-detail', require('./components/PackageDetail.vue'));
-    Vue.component('package-detail-frame', require('./components/PackageDetailFrame.vue'));
-    Vue.component('package-review-create', require('./components/PackageReviewCreate.vue'));
-    Vue.component('package-screenshot', require('./components/PackageScreenshot.vue'));
-    Vue.component('package-screenshots', require('./components/PackageScreenshots.vue'));
-    Vue.component('package-screenshots-dropzone', require('./components/PackageScreenshotsDropzone.vue'));
-    Vue.component('package-screenshots-list', require('./components/PackageScreenshotsList.vue'));
-    Vue.component('rating-count-bar', require('./components/RatingCountBar.vue'));
-    Vue.component('tag-select', require('./components/TagSelect.vue'));
-    Vue.component('title-icon', require('./components/TitleIcon.vue'));
+    Vue.component('admin-dropdown', () => import('./components/AdminDropDown.vue'));
+    Vue.component('collaborator-select', () => import('./components/CollaboratorSelect.vue'));
+    Vue.component('package-card', () => import('./components/PackageCard.vue'));
+    Vue.component('package-detail', () => import('./components/PackageDetail.vue'));
+    Vue.component('package-detail-frame', () => import('./components/PackageDetailFrame.vue'));
+    Vue.component('package-review-create', () => import('./components/PackageReviewCreate.vue'));
+    Vue.component('package-screenshot', () => import('./components/PackageScreenshot.vue'));
+    Vue.component('package-screenshots', () => import('./components/PackageScreenshots.vue'));
+    Vue.component('package-screenshots-dropzone', () => import('./components/PackageScreenshotsDropzone.vue'));
+    Vue.component('package-screenshots-list', () => import('./components/PackageScreenshotsList.vue'));
+    Vue.component('rating-count-bar', () => import('./components/RatingCountBar.vue'));
+    Vue.component('tag-select', () => import('./components/TagSelect.vue'));
+    Vue.component('title-icon', () => import('./components/TitleIcon.vue'));
 
-    Vue.component('passport-clients', require('./components/passport/Clients.vue'));
-    Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
-    Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
+    Vue.component('passport-clients', () => import('./components/passport/Clients.vue'));
+    Vue.component('passport-authorized-clients', () => import('./components/passport/AuthorizedClients.vue'));
+    Vue.component('passport-personal-access-tokens', () => import('./components/passport/PersonalAccessTokens.vue'));
 
     Vue.mixin({
         methods: {
@@ -71,7 +70,7 @@ if (!! document.getElementById('vue-app')) {
         }
     });
 
-    let app = new Vue({
+    new Vue({
         el: '#vue-app',
         delimiters: ['${', '}'],
     });

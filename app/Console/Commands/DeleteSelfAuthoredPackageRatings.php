@@ -19,7 +19,7 @@ class DeleteSelfAuthoredPackageRatings extends Command
 
     private function deleteSelfAuthoredPackageRatings()
     {
-        $query = Rating::whereHasMorph('rateable', 'App\Package', function ($query) {
+        $query = Rating::whereHasMorph('rateable', \App\Package::class, function ($query) {
             return $query
                 ->join('collaborators', 'collaborators.id', '=', 'packages.author_id')
                 ->whereRaw('collaborators.user_id = ratings.user_id');
@@ -32,7 +32,7 @@ class DeleteSelfAuthoredPackageRatings extends Command
 
     private function deleteSelfContributedPackageRatings()
     {
-        $query = Rating::whereHasMorph('rateable', 'App\Package', function ($query) {
+        $query = Rating::whereHasMorph('rateable', \App\Package::class, function ($query) {
             return $query
                 ->join('collaborator_package', 'collaborator_package.package_id', '=', 'packages.id')
                 ->join('collaborators', 'collaborators.id', '=', 'collaborator_package.collaborator_id')

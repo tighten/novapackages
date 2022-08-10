@@ -7,6 +7,7 @@ use Facades\App\Repo;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Log;
 class SyncPackageRepositoryData implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public $tries = 2;
 
     public $package;
 
@@ -30,8 +33,14 @@ class SyncPackageRepositoryData implements ShouldQueue
             return;
         }
 
-        if (! $this->remoteHasChanges($repo)) {
-            return Log::info('Repository data is unchanged for package #'.$this->package->id.' ('.$this->package->name.')');
+        try {
+            if (! $this->remoteHasChanges($repo)) {
+                return Log::info('Repository data is unchanged for package #' . $this->package->id . ' (' . $this->package->name . ')');
+            }
+        } catch (RequestException $exception) {
+            // The request(s) to the repository's provider failed, possibly due to a server error or rate-limiting.
+            // Release the job for 10 minutes to try again.
+            $this->release(600);
         }
 
         $this->package->update([
@@ -42,7 +51,7 @@ class SyncPackageRepositoryData implements ShouldQueue
             'latest_version' => $repo->latestReleaseVersion(),
         ]);
 
-        Log::info('Synced repository data for package #'.$this->package->id.' ('.$this->package->name.')');
+        Log::info('Synced repository data for package #' . $this->package->id . ' (' . $this->package->name . ')');
     }
 
     protected function remoteHasChanges($repo)

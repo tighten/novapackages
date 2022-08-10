@@ -26,6 +26,8 @@
 
         <ul class="mb-8 leading-normal list-disc pl-10">
             <li>/api/packages - paginated, 10 per page</li>
+            <li>/api/packages?github_username={{ auth()->user()->github_username }} - Filtered by author GitHub username</li>
+            <li>/api/packages?author_name={{ rawurlencode(auth()->user()->name) }} - Filtered by author name</li>
         </ul>
 
         <strong class="text-gray-800 mb-4">More documentation is coming.</strong>

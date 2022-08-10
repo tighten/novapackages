@@ -21,8 +21,9 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('sync:packagist')->hourly();
-        $schedule->command('sync:repo')->hourlyAt(30);
+        $schedule->command('sync:packagist')->everyTwoHours();
+        // Every two hours at minute 30.
+        $schedule->command('sync:repo')->cron('30 */2 * * *');
         $schedule->command('purge:abandonedscreenshots')->dailyAt('1:00');
         $schedule->command('telescope:prune')->daily();
 

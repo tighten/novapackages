@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\SearchIndex;
 use App\CacheKeys;
 use App\Package;
 use App\Tag;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
@@ -54,25 +54,22 @@ class PackageList extends Component
             $packages = Package::search($this->search, function (SearchIndex $algolia, string $query, array $options) {
                 $options['advancedSyntax'] = true;
 
-                if ($this->tag !== 'all') {
+                if (! in_array($this->tag, ['all', 'popular', 'nova_current'])) {
                     $options['tagFilters'] = [$this->tag];
                 }
 
                 return $algolia->search($query, $options);
+            })->query(function (Builder $builder) {
+                // Ensure search results use the same query scopes as non-filtered results
+                return $builder->filter($this->tag);
             })->paginate($this->pageSize);
 
             $packages->load(['author', 'ratings']);
         } else {
-            switch ($this->tag) {
-                case 'all':
-                    $packages = Package::query();
-                    break;
-                case 'popular':
-                    $packages = Package::popular();
-                    break;
-                default:
-                    $packages = Package::tagged($this->tag);
-                    break;
+            if (in_array($this->tag, ['all', 'popular', 'nova_current'])) {
+                $packages = Package::filter($this->tag);
+            } else {
+                $packages = Package::tagged($this->tag);
             }
 
             $packages = $packages->latest()->with(['author', 'ratings'])->paginate($this->pageSize);

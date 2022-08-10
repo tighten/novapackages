@@ -2,10 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Exceptions\PackagistException;
-use App\Http\Remotes\Packagist;
-use App\Http\Resources\Collaborator;
-use App\Http\Resources\Tag;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Package extends JsonResource
@@ -19,7 +15,7 @@ class Package extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
+            'name' => $this->display_name,
             'author' => new Collaborator($this->author),
             'composer_name' => $this->composer_name,
             'url' => $this->url,
@@ -37,6 +33,8 @@ class Package extends JsonResource
             'packagist_downloads' => $this->packagist_downloads,
             'github_stars' => $this->github_stars,
             'tags' => Tag::collection($this->tags),
+            'rating' => $this->average_rating,
+            'rating_count' => $this->ratings->count(),
         ];
     }
 }

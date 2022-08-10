@@ -22,6 +22,8 @@ class PackageDetailResource extends PackageResource
 
             if (! is_null($packagistData)) {
                 $composer_latest = $this->extractStableVersionsFromPackages($packagistData)->first();
+
+                $novaVersion = $composer_latest['require']['laravel/nova'] ?? null;
             }
         } catch (PackagistException $e) {
         }
@@ -58,6 +60,7 @@ class PackageDetailResource extends PackageResource
             'tags' => TagResource::from($package->tags),
             'is_favorite' => $this->isFavorite($package),
             'favorites_count' => $this->favoritesCount($package),
+            'nova_version' => $novaVersion ?? null,
         ]);
     }
 
@@ -89,7 +92,7 @@ class PackageDetailResource extends PackageResource
         $key = CacheKeys::userPackageRating(auth()->id(), $package->id);
 
         return Cache::remember($key, self::CACHE_RATINGS_LENGTH, function () use ($package) {
-            return (int)$package->user_average_rating;
+            return (int) $package->user_average_rating;
         });
     }
 

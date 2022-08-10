@@ -7,6 +7,7 @@ use Facades\App\Repo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Http;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\GithubProvider;
 use Laravel\Socialite\Two\User as SocialiteUser;
@@ -20,6 +21,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        Http::preventStrayRequests();
+
         /* Assert the collection equals the given collection */
         Collection::macro('assertEquals', function ($items) {
             Assert::assertCount($items->count(), $this);
@@ -29,6 +32,11 @@ abstract class TestCase extends BaseTestCase
                     : Assert::assertTrue($itemPair[0]->is($itemPair[1]));
             });
         });
+    }
+
+    protected function fakeResponse($path)
+    {
+        return file_get_contents(base_path("/tests/responses/{$path}"));
     }
 
     protected function mockSocialiteWithUserData($userData)

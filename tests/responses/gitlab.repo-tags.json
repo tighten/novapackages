@@ -1,0 +1,226 @@
+[
+    {
+        "name": "2.0.4",
+        "message": "",
+        "target": "e7b83236ade688bca5b0215fc58e9f287677ce37",
+        "commit":
+        {
+            "id": "e7b83236ade688bca5b0215fc58e9f287677ce37",
+            "short_id": "e7b83236",
+            "created_at": "2018-05-31T11:33:56.000+02:00",
+            "parent_ids":
+            [
+                "1bdf2b0e6e9aa06de9af268361d907ec67be5b04"
+            ],
+            "title": "Fix vendor inclusion from bin (ter)",
+            "message": "Fix vendor inclusion from bin (ter)\n",
+            "author_name": "alphayax",
+            "author_email": "alphayax@gmail.com",
+            "authored_date": "2018-05-31T11:33:56.000+02:00",
+            "committer_name": "alphayax",
+            "committer_email": "alphayax@gmail.com",
+            "committed_date": "2018-05-31T11:33:56.000+02:00",
+            "trailers":
+            {},
+            "web_url": "https://gitlab.com/alphayax/rancher-api/-/commit/e7b83236ade688bca5b0215fc58e9f287677ce37"
+        },
+        "release": null,
+        "protected": false
+    },
+    {
+        "name": "2.0.3",
+        "message": "",
+        "target": "1bdf2b0e6e9aa06de9af268361d907ec67be5b04",
+        "commit":
+        {
+            "id": "1bdf2b0e6e9aa06de9af268361d907ec67be5b04",
+            "short_id": "1bdf2b0e",
+            "created_at": "2018-05-31T11:06:04.000+02:00",
+            "parent_ids":
+            [
+                "debf1081d4d761730ff5064b1e1cfc2b32b26b4e"
+            ],
+            "title": "Fix vendor inclusion from bin bis",
+            "message": "Fix vendor inclusion from bin bis\n",
+            "author_name": "alphayax",
+            "author_email": "alphayax@gmail.com",
+            "authored_date": "2018-05-31T11:06:04.000+02:00",
+            "committer_name": "alphayax",
+            "committer_email": "alphayax@gmail.com",
+            "committed_date": "2018-05-31T11:06:04.000+02:00",
+            "trailers":
+            {},
+            "web_url": "https://gitlab.com/alphayax/rancher-api/-/commit/1bdf2b0e6e9aa06de9af268361d907ec67be5b04"
+        },
+        "release": null,
+        "protected": false
+    },
+    {
+        "name": "2.0.2",
+        "message": "",
+        "target": "debf1081d4d761730ff5064b1e1cfc2b32b26b4e",
+        "commit":
+        {
+            "id": "debf1081d4d761730ff5064b1e1cfc2b32b26b4e",
+            "short_id": "debf1081",
+            "created_at": "2018-05-31T09:24:37.000+02:00",
+            "parent_ids":
+            [
+                "91e0b8f3ffcbebd66eb76b057e1ddcd1a7dcd47e"
+            ],
+            "title": "Fix vendor inclusion from bin",
+            "message": "Fix vendor inclusion from bin\n",
+            "author_name": "alphayax",
+            "author_email": "alphayax@gmail.com",
+            "authored_date": "2018-05-31T09:24:37.000+02:00",
+            "committer_name": "alphayax",
+            "committer_email": "alphayax@gmail.com",
+            "committed_date": "2018-05-31T09:24:37.000+02:00",
+            "trailers":
+            {},
+            "web_url": "https://gitlab.com/alphayax/rancher-api/-/commit/debf1081d4d761730ff5064b1e1cfc2b32b26b4e"
+        },
+        "release": null,
+        "protected": false
+    },
+    {
+        "name": "2.0.1",
+        "message": "",
+        "target": "91e0b8f3ffcbebd66eb76b057e1ddcd1a7dcd47e",
+        "commit":
+        {
+            "id": "91e0b8f3ffcbebd66eb76b057e1ddcd1a7dcd47e",
+            "short_id": "91e0b8f3",
+            "created_at": "2018-05-30T15:41:24.000+02:00",
+            "parent_ids":
+            [
+                "b9bd3b53b2e28ddf5b93308e75bc9dbdd022aea6"
+            ],
+            "title": "Update README",
+            "message": "Update README\n",
+            "author_name": "alphayax",
+            "author_email": "alphayax@gmail.com",
+            "authored_date": "2018-05-30T15:41:24.000+02:00",
+            "committer_name": "alphayax",
+            "committer_email": "alphayax@gmail.com",
+            "committed_date": "2018-05-30T15:41:24.000+02:00",
+            "trailers":
+            {},
+            "web_url": "https://gitlab.com/alphayax/rancher-api/-/commit/91e0b8f3ffcbebd66eb76b057e1ddcd1a7dcd47e"
+        },
+        "release": null,
+        "protected": false
+    },
+    {
+        "name": "2.0.0",
+        "message": "",
+        "target": "b9bd3b53b2e28ddf5b93308e75bc9dbdd022aea6",
+        "commit":
+        {
+            "id": "b9bd3b53b2e28ddf5b93308e75bc9dbdd022aea6",
+            "short_id": "b9bd3b53",
+            "created_at": "2018-05-30T15:31:55.000+02:00",
+            "parent_ids":
+            [
+                "abd2122138825c6768442737e3b9f0274896baa7"
+            ],
+            "title": "Declare rancher_update as a composer bin",
+            "message": "Declare rancher_update as a composer bin\nMove into bin folder\nUpdate composer.json\n",
+            "author_name": "alphayax",
+            "author_email": "alphayax@gmail.com",
+            "authored_date": "2018-05-30T15:31:55.000+02:00",
+            "committer_name": "alphayax",
+            "committer_email": "alphayax@gmail.com",
+            "committed_date": "2018-05-30T15:31:55.000+02:00",
+            "trailers":
+            {},
+            "web_url": "https://gitlab.com/alphayax/rancher-api/-/commit/b9bd3b53b2e28ddf5b93308e75bc9dbdd022aea6"
+        },
+        "release": null,
+        "protected": false
+    },
+    {
+        "name": "1.0.2",
+        "message": "",
+        "target": "abd2122138825c6768442737e3b9f0274896baa7",
+        "commit":
+        {
+            "id": "abd2122138825c6768442737e3b9f0274896baa7",
+            "short_id": "abd21221",
+            "created_at": "2017-11-30T10:06:52.000+01:00",
+            "parent_ids":
+            [
+                "9d0f4136a62c2744cb3128b61a1847273b80cca4"
+            ],
+            "title": "Update readme",
+            "message": "Update readme\n",
+            "author_name": "alphayax",
+            "author_email": "alphayax@gmail.com",
+            "authored_date": "2017-11-30T10:06:52.000+01:00",
+            "committer_name": "alphayax",
+            "committer_email": "alphayax@gmail.com",
+            "committed_date": "2017-11-30T10:06:52.000+01:00",
+            "trailers":
+            {},
+            "web_url": "https://gitlab.com/alphayax/rancher-api/-/commit/abd2122138825c6768442737e3b9f0274896baa7"
+        },
+        "release": null,
+        "protected": false
+    },
+    {
+        "name": "1.0.1",
+        "message": "",
+        "target": "3ed66124b7241acd64209022e4ee11931f3eae2e",
+        "commit":
+        {
+            "id": "3ed66124b7241acd64209022e4ee11931f3eae2e",
+            "short_id": "3ed66124",
+            "created_at": "2017-11-30T09:52:18.000+01:00",
+            "parent_ids":
+            [
+                "18db3f8c065d4b82750e8e49acb12adcd91d4193"
+            ],
+            "title": "Update readme",
+            "message": "Update readme\n",
+            "author_name": "alphayax",
+            "author_email": "alphayax@gmail.com",
+            "authored_date": "2017-11-30T09:52:18.000+01:00",
+            "committer_name": "alphayax",
+            "committer_email": "alphayax@gmail.com",
+            "committed_date": "2017-11-30T09:52:18.000+01:00",
+            "trailers":
+            {},
+            "web_url": "https://gitlab.com/alphayax/rancher-api/-/commit/3ed66124b7241acd64209022e4ee11931f3eae2e"
+        },
+        "release": null,
+        "protected": false
+    },
+    {
+        "name": "1.0.0",
+        "message": "Initial release",
+        "target": "749647ea4f551b2acd6949bc48f49751d45e5248",
+        "commit":
+        {
+            "id": "db46f39f2554a0ad38ecec494ca9980187d018c6",
+            "short_id": "db46f39f",
+            "created_at": "2017-09-16T21:45:07.000+02:00",
+            "parent_ids":
+            [
+                "0ded24754b5c652561dfe2f985f69a77bef0d701"
+            ],
+            "title": "Add readme",
+            "message": "Add readme\n",
+            "author_name": "alphayax",
+            "author_email": "alphayax@gmail.com",
+            "authored_date": "2017-09-16T21:45:07.000+02:00",
+            "committer_name": "alphayax",
+            "committer_email": "alphayax@gmail.com",
+            "committed_date": "2017-09-16T21:45:07.000+02:00",
+            "trailers":
+            {},
+            "web_url": "https://gitlab.com/alphayax/rancher-api/-/commit/db46f39f2554a0ad38ecec494ca9980187d018c6"
+        },
+        "release": null,
+        "protected": false
+    }
+]

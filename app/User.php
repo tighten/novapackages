@@ -88,7 +88,7 @@ class User extends Authenticatable
 
     public function isPackageAuthor($packageId)
     {
-        return $this->collaborators->contains(function($collaborator) use ($packageId) {
+        return $this->collaborators->contains(function ($collaborator) use ($packageId) {
             return $collaborator->allAuthoredPackages->contains('id', $packageId);
         });
     }

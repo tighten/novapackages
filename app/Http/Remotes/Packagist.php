@@ -33,7 +33,13 @@ class Packagist
     public function fetchData($name)
     {
         $this->data = Cache::remember(CacheKeys::packagistData($name), 5, function () use ($name) {
-            return Http::get("{$this->url}.json")->json();
+            $response = Http::packagist()->get("{$this->url}.json");
+
+            if ($response->status() === 404) {
+                return null;
+            }
+
+            return $response->json();
         });
 
         if (Arr::get($this->data, 'status') === 'error') {

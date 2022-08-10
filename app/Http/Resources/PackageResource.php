@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Favorite;
 use App\Package;
 use Illuminate\Support\Str;
 
@@ -16,7 +15,7 @@ class PackageResource extends ModelResource
     {
         return [
             'id' => $package->id,
-            'name' => $package->name,
+            'name' => $package->display_name,
             'composer_name' => $package->composer_name,
             'packagist_namespace' => $package->composer_vendor,
             'packagist_name' => $package->composer_package,
@@ -34,6 +33,7 @@ class PackageResource extends ModelResource
                 'avatar_url' => $package->author->avatar ?: 'https://api.adorable.io/avatars/285/'.Str::slug($package->author->name).'.png',
                 'github_username' => $package->author->github_username,
             ],
+            'nova_version' => $package->nova_version ?? null,
         ];
     }
 
