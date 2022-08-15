@@ -169,3 +169,7 @@
 .markdown-body h6:hover .anchor .octicon-link {
     visibility: visible;
 }
+
+.markdown-body img {
+    display: inline;
+}
