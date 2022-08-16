@@ -1179,12 +1179,12 @@ html {
   left: 0px;
 }
 
-.z-50 {
-  z-index: 50;
-}
-
 .z-10 {
   z-index: 10;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .float-right {
@@ -1669,10 +1669,6 @@ html {
 
 .border-4 {
   border-width: 4px;
-}
-
-.border-2 {
-  border-width: 2px;
 }
 
 .border-t {
