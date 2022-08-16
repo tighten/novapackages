@@ -360,10 +360,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      composerString: "composer require ".concat(this.initialPackage.composer_name),
-      copyWasSuccessful: false,
       favoritesCount: this.initialPackage.favorites_count,
-      installBoxOpen: false,
       isFavorite: this.initialPackage.is_favorite,
       leaveReview: false,
       "package": this.initialPackage,
@@ -413,12 +410,6 @@ __webpack_require__.r(__webpack_exports__);
 
       return 'Nothing yet.';
     },
-    toggleInstallBox: function toggleInstallBox() {
-      return this.installBoxOpen = !this.installBoxOpen;
-    },
-    closeInstallBox: function closeInstallBox() {
-      if (this.installBoxOpen) return this.installBoxOpen = false;
-    },
     setRating: function setRating(rating) {
       var _this2 = this;
 
@@ -450,14 +441,6 @@ __webpack_require__.r(__webpack_exports__);
         alert('Error: ' + response.message);
       });
     },
-    copySuccessful: function copySuccessful() {
-      var _this5 = this;
-
-      this.copyWasSuccessful = true;
-      setTimeout(function () {
-        _this5.copyWasSuccessful = false;
-      }, 3000);
-    },
     goBack: function goBack() {
       window.history.back();
     },
@@ -472,21 +455,21 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     addToFavorites: function addToFavorites() {
-      var _this6 = this;
+      var _this5 = this;
 
       _http__WEBPACK_IMPORTED_MODULE_3__["default"].post("/internalapi/packages/".concat(this["package"].id, "/favorites")).then(function (response) {
-        _this6.isFavorite = true;
-        _this6.favoritesCount++;
+        _this5.isFavorite = true;
+        _this5.favoritesCount++;
       }, function (response) {
         alert('Error: ' + response.message);
       });
     },
     removeFromFavorites: function removeFromFavorites() {
-      var _this7 = this;
+      var _this6 = this;
 
       _http__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("/internalapi/packages/".concat(this["package"].id, "/favorites")).then(function (response) {
-        _this7.isFavorite = false;
-        _this7.favoritesCount--;
+        _this6.isFavorite = false;
+        _this6.favoritesCount--;
       }, function (response) {
         alert('Error: ' + response.message);
       });
@@ -507,36 +490,6 @@ __webpack_require__.r(__webpack_exports__);
       }, function (response) {
         alert('Error: ' + response.message);
       });
-    },
-    fallbackCopyTextToClipboard: function fallbackCopyTextToClipboard() {
-      /* Get the text field */
-      var textArea = document.createElement("textarea");
-      textArea.value = this.composerString; // Avoid scrolling to bottom
-
-      textArea.style.top = "0";
-      textArea.style.left = "0";
-      textArea.style.position = "fixed";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-
-      try {
-        document.execCommand('copy');
-      } catch (err) {
-        return;
-      }
-
-      document.body.removeChild(textArea);
-      this.copySuccessful();
-    },
-    copyTextToClipboard: function copyTextToClipboard() {
-      if (!navigator.clipboard) {
-        this.fallbackCopyTextToClipboard();
-        return;
-      }
-
-      navigator.clipboard.writeText(this.composerString);
-      this.copySuccessful();
     }
   }
 });
