@@ -1,10 +1,12 @@
+@props(['package'])
+
 <div
+    x-data="{ opened: true }"
     class="relative"
-    {{--v-click-outside="closeInstallBox"--}}
 >
     <a
+        x-on:click="opened = true"
         class="block cursor-pointer md:inline-block w-full md:w-auto py-4 px-4 sm:px-6 bg-indigo-600 text-white md:rounded-l-full md:rounded-r-full no-underline hover:bg-indigo-700 flex flex-row justify-center items-center content-center"
-        {{--@click="toggleInstallBox()"--}}
     >
         <svg
             class="mr-4 inline-block fill-current w-4"
@@ -17,7 +19,8 @@
         <span class="mr-4 inline-block leading-none inline-block uppercase">Install</span>
 
         <svg
-            {{--v-if="installBoxOpen"--}}
+            x-show="opened"
+            x-cloak
             class="inline-block fill-current w-4 h-4"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -26,7 +29,7 @@
         </svg>
 
         <svg
-            {{--v-else--}}
+            x-show="! opened"
             class="inline-block fill-current w-4"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -37,7 +40,9 @@
 
     <div
         class="absolute shadow rounded bg-white right-0"
-        {{--:class="installBoxOpen ? 'visible' : 'hidden'"--}}
+        x-show="opened"
+        x-on:click.away="opened = false"
+        x-cloak
         style="top: calc(100% + 1rem); min-width: 380px;"
     >
         <div class="flex flex-row w-full p-6 px-8 items-center text-gray-500">
@@ -45,10 +50,8 @@
                 id="packagist-install"
                 type="text"
                 class="rounded flex-grow block border py-2 px-2 mr-4 font-mono text-xs text-black outline-none"
-                {{--:class="--}}
-                {{--                copyWasSuccessful ? 'border-green border-2' : ''--}}
-                {{--            "--}}
-                {{--:value="composerString"--}}
+                {{--:class="copyWasSuccessful ? 'border-green border-2' : ''"--}}
+                value="composer require {{ $package['composer_name'] }}"
             />
 
             <svg
@@ -72,27 +75,26 @@
             </svg>
         </div>
 
-        <div
-            {{--v-if="package.composer_data.package"--}}
-            class="border border-t border-gray-300er flex flex-row flex-no-wrap"
-        >
-            <a
-                {{--:href="package.composer_data.package.repository"--}}
-                class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 border-r border-gray-300 hover:bg-indigo-100"
+        @isset ($package['composer_data']['package'])
+            <div
+                class="border border-t border-gray-300er flex flex-row flex-no-wrap"
             >
-                GitHub
-            </a>
+                <a
+                    href="{{ data_get($package, 'composer_data.package.repository') }}"
+                    class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 border-r border-gray-300 hover:bg-indigo-100"
+                >
+                    GitHub
+                </a>
 
-            <a
-                {{--:href="package.composer_latest.dist.url"--}}
-                class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 hover:bg-indigo-100"
-                {{--v-if="--}}
-                {{--                package.composer_latest &&--}}
-                {{--                    package.composer_latest.dist--}}
-                {{--            "--}}
-            >
-                Download Zip
-            </a>
-        </div>
+                @isset ($package['composer_latest']['dist']['url'])
+                    <a
+                        href="{{ $package['composer_latest']['dist']['url'] }}"
+                        class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 hover:bg-indigo-100"
+                    >
+                        Download Zip
+                    </a>
+                @endisset
+            </div>
+        @endisset
     </div>
 </div>

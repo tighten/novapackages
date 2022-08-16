@@ -45,7 +45,7 @@
                 </h1>
             </div>
 
-            <x-install-box />
+            <x-install-box :package="$package" />
         </div>
     </div>
 
