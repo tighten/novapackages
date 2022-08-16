@@ -1,8 +1,46 @@
 @props(['package'])
 
 <div
-    x-data="{ opened: true }"
-    class="relative"
+    x-data="{
+        opened: false,
+        copied: false,
+        copyToInstallCommandClipboard(text) {
+            if (!navigator.clipboard) {
+                return this.fallbackCopyInstallCommandToClipboard(text)
+            }
+
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    this.copied = true
+                    setTimeout(() => this.copied = false, 3000)
+                })
+        },
+        fallbackCopyInstallCommandToClipboard(text) {
+            let textArea = document.createElement('textarea')
+            textArea.value = text
+
+            // Avoid scrolling to bottom
+            textArea.style.top = '0'
+            textArea.style.left = '0'
+            textArea.style.position = 'fixed'
+
+            document.body.appendChild(textArea)
+            textArea.focus()
+            textArea.select()
+
+            try {
+                document.execCommand('copy')
+            } catch (err) {
+                alert('Sorry. Could not copy to clipboard.')
+            }
+
+            document.body.removeChild(textArea)
+
+            this.copied = true
+            setTimeout(() => this.copied = false, 3000)
+        }
+    }"
+    class="relative z-10"
 >
     <a
         x-on:click="opened = true"
@@ -50,13 +88,13 @@
                 id="packagist-install"
                 type="text"
                 class="rounded flex-grow block border py-2 px-2 mr-4 font-mono text-xs text-black outline-none"
-                {{--:class="copyWasSuccessful ? 'border-green border-2' : ''"--}}
                 value="composer require {{ $package['composer_name'] }}"
             />
 
             <svg
-                {{--v-if="copyWasSuccessful"--}}
-                class="fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor"
+                x-show="copied"
+                x-cloak
+                class="fill-current w-6 h-6 hover:text-indigo-600"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
             >
@@ -64,12 +102,12 @@
             </svg>
 
             <svg
-                {{--v-else--}}
+                x-show="! copied"
                 id="copy-button"
-                class="fill-current w-6 h-6 hover:text-indigo-600 pointer-cursor"
+                class="fill-current w-6 h-6 hover:text-indigo-600 cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
-                {{--@click="copyTextToClipboard"--}}
+                x-on:click="copyToInstallCommandClipboard('composer require {{ $package['composer_name'] }}')"
             >
                 <path d="M6 6V2c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2h4zm2 0h4a2 2 0 0 1 2 2v4h4V2H8v4zM2 8v10h10V8H2z" />
             </svg>
