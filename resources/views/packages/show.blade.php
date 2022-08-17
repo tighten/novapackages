@@ -23,9 +23,10 @@
     >
         <div class="w-full">
             <button
+                x-data
                 type="button"
                 class="self-start text-indigo-600 font-bold text-sm uppercase no-underline inline-block text-center hover:text-indigo-900 cursor-pointer"
-                {{--@click="goBack"--}}
+                x-on:click="window.history.back()"
             >
                 &#8592; Back
             </button>

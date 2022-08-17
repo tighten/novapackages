@@ -440,10 +440,6 @@ export default {
             );
         },
 
-        goBack() {
-            window.history.back();
-        },
-
         viewTag(tag) {
             window.location = tag.url;
         },

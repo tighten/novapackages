@@ -441,9 +441,6 @@ __webpack_require__.r(__webpack_exports__);
         alert('Error: ' + response.message);
       });
     },
-    goBack: function goBack() {
-      window.history.back();
-    },
     viewTag: function viewTag(tag) {
       window.location = tag.url;
     },
