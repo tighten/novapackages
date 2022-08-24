@@ -125,9 +125,12 @@ class PackageController extends Controller
         DB::transaction(function () use ($package) {
             $package->contributors()->sync([]);
             $package->tags()->sync([]);
-            $package->reviews->each->delete();
-            $package->ratings->each->delete();
-            $package->favorites->each->delete();
+            DB::table('reviews')->where('package_id', $package->id)->delete();
+            DB::table('ratings')->where([
+                'rateable_id' => $package->id,
+                'rateable_type' => $package->getMorphClass(),
+            ])->delete();
+            DB::table('favorites')->where('package_id', $package->id)->delete();
             $package->screenshots->each->delete();
             $package->delete();
         });
