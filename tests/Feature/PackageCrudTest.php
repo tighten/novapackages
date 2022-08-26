@@ -387,6 +387,23 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
+    function admin_can_delete_package()
+    {
+        $this->withoutEvents();
+
+        $admin = User::factory()->admin()->create();
+
+        $package = Package::factory()->create();
+
+        $this->actingAs($admin)
+            ->delete(route('app.packages.delete', $package))
+            ->assertRedirect(route('app.packages.index'))
+            ->assertSessionHas('status');
+
+        $this->assertModelMissing($package);
+    }
+
+    /** @test */
     public function users_that_are_not_a_packages_author_cannot_delete_it()
     {
         $user = User::factory()->create();
