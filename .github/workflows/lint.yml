@@ -1,0 +1,26 @@
+name: Audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  audit:
+    name: Audit Composer
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+
+      - name: Install dependencies
+        run: composer install --no-interaction --ignore-platform-reqs
+
+      - name: Audit Composer
+        run: composer audit
