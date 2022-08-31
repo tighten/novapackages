@@ -182,23 +182,8 @@
 
                     <div>
                         @if ($package['current_user_owns'])
-                            <a
-                                href="#"
-                                {{--@click.prevent="requestRepositoryRefresh"--}}
-                                {{--v-if="package.current_user_owns && !repositoryRefreshRequested"--}}
-                                class="block mt-8 mb-2"
-                            >
-                                Request a refresh of the readme from your package
-                                registry or VCS provider.
-                            </a>
+                            <livewire:request-repository-refresh :package-id="$package['id']" />
                         @endif
-
-                        {{--<span--}}
-                        {{--    --}}{{--v-if="repositoryRefreshRequested"--}}
-                        {{--    class="block mt-8 mb-2"--}}
-                        {{-->--}}
-                        {{--    Refresh requested--}}
-                        {{--</span>--}}
                     </div>
                 </div>
 
