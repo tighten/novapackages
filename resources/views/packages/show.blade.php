@@ -64,13 +64,14 @@
                 />
             </div>
             <div class="w-full md:w-1/4 bg-white md:ml-4 md:mt-12 shadow text-sm border-t sm:border-t-0">
-                <a
-                    {{--:href="'/app/packages/' + package.id + '/edit'"--}}
-                    class="block bg-indigo-600 hover:bg-indigo-700 text-white no-underline font-bold p-4 md:p-8 py-4 border-gray-300 border-b"
-                    {{--v-if="package.current_user_owns"--}}
-                >
-                    Edit this package
-                </a>
+                @if ($package['current_user_owns'])
+                    <a
+                        href="/app/packages/{{ $package['id']}}/edit"
+                        class="block bg-indigo-600 hover:bg-indigo-700 text-white no-underline font-bold p-4 md:p-8 py-4 border-gray-300 border-b"
+                    >
+                        Edit this package
+                    </a>
+                @endif
 
                 <div class="px-4 md:px-6 py-4 border-gray-300 border-b">
                     <table class="w-full">
@@ -170,22 +171,12 @@
                                 hour.
                             </p>
 
-                            <a
-                                href="#"
-                                {{--@click.prevent="requestPackagistRefresh"--}}
-                                {{--v-if="package.current_user_owns && !refreshRequested"--}}
-                                class="block mt-8 mb-2"
-                            >
-                                Request a cache refresh from Packagist (the cache
-                                lasts 5 minutes)
-                            </a>
-
-                            <span
-                                {{--v-if="refreshRequested"--}}
-                                class="block mt-8 mb-2"
-                            >
-                                    Refresh requested
-                                </span>
+                            @if ($package['current_user_owns'])
+                                <livewire:request-packagist-cache-refresh
+                                    :package-id="$package['id']"
+                                    :composer-name="$package['composer_name']"
+                                />
+                            @endif
                         </div>
                     @endif
 
