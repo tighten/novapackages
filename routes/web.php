@@ -54,10 +54,12 @@ Route::prefix('app')->middleware('auth', 'email')->name('app.')->group(function 
         Route::middleware(['can:update,any_package'])->group(function () {
             Route::put('{any_package}', [App\PackageController::class, 'update'])->name('update');
             Route::get('{any_package}/edit', [App\PackageController::class, 'edit'])->name('edit');
-            Route::delete('{any_package}', [App\PackageController::class, 'destroy'])->name('delete');
             Route::delete('{any_package}/packagist-cache', [App\PackagePackagistCacheController::class, 'destroy'])->name('packagistcache.destroy');
             Route::post('{any_package}/repository-refresh', App\RefreshPackageRepositoryController::class)->name('repository.refresh');
         });
+
+        Route::delete('{any_package}', [App\PackageController::class, 'destroy'])
+            ->can('delete,any_package')->name('delete');
     });
 
     Route::prefix('collaborators')->name('collaborators.')->group(function () {
