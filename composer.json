@@ -16,7 +16,7 @@
         "doctrine/dbal": "^3.4",
         "erusev/parsedown": "^1.7",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.26",
+        "laravel/framework": "^9.27",
         "laravel/helpers": "^1.5",
         "laravel/horizon": "^5.10",
         "laravel/passport": "^10.4",
