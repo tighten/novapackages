@@ -78,173 +78,174 @@
                             <td class="font-bold py-2">Added</td>
 
                             <td class="py-2">
-                                {{--                                    {{ package.created_at }}--}}
+                                {{ $package['created_at'] }}
                             </td>
                         </tr>
 
-                        {{--<template v-if="package.composer_latest">--}}
-                        {{--    <tr>--}}
-                        {{--        <td class="font-bold py-2">Last updated</td>--}}
+                        @if ($package['composer_latest'])
+                            <tr>
+                                <td class="font-bold py-2">Last updated</td>
 
-                        {{--        <td class="py-2">--}}
-                        {{--            {{--}}
-                        {{--                humanTime(package.composer_latest.time)--}}
-                        {{--            }}--}}
-                        {{--        </td>--}}
-                        {{--    </tr>--}}
+                                <td class="py-2">
+                                    {{ now()->parse($package['composer_latest']['time'])->diffForHumans() }}
+                                </td>
+                            </tr>
 
-                        {{--    <tr>--}}
-                        {{--        <td class="font-bold py-2">Version</td>--}}
+                            <tr>
+                                <td class="font-bold py-2">Version</td>
 
-                        {{--        <td class="py-2">--}}
-                        {{--            {{ package.composer_latest.version }}--}}
-                        {{--        </td>--}}
-                        {{--    </tr>--}}
+                                <td class="py-2">
+                                    {{ $package['composer_latest']['version'] }}
+                                </td>
+                            </tr>
 
-                        {{--    <tr v-if="package.nova_version">--}}
-                        {{--        <td class="py-2 font-bold">Nova Version</td>--}}
+                            @if ($package['nova_version'])
+                                <tr>
+                                    <td class="py-2 font-bold">Nova Version</td>
 
-                        {{--        <td class="py-2">--}}
-                        {{--            {{ package.nova_version }}--}}
-                        {{--        </td>--}}
-                        {{--    </tr>--}}
+                                    <td class="py-2">
+                                        {{ $package['nova_version'] }}
+                                    </td>
+                                </tr>
+                            @endif
 
-                        {{--    <tr>--}}
-                        {{--        <td class="font-bold pt-2" colspan="2>">Composer</td>--}}
-                        {{--    </tr>--}}
+                            <tr>
+                                <td class="font-bold pt-2" colspan="2>">Composer</td>
+                            </tr>
 
-                        {{--    <tr>--}}
-                        {{--        <td class="pb-2" colspan="2">--}}
-                        {{--            <a--}}
-                        {{--                :href="--}}
-                        {{--            'https://packagist.org/packages/' +--}}
-                        {{--                package.composer_name--}}
-                        {{--        "--}}
+                            <tr>
+                                <td class="pb-2" colspan="2">
+                                    <a
+                                        href="https://packagist.org/packages/{{ $package['composer_name']}}"
+                                        class="text-indigo-600 underline"
+                                    >
+                                        {{ $package['composer_name'] }}
+                                    </a>
+                                </td>
+                            </tr>
 
-                        {{--                class="text-indigo-600 underline"--}}
-                        {{--            >{{ package.composer_name }}</a--}}
-                        {{--            >--}}
-                        {{--        </td>--}}
-                        {{--    </tr>--}}
+                            <tr>
+                                <td class="font-bold py-2">GitHub stars</td>
 
-                        {{--    <tr>--}}
-                        {{--        <td class="font-bold py-2">GitHub stars</td>--}}
+                                <td class="py-2">
+                                    {{ $package['github_stars'] }}
+                                </td>
+                            </tr>
 
-                        {{--        <td class="py-2">--}}
-                        {{--            {{ package.github_stars }}--}}
-                        {{--        </td>--}}
-                        {{--    </tr>--}}
+                            <tr>
+                                <td class="font-bold py-2">Packagist downloads</td>
 
-                        {{--    <tr>--}}
-                        {{--        <td class="font-bold py-2">Packagist downloads</td>--}}
-
-                        {{--        <td class="py-2">--}}
-                        {{--            {{ packagistDownloads }}--}}
-                        {{--        </td>--}}
-                        {{--    </tr>--}}
-                        {{--</template>--}}
+                                <td class="py-2">
+                                    {{ number_format($package['packagist_downloads']) }}
+                                </td>
+                            </tr>
+                        @endif
                     </table>
 
-                    <div
-                        {{--v-if="!package.composer_latest"--}}
-                    >
-                        <p
-                            class="mb-2"
-                            {{--v-if="package.composer_data"--}}
-                        >
-                            This package is listed on
+                    @if (!$package['composer_latest'])
+                        <div>
+                            @if ($package['composer_data'])
+                                <p class="mb-2">
+                                    This package is listed on
+                                    <a
+                                        href="https://packagist.org/packages/{{ $package['composer_name']}}.json"
+                                    >
+                                        the Packagist API
+                                    </a>, but has no stable tags.
+                                </p>
+                            @else
+                                <p class="mb-2">
+                                    This package should be on
+                                    <a
+                                        href="https://packagist.org/packages/{{ $package['composer_name']}}.json"
+                                    >
+                                        the Packagist API
+                                    </a> but we're not getting any results.
+                                </p>
+                            @endif
+
+                            <p class="mb-2">
+                                Please note that the Packagist cache is pretty long,
+                                so some times you just need to check back in an
+                                hour.
+                            </p>
+
                             <a
-                                {{--:href="'https://packagist.org/packages/' +package.composer_name +'.json'"--}}
+                                href="#"
+                                {{--@click.prevent="requestPackagistRefresh"--}}
+                                {{--v-if="package.current_user_owns && !refreshRequested"--}}
+                                class="block mt-8 mb-2"
                             >
-                                the Packagist API
-                            </a>, but has no stable tags.
-                        </p>
+                                Request a cache refresh from Packagist (the cache
+                                lasts 5 minutes)
+                            </a>
 
-                        <p
-                            class="mb-2"
-                            {{--v-else--}}
-                        >
-                            This package should be on
-                            <a
-                                {{--:href="'https://packagist.org/packages/' +package.composer_name +'.json'"--}}
+                            <span
+                                {{--v-if="refreshRequested"--}}
+                                class="block mt-8 mb-2"
                             >
-                                the Packagist API
-                            </a> but we're not getting any results.
-                        </p>
-
-                        <p class="mb-2">
-                            Please note that the Packagist cache is pretty long,
-                            so some times you just need to check back in an
-                            hour.
-                        </p>
-
-                        <a
-                            href="#"
-                            {{--@click.prevent="requestPackagistRefresh"--}}
-                            {{--v-if="package.current_user_owns && !refreshRequested"--}}
-                            class="block mt-8 mb-2"
-                        >
-                            Request a cache refresh from Packagist (the cache
-                            lasts 5 minutes)
-                        </a>
-
-                        <span
-                            {{--v-if="refreshRequested"--}}
-                            class="block mt-8 mb-2"
-                        >
-                                Refresh requested
-                            </span>
-                    </div>
+                                    Refresh requested
+                                </span>
+                        </div>
+                    @endif
 
                     <div>
-                        <a
-                            href="#"
-                            {{--@click.prevent="requestRepositoryRefresh"--}}
-                            {{--v-if="package.current_user_owns && !repositoryRefreshRequested"--}}
-                            class="block mt-8 mb-2"
-                        >
-                            Request a refresh of the readme from your package
-                            registry or VCS provider.
-                        </a>
+                        @if ($package['current_user_owns'])
+                            <a
+                                href="#"
+                                {{--@click.prevent="requestRepositoryRefresh"--}}
+                                {{--v-if="package.current_user_owns && !repositoryRefreshRequested"--}}
+                                class="block mt-8 mb-2"
+                            >
+                                Request a refresh of the readme from your package
+                                registry or VCS provider.
+                            </a>
+                        @endif
 
-                        <span
-                            {{--v-if="repositoryRefreshRequested"--}}
-                            class="block mt-8 mb-2"
-                        >
-                                Refresh requested
-                            </span>
+                        {{--<span--}}
+                        {{--    --}}{{--v-if="repositoryRefreshRequested"--}}
+                        {{--    class="block mt-8 mb-2"--}}
+                        {{-->--}}
+                        {{--    Refresh requested--}}
+                        {{--</span>--}}
                     </div>
                 </div>
 
-                <div
-                    class="p-4 md:p-6 border-solid border-gray-300 border-b overflow-hidden"
-                    style="text-overflow: ellipsis;white-space: nowrap;"
-                    {{--v-if="package.url"--}}
-                >
-                    <h3 class="uppercase text-gray-600 text-sm pb-2 font-bold">URL</h3>
-
-                    <a
-                        {{--:href="package.url"--}}
-                        class="text-indigo-600 underline"
+                @if ($package['url'])
+                    <div
+                        class="p-4 md:p-6 border-solid border-gray-300 border-b overflow-hidden"
+                        style="text-overflow: ellipsis;white-space: nowrap;"
                     >
-                        {{--                            {{ package.url }}--}}
-                    </a>
-                </div>
+                        <h3 class="uppercase text-gray-600 text-sm pb-2 font-bold">URL</h3>
+
+                        <a
+                            href="{{ $package['url'] }}"
+                            class="text-indigo-600 underline"
+                        >
+                            {{ $package['url'] }}
+                        </a>
+                    </div>
+                @endif
 
                 <div class="p-4 pb-0 md:p-6 md:pb-2 border-gray-300 border-b">
                     <h3 class="uppercase text-gray-600 text-sm font-bold">Favorites</h3>
 
                     <div class="block py-4">
-                        {{--                            {{ favoritesCountString }} favorited--}}
+                        {{ $package['favorites_count'] }} {{ str_plural('user', $package['favorites_count']) }} favorited
                     </div>
 
-                    <a
-                        {{--v-if="auth"--}}
-                        {{--@click="toggleFavorite"--}}
-                        class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"
-                    >
-                        {{--                            {{ favoritePackageLinkText }}--}}
-                    </a>
+                    @auth
+                        <a
+                            {{--@click="toggleFavorite"--}}
+                            class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"
+                        >
+                            @if ($package['is_favorite'])
+                                Remove Favorite
+                            @else
+                                Add to Favorites
+                            @endif
+                        </a>
+                    @endauth
                 </div>
 
                 <div
@@ -302,7 +303,7 @@
                     {{--/>--}}
 
                     <div class="text-right text-sm text-gray-600 mt-2 mb-2">
-                        {{--                            {{ totalRatings }} ratings--}}
+                        {{ $package['rating_count'] }} {{ str_plural('rating', $package['rating_count']) }}
                     </div>
 
                     <div
@@ -322,58 +323,52 @@
 
                     <div class="flex text-sm pt-4 items-center">
                         <img
-                            {{--:src="package.author.avatar_url"--}}
+                            src="{{ $package['author']['avatar_url'] }}"
                             class="rounded-full h-10 w-10 mr-4"
-                            {{--:alt="package.author.name"--}}
+                            alt="{{ $package['author']['name'] }}"
                         />
 
                         <a
-                            {{--:href="'/collaborators/' + package.author.github_username"--}}
+                            href="/collaborators/{{ $package['author']['github_username'] }}"
                             class="text-indigo-600 font-bold no-underline uppercase text-sm hover:text-indigo-700"
                         >
-                            {{--                                {{ package.author.name }}--}}
+                            {{ $package['author']['name'] }}
                         </a>
                     </div>
                 </div>
 
-                <div
-                    class="p-4 pb-2 md:p-6 border-gray-300 border-b"
-                    {{--v-if="package.contributors.length"--}}
-                >
-                    <h3 class="uppercase text-gray-600 text-sm font-bold">
-                        Contributors
-                    </h3>
-
+                @if ($package['contributors'])
                     <div
-                        {{--v-for="contributor in package.contributors"--}}
-                        class="flex text-sm pt-4 items-center"
+                        class="p-4 pb-2 md:p-6 border-gray-300 border-b"
                     >
-                        {{--<title-icon--}}
-                        {{--    :title="contributor.name"--}}
-                        {{--    size="medium"--}}
-                        {{--    :image="contributor.avatar_url"--}}
-                        {{--></title-icon>--}}
+                        <h3 class="uppercase text-gray-600 text-sm font-bold">
+                            Contributors
+                        </h3>
 
-                        <a
-                            class="text-indigo-600 font-bold no-underline uppercase text-sm hover:text-indigo-700"
-                        >
-                            {{--                                {{ contributor.name }}--}}
-                        </a>
+                        @foreach($package['contributors'] as $contributor)
+                            <div class="flex text-sm pt-4 items-center">
+                                <x-title-icon :title="$contributor['name']" size="medium" :image="$contributor['avatar_url']" />
+
+                                <span class="text-indigo-600 font-bold no-underline uppercase text-sm hover:text-indigo-700">
+                                    {{ $contributor['name'] }}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
+                @endif
 
                 <div class="p-4 pb-0 md:p-6 md:pb-2 border-gray-300 border-b">
                     <h3 class="uppercase text-gray-600 text-sm font-bold">Tags</h3>
 
                     <div class="block py-4">
-                        <button
-                            class="bg-indigo-200 text-indigo-600 rounded-l-full rounded-r-full px-4 py-2 mr-2 mb-2 inline-block font-bold"
-                            {{--@click="viewTag(tag)"--}}
-                            {{--v-for="tag in package.tags"--}}
-                            {{--:key="tag.slug"--}}
-                        >
-                            {{--                                {{ tag.name }}--}}
-                        </button>
+                        @foreach($package['tags'] as $tag)
+                            <a
+                                href="{{ $tag['url'] }}"
+                                class="bg-indigo-200 text-indigo-600 rounded-l-full rounded-r-full px-4 py-2 mr-2 mb-2 inline-block font-bold"
+                            >
+                                {{ $tag['name'] }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
