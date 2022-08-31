@@ -387,7 +387,44 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    function admin_can_delete_package()
+    public function submitter_can_delete_package()
+    {
+        $this->withoutEvents();
+
+        $submitter = User::factory()->create();
+        $package = Package::factory()->create(['submitter_id' => $submitter->id]);
+
+        $this->actingAs($submitter)
+            ->delete(route('app.packages.delete', $package))
+            ->assertRedirect(route('app.packages.index'))
+            ->assertSessionHas('status');
+
+        $this->assertModelMissing($package);
+    }
+
+    /** @test */
+    public function submitter_can_delete_package_if_package_author_is_not_a_user()
+    {
+        $this->withoutEvents();
+
+        $submitter = User::factory()->create();
+        $authorUser = User::factory()->create();
+        $authorCollaborator = Collaborator::factory()->create();
+        $authorUser->collaborators()->save($authorCollaborator);
+        $package = Package::factory()->create([
+            'author_id' => $authorCollaborator->id,
+            'submitter_id' => $submitter->id,
+        ]);
+
+        $this->actingAs($submitter)
+            ->delete(route('app.packages.delete', $package))
+            ->assertStatus(403);
+
+        $this->assertModelExists($package);
+    }
+
+    /** @test */
+    public function admin_can_delete_package()
     {
         $this->withoutEvents();
 
