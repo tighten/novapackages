@@ -7,15 +7,21 @@ use App\Events\PackageCreated;
 use App\Favorite;
 use App\Listeners\SendNewPackageNotification;
 use App\Notifications\NewPackage;
+use App\Notifications\PackageDeleted;
 use App\Package;
+use App\Review;
+use App\Screenshot;
 use App\Tag;
 use App\Tighten;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Testing\File;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
+use willvincent\Rateable\Rating;
 
 class PackageCrudTest extends TestCase
 {
@@ -310,6 +316,162 @@ class PackageCrudTest extends TestCase
             NewPackage::class,
             function ($notification, $channels) {
                 return ! Arr::has($notification->toSlack(new Tighten)->attachments[0]->fields, 'Created By');
+            }
+        );
+    }
+
+    /** @test */
+    public function author_can_delete_their_packages()
+    {
+        $this->withoutEvents();
+
+        Storage::fake();
+
+        $authorUser = User::factory()->create();
+        $authorCollaborator = Collaborator::factory()->create();
+        $authorUser->collaborators()->save($authorCollaborator);
+        $package = Package::factory()->create([
+            'author_id' => $authorCollaborator->id,
+        ]);
+
+        $tag = Tag::factory()->create();
+        $package->tags()->save($tag);
+
+        $screenshot = Screenshot::factory()->create([
+            'uploader_id' => $authorUser->id,
+            'path' => File::create('screenshot.jpg')->store('screenshots'),
+            'package_id' => $package,
+        ]);
+
+        $review = Review::factory()->create(['package_id' => $package]);
+
+        $fanOfPackage = User::factory()->create();
+        $fanOfPackage->ratePackage($package->id, 5);
+        $rating = Rating::where([
+            'user_id' => $fanOfPackage->id,
+            'rateable_type' => Package::class,
+            'rateable_id' => $package->id,
+        ])->first();
+
+        $favorite = $fanOfPackage->favoritePackage($package->id);
+
+        $this->actingAs($authorUser)
+            ->delete(route('app.packages.delete', $package))
+            ->assertRedirect(route('app.packages.index'))
+            ->assertSessionHas('status');
+
+        $this->assertModelMissing($package);
+        $this->assertModelMissing($screenshot);
+        $this->assertModelMissing($review);
+        $this->assertModelMissing($rating);
+        $this->assertModelMissing($favorite);
+    }
+
+    /** @test */
+    public function collaborators_can_delete_their_packages()
+    {
+        $this->withoutEvents();
+
+        $user = User::factory()->create();
+        $collaborator = Collaborator::factory()->create();
+        $user->collaborators()->save($collaborator);
+
+        $package = Package::factory()->create();
+        $package->contributors()->sync($collaborator);
+
+        $this->actingAs($user)
+            ->delete(route('app.packages.delete', $package))
+            ->assertRedirect(route('app.packages.index'))
+            ->assertSessionHas('status');
+
+        $this->assertModelMissing($package);
+    }
+
+    /** @test */
+    public function submitter_can_delete_package()
+    {
+        $this->withoutEvents();
+
+        $submitter = User::factory()->create();
+        $package = Package::factory()->create(['submitter_id' => $submitter->id]);
+
+        $this->actingAs($submitter)
+            ->delete(route('app.packages.delete', $package))
+            ->assertRedirect(route('app.packages.index'))
+            ->assertSessionHas('status');
+
+        $this->assertModelMissing($package);
+    }
+
+    /** @test */
+    public function submitter_can_delete_package_if_package_author_is_not_a_user()
+    {
+        $this->withoutEvents();
+
+        $submitter = User::factory()->create();
+        $authorUser = User::factory()->create();
+        $authorCollaborator = Collaborator::factory()->create();
+        $authorUser->collaborators()->save($authorCollaborator);
+        $package = Package::factory()->create([
+            'author_id' => $authorCollaborator->id,
+            'submitter_id' => $submitter->id,
+        ]);
+
+        $this->actingAs($submitter)
+            ->delete(route('app.packages.delete', $package))
+            ->assertStatus(403);
+
+        $this->assertModelExists($package);
+    }
+
+    /** @test */
+    public function admin_can_delete_package()
+    {
+        $this->withoutEvents();
+
+        $admin = User::factory()->admin()->create();
+
+        $package = Package::factory()->create();
+
+        $this->actingAs($admin)
+            ->delete(route('app.packages.delete', $package))
+            ->assertRedirect(route('app.packages.index'))
+            ->assertSessionHas('status');
+
+        $this->assertModelMissing($package);
+    }
+
+    /** @test */
+    public function users_that_are_not_a_packages_author_cannot_delete_it()
+    {
+        $user = User::factory()->create();
+        $package = Package::factory()->create();
+
+        $this->actingAs($user)
+            ->delete(route('app.packages.delete', $package))
+            ->assertStatus(403);
+
+        $this->assertModelExists($package);
+    }
+
+    /** @test */
+    public function deleting_package_fires_slack_notification()
+    {
+        Notification::fake();
+
+        $admin = User::factory()->admin()->create();
+
+        $package = Package::factory()->create();
+
+        $this->actingAs($admin)->delete(route('app.packages.delete', $package));
+
+        Notification::assertSentTo(
+            new Tighten,
+            PackageDeleted::class,
+            function ($notification, $channels) use ($admin, $package) {
+                return $channels === ['slack']
+                    && $notification->packageName === $package->name
+                    && $notification->actor === $admin;
             }
         );
     }

@@ -57,6 +57,9 @@ Route::prefix('app')->middleware('auth', 'email')->name('app.')->group(function 
             Route::delete('{any_package}/packagist-cache', [App\PackagePackagistCacheController::class, 'destroy'])->name('packagistcache.destroy');
             Route::post('{any_package}/repository-refresh', App\RefreshPackageRepositoryController::class)->name('repository.refresh');
         });
+
+        Route::delete('{any_package}', [App\PackageController::class, 'destroy'])
+            ->can('delete,any_package')->name('delete');
     });
 
     Route::prefix('collaborators')->name('collaborators.')->group(function () {

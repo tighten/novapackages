@@ -24,4 +24,9 @@ class PackagePolicy
     {
         return $this->userIsAdminOrAuthorOrCollaboratorOrUnclaimedSubmitter($user, $package);
     }
+
+    public function delete(User $user, Package $package)
+    {
+        return $this->userIsAdminOrAuthorOrCollaboratorOrUnclaimedSubmitter($user, $package);
+    }
 }

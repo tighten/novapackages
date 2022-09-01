@@ -33,6 +33,6 @@ trait HandlesPackageAuthorizationTrait
 
     protected function userIsUnclaimedPackageSubmitter($user, $package)
     {
-        return ($user->id === $package->submitter_id) && (! $package->authorIsUser());
+        return ((int) $user->id === (int) $package->submitter_id) && (! $package->authorIsUser());
     }
 }

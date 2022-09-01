@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App;
 
 use App\Collaborator;
 use App\Events\PackageCreated;
+use App\Events\PackageDeleted;
 use App\Events\PackageUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageFormRequest;
@@ -11,6 +12,7 @@ use App\Package;
 use App\Tag;
 use DateTime;
 use Facades\App\Repo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -113,6 +115,32 @@ class PackageController extends Controller
         $package->refresh()->searchable();
         event(new PackageUpdated($package));
         $package->syncScreenshots($request->input('screenshots', []));
+
+        return redirect()->route('app.packages.index');
+    }
+
+    public function destroy(Package $package)
+    {
+        $name = $package->name;
+
+        DB::transaction(function () use ($package) {
+            $package->contributors()->sync([]);
+            $package->tags()->sync([]);
+            DB::table('reviews')->where('package_id', $package->id)->delete();
+            DB::table('ratings')->where([
+                'rateable_id' => $package->id,
+                'rateable_type' => $package->getMorphClass(),
+            ])->delete();
+            DB::table('favorites')->where('package_id', $package->id)->delete();
+            $package->screenshots->each->delete();
+            $package->delete();
+        });
+
+        event(new PackageDeleted($name, auth()->user()));
+
+        session()->flash('status', "{$name} has been deleted.");
+
+        Log::notice("Package {$name} was deleted by user " . auth()->user()->id);
 
         return redirect()->route('app.packages.index');
     }
