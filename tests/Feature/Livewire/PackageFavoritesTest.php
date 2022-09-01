@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\FavoritePackage;
+use App\Http\Livewire\PackageFavorites;
 use App\Package;
 use App\User;
 use Illuminate\Auth\AuthenticationException;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class FavoritePackageTest extends TestCase
+class PackageFavoritesTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,7 +19,7 @@ class FavoritePackageTest extends TestCase
     {
         $this->expectException(AuthenticationException::class);
 
-        Livewire::test(FavoritePackage::class)->call('toggleFavorite');
+        Livewire::test(PackageFavorites::class)->call('toggleFavorite');
     }
 
     /** @test */
@@ -29,7 +29,8 @@ class FavoritePackageTest extends TestCase
         $package = Package::factory()->create();
 
         $this->actingAs($user);
-        Livewire::test(FavoritePackage::class, [
+        Livewire::test(PackageFavorites::class, [
+            'favoriteCount' => 0,
             'isFavorite' => false,
             'packageId' => $package->id,
         ])->call('toggleFavorite');
@@ -46,7 +47,8 @@ class FavoritePackageTest extends TestCase
         $user->favoritePackage($package->id);
 
         $this->actingAs($user);
-        Livewire::test(FavoritePackage::class, [
+        Livewire::test(PackageFavorites::class, [
+            'favoriteCount' => 0,
             'isFavorite' => true,
             'packageId' => $package->id,
         ])->call('toggleFavorite');

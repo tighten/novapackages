@@ -203,20 +203,11 @@
                     </div>
                 @endif
 
-                <div class="p-4 pb-0 md:p-6 md:pb-2 border-gray-300 border-b">
-                    <h3 class="uppercase text-gray-600 text-sm font-bold">Favorites</h3>
-
-                    <div class="block py-4">
-                        {{ $package['favorites_count'] }} {{ str_plural('user', $package['favorites_count']) }} favorited
-                    </div>
-
-                    @auth
-                        <livewire:favorite-package
-                            :package-id="$package['id']"
-                            :is-favorite="$package['is_favorite']"
-                        />
-                    @endauth
-                </div>
+                <livewire:package-favorites
+                    :favorite-count="$package['favorites_count']"
+                    :is-favorite="$package['is_favorite']"
+                    :package-id="$package['id']"
+                />
 
                 <div
                     {{--v-if="!creatingReview"--}}
