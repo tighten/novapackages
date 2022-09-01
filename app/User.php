@@ -113,7 +113,7 @@ class User extends Authenticatable
 
     public function favoritePackage($packageId)
     {
-        Favorite::updateOrCreate([
+        return Favorite::updateOrCreate([
             'package_id' => Package::findOrFail($packageId)->id,
             'user_id' => $this->id,
         ]);

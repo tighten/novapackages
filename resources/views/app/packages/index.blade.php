@@ -15,6 +15,9 @@
     </div>
 
     <div class="bg-white p-8 rounded-lg leading-loose text-gray-800 shadow sm:p-12">
+
+        <x-status class="mb-8"/>
+
         <h3 class="text-gray-800 text-lg font-bold mb-4">My Packages</h3>
 
         @if (auth()->user()->collaborators()->count() === 0)
