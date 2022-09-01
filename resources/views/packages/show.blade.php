@@ -211,16 +211,10 @@
                     </div>
 
                     @auth
-                        <a
-                            {{--@click="toggleFavorite"--}}
-                            class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"
-                        >
-                            @if ($package['is_favorite'])
-                                Remove Favorite
-                            @else
-                                Add to Favorites
-                            @endif
-                        </a>
+                        <livewire:favorite-package
+                            :package-id="$package['id']"
+                            :is-favorite="$package['is_favorite']"
+                        />
                     @endauth
                 </div>
 
