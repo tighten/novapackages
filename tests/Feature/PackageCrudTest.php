@@ -7,6 +7,7 @@ use App\Events\PackageCreated;
 use App\Favorite;
 use App\Listeners\SendNewPackageNotification;
 use App\Notifications\NewPackage;
+use App\Notifications\PackageDeleted;
 use App\Package;
 use App\Review;
 use App\Screenshot;
@@ -451,6 +452,28 @@ class PackageCrudTest extends TestCase
             ->assertStatus(403);
 
         $this->assertModelExists($package);
+    }
+
+    /** @test */
+    public function deleting_package_fires_slack_notification()
+    {
+        Notification::fake();
+
+        $admin = User::factory()->admin()->create();
+
+        $package = Package::factory()->create();
+
+        $this->actingAs($admin)->delete(route('app.packages.delete', $package));
+
+        Notification::assertSentTo(
+            new Tighten,
+            PackageDeleted::class,
+            function ($notification, $channels) use ($admin, $package) {
+                return $channels === ['slack']
+                    && $notification->packageName === $package->name
+                    && $notification->actor === $admin;
+            }
+        );
     }
 
     private function postFromPackage($package)

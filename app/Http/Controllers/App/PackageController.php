@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App;
 
 use App\Collaborator;
 use App\Events\PackageCreated;
+use App\Events\PackageDeleted;
 use App\Events\PackageUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageFormRequest;
@@ -134,6 +135,8 @@ class PackageController extends Controller
             $package->screenshots->each->delete();
             $package->delete();
         });
+
+        event(new PackageDeleted($name, auth()->user()));
 
         session()->flash('status', "{$name} has been deleted.");
 
