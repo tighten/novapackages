@@ -211,6 +211,8 @@
 
                 <livewire:rate-and-review-package
                     :average-rating="$package['average_rating']"
+                    :current-user-rating="$package['current_user_rating']"
+                    :package-id="$package['id']"
                     :rating-count="$package['rating_count']"
                     :rating-counts="$package['rating_counts']"
                     :review-url="route('reviews.create', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']])"

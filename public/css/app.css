@@ -1416,6 +1416,10 @@ html {
   height: 0.5rem;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .min-h-full {
   min-height: 100%;
 }
@@ -1478,6 +1482,10 @@ html {
 
 .w-1\/4 {
   width: 25%;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .min-w-0 {
@@ -1865,6 +1873,14 @@ html {
 
 .fill-current {
   fill: currentColor;
+}
+
+.fill-gray-300 {
+  fill: #d1d5db;
+}
+
+.fill-yellow-500 {
+  fill: #eab308;
 }
 
 .p-3 {
