@@ -209,75 +209,10 @@
                     :package-id="$package['id']"
                 />
 
-                <div
-                    {{--v-if="!creatingReview"--}}
-                    class="p-4 md:p-6 pb-4 border-gray-300 border-b"
-                >
-                    <h3 class="uppercase text-gray-600 text-sm font-bold">Rating</h3>
-
-                    <div
-                        class="flex"
-                        {{--v-if="!rated"--}}
-                    >
-                        <div class="mt-2 mb-4 text-5xl w-1/2">
-                            {{--                                {{ package.average_rating ? package.average_rating : 'None yet' }}--}}
-                        </div>
-
-                        <div class="w-1/2 mb-6 text-gray-500 self-end">
-                            (out of 5)
-                        </div>
-                    </div>
-
-                    <div
-                        class="mt-2 mb-4"
-                        {{--v-else--}}
-                    >
-                        Thanks for rating this package!
-                    </div>
-
-                    <div
-                        {{--v-if="auth && !isSelfAuthored && !isSelfContributed" --}}
-                        class="mb-4 flex"
-                    >
-                        <div class="w-1/3 pt-1 text-gray-600">
-                            Tap to rate:
-                        </div>
-
-                        <div class="w-2/3 pl-2">
-                            {{--<star-rating--}}
-                            {{--    v-model="package.current_user_rating"--}}
-                            {{--    :rating="package.current_user_rating"--}}
-                            {{--    :read-only="!auth"--}}
-                            {{--    :star-size="20"--}}
-                            {{--    :show-rating="false"--}}
-                            {{--    @rating-selected="setRating"--}}
-                            {{--></star-rating>--}}
-                        </div>
-                    </div>
-
-                    {{--<rating-count-bar--}}
-                    {{--    :totalCount="totalRatings"--}}
-                    {{--    :stars="rating_count.number"--}}
-                    {{--    :count="rating_count.count"--}}
-                    {{--    :key="package.id + 'rate' + rating_count.number"--}}
-                    {{--    v-for="rating_count in package.rating_counts"--}}
-                    {{--/>--}}
-
-                    <div class="text-right text-sm text-gray-600 mt-2 mb-2">
-                        {{ $package['rating_count'] }} {{ str_plural('rating', $package['rating_count']) }}
-                    </div>
-
-                    <div
-                        {{--v-if="auth && !package.current_user_review.length && !isSelfAuthored && !isSelfContributed"--}}
-                    >
-                        <a
-                            class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"
-                            {{--:href="route('reviews.create', { namespace: package.packagist_namespace, name: package.packagist_name })"--}}
-                        >
-                            Review This Package
-                        </a>
-                    </div>
-                </div>
+                <livewire:rate-and-review-package
+                    :average-rating="$package['average_rating']"
+                    :review-url="route('reviews.create', ['namespace' => $package['packagist_namespace'], 'name' => $package['packagist_name']])"
+                />
 
                 <div class="p-4 md:p-6 border-gray-300 border-b">
                     <h3 class="uppercase text-gray-600 text-sm font-bold">Author</h3>
