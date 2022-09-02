@@ -37,19 +37,23 @@
             </div>
         @endif
 
-        {{--<rating-count-bar--}}
-        {{--    :totalCount="totalRatings"--}}
-        {{--    :stars="rating_count.number"--}}
-        {{--    :count="rating_count.count"--}}
-        {{--    :key="package.id + 'rate' + rating_count.number"--}}
-        {{--    v-for="rating_count in package.rating_counts"--}}
-        {{--/>--}}
+        @foreach ($ratingCounts as $ratingLevel)
+            <div class="flex my-1">
+                <div class="w-1/3 text-xs pr-1 text-gray-500 text-right">{{ str_repeat('★', $ratingLevel['number']) }}</div>
+                <div class="w-2/3 w-full bg-gray-200 h-2 mt-1">
+                    <div
+                        class="bg-yellow-500 h-2"
+                        style="width: {{ $this->totalRatingCount === 0 ? 0 : round($ratingLevel['count'] / $this->totalRatingCount * 100) }}%"
+                    ></div>
+                </div>
+            </div>
+        @endforeach
 
         <div class="text-right text-sm text-gray-600 mt-2 mb-2">
             {{ $ratingCount }} {{ str_plural('rating', $ratingCount) }}
         </div>
 
-        @if(auth()->check() && ! $userHasReviewed && ! $isSelfAuthored && ! $isSelfContributed)
+        @if(auth()->check() && ! $isSelfAuthored && ! $isSelfContributed)
             <div>
                 <a
                     class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"

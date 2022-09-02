@@ -16,15 +16,19 @@ class RateAndReviewPackage extends Component
 
     public int $ratingCount;
 
+    public array $ratingCounts;
+
     public string $reviewUrl;
 
     public bool $userHasRated = false;
 
-    // @todo:
-    public bool $userHasReviewed = false;
-
     public function render()
     {
         return view('livewire.rate-and-review-package');
+    }
+
+    public function getTotalRatingCountProperty()
+    {
+        return collect($this->ratingCounts)->pluck('count')->sum();
     }
 }
