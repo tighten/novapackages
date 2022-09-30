@@ -16,7 +16,7 @@
         "doctrine/dbal": "^3.4",
         "erusev/parsedown": "^1.7",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.27",
+        "laravel/framework": "^9.33",
         "laravel/helpers": "^1.5",
         "laravel/horizon": "^5.10",
         "laravel/passport": "^10.4",
@@ -34,7 +34,7 @@
         "stil/gd-text": "^1.1",
         "tightenco/ziggy": "^1.4.2",
         "willvincent/laravel-rateable": "^3.0",
-        "league/flysystem-aws-s3-v3": "^3.0"
+        "league/flysystem-aws-s3-v3": "^3.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
@@ -42,9 +42,9 @@
         "dms/phpunit-arraysubset-asserts": "^0.2.0",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
+        "nunomaduro/collision": "^6.3",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.4"
     },
     "autoload": {
         "psr-4": {
