@@ -16,7 +16,7 @@
         "doctrine/dbal": "^3.4",
         "erusev/parsedown": "^1.7",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.33",
+        "laravel/framework": "^9.35",
         "laravel/helpers": "^1.5",
         "laravel/horizon": "^5.10",
         "laravel/passport": "^10.4",
@@ -32,9 +32,9 @@
         "spatie/laravel-feed": "^4.1",
         "spatie/laravel-sitemap": "^6.2",
         "stil/gd-text": "^1.1",
-        "tightenco/ziggy": "^1.4.2",
+        "tightenco/ziggy": "^1.5",
         "willvincent/laravel-rateable": "^3.0",
-        "league/flysystem-aws-s3-v3": "^3.3"
+        "league/flysystem-aws-s3-v3": "^3.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
@@ -44,7 +44,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.3",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.4"
+        "spatie/laravel-ignition": "^1.5"
     },
     "autoload": {
         "psr-4": {
