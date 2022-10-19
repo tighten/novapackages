@@ -32,9 +32,9 @@
         "spatie/laravel-feed": "^4.1",
         "spatie/laravel-sitemap": "^6.2",
         "stil/gd-text": "^1.1",
-        "tightenco/ziggy": "^1.4.2",
+        "tightenco/ziggy": "^1.5",
         "willvincent/laravel-rateable": "^3.0",
-        "league/flysystem-aws-s3-v3": "^3.3"
+        "league/flysystem-aws-s3-v3": "^3.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
