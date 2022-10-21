@@ -78,7 +78,8 @@
             "@php artisan package:discover"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan horizon:publish --ansi"
         ]
     },
     "config": {
