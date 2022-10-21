@@ -69,7 +69,7 @@ class AdminPanelViewTest extends TestCase
     public function admin_user_can_view_individual_page_for_disabled_package()
     {
         Http::fake([
-            "https://packagist.org/packages/*.json" => Http::response(),
+            'https://packagist.org/packages/*.json' => Http::response(),
         ]);
 
         $disabledPackage = Package::factory()->disabled()->create();
