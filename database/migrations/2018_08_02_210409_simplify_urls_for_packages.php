@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SimplifyUrlsForPackages extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -35,4 +35,4 @@ class SimplifyUrlsForPackages extends Migration
             $table->string('picture_url')->change();
         });
     }
-}
+};

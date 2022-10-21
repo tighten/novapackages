@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddGithubUserIdColumnToCollaboratorsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -19,4 +19,4 @@ class AddGithubUserIdColumnToCollaboratorsTable extends Migration
             $table->dropColumn('github_user_id');
         });
     }
-}
+};
