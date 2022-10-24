@@ -10,11 +10,11 @@ class FeedApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testBasic()
+    public function it_counts_packages()
     {
         Package::factory(5)->create();
 
-        $response = $this->get('/api/packages.json')->json();
+        $response = $this->getJson('/api/packages.json');
 
         $response
             ->assertStatus(200)
