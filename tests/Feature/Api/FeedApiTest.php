@@ -4,13 +4,15 @@ namespace Tests\Feature\Api;
 
 use App\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class FeedApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function it_counts_packages()
+    /** @test */
+    public function ensures_packages_feed_response_code_and_structure()
     {
         Package::factory(5)->create();
 
@@ -18,6 +20,12 @@ class FeedApiTest extends TestCase
 
         $response
             ->assertStatus(200)
-            ->assertJsonCount(5);
+            ->assertJson(function (AssertableJson $json) {
+                $json
+                    ->count(5)
+                    ->first(function (AssertableJson $json) {
+                        $json->hasAll(['name', 'author', 'abstract', 'url', 'tags']);
+                    });
+            });
     }
 }
