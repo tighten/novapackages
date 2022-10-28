@@ -22,6 +22,8 @@
             <li>/api/stats</li>
         </ul>
 
+        <p>In addition, the endpoint /api/packages.json returns a subset of data (name, author, summary, url, and tags) for all packages in one request.</p>
+
         <h3 class="mb-2 text-gray-800 text-lg font-bold">Current private (accessible only with API keys) API routes:</h3>
 
         <ul class="mb-8 leading-normal list-disc pl-10">
