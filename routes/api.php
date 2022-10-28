@@ -8,6 +8,8 @@ Route::get('recent', Api\RecentController::class)->middleware('throttle:60');
 Route::get('popular', Api\PopularController::class)->middleware('throttle:60')->name('api.popular-packages');
 Route::get('stats', Api\StatsController::class)->middleware('throttle:60');
 
+Route::get('packages.json', Api\FeedController::class)->middleware('throttle:60');
+
 Route::middleware('auth:api')->group(function () {
     Route::get('packages', Api\PackagesController::class);
 });
