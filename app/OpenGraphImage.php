@@ -25,7 +25,7 @@ class OpenGraphImage
     ) {
     }
 
-    public static function makeFileName(string $uniqueId, string $name): string
+    public static function makeFileName($uniqueId, string $name): string
     {
         return "{$uniqueId}_".Str::slug($name, '-').'.png';
     }
