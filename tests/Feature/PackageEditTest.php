@@ -121,13 +121,17 @@ class PackageEditTest extends TestCase
 
         [$package, $user] = $this->createPackageWithUser();
 
+        Package::factory()->create([
+            'composer_name'=> 'tightenco/bae'
+        ]);
+
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'packagist_namespace' => 'tightenco',
             'packagist_name' => 'bae',
         ]);
 
         $response->assertStatus(302);
-        $response->assertSessionHasErrors();
+        $response->assertSessionHasErrors('packagist_name');
     }
 
     /** @test */
