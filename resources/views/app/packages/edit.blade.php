@@ -58,7 +58,7 @@
                     <p class="mb-6 text-gray-600 text-sm italic">(Write in Markdown)</p>
 
                     <label class="block font-bold">Screenshots</label>
-                    <package-screenshots class="mb-6" :initial-screenshots="{{ json_encode(old('screenshots', $package->screenshots)) }}"></package-screenshots>
+                    <package-screenshots class="mb-6" :initial-screenshots="{{ json_encode(old('screenshots', $screenshots)) }}"></package-screenshots>
 
                     <label class="block font-bold">Readme</label>
                     <p class="max-w-sm text-gray-800 text-sm mb-6">The readme for this project is consumed from the URL you specify. If your package is on Packagist, we will pull the VCS source Packagist points to and consume its readme. If you provide a GitHub URL in the "URL" field, we will bypass Packagist and pull the readme directly from that repo.</p>

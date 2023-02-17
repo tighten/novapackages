@@ -78,7 +78,8 @@ class PackageController extends Controller
         return view('app.packages.edit', [
             'package' => $package,
             'collaborators' => Collaborator::oldest('name')->get(),
-            'tags' => Tag::query()->oldest('slug')->get(), // @todo maybe group the types first?
+            'tags' => Tag::oldest('slug')->get(), // @todo maybe group the types first?
+            'screenshots' => $package->screenshots,
         ]);
     }
 

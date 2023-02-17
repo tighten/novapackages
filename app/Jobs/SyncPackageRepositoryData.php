@@ -19,7 +19,7 @@ class SyncPackageRepositoryData implements ShouldQueue
 
     public $tries = 2;
 
-    public function __construct(private Package $package)
+    public function __construct(public Package $package)
     {
     }
 

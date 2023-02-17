@@ -82,7 +82,7 @@ class PackageFormRequest extends FormRequest
 
     private function packageStringUnique($id = null)
     {
-        return Package::query()
+        return ! Package::query()
             ->when($id, fn ($query, $id) => $query->where('id', '!=', $id))
             ->where('composer_name', $this->getComposerName())
             ->exists();
