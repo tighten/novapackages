@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PackageDetailResource;
-use App\Package;
+use App\Models\Package;
 
 class PackageController extends Controller
 {

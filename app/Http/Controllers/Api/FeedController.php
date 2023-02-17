@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Package;
+use App\Models\Package;
 
 class FeedController extends Controller
 {

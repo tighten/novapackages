@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\InternalApi;
 
-use App\Package;
-use App\Review;
-use App\User;
+use App\Models\Package;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;

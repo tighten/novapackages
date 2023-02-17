@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Package as PackageResource;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Http\Request;
 
 class PackagesController extends Controller

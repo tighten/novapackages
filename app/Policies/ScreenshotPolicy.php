@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Screenshot;
-use App\User;
+use App\Models\Screenshot;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ScreenshotPolicy

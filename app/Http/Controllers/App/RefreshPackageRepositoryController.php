@@ -4,7 +4,7 @@ namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SyncPackageRepositoryData;
-use App\Package;
+use App\Models\Package;
 
 class RefreshPackageRepositoryController extends Controller
 {

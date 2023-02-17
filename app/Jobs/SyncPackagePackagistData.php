@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use App\Exceptions\PackagistException;
 use App\Http\Remotes\Packagist;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

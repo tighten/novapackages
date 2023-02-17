@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 use App\Events\CollaboratorCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Remotes\GitHub;

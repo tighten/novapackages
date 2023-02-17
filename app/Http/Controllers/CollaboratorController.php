@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 
 class CollaboratorController extends Controller
 {
