@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseRepo;
 use App\Exceptions\GitHubException;
 use App\Http\Remotes\GitHub;
 use Illuminate\Support\Arr;

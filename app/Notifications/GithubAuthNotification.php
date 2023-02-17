@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -30,12 +29,5 @@ class GithubAuthNotification extends Notification
                     ->line('If the email you used to create your account is the same as the Email address on your GitHub account, we will merge the two; otherwise you will get a brand new account based on your GitHub account.')
                     ->action('Connect Your GitHub Account', route('home'))
                     ->line('Thank you for being so excited to try NovaPackages!');
-    }
-
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

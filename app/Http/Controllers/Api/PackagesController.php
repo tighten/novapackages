@@ -14,7 +14,8 @@ class PackagesController extends Controller
         $githubUsername = $request->input('github_username');
         $authorName = $request->input('author_name');
 
-        return PackageResource::collection(Package::orderBy('created_at', 'desc')
+        $packages = Package::query()
+            ->with(['author', 'tags'])
             ->when($githubUsername, function ($query) use ($githubUsername) {
                 $query->whereHas('author', function ($query) use ($githubUsername) {
                     $query->where('github_username', $githubUsername);
@@ -25,6 +26,9 @@ class PackagesController extends Controller
                     $query->where('name', $authorName);
                 });
             })
-            ->with(['author', 'tags'])->paginate(10));
+            ->latest()
+            ->paginate(10);
+
+        return PackageResource::collection($packages);
     }
 }

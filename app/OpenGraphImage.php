@@ -11,20 +11,25 @@ use Illuminate\Support\Str;
 class OpenGraphImage
 {
     const GUTTER = 15;
+
     const IMAGE_HEIGHT = 630;
+
     const IMAGE_WIDTH = 1200;
+
     const PADDING = 50;
 
     protected $fileName;
+
     protected $subtitle;
+
     protected $title;
 
     /**
      * __construct
      *
-     * @param  string $title Main text for the image.
-     * @param  string $subtitle Subtext for the image.
-     * @param  string $fileName Image filename (e.g. my-image.png)
+     * @param  string  $title Main text for the image.
+     * @param  string  $subtitle Subtext for the image.
+     * @param  string  $fileName Image filename (e.g. my-image.png)
      * @return void
      */
     public function __construct($title, $subtitle, $fileName)
@@ -37,29 +42,29 @@ class OpenGraphImage
     /**
      * Generate an open graph image file name.
      *
-     * @param string $uniqueId A unique key to identify the image by.
-     * @param string $name Name of the file.
+     * @param  string  $uniqueId A unique key to identify the image by.
+     * @param  string  $name Name of the file.
      */
     public static function makeFileName($uniqueId, $name): string
     {
-        return "{$uniqueId}_" . Str::slug($name, '-') . '.png';
+        return "{$uniqueId}_".Str::slug($name, '-').'.png';
     }
 
     public function generate()
     {
-        Filesystem::ensureDirectoryExists(Storage::disk('public')->path('') . $this->storageDirectory());
+        Filesystem::ensureDirectoryExists(Storage::disk('public')->path('').$this->storageDirectory());
         $this->deleteImagesForProject();
         $this->save($this->make());
     }
 
     protected function storageDirectory(): string
     {
-        return config('opengraph.image_directory_name') . '/';
+        return config('opengraph.image_directory_name').'/';
     }
 
     protected function storagePath(): string
     {
-        return Storage::disk('public')->path('') . $this->storageDirectory() . "{$this->fileName}";
+        return Storage::disk('public')->path('').$this->storageDirectory()."{$this->fileName}";
     }
 
     protected function deleteImagesForProject()

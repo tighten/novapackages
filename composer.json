@@ -41,6 +41,7 @@
         "codedungeon/phpunit-result-printer": "^0.32",
         "dms/phpunit-arraysubset-asserts": "^0.2.0",
         "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.5",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.3",
         "phpunit/phpunit": "^9.5.10",

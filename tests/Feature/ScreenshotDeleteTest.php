@@ -47,7 +47,7 @@ class ScreenshotDeleteTest extends TestCase
     {
         Storage::fake();
 
-        list($package, $collaboratorUser) = $this->createPackageWithUser();
+        [$package, $collaboratorUser] = $this->createPackageWithUser();
         $uploader = User::factory()->create();
         $packageScreenshot = Screenshot::factory()->create([
             'uploader_id' => $uploader->id,

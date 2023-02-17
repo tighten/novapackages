@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Collaborator;
-use App\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PackageFactory extends Factory
@@ -16,20 +15,20 @@ class PackageFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence(),
-            'url' => "{$this->faker->url()}/{$this->faker->slug()}",
+            'name' => fake()->sentence(),
+            'url' => fake()->url().'/'.fake()->slug(),
             'picture_url' => 'https://picsum.photos/380/220/?random',
-            'description' => markdown('# '.$this->faker->sentence()."\n\n"
-                .implode(' ', $this->faker->sentences(2))."\n\n"
-                .implode(' ', $this->faker->sentences(4))),
-            'instructions' => markdown('```'.implode(' ', $this->faker->sentences(4)).'```'),
+            'description' => markdown('# '.fake()->sentence()."\n\n"
+                .implode(' ', fake()->sentences(2))."\n\n"
+                .implode(' ', fake()->sentences(4))),
+            'instructions' => markdown('```'.implode(' ', fake()->sentences(4)).'```'),
             'author_id' => Collaborator::factory(),
-            'composer_name' => $this->faker->slug().'/'.$this->faker->slug(),
+            'composer_name' => fake()->slug().'/'.fake()->slug(),
             'is_disabled' => false,
-            'abstract' => $this->faker->text(190),
-            'readme' => markdown('# '.$this->faker->sentence()."\n\n"
-                .implode(' ', $this->faker->sentences(2))."\n\n"
-                .implode(' ', $this->faker->sentences(4))),
+            'abstract' => fake()->text(190),
+            'readme' => markdown('# '.fake()->sentence()."\n\n"
+                .implode(' ', fake()->sentences(2))."\n\n"
+                .implode(' ', fake()->sentences(4))),
         ];
     }
 

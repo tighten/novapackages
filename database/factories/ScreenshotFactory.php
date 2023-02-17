@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Screenshot;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

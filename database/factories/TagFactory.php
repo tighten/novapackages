@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,7 +14,7 @@ class TagFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->sentence();
+        $name = fake()->sentence();
 
         return [
             'name' => Str::lower($name),

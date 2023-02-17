@@ -17,7 +17,9 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     use RefreshDatabase;
 
     private Package $validPackage;
+
     private Package $packageWithUnavailableUrl;
+
     private Package $packageWithUnavailableDomain;
 
     protected function setUp(): void
@@ -102,8 +104,8 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     {
         Notification::fake();
 
-         $this->packageWithUnavailableUrl->marked_as_unavailable_at = now();
-         $this->packageWithUnavailableUrl->save();
+        $this->packageWithUnavailableUrl->marked_as_unavailable_at = now();
+        $this->packageWithUnavailableUrl->save();
 
         $this->artisan('novapackages:check-package-urls');
 

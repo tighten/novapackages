@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\CacheKeys;
-use App\Collaborator;
-use App\Package;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use willvincent\Rateable\Rating;

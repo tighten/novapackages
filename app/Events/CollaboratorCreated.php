@@ -11,10 +11,6 @@ class CollaboratorCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $collaborator;
-
-    public function __construct(Collaborator $collaborator)
-    {
-        $this->collaborator = $collaborator;
+    public function __construct(public Collaborator $collaborator) {
     }
 }

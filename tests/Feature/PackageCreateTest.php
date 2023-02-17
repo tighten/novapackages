@@ -23,7 +23,7 @@ class PackageCreateTest extends TestCase
         $this->fakesRepoFromRequest();
 
         $user = User::factory()->create();
-        list($screenshotA, $screenshotB) = Screenshot::factory(2)->create(['uploader_id' => $user->id]);
+        [$screenshotA, $screenshotB] = Screenshot::factory(2)->create(['uploader_id' => $user->id]);
         $validPackageData = array_merge($package = Package::factory()->make()->toArray(), [
             'packagist_namespace' => explode('/', $package['composer_name'])[0],
             'packagist_name' => explode('/', $package['composer_name'])[1],
@@ -93,7 +93,7 @@ class PackageCreateTest extends TestCase
     public function all_uploaded_screenshots_are_returned_when_validation_fails()
     {
         $user = User::factory()->create();
-        list($screenshotA, $screenshotB) = Screenshot::factory(2)->create(['uploader_id' => $user->id]);
+        [$screenshotA, $screenshotB] = Screenshot::factory(2)->create(['uploader_id' => $user->id]);
 
         $response = $this->actingAs($user)->post(route('app.packages.store'), [
             'packagist_namespace' => null,
@@ -136,7 +136,7 @@ class PackageCreateTest extends TestCase
         $this->withoutEvents();
 
         $user = User::factory()->create();
-        list($selectedCollaboratorA, $author, $selectedCollaboratorB) = Collaborator::factory(3)->create();
+        [$selectedCollaboratorA, $author, $selectedCollaboratorB] = Collaborator::factory(3)->create();
         $unselectedCollaborator = Collaborator::factory()->create();
 
         $response = $this->actingAs($user)->post(route('app.packages.store'), [
@@ -198,24 +198,21 @@ class PackageCreateTest extends TestCase
         $this->withoutEvents();
 
         Http::fake([
-            'https://packagist.org/packages/starwars/lightsabers.json' =>
-                Http::response([
-                    'package' => [
-                        'repository' => 'https://github.com/starwars/lightsabers',
-                        'versions' => [
+            'https://packagist.org/packages/starwars/lightsabers.json' => Http::response([
+                'package' => [
+                    'repository' => 'https://github.com/starwars/lightsabers',
+                    'versions' => [
 
-                        ],
                     ],
-                ]),
-            'https://api.github.com/repos/starwars/lightsabers/readme' =>
-                Http::response('<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content p-5" itemprop="text"><p>Finding a <a href="kyber-crystal">kyber crystal</a> for your lightsaber</p></article></div>'),
-            'https://api.github.com/repos/starwars/lightsabers/releases' =>
-                Http::response([
-                    [
-                        'name' => 'Release',
-                        'tag_name' => 'v1.0',
-                    ],
-                ]),
+                ],
+            ]),
+            'https://api.github.com/repos/starwars/lightsabers/readme' => Http::response('<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content p-5" itemprop="text"><p>Finding a <a href="kyber-crystal">kyber crystal</a> for your lightsaber</p></article></div>'),
+            'https://api.github.com/repos/starwars/lightsabers/releases' => Http::response([
+                [
+                    'name' => 'Release',
+                    'tag_name' => 'v1.0',
+                ],
+            ]),
         ]);
 
         $user = User::factory()->create();

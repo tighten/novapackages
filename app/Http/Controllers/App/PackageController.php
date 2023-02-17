@@ -140,7 +140,7 @@ class PackageController extends Controller
 
         session()->flash('status', "{$name} has been deleted.");
 
-        Log::notice("Package {$name} was deleted by user " . auth()->user()->id);
+        Log::notice("Package {$name} was deleted by user ".auth()->user()->id);
 
         return redirect()->route('app.packages.index');
     }
@@ -162,18 +162,16 @@ class PackageController extends Controller
             return $existingTags->pluck('id')->toArray();
         }
 
-        Tag::insert($tagsToCreate->map(function ($tag) use ($created_at, $updated_at) {
-            return [
-                'slug' => Str::slug($tag),
-                'name' => $tag,
-                'created_at' => $created_at,
-                'updated_at' => $updated_at,
-            ];
-        })->toArray());
+        Tag::insert($tagsToCreate->map(fn ($tag) => [
+            'slug' => Str::slug($tag),
+            'name' => $tag,
+            'created_at' => $created_at,
+            'updated_at' => $updated_at,
+        ])->toArray());
 
         return $existingTags
             ->pluck('id')
-            ->merge(Tag::whereIn('name', $tagsToCreate)->get()->pluck('id'))
+            ->merge(Tag::whereIn('name', $tagsToCreate)->pluck('id'))
             ->toArray();
     }
 }

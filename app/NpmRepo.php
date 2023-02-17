@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseRepo;
 use App\Http\Remotes\Npm;
 use Facades\App\Repo;
 use Illuminate\Support\Arr;
@@ -55,7 +54,7 @@ class NpmRepo extends BaseRepo
         // On occasion, NPM will not provide a repository url for a package. In this case we use
         // the NPM registry url as the project's repo url.
         if (Arr::get($this->npm->data(), 'repository.url')) {
-            list($sourceControlType, $repoUrl) = explode('+', Arr::get($this->npm->data(), 'repository.url'), 2);
+            [$sourceControlType, $repoUrl] = explode('+', Arr::get($this->npm->data(), 'repository.url'), 2);
         } else {
             $repoUrl = $this->url;
         }

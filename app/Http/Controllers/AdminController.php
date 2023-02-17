@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Package;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {

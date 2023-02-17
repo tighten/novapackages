@@ -6,9 +6,7 @@ use App\CacheKeys;
 use App\Exceptions\PackagistException;
 use App\Favorite;
 use App\Http\Remotes\Packagist;
-use App\Http\Resources\TagResource;
 use App\ReadmeFormatter;
-use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -50,7 +48,7 @@ class PackageDetailResource extends PackageResource
                 return [
                     'id' => $contributor->user_id,
                     'name' => $contributor->name,
-                    'avatar_url' => $contributor->avatar ?: 'https://api.adorable.io/avatars/285/' . Str::slug($contributor->name) . '.png',
+                    'avatar_url' => $contributor->avatar ?: 'https://api.adorable.io/avatars/285/'.Str::slug($contributor->name).'.png',
                 ];
             })->toArray(),
             'possibly_abandoned' => $this->isPossiblyAbandoned($package, $composer_latest ?? null, $packagistData ?? []),

@@ -2,23 +2,11 @@
 
 namespace App\Console;
 
-use App\Console\Commands\CheckPackageUrls;
-use App\Console\Commands\DeleteAbandonedScreenshots;
-use App\Console\Commands\SyncPackagistData;
-use App\Console\Commands\SyncRepositoryData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-
-    protected $commands = [
-        SyncPackagistData::class,
-        DeleteAbandonedScreenshots::class,
-        SyncRepositoryData::class,
-        CheckPackageUrls::class
-    ];
-
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sync:packagist')->everyTwoHours();

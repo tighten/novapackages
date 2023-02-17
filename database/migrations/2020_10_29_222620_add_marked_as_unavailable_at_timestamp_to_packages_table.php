@@ -4,9 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMarkedAsUnavailableAtTimestampToPackagesTable extends Migration
+return new class extends Migration
 {
-
     public function up()
     {
         Schema::table('packages', function (Blueprint $table) {
@@ -20,4 +19,4 @@ class AddMarkedAsUnavailableAtTimestampToPackagesTable extends Migration
             $table->dropColumn('marked_as_unavailable_at');
         });
     }
-}
+};

@@ -5,10 +5,6 @@ namespace App\Http\Controllers\InternalApi;
 use App\Events\PackageRated;
 use App\Exceptions\SelfAuthoredRatingException;
 use App\Http\Controllers\Controller;
-use App\Package;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use willvincent\Rateable\Rating;
 
 class RatingsController extends Controller
 {

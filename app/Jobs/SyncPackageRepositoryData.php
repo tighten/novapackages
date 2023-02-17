@@ -35,7 +35,7 @@ class SyncPackageRepositoryData implements ShouldQueue
 
         try {
             if (! $this->remoteHasChanges($repo)) {
-                return Log::info('Repository data is unchanged for package #' . $this->package->id . ' (' . $this->package->name . ')');
+                return Log::info('Repository data is unchanged for package #'.$this->package->id.' ('.$this->package->name.')');
             }
         } catch (RequestException $exception) {
             // The request(s) to the repository's provider failed, possibly due to a server error or rate-limiting.
@@ -51,7 +51,7 @@ class SyncPackageRepositoryData implements ShouldQueue
             'latest_version' => $repo->latestReleaseVersion(),
         ]);
 
-        Log::info('Synced repository data for package #' . $this->package->id . ' (' . $this->package->name . ')');
+        Log::info('Synced repository data for package #'.$this->package->id.' ('.$this->package->name.')');
     }
 
     protected function remoteHasChanges($repo)

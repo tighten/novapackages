@@ -83,7 +83,7 @@ class PackageDetailResourceTest extends TestCase
     private function fakePackagistRequest(): void
     {
         Http::fake([
-            "https://packagist.org/packages/*.json" => Http::response(),
+            'https://packagist.org/packages/*.json' => Http::response(),
         ]);
     }
 }

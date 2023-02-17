@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class RenameAuthorsTableToCollaborators extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -14,4 +14,4 @@ class RenameAuthorsTableToCollaborators extends Migration
     {
         Schema::rename('collaborators', 'authors');
     }
-}
+};

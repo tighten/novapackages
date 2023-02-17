@@ -12,7 +12,7 @@ class PopularPackageApiTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function returns_popular_packages_in_order()
+    public function returns_popular_packages_in_order()
     {
         $lessPopularPackage = Package::factory()->create([
             'github_stars' => 10,

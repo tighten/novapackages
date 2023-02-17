@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class AddCollaboratorPackagePivotTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -19,4 +19,4 @@ class AddCollaboratorPackagePivotTable extends Migration
     {
         Schema::dropIfExists('collaborator_package');
     }
-}
+};

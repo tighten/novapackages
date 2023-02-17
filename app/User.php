@@ -2,10 +2,7 @@
 
 namespace App;
 
-use App\Favorite;
 use App\Jobs\UserRatePackage;
-use App\Package;
-use App\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

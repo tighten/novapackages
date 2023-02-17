@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Package;
-use App\Review;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +18,7 @@ class ReviewFactory extends Factory
         return [
             'user_id' => User::factory(),
             'package_id' => Package::factory(),
-            'content' => implode(' ', $this->faker->sentences(4)) . "\n\n" . implode(' ', $this->faker->sentences(3)),
+            'content' => implode(' ', fake()->sentences(4))."\n\n".implode(' ', fake()->sentences(3)),
         ];
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateRatingsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -23,4 +24,4 @@ class CreateRatingsTable extends Migration
     {
         Schema::drop('ratings');
     }
-}
+};

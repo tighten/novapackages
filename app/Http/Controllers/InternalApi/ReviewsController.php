@@ -5,8 +5,6 @@ namespace App\Http\Controllers\InternalApi;
 use App\Http\Controllers\Controller;
 use App\Package;
 use App\Review;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use willvincent\Rateable\Rating;
 
 class ReviewsController extends Controller
@@ -21,11 +19,12 @@ class ReviewsController extends Controller
             'review' => 'required',
         ]);
 
-        Package::findOrFail(request('package_id'))
-            ->addReview(
-                Rating::where('rateable_id', request('package_id'))->where('user_id', auth()->id())->first()->id,
-                request('review')
-            );
+        $ratingId = Rating::query()
+            ->where('rateable_id', request('package_id'))
+            ->where('user_id', auth()->id())
+            ->value('id');
+
+        Package::findOrFail(request('package_id'))->addReview($ratingId, request('review'));
 
         return ['status' => 'success', 'message' => 'Review created successfully'];
     }

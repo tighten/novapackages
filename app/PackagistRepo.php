@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseRepo;
 use App\Http\Remotes\Packagist;
 use Facades\App\Repo;
 use Illuminate\Support\Arr;

@@ -12,13 +12,9 @@ class CollaboratorClaimed
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $collaborator;
-
-    public $user;
-
-    public function __construct(Collaborator $collaborator, User $user)
-    {
-        $this->collaborator = $collaborator;
-        $this->user = $user;
+    public function __construct(
+        public Collaborator $collaborator,
+        public User $user
+    ) {
     }
 }

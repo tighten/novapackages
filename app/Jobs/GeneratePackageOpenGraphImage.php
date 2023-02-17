@@ -14,7 +14,9 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $packageName;
+
     protected $packageAuthor;
+
     protected $packageOgImageName;
 
     /**

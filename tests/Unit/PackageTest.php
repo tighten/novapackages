@@ -77,6 +77,7 @@ class PackageTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider packageNameProvider
      */
     public function it_returns_the_display_name_of_the_package($input, $expected)
@@ -230,19 +231,19 @@ class PackageTest extends TestCase
             ],
             [
                 'input' => ' ABC ',
-                'expected' => 'ABC'
+                'expected' => 'ABC',
             ],
             [
                 'input' => 'ABC For Laravel Nova 4!',
-                'expected' => 'ABC !'
+                'expected' => 'ABC !',
             ],
             [
                 'input' => 'Nova Oh Dear! Tool',
-                'expected' => 'Oh Dear! Tool'
+                'expected' => 'Oh Dear! Tool',
             ],
             [
                 'input' => 'Package  with  DoubleSpaces',
-                'expected' => 'Package with DoubleSpaces'
+                'expected' => 'Package with DoubleSpaces',
             ],
         ];
     }

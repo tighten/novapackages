@@ -132,8 +132,8 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
 
     public function createANewOpenGraphImage($packageName)
     {
-        $file = '123_' . Str::slug($packageName) . '.png';
-        $filePath = config('opengraph.image_directory_name') . "/{$file}";
+        $file = '123_'.Str::slug($packageName).'.png';
+        $filePath = config('opengraph.image_directory_name')."/{$file}";
 
         GeneratePackageOpenGraphImage::dispatch($packageName, 'Sesame Street', $file);
 

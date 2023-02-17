@@ -11,10 +11,7 @@ class PackageCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $package;
-
-    public function __construct(Package $package)
+    public function __construct(public Package $package)
     {
-        $this->package = $package;
     }
 }

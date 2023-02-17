@@ -30,7 +30,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         Route::bind('any_package', function ($id) {
-
             if (auth()->user()?->isAdmin()) {
                 return Package::withoutGlobalScope('notDisabled')->findOrFail($id);
             }

@@ -10,9 +10,9 @@ use willvincent\Rateable\Rating;
 
 class UserRatePackage
 {
-    private $user;
+    private $userId;
 
-    private $package;
+    private $packageId;
 
     private $stars;
 

@@ -16,9 +16,9 @@ class GenerateOpenGraphImages extends Command
     {
         $this->callSilent('purge:ogimage', ['package' => $this->argument('package')]);
 
-        $packages = $this->argument('package')
-            ? Package::where('id', $this->argument('package'))->get()
-            : Package::all();
+        $packages = Package::query()
+            ->when($this->argument('package'), fn ($query, $id)=> $query->where('id', $id))
+            ->get();
 
         $bar = $this->output->createProgressBar(count($packages));
         $this->info('Generating images ...');

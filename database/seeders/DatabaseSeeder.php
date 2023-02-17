@@ -84,7 +84,7 @@ class DatabaseSeeder extends Seeder
         Package::factory()->times(400)->create();
 
         Package::all()->each(function ($package) use ($tags, $users) {
-            $package->tags()->attach($tags->random()->take(3)->get());
+            $package->tags()->attach($tags->random()->take(3)->toArray());
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);

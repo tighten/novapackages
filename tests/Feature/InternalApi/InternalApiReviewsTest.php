@@ -31,14 +31,14 @@ class InternalApiReviewsTest extends TestCase
     public function authenticated_user_cannot_see_link_to_post_review_before_reviewing_package()
     {
         Http::fake([
-            "https://packagist.org/packages/*.json" => Http::response(),
+            'https://packagist.org/packages/*.json' => Http::response(),
         ]);
 
         $package = Package::factory()->create();
         $user = User::factory()->create();
 
         $this->be($user)
-            ->get('/packages/' . $package->composer_name)
+            ->get('/packages/'.$package->composer_name)
             ->assertDontSee('Write Your Review Here');
     }
 
@@ -95,7 +95,7 @@ class InternalApiReviewsTest extends TestCase
             ->assertSuccessful();
 
         $this->assertDatabaseMissing('reviews', [
-            'id' => $review->id
+            'id' => $review->id,
         ]);
     }
 
@@ -110,7 +110,7 @@ class InternalApiReviewsTest extends TestCase
             ->assertForbidden();
 
         $this->assertDatabaseHas('reviews', [
-            'id' => $review->id
+            'id' => $review->id,
         ]);
     }
 
@@ -125,7 +125,7 @@ class InternalApiReviewsTest extends TestCase
             ->assertSuccessful();
 
         $this->assertDatabaseMissing('reviews', [
-            'id' => $review->id
+            'id' => $review->id,
         ]);
     }
 }

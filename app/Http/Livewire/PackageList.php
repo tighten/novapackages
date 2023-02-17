@@ -17,10 +17,13 @@ class PackageList extends Component
     use WithPagination;
 
     const POPULAR_TAG = 'popular--and--recent';
+
     const POPULAR_TAGS_LENGTH = 120;
 
     public $tag = 'popular--and--recent';
+
     public $search;
+
     public $pageSize = 6;
 
     protected $queryString = [
@@ -87,9 +90,7 @@ class PackageList extends Component
         return Cache::remember(
             CacheKeys::popularTags(),
             self::POPULAR_TAGS_LENGTH,
-            function () {
-                return Tag::popular()->take(10)->get()->sortByDesc('packages_count');
-            }
+            fn () => Tag::popular()->take(10)->get()->sortByDesc('packages_count'),
         );
     }
 
