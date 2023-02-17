@@ -2,18 +2,18 @@
 
 namespace Tests\Feature;
 
-use App\Models\Collaborator;
 use App\Events\PackageCreated;
-use App\Models\Favorite;
 use App\Listeners\SendNewPackageNotification;
-use App\Notifications\NewPackage;
-use App\Notifications\PackageDeleted;
+use App\Models\Collaborator;
+use App\Models\Favorite;
 use App\Models\Package;
 use App\Models\Review;
 use App\Models\Screenshot;
 use App\Models\Tag;
-use App\Tighten;
 use App\Models\User;
+use App\Notifications\NewPackage;
+use App\Notifications\PackageDeleted;
+use App\Tighten;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Arr;

@@ -15,25 +15,12 @@ use Illuminate\Support\Facades\Log;
 
 class SyncPackagePackagistData implements ShouldQueue
 {
-    private $package;
-
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct($package)
+    public function __construct(private Package $package)
     {
-        $this->package = $package;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         try {

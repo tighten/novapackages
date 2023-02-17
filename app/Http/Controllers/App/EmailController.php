@@ -19,6 +19,6 @@ class EmailController extends Controller
 
         auth()->user()->update(['email' => request('email')]);
 
-        return redirect()->route('home');
+        return to_route('home');
     }
 }

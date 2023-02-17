@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Models\Collaborator;
 use App\Events\CollaboratorCreated;
+use App\Exceptions\GitHubException;
 use App\Http\Controllers\Controller;
 use App\Http\Remotes\GitHub;
-use Github\Exception\RuntimeException as GitHubException;
+use App\Models\Collaborator;
 use Illuminate\Validation\Rule;
 
 class CollaboratorController extends Controller
@@ -44,7 +44,7 @@ class CollaboratorController extends Controller
 
         event(new CollaboratorCreated($collaborator));
 
-        return redirect()->route('app.collaborators.index');
+        return to_route('app.collaborators.index');
     }
 
     public function edit(Collaborator $collaborator)
@@ -76,7 +76,7 @@ class CollaboratorController extends Controller
 
         $collaborator = $collaborator->update(array_merge($input, $githubData));
 
-        return redirect()->route('app.collaborators.index');
+        return to_route('app.collaborators.index');
     }
 
     private function getCollaboratorGitHubData($username)

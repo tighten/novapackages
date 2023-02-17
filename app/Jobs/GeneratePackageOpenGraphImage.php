@@ -13,29 +13,13 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $packageName;
-
-    protected $packageAuthor;
-
-    protected $packageOgImageName;
-
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(string $packageName, string $packageAuthor, string $packageOgImageName)
-    {
-        $this->packageName = $packageName;
-        $this->packageAuthor = $packageAuthor;
-        $this->packageOgImageName = $packageOgImageName;
+    public function __construct(
+        protected string $packageName,
+        protected string $packageAuthor,
+        protected string $packageOgImageName,
+    ) {
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         (new OpenGraphImage($this->packageName, $this->packageAuthor, $this->packageOgImageName))->generate();

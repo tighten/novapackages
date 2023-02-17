@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\OpenGraphImage;
+use App\RatingCountable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -77,7 +79,7 @@ class Package extends Model implements Feedable
 
     public function scopeFilter($query, string $tag)
     {
-        match ($tag) {
+        return match ($tag) {
             'popular' => $query->popular(),
             'nova_current' => $query->novaCurrent(),
             default => $query,

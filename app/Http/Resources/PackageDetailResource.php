@@ -4,8 +4,8 @@ namespace App\Http\Resources;
 
 use App\CacheKeys;
 use App\Exceptions\PackagistException;
-use App\Models\Favorite;
 use App\Http\Remotes\Packagist;
+use App\Models\Favorite;
 use App\ReadmeFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Models\Collaborator;
 use App\Events\CollaboratorClaimed;
 use App\Http\Controllers\Controller;
+use App\Models\Collaborator;
 
 class CollaboratorClaimController extends Controller
 {
@@ -21,6 +21,6 @@ class CollaboratorClaimController extends Controller
 
         event(new CollaboratorClaimed($collaborator, auth()->user()));
 
-        return redirect()->route('app.collaborators.index');
+        return to_route('app.collaborators.index');
     }
 }

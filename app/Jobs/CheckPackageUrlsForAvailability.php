@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Package;
 use App\Notifications\NotifyAuthorOfUnavailablePackageUrl;
 use Exception;
 use Illuminate\Bus\Queueable;
@@ -13,13 +14,10 @@ use Illuminate\Support\Facades\Http;
 
 class CheckPackageUrlsForAvailability implements ShouldQueue
 {
-    private $package;
-
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct($package)
+    public function __construct(private Package $package)
     {
-        $this->package = $package;
     }
 
     public function handle()

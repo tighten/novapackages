@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Models\Collaborator;
 use App\Events\PackageCreated;
 use App\Events\PackageDeleted;
 use App\Events\PackageUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageFormRequest;
+use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Tag;
 use DateTime;
@@ -66,11 +66,11 @@ class PackageController extends Controller
 
         event(new PackageCreated($package));
 
-        if (request('screenshots')) {
+        if (request()->has('screenshots')) {
             $package->syncScreenshots(request()->input('screenshots', []));
         }
 
-        return redirect()->route('app.packages.index');
+        return to_route('app.packages.index');
     }
 
     public function edit(Package $package)
@@ -116,7 +116,7 @@ class PackageController extends Controller
         event(new PackageUpdated($package));
         $package->syncScreenshots($request->input('screenshots', []));
 
-        return redirect()->route('app.packages.index');
+        return to_route('app.packages.index');
     }
 
     public function destroy(Package $package)
@@ -142,7 +142,7 @@ class PackageController extends Controller
 
         Log::notice("Package {$name} was deleted by user ".auth()->user()->id);
 
-        return redirect()->route('app.packages.index');
+        return to_route('app.packages.index');
     }
 
     // @todo: Race condition where someone else creates the tag in the interim time.

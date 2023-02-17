@@ -16,8 +16,8 @@ class PackagistRepo extends BaseRepo
 
     private function __construct($name, Packagist $packagist)
     {
-        $this->packagist = $packagist;
         $this->url = "https://packagist.org/packages/{$name}";
+        $this->packagist = $packagist;
         $this->initializeRepo();
     }
 

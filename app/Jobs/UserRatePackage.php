@@ -2,27 +2,21 @@
 
 namespace App\Jobs;
 
-use App\Models\Collaborator;
 use App\Exceptions\SelfAuthoredRatingException;
+use App\Models\Collaborator;
 use App\Models\Package;
 use Illuminate\Foundation\Bus\Dispatchable;
 use willvincent\Rateable\Rating;
 
 class UserRatePackage
 {
-    private $userId;
-
-    private $packageId;
-
-    private $stars;
-
     use Dispatchable;
 
-    public function __construct($userId, $packageId, $stars)
-    {
-        $this->userId = $userId;
-        $this->packageId = $packageId;
-        $this->stars = $stars;
+    public function __construct(
+        private $userId,
+        private $packageId,
+        private $stars,
+    ) {
     }
 
     public function handle()

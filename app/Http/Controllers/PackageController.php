@@ -28,7 +28,7 @@ class PackageController extends Controller
 
     public function showId(Package $package)
     {
-        return redirect()->route('packages.show', [
+        return to_route('packages.show', [
             'namespace' => $package->composer_vendor,
             'name' => $package->composer_package,
         ]);

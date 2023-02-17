@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Package;
 use Exception;
 use Facades\App\Repo;
 use Illuminate\Bus\Queueable;
@@ -18,11 +19,8 @@ class SyncPackageRepositoryData implements ShouldQueue
 
     public $tries = 2;
 
-    public $package;
-
-    public function __construct($package)
+    public function __construct(private Package $package)
     {
-        $this->package = $package;
     }
 
     public function handle()

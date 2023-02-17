@@ -9,7 +9,7 @@ trait RatingCountable
 {
     public $ratingsCountCacheLength = 60;
 
-    public $avarageRatingCacheLength = 60;
+    public $averageRatingCacheLength = 60;
 
     public function countStarRatings($numberOfStars)
     {
@@ -74,7 +74,9 @@ trait RatingCountable
 
     protected function ratingsCountsFromRawDb()
     {
-        return $this->ratings()->groupBy('rating')->select(DB::Raw('count(id) as count, rating'))
+        return $this->ratings()
+            ->groupBy('rating')
+            ->select(DB::Raw('count(id) as count, rating'))
             ->get()
             ->mapWithKeys(fn ($ratingCount) => [$ratingCount->rating => $ratingCount->count]);
     }
@@ -88,7 +90,7 @@ trait RatingCountable
     {
         return Cache::remember(
             CacheKeys::averageRating(static::class, $this->id),
-            $this->avarageRatingCacheLength,
+            $this->averageRatingCacheLength,
             function () {
                 $ratingsCounts = collect($this->getRatingsCounts());
 
@@ -96,9 +98,11 @@ trait RatingCountable
                     return 0;
                 }
 
-                return round($ratingsCounts
+                $num = $ratingsCounts
                     ->map(fn ($count, $stars) => $count * $stars)
-                    ->sum() / $ratingsCounts->sum(), 1);
+                    ->sum() / $ratingsCounts->sum();
+
+                return round($num, 1);
             }
         );
     }
