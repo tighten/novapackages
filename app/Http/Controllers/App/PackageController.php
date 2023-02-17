@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Collaborator;
 use App\Events\PackageCreated;
 use App\Events\PackageDeleted;
 use App\Events\PackageUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageFormRequest;
-use App\Package;
-use App\Tag;
-use DateTime;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Tag;
 use Facades\App\Repo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -29,8 +28,8 @@ class PackageController extends Controller
     public function create()
     {
         return view('app.packages.create', [
-            'collaborators' => Collaborator::orderBy('name')->get(),
-            'tags' => Tag::orderBy('slug')->get(),
+            'collaborators' => Collaborator::oldest('name')->get(),
+            'tags' => Tag::oldest('slug')->get(),
         ]);
     }
 
@@ -66,11 +65,11 @@ class PackageController extends Controller
 
         event(new PackageCreated($package));
 
-        if (request('screenshots')) {
+        if (request()->has('screenshots')) {
             $package->syncScreenshots(request()->input('screenshots', []));
         }
 
-        return redirect()->route('app.packages.index');
+        return to_route('app.packages.index');
     }
 
     public function edit(Package $package)
@@ -78,8 +77,8 @@ class PackageController extends Controller
         // @todo refactor like store above
         return view('app.packages.edit', [
             'package' => $package,
-            'collaborators' => Collaborator::orderBy('name')->get(),
-            'tags' => Tag::orderBy('slug')->get(), // @todo maybe group the types first?
+            'collaborators' => Collaborator::oldest('name')->get(),
+            'tags' => Tag::oldest('slug')->get(), // @todo maybe group the types first?
             'screenshots' => $package->screenshots,
         ]);
     }
@@ -116,7 +115,7 @@ class PackageController extends Controller
         event(new PackageUpdated($package));
         $package->syncScreenshots($request->input('screenshots', []));
 
-        return redirect()->route('app.packages.index');
+        return to_route('app.packages.index');
     }
 
     public function destroy(Package $package)
@@ -140,20 +139,16 @@ class PackageController extends Controller
 
         session()->flash('status', "{$name} has been deleted.");
 
-        Log::notice("Package {$name} was deleted by user " . auth()->user()->id);
+        Log::notice("Package {$name} was deleted by user ".auth()->user()->id);
 
-        return redirect()->route('app.packages.index');
+        return to_route('app.packages.index');
     }
 
     // @todo: Race condition where someone else creates the tag in the interim time.
     // Do we firstOrCreate each individually instead?
     private function createNewTags($newTags)
     {
-        $created_at = $updated_at = new DateTime;
-
-        $tagNames = collect($newTags)->map(function ($tag) {
-            return strtolower($tag);
-        });
+        $tagNames = collect($newTags)->map(fn ($tag) => strtolower($tag));
 
         $existingTags = Tag::whereIn('name', $tagNames)->get();
         $tagsToCreate = $tagNames->diff($existingTags->pluck('name'));
@@ -162,18 +157,16 @@ class PackageController extends Controller
             return $existingTags->pluck('id')->toArray();
         }
 
-        Tag::insert($tagsToCreate->map(function ($tag) use ($created_at, $updated_at) {
-            return [
-                'slug' => Str::slug($tag),
-                'name' => $tag,
-                'created_at' => $created_at,
-                'updated_at' => $updated_at,
-            ];
-        })->toArray());
+        Tag::insert($tagsToCreate->map(fn ($tag) => [
+            'slug' => Str::slug($tag),
+            'name' => $tag,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ])->toArray());
 
         return $existingTags
             ->pluck('id')
-            ->merge(Tag::whereIn('name', $tagsToCreate)->get()->pluck('id'))
+            ->merge(Tag::whereIn('name', $tagsToCreate)->pluck('id'))
             ->toArray();
     }
 }

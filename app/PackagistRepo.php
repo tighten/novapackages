@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseRepo;
 use App\Http\Remotes\Packagist;
 use Facades\App\Repo;
 use Illuminate\Support\Arr;
@@ -17,8 +16,8 @@ class PackagistRepo extends BaseRepo
 
     private function __construct($name, Packagist $packagist)
     {
-        $this->packagist = $packagist;
         $this->url = "https://packagist.org/packages/{$name}";
+        $this->packagist = $packagist;
         $this->initializeRepo();
     }
 

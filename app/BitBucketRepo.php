@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseRepo;
 use App\Exceptions\BitBucketException;
 use App\Http\Remotes\BitBucket;
 use Illuminate\Support\Arr;
@@ -14,6 +13,10 @@ class BitBucketRepo extends BaseRepo
     protected $url;
 
     protected $bitBucket;
+
+    protected $username;
+
+    protected $repo;
 
     private function __construct($url, BitBucket $bitBucket)
     {

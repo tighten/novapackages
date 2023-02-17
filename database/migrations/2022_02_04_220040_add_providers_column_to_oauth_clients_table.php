@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProvidersColumnToOauthClientsTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         if (! Schema::hasColumn('oauth_clients', 'provider')) {
             Schema::table('oauth_clients', function (Blueprint $table) {
@@ -16,10 +16,10 @@ class AddProvidersColumnToOauthClientsTable extends Migration
         }
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('oauth_clients', function (Blueprint $table) {
             //
         });
     }
-}
+};

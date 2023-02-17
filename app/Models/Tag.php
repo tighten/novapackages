@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,9 +35,9 @@ class Tag extends Model
 
     public function projectTypeSlugs()
     {
-        return collect(self::PROJECT_TYPES)->map(function ($name) {
-            return Str::slug($name);
-        })->toArray();
+        return collect(self::PROJECT_TYPES)
+            ->map(fn ($name) => Str::slug($name))
+            ->toArray();
     }
 
     public function scopePopular($query)
@@ -46,7 +46,7 @@ class Tag extends Model
             ->whereHas('packages')
             ->whereNotIn('name', ['Laravel', 'Nova', 'Laravel Nova'])
             ->withCount('packages')
-            ->orderByDesc('packages_count');
+            ->latest('packages_count');
     }
 
     public function scopeTypes($query)
@@ -66,6 +66,6 @@ class Tag extends Model
 
     public function url()
     {
-        return url('?tag=' . $this->slug);
+        return url('?tag='.$this->slug);
     }
 }

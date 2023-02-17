@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Remotes\GitHub;
-use Illuminate\Http\Request;
 
 class PackageIdeaController extends Controller
 {
@@ -33,8 +32,8 @@ class PackageIdeaController extends Controller
 
     private function hasChallengeAcceptedLabel($idea)
     {
-        return collect($idea['labels'])->filter(function ($label) {
-            return $label['name'] == 'challenge-accepted';
-        })->count() > 0;
+        return collect($idea['labels'])
+            ->filter(fn ($label) => $label['name'] == 'challenge-accepted')
+            ->count() > 0;
     }
 }

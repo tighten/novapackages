@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Package;
+use App\Models\Package;
 
 class DisablePackageController extends Controller
 {
@@ -13,7 +13,7 @@ class DisablePackageController extends Controller
 
         return back()->with([
             'package' => $package,
-            'status' => 'Package disabled: ' . $package->name,
+            'status' => 'Package disabled: '.$package->name,
         ]);
     }
 }

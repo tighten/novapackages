@@ -2,20 +2,21 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Package;
 use App\Notifications\NotifyAuthorOfDisabledPackage;
-use App\Package;
 use Illuminate\Console\Command;
 
 class DisableUnavailablePackages extends Command
 {
-
     protected $signature = 'novapackages:disable-unavailable-packages';
 
     protected $description = 'Disable unavailable packages after one month.';
 
     public function handle()
     {
-        $unavailablePackages = Package::whereNotNull('marked_as_unavailable_at')
+        // TODO: Get all packages from database in the past 30 days
+        $unavailablePackages = Package::query()
+            ->whereNotNull('marked_as_unavailable_at')
             ->where('is_disabled', 0)
             ->get();
 

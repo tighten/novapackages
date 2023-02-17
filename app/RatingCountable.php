@@ -2,14 +2,14 @@
 
 namespace App;
 
-use App\CacheKeys;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 trait RatingCountable
 {
     public $ratingsCountCacheLength = 60;
-    public $avarageRatingCacheLength = 60;
+
+    public $averageRatingCacheLength = 60;
 
     public function countStarRatings($numberOfStars)
     {
@@ -69,29 +69,28 @@ trait RatingCountable
 
     protected function ratingsCountsFromEagerLoad()
     {
-        return $this->ratings->groupBy('rating')->map(function ($ratings) {
-            return $ratings->count();
-        });
+        return $this->ratings->groupBy('rating')->map(fn ($ratings) => $ratings->count());
     }
 
     protected function ratingsCountsFromRawDb()
     {
-        return $this->ratings()->groupBy('rating')->select(DB::Raw('count(id) as count, rating'))
+        return $this->ratings()
+            ->groupBy('rating')
+            ->select(DB::Raw('count(id) as count, rating'))
             ->get()
-            ->mapWithKeys(function ($ratingCount) {
-                return [$ratingCount->rating => $ratingCount->count];
-            });
+            ->mapWithKeys(fn ($ratingCount) => [$ratingCount->rating => $ratingCount->count]);
     }
 
     /**
      * Override the Rateable method to take advantage of our cache.
+     *
      * @todo  maybe check if ratings is counted; if so, use it; if not, default to the other one?
      */
     public function averageRating()
     {
         return Cache::remember(
             CacheKeys::averageRating(static::class, $this->id),
-            $this->avarageRatingCacheLength,
+            $this->averageRatingCacheLength,
             function () {
                 $ratingsCounts = collect($this->getRatingsCounts());
 
@@ -99,9 +98,11 @@ trait RatingCountable
                     return 0;
                 }
 
-                return round($ratingsCounts->map(function ($count, $stars) {
-                    return $count * $stars;
-                })->sum() / $ratingsCounts->sum(), 1);
+                $num = $ratingsCounts
+                    ->map(fn ($count, $stars) => $count * $stars)
+                    ->sum() / $ratingsCounts->sum();
+
+                return round($num, 1);
             }
         );
     }

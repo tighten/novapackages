@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('og', function ($expression) {
-            list($property, $content) = explode(',', $expression, 2);
+            [$property, $content] = explode(',', $expression, 2);
 
             return "<?php echo '<meta property=\"og:' . $property . '\" content=\"' . $content . '\">' . \"\n\"; ?>";
         });

@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Package;
-use App\Tag;
+use App\Models\Package;
+use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -36,7 +36,7 @@ class TagTest extends TestCase
         $tagWithMostPackages = Tag::nonTypes()
             ->whereHas('packages')
             ->withCount('packages')
-            ->orderByDesc('packages_count')
+            ->latest('packages_count')
             ->first();
         $popularTags = Tag::popular()->take(3)->get();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -56,6 +56,6 @@ class Collaborator extends Model
 
     public function scopeInRequest($query, $request)
     {
-        return self::whereIn('id', array_merge([$request->input('author_id')], $request->input('contributors', [])));
+        return $query->whereIn('id', array_merge([$request->input('author_id')], $request->input('contributors', [])));
     }
 }

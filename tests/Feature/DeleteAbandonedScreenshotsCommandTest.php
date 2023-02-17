@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Package;
-use App\Screenshot;
+use App\Models\Package;
+use App\Models\Screenshot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Carbon;

@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRepoUrlFieldToPackagesTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->string('repo_url')
@@ -28,7 +28,7 @@ class AddRepoUrlFieldToPackagesTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->dropColumn('repo_url');
@@ -36,4 +36,4 @@ class AddRepoUrlFieldToPackagesTable extends Migration
             $table->dropColumn('readme');
         });
     }
-}
+};

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Api;
 
-use App\Package;
+use App\Models\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;

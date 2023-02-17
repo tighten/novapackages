@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Api;
 
-use App\Package;
-use App\Tag;
+use App\Models\Package;
+use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,7 +12,7 @@ class PopularPackageApiTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function returns_popular_packages_in_order()
+    public function returns_popular_packages_in_order()
     {
         $lessPopularPackage = Package::factory()->create([
             'github_stars' => 10,

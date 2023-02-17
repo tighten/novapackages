@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use App\Notifications\GithubAuthNotification;
-use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Notification;
 

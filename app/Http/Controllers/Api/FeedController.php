@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Package;
+use App\Models\Package;
 
 class FeedController extends Controller
 {
@@ -13,18 +13,16 @@ class FeedController extends Controller
             return Package::query()
                 ->with(['tags', 'author'])
                 ->get()
-                ->map(function ($package) {
-                    return [
-                        'name' => $package->display_name,
-                        'author' => $package->author->name,
-                        'abstract' => $package->abstract,
-                        'url' => route('packages.show', [
-                            'namespace' => $package->composer_vendor,
-                            'name' => $package->composer_package,
-                        ]),
-                        'tags' => $package->tags->pluck('name'),
-                    ];
-                });
+                ->map(fn ($package) => [
+                    'name' => $package->display_name,
+                    'author' => $package->author->name,
+                    'abstract' => $package->abstract,
+                    'url' => route('packages.show', [
+                        'namespace' => $package->composer_vendor,
+                        'name' => $package->composer_package,
+                    ]),
+                    'tags' => $package->tags->pluck('name'),
+                ]);
         });
     }
 }

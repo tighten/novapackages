@@ -10,7 +10,7 @@ use Tests\TestCase;
 class GitHubRepoTest extends TestCase
 {
     /** @test */
-    function requires_valid_url()
+    public function requires_valid_url()
     {
         $this->expectException(GitHubException::class);
 
@@ -45,7 +45,7 @@ class GitHubRepoTest extends TestCase
     }
 
     /** @test */
-    function it_returns_proper_readme_format()
+    public function it_returns_proper_readme_format()
     {
         $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
 

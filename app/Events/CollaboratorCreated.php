@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -11,10 +11,7 @@ class CollaboratorCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $collaborator;
-
-    public function __construct(Collaborator $collaborator)
+    public function __construct(public Collaborator $collaborator)
     {
-        $this->collaborator = $collaborator;
     }
 }

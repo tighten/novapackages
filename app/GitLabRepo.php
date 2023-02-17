@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseRepo;
 use App\Http\Remotes\GitLab;
 use Exception;
 use Illuminate\Support\Arr;
@@ -15,6 +14,10 @@ class GitLabRepo extends BaseRepo
     protected $url;
 
     protected $gitLab;
+
+    protected $username;
+
+    protected $repo;
 
     private function __construct($url, GitLab $gitLab)
     {

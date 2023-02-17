@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -11,10 +11,7 @@ class NewUserSignedUp
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user;
-
-    public function __construct(User $user)
+    public function __construct(public User $user)
     {
-        $this->user = $user;
     }
 }

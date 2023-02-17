@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Stats;
-use Illuminate\Http\Request;
 
 class StatsController extends Controller
 {

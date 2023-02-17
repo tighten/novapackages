@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Collaborator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CollaboratorFactory extends Factory
@@ -15,10 +14,10 @@ class CollaboratorFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->firstName().' '.$this->faker->lastName(),
-            'url' => $this->faker->url(),
-            'description' => implode(' ', $this->faker->sentences(2))."\n\n".implode(' ', $this->faker->sentences(2)),
-            'github_username' => $this->faker->slug(),
+            'name' => fake()->firstName().' '.fake()->lastName(),
+            'url' => fake()->url(),
+            'description' => implode(' ', fake()->sentences(2))."\n\n".implode(' ', fake()->sentences(2)),
+            'github_username' => fake()->slug(),
         ];
     }
 }

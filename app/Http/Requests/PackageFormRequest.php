@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Collaborator;
-use App\Package;
-use App\Screenshot;
-use App\Tag;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Screenshot;
+use App\Models\Tag;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -33,7 +32,7 @@ class PackageFormRequest extends FormRequest
                 function ($attribute, $value, $fail) {
                     $composerName = $this->getComposerName();
 
-                    if (! $this->packageStringUnique(request('any_package')->id ?? null)) {
+                    if ($this->packageUnique($composerName, request('any_package')->id ?? null)) {
                         $fail("The package {$composerName} has already been submitted.");
                     }
                 },
@@ -68,29 +67,24 @@ class PackageFormRequest extends FormRequest
     {
         $collaborators = Collaborator::inRequest(request())->get();
 
-        $newTags = collect(request('tags-new', []))->map(function ($item) {
-            return ['name' => $item];
-        });
+        $newTags = collect(request('tags-new', []))->map(fn ($item) => ['name' => $item]);
 
         return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput(array_merge(request()->all(), [
-                    'selectedAuthor' => $collaborators->where('id', request('author_id', null))->first(),
-                    'selectedCollaborators' => $collaborators->whereIn('id', request('contributors', []))->values(),
-                    'selectedTags' => Tag::whereIn('id', request('tags', []))->get()->toBase()->merge($newTags),
-                    'screenshots' => Screenshot::forRequest(request('screenshots')),
-                ]));
+            ->back()
+            ->withErrors($validator)
+            ->withInput(array_merge(request()->all(), [
+                'selectedAuthor' => $collaborators->where('id', request('author_id', null))->first(),
+                'selectedCollaborators' => $collaborators->whereIn('id', request('contributors', []))->values(),
+                'selectedTags' => Tag::whereIn('id', request('tags', []))->get()->toBase()->merge($newTags),
+                'screenshots' => Screenshot::forRequest(request('screenshots')),
+            ]));
     }
 
-    private function packageStringUnique($id = null)
+    private function packageUnique($composerName, $id = null): bool
     {
-        $query = Package::where('composer_name', $this->getComposerName());
-
-        if ($id) {
-            $query->where('id', '!=', $id);
-        }
-
-        return $query->count() == 0;
+        return Package::query()
+            ->when($id, fn ($query) => $query->where('id', '!=', $id))
+            ->where('composer_name', $composerName)
+            ->exists();
     }
 }

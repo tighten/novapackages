@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use App\Exceptions\PackagistException;
 use App\Http\Remotes\Packagist;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -15,25 +15,12 @@ use Illuminate\Support\Facades\Log;
 
 class SyncPackagePackagistData implements ShouldQueue
 {
-    private $package;
-
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct($package)
+    public function __construct(private Package $package)
     {
-        $this->package = $package;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         try {
@@ -72,7 +59,7 @@ class SyncPackagePackagistData implements ShouldQueue
             ]);
         });
 
-        Log::info('Synced packagist data for package #' . $this->package->id . ' (' . $this->package->name . ')');
+        Log::info('Synced packagist data for package #'.$this->package->id.' ('.$this->package->name.')');
     }
 
     private function extractStableVersionsFromPackages($packagist)

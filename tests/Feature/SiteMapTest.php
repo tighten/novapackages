@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Package;
+use App\Models\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -11,7 +11,7 @@ class SiteMapTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function displays_sitemap()
+    public function displays_sitemap()
     {
         [$packageA, $packageB] = Package::factory()->count(2)->create();
 

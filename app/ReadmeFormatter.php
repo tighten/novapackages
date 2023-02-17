@@ -65,9 +65,7 @@ class ReadmeFormatter
 
     public function replaceImageUrlsHtml($html)
     {
-        $patterns = array_map(function ($extension) {
-            return '/<img src="((?!http).*?\.'.$extension.')"/i';
-        }, $this->imageExtensions);
+        $patterns = array_map(fn ($extension) => '/<img src="((?!http).*?\.'.$extension.')"/i', $this->imageExtensions);
 
         $baseUrl = $this->url.'/raw/'.$this->latestVersion.'/';
 
@@ -95,9 +93,7 @@ class ReadmeFormatter
     public function imageRegexPatterns()
     {
         // Build an array of image patterns to look for in the markdown
-        return array_map(function ($extension) {
-            return '/\[(.*?)\]\(((?!http).*?\.'.$extension.')\)/i';
-        }, $this->imageExtensions);
+        return array_map(fn ($extension) => '/\[(.*?)\]\(((?!http).*?\.'.$extension.')\)/i', $this->imageExtensions);
     }
 
     protected function nonImageFormat()

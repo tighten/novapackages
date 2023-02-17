@@ -11,7 +11,7 @@ use Tests\TestCase;
 class NpmRepoTest extends TestCase
 {
     /** @test */
-    function it_returns_proper_readme_format()
+    public function it_returns_proper_readme_format()
     {
         Http::fake(['https://registry.npmjs.org/lodash/' => Http::response()]);
 
@@ -21,14 +21,13 @@ class NpmRepoTest extends TestCase
     }
 
     /** @test */
-    function it_returns_latest_release_if_set()
+    public function it_returns_latest_release_if_set()
     {
         Http::fake([
             'https://registry.npmjs.org/lodash/' => Http::response(
                 $this->fakeResponse('npm.repo-with-github-vcs.json')
             ),
-            'https://api.github.com/repos/lodash/lodash/releases' =>
-                Http::response($this->fakeResponse('github.repo-releases.json')),
+            'https://api.github.com/repos/lodash/lodash/releases' => Http::response($this->fakeResponse('github.repo-releases.json')),
         ]);
 
         $repo = Repo::fromUrl('https://www.npmjs.com/package/lodash');
@@ -37,12 +36,11 @@ class NpmRepoTest extends TestCase
     }
 
     /** @test */
-    function it_returns_master_if_latest_release_is_not_set()
+    public function it_returns_master_if_latest_release_is_not_set()
     {
         Http::fake([
             'https://registry.npmjs.org/lodash/' => Http::response(),
-            'https://api.github.com/repos/lodash/lodash/releases' =>
-                Http::response($this->fakeResponse('github.repo-releases.json')),
+            'https://api.github.com/repos/lodash/lodash/releases' => Http::response($this->fakeResponse('github.repo-releases.json')),
         ]);
 
         $repo = Repo::fromUrl('https://www.npmjs.com/package/lodash');

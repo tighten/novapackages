@@ -107,7 +107,8 @@ abstract class TestCase extends BaseTestCase
 
     public function buildFakeRepo($url = null, $source = null, $readme = null, $readmeFormat = null, $latestVersion = null)
     {
-        return new class($url, $source, $readme, $readmeFormat, $latestVersion) {
+        return new class($url, $source, $readme, $readmeFormat, $latestVersion)
+        {
             protected $url;
 
             protected $source;

@@ -1,10 +1,11 @@
 name: Audit
 
 on:
-  pull_request:
   push:
     branches:
       - main
+  pull_request:
+
 jobs:
   audit:
     name: Audit Composer

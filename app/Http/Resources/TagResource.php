@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Tag;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 
 class TagResource extends ModelResource

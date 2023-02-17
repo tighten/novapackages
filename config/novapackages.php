@@ -17,7 +17,6 @@ return [
         'latest_major_version' => env('NOVA_LATEST_MAJOR_VERSION', '4'),
     ],
 
-
     /*
     |--------------------------------------------------------------------------
     | Filtering
@@ -61,6 +60,6 @@ return [
             'V!',
             '(!)', // Place at bottom
             ' !', // Place at bottom
-        ]
-    ]
+        ],
+    ],
 ];

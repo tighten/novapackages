@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Stats;
-use Illuminate\Http\Request;
 
 class StatsController extends Controller
 {
-    public function __invoke(Request $request, Stats $stats)
+    public function __invoke(Stats $stats)
     {
         return response()->json([
             'package_count' => $stats->packageCount(),

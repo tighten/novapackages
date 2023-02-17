@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Package;
+use App\Models\Package;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -30,7 +30,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         Route::bind('any_package', function ($id) {
-
             if (auth()->user()?->isAdmin()) {
                 return Package::withoutGlobalScope('notDisabled')->findOrFail($id);
             }
@@ -59,8 +58,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60);
-        });
+        RateLimiter::for('api', fn (Request $request) => Limit::perMinute(60));
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Collaborator;
-use App\Package;
-use App\Tag;
-use App\User;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -84,7 +84,7 @@ class DatabaseSeeder extends Seeder
         Package::factory()->times(400)->create();
 
         Package::all()->each(function ($package) use ($tags, $users) {
-            $package->tags()->attach($tags->random()->take(3)->get());
+            $package->tags()->attach($tags->random()->take(3)->toArray());
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);

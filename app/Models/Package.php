@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\OpenGraphImage;
-use App\Screenshot;
+use App\RatingCountable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -79,14 +79,11 @@ class Package extends Model implements Feedable
 
     public function scopeFilter($query, string $tag)
     {
-        switch ($tag) {
-            case 'popular':
-                return $query->popular();
-            case 'nova_current':
-                return $query->novaCurrent();
-            default:
-                return $query;
-        }
+        return match ($tag) {
+            'popular' => $query->popular(),
+            'nova_current' => $query->novaCurrent(),
+            default => $query,
+        };
     }
 
     public function scopeTagged($query, $tagSlug)
@@ -98,10 +95,11 @@ class Package extends Model implements Feedable
 
     public function scopePopular($query)
     {
-        return $query->select(
-            DB::Raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
-        )
-            ->orderBy('popularity', 'desc');
+        return $query
+            ->latest('popularity')
+            ->select(
+                DB::Raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
+            );
     }
 
     public function scopeNovaCurrent($query)
@@ -174,7 +172,7 @@ class Package extends Model implements Feedable
 
     public function getOgImagePublicUrlAttribute()
     {
-        return Storage::url(config('opengraph.image_directory_name') . "/{$this->og_image_name}");
+        return Storage::url(config('opengraph.image_directory_name')."/{$this->og_image_name}");
     }
 
     /**

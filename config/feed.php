@@ -11,7 +11,7 @@ return [
              * You can also pass an argument to that method:
              * ['App\Model@getAllFeedItems', 'argument']
              */
-            'items' => App\Package::class.'@getRecentFeedItems',
+            'items' => App\Models\Package::class.'@getRecentFeedItems',
 
             /*
              * The feed will be available on this url.

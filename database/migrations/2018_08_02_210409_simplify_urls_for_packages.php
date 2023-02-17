@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SimplifyUrlsForPackages extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         // Friggin' SQLite.
         Schema::table('packages', function (Blueprint $table) {
@@ -26,7 +26,7 @@ class SimplifyUrlsForPackages extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->string('git_url');
@@ -35,4 +35,4 @@ class SimplifyUrlsForPackages extends Migration
             $table->string('picture_url')->change();
         });
     }
-}
+};

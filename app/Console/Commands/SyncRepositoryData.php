@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SyncPackageRepositoryData;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Console\Command;
 
 class SyncRepositoryData extends Command
@@ -14,9 +14,9 @@ class SyncRepositoryData extends Command
 
     public function handle()
     {
-        $packages = $this->argument('package')
-            ? Package::where('id', $this->argument('package'))->get()
-            : Package::all();
+        $packages = Package::query()
+            ->when($this->argument('package'), fn ($query, $id) => $query->where('id', $id))
+            ->get();
 
         foreach ($packages as $package) {
             dispatch(new SyncPackageRepositoryData($package));

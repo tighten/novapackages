@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\DisablePackageController;
-use App\Http\Controllers\EnablePackageController;
-use App\Http\Controllers\PackageIdeaController;
-use App\Http\Controllers\SiteMapController;
-use App\Http\Controllers\StatsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\App;
 use App\Http\Controllers\Auth;
 use App\Http\Controllers\CollaboratorController;
+use App\Http\Controllers\DisablePackageController;
+use App\Http\Controllers\EnablePackageController;
 use App\Http\Controllers\InternalApi;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PackageIdeaController;
 use App\Http\Controllers\PackageReviewController;
+use App\Http\Controllers\SiteMapController;
+use App\Http\Controllers\StatsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PackageController::class, 'index'])->name('home');

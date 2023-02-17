@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use App\Screenshot;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Screenshot;
 
 class ScreenshotUploadController extends Controller
 {

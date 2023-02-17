@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameCategoriesTablesToTags extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::rename('categories', 'tags');
         Schema::rename('category_package', 'package_tag');
@@ -16,7 +16,7 @@ class RenameCategoriesTablesToTags extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::rename('tags', 'categories');
         Schema::rename('package_tag', 'category_package');
@@ -25,4 +25,4 @@ class RenameCategoriesTablesToTags extends Migration
             $table->renameColumn('tag_id', 'category_id');
         });
     }
-}
+};
