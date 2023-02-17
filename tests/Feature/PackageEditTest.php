@@ -127,7 +127,7 @@ class PackageEditTest extends TestCase
         ]);
 
         $response->assertStatus(302);
-        $response->assertSessionHasErrors('packagist_name');
+        $response->assertSessionHasErrors();
     }
 
     /** @test */

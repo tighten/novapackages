@@ -32,7 +32,7 @@ class PackageFormRequest extends FormRequest
                 function ($attribute, $value, $fail) {
                     $composerName = $this->getComposerName();
 
-                    if (! $this->packageStringUnique(request('any_package')->id)) {
+                    if (! $this->packageStringUnique($composerName, request('any_package')->id ?? null)) {
                         $fail("The package {$composerName} has already been submitted.");
                     }
                 },
@@ -80,11 +80,11 @@ class PackageFormRequest extends FormRequest
             ]));
     }
 
-    private function packageStringUnique($id = null): bool
+    private function packageStringUnique($composerName, $id = null): bool
     {
         return ! Package::query()
             ->when($id != null, fn ($query) => $query->where('id', '!=', $id))
-            ->where('composer_name', $this->getComposerName())
+            ->where('composer_name', $composerName)
             ->exists();
     }
 }
