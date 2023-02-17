@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('tools', function (Blueprint $table) {
             $table->string('composer_name')->nullable();
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('tools', function (Blueprint $table) {
             $table->dropColumn('composer_name');

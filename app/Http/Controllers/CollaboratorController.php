@@ -20,8 +20,8 @@ class CollaboratorController extends Controller
 
     public function show(Collaborator $collaborator)
     {
-        return view('collaborators.show',[
-            'collaborator' => $collaborator
+        return view('collaborators.show', [
+            'collaborator' => $collaborator,
         ]);
     }
 }

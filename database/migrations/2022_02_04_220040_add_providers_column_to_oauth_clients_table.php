@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         if (! Schema::hasColumn('oauth_clients', 'provider')) {
             Schema::table('oauth_clients', function (Blueprint $table) {
@@ -16,7 +16,7 @@ return new class extends Migration
         }
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('oauth_clients', function (Blueprint $table) {
             //

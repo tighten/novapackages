@@ -14,7 +14,7 @@ class ReviewsController extends Controller
         request()->validate([
             'package_id' => [
                 'required',
-                'exists:App\Models\Package,id',
+                'exists:packages,id',
             ],
             'review' => 'required',
         ]);
@@ -34,7 +34,7 @@ class ReviewsController extends Controller
         request()->validate([
             'package_id' => [
                 'required',
-                'exists:App\Models\Package,id',
+                'exists:packages,id',
             ],
             'review' => 'required',
         ]);

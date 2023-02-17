@@ -18,34 +18,14 @@ class OpenGraphImage
 
     const PADDING = 50;
 
-    protected $fileName;
-
-    protected $subtitle;
-
-    protected $title;
-
-    /**
-     * __construct
-     *
-     * @param  string  $title Main text for the image.
-     * @param  string  $subtitle Subtext for the image.
-     * @param  string  $fileName Image filename (e.g. my-image.png)
-     * @return void
-     */
-    public function __construct($title, $subtitle, $fileName)
-    {
-        $this->title = $title;
-        $this->subtitle = $subtitle;
-        $this->fileName = $fileName;
+    public function __construct(
+        protected string $title,
+        protected string $subtitle,
+        protected string $fileName,
+    ) {
     }
 
-    /**
-     * Generate an open graph image file name.
-     *
-     * @param  string  $uniqueId A unique key to identify the image by.
-     * @param  string  $name Name of the file.
-     */
-    public static function makeFileName($uniqueId, $name): string
+    public static function makeFileName(string $uniqueId, string $name): string
     {
         return "{$uniqueId}_".Str::slug($name, '-').'.png';
     }

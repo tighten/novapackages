@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('authors', function (Blueprint $table) {
             $table->unsignedInteger('user_id')->nullable();
@@ -14,7 +14,7 @@ return new class extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('authors', function (Blueprint $table) {
             $table->dropColumn('user_id');

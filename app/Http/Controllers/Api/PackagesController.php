@@ -16,12 +16,12 @@ class PackagesController extends Controller
 
         $packages = Package::query()
             ->with(['author', 'tags'])
-            ->when($githubUsername, function ($query) use ($githubUsername) {
+            ->when($githubUsername, function ($query, $githubUsername) {
                 $query->whereHas('author', function ($query) use ($githubUsername) {
                     $query->where('github_username', $githubUsername);
                 });
             })
-            ->when($authorName, function ($query) use ($authorName) {
+            ->when($authorName, function ($query, $authorName) {
                 $query->whereHas('author', function ($query) use ($authorName) {
                     $query->where('name', $authorName);
                 });
