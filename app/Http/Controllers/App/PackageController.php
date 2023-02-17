@@ -10,7 +10,6 @@ use App\Http\Requests\PackageFormRequest;
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Tag;
-use DateTime;
 use Facades\App\Repo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -29,8 +28,8 @@ class PackageController extends Controller
     public function create()
     {
         return view('app.packages.create', [
-            'collaborators' => Collaborator::orderBy('name')->get(),
-            'tags' => Tag::orderBy('slug')->get(),
+            'collaborators' => Collaborator::oldest('name')->get(),
+            'tags' => Tag::oldest('slug')->get(),
         ]);
     }
 
@@ -78,9 +77,8 @@ class PackageController extends Controller
         // @todo refactor like store above
         return view('app.packages.edit', [
             'package' => $package,
-            'collaborators' => Collaborator::orderBy('name')->get(),
-            'tags' => Tag::orderBy('slug')->get(), // @todo maybe group the types first?
-            'screenshots' => $package->screenshots,
+            'collaborators' => Collaborator::oldest('name')->get(),
+            'tags' => Tag::query()->oldest('slug')->get(), // @todo maybe group the types first?
         ]);
     }
 
@@ -149,11 +147,7 @@ class PackageController extends Controller
     // Do we firstOrCreate each individually instead?
     private function createNewTags($newTags)
     {
-        $created_at = $updated_at = new DateTime;
-
-        $tagNames = collect($newTags)->map(function ($tag) {
-            return strtolower($tag);
-        });
+        $tagNames = collect($newTags)->map(fn ($tag) => strtolower($tag));
 
         $existingTags = Tag::whereIn('name', $tagNames)->get();
         $tagsToCreate = $tagNames->diff($existingTags->pluck('name'));
@@ -165,8 +159,8 @@ class PackageController extends Controller
         Tag::insert($tagsToCreate->map(fn ($tag) => [
             'slug' => Str::slug($tag),
             'name' => $tag,
-            'created_at' => $created_at,
-            'updated_at' => $updated_at,
+            'created_at' => now(),
+            'updated_at' => now(),
         ])->toArray());
 
         return $existingTags

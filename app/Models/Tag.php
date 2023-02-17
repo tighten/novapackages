@@ -46,7 +46,7 @@ class Tag extends Model
             ->whereHas('packages')
             ->whereNotIn('name', ['Laravel', 'Nova', 'Laravel Nova'])
             ->withCount('packages')
-            ->orderByDesc('packages_count');
+            ->latest('packages_count');
     }
 
     public function scopeTypes($query)

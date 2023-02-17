@@ -14,7 +14,8 @@ class CheckPackageUrls extends Command
 
     public function handle()
     {
-        $validPackages = Package::whereNull('marked_as_unavailable_at')
+        $validPackages = Package::query()
+            ->whereNull('marked_as_unavailable_at')
             ->with('author')
             ->get();
 

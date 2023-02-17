@@ -96,10 +96,10 @@ class Package extends Model implements Feedable
     public function scopePopular($query)
     {
         return $query
+            ->latest('popularity')
             ->select(
-                DB::Raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
-            )
-            ->orderBy('popularity', 'desc');
+                DB::Raw('packages.*, ((`github_stars` * ' . $this->githubStarVsPackagistDownloadsMultiplier . ') + `packagist_downloads`) as `popularity`')
+            );
     }
 
     public function scopeNovaCurrent($query)
@@ -172,7 +172,7 @@ class Package extends Model implements Feedable
 
     public function getOgImagePublicUrlAttribute()
     {
-        return Storage::url(config('opengraph.image_directory_name')."/{$this->og_image_name}");
+        return Storage::url(config('opengraph.image_directory_name') . "/{$this->og_image_name}");
     }
 
     /**

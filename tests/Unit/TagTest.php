@@ -36,7 +36,7 @@ class TagTest extends TestCase
         $tagWithMostPackages = Tag::nonTypes()
             ->whereHas('packages')
             ->withCount('packages')
-            ->orderByDesc('packages_count')
+            ->latest('packages_count')
             ->first();
         $popularTags = Tag::popular()->take(3)->get();
 
