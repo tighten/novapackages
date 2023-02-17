@@ -3,7 +3,7 @@
 namespace Tests\Unit\Http\Resources;
 
 use App\Http\Resources\PackageResource;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

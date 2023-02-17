@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\GeneratePackageOpenGraphImage;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Console\Command;
 
 class GenerateOpenGraphImages extends Command

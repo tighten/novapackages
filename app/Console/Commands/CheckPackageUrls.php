@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\CheckPackageUrlsForAvailability as CheckPackageUrlsJob;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Console\Command;
 
 class CheckPackageUrls extends Command

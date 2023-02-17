@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\NewUserSignedUp;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;

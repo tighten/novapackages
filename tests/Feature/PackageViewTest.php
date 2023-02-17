@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Collaborator;
-use App\Package;
-use App\Screenshot;
-use App\User;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Screenshot;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;

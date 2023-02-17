@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Package;
+use App\Models\Package;
 use App\ReadmeFormatter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Collaborator;
-use App\Package;
-use App\Tag;
-use App\User;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
