@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Package;
+use Illuminate\Support\Facades\Log;
 
 class FeedController extends Controller
 {
     public function __invoke()
     {
+        Log::info('API: packages.json');
+
         return cache()->remember('all-packages-as-json', 3600, function () {
             return Package::query()
                 ->with(['tags', 'author'])

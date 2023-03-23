@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Package as PackageResource;
 use App\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PackagesController extends Controller
 {
@@ -13,6 +14,8 @@ class PackagesController extends Controller
     {
         $githubUsername = $request->input('github_username');
         $authorName = $request->input('author_name');
+
+        Log::info('API: /packages');
 
         return PackageResource::collection(Package::orderBy('created_at', 'desc')
             ->when($githubUsername, function ($query) use ($githubUsername) {

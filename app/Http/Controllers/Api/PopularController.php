@@ -8,6 +8,7 @@ use App\Http\Resources\Package as PackageResource;
 use App\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class PopularController extends Controller
 {
@@ -15,6 +16,8 @@ class PopularController extends Controller
 
     public function __invoke(Request $request)
     {
+        Log::info('API: /popular');
+
         return PackageResource::collection($this->popular());
     }
 
