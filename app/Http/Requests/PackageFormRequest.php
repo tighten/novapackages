@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Collaborator;
-use App\Package;
-use App\Screenshot;
-use App\Tag;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Screenshot;
+use App\Models\Tag;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Package;
+use App\Models\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;

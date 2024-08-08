@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CollaboratorFactory extends Factory

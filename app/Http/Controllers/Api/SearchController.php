@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\SearchIndex;
 use App\CacheKeys;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Package as PackageResource;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;

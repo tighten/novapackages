@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Favorite;
+use App\Models\Favorite;
 use App\Jobs\UserRatePackage;
-use App\Package;
-use App\Review;
+use App\Models\Package;
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

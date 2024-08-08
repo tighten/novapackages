@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Resources\PackageDetailResource;
-use App\Package;
+use App\Models\Package;
 
 class PackageController extends Controller
 {

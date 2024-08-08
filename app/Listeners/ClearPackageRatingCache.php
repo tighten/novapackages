@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\CacheKeys;
 use App\Events\PackageRated;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Support\Facades\Cache;
 
 class ClearPackageRatingCache

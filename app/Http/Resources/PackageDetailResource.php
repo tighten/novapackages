@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use App\CacheKeys;
 use App\Exceptions\PackagistException;
-use App\Favorite;
+use App\Models\Favorite;
 use App\Http\Remotes\Packagist;
 use App\Http\Resources\TagResource;
 use App\ReadmeFormatter;

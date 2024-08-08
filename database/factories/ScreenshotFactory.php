@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Screenshot;
-use App\User;
+use App\Models\Screenshot;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ScreenshotFactory extends Factory

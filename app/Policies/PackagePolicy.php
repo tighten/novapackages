@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Package;
+use App\Models\Package;
 use App\Policies\HandlesPackageAuthorizationTrait;
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PackagePolicy

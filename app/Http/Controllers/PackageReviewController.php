@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Http\Resources\PackageDetailResource;
-use App\Package;
+use App\Models\Package;
 
 class PackageReviewController extends Controller
 {

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Collaborator;
-use App\Package;
+use App\Models\Collaborator;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PackageFactory extends Factory

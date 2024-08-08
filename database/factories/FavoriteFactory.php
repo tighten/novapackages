@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Favorite;
-use App\Package;
-use App\User;
+use App\Models\Favorite;
+use App\Models\Package;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FavoriteFactory extends Factory

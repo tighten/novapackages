@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Review;
-use App\User;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ReviewPolicy
