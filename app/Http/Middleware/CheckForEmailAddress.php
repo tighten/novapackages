@@ -16,7 +16,7 @@ class CheckForEmailAddress
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $guard = null): Response
+    public function handle(Request $request, Closure $next, ?string $guard = null): Response
     {
         if (auth()->check() && ! auth()->user()->email) {
             return redirect()->route('app.email.create');

@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\InternalApi;
 
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Package;
 
 class PackageFavoritesController extends Controller
 {
-    public function store(Package $package)
+    public function store(Package $package): Response
     {
         auth()->user()->favoritePackage($package->id);
 
         return response(['status' => 'success', 'message' => 'Favorite created successfully'], 201);
     }
 
-    public function destroy(Package $package)
+    public function destroy(Package $package): Response
     {
         auth()->user()->unfavoritePackage($package->id);
 

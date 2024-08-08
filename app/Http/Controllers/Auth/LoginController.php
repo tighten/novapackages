@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\RedirectResponse;
 use App\Events\NewUserSignedUp;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -48,7 +49,7 @@ class LoginController extends Controller
         return Socialite::driver('github')->redirect();
     }
 
-    public function handleProviderCallback()
+    public function handleProviderCallback(): RedirectResponse
     {
         $user = $this->createOrUpdateUser(Socialite::driver('github')->user());
 

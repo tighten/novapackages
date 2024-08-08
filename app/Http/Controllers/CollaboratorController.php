@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Collaborator;
 
 class CollaboratorController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         abort(404);
 
@@ -18,7 +19,7 @@ class CollaboratorController extends Controller
         //     ->with('packages', PackageResource::from(Package::orderBy('created_at', 'desc')->with(['tags', 'author', 'ratings'])->get()));
     }
 
-    public function show(Collaborator $collaborator)
+    public function show(Collaborator $collaborator): View
     {
         return view('collaborators.show')
             ->with('collaborator', $collaborator);

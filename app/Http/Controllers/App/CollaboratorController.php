@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\App;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Collaborator;
 use App\Events\CollaboratorCreated;
 use App\Http\Controllers\Controller;
@@ -11,19 +13,19 @@ use Illuminate\Validation\Rule;
 
 class CollaboratorController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('app.collaborators.index', [
             'unclaimed_collaborators' => Collaborator::doesntHave('user')->get(),
         ]);
     }
 
-    public function create()
+    public function create(): View
     {
         return view('app.collaborators.create');
     }
 
-    public function store()
+    public function store(): RedirectResponse
     {
         $input = request()->validate([
             'name' => 'required',
@@ -47,12 +49,12 @@ class CollaboratorController extends Controller
         return redirect()->route('app.collaborators.index');
     }
 
-    public function edit(Collaborator $collaborator)
+    public function edit(Collaborator $collaborator): View
     {
         return view('app.collaborators.edit', compact('collaborator'));
     }
 
-    public function update(Collaborator $collaborator)
+    public function update(Collaborator $collaborator): RedirectResponse
     {
         $input = request()->validate([
             'name' => 'required',

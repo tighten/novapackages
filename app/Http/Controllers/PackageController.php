@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Resources\PackageDetailResource;
 use App\Package;
 
 class PackageController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('packages.index');
     }
 
-    public function show($namespace, $name)
+    public function show($namespace, $name): View
     {
         $query = Package::where('composer_name', $namespace . '/' . $name);
 
@@ -29,7 +31,7 @@ class PackageController extends Controller
         ]);
     }
 
-    public function showId(Package $package)
+    public function showId(Package $package): RedirectResponse
     {
         return redirect()->route('packages.show', [
             'namespace' => $package->composer_vendor,
