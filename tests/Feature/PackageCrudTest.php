@@ -231,7 +231,7 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function user_cannot_submit_package_with_duplicate_packagist_name(): void
     {
-        $this->withoutEvents();
+        Event::fake();
         $this->fakesRepoFromRequest();
 
         $user = User::factory()->create();
@@ -323,7 +323,7 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function author_can_delete_their_packages(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         Storage::fake();
 
@@ -370,7 +370,7 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function collaborators_can_delete_their_packages(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();
@@ -390,7 +390,7 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function submitter_can_delete_package(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $submitter = User::factory()->create();
         $package = Package::factory()->create(['submitter_id' => $submitter->id]);
@@ -406,7 +406,7 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function submitter_can_delete_package_if_package_author_is_not_a_user(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $submitter = User::factory()->create();
         $authorUser = User::factory()->create();
@@ -427,7 +427,7 @@ class PackageCrudTest extends TestCase
     /** @test */
     public function admin_can_delete_package(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $admin = User::factory()->admin()->create();
 

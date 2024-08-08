@@ -16,7 +16,7 @@ use Tests\TestCase;
 
 class PackageEditTest extends TestCase
 {
-    use RefreshDatabase, WithFaker, WithoutEvents;
+    use RefreshDatabase, WithFaker;
 
     /** @test */
     public function user_can_update_a_package(): void

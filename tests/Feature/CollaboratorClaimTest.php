@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Collaborator;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class CollaboratorClaimTest extends TestCase
@@ -14,7 +15,7 @@ class CollaboratorClaimTest extends TestCase
     /** @test */
     public function user_can_claim_a_collaborator(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();
@@ -29,7 +30,7 @@ class CollaboratorClaimTest extends TestCase
     /** @test */
     public function users_can_claim_a_second_collaborator(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();

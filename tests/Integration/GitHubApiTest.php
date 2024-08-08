@@ -18,7 +18,7 @@ class GitHubApiTest extends TestCase
     }
 
     /** @test */
-    function readme_response_in_expected_format(): void
+    public function readme_response_in_expected_format(): void
     {
         $response = app(GitHub::class)->readme('tighten/nova-stripe');
 
@@ -26,7 +26,7 @@ class GitHubApiTest extends TestCase
     }
 
     /** @test */
-    function releases_response_in_expected_format(): void
+    public function releases_response_in_expected_format(): void
     {
         $response = app(GitHub::class)->releases('tighten/nova-stripe');
 
@@ -47,7 +47,7 @@ class GitHubApiTest extends TestCase
     }
 
     /** @test */
-    function searching_issues_response_in_expected_format(): void
+    public function searching_issues_response_in_expected_format(): void
     {
         $response = app(GitHub::class)->packageIdeaIssues();
 
@@ -69,7 +69,7 @@ class GitHubApiTest extends TestCase
     }
 
     /** @test */
-    function user_response_in_expected_format(): void
+    public function user_response_in_expected_format(): void
     {
         $response = app(GitHub::class)->user('marcusmoore');
 

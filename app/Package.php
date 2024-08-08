@@ -103,7 +103,7 @@ class Package extends Model implements Feedable
     public function scopePopular($query)
     {
         return $query->select(
-            DB::Raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
+            DB::raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
         )
             ->orderBy('popularity', 'desc');
     }

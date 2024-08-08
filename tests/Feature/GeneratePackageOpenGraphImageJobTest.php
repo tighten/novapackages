@@ -53,7 +53,11 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
             ->post(route('app.packages.store', $formData))
             ->assertSuccessful();
 
-        Event::assertDispatched(PackageCreated::class);
+        $package = Package::whereUrl('https://www.example.com/abcs/lmnop')->first();
+
+        Event::assertDispatched(PackageCreated::class, function ($event) use ($package) {
+            return $event->package->id === $package->id;
+        });
 
         (new PackageEventSubscriber)->handle(new PackageCreated($package));
 
