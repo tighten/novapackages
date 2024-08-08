@@ -31,7 +31,7 @@ class InternalApiReviewsTest extends TestCase
     public function authenticated_user_cannot_see_link_to_post_review_before_reviewing_package()
     {
         Http::fake([
-            "https://packagist.org/packages/*.json" => Http::response(),
+            'https://packagist.org/packages/*.json' => Http::response(),
         ]);
 
         $package = Package::factory()->create();
