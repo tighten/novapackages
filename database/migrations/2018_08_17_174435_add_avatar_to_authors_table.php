@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class AddAvatarToAuthorsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -18,4 +18,4 @@ class AddAvatarToAuthorsTable extends Migration
             $table->dropColumn('avatar');
         });
     }
-}
+};
