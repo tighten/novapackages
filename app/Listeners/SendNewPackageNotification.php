@@ -8,7 +8,7 @@ use App\Tighten;
 
 class SendNewPackageNotification
 {
-    public function handle(PackageCreated $event)
+    public function handle(PackageCreated $event): void
     {
         (new Tighten)->notify(new NewPackage($event->package));
     }

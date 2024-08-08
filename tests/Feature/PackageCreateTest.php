@@ -17,7 +17,7 @@ class PackageCreateTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function can_attach_screenshots_to_the_package()
+    public function can_attach_screenshots_to_the_package(): void
     {
         $this->withoutEvents();
         $this->fakesRepoFromRequest();
@@ -44,7 +44,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function screenshots_are_optional()
+    public function screenshots_are_optional(): void
     {
         $this->withoutEvents();
         $this->fakesRepoFromRequest();
@@ -63,7 +63,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function screenshots_must_be_an_array()
+    public function screenshots_must_be_an_array(): void
     {
         $user = User::factory()->create();
 
@@ -76,7 +76,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function can_not_attach_more_than_20_screenshots()
+    public function can_not_attach_more_than_20_screenshots(): void
     {
         $user = User::factory()->create();
         $screenshots = Screenshot::factory(21)->create(['uploader_id' => $user->id]);
@@ -90,7 +90,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function all_uploaded_screenshots_are_returned_when_validation_fails()
+    public function all_uploaded_screenshots_are_returned_when_validation_fails(): void
     {
         $user = User::factory()->create();
         list($screenshotA, $screenshotB) = Screenshot::factory(2)->create(['uploader_id' => $user->id]);
@@ -112,7 +112,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_author_is_returned_to_the_view_when_validation_fails()
+    public function the_selected_author_is_returned_to_the_view_when_validation_fails(): void
     {
         $this->withoutEvents();
 
@@ -131,7 +131,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails()
+    public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails(): void
     {
         $this->withoutEvents();
 
@@ -162,7 +162,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails()
+    public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails(): void
     {
         $this->withoutEvents();
 
@@ -193,7 +193,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function relative_urls_are_formatted_to_the_latest_release()
+    public function relative_urls_are_formatted_to_the_latest_release(): void
     {
         $this->withoutEvents();
 
@@ -250,7 +250,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case()
+    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case(): void
     {
         $this->withoutExceptionHandling();
         $this->withoutEvents();
@@ -278,7 +278,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added()
+    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added(): void
     {
         $this->withoutExceptionHandling();
         $this->withoutEvents();

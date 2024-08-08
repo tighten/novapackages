@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         Blade::directive('og', function ($expression) {
             list($property, $content) = explode(',', $expression, 2);
@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(Tighten::class, function () {
             return new Tighten;

@@ -12,7 +12,7 @@ class CollaboratorClaimTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function user_can_claim_a_collaborator()
+    public function user_can_claim_a_collaborator(): void
     {
         $this->withoutEvents();
 
@@ -27,7 +27,7 @@ class CollaboratorClaimTest extends TestCase
     }
 
     /** @test */
-    public function users_can_claim_a_second_collaborator()
+    public function users_can_claim_a_second_collaborator(): void
     {
         $this->withoutEvents();
 

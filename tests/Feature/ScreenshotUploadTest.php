@@ -14,7 +14,7 @@ class ScreenshotUploadTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function authenticated_users_can_upload_a_screenshot()
+    public function authenticated_users_can_upload_a_screenshot(): void
     {
         Storage::fake();
 
@@ -38,7 +38,7 @@ class ScreenshotUploadTest extends TestCase
     }
 
     /** @test */
-    public function guest_users_can_not_upload_screenshot()
+    public function guest_users_can_not_upload_screenshot(): void
     {
         Storage::fake();
 
@@ -53,7 +53,7 @@ class ScreenshotUploadTest extends TestCase
     }
 
     /** @test */
-    public function the_uploaded_screenshot_must_be_smaller_than_2mb()
+    public function the_uploaded_screenshot_must_be_smaller_than_2mb(): void
     {
         $user = User::factory()->create();
 
@@ -69,7 +69,7 @@ class ScreenshotUploadTest extends TestCase
     }
 
     /** @test */
-    public function the_upload_screenshot_must_be_an_image()
+    public function the_upload_screenshot_must_be_an_image(): void
     {
         $user = User::factory()->create();
 

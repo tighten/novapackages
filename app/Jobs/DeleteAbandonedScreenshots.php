@@ -14,7 +14,7 @@ class DeleteAbandonedScreenshots implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function handle()
+    public function handle(): void
     {
         Screenshot::abandoned()->get()->each(function ($screenshot) {
             $screenshot->delete();

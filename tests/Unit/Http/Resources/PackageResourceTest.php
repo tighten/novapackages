@@ -13,7 +13,7 @@ class PackageResourceTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_abstract_is_returned_if_the_resource_has_an_abstract()
+    public function the_abstract_is_returned_if_the_resource_has_an_abstract(): void
     {
         $abstract = 'This is the test abstract';
         $package = Package::factory()->create([
@@ -27,7 +27,7 @@ class PackageResourceTest extends TestCase
     }
 
     /** @test */
-    public function an_abstractified_value_is_returned_when_the_abstract_is_null()
+    public function an_abstractified_value_is_returned_when_the_abstract_is_null(): void
     {
         $package = Package::factory()->create([
             'abstract' => null,

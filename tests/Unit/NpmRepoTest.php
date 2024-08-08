@@ -11,7 +11,7 @@ use Tests\TestCase;
 class NpmRepoTest extends TestCase
 {
     /** @test */
-    function it_returns_proper_readme_format()
+    function it_returns_proper_readme_format(): void
     {
         Http::fake(['https://registry.npmjs.org/lodash/' => Http::response()]);
 
@@ -21,7 +21,7 @@ class NpmRepoTest extends TestCase
     }
 
     /** @test */
-    function it_returns_latest_release_if_set()
+    function it_returns_latest_release_if_set(): void
     {
         Http::fake([
             'https://registry.npmjs.org/lodash/' => Http::response(
@@ -37,7 +37,7 @@ class NpmRepoTest extends TestCase
     }
 
     /** @test */
-    function it_returns_master_if_latest_release_is_not_set()
+    function it_returns_master_if_latest_release_is_not_set(): void
     {
         Http::fake([
             'https://registry.npmjs.org/lodash/' => Http::response(),

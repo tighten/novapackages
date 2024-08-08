@@ -28,7 +28,7 @@ class PackageCrudTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function app_package_index_shows_my_packages()
+    public function app_package_index_shows_my_packages(): void
     {
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();
@@ -47,7 +47,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function app_package_index_doesnt_show_others_packages()
+    public function app_package_index_doesnt_show_others_packages(): void
     {
         $this->markTestIncomplete('Needs to scope just to the "My Packages" section');
 
@@ -65,7 +65,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function app_package_index_shows_my_favorited_packages()
+    public function app_package_index_shows_my_favorited_packages(): void
     {
         $userA = User::factory()->create();
         $userAFavorites = Favorite::factory(2)->create([
@@ -86,7 +86,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_user_can_see_create_package_page()
+    public function authenticated_user_can_see_create_package_page(): void
     {
         $user = User::factory()->create();
 
@@ -97,14 +97,14 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function non_authenticated_user_cannot_see_create_package_page()
+    public function non_authenticated_user_cannot_see_create_package_page(): void
     {
         $this->get(route('app.packages.create'))
             ->assertRedirect('/login/github');
     }
 
     /** @test */
-    public function user_can_submit_a_package()
+    public function user_can_submit_a_package(): void
     {
         Event::fake();
 
@@ -153,7 +153,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function non_user_cannot_submit_a_package()
+    public function non_user_cannot_submit_a_package(): void
     {
         $package = Package::factory()->make();
         $this->followingRedirects()
@@ -164,7 +164,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_submit_package_without_author()
+    public function user_cannot_submit_package_without_author(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->make(['author_id' => null]);
@@ -177,7 +177,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_submit_package_without_package_name()
+    public function user_cannot_submit_package_without_package_name(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->make(['name' => null]);
@@ -190,7 +190,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_submit_package_without_packagist_namespace()
+    public function user_cannot_submit_package_without_packagist_namespace(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->make(['composer_name' => '/test-name']);
@@ -203,7 +203,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_submit_package_without_packagist_name()
+    public function user_cannot_submit_package_without_packagist_name(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->make(['composer_name' => 'testing/']);
@@ -216,7 +216,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_submit_package_without_url()
+    public function user_cannot_submit_package_without_url(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->make(['url' => null]);
@@ -229,7 +229,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_submit_package_with_duplicate_packagist_name()
+    public function user_cannot_submit_package_with_duplicate_packagist_name(): void
     {
         $this->withoutEvents();
         $this->fakesRepoFromRequest();
@@ -249,7 +249,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function it_sends_a_slack_notification_when_a_new_package_is_created()
+    public function it_sends_a_slack_notification_when_a_new_package_is_created(): void
     {
         Event::fake();
         $this->fakesRepoFromRequest();
@@ -270,7 +270,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function slack_notification_contains_submitted_users_name_if_submitted_user_is_not_author()
+    public function slack_notification_contains_submitted_users_name_if_submitted_user_is_not_author(): void
     {
         Notification::fake();
         Event::fake();
@@ -293,7 +293,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function slack_notification_does_not_contain_submitted_users_name_if_submitted_user_is_author()
+    public function slack_notification_does_not_contain_submitted_users_name_if_submitted_user_is_author(): void
     {
         Notification::fake();
         Event::fake();
@@ -321,7 +321,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function author_can_delete_their_packages()
+    public function author_can_delete_their_packages(): void
     {
         $this->withoutEvents();
 
@@ -368,7 +368,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function collaborators_can_delete_their_packages()
+    public function collaborators_can_delete_their_packages(): void
     {
         $this->withoutEvents();
 
@@ -388,7 +388,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function submitter_can_delete_package()
+    public function submitter_can_delete_package(): void
     {
         $this->withoutEvents();
 
@@ -404,7 +404,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function submitter_can_delete_package_if_package_author_is_not_a_user()
+    public function submitter_can_delete_package_if_package_author_is_not_a_user(): void
     {
         $this->withoutEvents();
 
@@ -425,7 +425,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_delete_package()
+    public function admin_can_delete_package(): void
     {
         $this->withoutEvents();
 
@@ -442,7 +442,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function users_that_are_not_a_packages_author_cannot_delete_it()
+    public function users_that_are_not_a_packages_author_cannot_delete_it(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->create();
@@ -455,7 +455,7 @@ class PackageCrudTest extends TestCase
     }
 
     /** @test */
-    public function deleting_package_fires_slack_notification()
+    public function deleting_package_fires_slack_notification(): void
     {
         Notification::fake();
 

@@ -14,7 +14,7 @@ class CollaboratorCreateTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_url_field_is_optional()
+    public function the_url_field_is_optional(): void
     {
         $this->withoutEvents();
 

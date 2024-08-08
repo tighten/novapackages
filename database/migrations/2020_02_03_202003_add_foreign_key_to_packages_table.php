@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->foreign('author_id')->references('id')->on('collaborators');
@@ -23,7 +23,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->dropForeign('packages_author_id_foreign');

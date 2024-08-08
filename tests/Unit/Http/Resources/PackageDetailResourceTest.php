@@ -15,7 +15,7 @@ class PackageDetailResourceTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function can_determine_if_the_package_is_favorited_by_the_authenticated_user()
+    public function can_determine_if_the_package_is_favorited_by_the_authenticated_user(): void
     {
         $this->fakePackagistRequest();
 
@@ -30,7 +30,7 @@ class PackageDetailResourceTest extends TestCase
     }
 
     /** @test */
-    public function can_determine_if_the_package_is_unfavorited_by_the_authenticated_user()
+    public function can_determine_if_the_package_is_unfavorited_by_the_authenticated_user(): void
     {
         $this->fakePackagistRequest();
 
@@ -44,7 +44,7 @@ class PackageDetailResourceTest extends TestCase
     }
 
     /** @test */
-    public function return_the_count_of_favorites_for_a_package()
+    public function return_the_count_of_favorites_for_a_package(): void
     {
         $this->fakePackagistRequest();
 
@@ -60,7 +60,7 @@ class PackageDetailResourceTest extends TestCase
     }
 
     /** @test */
-    public function includes_whether_package_has_been_marked_as_unavailable()
+    public function includes_whether_package_has_been_marked_as_unavailable(): void
     {
         $this->fakePackagistRequest();
 

@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class PackageDetailResource extends PackageResource
 {
-    public function toArray($package)
+    public function toArray($package): array
     {
         try {
             $packagistData = Packagist::make($package->composer_name)->data();

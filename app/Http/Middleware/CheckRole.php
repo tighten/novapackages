@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 use Closure;
 
 class CheckRole
@@ -14,7 +16,7 @@ class CheckRole
      * @param  string  $role
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, $role): Response
     {
         if (! $request->user() || ! $request->user()->role == $role) {
             return redirect('/');

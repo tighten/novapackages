@@ -12,7 +12,7 @@ class FeedApiTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function ensures_packages_feed_response_code_and_structure()
+    public function ensures_packages_feed_response_code_and_structure(): void
     {
         Package::factory(5)->create();
 

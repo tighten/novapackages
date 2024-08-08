@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->integer('nova_version')->unsigned()->nullable()->after('latest_version');
@@ -23,7 +23,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->dropColumn('nova_version');

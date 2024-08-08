@@ -34,7 +34,7 @@ class SyncPackagePackagistData implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         try {
             $packagistData = Packagist::make($this->package->composer_name)->data();

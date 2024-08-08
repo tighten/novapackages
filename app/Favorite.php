@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Package;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,7 @@ class Favorite extends Model
         'user_id',
     ];
 
-    public function package()
+    public function package(): BelongsTo
     {
         return $this->belongsTo(Package::class);
     }

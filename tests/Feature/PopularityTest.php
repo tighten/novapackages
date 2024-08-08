@@ -13,7 +13,7 @@ class PopularityTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function github_stars_influence_popularity()
+    public function github_stars_influence_popularity(): void
     {
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();
@@ -32,7 +32,7 @@ class PopularityTest extends TestCase
     }
 
     /** @test */
-    public function packagist_downloads_influence_popularity()
+    public function packagist_downloads_influence_popularity(): void
     {
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();

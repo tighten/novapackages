@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('collaborator_package', function (Blueprint $table) {
             $table->foreign('package_id')->references('id')->on('packages');
@@ -14,7 +14,7 @@ return new class extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('collaborator_package', function (Blueprint $table) {
             $table->dropForeign([

@@ -13,7 +13,7 @@ class ScreenshotFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'uploader_id' => User::factory(),

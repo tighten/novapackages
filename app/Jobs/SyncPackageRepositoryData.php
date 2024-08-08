@@ -25,7 +25,7 @@ class SyncPackageRepositoryData implements ShouldQueue
         $this->package = $package;
     }
 
-    public function handle()
+    public function handle(): void
     {
         try {
             $repo = Repo::fromPackageModel($this->package);

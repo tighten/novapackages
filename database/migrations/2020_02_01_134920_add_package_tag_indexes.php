@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('package_tag', function (Blueprint $table) {
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
@@ -24,7 +24,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('package_tag', function (Blueprint $table) {
             $table->dropForeign('package_tag_package_id_foreign');

@@ -35,7 +35,7 @@ class CollaboratorClaimed extends Notification implements ShouldQueue
         (new Tighten)->notify($this);
     }
 
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['slack'];
     }

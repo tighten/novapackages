@@ -18,7 +18,7 @@ class DisableUnavailablePackageCommandTest extends TestCase
     /**
      * @test
      */
-    public function command_disables_unavailable_packages_after_30_days()
+    public function command_disables_unavailable_packages_after_30_days(): void
     {
 
         Notification::fake();

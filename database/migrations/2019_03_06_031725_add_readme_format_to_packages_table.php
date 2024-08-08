@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->string('readme_format')
@@ -16,7 +16,7 @@ return new class extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->dropColumn('readme_format');

@@ -52,7 +52,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     /**
      * @test
      */
-    public function calling_command_marks_unavailable_packages_as_unavailable()
+    public function calling_command_marks_unavailable_packages_as_unavailable(): void
     {
         Notification::fake();
         $now = now();
@@ -73,7 +73,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     /**
      * @test
      */
-    public function calling_command_sends_notification_to_author_of_unavailable_packages()
+    public function calling_command_sends_notification_to_author_of_unavailable_packages(): void
     {
         Notification::fake();
 
@@ -98,7 +98,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     /**
      * @test
      */
-    public function command_ignores_packages_that_are_already_unavailable()
+    public function command_ignores_packages_that_are_already_unavailable(): void
     {
         Notification::fake();
 

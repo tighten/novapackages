@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Favorite;
 use App\Jobs\UserRatePackage;
 use App\Package;
@@ -61,12 +62,12 @@ class User extends Authenticatable
         });
     }
 
-    public function collaborators()
+    public function collaborators(): HasMany
     {
         return $this->hasMany(Collaborator::class);
     }
 
-    public function favorites()
+    public function favorites(): HasMany
     {
         return $this->hasMany(Favorite::class);
     }

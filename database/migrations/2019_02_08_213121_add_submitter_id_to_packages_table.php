@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->unsignedInteger('submitter_id')->default(null)->nullable();
@@ -14,7 +14,7 @@ return new class extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->dropForeign('packages_submitter_id_foreign');

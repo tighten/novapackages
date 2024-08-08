@@ -23,7 +23,7 @@ class CheckPackageUrlsForAvailability implements ShouldQueue
         $this->package = $package;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $urlIsValid = true;
         try {

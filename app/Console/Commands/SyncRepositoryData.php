@@ -12,7 +12,7 @@ class SyncRepositoryData extends Command
 
     protected $description = 'Sync VCS repository readme, url and source for every package.';
 
-    public function handle()
+    public function handle(): void
     {
         $packages = $this->argument('package')
             ? Package::where('id', $this->argument('package'))->get()

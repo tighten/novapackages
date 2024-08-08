@@ -14,7 +14,7 @@ class StatsApiTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_counts_live_packages()
+    public function it_counts_live_packages(): void
     {
         $this->fakeNovaReleasesRequest();
 
@@ -27,7 +27,7 @@ class StatsApiTest extends TestCase
     }
 
     /** @test */
-    public function it_sums_live_package_download_counts()
+    public function it_sums_live_package_download_counts(): void
     {
         $this->fakeNovaReleasesRequest();
 
@@ -41,7 +41,7 @@ class StatsApiTest extends TestCase
     }
 
     /** @test */
-    public function it_sums_live_package_star_counts()
+    public function it_sums_live_package_star_counts(): void
     {
         $this->fakeNovaReleasesRequest();
 
@@ -55,7 +55,7 @@ class StatsApiTest extends TestCase
     }
 
     /** @test */
-    public function it_counts_collaborators()
+    public function it_counts_collaborators(): void
     {
         $this->fakeNovaReleasesRequest();
 
@@ -67,7 +67,7 @@ class StatsApiTest extends TestCase
     }
 
     /** @test */
-    public function it_counts_ratings()
+    public function it_counts_ratings(): void
     {
         $this->fakeNovaReleasesRequest();
 
@@ -91,7 +91,7 @@ class StatsApiTest extends TestCase
     }
 
     /** @test */
-    public function it_averages_global_rating()
+    public function it_averages_global_rating(): void
     {
         $this->fakeNovaReleasesRequest();
 

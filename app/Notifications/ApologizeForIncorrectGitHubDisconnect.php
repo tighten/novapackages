@@ -11,12 +11,12 @@ class ApologizeForIncorrectGitHubDisconnect extends Notification implements Shou
 {
     use Queueable;
 
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
 
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Our apologies for the incorrect error email!')

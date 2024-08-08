@@ -11,7 +11,7 @@ class ScreenshotPolicy
 {
     use HandlesAuthorization, HandlesPackageAuthorizationTrait;
 
-    public function delete(User $user, Screenshot $screenshot)
+    public function delete(User $user, Screenshot $screenshot): bool
     {
         if ($screenshot->uploader->is($user)
             || ($screenshot->hasPackage() && $this->userIsAdminOrAuthorOrCollaboratorOrUnclaimedSubmitter($user, $screenshot->package))

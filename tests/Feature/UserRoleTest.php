@@ -11,7 +11,7 @@ class UserRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function user_default_role_is_user()
+    public function user_default_role_is_user(): void
     {
         $user = User::factory()->create();
 
@@ -20,7 +20,7 @@ class UserRoleTest extends TestCase
     }
 
     /** @test */
-    public function user_correctly_reports_if_admin()
+    public function user_correctly_reports_if_admin(): void
     {
         $user = User::factory()->create();
         $admin = User::factory()->create(['role' => User::ADMIN_ROLE]);

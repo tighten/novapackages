@@ -11,7 +11,7 @@ class CheckRoleMiddlewareTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function users_cannot_visit_admin_protected_routes()
+    public function users_cannot_visit_admin_protected_routes(): void
     {
         $user = User::factory()->create();
 
@@ -21,7 +21,7 @@ class CheckRoleMiddlewareTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_visit_admin_protected_routes()
+    public function admins_can_visit_admin_protected_routes(): void
     {
         $user = User::factory()->admin()->create();
 

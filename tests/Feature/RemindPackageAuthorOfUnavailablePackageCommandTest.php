@@ -18,7 +18,7 @@ class RemindPackageAuthorOfUnavailablePackageCommandTest extends TestCase
     /**
      * @test
      */
-    public function command_sends_reminder_to_package_author_after_14_days()
+    public function command_sends_reminder_to_package_author_after_14_days(): void
     {
 
         Notification::fake();

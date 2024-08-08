@@ -11,7 +11,7 @@ class FeedTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_recent_feed_loads()
+    public function the_recent_feed_loads(): void
     {
         Package::factory()->create();
 

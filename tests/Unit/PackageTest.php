@@ -13,7 +13,7 @@ class PackageTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_returns_the_abstact_when_the_abstract_is_set()
+    public function it_returns_the_abstact_when_the_abstract_is_set(): void
     {
         $abstract = 'This is the test abstract';
         $package = Package::factory()->create([
@@ -24,7 +24,7 @@ class PackageTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_an_abstractified_readme_when_the_abstract_is_not_set()
+    public function it_returns_an_abstractified_readme_when_the_abstract_is_not_set(): void
     {
         $readme = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
         $truncatedReadme = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris';
@@ -39,7 +39,7 @@ class PackageTest extends TestCase
     }
 
     /** @test */
-    public function it_excludes_attributes_from_being_synchronized_to_the_scout_search_index()
+    public function it_excludes_attributes_from_being_synchronized_to_the_scout_search_index(): void
     {
         $notSearchableAttributes = [
             'description',
@@ -64,7 +64,7 @@ class PackageTest extends TestCase
     }
 
     /** @test */
-    public function the_readme_is_truncated_to_500_characters_when_being_synchronized_with_the_scout_index()
+    public function the_readme_is_truncated_to_500_characters_when_being_synchronized_with_the_scout_index(): void
     {
         $package = Package::factory()->create([
             'readme' => Str::random(1400),
@@ -79,7 +79,7 @@ class PackageTest extends TestCase
      * @test
      * @dataProvider packageNameProvider
      */
-    public function it_returns_the_display_name_of_the_package($input, $expected)
+    public function it_returns_the_display_name_of_the_package($input, $expected): void
     {
         $package = Package::make([
             'name' => $input,

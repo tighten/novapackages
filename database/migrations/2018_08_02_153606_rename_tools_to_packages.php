@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::rename('tools', 'packages');
         Schema::rename('category_tool', 'category_package');
@@ -16,7 +16,7 @@ return new class extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::rename('packages', 'tools');
         Schema::rename('category_package', 'category_tool');

@@ -11,7 +11,7 @@ use Tests\TestCase;
 class BitBucketRepoTest extends TestCase
 {
     /** @test */
-    public function it_gets_the_latest_release_version_for_tagged_releases()
+    public function it_gets_the_latest_release_version_for_tagged_releases(): void
     {
         $this->mockBitBucketWith([
             'fetchData' => [
@@ -29,7 +29,7 @@ class BitBucketRepoTest extends TestCase
     }
 
     /** @test */
-    public function it_falls_back_to_master_when_there_are_no_releases()
+    public function it_falls_back_to_master_when_there_are_no_releases(): void
     {
         $this->mockBitBucketWith([
             'fetchData' => ['values' => []],
@@ -41,7 +41,7 @@ class BitBucketRepoTest extends TestCase
     }
 
     /** @test */
-    function it_returns_proper_readme_format()
+    function it_returns_proper_readme_format(): void
     {
         $repo = BitBucketRepo::make('https://bitbucket.org/starwars/lightsabers');
 

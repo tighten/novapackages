@@ -34,7 +34,7 @@ class GeneratePackageOpenGraphImage implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         (new OpenGraphImage($this->packageName, $this->packageAuthor, $this->packageOgImageName))->generate();
     }

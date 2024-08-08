@@ -13,7 +13,7 @@ class LoginTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_login_after_socialite_authentication()
+    public function a_user_can_login_after_socialite_authentication(): void
     {
         Event::fake();
 
@@ -38,7 +38,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_login_after_socialite_authentication_when_the_socialite_response_is_missing_an_email()
+    public function a_user_can_login_after_socialite_authentication_when_the_socialite_response_is_missing_an_email(): void
     {
         Event::fake();
 
@@ -63,7 +63,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function a_user_is_updated_if_the_email_matches_the_socialite_response()
+    public function a_user_is_updated_if_the_email_matches_the_socialite_response(): void
     {
         Event::fake();
 
@@ -95,7 +95,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function a_user_is_updated_if_the_github_username_matches_the_socialite_response()
+    public function a_user_is_updated_if_the_github_username_matches_the_socialite_response(): void
     {
         Event::fake();
 
@@ -127,7 +127,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function the_github_user_id_is_updated_if_it_is_null()
+    public function the_github_user_id_is_updated_if_it_is_null(): void
     {
         Event::fake();
 

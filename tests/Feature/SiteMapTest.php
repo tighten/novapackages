@@ -11,7 +11,7 @@ class SiteMapTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function displays_sitemap()
+    function displays_sitemap(): void
     {
         [$packageA, $packageB] = Package::factory()->count(2)->create();
 

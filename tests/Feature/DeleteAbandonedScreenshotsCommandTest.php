@@ -15,7 +15,7 @@ class DeleteAbandonedScreenshotsCommandTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function screnshots_not_attached_to_packages_that_are_older_than_one_day_are_deleted()
+    public function screnshots_not_attached_to_packages_that_are_older_than_one_day_are_deleted(): void
     {
         Storage::fake();
 

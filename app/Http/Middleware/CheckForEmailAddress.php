@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 use Closure;
 
 class CheckForEmailAddress
@@ -14,7 +16,7 @@ class CheckForEmailAddress
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, $guard = null): Response
     {
         if (auth()->check() && ! auth()->user()->email) {
             return redirect()->route('app.email.create');
