@@ -12,7 +12,7 @@ use Tests\TestCase;
 class GitLabRepoTest extends TestCase
 {
     /** @test */
-    function it_sets_the_url_for_a_changed_username_to_the_new_repository_location()
+    function it_sets_the_url_for_a_changed_username_to_the_new_repository_location(): void
     {
         Http::fake([
             'https://gitlab.com/senator-palpatine/masterplan' => Http::response(null, 301, [
@@ -26,7 +26,7 @@ class GitLabRepoTest extends TestCase
     }
 
     /** @test */
-    public function it_gets_the_latest_release_version_for_tagged_releases()
+    public function it_gets_the_latest_release_version_for_tagged_releases(): void
     {
         Http::fake(['https://gitlab.com/starwars/lightsabers' => Http::response()]);
 
@@ -44,7 +44,7 @@ class GitLabRepoTest extends TestCase
     }
 
     /** @test */
-    public function it_falls_back_to_master_when_there_are_no_releases()
+    public function it_falls_back_to_master_when_there_are_no_releases(): void
     {
         Http::fake(['https://gitlab.com/starwars/x-wings' => Http::response()]);
 
@@ -58,7 +58,7 @@ class GitLabRepoTest extends TestCase
     }
 
     /** @test */
-    function it_returns_proper_readme_format()
+    function it_returns_proper_readme_format(): void
     {
         Http::fake(['https://gitlab.com/starwars/lightsabers' => Http::response()]);
 

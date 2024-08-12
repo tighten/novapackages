@@ -16,7 +16,7 @@ class ScreenshotDeleteTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_screenshot_can_be_deleted_by_the_person_who_uploaded_it()
+    public function a_screenshot_can_be_deleted_by_the_person_who_uploaded_it(): void
     {
         Storage::fake();
 
@@ -43,7 +43,7 @@ class ScreenshotDeleteTest extends TestCase
     }
 
     /** @test */
-    public function a_package_collaborator_can_delete_an_attached_screenshot()
+    public function a_package_collaborator_can_delete_an_attached_screenshot(): void
     {
         Storage::fake();
 
@@ -65,7 +65,7 @@ class ScreenshotDeleteTest extends TestCase
     }
 
     /** @test */
-    public function an_unauthorized_user_can_not_delete_a_screenshot()
+    public function an_unauthorized_user_can_not_delete_a_screenshot(): void
     {
         Storage::fake();
 
@@ -86,7 +86,7 @@ class ScreenshotDeleteTest extends TestCase
     }
 
     /** @test */
-    public function a_guest_user_can_not_delete_a_screenshot()
+    public function a_guest_user_can_not_delete_a_screenshot(): void
     {
         Storage::fake();
 

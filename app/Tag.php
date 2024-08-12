@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -28,7 +29,7 @@ class Tag extends Model
 
     protected $guarded = ['id'];
 
-    public function packages()
+    public function packages(): BelongsToMany
     {
         return $this->belongsToMany(Package::class)->withTimestamps();
     }

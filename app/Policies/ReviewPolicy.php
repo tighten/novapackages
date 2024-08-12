@@ -10,7 +10,7 @@ class ReviewPolicy
 {
     use HandlesAuthorization;
 
-    public function delete(User $user, Review $review)
+    public function delete(User $user, Review $review): bool
     {
         return $this->userIsAdminOrReviewAuthor($user, $review);
     }

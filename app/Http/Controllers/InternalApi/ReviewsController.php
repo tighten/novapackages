@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\InternalApi;
 
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Package;
 use App\Review;
@@ -45,7 +46,7 @@ class ReviewsController extends Controller
         return ['status' => 'success', 'message' => 'Review edited successfully'];
     }
 
-    public function destroy(Review $review)
+    public function destroy(Review $review): Response
     {
         $review->delete();
 

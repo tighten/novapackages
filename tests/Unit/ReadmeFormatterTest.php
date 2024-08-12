@@ -13,7 +13,7 @@ class ReadmeFormatterTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_formats_github_sources()
+    public function it_formats_github_sources(): void
     {
         $package = Package::factory()->create([
             'readme_source' => 'github',
@@ -32,7 +32,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_formats_gitlab_sources()
+    public function it_formats_gitlab_sources(): void
     {
         $package = Package::factory()->create([
             'readme_source' => 'gitlab',
@@ -51,7 +51,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_formats_bitbucket_sources()
+    public function it_formats_bitbucket_sources(): void
     {
         $package = Package::factory()->create([
             'readme_source' => 'bitbucket',
@@ -69,7 +69,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_wraps_html_readme_with_markdown_div()
+    public function it_wraps_html_readme_with_markdown_div(): void
     {
         $package = Package::factory()->create([
             'readme_source' => 'github',
@@ -87,7 +87,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_formats_html_image_relative_urls_to_full_qualified_raw_urls()
+    public function it_formats_html_image_relative_urls_to_full_qualified_raw_urls(): void
     {
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
         $latestVersion = 'v1.0.0';
@@ -124,7 +124,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_formats_html_non_image_relative_urls_to_fully_qualified_blob_urls()
+    public function it_formats_html_non_image_relative_urls_to_fully_qualified_blob_urls(): void
     {
         $relativeUrl = '<a href="CONTRIBUTING.md">contribution guidelines</a>';
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
@@ -145,7 +145,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_formats_markdown_image_relative_urls_to_full_qualified_raw_urls()
+    public function it_formats_markdown_image_relative_urls_to_full_qualified_raw_urls(): void
     {
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
         $latestVersion = 'v1.0.0';
@@ -181,7 +181,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_formats_markdown_non_image_relative_urls_to_fully_qualified_blob_urls()
+    public function it_formats_markdown_non_image_relative_urls_to_fully_qualified_blob_urls(): void
     {
         $relativeUrl = '[contribution guidelines](CONTRIBUTING.md)';
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
@@ -201,7 +201,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_format_fully_qualified_urls()
+    public function it_does_not_format_fully_qualified_urls(): void
     {
         $fullyQualifiedUrl = '[Dashboard index page](http://example.com)';
         $repoUrl = 'https://github.com/tightenco/nova-stripe';
@@ -221,7 +221,7 @@ class ReadmeFormatterTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_format_mailto_urls()
+    public function it_does_not_format_mailto_urls(): void
     {
         $mailtoUrl = '[email](mailto:me@example.com)';
 

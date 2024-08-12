@@ -13,10 +13,8 @@ class AuthServiceProvider extends ServiceProvider
         \App\Review::class => \App\Policies\ReviewPolicy::class,
     ];
 
-    public function boot()
+    public function boot(): void
     {
-        $this->registerPolicies();
-
-        Passport::routes();
+        //
     }
 }

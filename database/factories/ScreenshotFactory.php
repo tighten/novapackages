@@ -10,10 +10,8 @@ class ScreenshotFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'uploader_id' => User::factory(),

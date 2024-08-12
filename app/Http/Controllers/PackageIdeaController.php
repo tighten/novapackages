@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Http\Remotes\GitHub;
 use Illuminate\Http\Request;
 
 class PackageIdeaController extends Controller
 {
-    public function __invoke(GitHub $github)
+    public function __invoke(GitHub $github): View
     {
         $ideas = collect($github->packageIdeaIssues());
 

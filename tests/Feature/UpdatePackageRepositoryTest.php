@@ -15,7 +15,7 @@ class UpdatePackageRepositoryTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_authenticated_user_can_request_a_refresh_of_a_packages_repository_data()
+    public function an_authenticated_user_can_request_a_refresh_of_a_packages_repository_data(): void
     {
         Bus::fake();
 
@@ -34,7 +34,7 @@ class UpdatePackageRepositoryTest extends TestCase
     }
 
     /** @test */
-    public function a_guest_user_can_not_request_a_refresh_of_a_packages_repository_data()
+    public function a_guest_user_can_not_request_a_refresh_of_a_packages_repository_data(): void
     {
         Bus::fake();
 

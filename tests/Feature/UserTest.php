@@ -12,7 +12,7 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function updating_collaborator_names_when_the_user_name_changes()
+    public function updating_collaborator_names_when_the_user_name_changes(): void
     {
         $user = User::factory()->create([
             'name' => 'Caleb Dume',
@@ -30,7 +30,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function updating_collaborator_names_only_updates_where_same_github_username()
+    public function updating_collaborator_names_only_updates_where_same_github_username(): void
     {
         $user = User::factory()->create([
             'name' => 'Caleb Dume',
@@ -54,7 +54,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function updating_collaborator_github_usernames_when_the_user_github_username_changes()
+    public function updating_collaborator_github_usernames_when_the_user_github_username_changes(): void
     {
         $user = User::factory()->create([
             'github_user_id' => 123,
@@ -72,7 +72,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function updating_collaborator_github_usernames_only_updates_where_same_github_user_id()
+    public function updating_collaborator_github_usernames_only_updates_where_same_github_user_id(): void
     {
         $user = User::factory()->create([
             'github_user_id' => 123,
@@ -96,7 +96,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function collaborator_github_usernames_are_only_updated_when_github_user_id_is_set()
+    public function collaborator_github_usernames_are_only_updated_when_github_user_id_is_set(): void
     {
         $user = User::factory()->create([
             'github_user_id' => null,
@@ -114,7 +114,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function updating_collaborator_github_user_id_on_user_update()
+    public function updating_collaborator_github_user_id_on_user_update(): void
     {
         $user = User::factory()->create([
             'github_user_id' => null,
@@ -132,7 +132,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function collaborator_github_user_ids_are_only_updated_where_github_username_matches()
+    public function collaborator_github_user_ids_are_only_updated_where_github_username_matches(): void
     {
         $user = User::factory()->create([
             'github_user_id' => null,
@@ -156,7 +156,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function collaborator_github_user_id_is_only_updated_when_it_is_null()
+    public function collaborator_github_user_id_is_only_updated_when_it_is_null(): void
     {
         $user = User::factory()->create([
             'github_user_id' => null,

@@ -14,7 +14,7 @@ class DeleteSelfAuthoredPackageRatingsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function deleting_self_authored_package_ratings()
+    public function deleting_self_authored_package_ratings(): void
     {
         $packageAuthor = User::factory()->create();
         // We are creating two collaborators here and setting the
@@ -46,7 +46,7 @@ class DeleteSelfAuthoredPackageRatingsTest extends TestCase
     }
 
     /** @test */
-    public function deleting_self_contributed_package_ratings()
+    public function deleting_self_contributed_package_ratings(): void
     {
         $packageAuthor = User::factory()->create();
         $packageContributor = User::factory()->create();

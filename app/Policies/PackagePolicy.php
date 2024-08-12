@@ -20,12 +20,12 @@ class PackagePolicy
         return $this->userIsAdminOrAuthorOrCollaboratorOrUnclaimedSubmitter($user, $package);
     }
 
-    public function update(User $user, Package $package)
+    public function update(User $user, Package $package): bool
     {
         return $this->userIsAdminOrAuthorOrCollaboratorOrUnclaimedSubmitter($user, $package);
     }
 
-    public function delete(User $user, Package $package)
+    public function delete(User $user, Package $package): bool
     {
         return $this->userIsAdminOrAuthorOrCollaboratorOrUnclaimedSubmitter($user, $package);
     }

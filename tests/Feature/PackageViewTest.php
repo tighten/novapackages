@@ -15,7 +15,7 @@ class PackageViewTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_view_the_show_package_page()
+    public function a_user_can_view_the_show_package_page(): void
     {
         $packageNamespace = 'tightenco';
         $packageName = 'bae';
@@ -43,7 +43,7 @@ class PackageViewTest extends TestCase
     }
 
     /** @test */
-    public function legacy_package_id_lookup_redirects_to_namespace_search()
+    public function legacy_package_id_lookup_redirects_to_namespace_search(): void
     {
         $packageNamespace = 'tightenco';
         $packageName = 'bae';

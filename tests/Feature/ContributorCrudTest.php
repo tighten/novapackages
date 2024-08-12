@@ -13,7 +13,7 @@ class ContributorCrudTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function packages_can_have_contributors()
+    public function packages_can_have_contributors(): void
     {
         $user = User::factory()->create();
         $contributor = Collaborator::factory()->create();

@@ -14,7 +14,7 @@ class GithubAuthNotificationTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function users_not_authenticated_with_github_are_notified()
+    public function users_not_authenticated_with_github_are_notified(): void
     {
         $oldUser = User::factory()->create([
             'github_username' => null,

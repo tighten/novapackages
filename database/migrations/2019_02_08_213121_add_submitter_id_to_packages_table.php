@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSubmitterIdToPackagesTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->unsignedInteger('submitter_id')->default(null)->nullable();
@@ -14,7 +14,7 @@ class AddSubmitterIdToPackagesTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->dropForeign('packages_submitter_id_foreign');
@@ -22,4 +22,4 @@ class AddSubmitterIdToPackagesTable extends Migration
             $table->dropColumn('submitter_id');
         });
     }
-}
+};

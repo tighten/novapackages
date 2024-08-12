@@ -27,7 +27,7 @@ class OpenGraphImage
      * @param  string $fileName Image filename (e.g. my-image.png)
      * @return void
      */
-    public function __construct($title, $subtitle, $fileName)
+    public function __construct(string $title, string $subtitle, string $fileName)
     {
         $this->title = $title;
         $this->subtitle = $subtitle;
@@ -40,7 +40,7 @@ class OpenGraphImage
      * @param string $uniqueId A unique key to identify the image by.
      * @param string $name Name of the file.
      */
-    public static function makeFileName($uniqueId, $name): string
+    public static function makeFileName(string $uniqueId, string $name): string
     {
         return "{$uniqueId}_" . Str::slug($name, '-') . '.png';
     }

@@ -10,7 +10,7 @@ use Tests\TestCase;
 class GitHubRepoTest extends TestCase
 {
     /** @test */
-    function requires_valid_url()
+    function requires_valid_url(): void
     {
         $this->expectException(GitHubException::class);
 
@@ -18,7 +18,7 @@ class GitHubRepoTest extends TestCase
     }
 
     /** @test */
-    public function it_gets_the_latest_release_version_for_tagged_releases()
+    public function it_gets_the_latest_release_version_for_tagged_releases(): void
     {
         Http::fake([
             'https://api.github.com/repos/starwars/lightsabers/releases' => Http::response(collect([
@@ -35,7 +35,7 @@ class GitHubRepoTest extends TestCase
     }
 
     /** @test */
-    public function it_falls_back_to_master_when_there_are_no_releases()
+    public function it_falls_back_to_master_when_there_are_no_releases(): void
     {
         Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response([])]);
 
@@ -45,7 +45,7 @@ class GitHubRepoTest extends TestCase
     }
 
     /** @test */
-    function it_returns_proper_readme_format()
+    function it_returns_proper_readme_format(): void
     {
         $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
 

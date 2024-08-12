@@ -12,7 +12,7 @@ class SyncPackagistData extends Command
 
     protected $description = 'Cache Packagist download counts and GitHub stars for every package.';
 
-    public function handle()
+    public function handle(): void
     {
         foreach (Package::all() as $package) {
             dispatch(new SyncPackagePackagistData($package));

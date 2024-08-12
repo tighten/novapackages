@@ -25,7 +25,7 @@ class UserRatePackage
         $this->stars = $stars;
     }
 
-    public function handle()
+    public function handle(): void
     {
         if (Rating::where([
             'user_id' => $this->userId,

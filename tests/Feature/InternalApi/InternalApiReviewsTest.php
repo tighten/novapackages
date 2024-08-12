@@ -14,7 +14,7 @@ class InternalApiReviewsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function unauthenticated_users_cant_post_review()
+    public function unauthenticated_users_cant_post_review(): void
     {
         $package = Package::factory()->create();
         $review = Review::factory()->make();
@@ -28,10 +28,10 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_user_cannot_see_link_to_post_review_before_reviewing_package()
+    public function authenticated_user_cannot_see_link_to_post_review_before_reviewing_package(): void
     {
         Http::fake([
-            "https://packagist.org/packages/*.json" => Http::response(),
+            'https://packagist.org/packages/*.json' => Http::response(),
         ]);
 
         $package = Package::factory()->create();
@@ -43,7 +43,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    public function the_same_user_cant_add_two_reviews_to_a_package()
+    public function the_same_user_cant_add_two_reviews_to_a_package(): void
     {
         $package = Package::factory()->create();
         $user = User::factory()->create();
@@ -65,7 +65,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    public function users_can_modify_their_reviews()
+    public function users_can_modify_their_reviews(): void
     {
         $package = Package::factory()->create();
         $user = User::factory()->create();
@@ -86,7 +86,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_delete_their_review()
+    public function a_user_can_delete_their_review(): void
     {
         $review = Review::factory()->create();
 
@@ -100,7 +100,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_delete_a_review_belonging_to_another_user()
+    public function a_user_cannot_delete_a_review_belonging_to_another_user(): void
     {
         $review = Review::factory()->create();
         $otherUser = User::factory()->create();
@@ -115,7 +115,7 @@ class InternalApiReviewsTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_delete_another_users_review()
+    public function an_admin_can_delete_another_users_review(): void
     {
         $review = Review::factory()->create();
         $adminUser = User::factory()->admin()->create();

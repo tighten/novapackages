@@ -24,7 +24,7 @@ class CollaboratorCrudTest extends TestCase
     }
 
     /** @test */
-    public function users_can_create_collaborators()
+    public function users_can_create_collaborators(): void
     {
         Event::fake();
 
@@ -44,7 +44,7 @@ class CollaboratorCrudTest extends TestCase
     }
 
     /** @test */
-    public function only_one_collaborator_is_allowed_per_github_username()
+    public function only_one_collaborator_is_allowed_per_github_username(): void
     {
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
@@ -67,7 +67,7 @@ class CollaboratorCrudTest extends TestCase
     }
 
     /** @test */
-    public function collaborators_receive_avatar_url_from_github_upon_creation()
+    public function collaborators_receive_avatar_url_from_github_upon_creation(): void
     {
         $github = m::mock(GitHub::class);
         $github->shouldReceive('user')

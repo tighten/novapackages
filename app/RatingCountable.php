@@ -76,7 +76,7 @@ trait RatingCountable
 
     protected function ratingsCountsFromRawDb()
     {
-        return $this->ratings()->groupBy('rating')->select(DB::Raw('count(id) as count, rating'))
+        return $this->ratings()->groupBy('rating')->select(DB::raw('count(id) as count, rating'))
             ->get()
             ->mapWithKeys(function ($ratingCount) {
                 return [$ratingCount->rating => $ratingCount->count];

@@ -11,7 +11,7 @@ class PackageResource extends ModelResource
 
     const CACHE_RATINGS_LENGTH = 5;
 
-    public function toArray($package)
+    public function toArray($package): array
     {
         return [
             'id' => $package->id,

@@ -16,12 +16,12 @@ class GithubAuthNotification extends Notification
         //
     }
 
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
 
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
                     ->subject('Please authenticate your NovaPackages account with GitHub.')
@@ -32,7 +32,7 @@ class GithubAuthNotification extends Notification
                     ->line('Thank you for being so excited to try NovaPackages!');
     }
 
-    public function toArray($notifiable)
+    public function toArray($notifiable): array
     {
         return [
             //

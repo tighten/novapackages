@@ -12,7 +12,7 @@ class RatingCountableTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_counts_average_rating()
+    public function it_counts_average_rating(): void
     {
         $package = Package::factory()->create();
         $users = User::factory(4)->create();
@@ -26,7 +26,7 @@ class RatingCountableTest extends TestCase
     }
 
     /** @test */
-    public function it_counts_each_rating_correctly()
+    public function it_counts_each_rating_correctly(): void
     {
         $package = Package::factory()->create();
         $users = User::factory(15)->create();
@@ -58,7 +58,7 @@ class RatingCountableTest extends TestCase
     }
 
     /** @test */
-    public function it_counts_each_rating_correctly_when_eager_loaded()
+    public function it_counts_each_rating_correctly_when_eager_loaded(): void
     {
         $package = Package::factory()->create();
         $users = User::factory(15)->create();
@@ -92,7 +92,7 @@ class RatingCountableTest extends TestCase
     }
 
     /** @test */
-    public function average_rating_rounded_to_1_decimal()
+    public function average_rating_rounded_to_1_decimal(): void
     {
         $package = Package::factory()->create();
         $users = User::factory(3)->create();

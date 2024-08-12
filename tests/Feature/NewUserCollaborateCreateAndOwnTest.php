@@ -16,7 +16,7 @@ class NewUserCollaborateCreateAndOwnTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_creates_a_collaborator_for_new_users()
+    public function it_creates_a_collaborator_for_new_users(): void
     {
         Notification::fake();
 
@@ -31,7 +31,7 @@ class NewUserCollaborateCreateAndOwnTest extends TestCase
     }
 
     /** @test */
-    public function it_claims_collaborator_for_new_users_if_matching_by_github_username()
+    public function it_claims_collaborator_for_new_users_if_matching_by_github_username(): void
     {
         Notification::fake();
 

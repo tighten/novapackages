@@ -12,7 +12,7 @@ class DisabledPackageTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function packages_show_on_main_page()
+    public function packages_show_on_main_page(): void
     {
         $user = User::factory()->admin()->create();
         $package = Package::factory()->create();
@@ -22,7 +22,7 @@ class DisabledPackageTest extends TestCase
     }
 
     /** @test */
-    public function disabled_packages_dont_show_on_main_page()
+    public function disabled_packages_dont_show_on_main_page(): void
     {
         $user = User::factory()->admin()->create();
         $package = Package::factory()->disabled()->create();
@@ -32,7 +32,7 @@ class DisabledPackageTest extends TestCase
     }
 
     /** @test */
-    public function disabled_packages_dont_return_from_api()
+    public function disabled_packages_dont_return_from_api(): void
     {
         $this->markTestIncomplete();
     }

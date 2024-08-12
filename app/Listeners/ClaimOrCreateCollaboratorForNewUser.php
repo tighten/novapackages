@@ -10,13 +10,14 @@ use App\Tighten;
 
 class ClaimOrCreateCollaboratorForNewUser
 {
-    public function handle(NewUserSignedUp $event)
+    public function handle(NewUserSignedUp $event): void
     {
         if (Collaborator::where('github_username', $event->user->github_username)->count() > 0) {
-            return $this->claimCollaborator($event);
+            $this->claimCollaborator($event);
+            return;
         }
 
-        return $this->createCollaborator($event);
+        $this->createCollaborator($event);
     }
 
     private function claimCollaborator($event)

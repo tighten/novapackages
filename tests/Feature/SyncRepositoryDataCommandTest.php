@@ -12,7 +12,7 @@ class SyncRepositoryDataCommandTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function calling_the_command_without_an_argument_updates_all_packages_with_data_from_their_remote_repos()
+    public function calling_the_command_without_an_argument_updates_all_packages_with_data_from_their_remote_repos(): void
     {
         $packageA = Package::factory()->create([
             'readme' => 'old readme A',
@@ -58,7 +58,7 @@ class SyncRepositoryDataCommandTest extends TestCase
     }
 
     /** @test */
-    public function calling_the_command_with_a_package_id_only_updates_that_package_with_data_from_its_remote_repo()
+    public function calling_the_command_with_a_package_id_only_updates_that_package_with_data_from_its_remote_repo(): void
     {
         $packageA = Package::factory()->create([
             'readme' => 'old readme A',
@@ -104,7 +104,7 @@ class SyncRepositoryDataCommandTest extends TestCase
     }
 
     /** @test */
-    public function local_data_is_not_updated_if_there_are_no_changes_in_the_remote_repo()
+    public function local_data_is_not_updated_if_there_are_no_changes_in_the_remote_repo(): void
     {
         $updatedAt = Carbon::now()->subHour();
         $package = Package::factory()->create([
