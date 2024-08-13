@@ -129,14 +129,14 @@ class Package extends Model implements Feedable
 
         return [
             'id' => (string) $packageAttributes['id'],
-            'name' => (string) $packageAttributes['name'],
-            'url' => (string) $packageAttributes['url'],
-            'instructions' => (string) $packageAttributes['instructions'],
-            'composer_name' => (string) $packageAttributes['composer_name'],
-            'repo_url' => (string) $packageAttributes['repo_url'],
-            'readme' => (string) $packageAttributes['readme'],
-            'abstract' => (string) $packageAttributes['abstract'],
-            '_tags' => $packageAttributes['_tags'],
+            'name' => (string) ($packageAttributes['name'] ?? ''),
+            'url' => (string) ($packageAttributes['url'] ?? ''),
+            'instructions' => (string) ($packageAttributes['instructions'] ?? ''),
+            'composer_name' => (string) ($packageAttributes['composer_name'] ?? ''),
+            'repo_url' => (string) ($packageAttributes['repo_url'] ?? ''),
+            'readme' => (string) ($packageAttributes['readme'] ?? ''),
+            'abstract' => (string) ($packageAttributes['abstract'] ?? ''),
+            '_tags' => ($packageAttributes['_tags'] ?? []),
             'created_at' => $packageAttributes['created_at'],
         ];
     }
