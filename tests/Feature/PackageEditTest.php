@@ -16,10 +16,10 @@ use Tests\TestCase;
 
 class PackageEditTest extends TestCase
 {
-    use RefreshDatabase, WithFaker, WithoutEvents;
+    use RefreshDatabase, WithFaker;
 
     /** @test */
-    public function user_can_update_a_package()
+    public function user_can_update_a_package(): void
     {
         list($package, $user) = $this->createPackageWithUser();
         $formData = [
@@ -67,7 +67,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_can_view_the_edit_package_page()
+    public function an_authenticated_user_can_view_the_edit_package_page(): void
     {
         list($packageA, $user) = $this->createPackageWithUser();
         $screenshot = Screenshot::factory()->create(['uploader_id' => $user->id]);
@@ -87,7 +87,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function package_author_can_view_disabled_package_form()
+    public function package_author_can_view_disabled_package_form(): void
     {
         list($package, $author) = $this->createPackageWithUser();
 
@@ -103,7 +103,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function if_package_is_unavailable_user_sees_notice_on_form()
+    public function if_package_is_unavailable_user_sees_notice_on_form(): void
     {
         list($package, $user) = $this->createPackageWithUser();
         $package->update([
@@ -115,7 +115,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function the_composer_name_must_be_unique()
+    public function the_composer_name_must_be_unique(): void
     {
         $this->fakesRepoFromRequest();
 
@@ -132,7 +132,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function the_composer_can_remain_the_same()
+    public function the_composer_can_remain_the_same(): void
     {
         $this->fakesRepoFromRequest();
 
@@ -151,7 +151,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function can_update_multiple_screenshots()
+    public function can_update_multiple_screenshots(): void
     {
         $this->fakesRepoFromRequest();
 
@@ -177,7 +177,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function screenshots_are_optional()
+    public function screenshots_are_optional(): void
     {
         $this->fakesRepoFromRequest();
 
@@ -190,7 +190,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function can_not_upload_more_than_20_screenshots()
+    public function can_not_upload_more_than_20_screenshots(): void
     {
         list($package, $user) = $this->createPackageWithUser();
         $screenshots = Screenshot::factory(21)->create(['uploader_id' => $user->id]);
@@ -204,7 +204,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function screenshots_must_be_an_array()
+    public function screenshots_must_be_an_array(): void
     {
         list($package, $user) = $this->createPackageWithUser();
 
@@ -217,7 +217,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function all_uploaded_screenshots_are_returned_when_validation_fails()
+    public function all_uploaded_screenshots_are_returned_when_validation_fails(): void
     {
         list($package, $user) = $this->createPackageWithUser();
         list($oldScreenshot, $screenshotA, $screenshotB) = Screenshot::factory(3)->create(['uploader_id' => $user->id]);
@@ -236,7 +236,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_author_is_returned_to_the_view_when_validation_fails()
+    public function the_selected_author_is_returned_to_the_view_when_validation_fails(): void
     {
         list($package, $user) = $this->createPackageWithUser();
         $author = Collaborator::factory()->create();
@@ -253,7 +253,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails()
+    public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails(): void
     {
         list($package, $user) = $this->createPackageWithUser();
         list($selectedCollaboratorA, $author, $selectedCollaboratorB) = Collaborator::factory(3)->create();
@@ -282,7 +282,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails()
+    public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails(): void
     {
         list($package, $user) = $this->createPackageWithUser();
         $newTagName = 'New Tag';
@@ -311,7 +311,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case()
+    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case(): void
     {
         $this->withoutExceptionHandling();
         $this->fakesRepoFromRequest();
@@ -341,7 +341,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added()
+    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added(): void
     {
         $this->withoutExceptionHandling();
         $this->fakesRepoFromRequest();
@@ -372,7 +372,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function not_updating_url_does_not_change_package_availability()
+    public function not_updating_url_does_not_change_package_availability(): void
     {
         $this->withoutExceptionHandling();
         $this->fakesRepoFromRequest();
@@ -398,7 +398,7 @@ class PackageEditTest extends TestCase
     }
 
     /** @test */
-    public function updating_url_attribute_removes_unavailable_timestamp()
+    public function updating_url_attribute_removes_unavailable_timestamp(): void
     {
         list($package, $user) = $this->createPackageWithUser();
 

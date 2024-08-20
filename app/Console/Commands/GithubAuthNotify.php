@@ -13,7 +13,7 @@ class GithubAuthNotify extends Command
 
     protected $description = 'Notifies all users that they need to log in with Github.';
 
-    public function handle()
+    public function handle(): void
     {
         Notification::send(
             User::whereNull('github_username')->get(),

@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class HttpClientServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         Http::macro('github', function () {
             return Http::withToken(config('services.github.token'))

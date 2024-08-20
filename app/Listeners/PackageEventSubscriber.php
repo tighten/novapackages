@@ -6,7 +6,7 @@ use App\Jobs\GeneratePackageOpenGraphImage;
 
 class PackageEventSubscriber
 {
-    public function handle($e)
+    public function handle($e): void
     {
         GeneratePackageOpenGraphImage::dispatch(
             $e->package->name,

@@ -22,7 +22,7 @@ class GitHub
             $issues = Http::github()
                 ->accept('application/vnd.github+json')
                 ->get('search/issues', [
-                    'q' => 'state:open label:package-idea repo:tighten/nova-package-development',
+                    'q' => 'is:issue state:open label:package-idea repo:tighten/nova-package-development',
                     'sort' => 'updated',
                     'order' => 'desc',
                 ])

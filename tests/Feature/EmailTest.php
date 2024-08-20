@@ -11,7 +11,7 @@ class EmailTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function users_with_no_email_must_submit_an_email()
+    public function users_with_no_email_must_submit_an_email(): void
     {
         $user = User::factory()->create([
             'email' => null,
@@ -23,7 +23,7 @@ class EmailTest extends TestCase
     }
 
     /** @test */
-    public function user_can_submit_a_email_address_if_the_github_oauth_handshake_doesnt_return_one()
+    public function user_can_submit_a_email_address_if_the_github_oauth_handshake_doesnt_return_one(): void
     {
         $updatedEmail = 'john@example.com';
         $user = User::factory()->create([
@@ -39,7 +39,7 @@ class EmailTest extends TestCase
     }
 
     /** @test */
-    public function the_email_address_is_required()
+    public function the_email_address_is_required(): void
     {
         $user = User::factory()->create([
             'email' => null,
@@ -54,7 +54,7 @@ class EmailTest extends TestCase
     }
 
     /** @test */
-    public function the_email_address_must_be_valid()
+    public function the_email_address_must_be_valid(): void
     {
         $user = User::factory()->create([
             'email' => null,
@@ -69,7 +69,7 @@ class EmailTest extends TestCase
     }
 
     /** @test */
-    public function the_email_address_must_be_unique()
+    public function the_email_address_must_be_unique(): void
     {
         $existingEmail = 'john@example.com';
         User::factory()->create(['email' => $existingEmail]);

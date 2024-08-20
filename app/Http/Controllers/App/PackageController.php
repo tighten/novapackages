@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\App;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Collaborator;
 use App\Events\PackageCreated;
 use App\Events\PackageDeleted;
@@ -18,7 +20,7 @@ use Illuminate\Support\Str;
 
 class PackageController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('app.packages.index', [
             'packages' => Package::get(),
@@ -26,7 +28,7 @@ class PackageController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): View
     {
         return view('app.packages.create', [
             'collaborators' => Collaborator::orderBy('name')->get(),
@@ -73,7 +75,7 @@ class PackageController extends Controller
         return redirect()->route('app.packages.index');
     }
 
-    public function edit(Package $package)
+    public function edit(Package $package): View
     {
         // @todo refactor like store above
         return view('app.packages.edit', [
@@ -119,7 +121,7 @@ class PackageController extends Controller
         return redirect()->route('app.packages.index');
     }
 
-    public function destroy(Package $package)
+    public function destroy(Package $package): RedirectResponse
     {
         $name = $package->name;
 

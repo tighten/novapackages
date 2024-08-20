@@ -13,7 +13,7 @@ class InternalApiRatingsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function unauthenticated_users_cant_post_ratings()
+    public function unauthenticated_users_cant_post_ratings(): void
     {
         $package = Package::factory()->create();
         $response = $this->post(route('internalapi.ratings.store'), [
@@ -25,7 +25,7 @@ class InternalApiRatingsTest extends TestCase
     }
 
     /** @test */
-    public function posting_a_rating_increases_the_packages_overall_rating()
+    public function posting_a_rating_increases_the_packages_overall_rating(): void
     {
         $package = Package::factory()->create();
         $user = User::factory()->create();
@@ -39,7 +39,7 @@ class InternalApiRatingsTest extends TestCase
     }
 
     /** @test */
-    public function the_same_user_cant_add_two_ratings_to_a_package()
+    public function the_same_user_cant_add_two_ratings_to_a_package(): void
     {
         $package = Package::factory()->create();
         $user = User::factory()->create();
@@ -58,7 +58,7 @@ class InternalApiRatingsTest extends TestCase
     }
 
     /** @test */
-    public function users_can_modify_their_ratings()
+    public function users_can_modify_their_ratings(): void
     {
         $package = Package::factory()->create();
         $user = User::factory()->create();
@@ -77,7 +77,7 @@ class InternalApiRatingsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_rate_a_package_they_authored()
+    public function a_user_cannot_rate_a_package_they_authored(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->create([
@@ -100,7 +100,7 @@ class InternalApiRatingsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_rate_a_package_they_collaborated_on()
+    public function a_user_cannot_rate_a_package_they_collaborated_on(): void
     {
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->make();

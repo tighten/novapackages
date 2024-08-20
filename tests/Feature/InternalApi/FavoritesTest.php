@@ -13,7 +13,7 @@ class FavoritesTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_guest_user_can_not_favorite_a_package()
+    public function a_guest_user_can_not_favorite_a_package(): void
     {
         $package = Package::factory()->create();
 
@@ -24,7 +24,7 @@ class FavoritesTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_can_add_a_package_to_their_favorites()
+    public function an_authenticated_user_can_add_a_package_to_their_favorites(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->create();
@@ -36,7 +36,7 @@ class FavoritesTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_not_favorite_the_same_package_twice()
+    public function a_user_can_not_favorite_the_same_package_twice(): void
     {
         $user = User::factory()->create();
         $package = Package::factory()->create();
@@ -49,7 +49,7 @@ class FavoritesTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_remove_a_favorite()
+    public function a_user_can_remove_a_favorite(): void
     {
         $user = User::factory()->create();
         $packageA = Package::factory()->create();

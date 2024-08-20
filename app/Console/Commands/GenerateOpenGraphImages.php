@@ -12,7 +12,7 @@ class GenerateOpenGraphImages extends Command
 
     protected $description = 'Generates new Open Graph images for every package.';
 
-    public function handle()
+    public function handle(): void
     {
         $this->callSilent('purge:ogimage', ['package' => $this->argument('package')]);
 

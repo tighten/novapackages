@@ -11,7 +11,7 @@ class DeleteSelfAuthoredPackageRatings extends Command
 
     protected $description = 'Delete all package ratings where the rating was by the author or a contributor of the package';
 
-    public function handle()
+    public function handle(): void
     {
         $this->deleteSelfAuthoredPackageRatings();
         $this->deleteSelfContributedPackageRatings();

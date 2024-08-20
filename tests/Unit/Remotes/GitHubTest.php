@@ -11,7 +11,7 @@ use Tests\TestCase;
 class GitHubTest extends TestCase
 {
     /** @test */
-    function validates_github_urls()
+    function validates_github_urls(): void
     {
         $this->assertTrue(GitHub::validateUrl('http://github.com/starwars/lightsabers'));
         $this->assertTrue(GitHub::validateUrl('https://github.com/starwars/lightsabers'));
@@ -21,7 +21,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_package_idea_issues_sends_request_to_correct_url()
+    function requesting_package_idea_issues_sends_request_to_correct_url(): void
     {
         Http::fake([
             'https://api.github.com/search/issues*' =>
@@ -38,7 +38,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_package_idea_issues_throws_exception_when_request_has_error()
+    function requesting_package_idea_issues_throws_exception_when_request_has_error(): void
     {
         Http::fake(['https://api.github.com/search/issues*' => Http::response(null, 500)]);
 
@@ -48,7 +48,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_readme_requires_owner_and_repository()
+    function requesting_readme_requires_owner_and_repository(): void
     {
         $this->expectException(GitHubException::class);
 
@@ -56,7 +56,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_readme_sends_request_to_correct_url()
+    function requesting_readme_sends_request_to_correct_url(): void
     {
         Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response()]);
 
@@ -68,7 +68,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_readme_returns_null_when_readme_does_not_exist()
+    function requesting_readme_returns_null_when_readme_does_not_exist(): void
     {
         Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response(null, 404)]);
 
@@ -78,7 +78,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_readme_throws_exception_when_request_has_error()
+    function requesting_readme_throws_exception_when_request_has_error(): void
     {
         Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response(null, 500)]);
 
@@ -88,7 +88,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_releases_requires_owner_and_repository()
+    function requesting_releases_requires_owner_and_repository(): void
     {
         $this->expectException(GitHubException::class);
 
@@ -96,7 +96,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_releases_sends_request_to_correct_url()
+    function requesting_releases_sends_request_to_correct_url(): void
     {
         Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response([])]);
 
@@ -108,7 +108,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_releases_throws_exception_when_request_has_error()
+    function requesting_releases_throws_exception_when_request_has_error(): void
     {
         Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response(null, 500)]);
 
@@ -118,7 +118,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_user_sends_request_to_correct_url()
+    function requesting_user_sends_request_to_correct_url(): void
     {
         Http::fake(['https://api.github.com/users/lukeskywalker' => Http::response([])]);
 
@@ -128,7 +128,7 @@ class GitHubTest extends TestCase
     }
 
     /** @test */
-    function requesting_user_throws_exception_when_request_has_error()
+    function requesting_user_throws_exception_when_request_has_error(): void
     {
         Http::fake(['https://api.github.com/users/lukeskywalker' => Http::response(null, 500)]);
 

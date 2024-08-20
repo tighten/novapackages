@@ -12,7 +12,7 @@ class TagsOnApiTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_attaches_tags_to_api_responses()
+    public function it_attaches_tags_to_api_responses(): void
     {
         $package = Package::factory()->create();
         $tag = Tag::factory()->create();

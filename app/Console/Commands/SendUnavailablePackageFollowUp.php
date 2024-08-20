@@ -13,7 +13,7 @@ class SendUnavailablePackageFollowUp extends Command
 
     protected $description = 'If package has been unavailable for two weeks, send follow-up to package author.';
 
-    public function handle()
+    public function handle(): void
     {
         $unavailablePackages = Package::whereNotNull('marked_as_unavailable_at')
             ->where('is_disabled', 0)

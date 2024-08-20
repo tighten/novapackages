@@ -13,7 +13,7 @@ class DisableUnavailablePackages extends Command
 
     protected $description = 'Disable unavailable packages after one month.';
 
-    public function handle()
+    public function handle(): void
     {
         $unavailablePackages = Package::whereNotNull('marked_as_unavailable_at')
             ->where('is_disabled', 0)

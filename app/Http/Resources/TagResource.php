@@ -9,7 +9,7 @@ class TagResource extends ModelResource
 {
     public $model = Tag::class;
 
-    public function toArray($tag)
+    public function toArray($tag): array
     {
         return [
             'id' => $tag->id,

@@ -2,6 +2,10 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\OpenGraphImage;
 use App\Screenshot;
 use Illuminate\Database\Eloquent\Builder;
@@ -42,37 +46,37 @@ class Package extends Model implements Feedable
 
     protected $githubStarVsPackagistDownloadsMultiplier = 100;
 
-    public function author()
+    public function author(): BelongsTo
     {
         return $this->belongsTo(Collaborator::class, 'author_id');
     }
 
-    public function contributors()
+    public function contributors(): BelongsToMany
     {
         return $this->belongsToMany(Collaborator::class);
     }
 
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
-    public function screenshots()
+    public function screenshots(): HasMany
     {
         return $this->hasMany(Screenshot::class);
     }
 
-    public function reviews()
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }
 
-    public function ratings()
+    public function ratings(): MorphMany
     {
         return $this->morphMany(Rating::class, 'rateable');
     }
 
-    public function favorites()
+    public function favorites(): HasMany
     {
         return $this->hasMany(Favorite::class);
     }
@@ -99,7 +103,7 @@ class Package extends Model implements Feedable
     public function scopePopular($query)
     {
         return $query->select(
-            DB::Raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
+            DB::raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
         )
             ->orderBy('popularity', 'desc');
     }

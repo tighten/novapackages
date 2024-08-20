@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         User::factory()->times(500)->create();
 

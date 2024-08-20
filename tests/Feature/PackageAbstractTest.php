@@ -14,7 +14,7 @@ class PackageAbstractTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function package_abstracts_default_to_truncated_readme_if_no_abstract()
+    public function package_abstracts_default_to_truncated_readme_if_no_abstract(): void
     {
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();
@@ -36,7 +36,7 @@ class PackageAbstractTest extends TestCase
     }
 
     /** @test */
-    public function long_package_readmes_are_truncated_to_190_characters_for_abstract()
+    public function long_package_readmes_are_truncated_to_190_characters_for_abstract(): void
     {
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();
@@ -54,7 +54,7 @@ class PackageAbstractTest extends TestCase
     }
 
     /** @test */
-    public function api_abstract_never_null()
+    public function api_abstract_never_null(): void
     {
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->create();

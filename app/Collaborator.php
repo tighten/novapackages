@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,27 +18,27 @@ class Collaborator extends Model
 
     protected $appends = ['name_with_username'];
 
-    public function allAuthoredPackages()
+    public function allAuthoredPackages(): HasMany
     {
         return $this->hasMany(Package::class, 'author_id')->withoutGlobalScope('notDisabled');
     }
 
-    public function authoredPackages()
+    public function authoredPackages(): HasMany
     {
         return $this->hasMany(Package::class, 'author_id');
     }
 
-    public function contributedPackages()
+    public function contributedPackages(): BelongsToMany
     {
         return $this->belongsToMany(Package::class);
     }
 
-    public function submittedPackages()
+    public function submittedPackages(): HasMany
     {
         return $this->hasMany(Package::class, 'submitter_id', 'user_id');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

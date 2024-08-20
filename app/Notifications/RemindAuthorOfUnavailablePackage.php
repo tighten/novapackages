@@ -19,12 +19,12 @@ class RemindAuthorOfUnavailablePackage extends Notification
         $this->package = $package;
     }
 
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
 
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         $packageRoute = route('packages.show', [$this->package->composer_vendor, $this->package->composer_package]);
         $packageLink = "<a href='_blank' href='{$packageRoute}'>{$this->package->name}</a>";

@@ -6,6 +6,7 @@ use App\Collaborator;
 use App\Http\Remotes\GitHub;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Mockery as m;
 use Tests\TestCase;
 
@@ -14,9 +15,9 @@ class CollaboratorCreateTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_url_field_is_optional()
+    public function the_url_field_is_optional(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);

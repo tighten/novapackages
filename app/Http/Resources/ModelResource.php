@@ -21,7 +21,7 @@ class ModelResource
         return (new static($payload))->response();
     }
 
-    public function toArray($payload)
+    public function toArray($payload): array
     {
         return $payload->toArray();
     }

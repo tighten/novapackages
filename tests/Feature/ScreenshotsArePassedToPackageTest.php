@@ -15,7 +15,7 @@ class ScreenshotsArePassedToPackageTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_packages_screenshots_are_passed_to_the_view()
+    public function a_packages_screenshots_are_passed_to_the_view(): void
     {
         Http::fake(['https://packagist.org/packages/tightenco/bae.json' => Http::response()]);
 

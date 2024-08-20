@@ -12,7 +12,7 @@ class GenerateUuidsForExistingFailedJobs extends Command
 
     protected $description = 'Generates UUIDs for existing failed jobs that do not have a UUID set.';
 
-    public function handle()
+    public function handle(): int
     {
         DB::table('failed_jobs')->whereNull('uuid')->cursor()->each(function ($job) {
             DB::table('failed_jobs')

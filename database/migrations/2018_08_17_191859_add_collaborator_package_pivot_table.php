@@ -3,9 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class AddCollaboratorPackagePivotTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('collaborator_package', function ($table) {
             $table->increments('id');
@@ -15,8 +15,8 @@ class AddCollaboratorPackagePivotTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('collaborator_package');
     }
-}
+};

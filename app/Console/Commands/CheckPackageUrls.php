@@ -13,7 +13,7 @@ class CheckPackageUrls extends Command
 
     protected $description = 'Check all package URLs for 4XX errors';
 
-    public function handle()
+    public function handle(): void
     {
         $validPackages = Package::whereNull('marked_as_unavailable_at')
             ->with('author')

@@ -14,7 +14,7 @@ class CollaboratorEditTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_not_view_the_edit_collaborator_form_for_a_collaborator_that_is_not_assigned_to_them()
+    public function a_user_can_not_view_the_edit_collaborator_form_for_a_collaborator_that_is_not_assigned_to_them(): void
     {
         $userA = User::factory()->create();
         $userB = User::factory()->create();
@@ -27,7 +27,7 @@ class CollaboratorEditTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_view_the_edit_collaborator_form()
+    public function a_user_can_view_the_edit_collaborator_form(): void
     {
         $user = User::factory()->create();
         $collaborator = Collaborator::factory()->make();
@@ -42,7 +42,7 @@ class CollaboratorEditTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_not_update_a_collaborator_that_is_not_assigned_to_them()
+    public function a_user_can_not_update_a_collaborator_that_is_not_assigned_to_them(): void
     {
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
@@ -76,7 +76,7 @@ class CollaboratorEditTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_update_a_collaborator_assigned_to_them()
+    public function a_user_can_update_a_collaborator_assigned_to_them(): void
     {
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
         $this->app->instance(GitHub::class, $github);
@@ -108,7 +108,7 @@ class CollaboratorEditTest extends TestCase
     }
 
     /** @test */
-    public function the_name_field_is_required()
+    public function the_name_field_is_required(): void
     {
         $user = User::factory()->create();
         $collaboratorAttributes = [
@@ -130,7 +130,7 @@ class CollaboratorEditTest extends TestCase
     }
 
     /** @test */
-    public function the_url_field_is_optional()
+    public function the_url_field_is_optional(): void
     {
         $user = User::factory()->create();
         $collaboratorAttributes = [
@@ -154,7 +154,7 @@ class CollaboratorEditTest extends TestCase
     }
 
     /** @test */
-    public function the_url_field_must_be_valid()
+    public function the_url_field_must_be_valid(): void
     {
         $user = User::factory()->create();
         $collaboratorAttributes = [
@@ -176,7 +176,7 @@ class CollaboratorEditTest extends TestCase
     }
 
     /** @test */
-    public function the_github_username_field_is_required()
+    public function the_github_username_field_is_required(): void
     {
         $user = User::factory()->create();
         $collaboratorAttributes = [
@@ -198,7 +198,7 @@ class CollaboratorEditTest extends TestCase
     }
 
     /** @test */
-    public function the_github_username_can_be_unchanged()
+    public function the_github_username_can_be_unchanged(): void
     {
         $user = User::factory()->create();
         $collaboratorAttributes = [

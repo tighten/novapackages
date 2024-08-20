@@ -3,19 +3,19 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class AddAvatarToAuthorsTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('authors', function ($table) {
             $table->string('avatar')->nullable();
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('authors', function ($table) {
             $table->dropColumn('avatar');
         });
     }
-}
+};

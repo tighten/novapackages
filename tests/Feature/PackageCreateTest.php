@@ -8,6 +8,7 @@ use App\Screenshot;
 use App\Tag;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -17,9 +18,10 @@ class PackageCreateTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function can_attach_screenshots_to_the_package()
+    public function can_attach_screenshots_to_the_package(): void
     {
-        $this->withoutEvents();
+        Event::fake();
+
         $this->fakesRepoFromRequest();
 
         $user = User::factory()->create();
@@ -44,9 +46,10 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function screenshots_are_optional()
+    public function screenshots_are_optional(): void
     {
-        $this->withoutEvents();
+        Event::fake();
+
         $this->fakesRepoFromRequest();
 
         $user = User::factory()->create();
@@ -63,7 +66,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function screenshots_must_be_an_array()
+    public function screenshots_must_be_an_array(): void
     {
         $user = User::factory()->create();
 
@@ -76,7 +79,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function can_not_attach_more_than_20_screenshots()
+    public function can_not_attach_more_than_20_screenshots(): void
     {
         $user = User::factory()->create();
         $screenshots = Screenshot::factory(21)->create(['uploader_id' => $user->id]);
@@ -90,7 +93,7 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function all_uploaded_screenshots_are_returned_when_validation_fails()
+    public function all_uploaded_screenshots_are_returned_when_validation_fails(): void
     {
         $user = User::factory()->create();
         list($screenshotA, $screenshotB) = Screenshot::factory(2)->create(['uploader_id' => $user->id]);
@@ -112,9 +115,9 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_author_is_returned_to_the_view_when_validation_fails()
+    public function the_selected_author_is_returned_to_the_view_when_validation_fails(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $user = User::factory()->create();
         $author = Collaborator::factory()->create();
@@ -131,9 +134,9 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails()
+    public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $user = User::factory()->create();
         list($selectedCollaboratorA, $author, $selectedCollaboratorB) = Collaborator::factory(3)->create();
@@ -162,9 +165,9 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails()
+    public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         $user = User::factory()->create();
         $newTagName = 'New Tag';
@@ -193,9 +196,9 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function relative_urls_are_formatted_to_the_latest_release()
+    public function relative_urls_are_formatted_to_the_latest_release(): void
     {
-        $this->withoutEvents();
+        Event::fake();
 
         Http::fake([
             'https://packagist.org/packages/starwars/lightsabers.json' =>
@@ -250,10 +253,10 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case()
+    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case(): void
     {
         $this->withoutExceptionHandling();
-        $this->withoutEvents();
+        Event::fake();
         $this->fakesRepoFromRequest();
 
         $existingTagA = Tag::factory()->create(['name' => 'test tag a', 'slug' => 'test-tag-a']);
@@ -278,10 +281,10 @@ class PackageCreateTest extends TestCase
     }
 
     /** @test */
-    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added()
+    public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added(): void
     {
         $this->withoutExceptionHandling();
-        $this->withoutEvents();
+        Event::fake();
         $this->fakesRepoFromRequest();
 
         $existingTag = Tag::factory()->create(['name' => 'test tag', 'slug' => 'test-tag']);

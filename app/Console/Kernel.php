@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         CheckPackageUrls::class
     ];
 
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule->command('sync:packagist')->everyTwoHours();
         // Every two hours at minute 30.
@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('novapackages:disable-unavailable-packages')->dailyAt('21:30');
     }
 
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
 

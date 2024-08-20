@@ -12,7 +12,7 @@ class DisableAndEnablePackagesTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function admin_user_can_disable_a_package()
+    public function admin_user_can_disable_a_package(): void
     {
         $user = User::factory()->admin()->create();
         $package = Package::factory()->create();
@@ -25,7 +25,7 @@ class DisableAndEnablePackagesTest extends TestCase
     }
 
     /** @test */
-    public function admin_user_can_enable_a_package()
+    public function admin_user_can_enable_a_package(): void
     {
         $user = User::factory()->admin()->create();
         $package = Package::factory()->disabled()->create();

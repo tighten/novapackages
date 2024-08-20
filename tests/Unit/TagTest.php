@@ -31,7 +31,7 @@ class TagTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_scoped_by_number_of_associated_packages()
+    public function it_can_be_scoped_by_number_of_associated_packages(): void
     {
         $tagWithMostPackages = Tag::nonTypes()
             ->whereHas('packages')
@@ -46,7 +46,7 @@ class TagTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_scoped_by_only_project_types()
+    public function it_can_be_scoped_by_only_project_types(): void
     {
         $tags = Tag::types()->get();
 
@@ -56,13 +56,13 @@ class TagTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_scoped_to_exclude_project_types()
+    public function it_can_be_scoped_to_exclude_project_types(): void
     {
         $this->assertEmpty(Tag::nonTypes()->pluck('slug')->intersect(Tag::PROJECT_TYPES));
     }
 
     /** @test */
-    public function the_name_attribute_is_stored_as_lowercase()
+    public function the_name_attribute_is_stored_as_lowercase(): void
     {
         $name = 'Test name';
         $tag = Tag::factory()->make([
@@ -79,7 +79,7 @@ class TagTest extends TestCase
     }
 
     /** @test */
-    public function it_can_generate_its_own_url()
+    public function it_can_generate_its_own_url(): void
     {
         $tag = Tag::factory()->create(['slug' => 'abc']);
 

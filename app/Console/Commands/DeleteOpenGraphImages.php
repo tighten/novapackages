@@ -12,7 +12,7 @@ class DeleteOpenGraphImages extends Command
 
     protected $description = 'Deletes all existing Open Graph images from storage.';
 
-    public function handle()
+    public function handle(): void
     {
         if (! $this->argument('package')) {
             $files = Storage::allFiles(config('opengraph.image_directory_name') . '/');

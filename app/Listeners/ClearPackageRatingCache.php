@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 
 class ClearPackageRatingCache
 {
-    public function handle(PackageRated $event)
+    public function handle(PackageRated $event): void
     {
         Cache::forget(CacheKeys::averageRating(Package::class, $event->packageId));
 
