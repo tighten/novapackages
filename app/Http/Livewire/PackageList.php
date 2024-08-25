@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Typesense\Documents;
 
 class PackageList extends Component
 {
@@ -51,14 +52,19 @@ class PackageList extends Component
     public function renderPackageList()
     {
         if ($this->search) {
-            $packages = Package::search($this->search, function (SearchIndex $algolia, string $query, array $options) {
-                $options['advancedSyntax'] = true;
+            $packages = Package::search($this->search, function (Documents $documents, string $query) {
+
+                $searchParams = [
+                    'q' => $query,
+                    // TODO: Figure out why this isn't using the default query_by in scout.php and instead needs to be specified each time.
+                    'query_by' => config('scout.typesense.model-settings.' . Package::class . '.search-parameters.query_by'),
+                ];
 
                 if (! in_array($this->tag, ['all', 'popular', 'nova_current'])) {
-                    $options['tagFilters'] = [$this->tag];
+                    $searchParams['filter_by'] = '_tags: [' . $this->tag . ']';
                 }
 
-                return $algolia->search($query, $options);
+                return $documents->search($searchParams);
             })->query(function (Builder $builder) {
                 // Ensure search results use the same query scopes as non-filtered results
                 return $builder->filter($this->tag);

@@ -7,12 +7,11 @@
 1. `php artisan passport:keys`
 2. `php artisan passport:client --personal`
 
-## Setting up Scout
+## Setting up Scout with Typesense
 
-1. Make a new [Algolia app](https://www.algolia.com/)
-2. From your Algolia app, copy the Admin API key and ID into your `.env`. If you see a "Not enough rights to update an object near line:1" error when seeding your database, you're using the Search-Only key—swap it out for the Admin key.
-3. In your Algolia app, create a new index called "packages".
-4. After seeding your database, run `php artisan scout:import "App\Package"`
+1. Set up a Typesense instance locally or on a server. For local development, you can use https://github.com/tighten/takeout to run Typesense.
+2. Update the `.env` variables for your Typesense instance.
+3. After seeding your database, run `php artisan scout:import "App\Package"`
 
 ## Seeding the Database
 

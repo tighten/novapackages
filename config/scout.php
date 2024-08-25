@@ -144,7 +144,7 @@ return [
                     ],
                 ],
                 'search-parameters' => [
-                    'query_by' => 'name,composer_name,instructions,readme,abstract,url,repo_url',
+                    'query_by' => 'name, composer_name, instructions, readme, abstract, url, repo_url',
                 ],
             ],
         ],
