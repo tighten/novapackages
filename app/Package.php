@@ -119,6 +119,7 @@ class Package extends Model implements Feedable
         // Temporarily truncate to prevent algolia from throwing a size exceeded exception
         $packageAttributes['readme'] = substr($packageAttributes['readme'], 0, 500);
         $packageAttributes['instructions'] = substr($packageAttributes['instructions'], 0, 500);
+        $packageAttributes['created_at'] = $this->created_at->timestamp;
 
         Arr::forget($packageAttributes, $this->excludeFromSearchIndex);
 
@@ -126,7 +127,18 @@ class Package extends Model implements Feedable
         // @todo Make sure this is updated when tags are updated
         $packageAttributes['_tags'] = $this->tags->pluck('slug')->toArray();
 
-        return $packageAttributes;
+        return [
+            'id' => (string) $packageAttributes['id'],
+            'name' => (string) ($packageAttributes['name'] ?? ''),
+            'url' => (string) ($packageAttributes['url'] ?? ''),
+            'instructions' => (string) ($packageAttributes['instructions'] ?? ''),
+            'composer_name' => (string) ($packageAttributes['composer_name'] ?? ''),
+            'repo_url' => (string) ($packageAttributes['repo_url'] ?? ''),
+            'readme' => (string) ($packageAttributes['readme'] ?? ''),
+            'abstract' => (string) ($packageAttributes['abstract'] ?? ''),
+            '_tags' => ($packageAttributes['_tags'] ?? []),
+            'created_at' => $packageAttributes['created_at'],
+        ];
     }
 
     protected static function booted()
