@@ -56,7 +56,6 @@ class PackageList extends Component
 
                 $searchParams = [
                     'q' => $query,
-                    // TODO: Figure out why this isn't using the default query_by in scout.php and instead needs to be specified each time.
                     'query_by' => config('scout.typesense.model-settings.' . Package::class . '.search-parameters.query_by'),
                 ];
 
