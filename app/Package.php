@@ -116,9 +116,7 @@ class Package extends Model implements Feedable
     public function toSearchableArray()
     {
         $packageAttributes = $this->toArray();
-        // Temporarily truncate to prevent algolia from throwing a size exceeded exception
-        $packageAttributes['readme'] = substr($packageAttributes['readme'], 0, 500);
-        $packageAttributes['instructions'] = substr($packageAttributes['instructions'], 0, 500);
+
         $packageAttributes['created_at'] = $this->created_at->timestamp;
 
         Arr::forget($packageAttributes, $this->excludeFromSearchIndex);

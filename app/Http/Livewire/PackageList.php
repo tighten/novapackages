@@ -53,7 +53,6 @@ class PackageList extends Component
     {
         if ($this->search) {
             $packages = Package::search($this->search, function (Documents $documents, string $query) {
-
                 $searchParams = [
                     'q' => $query,
                     'query_by' => config('scout.typesense.model-settings.' . Package::class . '.search-parameters.query_by'),
