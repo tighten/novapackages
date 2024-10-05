@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use Algolia\AlgoliaSearch\SearchIndex;
 use App\CacheKeys;
 use App\Package;
 use App\Tag;
