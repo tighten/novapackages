@@ -10,13 +10,6 @@ class SearchTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->markTestIncomplete('Need to figure out how to test with Scout.');
-    }
-
     /** @test */
     public function it_returns_matching_results(): void
     {

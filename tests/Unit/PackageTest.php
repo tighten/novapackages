@@ -64,7 +64,7 @@ class PackageTest extends TestCase
     }
 
     /** @test */
-    public function the_readme_is_truncated_to_500_characters_when_being_synchronized_with_the_scout_index(): void
+    public function the_readme_is_preserved_even_when_its_above_500_characters_when_being_synchronized_with_the_scout_index(): void
     {
         $package = Package::factory()->create([
             'readme' => Str::random(1400),
@@ -72,7 +72,7 @@ class PackageTest extends TestCase
 
         $searchableArray = $package->toSearchableArray();
 
-        $this->assertEquals(500, strlen($searchableArray['readme']));
+        $this->assertEquals(1400, strlen($searchableArray['readme']));
     }
 
     /**
