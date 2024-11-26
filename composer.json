@@ -44,8 +44,8 @@
         "dms/phpunit-arraysubset-asserts": "^0.5",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.3",
-        "phpunit/phpunit": "^9.5.10"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.1"
     },
     "autoload": {
         "psr-4": {
