@@ -14,7 +14,7 @@ return [
     */
 
     'nova' => [
-        'latest_major_version' => env('NOVA_LATEST_MAJOR_VERSION', '4'),
+        'latest_major_version' => env('NOVA_LATEST_MAJOR_VERSION', '5'),
     ],
 
 
