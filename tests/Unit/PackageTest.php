@@ -89,7 +89,7 @@ class PackageTest extends TestCase
     }
 
     /** Data Provider for the package name test. */
-    public function packageNameProvider(): array
+    public static function packageNameProvider(): array
     {
         return [
             [
