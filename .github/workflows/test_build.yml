@@ -20,14 +20,14 @@ jobs:
           php-version: 8.3
 
       - name: Cache Composer dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ~/.composer/cache/files
           key: php-8.3-laravel-9.*-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: php-8.3-laravel-9`.*-composer-
 
       - name: Cache npm dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-${{ hashFiles('**/package-lock.json') }}
