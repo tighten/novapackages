@@ -58,7 +58,5 @@ class AppServiceProvider extends ServiceProvider
 
             return Package::findOrFail($id);
         });
-
-
     }
 }
