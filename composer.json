@@ -15,7 +15,7 @@
         "bugsnag/bugsnag-laravel": "^2.28",
         "doctrine/dbal": "^3.9",
         "erusev/parsedown": "^1.7",
-        "laravel/framework": "^12.1",
+        "laravel/framework": "^11.44",
         "laravel/helpers": "^1.7",
         "laravel/horizon": "^5.30",
         "laravel/passport": "^12.0",
@@ -39,8 +39,6 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
-        "codedungeon/phpunit-result-printer": "^0.32",
-        "dms/phpunit-arraysubset-asserts": "^0.5",
         "fakerphp/faker": "^1.23",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
@@ -85,7 +83,10 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true
