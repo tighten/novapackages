@@ -15,7 +15,7 @@ use PHPUnit\Framework\Assert;
 
 abstract class TestCase extends BaseTestCase
 {
-    use ArraySubsetAsserts, CreatesApplication;
+    use ArraySubsetAsserts;
 
     protected function setUp(): void
     {
