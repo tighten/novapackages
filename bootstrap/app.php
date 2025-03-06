@@ -8,6 +8,11 @@ use Illuminate\Foundation\Configuration\Middleware;
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
         \Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
+        App\Providers\HttpClientServiceProvider::class,
     ])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -18,7 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->redirectGuestsTo(fn () => route('login'));
-        $middleware->redirectUsersTo(route(AppServiceProvider::HOME));
+        $middleware->redirectUsersTo(AppServiceProvider::HOME);
 
         $middleware->throttleApi();
 
