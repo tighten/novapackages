@@ -14,7 +14,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->redirectGuestsTo(fn () => route('login'));
+        $middleware->redirectUsersTo(route(RouteServiceProvider::HOME));
+
+        $middleware->throttleApi();
+
+        $middleware->alias([
+            'claimed' => \App\Http\Middleware\CheckUserClaimedCollaborator::class,
+            'email' => \App\Http\Middleware\CheckForEmailAddress::class,
+            'role' => \App\Http\Middleware\CheckRole::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
