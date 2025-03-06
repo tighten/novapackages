@@ -4,6 +4,7 @@ namespace App\Http\Remotes;
 
 use App\CacheKeys;
 use App\Exceptions\PackagistException;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -33,7 +34,11 @@ class Packagist
     public function fetchData($name)
     {
         $this->data = Cache::remember(CacheKeys::packagistData($name), 5, function () use ($name) {
-            $response = Http::packagist()->get("{$this->url}.json");
+            $response = Http::packagist()
+                ->retry(2, 500, function ($exception, $request) {
+                    return $exception instanceof ConnectionException;
+                }, false)
+                ->get("{$this->url}.json");
 
             if ($response->status() === 404) {
                 return null;
