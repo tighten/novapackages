@@ -106,12 +106,23 @@ class PackageCreateTest extends TestCase
             ],
         ]);
 
+        // dd(session('_old_input.screenshots')->all());
         $response->assertStatus(302);
         $response->assertSessionHas('errors');
-        $this->assertArraySubset([
+
+        $sessionScreenshots = session('_old_input.screenshots')->all();
+
+        $expectedScreenshots = [
             ['id' => $screenshotA->id, 'public_url' => Storage::url($screenshotA->path)],
             ['id' => $screenshotB->id, 'public_url' => Storage::url($screenshotB->path)],
-        ], session('_old_input.screenshots'));
+        ];
+
+        $this->assertCount(count($expectedScreenshots), $sessionScreenshots);
+
+        $this->assertEquals($screenshotA->id, $sessionScreenshots[0]['id']);
+        $this->assertEquals(Storage::url($screenshotA->path), $sessionScreenshots[0]['public_url']);
+        $this->assertEquals($screenshotB->id, $sessionScreenshots[1]['id']);
+        $this->assertEquals(Storage::url($screenshotB->path), $sessionScreenshots[1]['public_url']);
     }
 
     /** @test */
@@ -239,6 +250,7 @@ class PackageCreateTest extends TestCase
             'namespace' => 'starwars',
             'name' => 'lightsabers',
         ]));
+        $response->assertSuccessful();
         $readme = $response->viewData('package')['readme'];
 
         // The github link should be based on the latest release tag rather than the release name

@@ -14,9 +14,14 @@ class Collaborator extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = ['user_id' => 'integer'];
-
     protected $appends = ['name_with_username'];
+
+    protected function casts(): array
+    {
+        return [
+            'user_id' => 'integer'
+        ];
+    }
 
     public function allAuthoredPackages(): HasMany
     {

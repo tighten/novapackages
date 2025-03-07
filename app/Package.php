@@ -31,12 +31,6 @@ class Package extends Model implements Feedable
 
     protected $guarded = ['id', 'is_disabled'];
 
-    protected $casts = [
-        'is_disabled' => 'boolean',
-        'packagist_downloads' => 'integer',
-        'github_stars' => 'integer',
-    ];
-
     protected $excludeFromSearchIndex = [
         'description',
         'packagist_downloads',
@@ -45,6 +39,15 @@ class Package extends Model implements Feedable
     ];
 
     protected $githubStarVsPackagistDownloadsMultiplier = 100;
+
+    protected function casts(): array
+    {
+        return [
+            'is_disabled' => 'boolean',
+            'packagist_downloads' => 'integer',
+            'github_stars' => 'integer',
+        ];
+    }
 
     public function author(): BelongsTo
     {

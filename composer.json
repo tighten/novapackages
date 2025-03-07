@@ -10,24 +10,22 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "algolia/algoliasearch-client-php": "^3.3",
         "bugsnag/bugsnag-laravel": "^2.28",
-        "doctrine/dbal": "^3.9",
         "erusev/parsedown": "^1.7",
-        "guzzlehttp/guzzle": "^7.9",
-        "laravel/framework": "^10.48",
+        "laravel/framework": "^11.44",
         "laravel/helpers": "^1.7",
         "laravel/horizon": "^5.30",
-        "laravel/passport": "^11.5",
+        "laravel/passport": "^12.0",
         "laravel/scout": "^10.12",
-        "laravel/slack-notification-channel": "^2.5",
+        "laravel/slack-notification-channel": "^3.2",
         "laravel/socialite": "^5.17",
-        "laravel/telescope": "^4.12",
-        "laravel/tinker": "^2.8",
+        "laravel/telescope": "^5.0",
+        "laravel/tinker": "^2.9",
         "laravel/ui": "^4.6",
         "league/flysystem-aws-s3-v3": "^3.29",
-        "livewire/livewire": "^2.11",
+        "livewire/livewire": "^3.3",
         "php-http/guzzle7-adapter": "^1.1",
         "predis/predis": "^1.1",
         "spatie/laravel-feed": "^4.4",
@@ -40,12 +38,10 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
-        "codedungeon/phpunit-result-printer": "^0.32",
-        "dms/phpunit-arraysubset-asserts": "^0.5",
-        "fakerphp/faker": "^1.9.1",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.1"
+        "fakerphp/faker": "^1.23",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "phpunit/phpunit": "^11.0.1"
     },
     "autoload": {
         "psr-4": {
@@ -86,7 +82,10 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

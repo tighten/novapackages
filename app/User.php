@@ -25,10 +25,6 @@ class User extends Authenticatable
         self::ADMIN_ROLE => 'admin',
     ];
 
-    protected $casts = [
-        'role' => 'integer',
-    ];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -46,6 +42,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'role' => 'integer',
+        ];
+    }
 
     public static function booted()
     {

@@ -2,18 +2,19 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
-
-/*
-|--------------------------------------------------------------------------
-| Console Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of your Closure based console
-| commands. Each Closure is bound to a command instance allowing a
-| simple approach to interacting with each command's IO methods.
-|
-*/
+use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+
+Schedule::command('sync:packagist')->everyTwoHours();
+// Every two hours at minute 30.
+Schedule::command('sync:repo')->cron('30 */2 * * *');
+Schedule::command('purge:abandonedscreenshots')->dailyAt('1:00');
+Schedule::command('telescope:prune')->daily();
+
+// Schedule::command('novapackages:check-package-urls')->weeklyOn(7, '20:00');
+// Schedule::command('novapackages:send-unavailable-package-followup')->dailyAt('21:00');
+// Schedule::command('novapackages:disable-unavailable-packages')->dailyAt('21:30');
