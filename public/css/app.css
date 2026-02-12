@@ -63,16 +63,6 @@
  * The MIT License
  * Copyright (c) 2012 Matias Meno <m@tias.me>
  */
-@-webkit-keyframes passing-through {
-  0% {
-    opacity: 0;
-    transform: translateY(40px); }
-  30%, 70% {
-    opacity: 1;
-    transform: translateY(0px); }
-  100% {
-    opacity: 0;
-    transform: translateY(-40px); } }
 @keyframes passing-through {
   0% {
     opacity: 0;
@@ -83,13 +73,6 @@
   100% {
     opacity: 0;
     transform: translateY(-40px); } }
-@-webkit-keyframes slide-in {
-  0% {
-    opacity: 0;
-    transform: translateY(40px); }
-  30% {
-    opacity: 1;
-    transform: translateY(0px); } }
 @keyframes slide-in {
   0% {
     opacity: 0;
@@ -97,13 +80,6 @@
   30% {
     opacity: 1;
     transform: translateY(0px); } }
-@-webkit-keyframes pulse {
-  0% {
-    transform: scale(1); }
-  10% {
-    transform: scale(1.1); }
-  20% {
-    transform: scale(1); } }
 @keyframes pulse {
   0% {
     transform: scale(1); }
@@ -207,11 +183,9 @@
       .dropzone .dz-preview .dz-image img {
         display: block; }
     .dropzone .dz-preview.dz-success .dz-success-mark {
-      -webkit-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
       animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1); }
     .dropzone .dz-preview.dz-error .dz-error-mark {
       opacity: 1;
-      -webkit-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
       animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1); }
     .dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {
       pointer-events: none;
@@ -234,7 +208,6 @@
       opacity: 0;
       transition: opacity 0.4s ease-in; }
     .dropzone .dz-preview:not(.dz-processing) .dz-progress {
-      -webkit-animation: pulse 6s ease infinite;
       animation: pulse 6s ease infinite; }
     .dropzone .dz-preview .dz-progress {
       opacity: 1;
@@ -1025,11 +998,6 @@ input::-moz-placeholder, textarea::-moz-placeholder {
   color: #9ca3af; /* 2 */
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;  /* 1 */
-  color: #9ca3af; /* 2 */
-}
-
 input::placeholder,
 textarea::placeholder {
   opacity: 1;  /* 1 */
@@ -1185,10 +1153,6 @@ html {
 
 .z-50 {
   z-index: 50;
-}
-
-.float-right {
-  float: right;
 }
 
 .m-1 {
@@ -1488,6 +1452,10 @@ html {
   max-width: 56rem;
 }
 
+.max-w-\[1440px\] {
+  max-width: 1440px;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -1539,7 +1507,6 @@ html {
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
@@ -1591,6 +1558,10 @@ html {
 
 .justify-around {
   justify-content: space-around;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .self-start {
@@ -1758,6 +1729,11 @@ html {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-green-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 252 231 / var(--tw-bg-opacity));
@@ -1910,6 +1886,11 @@ html {
   padding-bottom: 0.25rem;
 }
 
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1923,11 +1904,6 @@ html {
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 .px-8 {
@@ -2174,14 +2150,19 @@ html {
   color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 
-.text-green-600 {
-  --tw-text-opacity: 1;
-  color: rgb(22 163 74 / var(--tw-text-opacity));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-indigo-500 {
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
+}
+
+.text-green-600 {
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 
 .text-custom-indigo-light {
@@ -2258,11 +2239,6 @@ html {
 }
 
 .placeholder-gray-900::-moz-placeholder {
-  --tw-placeholder-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-placeholder-opacity));
-}
-
-.placeholder-gray-900:-ms-input-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(17 24 39 / var(--tw-placeholder-opacity));
 }

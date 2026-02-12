@@ -42,6 +42,7 @@
 </head>
 
 <body class="bg-gray-200 font-sans font-normal">
+    <x-community-banner />
     <div class="bg-custom-indigo-darkest">
         <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between py-4">
             <a href="/" class="flex items-center text-white font-bold text-md no-underline uppercase">
