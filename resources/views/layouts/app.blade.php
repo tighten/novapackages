@@ -28,8 +28,6 @@
         };
     </script>
 
-    <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
-
 
     @production
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVEM0Q7HZ8"></script>
