@@ -20,7 +20,7 @@ class SendUnavailablePackageFollowUp extends Command
             ->get();
 
         $unavailablePackages->each(function ($package) {
-            $diffInDays = now()->diffInDays($package->marked_as_unavailable_at);
+            $diffInDays = (int) abs(now()->diffInDays($package->marked_as_unavailable_at));
             if ($diffInDays != 14) {
                 return;
             }

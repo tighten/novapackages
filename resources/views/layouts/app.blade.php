@@ -28,9 +28,6 @@
         };
     </script>
 
-    <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
-
-    @livewireStyles
 
     @production
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVEM0Q7HZ8"></script>
@@ -109,7 +106,6 @@
     </div>
 
     @routes
-    @livewireScripts
     @stack('scripts')
 
     <script src="{{ mix('js/app.js') }}"></script>

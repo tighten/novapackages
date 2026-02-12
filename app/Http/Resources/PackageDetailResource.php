@@ -70,7 +70,7 @@ class PackageDetailResource extends PackageResource
     public function isPossiblyAbandoned($package, $composer_latest, $packagistData)
     {
         return Arr::get($packagistData, 'package.abandoned', false) ||
-            ($package->created_at->diffInDays(now()) > 15 && ! $composer_latest);
+            ($package->created_at->diffInDays(now()) > 16 && ! $composer_latest);
     }
 
     protected function isFavorite($package)

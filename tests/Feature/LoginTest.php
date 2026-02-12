@@ -33,7 +33,7 @@ class LoginTest extends TestCase
         Event::assertDispatched(NewUserSignedUp::class);
         $this->assertCount(1, User::all());
         $user = User::first();
-        $this->assertArraySubset($fakeUserData, $user->toArray());
+        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $user->toArray(), array_keys($fakeUserData));
         $this->assertEquals($user->id, auth()->id());
     }
 
@@ -58,7 +58,7 @@ class LoginTest extends TestCase
         Event::assertDispatched(NewUserSignedUp::class);
         $this->assertCount(1, User::all());
         $user = User::first();
-        $this->assertArraySubset($fakeUserData, $user->toArray());
+        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $user->toArray(), array_keys($fakeUserData));
         $this->assertEquals($user->id, auth()->id());
     }
 
@@ -90,7 +90,7 @@ class LoginTest extends TestCase
         Event::assertNotDispatched(NewUserSignedUp::class);
         $this->assertCount(1, User::all());
         $existingUser->refresh();
-        $this->assertArraySubset($fakeUserData, $existingUser->toArray());
+        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $existingUser->toArray(), array_keys($fakeUserData));
         $this->assertEquals($existingUser->id, auth()->id());
     }
 
@@ -122,7 +122,7 @@ class LoginTest extends TestCase
         Event::assertNotDispatched(NewUserSignedUp::class);
         $this->assertCount(1, User::all());
         $existingUser->refresh();
-        $this->assertArraySubset($fakeUserData, $existingUser->toArray());
+        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $existingUser->toArray(), array_keys($fakeUserData));
         $this->assertEquals($existingUser->id, auth()->id());
     }
 
