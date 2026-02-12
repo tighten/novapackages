@@ -7,6 +7,7 @@ use App\Tighten;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Event::listen(
+            \App\Events\CollaboratorClaimed::class,
+            [\App\Notifications\CollaboratorClaimed::class, 'handle']
+        );
+
         Blade::directive('og', function ($expression) {
             list($property, $content) = explode(',', $expression, 2);
 
