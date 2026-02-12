@@ -21,7 +21,6 @@
         "laravel/scout": "^10.12",
         "laravel/slack-notification-channel": "^3.2",
         "laravel/socialite": "^5.17",
-        "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.6",
         "league/flysystem-aws-s3-v3": "^3.29",
