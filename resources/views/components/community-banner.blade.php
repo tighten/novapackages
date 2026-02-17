@@ -3,6 +3,8 @@
         <span>Laravel Community Tools by <a href="https://tighten.com" class="hover:underline">Tighten</a></span>
 
         <nav class="flex items-center gap-4">
+            <a href="https://laravelversions.com" class="hover:underline">Laravel Versions</a>
+            <a href="https://phpreleases.com" class="hover:underline">PHP Releases</a>
             <a href="https://novapackages.com" class="text-indigo-500 hover:underline">Nova Packages</a>
             <a href="https://laravel-tricks.com" class="hover:underline">Laravel Tricks</a>
             <a href="https://forgerecipes.com" class="hover:underline">Forge Recipes</a>
