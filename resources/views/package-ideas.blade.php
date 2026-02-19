@@ -17,7 +17,7 @@
         <div class="font-bold text-2xl py-3">
             Package Ideas
         </div>
-        <div class="rounded shadow">
+        <div class="rounded-sm shadow-sm">
             <div class="bg-white p-3 md:p-6 rounded-b leading-normal">
                 <p class="mb-4">Looking to get started developing packages for the Nova community? Here are some suggestions for you to choose from.</p>
                 <h2 class="text-lg font-bold">How does this work?</h2>

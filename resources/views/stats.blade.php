@@ -8,7 +8,7 @@
         <div class="font-bold text-2xl py-3">
             Stats
         </div>
-        <div class="rounded shadow">
+        <div class="rounded-sm shadow-sm">
             <div class="bg-white p-3 rounded-b leading-normal">
                 <ul class="list-disc pl-10">
                     <li><strong>Package Count</strong>: {{ $stats->packageCount() }}</li>

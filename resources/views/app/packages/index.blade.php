@@ -14,7 +14,7 @@
         </a>
     </div>
 
-    <div class="bg-white p-8 rounded-lg leading-loose text-gray-800 shadow sm:p-12">
+    <div class="bg-white p-8 rounded-lg leading-loose text-gray-800 shadow-sm sm:p-12">
 
         <x-status class="mb-8"/>
 

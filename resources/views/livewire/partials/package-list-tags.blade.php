@@ -1,5 +1,5 @@
     <div class="block w-full sm:hidden relative mx-auto mb-8 px-2" style="max-width: 380px;">
-        <select wire:model="tag" class="block appearance-none w-full bg-white border border-gray-300 hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+        <select wire:model="tag" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-300 px-4 py-2 pr-8 rounded-sm shadow-sm leading-tight focus:outline-hidden focus:shadow-outline">
             <option value="popular--and--recent">
                 Popular &amp; Recent
             </option>
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="hidden sm:block flex-shrink-0 flex-grow-0 mr-4" style="min-width: 13em;">
+    <div class="hidden sm:block shrink-0 grow-0 mr-4" style="min-width: 13em;">
         <nav>
             <a
                 wire:click="filterTag('popular--and--recent')"
@@ -55,7 +55,7 @@
                 class="block px-8 py-2 cursor-pointer hover:text-indigo-700 {{ $tag === 'nova_current' ? 'text-gray-800 font-bold' : 'text-gray-700' }}"
                 >Nova {{ config('novapackages.nova.latest_major_version') }} packages</a>
 
-            <span class="block mt-4 mb-2 mx-4 pb-2 px-4 mt-6 border-b border-grey uppercase text-sm">Package types</span>
+            <span class="block mt-4 mb-2 mx-4 pb-2 px-4 mt-6 border-b border-gray-300 uppercase text-sm">Package types</span>
 
             @foreach ($typeTags as $thisTag)
             <a
@@ -64,7 +64,7 @@
                 >{{ $thisTag->name }}</a>
             @endforeach
 
-            <span class="block mt-6 mb-2 mx-4 pb-2 px-4 mt-4 border-b border-grey uppercase text-sm">Popular tags</span>
+            <span class="block mt-6 mb-2 mx-4 pb-2 px-4 mt-4 border-b border-gray-300 uppercase text-sm">Popular tags</span>
             @foreach ($popularTags as $thisTag)
             <a
                 wire:click="filterTag('{{ $thisTag->slug }}')"

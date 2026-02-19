@@ -1,6 +1,8 @@
-const { colors } = require('tailwindcss/defaultTheme')
+import defaultTheme from 'tailwindcss/defaultTheme.js';
 
-module.exports = {
+const { colors } = defaultTheme;
+
+export default {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",

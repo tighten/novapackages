@@ -30,7 +30,7 @@
         ></textarea>
 
         <button v-if="canSubmit"
-            class="cursor-pointer bg-indigo-600 hover:bg-indigo-700 w-full md:w-auto text-white rounded-sm no-underline flex justify-center items-center mt-2 py-4 px-4 sm:px-6"
+            class="cursor-pointer bg-indigo-600 hover:bg-indigo-700 w-full md:w-auto text-white rounded-xs no-underline flex justify-center items-center mt-2 py-4 px-4 sm:px-6"
             @click.prevent="save"
         >
             Submit Review

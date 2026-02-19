@@ -14,7 +14,7 @@
         @apply bg-indigo-700;
     }
 
-    @screen sm {
+    @media (width >= 576px) {
         .button--indigo {
             @apply text-sm;
         }

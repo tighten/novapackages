@@ -53,13 +53,13 @@
 
                 <div
                     slot="dropdown"
-                    class="overflow-hidden bg-indigo-600 border rounded shadow"
+                    class="overflow-hidden bg-indigo-600 border border-gray-200 rounded-sm shadow-sm"
                 >
                     <a v-if="package.is_disabled"
                         :href="
                             route('app.admin.enable-package', package)
                         "
-                        class="block px-4 py-3 text-white no-underline bg-indigo-600 border-b hover:text-white hover:bg-blue"
+                        class="block px-4 py-3 text-white no-underline bg-indigo-600 border-b border-gray-200 hover:text-white hover:bg-blue-500"
                     >
                         Enable
                     </a>
@@ -68,7 +68,7 @@
                         :href="
                             route('app.admin.disable-package', package)
                         "
-                        class="block px-4 py-3 text-white no-underline bg-indigo-600 border-b hover:text-white hover:bg-blue"
+                        class="block px-4 py-3 text-white no-underline bg-indigo-600 border-b border-gray-200 hover:text-white hover:bg-blue-500"
                     >
                         Disable
                     </a>
@@ -76,7 +76,7 @@
             </admin-dropdown>
         </div>
 
-        <div class="m-4 break-words md:m-10">
+        <div class="m-4 wrap-break-word md:m-10">
             <div v-if="package.instructions" class="pb-6 border-b border-gray-300">
                 <h2 class="py-2 pt-3 pl-4 mb-4 -mx-4 text-2xl font-bold text-gray-800 bg-gray-200 border-b-2 border-gray-300">
                     Installation Instructions

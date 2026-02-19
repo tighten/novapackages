@@ -7,8 +7,8 @@
 <template>
     <div>
         <div v-if="tokens.length > 0">
-            <div class="relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-400 card-default">
-                <div class="py-3 px-6 mb-0 bg-gray-100 border-b-1 border-gray-400 text-gray-800">Authorized Applications</div>
+            <div class="relative flex flex-col min-w-0 rounded-sm wrap-break-word border bg-white border border-gray-400 card-default">
+                <div class="py-3 px-6 mb-0 bg-gray-100 border-b border-gray-400 text-gray-800">Authorized Applications</div>
 
                 <div class="flex-auto p-6">
                     <!-- Authorized Tokens -->
@@ -37,7 +37,7 @@
 
                                 <!-- Revoke Button -->
                                 <td style="vertical-align: middle;">
-                                    <a class="action-link text-red" @click="revoke(token)">
+                                    <a class="action-link text-red-600" @click="revoke(token)">
                                         Revoke
                                     </a>
                                 </td>

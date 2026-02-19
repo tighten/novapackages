@@ -24,7 +24,7 @@
                 >
                     {{ package.name }}
                     <span
-                        class="text-xs uppercase text-red"
+                        class="text-xs uppercase text-red-600"
                         v-if="package.is_disabled"
                         >Disabled</span
                     >
@@ -73,7 +73,7 @@
                 </a>
 
                 <div
-                    class="absolute shadow rounded bg-white right-0"
+                    class="absolute shadow-sm rounded-sm bg-white right-0"
                     :class="installBoxOpen ? 'visible' : 'hidden'"
                     style="top: calc(100% + 1rem); min-width: 380px;"
                 >
@@ -83,9 +83,9 @@
                         <input
                             id="packagist-install"
                             type="text"
-                            class="rounded flex-grow block border py-2 px-2 mr-4 font-mono text-xs text-black outline-none"
+                            class="rounded-sm grow block border border-gray-200 py-2 px-2 mr-4 font-mono text-xs text-black outline-hidden"
                             :class="
-                                copyWasSuccessful ? 'border-green border-2' : ''
+                                copyWasSuccessful ? 'border-green-600 border-2' : ''
                             "
                             :value="composerString"
                         />
@@ -115,7 +115,7 @@
 
                     <div
                         v-if="package.composer_data.package"
-                        class="border border-t border-gray-300er flex flex-row flex-no-wrap"
+                        class="border border-t border-gray-300 flex flex-row flex-no-wrap"
                     >
                         <a
                             :href="package.composer_data.package.repository"
@@ -139,16 +139,16 @@
 
         <div class="w-full flex flex-col md:flex-row">
             <div
-                class="w-full md:w-3/4 bg-white shadow"
+                class="w-full md:w-3/4 bg-white shadow-sm"
                 :class="[
-                    package.is_disabled ? 'border-red' : 'border-indigo'
+                    package.is_disabled ? 'border-red-600' : 'border-indigo-600'
                 ]"
             >
                 <slot />
             </div>
 
             <div
-                class="w-full md:w-1/4 bg-white md:ml-4 md:mt-12 shadow text-sm border-t sm:border-t-0"
+                class="w-full md:w-1/4 bg-white md:ml-4 md:mt-12 shadow-sm text-sm border-t sm:border-t-0"
             >
                 <a
                     :href="'/app/packages/' + package.id + '/edit'"

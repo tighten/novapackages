@@ -1,4 +1,4 @@
-<div class="m-1 p-6 my-3 border-grey border rounded shadow ">
+<div class="m-1 p-6 my-3 border-gray-300 border rounded-sm shadow-sm ">
     <div class="flex mb-2">
         <div class="flex-1">
             <a class="text-indigo-600 text-xl no-underline font-bold hover:underline" href="{{ route('packages.show', [$package->composer_vendor, $package->composer_package]) }}">{{ $package->name }}</a>
@@ -6,7 +6,7 @@
         <div class="uppercase text-gray-600 text-xs">
             <div class="flex px-4 pb-1 items-center">
                 <span>Rating: </span>
-                <div class="text-md px-2 capitalize">{{ $package->average_rating ?? 'Not Yet Rated' }}</div>
+                <div class="text-base px-2 capitalize">{{ $package->average_rating ?? 'Not Yet Rated' }}</div>
                 @if ($package->average_rating )
                     <div class="text-grey text-xs lowercase">(out of 5)</div>
                 @endif

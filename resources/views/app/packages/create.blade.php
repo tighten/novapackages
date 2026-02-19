@@ -7,7 +7,7 @@
 @section('content')
 <div class="flex items-center">
     <div class="md:w-1/2 mx-4 md:mx-auto">
-        <div class="rounded shadow">
+        <div class="rounded-sm shadow-sm">
             <div class="font-medium text-lg text-brand-darker bg-brand-lighter p-3 rounded-t">
                 Submit Package
             </div>
@@ -41,7 +41,7 @@
                     <tag-select :tags="{{ $tags }}" :initial-selected="{{ json_encode(old('selectedTags')) }}" name="tags"></tag-select>
 
                     <label class="block font-bold">URL (e.g. GitHub)*</label>
-                    <input name="url" placeholder="https://github.com/tightenco/nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-128 max-w-full" value="{{ old('url') }}">
+                    <input name="url" placeholder="https://github.com/tightenco/nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-lg max-w-full" value="{{ old('url') }}">
 
                     <label class="block font-bold">Abstract*</label>
                     <p class="max-w-sm text-gray-800 text-sm mb-2">The short description that shows on a list page</p>

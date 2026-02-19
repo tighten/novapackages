@@ -20,7 +20,7 @@ class PackageList extends Component
     const POPULAR_TAGS_LENGTH = 120;
 
     public $tag = 'popular--and--recent';
-    public $search;
+    public string $search = '';
     public $pageSize = 6;
 
     protected $queryString = [

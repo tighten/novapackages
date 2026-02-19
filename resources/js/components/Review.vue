@@ -58,7 +58,7 @@
                 </button>
 
                 <button
-                    class="flex text-red no-underline font-bold text-md uppercase cursor-pointer ml-2 px-2"
+                    class="flex text-red-600 no-underline font-bold text-base uppercase cursor-pointer ml-2 px-2"
                     @click="remove"
                 >
                     Delete

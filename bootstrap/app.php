@@ -7,7 +7,6 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
-
         App\Providers\AppServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\HttpClientServiceProvider::class,
@@ -32,5 +31,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->report(function (Throwable $e) {
+            if (request()->is('livewire/*') && str_contains((string) request()->userAgent(), 'python-requests')) {
+                return false;
+            }
+        });
     })->create();

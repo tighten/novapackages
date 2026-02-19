@@ -11,7 +11,7 @@
     <title>@yield('title', 'Home') - {{ config('app.name', 'Nova Packages') }}</title>
     @yield('meta')
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
@@ -45,7 +45,7 @@
     <x-community-banner />
     <div class="bg-custom-indigo-darkest">
         <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between py-4">
-            <a href="/" class="flex items-center text-white font-bold text-md no-underline uppercase">
+            <a href="/" class="flex items-center text-white font-bold text-base no-underline uppercase">
                 <img src="/images/nova.svg" alt="Laravel Nova icon" class="h-8 mr-4" />
                 <span class="mr-1">Nova</span>
                 <span class="text-custom-indigo-light">Packages</span>
@@ -109,7 +109,6 @@
     @routes
     @stack('scripts')
 
-    <script src="{{ mix('js/app.js') }}"></script>
 
     @if (app()->environment() =='local')
     <script>

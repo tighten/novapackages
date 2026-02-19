@@ -1,15 +1,17 @@
-window._ = require("lodash");
-window.Popper = require('popper.js').default; // because bootstrap/passport
+import _ from 'lodash';
+window._ = _;
+
+import * as Popper from 'popper.js';
+window.Popper = Popper.default; // because bootstrap/passport
 
 /**
  * We'll load jQuery and Bootstrap because Passport.
  */
 
-try {
-    window.$ = window.jQuery = require('jquery');
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 
-    require('bootstrap');
-} catch (e) {}
+import 'bootstrap';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -17,7 +19,8 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require("axios");
+import axios from 'axios';
+window.axios = axios;
 
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
@@ -36,18 +39,3 @@ if (token) {
     "CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token"
   );
 }
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from 'laravel-echo'
-
-// window.Pusher = require('pusher-js');
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
-// });

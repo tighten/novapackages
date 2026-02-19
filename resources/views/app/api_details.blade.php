@@ -12,7 +12,7 @@
         <h1 class="text-gray-800 text-3xl font-bold mb-4">API Details</h1>
     </div>
 
-    <div class="bg-white p-8 mb-16 rounded-lg leading-loose text-gray-800 shadow sm:p-12">
+    <div class="bg-white p-8 mb-16 rounded-lg leading-loose text-gray-800 shadow-sm sm:p-12">
         <h3 class="mb-2 text-gray-800 text-lg font-bold">Current public (accessible without API keys) API routes:</h3>
 
         <ul class="mb-4 leading-normal list-disc pl-10">

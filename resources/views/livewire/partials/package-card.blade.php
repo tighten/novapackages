@@ -2,8 +2,8 @@
 $package = (new App\Http\Resources\PackageResource($package))->toArray($package);
 $package['accent'] = app(App\Colors::class)->nextColor();
 @endphp
-<div class="flex m-2 mb-4 shadow hover:shadow-md h-128 w-full max-w-xs rounded relative" wire:key="{{ $context ?? 'no-context' }}-{{ $package['id'] }}">
-    <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded">
+<div class="flex m-2 mb-4 shadow-sm hover:shadow-md w-full max-w-xs rounded-sm relative" wire:key="{{ $context ?? 'no-context' }}-{{ $package['id'] }}">
+    <div style="border: 1px solid #ddd; border-top-width: 4px; border-top-color: {{ $package['accent'] }}" class="flex-1 bg-white text-sm rounded-sm">
         @if (auth()->user()?->isAdmin())
             <div class="text-right -mb-6">
                 <div class="relative" x-data="{ open: false }">
@@ -15,7 +15,7 @@ $package['accent'] = app(App\Colors::class)->nextColor();
                         </span>
                     </div>
                     <div class="absolute right-0 w-auto mr-2 z-50" x-show="open">
-                        <div class="bg-indigo shadow rounded border overflow-hidden" x-cloak>
+                        <div class="bg-indigo shadow-sm rounded-sm border overflow-hidden" x-cloak>
                             @if ($package['is_disabled'])
                                 <a href="{{ route('app.admin.enable-package', $package['id']) }}" class="no-underline block px-4 py-3 border-b text-white bg-indigo-500 hover:text-white hover:bg-blue-500">
                                     Enable

@@ -1,7 +1,7 @@
 <a href="{{ $idea['html_url'] }}" class="block mb-4 no-underline text-gray-900 border border-gray-300 px-4 py-3 hover:border-gray-400 hover:bg-gray-100">
     <span class="font-bold text-lg">{{ $idea['title'] }}</span>
     @foreach ($idea['labels'] as $label)
-        <div class="text-xs inline-block font-bold rounded-sm px-1 ml-1 shadow-slim" style="background-color: #{{ $label['color'] }};">{{ $label['name'] }}</div>
+        <div class="text-xs inline-block font-bold rounded-xs px-1 ml-1 shadow-slim" style="background-color: #{{ $label['color'] }};">{{ $label['name'] }}</div>
     @endforeach
 
     <div class="text-gray-600 text-xs">Suggested by {{ $idea['user']['login'] }}</div>

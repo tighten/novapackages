@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="rounded shadow">
+        <div class="rounded-sm shadow-sm">
             <div class="bg-white p-3 rounded-b">
                 <h3 class="mt-2 mb-4 p-4 bg-gray-100 mx-2 text-lg font-bold">Authored packages</h3>
                 <div class="px-2 mb-4">

@@ -1,8 +1,9 @@
-require('./bootstrap');
+import './bootstrap';
 
 import Vue from 'vue';
 
-window.hljs = require('highlight.js');
+import hljs from 'highlight.js';
+window.hljs = hljs;
 
 hljs.highlightAll();
 
@@ -43,7 +44,6 @@ if (!! document.getElementById('vue-app')) {
 
     Vue.component('admin-dropdown', () => import('./components/AdminDropDown.vue'));
     Vue.component('collaborator-select', () => import('./components/CollaboratorSelect.vue'));
-    Vue.component('package-card', () => import('./components/PackageCard.vue'));
     Vue.component('package-detail', () => import('./components/PackageDetail.vue'));
     Vue.component('package-detail-frame', () => import('./components/PackageDetailFrame.vue'));
     Vue.component('package-review-create', () => import('./components/PackageReviewCreate.vue'));
@@ -53,7 +53,6 @@ if (!! document.getElementById('vue-app')) {
     Vue.component('package-screenshots-list', () => import('./components/PackageScreenshotsList.vue'));
     Vue.component('rating-count-bar', () => import('./components/RatingCountBar.vue'));
     Vue.component('tag-select', () => import('./components/TagSelect.vue'));
-    Vue.component('title-icon', () => import('./components/TitleIcon.vue'));
 
     Vue.component('passport-clients', () => import('./components/passport/Clients.vue'));
     Vue.component('passport-authorized-clients', () => import('./components/passport/AuthorizedClients.vue'));

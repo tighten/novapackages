@@ -8,7 +8,7 @@
             </a>
         </div>
 
-        <div class="bg-white flex flex-col min-w-0 rounded break-words shadow">
+        <div class="bg-white flex flex-col min-w-0 rounded-sm wrap-break-word shadow-sm">
             <!-- Current Clients -->
             <p class="mb-0 p-8" v-if="clients.length === 0">
                 You have not created any OAuth clients.
@@ -43,11 +43,11 @@
 
                         <!-- Edit/Delete Button -->
                         <td class="flex flex-col w-1/4 align-middle justify-around text-center text-xs sm:text-sm sm:flex-row sm:justify-end md:w-1/5 ">
-                            <a class="cursor-pointer border inline-block mb-2 p-2 hover:bg-gray-100 sm:mr-2 hover:border-gray-600" tabindex="-1" @click="edit(client)">
+                            <a class="cursor-pointer border border-gray-200 inline-block mb-2 p-2 hover:bg-gray-100 sm:mr-2 hover:border-gray-600" tabindex="-1" @click="edit(client)">
                                 Edit
                             </a>
 
-                            <a class="cursor-pointer border inline-block mb-2 p-2 text-red hover:bg-gray-100 hover:border-gray-600" @click="destroy(client)">
+                            <a class="cursor-pointer border border-gray-200 inline-block mb-2 p-2 text-red-600 hover:bg-gray-100 hover:border-gray-600" @click="destroy(client)">
                                 Delete
                             </a>
                         </td>
@@ -70,7 +70,7 @@
 
                     <div class="modal-body">
                         <!-- Form Errors -->
-                        <div class="relative px-3 py-3 mb-4 border rounded text-red-900 border-red-700 bg-red-300" v-if="createForm.errors.length > 0">
+                        <div class="relative px-3 py-3 mb-4 border rounded-sm text-red-900 border-red-700 bg-red-300" v-if="createForm.errors.length > 0">
                             <p class="mb-0"><strong>Whoops!</strong> Something went wrong!</p>
                             <br>
                             <ul>
@@ -87,10 +87,10 @@
                                 <label class="md:w-1/4 pr-4 pl-4 pt-2 pb-2 mb-0 leading-normal">Name</label>
 
                                 <div class="md:w-3/4 pr-4 pl-4">
-                                    <input id="create-client-name" type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded"
+                                    <input id="create-client-name" type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-gray-300 rounded-sm"
                                                                 @keyup.enter="store" v-model="createForm.name">
 
-                                    <span class="block mt-1 text-grey">
+                                    <span class="block mt-1 text-gray-500">
                                         Something your users will recognize and trust.
                                     </span>
                                 </div>
@@ -101,10 +101,10 @@
                                 <label class="md:w-1/4 pr-4 pl-4 pt-2 pb-2 mb-0 leading-normal">Redirect URL</label>
 
                                 <div class="md:w-3/4 pr-4 pl-4">
-                                    <input type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded" name="redirect"
+                                    <input type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-gray-300 rounded-sm" name="redirect"
                                                     @keyup.enter="store" v-model="createForm.redirect">
 
-                                    <span class="block mt-1 text-grey">
+                                    <span class="block mt-1 text-gray-500">
                                         Your application's authorization callback URL.
                                     </span>
                                 </div>
@@ -114,9 +114,9 @@
 
                     <!-- Modal Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400" data-dismiss="modal">Close</button>
+                        <button type="button" class="inline-block align-middle text-center select-none border border-gray-200 font-normal whitespace-no-wrap py-2 px-4 rounded-sm text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400" data-dismiss="modal">Close</button>
 
-                        <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-100 bg-blue-500 hover:bg-blue-400" @click="store">
+                        <button type="button" class="inline-block align-middle text-center select-none border border-gray-200 font-normal whitespace-no-wrap py-2 px-4 rounded-sm text-base leading-normal no-underline text-blue-100 bg-blue-500 hover:bg-blue-400" @click="store">
                             Create
                         </button>
                     </div>
@@ -138,7 +138,7 @@
 
                     <div class="modal-body">
                         <!-- Form Errors -->
-                        <div class="relative px-3 py-3 mb-4 border rounded text-red-900 border-red-700 bg-red-300" v-if="editForm.errors.length > 0">
+                        <div class="relative px-3 py-3 mb-4 border rounded-sm text-red-900 border-red-700 bg-red-300" v-if="editForm.errors.length > 0">
                             <p class="mb-0"><strong>Whoops!</strong> Something went wrong!</p>
                             <br>
                             <ul>
@@ -155,10 +155,10 @@
                                 <label class="md:w-1/4 pr-4 pl-4 pt-2 pb-2 mb-0 leading-normal">Name</label>
 
                                 <div class="md:w-3/4 pr-4 pl-4">
-                                    <input id="edit-client-name" type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded"
+                                    <input id="edit-client-name" type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-gray-300 rounded-sm"
                                                                 @keyup.enter="update" v-model="editForm.name">
 
-                                    <span class="block mt-1 text-grey">
+                                    <span class="block mt-1 text-gray-500">
                                         Something your users will recognize and trust.
                                     </span>
                                 </div>
@@ -169,10 +169,10 @@
                                 <label class="md:w-1/4 pr-4 pl-4 pt-2 pb-2 mb-0 leading-normal">Redirect URL</label>
 
                                 <div class="md:w-3/4 pr-4 pl-4">
-                                    <input type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-grey rounded" name="redirect"
+                                    <input type="text" class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-600 border border-gray-300 rounded-sm" name="redirect"
                                                     @keyup.enter="update" v-model="editForm.redirect">
 
-                                    <span class="block mt-1 text-grey">
+                                    <span class="block mt-1 text-gray-500">
                                         Your application's authorization callback URL.
                                     </span>
                                 </div>
@@ -182,9 +182,9 @@
 
                     <!-- Modal Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400" data-dismiss="modal">Close</button>
+                        <button type="button" class="inline-block align-middle text-center select-none border border-gray-200 font-normal whitespace-no-wrap py-2 px-4 rounded-sm text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-400" data-dismiss="modal">Close</button>
 
-                        <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-blue-100 bg-blue-500 hover:bg-blue-400" @click="update">
+                        <button type="button" class="inline-block align-middle text-center select-none border border-gray-200 font-normal whitespace-no-wrap py-2 px-4 rounded-sm text-base leading-normal no-underline text-blue-100 bg-blue-500 hover:bg-blue-400" @click="update">
                             Save Changes
                         </button>
                     </div>

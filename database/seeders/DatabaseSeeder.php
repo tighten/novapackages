@@ -4,10 +4,13 @@ namespace Database\Seeders;
 
 use App\Collaborator;
 use App\Package;
+use App\Review;
+use App\Screenshot;
 use App\Tag;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use willvincent\Rateable\Rating;
 
 class DatabaseSeeder extends Seeder
 {
@@ -88,6 +91,38 @@ class DatabaseSeeder extends Seeder
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
             $users->random()->ratePackage($package->id, rand(1, 15) / 3);
+        });
+
+        // Add reviews and screenshots to the first few named packages
+        $namedPackages = Package::whereIn('composer_name', [
+            'tightenco/nova-stripe',
+            'tightenco/nova-releases',
+            'tightenco/nova-google-analytics',
+            'tightenco/nova-package-discovery',
+        ])->get();
+
+        $namedPackages->each(function ($package) use ($users) {
+            // Add 2-5 reviews per package, each with a 1-5 star rating
+            $users->random(rand(2, 5))->each(function ($user) use ($package) {
+                $rating = new Rating;
+                $rating->rating = rand(1, 5);
+                $rating->user_id = $user->id;
+                $package->ratings()->save($rating);
+
+                Review::factory()->create([
+                    'user_id' => $user->id,
+                    'package_id' => $package->id,
+                    'rating_id' => $rating->id,
+                ]);
+            });
+
+            // Add 1-3 screenshots per package
+            Screenshot::factory()
+                ->count(rand(1, 3))
+                ->create([
+                    'uploader_id' => $users->random()->id,
+                    'package_id' => $package->id,
+                ]);
         });
 
         // @todo make sure tags get synced up when pushing *anything* up to algolia

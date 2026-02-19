@@ -5,7 +5,7 @@
                 <svg class="fill-current text-white inline-block h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3.828 9l6.071-6.071-1.414-1.414L0 10l.707.707 7.778 7.778 1.414-1.414L3.828 11H20V9H3.828z"/></svg>
             </a>
             <div class="w-full h-screen">
-                <img class="cursor-pointer rounded my-10" style="max-height: 90vh;" :src="this.currentScreenshot.public_url" @click="closeLightbox"/>
+                <img class="cursor-pointer rounded-sm my-10" style="max-height: 90vh;" :src="this.currentScreenshot.public_url" @click="closeLightbox"/>
             </div>
             <div>
                  <a class="text-white cursor-pointer absolute top-0 pt-4 pl-4" @click="closeLightbox">
