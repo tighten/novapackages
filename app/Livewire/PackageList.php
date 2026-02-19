@@ -26,7 +26,6 @@ class PackageList extends Component
     protected $queryString = [
         'tag' => ['except' => 'popular--and--recent'],
         'search' => ['except' => ''],
-        'page' => ['except' => 1],
     ];
 
     public function render()

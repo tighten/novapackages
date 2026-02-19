@@ -7,7 +7,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
-        \Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+
         App\Providers\AppServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\HttpClientServiceProvider::class,

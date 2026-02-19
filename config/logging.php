@@ -8,9 +8,6 @@ use Monolog\Handler\SyslogUdpHandler;
 return [
 
     'channels' => [
-        'bugsnag' => [
-            'driver' => 'bugsnag',
-        ],
 
         'flare' => [
             'driver' => 'flare',

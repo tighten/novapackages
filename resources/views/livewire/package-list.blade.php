@@ -23,7 +23,7 @@
                         @each('livewire.partials.package-card', $packages, 'package')
                     </div>
                 @else
-                    <div class="block w-full font-bold text-xl text-gray-800 self-start ml-2 mt-8">
+                    <div class="block w-full font-bold text-xl text-gray-800 self-start ml-2 my-8">
                         Sorry, but no packages currently in our database match this filter.
                     </div>
                 @endif

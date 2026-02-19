@@ -12,12 +12,11 @@
     "require": {
         "php": "^8.2",
         "algolia/algoliasearch-client-php": "^3.3",
-        "bugsnag/bugsnag-laravel": "^2.28",
         "erusev/parsedown": "^1.7",
         "laravel/framework": "^11.44",
         "laravel/helpers": "^1.7",
         "laravel/horizon": "^5.30",
-        "laravel/passport": "^12.0",
+        "laravel/passport": "^13.0",
         "laravel/scout": "^10.12",
         "laravel/slack-notification-channel": "^3.2",
         "laravel/socialite": "^5.17",

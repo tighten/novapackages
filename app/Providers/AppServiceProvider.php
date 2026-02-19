@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Passport::$clientUuids = false;
+        Passport::$registersJsonApiRoutes = true;
+
         Event::listen(
             \App\Events\CollaboratorClaimed::class,
             [\App\Notifications\CollaboratorClaimed::class, 'handle']
