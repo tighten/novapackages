@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->times(500)->create();
+        User::factory()->admin()->create();
+        User::factory()->times(499)->create();
 
         foreach (Tag::PROJECT_TYPES as $name) {
             Tag::create(['name' => $name, 'slug' => Str::slug($name)]);

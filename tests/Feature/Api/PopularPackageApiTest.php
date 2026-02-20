@@ -5,13 +5,14 @@ namespace Tests\Feature\Api;
 use App\Package;
 use App\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PopularPackageApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     function returns_popular_packages_in_order(): void
     {
         $lessPopularPackage = Package::factory()->create([

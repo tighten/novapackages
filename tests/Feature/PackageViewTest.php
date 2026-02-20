@@ -8,13 +8,14 @@ use App\Screenshot;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PackageViewTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function a_user_can_view_the_show_package_page(): void
     {
         $packageNamespace = 'tightenco';
@@ -39,10 +40,9 @@ class PackageViewTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertViewHas('package');
-        $response->assertViewHas('screenshots');
     }
 
-    /** @test */
+    #[Test]
     public function legacy_package_id_lookup_redirects_to_namespace_search(): void
     {
         $packageNamespace = 'tightenco';

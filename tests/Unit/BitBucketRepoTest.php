@@ -6,11 +6,12 @@ use App\BaseRepo;
 use App\BitBucketRepo;
 use App\Http\Remotes\BitBucket;
 use Mockery;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class BitBucketRepoTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_the_latest_release_version_for_tagged_releases(): void
     {
         $this->mockBitBucketWith([
@@ -28,7 +29,7 @@ class BitBucketRepoTest extends TestCase
         $this->assertEquals('v1.0', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function it_falls_back_to_master_when_there_are_no_releases(): void
     {
         $this->mockBitBucketWith([
@@ -40,7 +41,7 @@ class BitBucketRepoTest extends TestCase
         $this->assertEquals('master', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     function it_returns_proper_readme_format(): void
     {
         $repo = BitBucketRepo::make('https://bitbucket.org/starwars/lightsabers');

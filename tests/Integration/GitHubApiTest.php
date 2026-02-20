@@ -5,9 +5,11 @@ namespace Tests\Integration;
 use App\Http\Remotes\GitHub;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\AssertableJsonString;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
-/** @group integration */
+#[Group("integration")]
 class GitHubApiTest extends TestCase
 {
     protected function setUp(): void
@@ -17,7 +19,7 @@ class GitHubApiTest extends TestCase
         Http::allowStrayRequests();
     }
 
-    /** @test */
+    #[Test]
     public function readme_response_in_expected_format(): void
     {
         $response = app(GitHub::class)->readme('tighten/nova-stripe');
@@ -25,7 +27,7 @@ class GitHubApiTest extends TestCase
         $this->assertTrue(str_contains($response, '<div id="readme"'));
     }
 
-    /** @test */
+    #[Test]
     public function releases_response_in_expected_format(): void
     {
         $response = app(GitHub::class)->releases('tighten/nova-stripe');
@@ -46,7 +48,7 @@ class GitHubApiTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function searching_issues_response_in_expected_format(): void
     {
         $response = app(GitHub::class)->packageIdeaIssues();
@@ -68,7 +70,7 @@ class GitHubApiTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function user_response_in_expected_format(): void
     {
         $response = app(GitHub::class)->user('marcusmoore');

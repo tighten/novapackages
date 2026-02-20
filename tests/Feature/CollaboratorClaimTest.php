@@ -6,13 +6,14 @@ use App\Collaborator;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CollaboratorClaimTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function user_can_claim_a_collaborator(): void
     {
         Event::fake();
@@ -27,7 +28,7 @@ class CollaboratorClaimTest extends TestCase
         $this->assertEquals($user->id, $collaborator->refresh()->user->id);
     }
 
-    /** @test */
+    #[Test]
     public function users_can_claim_a_second_collaborator(): void
     {
         Event::fake();

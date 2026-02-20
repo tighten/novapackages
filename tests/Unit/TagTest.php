@@ -6,6 +6,7 @@ use App\Package;
 use App\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class TagTest extends TestCase
@@ -30,7 +31,7 @@ class TagTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_be_scoped_by_number_of_associated_packages(): void
     {
         $tagWithMostPackages = Tag::nonTypes()
@@ -45,7 +46,7 @@ class TagTest extends TestCase
         $this->assertLessThanOrEqual($popularTags->first()->packages->count(), $popularTags->last()->packages->count());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_be_scoped_by_only_project_types(): void
     {
         $tags = Tag::types()->get();
@@ -55,13 +56,13 @@ class TagTest extends TestCase
         $this->assertEmpty($tags->pluck('slug')->intersect(Tag::nonTypes()->pluck('slug')));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_be_scoped_to_exclude_project_types(): void
     {
         $this->assertEmpty(Tag::nonTypes()->pluck('slug')->intersect(Tag::PROJECT_TYPES));
     }
 
-    /** @test */
+    #[Test]
     public function the_name_attribute_is_stored_as_lowercase(): void
     {
         $name = 'Test name';
@@ -78,7 +79,7 @@ class TagTest extends TestCase
         $this->assertTrue(strcmp(Str::lower($name), $tag->name) === 0);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_its_own_url(): void
     {
         $tag = Tag::factory()->create(['slug' => 'abc']);

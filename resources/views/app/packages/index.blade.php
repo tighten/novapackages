@@ -16,12 +16,10 @@
 
     <div class="bg-white p-8 rounded-lg leading-loose text-gray-800 shadow-sm sm:p-12">
 
-        <x-status class="mb-8"/>
-
         <h3 class="text-gray-800 text-lg font-bold mb-4">My Packages</h3>
 
         @if (auth()->user()->collaborators()->count() === 0)
-            <p>You currently don't have a collaborator attached to your user.<br><a href="{{ route('app.collaborators.index') }}">Claim or create one now.</a></p>
+            <p>You currently don't have a collaborator attached to your user.<br><a href="{{ route('app.collaborators.index') }}" class="underline">Claim or create one now.</a></p>
         @else
             @foreach (auth()->user()->collaborators as $collaborator)
             <h4 class="text-gray-800 mb-2">Collaborator: {{ $collaborator->name }}</h4>

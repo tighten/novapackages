@@ -6,13 +6,14 @@ use App\Collaborator;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PopularityTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function github_stars_influence_popularity(): void
     {
         $user = User::factory()->create();
@@ -31,7 +32,7 @@ class PopularityTest extends TestCase
         $this->assertCount(10, array_intersect($popularScope, $popularPackages->pluck('id')->toArray()));
     }
 
-    /** @test */
+    #[Test]
     public function packagist_downloads_influence_popularity(): void
     {
         $user = User::factory()->create();

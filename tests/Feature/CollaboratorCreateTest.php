@@ -8,13 +8,14 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CollaboratorCreateTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function the_url_field_is_optional(): void
     {
         Event::fake();

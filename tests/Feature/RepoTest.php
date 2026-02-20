@@ -15,6 +15,7 @@ use Facades\App\Repo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Mockery;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class RepoTest extends TestCase
@@ -37,7 +38,7 @@ class RepoTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_get_a_repo_from_a_package_composer_name(): void
     {
         $composerName = 'tightenco/nova-stripe';
@@ -56,7 +57,7 @@ class RepoTest extends TestCase
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_get_a_repo_from_a_the_package_url_if_the_composer_name_is_not_valid(): void
     {
         $packageUrl = 'https://github.com/tighten/nova-stripe';
@@ -83,7 +84,7 @@ class RepoTest extends TestCase
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_get_a_repo_from_a_packagist_composer_name(): void
     {
         $url = 'https://packagist.org/packages/tightenco/nova-stripe';
@@ -102,7 +103,7 @@ class RepoTest extends TestCase
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_get_a_repo_from_a_the_request_url_if_the_composer_name_is_not_valid(): void
     {
         Http::fake([
@@ -127,7 +128,7 @@ class RepoTest extends TestCase
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_data_from_a_github_repo(): void
     {
         $githubUrl = 'https://github.com/tighten/nova-stripe';
@@ -142,7 +143,7 @@ class RepoTest extends TestCase
         $this->assertNotEquals('master', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function github_readme_is_returned_as_null_if_one_is_not_present(): void
     {
         $repositoryPath = 'ctroms/no-readme-test';
@@ -159,7 +160,7 @@ class RepoTest extends TestCase
         $this->assertNull($repo->readme());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_data_from_a_bitbucket_repo(): void
     {
         Http::fake([
@@ -180,7 +181,7 @@ class RepoTest extends TestCase
         $this->assertEquals('master', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function an_exception_is_thrown_if_bitbucket_response_has_errors_that_are_not_file_not_found_errors(): void
     {
         Http::fake([
@@ -196,7 +197,7 @@ class RepoTest extends TestCase
         Repo::fromUrl($bitBucketUrl)->readme();
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_data_from_a_gitlab_repo(): void
     {
         $url = 'https://gitlab.com/alphayax/rancher-api';
@@ -218,7 +219,7 @@ class RepoTest extends TestCase
         $this->assertEquals('2.0.4', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function an_exception_is_thrown_if_gitlab_response_has_errors_that_are_not_file_not_found_errors(): void
     {
         $gitlabUrl = 'https://gitlab.com/invalid-user/invalid-repo';
@@ -235,7 +236,7 @@ class RepoTest extends TestCase
         Repo::fromUrl($gitlabUrl)->readme();
     }
 
-    /** @test */
+    #[Test]
     public function gitlab_readme_is_returned_as_null_if_one_is_not_present(): void
     {
         $url = 'https://gitlab.com/jedi/how-to-join-the-sith';
@@ -255,7 +256,7 @@ class RepoTest extends TestCase
         $this->assertNull($repo->readme());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_github_data_from_an_npm_package_with_a_github_vcs(): void
     {
         // lodash is an example of a package that has been
@@ -281,7 +282,7 @@ class RepoTest extends TestCase
         $this->assertNotNull($repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_npm_data_if_the_package_doesnt_have_a_vcs(): void
     {
         // vue-form-state is an example of a package that has been
@@ -301,19 +302,19 @@ class RepoTest extends TestCase
         $this->assertNotNull($repo->readme());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_npm_data_if_the_package_has_a_vcs_we_do_not_integrate_with(): void
     {
         $this->markTestIncomplete('Need to find/create a package that matches this use case');
     }
 
-    /** @test */
+    #[Test]
     public function return_default_data_for_an_npm_package_without_a_vcs_or_a_readme(): void
     {
         $this->markTestIncomplete('Need to find/create a package that matches this use case');
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_default_data_for_a_vcs_we_dont_integrate_with(): void
     {
         $npmUrl = 'https://www.example.com/package/a-new-package';
@@ -327,7 +328,7 @@ class RepoTest extends TestCase
         $this->assertNull($repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_default_data_for_a_url_without_the_trailing_slash(): void
     {
         $npmUrl = 'https://www.example.com';
@@ -341,7 +342,7 @@ class RepoTest extends TestCase
         $this->assertNull($repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_github_data_from_a_packagist_package_with_a_github_vcs(): void
     {
         $url = 'https://packagist.org/packages/tightenco/nova-stripe';
@@ -362,7 +363,7 @@ class RepoTest extends TestCase
         $this->assertEquals('v1.0.0', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_bitbucket_data_from_a_packagist_package_with_a_bitbucket_vcs(): void
     {
         // This package is an example of a package that is
@@ -393,7 +394,7 @@ class RepoTest extends TestCase
         $this->assertEquals('0.0.3', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_gitlab_data_from_a_packagist_package_with_a_gitlab_vcs(): void
     {
         $packagistUrl = 'https://packagist.org/packages/alphayax/rancher-api';
@@ -419,7 +420,7 @@ class RepoTest extends TestCase
         $this->assertEquals('2.0.4', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function can_fetch_the_default_data_from_a_packagist_package_with_a_vcs_we_do_not_integrate_with(): void
     {
         $this->markTestIncomplete('Need to find/create a package that matches this use case');

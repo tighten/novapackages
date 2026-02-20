@@ -6,13 +6,14 @@ use App\Events\NewUserSignedUp;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function a_user_can_login_after_socialite_authentication(): void
     {
         Event::fake();
@@ -37,7 +38,7 @@ class LoginTest extends TestCase
         $this->assertEquals($user->id, auth()->id());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_login_after_socialite_authentication_when_the_socialite_response_is_missing_an_email(): void
     {
         Event::fake();
@@ -62,7 +63,7 @@ class LoginTest extends TestCase
         $this->assertEquals($user->id, auth()->id());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_is_updated_if_the_email_matches_the_socialite_response(): void
     {
         Event::fake();
@@ -94,7 +95,7 @@ class LoginTest extends TestCase
         $this->assertEquals($existingUser->id, auth()->id());
     }
 
-    /** @test */
+    #[Test]
     public function a_user_is_updated_if_the_github_username_matches_the_socialite_response(): void
     {
         Event::fake();
@@ -126,7 +127,7 @@ class LoginTest extends TestCase
         $this->assertEquals($existingUser->id, auth()->id());
     }
 
-    /** @test */
+    #[Test]
     public function the_github_user_id_is_updated_if_it_is_null(): void
     {
         Event::fake();

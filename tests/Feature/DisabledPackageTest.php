@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class DisabledPackageTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function packages_show_on_main_page(): void
     {
         $user = User::factory()->admin()->create();
@@ -21,7 +22,7 @@ class DisabledPackageTest extends TestCase
         $response->assertSee($package->name);
     }
 
-    /** @test */
+    #[Test]
     public function disabled_packages_dont_show_on_main_page(): void
     {
         $user = User::factory()->admin()->create();
@@ -31,7 +32,7 @@ class DisabledPackageTest extends TestCase
         $response->assertDontSee($package->name);
     }
 
-    /** @test */
+    #[Test]
     public function disabled_packages_dont_return_from_api(): void
     {
         $this->markTestIncomplete();

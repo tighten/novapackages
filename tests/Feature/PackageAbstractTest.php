@@ -7,13 +7,14 @@ use App\Http\Resources\PackageResource;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PackageAbstractTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function package_abstracts_default_to_truncated_readme_if_no_abstract(): void
     {
         $user = User::factory()->create();
@@ -35,7 +36,7 @@ class PackageAbstractTest extends TestCase
         $this->assertEquals('Abcdef8181', $resource['abstract']);
     }
 
-    /** @test */
+    #[Test]
     public function long_package_readmes_are_truncated_to_190_characters_for_abstract(): void
     {
         $user = User::factory()->create();
@@ -53,7 +54,7 @@ class PackageAbstractTest extends TestCase
         $this->assertStringNotContainsString('nibh', $resource['abstract']);
     }
 
-    /** @test */
+    #[Test]
     public function api_abstract_never_null(): void
     {
         $user = User::factory()->create();

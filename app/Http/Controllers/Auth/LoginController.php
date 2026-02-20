@@ -44,6 +44,12 @@ class LoginController extends Controller
 
     public function redirectToProvider()
     {
+        if (app()->environment('local')) {
+            Auth::login(User::findOrFail(1));
+
+            return redirect()->intended('/');
+        }
+
         session()->flash('url.intended', url()->previous());
 
         return Socialite::driver('github')->redirect();

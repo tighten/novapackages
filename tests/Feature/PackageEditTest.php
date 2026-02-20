@@ -12,13 +12,14 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutEvents;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PackageEditTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    /** @test */
+    #[Test]
     public function user_can_update_a_package(): void
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -66,7 +67,7 @@ class PackageEditTest extends TestCase
         $this->assertTrue($package->tags->contains('id', $existingTag->id));
     }
 
-    /** @test */
+    #[Test]
     public function an_authenticated_user_can_view_the_edit_package_page(): void
     {
         list($packageA, $user) = $this->createPackageWithUser();
@@ -86,7 +87,7 @@ class PackageEditTest extends TestCase
         $response->assertDontSee('This URL was recently marked as inaccessible. Please review and update as necessary!');
     }
 
-    /** @test */
+    #[Test]
     public function package_author_can_view_disabled_package_form(): void
     {
         list($package, $author) = $this->createPackageWithUser();
@@ -102,7 +103,7 @@ class PackageEditTest extends TestCase
             ->assertStatus(404);
     }
 
-    /** @test */
+    #[Test]
     public function if_package_is_unavailable_user_sees_notice_on_form(): void
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -114,7 +115,7 @@ class PackageEditTest extends TestCase
             ->assertSee('This URL was recently marked as inaccessible. Please review and update as necessary!');
     }
 
-    /** @test */
+    #[Test]
     public function the_composer_name_must_be_unique(): void
     {
         $this->fakesRepoFromRequest();
@@ -131,7 +132,7 @@ class PackageEditTest extends TestCase
         $response->assertSessionHasErrors('packagist_name');
     }
 
-    /** @test */
+    #[Test]
     public function the_composer_can_remain_the_same(): void
     {
         $this->fakesRepoFromRequest();
@@ -150,7 +151,7 @@ class PackageEditTest extends TestCase
         $response->assertSessionHasNoErrors();
     }
 
-    /** @test */
+    #[Test]
     public function can_update_multiple_screenshots(): void
     {
         $this->fakesRepoFromRequest();
@@ -176,7 +177,7 @@ class PackageEditTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
-    /** @test */
+    #[Test]
     public function screenshots_are_optional(): void
     {
         $this->fakesRepoFromRequest();
@@ -189,7 +190,7 @@ class PackageEditTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
-    /** @test */
+    #[Test]
     public function can_not_upload_more_than_20_screenshots(): void
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -203,7 +204,7 @@ class PackageEditTest extends TestCase
         $response->assertSessionHasErrors('screenshots');
     }
 
-    /** @test */
+    #[Test]
     public function screenshots_must_be_an_array(): void
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -216,7 +217,7 @@ class PackageEditTest extends TestCase
         $response->assertSessionHasErrors('screenshots');
     }
 
-    /** @test */
+    #[Test]
     public function all_uploaded_screenshots_are_returned_when_validation_fails(): void
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -235,7 +236,7 @@ class PackageEditTest extends TestCase
         $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys(['id' => $screenshotB->id, 'public_url' => Storage::url($screenshotB->path)], session('_old_input.screenshots')[2],  ['id', 'public_url']);
     }
 
-    /** @test */
+    #[Test]
     public function the_selected_author_is_returned_to_the_view_when_validation_fails(): void
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -252,7 +253,7 @@ class PackageEditTest extends TestCase
         $this->assertTrue(old('selectedAuthor')->is($author));
     }
 
-    /** @test */
+    #[Test]
     public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails(): void
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -281,7 +282,7 @@ class PackageEditTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails(): void
     {
         list($package, $user) = $this->createPackageWithUser();
@@ -310,7 +311,7 @@ class PackageEditTest extends TestCase
         old('selectedTags')->assertEquals($selectedTags);
     }
 
-    /** @test */
+    #[Test]
     public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case(): void
     {
         $this->withoutExceptionHandling();
@@ -340,7 +341,7 @@ class PackageEditTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
-    /** @test */
+    #[Test]
     public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added(): void
     {
         $this->withoutExceptionHandling();
@@ -371,7 +372,7 @@ class PackageEditTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
-    /** @test */
+    #[Test]
     public function not_updating_url_does_not_change_package_availability(): void
     {
         $this->withoutExceptionHandling();
@@ -397,7 +398,7 @@ class PackageEditTest extends TestCase
         $this->assertTrue($package->refresh()->is_disabled);
     }
 
-    /** @test */
+    #[Test]
     public function updating_url_attribute_removes_unavailable_timestamp(): void
     {
         list($package, $user) = $this->createPackageWithUser();

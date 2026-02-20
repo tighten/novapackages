@@ -4,13 +4,14 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class EmailTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function users_with_no_email_must_submit_an_email(): void
     {
         $user = User::factory()->create([
@@ -22,7 +23,7 @@ class EmailTest extends TestCase
         $this->assertEquals(route('app.email.create'), url()->current());
     }
 
-    /** @test */
+    #[Test]
     public function user_can_submit_a_email_address_if_the_github_oauth_handshake_doesnt_return_one(): void
     {
         $updatedEmail = 'john@example.com';
@@ -38,7 +39,7 @@ class EmailTest extends TestCase
         $this->assertEquals($updatedEmail, $user->fresh()->email);
     }
 
-    /** @test */
+    #[Test]
     public function the_email_address_is_required(): void
     {
         $user = User::factory()->create([
@@ -53,7 +54,7 @@ class EmailTest extends TestCase
         $response->assertSessionHasErrors('email');
     }
 
-    /** @test */
+    #[Test]
     public function the_email_address_must_be_valid(): void
     {
         $user = User::factory()->create([
@@ -68,7 +69,7 @@ class EmailTest extends TestCase
         $response->assertSessionHasErrors('email');
     }
 
-    /** @test */
+    #[Test]
     public function the_email_address_must_be_unique(): void
     {
         $existingEmail = 'john@example.com';

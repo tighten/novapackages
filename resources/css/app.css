@@ -1,10 +1,10 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css';
 @import 'highlight.js/styles/a11y-light.css';
+@import 'tom-select/dist/css/tom-select.css';
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
 @import './custom.css';
-@import './dropzone.css';
 @import './passport-shame.css';
 @import './markdown-shame.css';
 

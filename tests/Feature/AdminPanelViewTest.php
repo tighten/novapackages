@@ -6,6 +6,7 @@ use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class AdminPanelViewTest extends TestCase
@@ -21,7 +22,7 @@ class AdminPanelViewTest extends TestCase
         $this->user = User::factory()->admin()->create();
     }
 
-    /** @test */
+    #[Test]
     public function admin_panel_shows_enabled_packages_if_there_are_any(): void
     {
         $enabledPackage = Package::factory()->create();
@@ -33,7 +34,7 @@ class AdminPanelViewTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function admin_panel_shows_disabled_packages_if_there_are_any(): void
     {
         $disabledPackage = Package::factory()->disabled()->create();
@@ -45,7 +46,7 @@ class AdminPanelViewTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function admin_panel_does_not_show_disabled_package_list_if_there_are_none(): void
     {
         $enabledPackage = Package::factory()->create();
@@ -55,7 +56,7 @@ class AdminPanelViewTest extends TestCase
             ->assertDontSee('Disabled Packages');
     }
 
-    /** @test */
+    #[Test]
     public function admin_panel_does_not_show_enabled_package_list_if_there_are_none(): void
     {
         $disabledPackage = Package::factory()->disabled()->create();
@@ -65,7 +66,7 @@ class AdminPanelViewTest extends TestCase
             ->assertDontSee('Enabled Packages');
     }
 
-    /** @test */
+    #[Test]
     public function admin_user_can_view_individual_page_for_disabled_package(): void
     {
         Http::fake([
@@ -82,7 +83,7 @@ class AdminPanelViewTest extends TestCase
             ->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function admin_user_can_view_edit_page_for_disabled_package(): void
     {
         $disabledPackage = Package::factory()->disabled()->create();

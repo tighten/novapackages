@@ -72,6 +72,8 @@ class PackageController extends Controller
             $package->syncScreenshots(request()->input('screenshots', []));
         }
 
+        session()->flash('status', 'Package created successfully.');
+
         return redirect()->route('app.packages.index');
     }
 
@@ -117,6 +119,8 @@ class PackageController extends Controller
         $package->refresh()->searchable();
         event(new PackageUpdated($package));
         $package->syncScreenshots($request->input('screenshots', []));
+
+        session()->flash('status', 'Package updated successfully.');
 
         return redirect()->route('app.packages.index');
     }

@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class RatingCountableTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_counts_average_rating(): void
     {
         $package = Package::factory()->create();
@@ -25,7 +26,7 @@ class RatingCountableTest extends TestCase
         $this->assertEquals((1 + 2 + 3 + 4) / 4, $package->fresh()->average_rating);
     }
 
-    /** @test */
+    #[Test]
     public function it_counts_each_rating_correctly(): void
     {
         $package = Package::factory()->create();
@@ -57,7 +58,7 @@ class RatingCountableTest extends TestCase
         $this->assertEquals(5, $package->countOneStarRatings());
     }
 
-    /** @test */
+    #[Test]
     public function it_counts_each_rating_correctly_when_eager_loaded(): void
     {
         $package = Package::factory()->create();
@@ -91,7 +92,7 @@ class RatingCountableTest extends TestCase
         $this->assertEquals(5, $package->countOneStarRatings());
     }
 
-    /** @test */
+    #[Test]
     public function average_rating_rounded_to_1_decimal(): void
     {
         $package = Package::factory()->create();

@@ -8,13 +8,14 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PackageDetailResourceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function can_determine_if_the_package_is_favorited_by_the_authenticated_user(): void
     {
         $this->fakePackagistRequest();
@@ -29,7 +30,7 @@ class PackageDetailResourceTest extends TestCase
         $this->assertTrue($packageDetailResource['is_favorite'], 'Failed asserting the package is favorited');
     }
 
-    /** @test */
+    #[Test]
     public function can_determine_if_the_package_is_unfavorited_by_the_authenticated_user(): void
     {
         $this->fakePackagistRequest();
@@ -43,7 +44,7 @@ class PackageDetailResourceTest extends TestCase
         $this->assertFalse($packageDetailResource['is_favorite'], 'Failed asserting the package is unfavorited');
     }
 
-    /** @test */
+    #[Test]
     public function return_the_count_of_favorites_for_a_package(): void
     {
         $this->fakePackagistRequest();
@@ -59,7 +60,7 @@ class PackageDetailResourceTest extends TestCase
         $this->assertEquals(2, $packageDetailResource['favorites_count']);
     }
 
-    /** @test */
+    #[Test]
     public function includes_whether_package_has_been_marked_as_unavailable(): void
     {
         $this->fakePackagistRequest();

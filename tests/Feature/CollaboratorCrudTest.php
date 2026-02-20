@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CollaboratorCrudTest extends TestCase
@@ -23,7 +24,7 @@ class CollaboratorCrudTest extends TestCase
         Notification::fake();
     }
 
-    /** @test */
+    #[Test]
     public function users_can_create_collaborators(): void
     {
         Event::fake();
@@ -43,7 +44,7 @@ class CollaboratorCrudTest extends TestCase
         $this->assertEquals(1, Collaborator::count());
     }
 
-    /** @test */
+    #[Test]
     public function only_one_collaborator_is_allowed_per_github_username(): void
     {
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
@@ -66,7 +67,7 @@ class CollaboratorCrudTest extends TestCase
         $this->assertEquals(1, Collaborator::count());
     }
 
-    /** @test */
+    #[Test]
     public function collaborators_receive_avatar_url_from_github_upon_creation(): void
     {
         $github = m::mock(GitHub::class);

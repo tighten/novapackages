@@ -4,13 +4,14 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class UserRoleTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function user_default_role_is_user(): void
     {
         $user = User::factory()->create();
@@ -19,7 +20,7 @@ class UserRoleTest extends TestCase
         $this->assertEquals(User::USER_ROLE, $user->fresh()->role);
     }
 
-    /** @test */
+    #[Test]
     public function user_correctly_reports_if_admin(): void
     {
         $user = User::factory()->create();

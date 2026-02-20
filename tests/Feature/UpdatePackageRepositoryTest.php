@@ -8,13 +8,14 @@ use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class UpdatePackageRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function an_authenticated_user_can_request_a_refresh_of_a_packages_repository_data(): void
     {
         Bus::fake();
@@ -33,7 +34,7 @@ class UpdatePackageRepositoryTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function a_guest_user_can_not_request_a_refresh_of_a_packages_repository_data(): void
     {
         Bus::fake();

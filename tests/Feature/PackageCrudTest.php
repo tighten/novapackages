@@ -16,10 +16,10 @@ use App\Tighten;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use willvincent\Rateable\Rating;
 
@@ -27,7 +27,7 @@ class PackageCrudTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function app_package_index_shows_my_packages(): void
     {
         $user = User::factory()->create();
@@ -46,7 +46,7 @@ class PackageCrudTest extends TestCase
         $response->assertSee(route('app.packages.edit', $package));
     }
 
-    /** @test */
+    #[Test]
     public function app_package_index_doesnt_show_others_packages(): void
     {
         $this->markTestIncomplete('Needs to scope just to the "My Packages" section');
@@ -64,7 +64,7 @@ class PackageCrudTest extends TestCase
         $response->assertDontSee($package->name);
     }
 
-    /** @test */
+    #[Test]
     public function app_package_index_shows_my_favorited_packages(): void
     {
         $userA = User::factory()->create();
@@ -85,7 +85,7 @@ class PackageCrudTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function authenticated_user_can_see_create_package_page(): void
     {
         $user = User::factory()->create();
@@ -96,14 +96,14 @@ class PackageCrudTest extends TestCase
             ->assertSee('Submit Package');
     }
 
-    /** @test */
+    #[Test]
     public function non_authenticated_user_cannot_see_create_package_page(): void
     {
         $this->get(route('app.packages.create'))
             ->assertRedirect('/login/github');
     }
 
-    /** @test */
+    #[Test]
     public function user_can_submit_a_package(): void
     {
         Event::fake();
@@ -152,7 +152,7 @@ class PackageCrudTest extends TestCase
         $this->assertTrue($package->tags->contains('id', $existingTag->id));
     }
 
-    /** @test */
+    #[Test]
     public function non_user_cannot_submit_a_package(): void
     {
         $package = Package::factory()->make();
@@ -163,7 +163,7 @@ class PackageCrudTest extends TestCase
         $this->assertDatabaseMissing('packages', ['name' => $package->name]);
     }
 
-    /** @test */
+    #[Test]
     public function user_cannot_submit_package_without_author(): void
     {
         $user = User::factory()->create();
@@ -176,7 +176,7 @@ class PackageCrudTest extends TestCase
         $this->assertDatabaseMissing('packages', ['name' => $package->name]);
     }
 
-    /** @test */
+    #[Test]
     public function user_cannot_submit_package_without_package_name(): void
     {
         $user = User::factory()->create();
@@ -189,7 +189,7 @@ class PackageCrudTest extends TestCase
         $this->assertDatabaseMissing('packages', ['name' => $package->name]);
     }
 
-    /** @test */
+    #[Test]
     public function user_cannot_submit_package_without_packagist_namespace(): void
     {
         $user = User::factory()->create();
@@ -202,7 +202,7 @@ class PackageCrudTest extends TestCase
         $this->assertDatabaseMissing('packages', ['name' => $package->name]);
     }
 
-    /** @test */
+    #[Test]
     public function user_cannot_submit_package_without_packagist_name(): void
     {
         $user = User::factory()->create();
@@ -215,7 +215,7 @@ class PackageCrudTest extends TestCase
         $this->assertDatabaseMissing('packages', ['name' => $package->name]);
     }
 
-    /** @test */
+    #[Test]
     public function user_cannot_submit_package_without_url(): void
     {
         $user = User::factory()->create();
@@ -228,7 +228,7 @@ class PackageCrudTest extends TestCase
         $this->assertDatabaseMissing('packages', ['name' => $package->name]);
     }
 
-    /** @test */
+    #[Test]
     public function user_cannot_submit_package_with_duplicate_packagist_name(): void
     {
         Event::fake();
@@ -248,7 +248,7 @@ class PackageCrudTest extends TestCase
             ->assertSessionHasErrors('packagist_name', 'The package '.$originalPackage->composer_name.' has already been submitted.');
     }
 
-    /** @test */
+    #[Test]
     public function it_sends_a_slack_notification_when_a_new_package_is_created(): void
     {
         Event::fake();
@@ -269,9 +269,10 @@ class PackageCrudTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function slack_notification_contains_submitted_users_name_if_submitted_user_is_not_author(): void
     {
+        config(['services.slack.webhook_url' => 'https://hooks.slack.com/test']);
         Notification::fake();
         Event::fake();
         $this->fakesRepoFromRequest();
@@ -287,14 +288,17 @@ class PackageCrudTest extends TestCase
             new Tighten,
             NewPackage::class,
             function ($notification, $channels) use ($user) {
-                return $notification->toSlack(new Tighten)->attachments[0]->fields['Created By'] == $user->name;
+                $message = json_encode($notification->toSlack(new Tighten)->toArray());
+
+                return str_contains($message, 'Created by: '.$user->name);
             }
         );
     }
 
-    /** @test */
+    #[Test]
     public function slack_notification_does_not_contain_submitted_users_name_if_submitted_user_is_author(): void
     {
+        config(['services.slack.webhook_url' => 'https://hooks.slack.com/test']);
         Notification::fake();
         Event::fake();
         $this->fakesRepoFromRequest();
@@ -315,12 +319,14 @@ class PackageCrudTest extends TestCase
             new Tighten,
             NewPackage::class,
             function ($notification, $channels) {
-                return ! Arr::has($notification->toSlack(new Tighten)->attachments[0]->fields, 'Created By');
+                $message = json_encode($notification->toSlack(new Tighten)->toArray());
+
+                return ! str_contains($message, 'Created by:');
             }
         );
     }
 
-    /** @test */
+    #[Test]
     public function author_can_delete_their_packages(): void
     {
         Event::fake();
@@ -367,7 +373,7 @@ class PackageCrudTest extends TestCase
         $this->assertModelMissing($favorite);
     }
 
-    /** @test */
+    #[Test]
     public function collaborators_can_delete_their_packages(): void
     {
         Event::fake();
@@ -387,7 +393,7 @@ class PackageCrudTest extends TestCase
         $this->assertModelMissing($package);
     }
 
-    /** @test */
+    #[Test]
     public function submitter_can_delete_package(): void
     {
         Event::fake();
@@ -403,7 +409,7 @@ class PackageCrudTest extends TestCase
         $this->assertModelMissing($package);
     }
 
-    /** @test */
+    #[Test]
     public function submitter_can_delete_package_if_package_author_is_not_a_user(): void
     {
         Event::fake();
@@ -424,7 +430,7 @@ class PackageCrudTest extends TestCase
         $this->assertModelExists($package);
     }
 
-    /** @test */
+    #[Test]
     public function admin_can_delete_package(): void
     {
         Event::fake();
@@ -441,7 +447,7 @@ class PackageCrudTest extends TestCase
         $this->assertModelMissing($package);
     }
 
-    /** @test */
+    #[Test]
     public function users_that_are_not_a_packages_author_cannot_delete_it(): void
     {
         $user = User::factory()->create();
@@ -454,9 +460,10 @@ class PackageCrudTest extends TestCase
         $this->assertModelExists($package);
     }
 
-    /** @test */
+    #[Test]
     public function deleting_package_fires_slack_notification(): void
     {
+        config(['services.slack.webhook_url' => 'https://hooks.slack.com/test']);
         Notification::fake();
 
         $admin = User::factory()->admin()->create();

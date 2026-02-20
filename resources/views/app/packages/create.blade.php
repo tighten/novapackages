@@ -2,8 +2,6 @@
 
 @section('title', 'Create package')
 
-@section('top-id', 'vue-app')
-
 @section('content')
 <div class="flex items-center">
     <div class="md:w-1/2 mx-4 md:mx-auto">
@@ -32,13 +30,13 @@
                     <input name="packagist_name" placeholder="nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-64" value="{{ old('packagist_name') }}">
 
                     <label class="block font-bold">Package author*</label>
-                    <collaborator-select :collaborators="{{ $collaborators }}" :initial-selected="{{ json_encode(old('selectedAuthor')) }}" name="author_id"></collaborator-select>
+                    <x-collaborator-select :collaborators="$collaborators" :selected="old('author_id')" name="author_id" />
 
                     <label class="block font-bold">Contributors</label>
-                    <collaborator-select multiple :collaborators="{{ $collaborators }}" :initial-selected="{{ json_encode(old('selectedCollaborators')) }}" name="contributors"></collaborator-select>
+                    <x-collaborator-select :collaborators="$collaborators" :selected="old('contributors', [])" name="contributors" :multiple="true" />
 
                     <label class="block font-bold">Tags</label>
-                    <tag-select :tags="{{ $tags }}" :initial-selected="{{ json_encode(old('selectedTags')) }}" name="tags"></tag-select>
+                    <x-tag-select :tags="$tags" :selected="old('tags', [])" name="tags" />
 
                     <label class="block font-bold">URL (e.g. GitHub)*</label>
                     <input name="url" placeholder="https://github.com/tightenco/nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-lg max-w-full" value="{{ old('url') }}">
@@ -56,7 +54,9 @@
 
                     <label class="block font-bold">Screenshots</label>
                     <p class="max-w-sm text-gray-800 text-sm mb-2">Most of the packages right now don't have screenshots and it makes it very difficult for people to understand what they do.</p>
-                    <package-screenshots class="mb-6" :initial-screenshots="{{ json_encode(old('screenshots', [])) }}"></package-screenshots>
+                    <div class="mb-6">
+                        @livewire('package-screenshots', ['screenshots' => old('screenshots', [])])
+                    </div>
 
                     <label class="block font-bold">Readme</label>
                     <p class="max-w-sm text-gray-800 text-sm mb-6">The readme for this project is consumed from the URL you specify. If your package is on Packagist, we will pull the VCS source Packagist points to and consume its readme. If you provide a GitHub URL in the "URL" field, we will bypass Packagist and pull the readme directly from that repo.</p>

@@ -7,13 +7,14 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ScreenshotUploadTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function authenticated_users_can_upload_a_screenshot(): void
     {
         Storage::fake();
@@ -37,7 +38,7 @@ class ScreenshotUploadTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function guest_users_can_not_upload_screenshot(): void
     {
         Storage::fake();
@@ -52,7 +53,7 @@ class ScreenshotUploadTest extends TestCase
         $this->assertcount(0, Screenshot::all());
     }
 
-    /** @test */
+    #[Test]
     public function the_uploaded_screenshot_must_be_smaller_than_2mb(): void
     {
         $user = User::factory()->create();
@@ -68,7 +69,7 @@ class ScreenshotUploadTest extends TestCase
         $this->assertCount(0, Screenshot::all());
     }
 
-    /** @test */
+    #[Test]
     public function the_upload_screenshot_must_be_an_image(): void
     {
         $user = User::factory()->create();

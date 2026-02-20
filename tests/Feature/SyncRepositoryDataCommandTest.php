@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class SyncRepositoryDataCommandTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function calling_the_command_without_an_argument_updates_all_packages_with_data_from_their_remote_repos(): void
     {
         $packageA = Package::factory()->create([
@@ -57,7 +58,7 @@ class SyncRepositoryDataCommandTest extends TestCase
         $this->assertEquals($repoAttributesB['latest_version'], $packageB->latest_version);
     }
 
-    /** @test */
+    #[Test]
     public function calling_the_command_with_a_package_id_only_updates_that_package_with_data_from_its_remote_repo(): void
     {
         $packageA = Package::factory()->create([
@@ -103,7 +104,7 @@ class SyncRepositoryDataCommandTest extends TestCase
         $this->assertEquals($packageBAttributes['latest_version'], $packageB->latest_version);
     }
 
-    /** @test */
+    #[Test]
     public function local_data_is_not_updated_if_there_are_no_changes_in_the_remote_repo(): void
     {
         $updatedAt = Carbon::now()->subHour();

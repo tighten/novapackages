@@ -6,22 +6,13 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@vitejs/plugin-vue2": "^2.3.0",
         "axios": "^1.6.4",
-        "bootstrap": "^4.0.0",
-        "dropzone": "^5.5.1",
         "highlight.js": "^10.4.1",
-        "jquery": "^3.2",
-        "laravel-vite-plugin": "^1.0",
-        "lodash": "^4.17.19",
-        "moment": "^2.29.4",
-        "popper.js": "^1.12",
-        "vue": "^2.7.0",
-        "vue-select": "^2.4.0",
-        "vue-star-rating": "^1.6.0"
+        "laravel-vite-plugin": "^1.0"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.2.0",
-        "tailwindcss": "^4.2.0"
+        "tailwindcss": "^4.2.0",
+        "tom-select": "^2.5.1"
     }
 }

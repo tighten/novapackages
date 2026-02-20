@@ -9,13 +9,14 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ScreenshotDeleteTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function a_screenshot_can_be_deleted_by_the_person_who_uploaded_it(): void
     {
         Storage::fake();
@@ -42,7 +43,7 @@ class ScreenshotDeleteTest extends TestCase
         Storage::assertMissing($screenshotA->path);
     }
 
-    /** @test */
+    #[Test]
     public function a_package_collaborator_can_delete_an_attached_screenshot(): void
     {
         Storage::fake();
@@ -64,7 +65,7 @@ class ScreenshotDeleteTest extends TestCase
         Storage::assertMissing($packageScreenshot->path);
     }
 
-    /** @test */
+    #[Test]
     public function an_unauthorized_user_can_not_delete_a_screenshot(): void
     {
         Storage::fake();
@@ -85,7 +86,7 @@ class ScreenshotDeleteTest extends TestCase
         Storage::assertExists($screenshot->path);
     }
 
-    /** @test */
+    #[Test]
     public function a_guest_user_can_not_delete_a_screenshot(): void
     {
         Storage::fake();

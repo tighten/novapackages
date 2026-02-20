@@ -6,13 +6,14 @@ use App\Favorite;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class FavoritesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function a_guest_user_can_not_favorite_a_package(): void
     {
         $package = Package::factory()->create();
@@ -23,7 +24,7 @@ class FavoritesTest extends TestCase
         $this->assertCount(0, Favorite::where('package_id', $package->id)->get());
     }
 
-    /** @test */
+    #[Test]
     public function an_authenticated_user_can_add_a_package_to_their_favorites(): void
     {
         $user = User::factory()->create();
@@ -35,7 +36,7 @@ class FavoritesTest extends TestCase
         $this->assertTrue($user->favorites()->first()->package->is($package));
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_not_favorite_the_same_package_twice(): void
     {
         $user = User::factory()->create();
@@ -48,7 +49,7 @@ class FavoritesTest extends TestCase
         $this->assertTrue($user->favorites()->first()->package->is($package));
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_remove_a_favorite(): void
     {
         $user = User::factory()->create();

@@ -5,13 +5,14 @@ namespace Tests\Feature\Api;
 use App\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class FeedApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function ensures_packages_feed_response_code_and_structure(): void
     {
         Package::factory(5)->create();

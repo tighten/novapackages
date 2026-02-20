@@ -6,13 +6,14 @@ use App\Collaborator;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class InternalApiRatingsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function unauthenticated_users_cant_post_ratings(): void
     {
         $package = Package::factory()->create();
@@ -24,7 +25,7 @@ class InternalApiRatingsTest extends TestCase
         $this->assertEquals(route('login'), $response->getTargetUrl());
     }
 
-    /** @test */
+    #[Test]
     public function posting_a_rating_increases_the_packages_overall_rating(): void
     {
         $package = Package::factory()->create();
@@ -38,7 +39,7 @@ class InternalApiRatingsTest extends TestCase
         $this->assertEquals(4, $package->average_rating);
     }
 
-    /** @test */
+    #[Test]
     public function the_same_user_cant_add_two_ratings_to_a_package(): void
     {
         $package = Package::factory()->create();
@@ -57,7 +58,7 @@ class InternalApiRatingsTest extends TestCase
         $this->assertEquals(1, $package->ratings()->count());
     }
 
-    /** @test */
+    #[Test]
     public function users_can_modify_their_ratings(): void
     {
         $package = Package::factory()->create();
@@ -76,7 +77,7 @@ class InternalApiRatingsTest extends TestCase
         $this->assertEquals(2, (int) $package->user_average_rating);
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_rate_a_package_they_authored(): void
     {
         $user = User::factory()->create();
@@ -99,7 +100,7 @@ class InternalApiRatingsTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_rate_a_package_they_collaborated_on(): void
     {
         $user = User::factory()->create();

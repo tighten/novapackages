@@ -4,13 +4,14 @@ namespace Tests\Unit;
 
 use App\Collaborator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CollaboratorTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     function name_with_username_attribute(): void
     {
         $this->assertEquals(

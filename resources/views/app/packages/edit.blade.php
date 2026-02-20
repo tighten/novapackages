@@ -2,8 +2,6 @@
 
 @section('title', 'Edit package')
 
-@section('top-id', 'vue-app')
-
 @section('content')
 <div class="flex items-center">
     <div class="md:w-1/2 mx-4 md:mx-auto">
@@ -30,13 +28,13 @@
                     <input name="packagist_name" placeholder="nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-64" value="{{ old('packagist_name', $package->composer_package) }}">
 
                     <label class="block font-bold">Package author*</label>
-                    <collaborator-select :collaborators="{{ $collaborators }}" :initial-selected="{{ old('selectedAuthor', json_encode($package->author)) }}" name="author_id"></collaborator-select>
+                    <x-collaborator-select :collaborators="$collaborators" :selected="old('author_id', $package->author_id)" name="author_id" />
 
                     <label class="block font-bold">Contributors</label>
-                    <collaborator-select multiple :collaborators="{{ $collaborators }}" :initial-selected="{{ old('selectedCollaborators', $package->contributors) }}" name="contributors"></collaborator-select>
+                    <x-collaborator-select :collaborators="$collaborators" :selected="old('contributors', $package->contributors->pluck('id')->toArray())" name="contributors" :multiple="true" />
 
                     <label class="block font-bold">Tags</label>
-                    <tag-select :tags="{{ $tags }}" :initial-selected="{{ old('selectedTags', $package->tags) }}" name="tags"></tag-select>
+                    <x-tag-select :tags="$tags" :selected="old('tags', $package->tags->pluck('id')->toArray())" name="tags" />
 
                     <label class="block font-bold">URL (e.g. GitHub)*</label>
                     <input name="url" placeholder="https://github.com/tightenco/nova-stock-ticker" class="border border-gray-600 p-2 mb-6 w-lg w-full max-w-full" value="{{ old('url', $package->url) }}">
@@ -58,7 +56,9 @@
                     <p class="mb-6 text-gray-600 text-sm italic">(Write in Markdown)</p>
 
                     <label class="block font-bold">Screenshots</label>
-                    <package-screenshots class="mb-6" :initial-screenshots="{{ json_encode(old('screenshots', $screenshots)) }}"></package-screenshots>
+                    <div class="mb-6">
+                        @livewire('package-screenshots', ['screenshots' => old('screenshots', $screenshots->map(fn($s) => ['id' => $s->id, 'public_url' => $s->public_url])->toArray())])
+                    </div>
 
                     <label class="block font-bold">Readme</label>
                     <p class="max-w-sm text-gray-800 text-sm mb-6">The readme for this project is consumed from the URL you specify. If your package is on Packagist, we will pull the VCS source Packagist points to and consume its readme. If you provide a GitHub URL in the "URL" field, we will bypass Packagist and pull the readme directly from that repo.</p>

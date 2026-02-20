@@ -7,13 +7,14 @@ use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class StatsApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_counts_live_packages(): void
     {
         $this->fakeNovaReleasesRequest();
@@ -26,7 +27,7 @@ class StatsApiTest extends TestCase
         $this->assertEquals(2, $apiCall['package_count']);
     }
 
-    /** @test */
+    #[Test]
     public function it_sums_live_package_download_counts(): void
     {
         $this->fakeNovaReleasesRequest();
@@ -40,7 +41,7 @@ class StatsApiTest extends TestCase
         $this->assertEquals(123 + 234, $apiCall['packagist_download_count']);
     }
 
-    /** @test */
+    #[Test]
     public function it_sums_live_package_star_counts(): void
     {
         $this->fakeNovaReleasesRequest();
@@ -54,7 +55,7 @@ class StatsApiTest extends TestCase
         $this->assertEquals(123 + 234, $apiCall['github_star_count']);
     }
 
-    /** @test */
+    #[Test]
     public function it_counts_collaborators(): void
     {
         $this->fakeNovaReleasesRequest();
@@ -66,7 +67,7 @@ class StatsApiTest extends TestCase
         $this->assertEquals(4, $apiCall['collaborator_count']);
     }
 
-    /** @test */
+    #[Test]
     public function it_counts_ratings(): void
     {
         $this->fakeNovaReleasesRequest();
@@ -90,7 +91,7 @@ class StatsApiTest extends TestCase
         $this->assertEquals(5, $apiCall['rating_count']);
     }
 
-    /** @test */
+    #[Test]
     public function it_averages_global_rating(): void
     {
         $this->fakeNovaReleasesRequest();

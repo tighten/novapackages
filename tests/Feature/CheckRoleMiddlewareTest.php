@@ -4,13 +4,14 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CheckRoleMiddlewareTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function users_cannot_visit_admin_protected_routes(): void
     {
         $user = User::factory()->create();
@@ -20,7 +21,7 @@ class CheckRoleMiddlewareTest extends TestCase
         $response->assertStatus(302);
     }
 
-    /** @test */
+    #[Test]
     public function admins_can_visit_admin_protected_routes(): void
     {
         $user = User::factory()->admin()->create();

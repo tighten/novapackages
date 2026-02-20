@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Resources\PackageDetailResource;
 use App\Package;
 
 class PackageController extends Controller
@@ -25,8 +24,7 @@ class PackageController extends Controller
         $package = $query->firstOrFail();
 
         return view('packages.show', [
-            'package' => PackageDetailResource::from($package),
-            'screenshots' => $package->screenshots,
+            'package' => $package,
             'packageOgImageUrl' => $package->og_image_public_url,
         ]);
     }

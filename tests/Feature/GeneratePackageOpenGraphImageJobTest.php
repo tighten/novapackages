@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class GeneratePackageOpenGraphImageJobTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_is_dispatched_when_a_package_is_created(): void
     {
         Bus::fake();
@@ -64,7 +65,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
         Bus::assertDispatched(GeneratePackageOpenGraphImage::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_is_dispatched_when_a_package_is_updated(): void
     {
         Bus::fake();
@@ -98,7 +99,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
         Bus::assertDispatched(GeneratePackageOpenGraphImage::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_new_image_and_saves_to_storage(): void
     {
         $packageName = 'Alphabets';
@@ -112,7 +113,7 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
         Storage::disk('public')->assertMissing($filePath);
     }
 
-    /** @test */
+    #[Test]
     public function it_removes_the_old_image_from_storage_when_a_package_name_is_updated(): void
     {
         $originalPackageName = 'Alphabets';

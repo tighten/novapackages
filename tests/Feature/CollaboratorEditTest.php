@@ -7,13 +7,14 @@ use App\Http\Remotes\GitHub;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CollaboratorEditTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function a_user_can_not_view_the_edit_collaborator_form_for_a_collaborator_that_is_not_assigned_to_them(): void
     {
         $userA = User::factory()->create();
@@ -26,7 +27,7 @@ class CollaboratorEditTest extends TestCase
         $response->assertStatus(403);
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_view_the_edit_collaborator_form(): void
     {
         $user = User::factory()->create();
@@ -41,7 +42,7 @@ class CollaboratorEditTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_not_update_a_collaborator_that_is_not_assigned_to_them(): void
     {
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
@@ -75,7 +76,7 @@ class CollaboratorEditTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_update_a_collaborator_assigned_to_them(): void
     {
         $github = m::mock(GitHub::class)->shouldIgnoreMissing();
@@ -107,7 +108,7 @@ class CollaboratorEditTest extends TestCase
         $this->assertEquals($userData['github_username'], $collaborator->github_username);
     }
 
-    /** @test */
+    #[Test]
     public function the_name_field_is_required(): void
     {
         $user = User::factory()->create();
@@ -129,7 +130,7 @@ class CollaboratorEditTest extends TestCase
         $this->assertEquals($collaboratorAttributes['name'], $collaborator->fresh()->name);
     }
 
-    /** @test */
+    #[Test]
     public function the_url_field_is_optional(): void
     {
         $user = User::factory()->create();
@@ -153,7 +154,7 @@ class CollaboratorEditTest extends TestCase
         $this->assertNull($collaborator->fresh()->url);
     }
 
-    /** @test */
+    #[Test]
     public function the_url_field_must_be_valid(): void
     {
         $user = User::factory()->create();
@@ -175,7 +176,7 @@ class CollaboratorEditTest extends TestCase
         $this->assertEquals($collaboratorAttributes['url'], $collaborator->fresh()->url);
     }
 
-    /** @test */
+    #[Test]
     public function the_github_username_field_is_required(): void
     {
         $user = User::factory()->create();
@@ -197,7 +198,7 @@ class CollaboratorEditTest extends TestCase
         $this->assertEquals($collaboratorAttributes['github_username'], $collaborator->fresh()->github_username);
     }
 
-    /** @test */
+    #[Test]
     public function the_github_username_can_be_unchanged(): void
     {
         $user = User::factory()->create();

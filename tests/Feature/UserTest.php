@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Collaborator;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function updating_collaborator_names_when_the_user_name_changes(): void
     {
         $user = User::factory()->create([
@@ -29,7 +30,7 @@ class UserTest extends TestCase
         $this->assertEquals('Kanan Jarrus', $collaborator->fresh()->name);
     }
 
-    /** @test */
+    #[Test]
     public function updating_collaborator_names_only_updates_where_same_github_username(): void
     {
         $user = User::factory()->create([
@@ -53,7 +54,7 @@ class UserTest extends TestCase
         $this->assertEquals('Ezra Bridger', $newCollaborator->fresh()->name);
     }
 
-    /** @test */
+    #[Test]
     public function updating_collaborator_github_usernames_when_the_user_github_username_changes(): void
     {
         $user = User::factory()->create([
@@ -71,7 +72,7 @@ class UserTest extends TestCase
         $this->assertEquals('kananjarrus', $collaborator->fresh()->github_username);
     }
 
-    /** @test */
+    #[Test]
     public function updating_collaborator_github_usernames_only_updates_where_same_github_user_id(): void
     {
         $user = User::factory()->create([
@@ -95,7 +96,7 @@ class UserTest extends TestCase
         $this->assertEquals('ezrabridger', $newCollaborator->fresh()->github_username);
     }
 
-    /** @test */
+    #[Test]
     public function collaborator_github_usernames_are_only_updated_when_github_user_id_is_set(): void
     {
         $user = User::factory()->create([
@@ -113,7 +114,7 @@ class UserTest extends TestCase
         $this->assertEquals('calebdume', $collaborator->fresh()->github_username);
     }
 
-    /** @test */
+    #[Test]
     public function updating_collaborator_github_user_id_on_user_update(): void
     {
         $user = User::factory()->create([
@@ -131,7 +132,7 @@ class UserTest extends TestCase
         $this->assertEquals(123, $collaborator->fresh()->github_user_id);
     }
 
-    /** @test */
+    #[Test]
     public function collaborator_github_user_ids_are_only_updated_where_github_username_matches(): void
     {
         $user = User::factory()->create([
@@ -155,7 +156,7 @@ class UserTest extends TestCase
         $this->assertNull($newCollaborator->fresh()->github_user_id);
     }
 
-    /** @test */
+    #[Test]
     public function collaborator_github_user_id_is_only_updated_when_it_is_null(): void
     {
         $user = User::factory()->create([

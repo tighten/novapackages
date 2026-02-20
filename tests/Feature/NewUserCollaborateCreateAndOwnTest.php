@@ -9,13 +9,14 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class NewUserCollaborateCreateAndOwnTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_creates_a_collaborator_for_new_users(): void
     {
         Notification::fake();
@@ -30,7 +31,7 @@ class NewUserCollaborateCreateAndOwnTest extends TestCase
         $this->assertEquals(1, Collaborator::count());
     }
 
-    /** @test */
+    #[Test]
     public function it_claims_collaborator_for_new_users_if_matching_by_github_username(): void
     {
         Notification::fake();

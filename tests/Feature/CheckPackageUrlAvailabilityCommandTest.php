@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CheckPackageUrlAvailabilityCommandTest extends TestCase
@@ -49,9 +50,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function calling_command_marks_unavailable_packages_as_unavailable(): void
     {
         Notification::fake();
@@ -70,9 +69,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function calling_command_sends_notification_to_author_of_unavailable_packages(): void
     {
         Notification::fake();
@@ -95,9 +92,7 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function command_ignores_packages_that_are_already_unavailable(): void
     {
         Notification::fake();

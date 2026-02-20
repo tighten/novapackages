@@ -8,6 +8,7 @@ use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class RemindPackageAuthorOfUnavailablePackageCommandTest extends TestCase
@@ -15,9 +16,7 @@ class RemindPackageAuthorOfUnavailablePackageCommandTest extends TestCase
 
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function command_sends_reminder_to_package_author_after_14_days(): void
     {
 

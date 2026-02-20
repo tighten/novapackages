@@ -4,13 +4,14 @@ namespace Tests\Feature;
 
 use App\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class SiteMapTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     function displays_sitemap(): void
     {
         [$packageA, $packageB] = Package::factory()->count(2)->create();

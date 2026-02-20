@@ -5,11 +5,12 @@ namespace Tests\Unit;
 use App\Exceptions\GitHubException;
 use App\GitHubRepo;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class GitHubRepoTest extends TestCase
 {
-    /** @test */
+    #[Test]
     function requires_valid_url(): void
     {
         $this->expectException(GitHubException::class);
@@ -17,7 +18,7 @@ class GitHubRepoTest extends TestCase
         GitHubRepo::make('https://notgithub.com/starwars/lightsabers');
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_the_latest_release_version_for_tagged_releases(): void
     {
         Http::fake([
@@ -34,7 +35,7 @@ class GitHubRepoTest extends TestCase
         $this->assertEquals('v1.0', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     public function it_falls_back_to_master_when_there_are_no_releases(): void
     {
         Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response([])]);
@@ -44,7 +45,7 @@ class GitHubRepoTest extends TestCase
         $this->assertEquals('master', $repo->latestReleaseVersion());
     }
 
-    /** @test */
+    #[Test]
     function it_returns_proper_readme_format(): void
     {
         $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');

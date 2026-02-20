@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('top-id', 'vue-app')
-
 @section('title', 'API Details')
 
 @section('content')
@@ -72,11 +70,11 @@
         </pre></code>
     </div>
 
-    <passport-clients></passport-clients>
-    <passport-authorized-clients></passport-authorized-clients>
+    @livewire('passport.clients')
+    @livewire('passport.authorized-clients')
 
     <br class="mb-4">
 
-    <passport-personal-access-tokens></passport-personal-access-tokens>
+    @livewire('passport.personal-access-tokens')
 </div>
 @endsection

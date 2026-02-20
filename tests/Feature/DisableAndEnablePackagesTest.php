@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class DisableAndEnablePackagesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function admin_user_can_disable_a_package(): void
     {
         $user = User::factory()->admin()->create();
@@ -24,7 +25,7 @@ class DisableAndEnablePackagesTest extends TestCase
         $this->assertTrue($updatedPackage->is_disabled);
     }
 
-    /** @test */
+    #[Test]
     public function admin_user_can_enable_a_package(): void
     {
         $user = User::factory()->admin()->create();

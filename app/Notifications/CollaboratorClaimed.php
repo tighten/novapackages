@@ -6,12 +6,11 @@ use App\Collaborator;
 use App\Events\CollaboratorClaimed as CollaboratorClaimedEvent;
 use App\Tighten;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\SlackAttachment;
-use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Slack\BlockKit\Blocks\SectionBlock;
+use Illuminate\Notifications\Slack\SlackMessage;
 
 class CollaboratorClaimed extends Notification implements ShouldQueue
 {
@@ -43,15 +42,13 @@ class CollaboratorClaimed extends Notification implements ShouldQueue
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
-            ->success()
-            ->content('Collaborator claimed!')
-            ->attachment(function (SlackAttachment $attachment) {
-                $attachment
-                    ->fields([
-                        'Collaborator Name' => $this->collaborator->name,
-                        'User Name' => $this->user->name,
-                    ])
-                    ->timestamp(Carbon::now());
+            ->text('Collaborator claimed!')
+            ->headerBlock('Collaborator claimed!')
+            ->sectionBlock(function (SectionBlock $section) {
+                $section->text(
+                    "*Collaborator:* {$this->collaborator->name}\n"
+                    . "*User:* {$this->user->name}"
+                );
             });
     }
 }

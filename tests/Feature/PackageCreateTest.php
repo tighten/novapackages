@@ -11,13 +11,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PackageCreateTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function can_attach_screenshots_to_the_package(): void
     {
         Event::fake();
@@ -45,7 +46,7 @@ class PackageCreateTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
-    /** @test */
+    #[Test]
     public function screenshots_are_optional(): void
     {
         Event::fake();
@@ -65,7 +66,7 @@ class PackageCreateTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
-    /** @test */
+    #[Test]
     public function screenshots_must_be_an_array(): void
     {
         $user = User::factory()->create();
@@ -78,7 +79,7 @@ class PackageCreateTest extends TestCase
         $response->assertSessionHasErrors('screenshots');
     }
 
-    /** @test */
+    #[Test]
     public function can_not_attach_more_than_20_screenshots(): void
     {
         $user = User::factory()->create();
@@ -92,7 +93,7 @@ class PackageCreateTest extends TestCase
         $response->assertSessionHasErrors('screenshots');
     }
 
-    /** @test */
+    #[Test]
     public function all_uploaded_screenshots_are_returned_when_validation_fails(): void
     {
         $user = User::factory()->create();
@@ -125,7 +126,7 @@ class PackageCreateTest extends TestCase
         $this->assertEquals(Storage::url($screenshotB->path), $sessionScreenshots[1]['public_url']);
     }
 
-    /** @test */
+    #[Test]
     public function the_selected_author_is_returned_to_the_view_when_validation_fails(): void
     {
         Event::fake();
@@ -144,7 +145,7 @@ class PackageCreateTest extends TestCase
         $this->assertTrue(old('selectedAuthor')->is($author));
     }
 
-    /** @test */
+    #[Test]
     public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails(): void
     {
         Event::fake();
@@ -175,7 +176,7 @@ class PackageCreateTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails(): void
     {
         Event::fake();
@@ -206,7 +207,7 @@ class PackageCreateTest extends TestCase
         old('selectedTags')->assertEquals($selectedTags);
     }
 
-    /** @test */
+    #[Test]
     public function relative_urls_are_formatted_to_the_latest_release(): void
     {
         Event::fake();
@@ -246,12 +247,8 @@ class PackageCreateTest extends TestCase
 
         $this->assertDatabaseHas('packages', ['name' => 'Lightsabers']);
 
-        $response = $this->get(route('packages.show', [
-            'namespace' => 'starwars',
-            'name' => 'lightsabers',
-        ]));
-        $response->assertSuccessful();
-        $readme = $response->viewData('package')['readme'];
+        $package = Package::where('name', 'Lightsabers')->firstOrFail();
+        $readme = (new \App\ReadmeFormatter($package))->format($package->readme);
 
         // The github link should be based on the latest release tag rather than the release name
         $this->assertStringNotContainsStringIgnoringCase(
@@ -264,7 +261,7 @@ class PackageCreateTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case(): void
     {
         $this->withoutExceptionHandling();
@@ -292,7 +289,7 @@ class PackageCreateTest extends TestCase
         $response->assertRedirect(route('app.packages.index'));
     }
 
-    /** @test */
+    #[Test]
     public function an_existing_tag_is_used_if_the_tag_submitted_differs_only_in_case_and_a_new_tag_is_added(): void
     {
         $this->withoutExceptionHandling();

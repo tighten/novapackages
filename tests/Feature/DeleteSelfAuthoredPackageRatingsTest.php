@@ -6,6 +6,7 @@ use App\Collaborator;
 use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use willvincent\Rateable\Rating;
 
@@ -13,7 +14,7 @@ class DeleteSelfAuthoredPackageRatingsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function deleting_self_authored_package_ratings(): void
     {
         $packageAuthor = User::factory()->create();
@@ -45,7 +46,7 @@ class DeleteSelfAuthoredPackageRatingsTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function deleting_self_contributed_package_ratings(): void
     {
         $packageAuthor = User::factory()->create();

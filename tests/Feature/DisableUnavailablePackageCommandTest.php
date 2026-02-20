@@ -8,6 +8,7 @@ use App\Package;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class DisableUnavailablePackageCommandTest extends TestCase
@@ -15,9 +16,7 @@ class DisableUnavailablePackageCommandTest extends TestCase
 
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function command_disables_unavailable_packages_after_30_days(): void
     {
 

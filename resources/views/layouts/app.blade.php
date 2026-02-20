@@ -19,15 +19,7 @@
     <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#2b3157">
 
     @include('feed::links')
-
-    <script>
-        window.novapackages = {
-            is_admin: {{ auth()->user()?->isAdmin() ? "true" : "false" }},
-            csrf_token: '{{ csrf_token() }}',
-            user_id: '{{ auth()->id() ?? null }}'
-        };
-    </script>
-
+    @livewireStyles
 
     @production
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVEM0Q7HZ8"></script>
@@ -78,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div id="@yield('top-id', 'app')" class="pt-8">
+    <div id="app" class="pt-8">
         @yield('content')
     </div>
 
@@ -106,26 +98,10 @@
         </a>
     </div>
 
-    @routes
+    <x-toast />
+
+    @livewireScripts
     @stack('scripts')
 
-
-    @if (app()->environment() =='local')
-    <script>
-        let logComponentsData = function () {
-            window.livewire.components.components().forEach(component => {
-                console.log("%cComponent: " + component.name, "font-weight:bold");
-                console.log(component.data);
-            });
-        };
-        document.addEventListener("livewire:load", function(event) {
-            logComponentsData();
-
-            window.livewire.hook('message.processed', () => {
-                logComponentsData();
-            });
-        });
-    </script>
-    @endif
 </body>
 </html>
