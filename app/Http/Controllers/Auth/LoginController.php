@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Http\RedirectResponse;
 use App\Events\NewUserSignedUp;
 use App\Http\Controllers\Controller;
@@ -10,7 +12,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-class LoginController extends Controller
+class LoginController extends Controller implements HasMiddleware
 {
     /*
     |--------------------------------------------------------------------------
@@ -32,14 +34,11 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('guest')->except('logout');
+        return [
+            new Middleware('guest', except: ['logout']),
+        ];
     }
 
     public function redirectToProvider()
