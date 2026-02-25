@@ -74,8 +74,7 @@
             "@php artisan package:discover"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan horizon:publish --ansi"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
