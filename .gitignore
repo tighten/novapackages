@@ -3,8 +3,10 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/pail
 /vendor
 /.idea
+/.nova
 /.vscode
 /.vagrant
 Homestead.json

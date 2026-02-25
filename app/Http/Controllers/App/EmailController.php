@@ -16,7 +16,7 @@ class EmailController extends Controller
 
     public function store(): RedirectResponse
     {
-        $this->validate(request(), [
+        request()->validate([
             'email' => 'required|email|unique:users,email',
         ]);
 

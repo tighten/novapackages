@@ -41,7 +41,7 @@ jobs:
           composer install --prefer-dist --no-interaction --no-progress --no-suggest
           npm install
       - name: Build Assets
-        run: npm run prod
+        run: npm run build
 
       - name: Generate key
         run: php artisan key:generate

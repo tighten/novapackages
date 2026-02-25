@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -84,7 +85,8 @@ class Package extends Model implements Feedable
         return $this->hasMany(Favorite::class);
     }
 
-    public function scopeFilter($query, string $tag)
+    #[Scope]
+    protected function filter($query, string $tag)
     {
         switch ($tag) {
             case 'popular':
@@ -96,14 +98,16 @@ class Package extends Model implements Feedable
         }
     }
 
-    public function scopeTagged($query, $tagSlug)
+    #[Scope]
+    protected function tagged($query, $tagSlug)
     {
         $query->whereHas('tags', function ($query) use ($tagSlug) {
             $query->where('slug', $tagSlug);
         });
     }
 
-    public function scopePopular($query)
+    #[Scope]
+    protected function popular($query)
     {
         return $query->select(
             DB::raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
@@ -111,7 +115,8 @@ class Package extends Model implements Feedable
             ->orderBy('popularity', 'desc');
     }
 
-    public function scopeNovaCurrent($query)
+    #[Scope]
+    protected function novaCurrent($query)
     {
         return $query->where('nova_version', config('novapackages.nova.latest_major_version'));
     }

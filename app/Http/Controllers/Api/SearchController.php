@@ -17,7 +17,7 @@ class SearchController extends Controller
 
     public function __invoke(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'q' => 'required|min:3',
         ]);
 

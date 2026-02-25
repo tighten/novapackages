@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,7 +30,8 @@ class Screenshot extends Model
         return $this->belongsTo(Package::class);
     }
 
-    public function scopeAbandoned($query)
+    #[Scope]
+    protected function abandoned($query)
     {
         return $query->doesntHave('package')
             ->where('created_at', '<', Carbon::now()->subHours(24));

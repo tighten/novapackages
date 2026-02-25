@@ -231,9 +231,9 @@ class PackageEditTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSessionHas('errors');
-        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys(['id' => $oldScreenshot->id, 'public_url' => Storage::url($oldScreenshot->path)], session('_old_input.screenshots')[0],  ['id', 'public_url']);
-        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys(['id' => $screenshotA->id, 'public_url' => Storage::url($screenshotA->path)], session('_old_input.screenshots')[1],  ['id', 'public_url']);
-        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys(['id' => $screenshotB->id, 'public_url' => Storage::url($screenshotB->path)], session('_old_input.screenshots')[2],  ['id', 'public_url']);
+        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys(['id' => $oldScreenshot->id, 'public_url' => Storage::url($oldScreenshot->path)], session('_old_input.screenshots')[0], ['id', 'public_url']);
+        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys(['id' => $screenshotA->id, 'public_url' => Storage::url($screenshotA->path)], session('_old_input.screenshots')[1], ['id', 'public_url']);
+        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys(['id' => $screenshotB->id, 'public_url' => Storage::url($screenshotB->path)], session('_old_input.screenshots')[2], ['id', 'public_url']);
     }
 
     #[Test]
