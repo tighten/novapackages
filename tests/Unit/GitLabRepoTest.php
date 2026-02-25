@@ -13,7 +13,7 @@ use Tests\TestCase;
 class GitLabRepoTest extends TestCase
 {
     #[Test]
-    function it_sets_the_url_for_a_changed_username_to_the_new_repository_location(): void
+    public function it_sets_the_url_for_a_changed_username_to_the_new_repository_location(): void
     {
         Http::fake([
             'https://gitlab.com/senator-palpatine/masterplan' => Http::response(null, 301, [
@@ -59,7 +59,7 @@ class GitLabRepoTest extends TestCase
     }
 
     #[Test]
-    function it_returns_proper_readme_format(): void
+    public function it_returns_proper_readme_format(): void
     {
         Http::fake(['https://gitlab.com/starwars/lightsabers' => Http::response()]);
 

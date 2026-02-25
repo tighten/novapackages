@@ -24,24 +24,24 @@ class BitBucket
 
     public function fetchData($endpoint, $asJson = false)
     {
-        $response = Http::get('https://api.bitbucket.org/'.self::API_VERSION.'/'.$endpoint);
+        $response = Http::get('https://api.bitbucket.org/' . self::API_VERSION . '/' . $endpoint);
         $responseContents = $response->getBody()->getContents();
         $responseJson = json_decode($responseContents, true);
 
         if ($this->responseHasErrors($responseJson) && $this->isFileNotFoundError($responseJson) === false) {
-            throw new BitBucketException("BitBucket error fetching data for [{$this->url}]: ".Arr::get($responseJson, 'error.message'));
+            throw new BitBucketException("BitBucket error fetching data for [{$this->url}]: " . Arr::get($responseJson, 'error.message'));
         }
 
         return $asJson ? $responseJson : $responseContents;
     }
 
-    protected function responseHasErrors($responseJson)
-    {
-        return Arr::get($responseJson, 'type') === 'error';
-    }
-
     public function isFileNotFoundError($responseJson)
     {
         return strpos(Arr::get($responseJson, 'error.message', ''), 'No such file or directory');
+    }
+
+    protected function responseHasErrors($responseJson)
+    {
+        return Arr::get($responseJson, 'type') === 'error';
     }
 }

@@ -8,7 +8,6 @@ use App\Screenshot;
 use App\Tag;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -47,7 +46,7 @@ class PackageFormRequest extends FormRequest
 
                     if (count($value) > 20) {
                         $deleteCount = count($value) - 20;
-                        $fail("You may only upload 20 {$attribute}. Please delete {$deleteCount} ".Str::plural('screenshot', $deleteCount));
+                        $fail("You may only upload 20 {$attribute}. Please delete {$deleteCount} " . Str::plural('screenshot', $deleteCount));
                     }
                 },
             ],
@@ -56,7 +55,7 @@ class PackageFormRequest extends FormRequest
 
     public function getComposerName()
     {
-        return request('packagist_namespace').'/'.request('packagist_name');
+        return request('packagist_namespace') . '/' . request('packagist_name');
     }
 
     protected function failedValidation(Validator $validator)
@@ -73,14 +72,14 @@ class PackageFormRequest extends FormRequest
         });
 
         return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput(array_merge(request()->all(), [
-                    'selectedAuthor' => $collaborators->where('id', request('author_id', null))->first(),
-                    'selectedCollaborators' => $collaborators->whereIn('id', request('contributors', []))->values(),
-                    'selectedTags' => Tag::whereIn('id', request('tags', []))->get()->toBase()->merge($newTags),
-                    'screenshots' => Screenshot::forRequest(request('screenshots')),
-                ]));
+            ->back()
+            ->withErrors($validator)
+            ->withInput(array_merge(request()->all(), [
+                'selectedAuthor' => $collaborators->where('id', request('author_id', null))->first(),
+                'selectedCollaborators' => $collaborators->whereIn('id', request('contributors', []))->values(),
+                'selectedTags' => Tag::whereIn('id', request('tags', []))->get()->toBase()->merge($newTags),
+                'screenshots' => Screenshot::forRequest(request('screenshots')),
+            ]));
     }
 
     private function packageStringUnique($id = null)

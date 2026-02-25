@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\App;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Collaborator;
 use App\Events\CollaboratorCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Remotes\GitHub;
 use Github\Exception\RuntimeException as GitHubException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class CollaboratorController extends Controller
 {

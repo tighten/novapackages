@@ -7,7 +7,7 @@
     @keydown.arrow-left.window="if (open) current = (current - 1 + {{ count($screenshots) }}) % {{ count($screenshots) }}"
     class="flex flex-wrap items-end mt-4 mb-6"
 >
-    @foreach($screenshots as $index => $screenshot)
+    @foreach ($screenshots as $index => $screenshot)
         <div class="text-center w-1/5 p-2">
             <a class="cursor-pointer" @click="open = true; current = {{ $index }}">
                 <img class="rounded-sm shadow-md" src="{{ $screenshot->public_url }}" />
@@ -29,7 +29,7 @@
                     <svg class="fill-current text-white inline-block h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3.828 9l6.071-6.071-1.414-1.414L0 10l.707.707 7.778 7.778 1.414-1.414L3.828 11H20V9H3.828z"/></svg>
                 </a>
                 <div class="w-full">
-                    @foreach($screenshots as $index => $screenshot)
+                    @foreach ($screenshots as $index => $screenshot)
                         <img
                             x-show="current === {{ $index }}"
                             class="cursor-pointer rounded-sm mx-auto"

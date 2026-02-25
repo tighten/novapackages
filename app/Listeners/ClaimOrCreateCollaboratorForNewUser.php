@@ -14,6 +14,7 @@ class ClaimOrCreateCollaboratorForNewUser
     {
         if (Collaborator::where('github_username', $event->user->github_username)->count() > 0) {
             $this->claimCollaborator($event);
+
             return;
         }
 

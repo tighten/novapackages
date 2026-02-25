@@ -33,7 +33,7 @@ class GitHub
         });
     }
 
-    public function readme(string $repositoryPath): string|null
+    public function readme(string $repositoryPath): ?string
     {
         $this->guardAgainstInvalidRepositoryPath($repositoryPath);
 

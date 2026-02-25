@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\App;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Screenshot;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\JsonResponse;
 
 class ScreenshotUploadController extends Controller
 {

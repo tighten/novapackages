@@ -42,7 +42,7 @@
                                 'name' => $package->composer_package,
                             ]) }}"
                     >{{ $package->name }}</a>
-                    @if(! $package->authorIsUser())
+                    @if (! $package->authorIsUser())
                         (<a href="{{ route('app.packages.edit', [$package]) }}">edit</a>)
                     @endif
                      - Submitter</li>

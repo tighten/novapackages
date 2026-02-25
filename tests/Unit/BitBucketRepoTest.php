@@ -42,7 +42,7 @@ class BitBucketRepoTest extends TestCase
     }
 
     #[Test]
-    function it_returns_proper_readme_format(): void
+    public function it_returns_proper_readme_format(): void
     {
         $repo = BitBucketRepo::make('https://bitbucket.org/starwars/lightsabers');
 

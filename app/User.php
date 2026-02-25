@@ -2,12 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Favorite;
 use App\Jobs\UserRatePackage;
-use App\Package;
-use App\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\Contracts\OAuthenticatable;
@@ -15,7 +12,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements OAuthenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasApiTokens, HasFactory, Notifiable;
 
     const USER_ROLE = 0;
 
@@ -44,13 +41,6 @@ class User extends Authenticatable implements OAuthenticatable
         'password', 'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'role' => 'integer',
-        ];
-    }
-
     public static function booted()
     {
         self::updated(function ($user) {
@@ -64,6 +54,13 @@ class User extends Authenticatable implements OAuthenticatable
                 $user->updateCollaboratorGithubUserIds();
             }
         });
+    }
+
+    public static function forSocialiteUser($socialiteUser)
+    {
+        return self::where('github_username', $socialiteUser->getNickname())
+            ->orWhere('email', $socialiteUser->getEmail())
+            ->first();
     }
 
     public function collaborators(): HasMany
@@ -129,13 +126,6 @@ class User extends Authenticatable implements OAuthenticatable
         $this->favorites()->where('package_id', $packageId)->delete();
     }
 
-    public static function forSocialiteUser($socialiteUser)
-    {
-        return self::where('github_username', $socialiteUser->getNickname())
-            ->orWhere('email', $socialiteUser->getEmail())
-            ->first();
-    }
-
     public function updateCollaboratorNames()
     {
         $this->collaborators
@@ -174,5 +164,12 @@ class User extends Authenticatable implements OAuthenticatable
             ->each(function ($collaborator) {
                 $collaborator->update(['github_user_id' => $this->github_user_id]);
             });
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'role' => 'integer',
+        ];
     }
 }

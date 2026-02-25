@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Collaborator;
+use Illuminate\View\View;
 
 class CollaboratorController extends Controller
 {
@@ -21,7 +21,6 @@ class CollaboratorController extends Controller
 
     public function show(Collaborator $collaborator): View
     {
-        return view('collaborators.show')
-            ->with('collaborator', $collaborator);
+        return view('collaborators.show', ['collaborator' => $collaborator]);
     }
 }

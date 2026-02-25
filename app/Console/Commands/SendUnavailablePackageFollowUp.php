@@ -8,7 +8,6 @@ use Illuminate\Console\Command;
 
 class SendUnavailablePackageFollowUp extends Command
 {
-
     protected $signature = 'novapackages:send-unavailable-package-followup';
 
     protected $description = 'If package has been unavailable for two weeks, send follow-up to package author.';

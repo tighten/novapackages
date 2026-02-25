@@ -10,13 +10,12 @@ use willvincent\Rateable\Rating;
 
 class UserRatePackage
 {
+    use Dispatchable;
     private $user;
 
     private $package;
 
     private $stars;
-
-    use Dispatchable;
 
     public function __construct($userId, $packageId, $stars)
     {

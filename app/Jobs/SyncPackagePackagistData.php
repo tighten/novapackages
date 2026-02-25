@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Log;
 
 class SyncPackagePackagistData implements ShouldQueue
 {
-    private $package;
-
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    private $package;
 
     /**
      * Create a new job instance.

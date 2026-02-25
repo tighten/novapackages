@@ -5,7 +5,7 @@ use Illuminate\Support\Arr;
 if (! function_exists('markdown')) {
     function markdown($text)
     {
-        return '<div class="markdown">'.(new Parsedown)->text($text).'</div>';
+        return '<div class="markdown">' . (new Parsedown)->text($text) . '</div>';
     }
 }
 
@@ -14,7 +14,7 @@ if (! function_exists('abstractify')) {
     {
         $text = strip_tags($text);
 
-        return strlen($text) > 190 ? substr($text, 0, 190).'...' : $text;
+        return strlen($text) > 190 ? substr($text, 0, 190) . '...' : $text;
     }
 }
 

@@ -11,7 +11,6 @@ use Illuminate\Support\HtmlString;
 
 class NotifyAuthorOfUnavailablePackageUrl extends Notification implements ShouldQueue
 {
-
     use Queueable;
 
     protected $package;

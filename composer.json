@@ -30,6 +30,7 @@
         "spatie/laravel-flare": "^2.7",
         "spatie/laravel-sitemap": "^7.3",
         "stil/gd-text": "^1.1",
+        "tightenco/duster": "^3.3",
         "tightenco/ziggy": "^2.5",
         "typesense/typesense-php": "^4.9",
         "willvincent/laravel-rateable": "^3.5"

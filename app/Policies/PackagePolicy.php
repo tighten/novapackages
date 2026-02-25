@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Package;
-use App\Policies\HandlesPackageAuthorizationTrait;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

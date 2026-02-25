@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Attributes\Scope;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Collaborator extends Model
 {
@@ -16,13 +16,6 @@ class Collaborator extends Model
     protected $guarded = ['id'];
 
     protected $appends = ['name_with_username'];
-
-    protected function casts(): array
-    {
-        return [
-            'user_id' => 'integer'
-        ];
-    }
 
     public function allAuthoredPackages(): HasMany
     {
@@ -61,6 +54,13 @@ class Collaborator extends Model
     public function getRouteKeyName()
     {
         return 'github_username';
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'user_id' => 'integer',
+        ];
     }
 
     #[Scope]

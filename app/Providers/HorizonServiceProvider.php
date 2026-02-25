@@ -19,6 +19,14 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
     }
 
     /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
+    /**
      * Register the Horizon gate.
      *
      * This gate determines who can access Horizon in non-local environments.
@@ -28,13 +36,5 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
         Gate::define('viewHorizon', function ($user) {
             return in_array($user->email, explode(',', config('horizon.users')));
         });
-    }
-
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
     }
 }

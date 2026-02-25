@@ -7,7 +7,7 @@
         <div class="pt-1 text-gray-600">Your Rating:</div>
 
         <div class="w-2/3 pl-2 flex-row" x-data="{ hovered: 0 }">
-            @for($i = 1; $i <= 5; $i++)
+            @for ($i = 1; $i <= 5; $i++)
                 <span
                     class="cursor-pointer text-2xl"
                     :class="(hovered >= {{ $i }} || (hovered === 0 && {{ $rating }} >= {{ $i }})) ? 'text-yellow-500' : 'text-gray-300'"

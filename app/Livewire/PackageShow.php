@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\CacheKeys;
+use App\Collaborator;
 use App\Events\PackageRated;
 use App\Exceptions\PackagistException;
 use App\Exceptions\SelfAuthoredRatingException;
@@ -13,7 +14,6 @@ use App\Package;
 use App\ReadmeFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 use Livewire\Component;
 
 class PackageShow extends Component
@@ -47,6 +47,7 @@ class PackageShow extends Component
             auth()->user()->ratePackage($this->package->id, $stars);
         } catch (SelfAuthoredRatingException $e) {
             $this->dispatch('toast', message: 'A package cannot be rated by its author.', type: 'error');
+
             return;
         }
 
@@ -96,6 +97,50 @@ class PackageShow extends Component
         $this->package->is_disabled = ! $this->package->is_disabled;
         $this->package->save();
         $this->dispatch('toast', message: $this->package->is_disabled ? 'Package disabled.' : 'Package enabled.');
+    }
+
+    public function render()
+    {
+        $this->package->load(['author', 'contributors', 'tags', 'screenshots', 'reviews.user', 'reviews.rating', 'ratings']);
+
+        $packagist = $this->getPackagistData();
+
+        $currentUserOwns = auth()->check() && auth()->user()->can('update', $this->package);
+        $currentUserReview = auth()->check()
+            ? $this->package->reviews->where('user_id', auth()->id())
+            : collect();
+
+        $isSelfAuthored = auth()->check() && $this->package->author_id === (int) optional(
+            Collaborator::where('user_id', auth()->id())->first()
+        )->id;
+
+        $isSelfContributed = auth()->check() && $this->package->contributors()->pluck('user_id')->contains(auth()->id());
+
+        $ratingCounts = [
+            ['number' => 5, 'count' => $this->package->countStarRatings(5)],
+            ['number' => 4, 'count' => $this->package->countStarRatings(4)],
+            ['number' => 3, 'count' => $this->package->countStarRatings(3)],
+            ['number' => 2, 'count' => $this->package->countStarRatings(2)],
+            ['number' => 1, 'count' => $this->package->countStarRatings(1)],
+        ];
+
+        $totalRatings = collect($ratingCounts)->sum('count');
+
+        return view('livewire.package-show', [
+            'packagistData' => $packagist['packagistData'],
+            'composerLatest' => $packagist['composerLatest'],
+            'novaVersion' => $packagist['novaVersion'],
+            'readme' => $this->getFormattedReadme(),
+            'instructions' => $this->getFormattedInstructions(),
+            'possiblyAbandoned' => $this->isPossiblyAbandoned($packagist['composerLatest'], $packagist['packagistData']),
+            'currentUserOwns' => $currentUserOwns,
+            'currentUserReview' => $currentUserReview,
+            'isSelfAuthored' => $isSelfAuthored,
+            'isSelfContributed' => $isSelfContributed,
+            'ratingCounts' => $ratingCounts,
+            'totalRatings' => $totalRatings,
+            'averageRating' => number_format($this->package->averageRating(), 2, '.', ''),
+        ]);
     }
 
     protected function getUserRating()
@@ -156,49 +201,5 @@ class PackageShow extends Component
     {
         return Arr::get($packagistData ?? [], 'package.abandoned', false) ||
             ($this->package->created_at->diffInDays(now()) > 16 && ! $composerLatest);
-    }
-
-    public function render()
-    {
-        $this->package->load(['author', 'contributors', 'tags', 'screenshots', 'reviews.user', 'reviews.rating', 'ratings']);
-
-        $packagist = $this->getPackagistData();
-
-        $currentUserOwns = auth()->check() && auth()->user()->can('update', $this->package);
-        $currentUserReview = auth()->check()
-            ? $this->package->reviews->where('user_id', auth()->id())
-            : collect();
-
-        $isSelfAuthored = auth()->check() && $this->package->author_id === (int) optional(
-            \App\Collaborator::where('user_id', auth()->id())->first()
-        )->id;
-
-        $isSelfContributed = auth()->check() && $this->package->contributors()->pluck('user_id')->contains(auth()->id());
-
-        $ratingCounts = [
-            ['number' => 5, 'count' => $this->package->countStarRatings(5)],
-            ['number' => 4, 'count' => $this->package->countStarRatings(4)],
-            ['number' => 3, 'count' => $this->package->countStarRatings(3)],
-            ['number' => 2, 'count' => $this->package->countStarRatings(2)],
-            ['number' => 1, 'count' => $this->package->countStarRatings(1)],
-        ];
-
-        $totalRatings = collect($ratingCounts)->sum('count');
-
-        return view('livewire.package-show', [
-            'packagistData' => $packagist['packagistData'],
-            'composerLatest' => $packagist['composerLatest'],
-            'novaVersion' => $packagist['novaVersion'],
-            'readme' => $this->getFormattedReadme(),
-            'instructions' => $this->getFormattedInstructions(),
-            'possiblyAbandoned' => $this->isPossiblyAbandoned($packagist['composerLatest'], $packagist['packagistData']),
-            'currentUserOwns' => $currentUserOwns,
-            'currentUserReview' => $currentUserReview,
-            'isSelfAuthored' => $isSelfAuthored,
-            'isSelfContributed' => $isSelfContributed,
-            'ratingCounts' => $ratingCounts,
-            'totalRatings' => $totalRatings,
-            'averageRating' => number_format($this->package->averageRating(), 2, '.', ''),
-        ]);
     }
 }

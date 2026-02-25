@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Http;
 
 class CheckPackageUrlsForAvailability implements ShouldQueue
 {
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $package;
-
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct($package)
     {
@@ -29,7 +28,7 @@ class CheckPackageUrlsForAvailability implements ShouldQueue
         try {
             $response = Http::get($this->package->url);
             if ($response->clientError()) {
-                 $urlIsValid = false;
+                $urlIsValid = false;
             }
         } catch (Exception $e) {
             $urlIsValid = false; // If we can't reach the domain at all, mark as invalid

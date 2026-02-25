@@ -8,7 +8,7 @@
     </div>
 
     <div class="bg-white flex flex-col min-w-0 rounded-sm wrap-break-word shadow-sm">
-        @if(count($clients) === 0)
+        @if (count($clients) === 0)
             <p class="mb-0 p-8">
                 You have not created any OAuth clients.
             </p>
@@ -24,7 +24,7 @@
                 </thead>
 
                 <tbody class="flex flex-col p-6 sm:p-8 sm:pb-4">
-                    @foreach($clients as $client)
+                    @foreach ($clients as $client)
                         <tr class="flex justify-between mb-4">
                             <td class="w-1/5 align-middle hidden md:block">{{ $client['id'] }}</td>
                             <td class="w-1/5 align-middle text-left">{{ $client['name'] }}</td>
@@ -45,7 +45,7 @@
     </div>
 
     {{-- Create Client Modal --}}
-    @if($showCreateModal)
+    @if ($showCreateModal)
         <div class="fixed inset-0 z-50 flex items-center justify-center" x-data @keydown.escape.window="$wire.set('showCreateModal', false)">
             <div class="fixed inset-0 bg-black/50" wire:click="$set('showCreateModal', false)"></div>
             <div class="relative bg-white rounded-sm shadow-lg w-full max-w-lg mx-4">
@@ -55,11 +55,11 @@
                 </div>
 
                 <div class="p-4">
-                    @if(count($createErrors))
+                    @if (count($createErrors))
                         <div class="relative px-3 py-3 mb-4 border rounded-sm text-red-900 border-red-700 bg-red-300">
                             <p class="mb-0"><strong>Whoops!</strong> Something went wrong!</p>
                             <ul class="mt-2">
-                                @foreach($createErrors as $error)
+                                @foreach ($createErrors as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
@@ -92,7 +92,7 @@
     @endif
 
     {{-- Edit Client Modal --}}
-    @if($showEditModal)
+    @if ($showEditModal)
         <div class="fixed inset-0 z-50 flex items-center justify-center" x-data @keydown.escape.window="$wire.set('showEditModal', false)">
             <div class="fixed inset-0 bg-black/50" wire:click="$set('showEditModal', false)"></div>
             <div class="relative bg-white rounded-sm shadow-lg w-full max-w-lg mx-4">
@@ -102,11 +102,11 @@
                 </div>
 
                 <div class="p-4">
-                    @if(count($editErrors))
+                    @if (count($editErrors))
                         <div class="relative px-3 py-3 mb-4 border rounded-sm text-red-900 border-red-700 bg-red-300">
                             <p class="mb-0"><strong>Whoops!</strong> Something went wrong!</p>
                             <ul class="mt-2">
-                                @foreach($editErrors as $error)
+                                @foreach ($editErrors as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>

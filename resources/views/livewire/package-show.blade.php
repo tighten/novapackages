@@ -48,7 +48,7 @@
 
             <h1 class="inline text-gray-800 text-2xl md:text-4xl font-bold">
                 {{ $package->display_name }}
-                @if($package->is_disabled)
+                @if ($package->is_disabled)
                     <span class="text-xs uppercase text-red-600">Disabled</span>
                 @endif
             </h1>
@@ -109,14 +109,14 @@
                     </svg>
                 </div>
 
-                @if($packagistData && isset($packagistData['package']))
+                @if ($packagistData && isset($packagistData['package']))
                     <div class="border border-t border-gray-300 flex flex-row flex-no-wrap">
                         <a
                             href="{{ $packagistData['package']['repository'] ?? '#' }}"
                             class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 border-r border-gray-300 hover:bg-indigo-100"
                         >GitHub</a>
 
-                        @if($composerLatest && isset($composerLatest['dist']['url']))
+                        @if ($composerLatest && isset($composerLatest['dist']['url']))
                             <a
                                 href="{{ $composerLatest['dist']['url'] }}"
                                 class="no-underline text-center text-indigo-600 uppercase text-sm font-bold w-1/2 py-4 hover:bg-indigo-100"
@@ -134,15 +134,15 @@
             class="w-full md:w-3/4 bg-white shadow-sm"
             :class="'{{ $package->is_disabled ? 'border-red-600' : 'border-indigo-600' }}'"
         >
-            @if(! $creatingReview)
+            @if (! $creatingReview)
                 {{-- Package Detail Content --}}
-                @if($possiblyAbandoned)
+                @if ($possiblyAbandoned)
                     <div class="p-4 text-white bg-red-600">
                         This package is possibly abandoned. Please proceed with care.
                     </div>
                 @endif
 
-                @if($package->marked_as_unavailable_at)
+                @if ($package->marked_as_unavailable_at)
                     <div class="p-4 text-white bg-orange-500">
                         This package seems to have a broken documentation URL. Please proceed with care.
                     </div>
@@ -154,13 +154,13 @@
                             <a class="block p-4 font-semibold text-gray-100 no-underline bg-gray-800 hover:bg-gray-100 hover:text-gray-800 sm:mr-2 md:mr-4 md:px-6" href="#readme">Readme</a>
                         </li>
 
-                        @if($package->screenshots->count())
+                        @if ($package->screenshots->count())
                             <li>
                                 <a class="block p-4 font-semibold text-gray-100 no-underline bg-gray-800 hover:bg-gray-100 hover:text-gray-800 sm:mr-2 md:mr-4 md:px-6" href="#screenshots">Screenshots</a>
                             </li>
                         @endif
 
-                        @if($package->reviews->count())
+                        @if ($package->reviews->count())
                             <li>
                                 <a class="block p-4 font-semibold text-gray-100 no-underline bg-gray-800 hover:bg-gray-100 hover:text-gray-800 sm:mr-2 md:mr-4 md:px-6" href="#reviews">Reviews</a>
                             </li>
@@ -168,7 +168,7 @@
                     </ul>
                 </div>
 
-                @if(auth()->user()?->isAdmin())
+                @if (auth()->user()?->isAdmin())
                     <div class="-mb-8 text-right">
                         <x-admin-dropdown>
                             <x-slot:trigger>
@@ -180,7 +180,7 @@
                             </x-slot:trigger>
 
                             <div class="overflow-hidden bg-indigo-600 border border-gray-200 rounded-sm shadow-sm">
-                                @if($package->is_disabled)
+                                @if ($package->is_disabled)
                                     <a
                                         href="{{ route('app.admin.enable-package', $package) }}"
                                         class="block px-4 py-3 text-white no-underline bg-indigo-600 border-b border-gray-200 hover:text-white hover:bg-blue-500"
@@ -197,7 +197,7 @@
                 @endif
 
                 <div class="m-4 wrap-break-word md:m-10">
-                    @if($instructions)
+                    @if ($instructions)
                         <div class="pb-6 border-b border-gray-300">
                             <h2 class="py-2 pt-3 pl-4 mb-4 -mx-4 text-2xl font-bold text-gray-800 bg-gray-200 border-b-2 border-gray-300">
                                 Installation Instructions
@@ -222,7 +222,7 @@
                         </div>
                     </div>
 
-                    @if($package->screenshots->count())
+                    @if ($package->screenshots->count())
                         <div class="pb-6 border-b border-gray-300">
                             <h2
                                 id="screenshots"
@@ -235,7 +235,7 @@
                         </div>
                     @endif
 
-                    @if($package->reviews->count())
+                    @if ($package->reviews->count())
                         <div class="pb-6 border-b border-gray-300">
                             <h2
                                 id="reviews"
@@ -266,7 +266,7 @@
 
         {{-- Sidebar --}}
         <div class="w-full md:w-1/4 bg-white md:ml-4 md:mt-12 shadow-sm text-sm border-t sm:border-t-0">
-            @if($currentUserOwns)
+            @if ($currentUserOwns)
                 <a
                     href="{{ route('app.packages.edit', $package) }}"
                     class="block bg-indigo-600 hover:bg-indigo-700 text-white no-underline font-bold p-4 md:p-8 py-4 border-gray-300 border-b"
@@ -282,11 +282,11 @@
                         <td class="py-2">{{ $package->created_at->diffForHumans() }}</td>
                     </tr>
 
-                    @if($composerLatest)
+                    @if ($composerLatest)
                         <tr>
                             <td class="font-bold py-2">Last updated</td>
                             <td class="py-2">
-                                @if(isset($composerLatest['time']))
+                                @if (isset($composerLatest['time']))
                                     {{ \Illuminate\Support\Str::title(\Carbon\Carbon::parse($composerLatest['time'])->diffForHumans()) }}
                                 @else
                                     Nothing yet.
@@ -299,7 +299,7 @@
                             <td class="py-2">{{ $composerLatest['version'] }}</td>
                         </tr>
 
-                        @if($novaVersion)
+                        @if ($novaVersion)
                             <tr>
                                 <td class="py-2 font-bold">Nova Version</td>
                                 <td class="py-2">{{ $novaVersion }}</td>
@@ -331,8 +331,8 @@
                     @endif
                 </table>
 
-                @if(! $composerLatest)
-                    @if($packagistData)
+                @if (! $composerLatest)
+                    @if ($packagistData)
                         <p class="mb-2">
                             This package is listed on
                             <a href="https://packagist.org/packages/{{ $package->composer_name }}.json">the Packagist API</a>,
@@ -351,7 +351,7 @@
                         so some times you just need to check back in an hour.
                     </p>
 
-                    @if($currentUserOwns && !$refreshRequested)
+                    @if ($currentUserOwns && !$refreshRequested)
                         <a
                             href="#"
                             wire:click.prevent="requestPackagistRefresh"
@@ -361,13 +361,13 @@
                         </a>
                     @endif
 
-                    @if($refreshRequested)
+                    @if ($refreshRequested)
                         <span class="block mt-8 mb-2">Refresh requested</span>
                     @endif
                 @endif
 
                 <div>
-                    @if($currentUserOwns && !$repositoryRefreshRequested)
+                    @if ($currentUserOwns && !$repositoryRefreshRequested)
                         <a
                             href="#"
                             wire:click.prevent="requestRepositoryRefresh"
@@ -377,13 +377,13 @@
                         </a>
                     @endif
 
-                    @if($repositoryRefreshRequested)
+                    @if ($repositoryRefreshRequested)
                         <span class="block mt-8 mb-2">Refresh requested</span>
                     @endif
                 </div>
             </div>
 
-            @if($package->url)
+            @if ($package->url)
                 <div
                     class="p-4 md:p-6 border-solid border-gray-300 border-b overflow-hidden"
                     style="text-overflow: ellipsis; white-space: nowrap;"
@@ -410,11 +410,11 @@
                 @endauth
             </div>
 
-            @if(! $creatingReview)
+            @if (! $creatingReview)
                 <div class="p-4 md:p-6 pb-4 border-gray-300 border-b">
                     <h3 class="uppercase text-gray-600 text-sm font-bold">Rating</h3>
 
-                    @if(! $rated)
+                    @if (! $rated)
                         <div class="flex">
                             <div class="mt-2 mb-4 text-5xl w-1/2">
                                 {{ $averageRating > 0 ? number_format($averageRating, 2) : 'N/A' }}
@@ -429,13 +429,13 @@
                         </div>
                     @endif
 
-                    @if(auth()->check() && !$isSelfAuthored && !$isSelfContributed)
+                    @if (auth()->check() && !$isSelfAuthored && !$isSelfContributed)
                         <div class="mb-4 flex" x-data="{ hovered: 0 }">
                             <div class="w-1/3 pt-1 text-gray-600">
                                 Tap to rate:
                             </div>
                             <div class="w-2/3 pl-2">
-                                @for($i = 1; $i <= 5; $i++)
+                                @for ($i = 1; $i <= 5; $i++)
                                     <span
                                         class="cursor-pointer text-xl"
                                         :class="(hovered >= {{ $i }} || (hovered === 0 && {{ $currentUserRating }} >= {{ $i }})) ? 'text-yellow-500' : 'text-gray-300'"
@@ -448,7 +448,7 @@
                         </div>
                     @endif
 
-                    @foreach($ratingCounts as $ratingCount)
+                    @foreach ($ratingCounts as $ratingCount)
                         <x-rating-count-bar
                             :stars="$ratingCount['number']"
                             :count="$ratingCount['count']"
@@ -460,7 +460,7 @@
                         {{ $totalRatings }} ratings
                     </div>
 
-                    @if(auth()->check() && $currentUserReview->isEmpty() && !$isSelfAuthored && !$isSelfContributed)
+                    @if (auth()->check() && $currentUserReview->isEmpty() && !$isSelfAuthored && !$isSelfContributed)
                         <a
                             class="block text-indigo-600 no-underline font-bold text-sm cursor-pointer pb-4"
                             href="{{ route('reviews.create', [
@@ -493,11 +493,11 @@
                 </div>
             </div>
 
-            @if($package->contributors->count())
+            @if ($package->contributors->count())
                 <div class="p-4 pb-2 md:p-6 border-gray-300 border-b">
                     <h3 class="uppercase text-gray-600 text-sm font-bold">Contributors</h3>
 
-                    @foreach($package->contributors as $contributor)
+                    @foreach ($package->contributors as $contributor)
                         <div class="flex text-sm pt-4 items-center">
                             @include('livewire.partials.title-icon', [
                                 'title' => $contributor->name,
@@ -517,7 +517,7 @@
                 <h3 class="uppercase text-gray-600 text-sm font-bold">Tags</h3>
 
                 <div class="block py-4">
-                    @foreach($package->tags as $tag)
+                    @foreach ($package->tags as $tag)
                         <a
                             href="{{ $tag->url() }}"
                             class="bg-indigo-200 text-indigo-600 rounded-l-full rounded-r-full px-4 py-2 mr-2 mb-2 inline-block font-bold no-underline"

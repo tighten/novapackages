@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Package;
-use App\Review;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -4,7 +4,7 @@
 @endphp
 
 <div wire:key="review-{{ $review->id }}">
-    @if($editingReviewId === $review->id)
+    @if ($editingReviewId === $review->id)
         {{-- Editing mode --}}
         <div class="container py-4">
             <div class="mb-4 flex">
@@ -44,7 +44,7 @@
 
             <p class="text-gray-800 py-1">{{ $review->content }}</p>
 
-            @if($canEdit)
+            @if ($canEdit)
                 <div class="flex mt-2">
                     <button
                         wire:click="edit({{ $review->id }})"

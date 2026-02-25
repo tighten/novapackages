@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Http\Remotes\GitHub;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PackageIdeaController extends Controller
 {

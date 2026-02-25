@@ -38,9 +38,7 @@ class BaseRepo
         return $source[1] ?? $this->url;
     }
 
-    public function readme()
-    {
-    }
+    public function readme() {}
 
     public function readmeFormat()
     {
@@ -51,8 +49,13 @@ class BaseRepo
         return static::README_FORMAT;
     }
 
-    public function latestReleaseVersion()
+    public function latestReleaseVersion() {}
+
+    protected function repoHasConst($const)
     {
+        return method_exists($this, 'repo')
+            && $this->repo() !== null
+            && defined(get_class($this->repo()) . '::' . $const);
     }
 
     private function repoSource($registryRepo)
@@ -64,10 +67,5 @@ class BaseRepo
         if (defined('static::SOURCE')) {
             return static::SOURCE;
         }
-    }
-
-    protected function repoHasConst($const)
-    {
-        return method_exists($this, 'repo') && $this->repo() !== null && defined(get_class($this->repo()).'::'.$const);
     }
 }

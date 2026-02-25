@@ -19,8 +19,8 @@
             setTimeout(() => { this.toasts = this.toasts.filter(t => t.id !== id); }, 300);
         },
     }"
-    @if(session('status')) data-flash-status="{{ session('status') }}" @endif
-    @if(session('error')) data-flash-error="{{ session('error') }}" @endif
+    @if (session('status')) data-flash-status="{{ session('status') }}" @endif
+    @if (session('error')) data-flash-error="{{ session('error') }}" @endif
     @toast.window="add($event.detail.message, $event.detail.type || 'success')"
     class="fixed top-4 right-4 z-[9999] flex flex-col gap-3 pointer-events-none"
 >

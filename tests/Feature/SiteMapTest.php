@@ -12,7 +12,7 @@ class SiteMapTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
-    function displays_sitemap(): void
+    public function displays_sitemap(): void
     {
         [$packageA, $packageB] = Package::factory()->count(2)->create();
 

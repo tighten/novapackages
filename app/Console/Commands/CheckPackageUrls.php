@@ -8,7 +8,6 @@ use Illuminate\Console\Command;
 
 class CheckPackageUrls extends Command
 {
-
     protected $signature = 'novapackages:check-package-urls';
 
     protected $description = 'Check all package URLs for 4XX errors';

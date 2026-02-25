@@ -35,9 +35,9 @@ class AppServiceProvider extends ServiceProvider
         );
 
         Blade::directive('og', function ($expression) {
-            list($property, $content) = explode(',', $expression, 2);
+            [$property, $content] = explode(',', $expression, 2);
 
-            return "<?php echo '<meta property=\"og:' . $property . '\" content=\"' . $content . '\">' . \"\n\"; ?>";
+            return "<?php echo '<meta property=\"og:' . {$property} . '\" content=\"' . {$content} . '\">' . \"\n\"; ?>";
         });
 
         $this->bootRoute();

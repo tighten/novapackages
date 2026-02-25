@@ -96,7 +96,7 @@ class InternalApiReviewsTest extends TestCase
             ->assertSuccessful();
 
         $this->assertDatabaseMissing('reviews', [
-            'id' => $review->id
+            'id' => $review->id,
         ]);
     }
 
@@ -111,7 +111,7 @@ class InternalApiReviewsTest extends TestCase
             ->assertForbidden();
 
         $this->assertDatabaseHas('reviews', [
-            'id' => $review->id
+            'id' => $review->id,
         ]);
     }
 
@@ -126,7 +126,7 @@ class InternalApiReviewsTest extends TestCase
             ->assertSuccessful();
 
         $this->assertDatabaseMissing('reviews', [
-            'id' => $review->id
+            'id' => $review->id,
         ]);
     }
 }

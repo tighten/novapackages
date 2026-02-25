@@ -1,5 +1,5 @@
 <div>
-    @if(count($tokens) > 0)
+    @if (count($tokens) > 0)
         <div class="relative flex flex-col min-w-0 rounded-sm wrap-break-word border bg-white border border-gray-400 card-default">
             <div class="py-3 px-6 mb-0 bg-gray-100 border-b border-gray-400 text-gray-800">Authorized Applications</div>
 
@@ -14,11 +14,11 @@
                     </thead>
 
                     <tbody>
-                        @foreach($tokens as $token)
+                        @foreach ($tokens as $token)
                             <tr>
                                 <td style="vertical-align: middle;">{{ $token['client_name'] }}</td>
                                 <td style="vertical-align: middle;">
-                                    @if(count($token['scopes']) > 0)
+                                    @if (count($token['scopes']) > 0)
                                         {{ implode(', ', $token['scopes']) }}
                                     @endif
                                 </td>

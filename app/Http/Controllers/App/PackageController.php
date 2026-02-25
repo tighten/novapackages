@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\App;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Collaborator;
 use App\Events\PackageCreated;
 use App\Events\PackageDeleted;
@@ -14,9 +12,11 @@ use App\Package;
 use App\Tag;
 use DateTime;
 use Facades\App\Repo;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class PackageController extends Controller
 {

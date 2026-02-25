@@ -5,8 +5,8 @@ namespace Tests\Integration;
 use App\Http\Remotes\GitHub;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\AssertableJsonString;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 #[Group('integration')]

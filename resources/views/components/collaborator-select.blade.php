@@ -40,7 +40,7 @@
     class="mb-4"
     wire:ignore
 >
-    @if($multiple)
+    @if ($multiple)
         <select x-ref="select" name="{{ $name }}[]" multiple>
         </select>
     @else

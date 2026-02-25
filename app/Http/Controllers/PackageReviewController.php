@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Package;
+use Illuminate\View\View;
 
 class PackageReviewController extends Controller
 {

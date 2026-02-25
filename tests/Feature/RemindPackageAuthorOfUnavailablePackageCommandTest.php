@@ -13,7 +13,6 @@ use Tests\TestCase;
 
 class RemindPackageAuthorOfUnavailablePackageCommandTest extends TestCase
 {
-
     use RefreshDatabase;
 
     #[Test]
@@ -25,23 +24,23 @@ class RemindPackageAuthorOfUnavailablePackageCommandTest extends TestCase
         $packageThatShouldReceiveNotification = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subWeeks(2),
             'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id
-            ])->id
+                'user_id' => User::factory()->create()->id,
+            ])->id,
         ]);
 
         $packageThatShouldNotReceiveNotification = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subWeeks(1),
             'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id
-            ])->id
+                'user_id' => User::factory()->create()->id,
+            ])->id,
         ]);
 
         $disabledPackage = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subWeeks(1),
             'is_disabled' => 1,
             'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id
-            ])->id
+                'user_id' => User::factory()->create()->id,
+            ])->id,
         ]);
 
         $this->artisan('novapackages:send-unavailable-package-followup');

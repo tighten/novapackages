@@ -31,20 +31,20 @@ class Npm
         return (bool) preg_match('/npmjs\.(?:com|org)\/(?:package\/)?([\w-]+)(?:\/v\/((?:\d+\.)?(?:\d+\.)?(?:\*|\d+)))?/i', $url);
     }
 
+    public function data()
+    {
+        return $this->data;
+    }
+
     protected function setRegistryUrl($url)
     {
         if (preg_match('/npmjs\.(?:com|org)\/(?:package\/)?([\w-]+)(?:\/v\/((?:\d+\.)?(?:\d+\.)?(?:\*|\d+)))?/i', $url, $parts)) {
-            $this->registryUrl = 'https://registry.npmjs.org/'.$parts[1].'/'.($parts[2] ?? '');
+            $this->registryUrl = 'https://registry.npmjs.org/' . $parts[1] . '/' . ($parts[2] ?? '');
         }
     }
 
     protected function fetchData($url)
     {
         return Http::get($this->registryUrl)->json();
-    }
-
-    public function data()
-    {
-        return $this->data;
     }
 }

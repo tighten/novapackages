@@ -3,15 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Attributes\Scope;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\OpenGraphImage;
-use App\Screenshot;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -25,10 +23,10 @@ use willvincent\Rateable\Rating;
 class Package extends Model implements Feedable
 {
     use HasFactory;
-    use Searchable;
     use Rateable, RatingCountable {
         RatingCountable::averageRating insteadof Rateable;
     }
+    use Searchable;
 
     protected $guarded = ['id', 'is_disabled'];
 
@@ -41,13 +39,16 @@ class Package extends Model implements Feedable
 
     protected $githubStarVsPackagistDownloadsMultiplier = 100;
 
-    protected function casts(): array
+    public static function getRecentFeedItems()
     {
-        return [
-            'is_disabled' => 'boolean',
-            'packagist_downloads' => 'integer',
-            'github_stars' => 'integer',
-        ];
+        return self::latest()->take(20)->get();
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('notDisabled', function (Builder $builder) {
+            $builder->where('is_disabled', false);
+        });
     }
 
     public function author(): BelongsTo
@@ -85,42 +86,6 @@ class Package extends Model implements Feedable
         return $this->hasMany(Favorite::class);
     }
 
-    #[Scope]
-    protected function filter($query, string $tag)
-    {
-        switch ($tag) {
-            case 'popular':
-                return $query->popular();
-            case 'nova_current':
-                return $query->novaCurrent();
-            default:
-                return $query;
-        }
-    }
-
-    #[Scope]
-    protected function tagged($query, $tagSlug)
-    {
-        $query->whereHas('tags', function ($query) use ($tagSlug) {
-            $query->where('slug', $tagSlug);
-        });
-    }
-
-    #[Scope]
-    protected function popular($query)
-    {
-        return $query->select(
-            DB::raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
-        )
-            ->orderBy('popularity', 'desc');
-    }
-
-    #[Scope]
-    protected function novaCurrent($query)
-    {
-        return $query->where('nova_version', config('novapackages.nova.latest_major_version'));
-    }
-
     public function toSearchableArray()
     {
         $packageAttributes = $this->toArray();
@@ -145,13 +110,6 @@ class Package extends Model implements Feedable
             '_tags' => ($packageAttributes['_tags'] ?? []),
             'created_at' => $packageAttributes['created_at'],
         ];
-    }
-
-    protected static function booted()
-    {
-        static::addGlobalScope('notDisabled', function (Builder $builder) {
-            $builder->where('is_disabled', false);
-        });
     }
 
     public function getDisplayNameAttribute()
@@ -213,11 +171,6 @@ class Package extends Model implements Feedable
             ->authorName($this->author->name);
     }
 
-    public static function getRecentFeedItems()
-    {
-        return self::latest()->take(20)->get();
-    }
-
     public function syncScreenshots($screenshots)
     {
         $this->screenshots()->update(['package_id' => null]);
@@ -260,5 +213,50 @@ class Package extends Model implements Feedable
             $this->is_disabled = false;
             $this->save();
         }
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_disabled' => 'boolean',
+            'packagist_downloads' => 'integer',
+            'github_stars' => 'integer',
+        ];
+    }
+
+    #[Scope]
+    protected function filter($query, string $tag)
+    {
+        switch ($tag) {
+            case 'popular':
+                return $query->popular();
+            case 'nova_current':
+                return $query->novaCurrent();
+            default:
+                return $query;
+        }
+    }
+
+    #[Scope]
+    protected function tagged($query, $tagSlug)
+    {
+        $query->whereHas('tags', function ($query) use ($tagSlug) {
+            $query->where('slug', $tagSlug);
+        });
+    }
+
+    #[Scope]
+    protected function popular($query)
+    {
+        return $query->select(
+            DB::raw('packages.*, ((`github_stars` * ' . $this->githubStarVsPackagistDownloadsMultiplier . ') + `packagist_downloads`) as `popularity`')
+        )
+            ->orderBy('popularity', 'desc');
+    }
+
+    #[Scope]
+    protected function novaCurrent($query)
+    {
+        return $query->where('nova_version', config('novapackages.nova.latest_major_version'));
     }
 }

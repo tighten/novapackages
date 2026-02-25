@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\Notification;
 
 /**
  * A non-eloquent notifiable model to facilitate notifications to Tighten Slack.

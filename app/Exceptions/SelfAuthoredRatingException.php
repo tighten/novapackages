@@ -4,6 +4,4 @@ namespace App\Exceptions;
 
 use Exception;
 
-class SelfAuthoredRatingException extends Exception
-{
-}
+class SelfAuthoredRatingException extends Exception {}

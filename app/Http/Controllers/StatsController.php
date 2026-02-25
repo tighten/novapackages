@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Stats;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class StatsController extends Controller
 {

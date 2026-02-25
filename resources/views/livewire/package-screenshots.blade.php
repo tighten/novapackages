@@ -25,9 +25,9 @@
         </div>
     </div>
 
-    @if(count($screenshots))
+    @if (count($screenshots))
         <div class="flex flex-wrap items-end mt-4 mb-6">
-            @foreach($screenshots as $screenshot)
+            @foreach ($screenshots as $screenshot)
                 <div class="text-center w-1/5 p-2" wire:key="screenshot-{{ $screenshot['id'] }}">
                     <img class="rounded-sm shadow-md mb-2" src="{{ $screenshot['public_url'] }}" />
                     <button
@@ -39,7 +39,7 @@
         </div>
     @endif
 
-    @foreach($screenshots as $screenshot)
+    @foreach ($screenshots as $screenshot)
         <input type="hidden" name="screenshots[]" value="{{ $screenshot['id'] }}" />
     @endforeach
 </div>

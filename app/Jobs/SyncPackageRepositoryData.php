@@ -36,6 +36,7 @@ class SyncPackageRepositoryData implements ShouldQueue
         try {
             if (! $this->remoteHasChanges($repo)) {
                 Log::info('Repository data is unchanged for package #' . $this->package->id . ' (' . $this->package->name . ')');
+
                 return;
             }
         } catch (RequestException $exception) {

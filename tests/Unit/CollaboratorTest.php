@@ -12,7 +12,7 @@ class CollaboratorTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
-    function name_with_username_attribute(): void
+    public function name_with_username_attribute(): void
     {
         $this->assertEquals(
             'Ted Lasso (tedlasso)',

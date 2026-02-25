@@ -8,7 +8,7 @@
     </div>
 
     <div class="bg-white flex flex-col min-w-0 rounded-sm wrap-break-word shadow-sm">
-        @if(count($tokens) === 0)
+        @if (count($tokens) === 0)
             <p class="p-8">
                 You have not created any personal access tokens.
             </p>
@@ -22,7 +22,7 @@
                 </thead>
 
                 <tbody class="flex flex-col p-8 pb-4">
-                    @foreach($tokens as $token)
+                    @foreach ($tokens as $token)
                         <tr class="flex justify-between mb-8">
                             <td class="align-middle w-2/3">{{ $token['name'] }}</td>
                             <td class="w-1/3 align-middle text-right">
@@ -38,7 +38,7 @@
     </div>
 
     {{-- Create Token Modal --}}
-    @if($showCreateModal)
+    @if ($showCreateModal)
         <div class="fixed inset-0 z-50 flex items-center justify-center" x-data @keydown.escape.window="$wire.set('showCreateModal', false)">
             <div class="fixed inset-0 bg-black/50" wire:click="$set('showCreateModal', false)"></div>
             <div class="relative bg-white rounded-sm shadow-lg w-full max-w-lg mx-4">
@@ -48,11 +48,11 @@
                 </div>
 
                 <div class="p-4">
-                    @if(count($createErrors))
+                    @if (count($createErrors))
                         <div class="relative px-3 py-3 mb-4 border rounded-sm text-red-900 border-red-700 bg-red-300">
                             <p class="mb-0"><strong>Whoops!</strong> Something went wrong!</p>
                             <ul class="mt-2">
-                                @foreach($createErrors as $error)
+                                @foreach ($createErrors as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
@@ -66,11 +66,11 @@
                         </div>
                     </div>
 
-                    @if(count($scopes) > 0)
+                    @if (count($scopes) > 0)
                         <div class="mb-4 flex flex-wrap">
                             <label class="md:w-1/3 pr-4 pl-4 pt-2 pb-2 mb-0 leading-normal">Scopes</label>
                             <div class="md:w-1/2 pr-4 pl-4">
-                                @foreach($scopes as $scope)
+                                @foreach ($scopes as $scope)
                                     <div class="checkbox">
                                         <label>
                                             <input
@@ -96,7 +96,7 @@
     @endif
 
     {{-- Access Token Modal --}}
-    @if($showAccessTokenModal)
+    @if ($showAccessTokenModal)
         <div class="fixed inset-0 z-50 flex items-center justify-center" x-data @keydown.escape.window="$wire.closeAccessTokenModal()">
             <div class="fixed inset-0 bg-black/50" wire:click="closeAccessTokenModal"></div>
             <div class="relative bg-white rounded-sm shadow-lg w-full max-w-lg mx-4">

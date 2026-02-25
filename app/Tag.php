@@ -3,9 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Attributes\Scope;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
 class Tag extends Model
@@ -42,6 +42,16 @@ class Tag extends Model
         })->toArray();
     }
 
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Str::lower($value);
+    }
+
+    public function url()
+    {
+        return url('?tag=' . $this->slug);
+    }
+
     #[Scope]
     protected function popular($query)
     {
@@ -62,15 +72,5 @@ class Tag extends Model
     protected function nonTypes($query)
     {
         return $query->whereNotIn('slug', $this->projectTypeSlugs());
-    }
-
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = Str::lower($value);
-    }
-
-    public function url()
-    {
-        return url('?tag=' . $this->slug);
     }
 }

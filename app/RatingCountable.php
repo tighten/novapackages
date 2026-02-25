@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\CacheKeys;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +13,55 @@ trait RatingCountable
     public function countStarRatings($numberOfStars)
     {
         return $this->getRatingsCounts()[$numberOfStars];
+    }
+
+    public function countOneStarRatings()
+    {
+        return $this->countStarRatings(1);
+    }
+
+    public function countTwoStarRatings()
+    {
+        return $this->countStarRatings(2);
+    }
+
+    public function countThreeStarRatings()
+    {
+        return $this->countStarRatings(3);
+    }
+
+    public function countFourStarRatings()
+    {
+        return $this->countStarRatings(4);
+    }
+
+    public function countFiveStarRatings()
+    {
+        return $this->countStarRatings(5);
+    }
+
+    /**
+     * Override the Rateable method to take advantage of our cache.
+     *
+     * @todo  maybe check if ratings is counted; if so, use it; if not, default to the other one?
+     */
+    public function averageRating()
+    {
+        return Cache::remember(
+            CacheKeys::averageRating(static::class, $this->id),
+            $this->avarageRatingCacheLength,
+            function () {
+                $ratingsCounts = collect($this->getRatingsCounts());
+
+                if ($ratingsCounts->sum() === 0) {
+                    return 0;
+                }
+
+                return round($ratingsCounts->map(function ($count, $stars) {
+                    return $count * $stars;
+                })->sum() / $ratingsCounts->sum(), 1);
+            }
+        );
     }
 
     protected function getRatingsCounts()
@@ -42,31 +90,6 @@ trait RatingCountable
         );
     }
 
-    public function countOneStarRatings()
-    {
-        return $this->countStarRatings(1);
-    }
-
-    public function countTwoStarRatings()
-    {
-        return $this->countStarRatings(2);
-    }
-
-    public function countThreeStarRatings()
-    {
-        return $this->countStarRatings(3);
-    }
-
-    public function countFourStarRatings()
-    {
-        return $this->countStarRatings(4);
-    }
-
-    public function countFiveStarRatings()
-    {
-        return $this->countStarRatings(5);
-    }
-
     protected function ratingsCountsFromEagerLoad()
     {
         return $this->ratings->groupBy('rating')->map(function ($ratings) {
@@ -81,28 +104,5 @@ trait RatingCountable
             ->mapWithKeys(function ($ratingCount) {
                 return [$ratingCount->rating => $ratingCount->count];
             });
-    }
-
-    /**
-     * Override the Rateable method to take advantage of our cache.
-     * @todo  maybe check if ratings is counted; if so, use it; if not, default to the other one?
-     */
-    public function averageRating()
-    {
-        return Cache::remember(
-            CacheKeys::averageRating(static::class, $this->id),
-            $this->avarageRatingCacheLength,
-            function () {
-                $ratingsCounts = collect($this->getRatingsCounts());
-
-                if ($ratingsCounts->sum() === 0) {
-                    return 0;
-                }
-
-                return round($ratingsCounts->map(function ($count, $stars) {
-                    return $count * $stars;
-                })->sum() / $ratingsCounts->sum(), 1);
-            }
-        );
     }
 }

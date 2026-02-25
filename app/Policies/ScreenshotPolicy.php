@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Policies\HandlesPackageAuthorizationTrait;
 use App\Screenshot;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;

@@ -31,6 +31,7 @@ class PackageReviewCreate extends Component
             auth()->user()->ratePackage($this->packageId, $stars);
         } catch (SelfAuthoredRatingException $e) {
             $this->dispatch('toast', message: 'A package cannot be rated by its author.', type: 'error');
+
             return;
         }
 

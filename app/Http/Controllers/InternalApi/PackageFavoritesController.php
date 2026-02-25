@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\InternalApi;
 
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Package;
+use Illuminate\Http\Response;
 
 class PackageFavoritesController extends Controller
 {

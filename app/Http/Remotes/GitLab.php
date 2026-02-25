@@ -37,11 +37,6 @@ class GitLab
         return $this->response;
     }
 
-    protected function responseHasErrors()
-    {
-        return Arr::get($this->response, 'message');
-    }
-
     public function isNotFileNotFoundError()
     {
         return Arr::get($this->response, 'message') !== '404 File Not Found';
@@ -55,5 +50,10 @@ class GitLab
     public function isCommitNotFoundError()
     {
         return Arr::get($this->response, 'message') === '404 Commit Not Found';
+    }
+
+    protected function responseHasErrors()
+    {
+        return Arr::get($this->response, 'message');
     }
 }

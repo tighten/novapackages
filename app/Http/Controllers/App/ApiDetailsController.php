@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\App;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ApiDetailsController extends Controller
 {

@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Passport;
 
+use Exception;
+use Laravel\Passport\Passport;
 use Livewire\Component;
 
 class PersonalAccessTokens extends Component
@@ -44,7 +46,7 @@ class PersonalAccessTokens extends Component
     public function loadScopes()
     {
         // Passport scopes if registered
-        $this->scopes = collect(\Laravel\Passport\Passport::scopes())->map(function ($scope) {
+        $this->scopes = collect(Passport::scopes())->map(function ($scope) {
             return [
                 'id' => $scope->id,
                 'description' => $scope->description,
@@ -81,7 +83,7 @@ class PersonalAccessTokens extends Component
             $this->reset(['createName', 'createScopes']);
             $this->loadTokens();
             $this->dispatch('toast', message: 'Token created.');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->createErrors = ['Something went wrong. Please try again.'];
         }
     }

@@ -13,7 +13,6 @@ use Tests\TestCase;
 
 class DisableUnavailablePackageCommandTest extends TestCase
 {
-
     use RefreshDatabase;
 
     #[Test]
@@ -25,15 +24,15 @@ class DisableUnavailablePackageCommandTest extends TestCase
         $packageThatShouldBeDisabled = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subDays(30),
             'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id
-            ])->id
+                'user_id' => User::factory()->create()->id,
+            ])->id,
         ]);
 
         $packageThatShouldNotBeDisabled = Package::factory()->create([
             'marked_as_unavailable_at' => today()->subDays(29),
             'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id
-            ])->id
+                'user_id' => User::factory()->create()->id,
+            ])->id,
         ]);
 
         $this->artisan('novapackages:disable-unavailable-packages');

@@ -84,17 +84,6 @@ class PackageList extends Component
         ]);
     }
 
-    private function topTenPopularTags()
-    {
-        return Cache::remember(
-            CacheKeys::popularTags(),
-            self::POPULAR_TAGS_LENGTH,
-            function () {
-                return Tag::popular()->take(10)->get()->sortByDesc('packages_count');
-            }
-        );
-    }
-
     public function filterTag($tagSlug)
     {
         $this->tag = $tagSlug;
@@ -133,5 +122,16 @@ class PackageList extends Component
     public function paginationView()
     {
         return 'livewire.partials.tailwind-beta-pagination';
+    }
+
+    private function topTenPopularTags()
+    {
+        return Cache::remember(
+            CacheKeys::popularTags(),
+            self::POPULAR_TAGS_LENGTH,
+            function () {
+                return Tag::popular()->take(10)->get()->sortByDesc('packages_count');
+            }
+        );
     }
 }

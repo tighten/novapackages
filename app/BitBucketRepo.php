@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseRepo;
 use App\Exceptions\BitBucketException;
 use App\Http\Remotes\BitBucket;
 use Illuminate\Support\Arr;

@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Passport;
 
-use Illuminate\Support\Facades\Http;
+use Exception;
 use Laravel\Passport\ClientRepository;
 use Livewire\Component;
 
@@ -63,7 +63,7 @@ class Clients extends Component
             $this->reset(['createName', 'createRedirect']);
             $this->loadClients();
             $this->dispatch('toast', message: 'Client created.');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->createErrors = ['Something went wrong. Please try again.'];
         }
     }
@@ -96,7 +96,7 @@ class Clients extends Component
             $this->showEditModal = false;
             $this->loadClients();
             $this->dispatch('toast', message: 'Client updated.');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->editErrors = ['Something went wrong. Please try again.'];
         }
     }

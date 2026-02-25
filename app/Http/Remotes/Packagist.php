@@ -33,7 +33,7 @@ class Packagist
 
     public function fetchData($name)
     {
-        $this->data = Cache::remember(CacheKeys::packagistData($name), 5, function () use ($name) {
+        $this->data = Cache::remember(CacheKeys::packagistData($name), 5, function () {
             $response = Http::packagist()
                 ->retry(2, 500, function ($exception, $request) {
                     return $exception instanceof ConnectionException;
@@ -48,7 +48,7 @@ class Packagist
         });
 
         if (Arr::get($this->data, 'status') === 'error') {
-            throw new PackagistException("Packagist error looking up [{$name}]: ".$this->data['message']);
+            throw new PackagistException("Packagist error looking up [{$name}]: " . $this->data['message']);
         }
 
         return $this->data;

@@ -245,7 +245,7 @@ class PackageCrudTest extends TestCase
 
         $this->actingAs($user)
             ->post(route('app.packages.store'), $this->postFromPackage($duplicatePackage))
-            ->assertSessionHasErrors('packagist_name', 'The package '.$originalPackage->composer_name.' has already been submitted.');
+            ->assertSessionHasErrors('packagist_name', 'The package ' . $originalPackage->composer_name . ' has already been submitted.');
     }
 
     #[Test]
@@ -290,7 +290,7 @@ class PackageCrudTest extends TestCase
             function ($notification, $channels) use ($user) {
                 $message = json_encode($notification->toSlack(new Tighten)->toArray());
 
-                return str_contains($message, 'Created by: '.$user->name);
+                return str_contains($message, 'Created by: ' . $user->name);
             }
         );
     }

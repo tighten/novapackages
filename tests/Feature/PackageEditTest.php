@@ -9,7 +9,6 @@ use App\Tag;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\WithoutEvents;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\Test;
@@ -22,7 +21,7 @@ class PackageEditTest extends TestCase
     #[Test]
     public function user_can_update_a_package(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
         $formData = [
             'name' => 'BAE Package',
             'author_id' => $user->id,
@@ -36,7 +35,7 @@ class PackageEditTest extends TestCase
         $readme = '# Fake Repo Readme';
         $version = 'v1.2.3';
         $this->fakesRepoFromRequest([
-            'url' =>$formData['url'],
+            'url' => $formData['url'],
             'source' => $source,
             'readme' => $readme,
             'latest_version' => $version,
@@ -70,7 +69,7 @@ class PackageEditTest extends TestCase
     #[Test]
     public function an_authenticated_user_can_view_the_edit_package_page(): void
     {
-        list($packageA, $user) = $this->createPackageWithUser();
+        [$packageA, $user] = $this->createPackageWithUser();
         $screenshot = Screenshot::factory()->create(['uploader_id' => $user->id]);
         $packageA->screenshots()->save($screenshot);
         $packageB = Package::factory()->create();
@@ -90,7 +89,7 @@ class PackageEditTest extends TestCase
     #[Test]
     public function package_author_can_view_disabled_package_form(): void
     {
-        list($package, $author) = $this->createPackageWithUser();
+        [$package, $author] = $this->createPackageWithUser();
 
         $package->is_disabled = true;
         $package->save();
@@ -106,9 +105,9 @@ class PackageEditTest extends TestCase
     #[Test]
     public function if_package_is_unavailable_user_sees_notice_on_form(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
         $package->update([
-            'marked_as_unavailable_at' => now()
+            'marked_as_unavailable_at' => now(),
         ]);
         $this->actingAs($user)->get(route('app.packages.edit', $package))
             ->assertSuccessful()
@@ -121,7 +120,7 @@ class PackageEditTest extends TestCase
         $this->fakesRepoFromRequest();
 
         $existingPackage = Package::factory()->create(['composer_name' => 'tightenco/bae']);
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'packagist_namespace' => 'tightenco',
@@ -156,8 +155,8 @@ class PackageEditTest extends TestCase
     {
         $this->fakesRepoFromRequest();
 
-        list($package, $user) = $this->createPackageWithUser();
-        list($oldScreenshot, $screenshotA, $screenshotB) = Screenshot::factory(3)->create(['uploader_id' => $user->id]);
+        [$package, $user] = $this->createPackageWithUser();
+        [$oldScreenshot, $screenshotA, $screenshotB] = Screenshot::factory(3)->create(['uploader_id' => $user->id]);
         $package->screenshots()->save($oldScreenshot);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), array_merge($this->getValidPackageData(), [
@@ -182,7 +181,7 @@ class PackageEditTest extends TestCase
     {
         $this->fakesRepoFromRequest();
 
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), $this->getValidPackageData());
 
@@ -193,7 +192,7 @@ class PackageEditTest extends TestCase
     #[Test]
     public function can_not_upload_more_than_20_screenshots(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
         $screenshots = Screenshot::factory(21)->create(['uploader_id' => $user->id]);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
@@ -207,7 +206,7 @@ class PackageEditTest extends TestCase
     #[Test]
     public function screenshots_must_be_an_array(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'screenshots' => 'not-an-array',
@@ -220,8 +219,8 @@ class PackageEditTest extends TestCase
     #[Test]
     public function all_uploaded_screenshots_are_returned_when_validation_fails(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
-        list($oldScreenshot, $screenshotA, $screenshotB) = Screenshot::factory(3)->create(['uploader_id' => $user->id]);
+        [$package, $user] = $this->createPackageWithUser();
+        [$oldScreenshot, $screenshotA, $screenshotB] = Screenshot::factory(3)->create(['uploader_id' => $user->id]);
         $package->screenshots()->save($oldScreenshot);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
@@ -239,7 +238,7 @@ class PackageEditTest extends TestCase
     #[Test]
     public function the_selected_author_is_returned_to_the_view_when_validation_fails(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
         $author = Collaborator::factory()->create();
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
@@ -256,8 +255,8 @@ class PackageEditTest extends TestCase
     #[Test]
     public function the_selected_collaborators_are_returned_to_the_view_when_validation_fails(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
-        list($selectedCollaboratorA, $author, $selectedCollaboratorB) = Collaborator::factory(3)->create();
+        [$package, $user] = $this->createPackageWithUser();
+        [$selectedCollaboratorA, $author, $selectedCollaboratorB] = Collaborator::factory(3)->create();
         $unselectedCollaborator = Collaborator::factory()->create();
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
@@ -285,7 +284,7 @@ class PackageEditTest extends TestCase
     #[Test]
     public function the_selected_existing_tags_and_new_tags_are_returned_to_the_view_when_validation_fails(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
         $newTagName = 'New Tag';
         $selectedTags = collect([
             $tagA = Tag::factory()->create(['name' => 'Tag A']),
@@ -317,15 +316,15 @@ class PackageEditTest extends TestCase
         $this->withoutExceptionHandling();
         $this->fakesRepoFromRequest();
 
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
         $existingTagA = Tag::factory()->create(['name' => 'test tag a', 'slug' => 'test-tag-a']);
         $existingTagB = Tag::factory()->create(['name' => 'test tag b', 'slug' => 'test-tag-b']);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'name' => $this->faker->company(),
             'author_id' => $user->id,
-            'url' =>  $this->faker->url(),
-            'abstract' =>  $this->faker->sentence(),
+            'url' => $this->faker->url(),
+            'abstract' => $this->faker->sentence(),
             'instructions' => $this->faker->sentence(),
             'packagist_namespace' => $this->faker->word(),
             'packagist_name' => $this->faker->word(),
@@ -347,14 +346,14 @@ class PackageEditTest extends TestCase
         $this->withoutExceptionHandling();
         $this->fakesRepoFromRequest();
 
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
         $existingTag = Tag::factory()->create(['name' => 'test tag', 'slug' => 'test-tag']);
 
         $response = $this->actingAs($user)->put(route('app.packages.update', $package), [
             'name' => $this->faker->company(),
             'author_id' => $user->id,
-            'url' =>  $this->faker->url(),
-            'abstract' =>  $this->faker->sentence(),
+            'url' => $this->faker->url(),
+            'abstract' => $this->faker->sentence(),
             'instructions' => $this->faker->sentence(),
             'packagist_namespace' => $this->faker->word(),
             'packagist_name' => $this->faker->word(),
@@ -378,7 +377,7 @@ class PackageEditTest extends TestCase
         $this->withoutExceptionHandling();
         $this->fakesRepoFromRequest();
 
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
 
         $package->marked_as_unavailable_at = now();
         $package->is_disabled = true;
@@ -387,12 +386,12 @@ class PackageEditTest extends TestCase
         $this->actingAs($user)->put(route('app.packages.update', $package), [
             'name' => $this->faker->company(),
             'author_id' => $user->id,
-            'url' =>  $package->url,
-            'abstract' =>  $this->faker->sentence(),
+            'url' => $package->url,
+            'abstract' => $this->faker->sentence(),
             'packagist_namespace' => $this->faker->word(),
             'packagist_name' => $this->faker->word(),
         ])
-        ->assertRedirect(route('app.packages.index'));
+            ->assertRedirect(route('app.packages.index'));
 
         $this->assertNotNull($package->refresh()->marked_as_unavailable_at);
         $this->assertTrue($package->refresh()->is_disabled);
@@ -401,7 +400,7 @@ class PackageEditTest extends TestCase
     #[Test]
     public function updating_url_attribute_removes_unavailable_timestamp(): void
     {
-        list($package, $user) = $this->createPackageWithUser();
+        [$package, $user] = $this->createPackageWithUser();
 
         $packagistNamespace = 'jedi';
         $packagistName = 'field-guide';
@@ -421,8 +420,8 @@ class PackageEditTest extends TestCase
         $this->actingAs($user)->put(route('app.packages.update', $package), [
             'name' => $this->faker->company(),
             'author_id' => $user->id,
-            'url' =>  $this->faker->url(),
-            'abstract' =>  $this->faker->sentence(),
+            'url' => $this->faker->url(),
+            'abstract' => $this->faker->sentence(),
             'packagist_namespace' => $packagistNamespace,
             'packagist_name' => $packagistName,
         ])
@@ -448,6 +447,7 @@ class PackageEditTest extends TestCase
         $user->collaborators()->save($collaborator);
         $collaborator->authoredPackages()->save($package);
         $package->tags()->save(Tag::factory()->create());
+
         return [$package, $user];
     }
 }

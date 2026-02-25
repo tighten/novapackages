@@ -2,18 +2,12 @@
 
 namespace App;
 
-use App\BaseRepo;
-use App\BitBucketRepo;
 use App\Exceptions\PackagistException;
-use App\GitHubRepo;
-use App\GitLabRepo;
 use App\Http\Remotes\BitBucket;
 use App\Http\Remotes\GitHub;
 use App\Http\Remotes\GitLab;
 use App\Http\Remotes\Npm;
 use App\Http\Remotes\Packagist;
-use App\NpmRepo;
-use App\PackagistRepo;
 
 class Repo
 {

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\InternalApi;
 
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Package;
 use App\Review;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Response;
 use willvincent\Rateable\Rating;
 
 class ReviewsController extends Controller

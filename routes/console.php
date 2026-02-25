@@ -8,7 +8,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-
 Schedule::command('sync:packagist')->everyTwoHours();
 // Every two hours at minute 30.
 Schedule::command('sync:repo')->cron('30 */2 * * *');

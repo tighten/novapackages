@@ -8,7 +8,6 @@ use Illuminate\Console\Command;
 
 class DisableUnavailablePackages extends Command
 {
-
     protected $signature = 'novapackages:disable-unavailable-packages';
 
     protected $description = 'Disable unavailable packages after one month.';
@@ -22,7 +21,7 @@ class DisableUnavailablePackages extends Command
         $unavailablePackages->each(function ($package) {
             $diffInDays = (int) abs(now()->diffInDays($package->marked_as_unavailable_at));
 
-            if ($diffInDays  < 30) {
+            if ($diffInDays < 30) {
                 return;
             }
 

@@ -14,7 +14,6 @@ use PHPUnit\Framework\Assert;
 
 abstract class TestCase extends BaseTestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -30,6 +29,75 @@ abstract class TestCase extends BaseTestCase
                     : Assert::assertTrue($itemPair[0]->is($itemPair[1]));
             });
         });
+    }
+
+    public function buildMockRepoObjectsFromArray($repoObjects)
+    {
+        // Becuase we indentd on mapping over an array of arrays of repo paremeters, we normalize
+        // the data passed to this method so that is is in the proper format.
+        if (! is_array(reset($repoObjects))) {
+            $repoObjects = [$repoObjects];
+        }
+
+        return array_map(function ($repo) {
+            return $this->buildFakeRepo(
+                $repo['url'] ?? null,
+                $repo['source'] ?? null,
+                $repo['readme'] ?? null,
+                $repo['readme_format'] ?? null,
+                $repo['latest_version'] ?? null
+            );
+        }, $repoObjects);
+    }
+
+    public function buildFakeRepo($url = null, $source = null, $readme = null, $readmeFormat = null, $latestVersion = null)
+    {
+        return new class($url, $source, $readme, $readmeFormat, $latestVersion)
+        {
+            protected $url;
+
+            protected $source;
+
+            protected $readme;
+
+            protected $readmeFormat;
+
+            protected $latestVersion;
+
+            public function __construct($url, $source, $readme, $readmeFormat, $latestVersion)
+            {
+                $this->url = $url;
+                $this->source = $source;
+                $this->readme = $readme;
+                $this->readmeFormat = $readmeFormat;
+                $this->latestVersion = $latestVersion;
+            }
+
+            public function url()
+            {
+                return $this->url;
+            }
+
+            public function source()
+            {
+                return $this->source;
+            }
+
+            public function readme()
+            {
+                return $this->readme;
+            }
+
+            public function readmeFormat()
+            {
+                return $this->readmeFormat;
+            }
+
+            public function latestReleaseVersion()
+            {
+                return $this->latestVersion;
+            }
+        };
     }
 
     protected function fakeResponse($path)
@@ -82,73 +150,5 @@ abstract class TestCase extends BaseTestCase
             [Repo::shouldReceive('fromPackageModel')->with(Model::class), 'andReturn'],
             $this->buildMockRepoObjectsFromArray($repoObjects)
         );
-    }
-
-    public function buildMockRepoObjectsFromArray($repoObjects)
-    {
-        // Becuase we indentd on mapping over an array of arrays of repo paremeters, we normalize
-        // the data passed to this method so that is is in the proper format.
-        if (! is_array(reset($repoObjects))) {
-            $repoObjects = [$repoObjects];
-        }
-
-        return array_map(function ($repo) {
-            return $this->buildFakeRepo(
-                $repo['url'] ?? null,
-                $repo['source'] ?? null,
-                $repo['readme'] ?? null,
-                $repo['readme_format'] ?? null,
-                $repo['latest_version'] ?? null
-            );
-        }, $repoObjects);
-    }
-
-    public function buildFakeRepo($url = null, $source = null, $readme = null, $readmeFormat = null, $latestVersion = null)
-    {
-        return new class($url, $source, $readme, $readmeFormat, $latestVersion) {
-            protected $url;
-
-            protected $source;
-
-            protected $readme;
-
-            protected $readmeFormat;
-
-            protected $latestVersion;
-
-            public function __construct($url, $source, $readme, $readmeFormat, $latestVersion)
-            {
-                $this->url = $url;
-                $this->source = $source;
-                $this->readme = $readme;
-                $this->readmeFormat = $readmeFormat;
-                $this->latestVersion = $latestVersion;
-            }
-
-            public function url()
-            {
-                return $this->url;
-            }
-
-            public function source()
-            {
-                return $this->source;
-            }
-
-            public function readme()
-            {
-                return $this->readme;
-            }
-
-            public function readmeFormat()
-            {
-                return $this->readmeFormat;
-            }
-
-            public function latestReleaseVersion()
-            {
-                return $this->latestVersion;
-            }
-        };
     }
 }

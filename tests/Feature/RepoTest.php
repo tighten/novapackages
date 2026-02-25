@@ -27,14 +27,11 @@ class RepoTest extends TestCase
         parent::setUp();
 
         Http::fake([
-            'https://packagist.org/packages/tightenco/nova-stripe.json' =>
-                Http::response([
-                    'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
-                ]),
-            'https://api.github.com/repos/tighten/nova-stripe/readme' =>
-                Http::response($this->fakeResponse('github.repo-readme.html')),
-            'https://api.github.com/repos/tighten/nova-stripe/releases' =>
-                Http::response($this->fakeResponse('github.repo-releases.json')),
+            'https://packagist.org/packages/tightenco/nova-stripe.json' => Http::response([
+                'package' => ['repository' => 'https://github.com/tighten/nova-stripe'],
+            ]),
+            'https://api.github.com/repos/tighten/nova-stripe/readme' => Http::response($this->fakeResponse('github.repo-readme.html')),
+            'https://api.github.com/repos/tighten/nova-stripe/releases' => Http::response($this->fakeResponse('github.repo-releases.json')),
         ]);
     }
 
@@ -151,8 +148,7 @@ class RepoTest extends TestCase
         $url = "https://github.com/{$repositoryPath}";
 
         Http::fake([
-            "https://api.github.com/repos/{$repositoryPath}/readme" =>
-                Http::response($this->fakeResponse('github.repo-readme-404.json'), 404),
+            "https://api.github.com/repos/{$repositoryPath}/readme" => Http::response($this->fakeResponse('github.repo-readme-404.json'), 404),
         ]);
 
         $repo = Repo::fromUrl($url);
@@ -165,8 +161,7 @@ class RepoTest extends TestCase
     {
         Http::fake([
             'https://api.bitbucket.org/2.0/repositories/tightenco/novapackages-test/refs' => Http::response(),
-            'https://api.bitbucket.org/2.0/repositories/tightenco/novapackages-test/src/master/README.md' =>
-                Http::response(['# novapackages-test']),
+            'https://api.bitbucket.org/2.0/repositories/tightenco/novapackages-test/src/master/README.md' => Http::response(['# novapackages-test']),
         ]);
 
         $bitBucketUrl = 'https://bitbucket.org/tightenco/novapackages-test';
@@ -205,8 +200,7 @@ class RepoTest extends TestCase
         Http::fake([
             $url => Http::response(),
             'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/tags' => Http::response($this->fakeResponse('gitlab.repo-tags.json')),
-            'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/files/README%2Emd?ref=2.0.4' =>
-                Http::response($this->fakeResponse('gitlab.repo-readme.json')),
+            'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/files/README%2Emd?ref=2.0.4' => Http::response($this->fakeResponse('gitlab.repo-readme.json')),
         ]);
 
         $repo = Repo::fromUrl($url);
@@ -244,8 +238,7 @@ class RepoTest extends TestCase
         Http::fake([
             $url => Http::response(),
             'https://gitlab.com/api/v4/projects/jedi%2Fhow-to-join-the-sith/repository/tags' => Http::response([]),
-            'https://gitlab.com/api/v4/projects/jedi%2Fhow-to-join-the-sith/repository/files/README%2Emd?ref=master' =>
-                Http::response(['message' => '404 Commit Not Found']),
+            'https://gitlab.com/api/v4/projects/jedi%2Fhow-to-join-the-sith/repository/files/README%2Emd?ref=master' => Http::response(['message' => '404 Commit Not Found']),
 
         ]);
 
@@ -268,8 +261,7 @@ class RepoTest extends TestCase
                 $this->fakeResponse('npm.repo-with-github-vcs.json')
             ),
             'https://api.github.com/repos/lodash/lodash/readme' => Http::response(),
-            'https://api.github.com/repos/lodash/lodash/releases' =>
-                Http::response($this->fakeResponse('github.repo-releases.json')),
+            'https://api.github.com/repos/lodash/lodash/releases' => Http::response($this->fakeResponse('github.repo-releases.json')),
         ]);
 
         $repo = Repo::fromUrl($npmUrl);
@@ -290,8 +282,7 @@ class RepoTest extends TestCase
         $npmUrl = 'https://www.npmjs.com/package/vue-form-state';
 
         Http::fake([
-            'https://registry.npmjs.org/vue-form-state/' =>
-                Http::response($this->fakeResponse('npm.package-without-vcs.json')),
+            'https://registry.npmjs.org/vue-form-state/' => Http::response($this->fakeResponse('npm.package-without-vcs.json')),
         ]);
 
         $repo = Repo::fromUrl($npmUrl);
@@ -348,8 +339,7 @@ class RepoTest extends TestCase
         $url = 'https://packagist.org/packages/tightenco/nova-stripe';
 
         Http::fake([
-            "{$url}.json" =>
-                Http::response($this->fakeResponse('packagist.repo-with-github-vcs.json')),
+            "{$url}.json" => Http::response($this->fakeResponse('packagist.repo-with-github-vcs.json')),
         ]);
 
         $repo = Repo::fromUrl($url);
@@ -371,17 +361,14 @@ class RepoTest extends TestCase
         $packagistUrl = 'https://packagist.org/packages/adnanchowdhury/uploadcare-image';
 
         Http::fake([
-            "{$packagistUrl}.json" =>
-                Http::response($this->fakeResponse('packagist.repo-with-bitbucket-vcs.json')),
+            "{$packagistUrl}.json" => Http::response($this->fakeResponse('packagist.repo-with-bitbucket-vcs.json')),
             // This request is currently run twice in this test case
             // for $repo->readme() and $repo->latestReleaseVersion().
             // Caching should be introduced to avoid this.
-            'https://api.bitbucket.org/2.0/repositories/adnanchowdhury/nova-uploadcare-imagefield/refs' =>
-                Http::sequence()
-                    ->push($this->fakeResponse('bitbucket.repo-refs.json'))
-                    ->push($this->fakeResponse('bitbucket.repo-refs.json')),
-            'https://api.bitbucket.org/2.0/repositories/adnanchowdhury/nova-uploadcare-imagefield/src/0.0.3/README.md' =>
-                Http::response($this->fakeResponse('bitbucket.repo-readme.md')),
+            'https://api.bitbucket.org/2.0/repositories/adnanchowdhury/nova-uploadcare-imagefield/refs' => Http::sequence()
+                ->push($this->fakeResponse('bitbucket.repo-refs.json'))
+                ->push($this->fakeResponse('bitbucket.repo-refs.json')),
+            'https://api.bitbucket.org/2.0/repositories/adnanchowdhury/nova-uploadcare-imagefield/src/0.0.3/README.md' => Http::response($this->fakeResponse('bitbucket.repo-readme.md')),
         ]);
 
         $repo = Repo::fromUrl($packagistUrl);
@@ -404,8 +391,7 @@ class RepoTest extends TestCase
             "{$packagistUrl}.json" => Http::response($this->fakeResponse('packagist.repo-with-gitlab-vcs.json')),
             $repoUrl => Http::response(),
             'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/tags' => Http::response($this->fakeResponse('gitlab.repo-tags.json')),
-            'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/files/README%2Emd?ref=2.0.4' =>
-                Http::response($this->fakeResponse('gitlab.repo-readme.json')),
+            'https://gitlab.com/api/v4/projects/alphayax%2Francher-api/repository/files/README%2Emd?ref=2.0.4' => Http::response($this->fakeResponse('gitlab.repo-readme.json')),
         ]);
 
         $repo = Repo::fromUrl($packagistUrl);

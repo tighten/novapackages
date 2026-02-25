@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseRepo;
 use App\Http\Remotes\GitLab;
 use Exception;
 use Illuminate\Support\Arr;
