@@ -78,7 +78,7 @@ class PackageTest extends TestCase
     }
 
     #[Test]
-    #[DataProvider("packageNameProvider")]
+    #[DataProvider('packageNameProvider')]
     public function it_returns_the_display_name_of_the_package($input, $expected): void
     {
         $package = Package::make([

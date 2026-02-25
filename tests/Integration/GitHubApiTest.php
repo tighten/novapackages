@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
-#[Group("integration")]
+#[Group('integration')]
 class GitHubApiTest extends TestCase
 {
     protected function setUp(): void
