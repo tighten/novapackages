@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -62,7 +63,8 @@ class Collaborator extends Model
         return 'github_username';
     }
 
-    public function scopeInRequest($query, $request)
+    #[Scope]
+    protected function inRequest($query, $request)
     {
         return self::whereIn('id', array_merge([$request->input('author_id')], $request->input('contributors', [])));
     }

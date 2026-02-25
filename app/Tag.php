@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +42,8 @@ class Tag extends Model
         })->toArray();
     }
 
-    public function scopePopular($query)
+    #[Scope]
+    protected function popular($query)
     {
         return $query->nonTypes()
             ->whereHas('packages')
@@ -50,12 +52,14 @@ class Tag extends Model
             ->orderByDesc('packages_count');
     }
 
-    public function scopeTypes($query)
+    #[Scope]
+    protected function types($query)
     {
         return $query->whereIn('slug', $this->projectTypeSlugs());
     }
 
-    public function scopeNonTypes($query)
+    #[Scope]
+    protected function nonTypes($query)
     {
         return $query->whereNotIn('slug', $this->projectTypeSlugs());
     }
