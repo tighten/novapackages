@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Package;
-use App\Tag;
+use App\Models\Package;
+use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\Test;

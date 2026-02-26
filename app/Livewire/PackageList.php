@@ -3,8 +3,8 @@
 namespace App\Livewire;
 
 use App\CacheKeys;
-use App\Package;
-use App\Tag;
+use App\Models\Package;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
@@ -17,10 +17,13 @@ class PackageList extends Component
     use WithPagination;
 
     const POPULAR_TAG = 'popular--and--recent';
+
     const POPULAR_TAGS_LENGTH = 120;
 
     public $tag = 'popular--and--recent';
+
     public string $search = '';
+
     public $pageSize = 6;
 
     protected $queryString = [

@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Collaborator;
 use App\Http\Remotes\GitHub;
-use App\User;
+use App\Models\Collaborator;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Mockery as m;

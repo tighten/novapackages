@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Package;
-use App\Review;
+use App\Models\Package;
+use App\Models\Review;
 use Livewire\Component;
 
 class ReviewList extends Component
@@ -11,6 +11,7 @@ class ReviewList extends Component
     public int $packageId;
 
     public ?int $editingReviewId = null;
+
     public string $editingContent = '';
 
     public function mount(int $packageId)

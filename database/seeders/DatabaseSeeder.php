@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Collaborator;
-use App\Package;
-use App\Review;
-use App\Screenshot;
-use App\Tag;
-use App\User;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Review;
+use App\Models\Screenshot;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use willvincent\Rateable\Rating;

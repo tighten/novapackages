@@ -11,15 +11,21 @@ class Clients extends Component
     public array $clients = [];
 
     public bool $showCreateModal = false;
+
     public bool $showEditModal = false;
 
     public string $createName = '';
+
     public string $createRedirect = '';
+
     public array $createErrors = [];
 
     public ?string $editId = null;
+
     public string $editName = '';
+
     public string $editRedirect = '';
+
     public array $editErrors = [];
 
     public function mount()

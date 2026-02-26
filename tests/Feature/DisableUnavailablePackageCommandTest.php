@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Collaborator;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\User;
 use App\Notifications\NotifyAuthorOfDisabledPackage;
-use App\Package;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use PHPUnit\Framework\Attributes\Test;

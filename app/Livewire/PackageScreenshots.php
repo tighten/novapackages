@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Screenshot;
+use App\Models\Screenshot;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;

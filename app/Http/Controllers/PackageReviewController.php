@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Package;
+use App\Models\Package;
 use Illuminate\View\View;
 
 class PackageReviewController extends Controller

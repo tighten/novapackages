@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Screenshot;
-use App\User;
+use App\Models\Screenshot;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;

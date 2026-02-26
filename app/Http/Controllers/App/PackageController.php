@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Collaborator;
 use App\Events\PackageCreated;
 use App\Events\PackageDeleted;
 use App\Events\PackageUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageFormRequest;
-use App\Package;
-use App\Tag;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Tag;
 use DateTime;
 use Facades\App\Repo;
 use Illuminate\Http\RedirectResponse;

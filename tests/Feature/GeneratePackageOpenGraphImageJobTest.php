@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Collaborator;
 use App\Events\PackageCreated;
 use App\Events\PackageUpdated;
 use App\Jobs\GeneratePackageOpenGraphImage;
 use App\Listeners\PackageEventSubscriber;
-use App\Package;
-use App\Tag;
-use App\User;
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;

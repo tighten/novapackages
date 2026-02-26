@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Collaborator;
 use App\Events\NewUserSignedUp;
 use App\Http\Remotes\GitHub;
+use App\Models\Collaborator;
 use App\Notifications\CollaboratorClaimed;
 use App\Tighten;
 

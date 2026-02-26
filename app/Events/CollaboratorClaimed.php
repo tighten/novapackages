@@ -2,8 +2,8 @@
 
 namespace App\Events;
 
-use App\Collaborator;
-use App\User;
+use App\Models\Collaborator;
+use App\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

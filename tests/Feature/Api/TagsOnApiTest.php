@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Api;
 
-use App\Package;
-use App\Tag;
+use App\Models\Package;
+use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;

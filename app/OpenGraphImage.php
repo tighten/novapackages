@@ -11,12 +11,17 @@ use Illuminate\Support\Str;
 class OpenGraphImage
 {
     const GUTTER = 15;
+
     const IMAGE_HEIGHT = 630;
+
     const IMAGE_WIDTH = 1200;
+
     const PADDING = 50;
 
     protected $fileName;
+
     protected $subtitle;
+
     protected $title;
 
     /**

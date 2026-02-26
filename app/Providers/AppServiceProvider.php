@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Package;
+use App\Models\Package;
 use App\Tighten;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Relation::morphMap([
+            'App\Package' => \App\Models\Package::class,
+        ]);
+
         Passport::$clientUuids = false;
         Passport::$registersJsonApiRoutes = true;
 

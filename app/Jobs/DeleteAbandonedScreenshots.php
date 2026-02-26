@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Screenshot;
+use App\Models\Screenshot;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

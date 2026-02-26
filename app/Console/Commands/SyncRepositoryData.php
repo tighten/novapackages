@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SyncPackageRepositoryData;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Console\Command;
 
 class SyncRepositoryData extends Command

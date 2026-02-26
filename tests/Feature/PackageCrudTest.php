@@ -2,18 +2,18 @@
 
 namespace Tests\Feature;
 
-use App\Collaborator;
 use App\Events\PackageCreated;
-use App\Favorite;
 use App\Listeners\SendNewPackageNotification;
+use App\Models\Collaborator;
+use App\Models\Favorite;
+use App\Models\Package;
+use App\Models\Review;
+use App\Models\Screenshot;
+use App\Models\Tag;
+use App\Models\User;
 use App\Notifications\NewPackage;
 use App\Notifications\PackageDeleted;
-use App\Package;
-use App\Review;
-use App\Screenshot;
-use App\Tag;
 use App\Tighten;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Event;
@@ -355,7 +355,7 @@ class PackageCrudTest extends TestCase
         $fanOfPackage->ratePackage($package->id, 5);
         $rating = Rating::where([
             'user_id' => $fanOfPackage->id,
-            'rateable_type' => Package::class,
+            'rateable_type' => (new Package)->getMorphClass(),
             'rateable_id' => $package->id,
         ])->first();
 

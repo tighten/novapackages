@@ -9,13 +9,17 @@ use Livewire\Component;
 class PersonalAccessTokens extends Component
 {
     public array $tokens = [];
+
     public array $scopes = [];
 
     public bool $showCreateModal = false;
+
     public bool $showAccessTokenModal = false;
 
     public string $createName = '';
+
     public array $createScopes = [];
+
     public array $createErrors = [];
 
     public ?string $accessToken = null;

@@ -3,14 +3,14 @@
 namespace App\Livewire;
 
 use App\CacheKeys;
-use App\Collaborator;
 use App\Events\PackageRated;
 use App\Exceptions\PackagistException;
 use App\Exceptions\SelfAuthoredRatingException;
-use App\Favorite;
 use App\Http\Remotes\Packagist;
 use App\Jobs\SyncPackageRepositoryData;
-use App\Package;
+use App\Models\Collaborator;
+use App\Models\Favorite;
+use App\Models\Package;
 use App\ReadmeFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
@@ -19,13 +19,19 @@ use Livewire\Component;
 class PackageShow extends Component
 {
     public Package $package;
+
     public bool $creatingReview = false;
 
     public bool $isFavorite = false;
+
     public int $favoritesCount = 0;
+
     public bool $rated = false;
+
     public int $currentUserRating = 0;
+
     public bool $refreshRequested = false;
+
     public bool $repositoryRefreshRequested = false;
 
     public function mount(Package $package, bool $creatingReview = false)

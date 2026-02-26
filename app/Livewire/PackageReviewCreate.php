@@ -4,15 +4,18 @@ namespace App\Livewire;
 
 use App\Events\PackageRated;
 use App\Exceptions\SelfAuthoredRatingException;
-use App\Package;
+use App\Models\Package;
 use Livewire\Component;
 use willvincent\Rateable\Rating;
 
 class PackageReviewCreate extends Component
 {
     public int $packageId;
+
     public int $rating = 0;
+
     public string $content = '';
+
     public bool $rated = false;
 
     public function mount(int $packageId, ?int $initialRating = null)

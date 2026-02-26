@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Package;
 use App\Notifications\RemindAuthorOfUnavailablePackage;
-use App\Package;
 use Illuminate\Console\Command;
 
 class SendUnavailablePackageFollowUp extends Command
