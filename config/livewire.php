@@ -4,6 +4,58 @@ return [
 
     /*
     |---------------------------------------------------------------------------
+    | Component Locations
+    |---------------------------------------------------------------------------
+    |
+    | This value sets the root directories that'll be used to resolve view-based
+    | components like single and multi-file components. The make command will
+    | use the first directory in this array to add new component files to.
+    |
+    */
+
+    'component_locations' => [
+        resource_path('views/components'),
+        resource_path('views/livewire'),
+    ],
+
+    /*
+    |---------------------------------------------------------------------------
+    | Component Namespaces
+    |---------------------------------------------------------------------------
+    |
+    | This value sets default namespaces that will be used to resolve view-based
+    | components like single-file and multi-file components. These folders'll
+    | also be referenced when creating new components via the make command.
+    |
+    */
+
+    'component_namespaces' => [
+        'layouts' => resource_path('views/layouts'),
+        'pages' => resource_path('views/pages'),
+    ],
+
+    /*
+    |---------------------------------------------------------------------------
+    | Make Command
+    |---------------------------------------------------------------------------
+    | This value determines the default configuration for the artisan make command
+    | You can configure the component type (sfc, mfc, class) and whether to use
+    | the high-voltage (⚡) emoji as a prefix in the sfc|mfc component names.
+    |
+    */
+
+    'make_command' => [
+        'type' => 'class', // Options: 'sfc', 'mfc', 'class'
+        'emoji' => true, // Options: true, false
+        'with' => [
+            'js' => false,
+            'css' => false,
+            'test' => false,
+        ],
+    ],
+
+    /*
+    |---------------------------------------------------------------------------
     | Class Namespace
     |---------------------------------------------------------------------------
     |
@@ -38,7 +90,7 @@ return [
     |
     */
 
-    'layout' => 'components.layouts.app',
+    'component_layout' => 'components.layouts.app',
 
     /*
     |---------------------------------------------------------------------------
@@ -50,7 +102,7 @@ return [
     |
     */
 
-    'lazy_placeholder' => null,
+    'component_placeholder' => null,
 
     /*
     |---------------------------------------------------------------------------
@@ -157,4 +209,35 @@ return [
     */
 
     'pagination_theme' => 'tailwind',
+
+    /*
+    |---------------------------------------------------------------------------
+    | CSP Safe
+    |---------------------------------------------------------------------------
+    |
+    | This config is used to determine if Livewire will use the CSP-safe version
+    | of Alpine in its bundle. This is useful for applications that are using
+    | strict Content Security Policy (CSP) to protect against XSS attacks.
+    |
+    */
+
+    'csp_safe' => false,
+
+    /*
+    |---------------------------------------------------------------------------
+    | Payload Guards
+    |---------------------------------------------------------------------------
+    |
+    | These settings protect against malicious or oversized payloads that could
+    | cause denial of service. The default values should feel reasonable for
+    | most web applications. Each can be set to null to disable the limit.
+    |
+    */
+
+    'payload' => [
+        'max_size' => 1024 * 1024,   // 1MB - maximum request payload size in bytes
+        'max_nesting_depth' => 10,   // Maximum depth of dot-notation property paths
+        'max_calls' => 50,           // Maximum method calls per request
+        'max_components' => 20,      // Maximum components per batch request
+    ],
 ];
