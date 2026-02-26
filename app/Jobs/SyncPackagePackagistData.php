@@ -42,16 +42,8 @@ class SyncPackagePackagistData implements ShouldQueue
             if (! is_null($packagistData)) {
                 $composerLatest = $this->extractStableVersionsFromPackages($packagistData)->first();
 
-                $novaVersion = $composerLatest['require']['laravel/nova'] ?? null;
-
-                // Filter version numbers
-                $novaVersion = preg_replace('/[^0-9]/', '', $novaVersion);
-
-                if (strlen($novaVersion) > 0) {
-                    $novaVersion = substr($novaVersion, 0, 1);
-                } else {
-                    $novaVersion = null;
-                }
+                $novaConstraint = $composerLatest['require']['laravel/nova'] ?? null;
+                $novaVersion = self::parseNovaVersion($novaConstraint);
             }
         } catch (PackagistException $e) {
             return;
@@ -71,6 +63,25 @@ class SyncPackagePackagistData implements ShouldQueue
         });
 
         Log::info('Synced packagist data for package #' . $this->package->id . ' (' . $this->package->name . ')');
+    }
+
+    public static function parseNovaVersion(?string $constraint): ?int
+    {
+        if (! $constraint) {
+            return null;
+        }
+
+        // Split on | to handle multiple version constraints like "^4.0|^5.0"
+        $parts = explode('|', $constraint);
+        $majorVersions = [];
+
+        foreach ($parts as $part) {
+            if (preg_match('/(\d+)/', trim($part), $matches)) {
+                $majorVersions[] = (int) $matches[1];
+            }
+        }
+
+        return ! empty($majorVersions) ? max($majorVersions) : null;
     }
 
     private function extractStableVersionsFromPackages($packagist)
