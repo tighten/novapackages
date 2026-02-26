@@ -1,6 +1,6 @@
 <?php
 
-use App\Package;
+use App\Models\Package;
 
 return [
 

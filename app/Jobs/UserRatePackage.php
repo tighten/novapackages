@@ -2,9 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 use App\Exceptions\SelfAuthoredRatingException;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Foundation\Bus\Dispatchable;
 use willvincent\Rateable\Rating;
 

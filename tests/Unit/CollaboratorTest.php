@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;

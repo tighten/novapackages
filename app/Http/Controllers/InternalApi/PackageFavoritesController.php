@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\InternalApi;
 
 use App\Http\Controllers\Controller;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Http\Response;
 
 class PackageFavoritesController extends Controller

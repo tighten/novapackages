@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Package;
+use App\Models\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\Test;

@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Events\PackageRated;
 use App\Exceptions\SelfAuthoredRatingException;
-use App\Package;
+use App\Models\Package;
 use Livewire\Component;
 use willvincent\Rateable\Rating;
 

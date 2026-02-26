@@ -2,10 +2,10 @@
 
 namespace App\Notifications;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 use App\Events\CollaboratorClaimed as CollaboratorClaimedEvent;
 use App\Tighten;
-use App\User;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;

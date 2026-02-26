@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Package;
+use App\Models\Package;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 

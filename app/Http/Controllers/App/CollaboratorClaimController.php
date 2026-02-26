@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 use App\Events\CollaboratorClaimed;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;

@@ -3,14 +3,14 @@
 namespace App\Livewire;
 
 use App\CacheKeys;
-use App\Collaborator;
+use App\Models\Collaborator;
 use App\Events\PackageRated;
 use App\Exceptions\PackagistException;
 use App\Exceptions\SelfAuthoredRatingException;
-use App\Favorite;
+use App\Models\Favorite;
 use App\Http\Remotes\Packagist;
 use App\Jobs\SyncPackageRepositoryData;
-use App\Package;
+use App\Models\Package;
 use App\ReadmeFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;

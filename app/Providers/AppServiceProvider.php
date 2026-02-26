@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Package;
+use App\Models\Package;
 use App\Tighten;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;

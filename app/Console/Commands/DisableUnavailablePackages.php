@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Notifications\NotifyAuthorOfDisabledPackage;
-use App\Package;
+use App\Models\Package;
 use Illuminate\Console\Command;
 
 class DisableUnavailablePackages extends Command

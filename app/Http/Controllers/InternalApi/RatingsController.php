@@ -13,7 +13,7 @@ class RatingsController extends Controller
         request()->validate([
             'package_id' => [
                 'required',
-                'exists:App\Package,id',
+                'exists:App\Models\Package,id',
             ],
             'rating' => 'required',
         ]);

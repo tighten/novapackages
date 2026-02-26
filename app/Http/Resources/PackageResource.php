@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Package;
+use App\Models\Package;
 use Illuminate\Support\Str;
 
 class PackageResource extends ModelResource

@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Collaborator;
+use App\Models\Collaborator;
 use App\Notifications\NotifyAuthorOfUnavailablePackageUrl;
-use App\Package;
-use App\User;
+use App\Models\Package;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;

@@ -3,8 +3,8 @@
 namespace Tests\Unit\Http\Resources;
 
 use App\Http\Resources\PackageDetailResource;
-use App\Package;
-use App\User;
+use App\Models\Package;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;

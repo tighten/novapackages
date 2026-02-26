@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\InternalApi;
 
-use App\Favorite;
-use App\Package;
-use App\User;
+use App\Models\Favorite;
+use App\Models\Package;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;

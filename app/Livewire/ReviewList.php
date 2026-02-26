@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Package;
-use App\Review;
+use App\Models\Package;
+use App\Models\Review;
 use Livewire\Component;
 
 class ReviewList extends Component
