@@ -49,7 +49,7 @@ class Tag extends Model
 
     public function url()
     {
-        return url('?tag='.$this->slug);
+        return url('?tag=' . $this->slug);
     }
 
     #[Scope]

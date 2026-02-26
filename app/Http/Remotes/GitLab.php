@@ -26,11 +26,11 @@ class GitLab
 
     public function fetchData($endpoint)
     {
-        $this->response = Http::get('https://gitlab.com/api/'.self::API_VERSION.'/'.$endpoint)->json();
+        $this->response = Http::get('https://gitlab.com/api/' . self::API_VERSION . '/' . $endpoint)->json();
 
         if ($this->responseHasErrors() && ($this->isNotFileNotFoundError() || $this->isCommitNotFoundError())) {
             throw new GitLabException(
-                "GitLab error fetching data for [{$this->url}]: ".Arr::get($this->response, 'message')
+                "GitLab error fetching data for [{$this->url}]: " . Arr::get($this->response, 'message')
             );
         }
 

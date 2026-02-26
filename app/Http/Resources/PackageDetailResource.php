@@ -4,8 +4,8 @@ namespace App\Http\Resources;
 
 use App\CacheKeys;
 use App\Exceptions\PackagistException;
-use App\Models\Favorite;
 use App\Http\Remotes\Packagist;
+use App\Models\Favorite;
 use App\ReadmeFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
@@ -48,7 +48,7 @@ class PackageDetailResource extends PackageResource
                 return [
                     'id' => $contributor->user_id,
                     'name' => $contributor->name,
-                    'avatar_url' => $contributor->avatar ?: 'https://api.adorable.io/avatars/285/'.Str::slug($contributor->name).'.png',
+                    'avatar_url' => $contributor->avatar ?: 'https://api.adorable.io/avatars/285/' . Str::slug($contributor->name) . '.png',
                 ];
             })->toArray(),
             'possibly_abandoned' => $this->isPossiblyAbandoned($package, $composer_latest ?? null, $packagistData ?? []),

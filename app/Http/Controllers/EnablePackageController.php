@@ -13,7 +13,7 @@ class EnablePackageController extends Controller
 
         return back()->with([
             'package' => $package,
-            'status' => 'Package enabled: '.$package->name,
+            'status' => 'Package enabled: ' . $package->name,
         ]);
     }
 }

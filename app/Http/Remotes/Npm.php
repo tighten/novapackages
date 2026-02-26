@@ -39,7 +39,7 @@ class Npm
     protected function setRegistryUrl($url)
     {
         if (preg_match('/npmjs\.(?:com|org)\/(?:package\/)?([\w-]+)(?:\/v\/((?:\d+\.)?(?:\d+\.)?(?:\*|\d+)))?/i', $url, $parts)) {
-            $this->registryUrl = 'https://registry.npmjs.org/'.$parts[1].'/'.($parts[2] ?? '');
+            $this->registryUrl = 'https://registry.npmjs.org/' . $parts[1] . '/' . ($parts[2] ?? '');
         }
     }
 

@@ -47,24 +47,24 @@ class OpenGraphImage
      */
     public static function makeFileName(string $uniqueId, string $name): string
     {
-        return "{$uniqueId}_".Str::slug($name, '-').'.png';
+        return "{$uniqueId}_" . Str::slug($name, '-') . '.png';
     }
 
     public function generate()
     {
-        Filesystem::ensureDirectoryExists(Storage::disk('public')->path('').$this->storageDirectory());
+        Filesystem::ensureDirectoryExists(Storage::disk('public')->path('') . $this->storageDirectory());
         $this->deleteImagesForProject();
         $this->save($this->make());
     }
 
     protected function storageDirectory(): string
     {
-        return config('opengraph.image_directory_name').'/';
+        return config('opengraph.image_directory_name') . '/';
     }
 
     protected function storagePath(): string
     {
-        return Storage::disk('public')->path('').$this->storageDirectory()."{$this->fileName}";
+        return Storage::disk('public')->path('') . $this->storageDirectory() . "{$this->fileName}";
     }
 
     protected function deleteImagesForProject()

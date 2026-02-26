@@ -55,7 +55,7 @@ class BaseRepo
     {
         return method_exists($this, 'repo')
             && $this->repo() !== null
-            && defined(get_class($this->repo()).'::'.$const);
+            && defined(get_class($this->repo()) . '::' . $const);
     }
 
     private function repoSource($registryRepo)

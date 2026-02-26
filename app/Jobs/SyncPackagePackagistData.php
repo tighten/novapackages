@@ -70,7 +70,7 @@ class SyncPackagePackagistData implements ShouldQueue
             ]);
         });
 
-        Log::info('Synced packagist data for package #'.$this->package->id.' ('.$this->package->name.')');
+        Log::info('Synced packagist data for package #' . $this->package->id . ' (' . $this->package->name . ')');
     }
 
     private function extractStableVersionsFromPackages($packagist)

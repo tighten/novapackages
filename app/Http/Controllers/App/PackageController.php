@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Models\Collaborator;
 use App\Events\PackageCreated;
 use App\Events\PackageDeleted;
 use App\Events\PackageUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageFormRequest;
+use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Tag;
 use DateTime;
@@ -146,7 +146,7 @@ class PackageController extends Controller
 
         session()->flash('status', "{$name} has been deleted.");
 
-        Log::notice("Package {$name} was deleted by user ".auth()->user()->id);
+        Log::notice("Package {$name} was deleted by user " . auth()->user()->id);
 
         return redirect()->route('app.packages.index');
     }

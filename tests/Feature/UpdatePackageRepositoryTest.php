@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Collaborator;
 use App\Jobs\SyncPackageRepositoryData;
+use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

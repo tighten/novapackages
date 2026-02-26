@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\OpenGraphImage;
+use App\RatingCountable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -154,7 +156,7 @@ class Package extends Model implements Feedable
 
     public function getOgImagePublicUrlAttribute()
     {
-        return Storage::url(config('opengraph.image_directory_name')."/{$this->og_image_name}");
+        return Storage::url(config('opengraph.image_directory_name') . "/{$this->og_image_name}");
     }
 
     /**
@@ -249,7 +251,7 @@ class Package extends Model implements Feedable
     protected function popular($query)
     {
         return $query->select(
-            DB::raw('packages.*, ((`github_stars` * '.$this->githubStarVsPackagistDownloadsMultiplier.') + `packagist_downloads`) as `popularity`')
+            DB::raw('packages.*, ((`github_stars` * ' . $this->githubStarVsPackagistDownloadsMultiplier . ') + `packagist_downloads`) as `popularity`')
         )
             ->orderBy('popularity', 'desc');
     }

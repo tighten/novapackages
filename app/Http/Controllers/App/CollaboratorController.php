@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Models\Collaborator;
 use App\Events\CollaboratorCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Remotes\GitHub;
+use App\Models\Collaborator;
 use Github\Exception\RuntimeException as GitHubException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
@@ -51,7 +51,7 @@ class CollaboratorController extends Controller
 
     public function edit(Collaborator $collaborator): View
     {
-        return view('app.collaborators.edit', compact('collaborator'));
+        return view('app.collaborators.edit', ['collaborator' => $collaborator]);
     }
 
     public function update(Collaborator $collaborator): RedirectResponse

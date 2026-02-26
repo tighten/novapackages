@@ -4,10 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Collaborator;
 use App\Models\Package;
-use App\ReadmeFormatter;
 use App\Models\Screenshot;
 use App\Models\Tag;
 use App\Models\User;
+use App\ReadmeFormatter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;

@@ -20,7 +20,7 @@ class SearchController extends Controller
             'q' => 'required|min:3',
         ]);
 
-        Log::info('API: search for: '.$request->input('q'));
+        Log::info('API: search for: ' . $request->input('q'));
 
         return PackageResource::collection($this->searchFor($request->input('q')));
     }

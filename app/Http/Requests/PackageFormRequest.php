@@ -46,7 +46,7 @@ class PackageFormRequest extends FormRequest
 
                     if (count($value) > 20) {
                         $deleteCount = count($value) - 20;
-                        $fail("You may only upload 20 {$attribute}. Please delete {$deleteCount} ".Str::plural('screenshot', $deleteCount));
+                        $fail("You may only upload 20 {$attribute}. Please delete {$deleteCount} " . Str::plural('screenshot', $deleteCount));
                     }
                 },
             ],
@@ -55,7 +55,7 @@ class PackageFormRequest extends FormRequest
 
     public function getComposerName()
     {
-        return request('packagist_namespace').'/'.request('packagist_name');
+        return request('packagist_namespace') . '/' . request('packagist_name');
     }
 
     protected function failedValidation(Validator $validator)

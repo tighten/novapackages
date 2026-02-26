@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Models\Collaborator;
 use App\Exceptions\SelfAuthoredRatingException;
+use App\Models\Collaborator;
 use App\Models\Package;
 use Illuminate\Foundation\Bus\Dispatchable;
 use willvincent\Rateable\Rating;
@@ -29,7 +29,7 @@ class UserRatePackage
     {
         if (Rating::where([
             'user_id' => $this->userId,
-            'rateable_type' => Package::class,
+            'rateable_type' => (new Package)->getMorphClass(),
             'rateable_id' => $this->packageId,
         ])->count() === 0) {
             $rating = new Rating;
@@ -46,7 +46,7 @@ class UserRatePackage
         } else {
             $rating = Rating::where([
                 'user_id' => $this->userId,
-                'rateable_type' => Package::class,
+                'rateable_type' => (new Package)->getMorphClass(),
                 'rateable_id' => $this->packageId,
             ])->first();
 

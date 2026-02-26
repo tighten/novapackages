@@ -39,7 +39,7 @@ class InternalApiReviewsTest extends TestCase
         $user = User::factory()->create();
 
         $this->be($user)
-            ->get('/packages/'.$package->composer_name)
+            ->get('/packages/' . $package->composer_name)
             ->assertDontSee('Write Your Review Here');
     }
 

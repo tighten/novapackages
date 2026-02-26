@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Collaborator;
-use App\Notifications\RemindAuthorOfUnavailablePackage;
 use App\Models\Package;
 use App\Models\User;
+use App\Notifications\RemindAuthorOfUnavailablePackage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use PHPUnit\Framework\Attributes\Test;

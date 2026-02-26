@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Collaborator;
 use App\Events\CollaboratorCreated;
 use App\Http\Remotes\GitHub;
+use App\Models\Collaborator;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;

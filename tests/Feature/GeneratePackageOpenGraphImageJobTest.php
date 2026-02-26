@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\Collaborator;
 use App\Events\PackageCreated;
 use App\Events\PackageUpdated;
 use App\Jobs\GeneratePackageOpenGraphImage;
 use App\Listeners\PackageEventSubscriber;
+use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Tag;
 use App\Models\User;
@@ -137,8 +137,8 @@ class GeneratePackageOpenGraphImageJobTest extends TestCase
 
     public function createANewOpenGraphImage($packageName)
     {
-        $file = '123_'.Str::slug($packageName).'.png';
-        $filePath = config('opengraph.image_directory_name')."/{$file}";
+        $file = '123_' . Str::slug($packageName) . '.png';
+        $filePath = config('opengraph.image_directory_name') . "/{$file}";
 
         GeneratePackageOpenGraphImage::dispatch($packageName, 'Sesame Street', $file);
 

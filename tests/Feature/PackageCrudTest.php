@@ -2,18 +2,18 @@
 
 namespace Tests\Feature;
 
-use App\Models\Collaborator;
 use App\Events\PackageCreated;
-use App\Models\Favorite;
 use App\Listeners\SendNewPackageNotification;
-use App\Notifications\NewPackage;
-use App\Notifications\PackageDeleted;
+use App\Models\Collaborator;
+use App\Models\Favorite;
 use App\Models\Package;
 use App\Models\Review;
 use App\Models\Screenshot;
 use App\Models\Tag;
-use App\Tighten;
 use App\Models\User;
+use App\Notifications\NewPackage;
+use App\Notifications\PackageDeleted;
+use App\Tighten;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Event;
@@ -245,7 +245,7 @@ class PackageCrudTest extends TestCase
 
         $this->actingAs($user)
             ->post(route('app.packages.store'), $this->postFromPackage($duplicatePackage))
-            ->assertSessionHasErrors('packagist_name', 'The package '.$originalPackage->composer_name.' has already been submitted.');
+            ->assertSessionHasErrors('packagist_name', 'The package ' . $originalPackage->composer_name . ' has already been submitted.');
     }
 
     #[Test]
@@ -290,7 +290,7 @@ class PackageCrudTest extends TestCase
             function ($notification, $channels) use ($user) {
                 $message = json_encode($notification->toSlack(new Tighten)->toArray());
 
-                return str_contains($message, 'Created by: '.$user->name);
+                return str_contains($message, 'Created by: ' . $user->name);
             }
         );
     }
@@ -355,7 +355,7 @@ class PackageCrudTest extends TestCase
         $fanOfPackage->ratePackage($package->id, 5);
         $rating = Rating::where([
             'user_id' => $fanOfPackage->id,
-            'rateable_type' => Package::class,
+            'rateable_type' => (new Package)->getMorphClass(),
             'rateable_id' => $package->id,
         ])->first();
 

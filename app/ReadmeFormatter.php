@@ -41,35 +41,35 @@ class ReadmeFormatter
         $formattedHtml = $this->replaceNonImageUrlsHtml($this->replaceImageUrlsHtml($html));
 
         // wrap with .markdown
-        return '<div class="markdown">'.$formattedHtml.'</div>';
+        return '<div class="markdown">' . $formattedHtml . '</div>';
     }
 
     public function replaceImageUrls($markdown)
     {
         // Look for all of relative url's with valid image types in the markdown and noamalize them with fully
         // qualified url's.
-        return preg_replace($this->imageRegexPatterns(), '[$1]('.$this->url.'/raw/'.$this->latestVersion.'/'.'$2'.')', $markdown);
+        return preg_replace($this->imageRegexPatterns(), '[$1](' . $this->url . '/raw/' . $this->latestVersion . '/' . '$2' . ')', $markdown);
     }
 
     public function replaceNonImageUrls($markdown)
     {
         // Look for all of relative url's in the markdown and repalce them with fully qualified url's base on the
         // markdown source
-        return preg_replace('/\[(.*?)\]\(((?!http|mailto:).*?)\)/i', '[$1]('.$this->url.'/'.$this->nonImageFormat().'/'.$this->latestVersion.'/'.'$2'.')', $markdown);
+        return preg_replace('/\[(.*?)\]\(((?!http|mailto:).*?)\)/i', '[$1](' . $this->url . '/' . $this->nonImageFormat() . '/' . $this->latestVersion . '/' . '$2' . ')', $markdown);
     }
 
     public function replaceImageUrlsHtml($html)
     {
         $patterns = array_map(function ($extension) {
-            return '/<img src="((?!http).*?\.'.$extension.')"/i';
+            return '/<img src="((?!http).*?\.' . $extension . ')"/i';
         }, $this->imageExtensions);
 
-        $baseUrl = $this->url.'/raw/'.$this->latestVersion.'/';
+        $baseUrl = $this->url . '/raw/' . $this->latestVersion . '/';
 
         // Look for all of relative URLs with valid image types in img elements and give them full URLs
         return preg_replace(
             $patterns,
-            '<img src="'.$baseUrl.'$1'.'"',
+            '<img src="' . $baseUrl . '$1' . '"',
             $html
         );
     }
@@ -78,11 +78,11 @@ class ReadmeFormatter
     {
         $pattern = '/<a(.+?)href="((?!http)(?!mailto).*?)"/i';
 
-        $baseUrl = $this->url.'/'.$this->nonImageFormat().'/'.$this->latestVersion.'/';
+        $baseUrl = $this->url . '/' . $this->nonImageFormat() . '/' . $this->latestVersion . '/';
 
         return preg_replace(
             $pattern,
-            '<a$1href="'.$baseUrl.'$2"',
+            '<a$1href="' . $baseUrl . '$2"',
             $html
         );
     }
@@ -91,7 +91,7 @@ class ReadmeFormatter
     {
         // Build an array of image patterns to look for in the markdown
         return array_map(function ($extension) {
-            return '/\[(.*?)\]\(((?!http).*?\.'.$extension.')\)/i';
+            return '/\[(.*?)\]\(((?!http).*?\.' . $extension . ')\)/i';
         }, $this->imageExtensions);
     }
 

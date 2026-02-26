@@ -29,7 +29,7 @@ class PackagistRepo extends BaseRepo
     public static function makeFromUrl($url)
     {
         preg_match('/packagist\.org\/packages\/([\w-]+)\/([\w-]+)/i', $url, $parts);
-        $composerName = $parts[1].'/'.$parts[2];
+        $composerName = $parts[1] . '/' . $parts[2];
 
         return self::make($composerName);
     }

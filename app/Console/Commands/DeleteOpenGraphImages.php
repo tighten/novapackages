@@ -15,14 +15,14 @@ class DeleteOpenGraphImages extends Command
     public function handle(): void
     {
         if (! $this->argument('package')) {
-            $files = Storage::allFiles(config('opengraph.image_directory_name').'/');
+            $files = Storage::allFiles(config('opengraph.image_directory_name') . '/');
             Storage::delete($files);
 
             return;
         }
 
         $package = Package::where('id', $this->argument('package'))->first();
-        $file = config('opengraph.image_directory_name')."/{$package->og_image_name}";
+        $file = config('opengraph.image_directory_name') . "/{$package->og_image_name}";
 
         Storage::delete($file);
     }

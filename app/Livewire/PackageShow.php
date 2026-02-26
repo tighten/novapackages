@@ -3,13 +3,13 @@
 namespace App\Livewire;
 
 use App\CacheKeys;
-use App\Models\Collaborator;
 use App\Events\PackageRated;
 use App\Exceptions\PackagistException;
 use App\Exceptions\SelfAuthoredRatingException;
-use App\Models\Favorite;
 use App\Http\Remotes\Packagist;
 use App\Jobs\SyncPackageRepositoryData;
+use App\Models\Collaborator;
+use App\Models\Favorite;
 use App\Models\Package;
 use App\ReadmeFormatter;
 use Illuminate\Support\Arr;
@@ -188,7 +188,7 @@ class PackageShow extends Component
     protected function getFormattedReadme()
     {
         if (! $this->package->readme) {
-            return '<p>Readme not found. Refer to the project website: <a href="'.e($this->package->url).'">'.e($this->package->url).'</a></p>';
+            return '<p>Readme not found. Refer to the project website: <a href="' . e($this->package->url) . '">' . e($this->package->url) . '</a></p>';
         }
 
         return (new ReadmeFormatter($this->package))->format($this->package->readme);
