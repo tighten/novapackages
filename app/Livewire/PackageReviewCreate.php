@@ -11,8 +11,11 @@ use willvincent\Rateable\Rating;
 class PackageReviewCreate extends Component
 {
     public int $packageId;
+
     public int $rating = 0;
+
     public string $content = '';
+
     public bool $rated = false;
 
     public function mount(int $packageId, ?int $initialRating = null)

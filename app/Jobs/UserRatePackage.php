@@ -11,6 +11,7 @@ use willvincent\Rateable\Rating;
 class UserRatePackage
 {
     use Dispatchable;
+
     private $user;
 
     private $package;

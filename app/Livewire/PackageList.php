@@ -17,10 +17,13 @@ class PackageList extends Component
     use WithPagination;
 
     const POPULAR_TAG = 'popular--and--recent';
+
     const POPULAR_TAGS_LENGTH = 120;
 
     public $tag = 'popular--and--recent';
+
     public string $search = '';
+
     public $pageSize = 6;
 
     protected $queryString = [
@@ -53,11 +56,11 @@ class PackageList extends Component
             $packages = Package::search($this->search, function (Documents $documents, string $query) {
                 $searchParams = [
                     'q' => $query,
-                    'query_by' => config('scout.typesense.model-settings.' . Package::class . '.search-parameters.query_by'),
+                    'query_by' => config('scout.typesense.model-settings.'.Package::class.'.search-parameters.query_by'),
                 ];
 
                 if (! in_array($this->tag, ['all', 'popular', 'nova_current'])) {
-                    $searchParams['filter_by'] = '_tags: [' . $this->tag . ']';
+                    $searchParams['filter_by'] = '_tags: ['.$this->tag.']';
                 }
 
                 return $documents->search($searchParams);

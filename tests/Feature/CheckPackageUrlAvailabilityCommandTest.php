@@ -18,7 +18,9 @@ class CheckPackageUrlAvailabilityCommandTest extends TestCase
     use RefreshDatabase;
 
     private Package $validPackage;
+
     private Package $packageWithUnavailableUrl;
+
     private Package $packageWithUnavailableDomain;
 
     protected function setUp(): void

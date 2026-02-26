@@ -34,7 +34,7 @@ class NewPackage extends Notification implements ShouldQueue
 
         $createdBy = '';
         if (! isset($this->package->author->user) || Auth::id() != $this->package->author->user->id) {
-            $createdBy = "\nCreated by: " . Auth::user()->name;
+            $createdBy = "\nCreated by: ".Auth::user()->name;
         }
 
         return (new SlackMessage)
@@ -43,10 +43,10 @@ class NewPackage extends Notification implements ShouldQueue
             ->sectionBlock(function (SectionBlock $section) use ($packageUrl, $createdBy) {
                 $section->text(
                     "*<{$packageUrl}|{$this->package->name}>*\n"
-                    . "by {$this->package->author->name}\n"
-                    . "`{$this->package->composer_name}`\n\n"
-                    . $this->package->abstract
-                    . $createdBy
+                    ."by {$this->package->author->name}\n"
+                    ."`{$this->package->composer_name}`\n\n"
+                    .$this->package->abstract
+                    .$createdBy
                 );
             });
     }

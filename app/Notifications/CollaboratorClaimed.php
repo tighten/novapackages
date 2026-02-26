@@ -47,7 +47,7 @@ class CollaboratorClaimed extends Notification implements ShouldQueue
             ->sectionBlock(function (SectionBlock $section) {
                 $section->text(
                     "*Collaborator:* {$this->collaborator->name}\n"
-                    . "*User:* {$this->user->name}"
+                    ."*User:* {$this->user->name}"
                 );
             });
     }

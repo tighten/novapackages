@@ -37,7 +37,7 @@ class Stats
             return Http::get('https://nova.laravel.com/api/releases')->json();
         });
 
-        return 'v' . $data['current_version'];
+        return 'v'.$data['current_version'];
     }
 
     public function collaboratorsCount()

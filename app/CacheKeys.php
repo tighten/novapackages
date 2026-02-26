@@ -6,27 +6,27 @@ class CacheKeys
 {
     public static function averageRating($class, $id)
     {
-        return 'average-rating--model::' . $class . '-id::' . $id;
+        return 'average-rating--model::'.$class.'-id::'.$id;
     }
 
     public static function userPackageRating($userId, $packageId)
     {
-        return 'user-package-rating::package-' . $packageId . '-user-' . $userId;
+        return 'user-package-rating::package-'.$packageId.'-user-'.$userId;
     }
 
     public static function ratingsCounts($class, $id)
     {
-        return 'count-ratings--model::' . $class . '-id::' . $id . '-count';
+        return 'count-ratings--model::'.$class.'-id::'.$id.'-count';
     }
 
     public static function packageSearchResults($term)
     {
-        return 'package-search-results::' . $term;
+        return 'package-search-results::'.$term;
     }
 
     public static function packagistData($packageFullComposerString)
     {
-        return 'packagist-' . $packageFullComposerString;
+        return 'packagist-'.$packageFullComposerString;
     }
 
     public static function popularPackages()
@@ -86,11 +86,11 @@ class CacheKeys
 
     public static function githubReadme($packageName)
     {
-        return 'github-readme::' . $packageName;
+        return 'github-readme::'.$packageName;
     }
 
     public static function npmData($packageName)
     {
-        return 'npm-' . $packageName;
+        return 'npm-'.$packageName;
     }
 }

@@ -15,10 +15,10 @@ class PackageController extends Controller
 
     public function show($namespace, $name): View
     {
-        $query = Package::where('composer_name', $namespace . '/' . $name);
+        $query = Package::where('composer_name', $namespace.'/'.$name);
 
         if (auth()->user() && auth()->user()->isAdmin()) {
-            $query = Package::withoutGlobalScopes()->where('composer_name', $namespace . '/' . $name);
+            $query = Package::withoutGlobalScopes()->where('composer_name', $namespace.'/'.$name);
         }
 
         $package = $query->firstOrFail();

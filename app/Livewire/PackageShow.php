@@ -19,13 +19,19 @@ use Livewire\Component;
 class PackageShow extends Component
 {
     public Package $package;
+
     public bool $creatingReview = false;
 
     public bool $isFavorite = false;
+
     public int $favoritesCount = 0;
+
     public bool $rated = false;
+
     public int $currentUserRating = 0;
+
     public bool $refreshRequested = false;
+
     public bool $repositoryRefreshRequested = false;
 
     public function mount(Package $package, bool $creatingReview = false)
@@ -182,7 +188,7 @@ class PackageShow extends Component
     protected function getFormattedReadme()
     {
         if (! $this->package->readme) {
-            return '<p>Readme not found. Refer to the project website: <a href="' . e($this->package->url) . '">' . e($this->package->url) . '</a></p>';
+            return '<p>Readme not found. Refer to the project website: <a href="'.e($this->package->url).'">'.e($this->package->url).'</a></p>';
         }
 
         return (new ReadmeFormatter($this->package))->format($this->package->readme);

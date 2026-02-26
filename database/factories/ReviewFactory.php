@@ -16,7 +16,7 @@ class ReviewFactory extends Factory
         return [
             'user_id' => User::factory(),
             'package_id' => Package::factory(),
-            'content' => implode(' ', $this->faker->sentences(4)) . "\n\n" . implode(' ', $this->faker->sentences(3)),
+            'content' => implode(' ', $this->faker->sentences(4))."\n\n".implode(' ', $this->faker->sentences(3)),
         ];
     }
 }

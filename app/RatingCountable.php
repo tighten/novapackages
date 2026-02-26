@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 trait RatingCountable
 {
     public $ratingsCountCacheLength = 60;
+
     public $avarageRatingCacheLength = 60;
 
     public function countStarRatings($numberOfStars)

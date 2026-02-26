@@ -11,6 +11,7 @@ class ReviewList extends Component
     public int $packageId;
 
     public ?int $editingReviewId = null;
+
     public string $editingContent = '';
 
     public function mount(int $packageId)

@@ -30,7 +30,7 @@ class NotifyAuthorOfDisabledPackage extends Notification
         $packageLink = "<a href='_blank' href='{$packageRoute}'>{$this->package->name}</a>";
 
         return (new MailMessage)
-            ->subject('Please double-check your NovaPackages listing for "' . $this->package->name . '"')
+            ->subject('Please double-check your NovaPackages listing for "'.$this->package->name.'"')
             ->line(new HtmlString("You are receiving this email because you have been identified as an author on {$packageLink}."))
             ->line('This is a reminder that NovaPackages recently found an error with the URL that we have listed for that package:')
             ->line(new HtmlString("<a target='_blank' href='{$this->package->url}'>{$this->package->url}</a>"))

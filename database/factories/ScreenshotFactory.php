@@ -28,7 +28,7 @@ class ScreenshotFactory extends Factory
         $bg = $this->faker->hexColor();
         $text = urlencode($this->faker->words(2, true));
 
-        $filename = 'screenshots/' . $this->faker->uuid() . '.svg';
+        $filename = 'screenshots/'.$this->faker->uuid().'.svg';
 
         $svg = <<<SVG
         <svg xmlns="http://www.w3.org/2000/svg" width="{$width}" height="{$height}">

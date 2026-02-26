@@ -146,7 +146,7 @@ class PackageController extends Controller
 
         session()->flash('status', "{$name} has been deleted.");
 
-        Log::notice("Package {$name} was deleted by user " . auth()->user()->id);
+        Log::notice("Package {$name} was deleted by user ".auth()->user()->id);
 
         return redirect()->route('app.packages.index');
     }

@@ -12,6 +12,7 @@ class Review extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
     protected $with = ['rating:id,rating'];
 
     public function package(): BelongsTo
