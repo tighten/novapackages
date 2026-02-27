@@ -6,8 +6,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('a guest user can not favorite a package', function () {
     $package = Package::factory()->create();

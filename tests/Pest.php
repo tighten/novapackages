@@ -1,5 +1,8 @@
 <?php
 
+uses(\Tests\TestCase::class)->in('Feature', 'Integration');
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class)->in('Feature');
+
 /*
 |--------------------------------------------------------------------------
 | Test Case

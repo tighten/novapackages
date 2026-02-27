@@ -7,8 +7,6 @@ use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('authenticated users can upload a screenshot', function () {
     Storage::fake();

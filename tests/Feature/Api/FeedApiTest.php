@@ -5,8 +5,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('ensures packages feed response code and structure', function () {
     Package::factory(5)->create();

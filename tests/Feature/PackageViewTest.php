@@ -8,8 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('a user can view the show package page', function () {
     $packageNamespace = 'tightenco';

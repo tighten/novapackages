@@ -8,8 +8,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('screnshots not attached to packages that are older than one day are deleted', function () {
     Storage::fake();

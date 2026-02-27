@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 it('is dispatched when a package is created', function () {
     Bus::fake();

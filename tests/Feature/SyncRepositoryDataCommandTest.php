@@ -5,8 +5,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('calling the command without an argument updates all packages with data from their remote repos', function () {
     $packageA = Package::factory()->create([

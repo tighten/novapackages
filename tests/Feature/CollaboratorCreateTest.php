@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Event;
 use Mockery as m;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('the url field is optional', function () {
     Event::fake();

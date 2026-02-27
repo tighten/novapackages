@@ -7,8 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use willvincent\Rateable\Rating;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('deleting self authored package ratings', function () {
     $packageAuthor = User::factory()->create();

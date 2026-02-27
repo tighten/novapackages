@@ -7,8 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery as m;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('a user can not view the edit collaborator form for a collaborator that is not assigned to them', function () {
     $userA = User::factory()->create();

@@ -4,8 +4,6 @@ use App\Models\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 it('returns matching results', function () {
     $package = Package::factory()->create(['name' => 'Dancing hyenas']);

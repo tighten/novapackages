@@ -5,8 +5,6 @@ use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 it('attaches tags to api responses', function () {
     $package = Package::factory()->create();

@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Notification;
 use Mockery as m;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 it('creates a collaborator for new users', function () {
     Notification::fake();

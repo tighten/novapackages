@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('users not authenticated with github are notified', function () {
     $oldUser = User::factory()->create([

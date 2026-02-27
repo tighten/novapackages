@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 beforeEach(function () {
     $this->validPackage = Package::factory()->create([
         'name' => 'Valid Package',

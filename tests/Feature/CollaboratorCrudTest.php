@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Notification;
 use Mockery as m;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 beforeEach(function () {
     Notification::fake();
 });

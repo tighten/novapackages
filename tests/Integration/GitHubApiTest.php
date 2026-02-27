@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\AssertableJsonString;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
 
 #[Group('integration')]
 beforeEach(function () {

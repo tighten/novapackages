@@ -8,8 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('a packages screenshots are passed to the view', function () {
     Http::fake(['https://packagist.org/packages/tightenco/bae.json' => Http::response()]);

@@ -4,8 +4,6 @@ use App\Models\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('displays sitemap', function () {
     [$packageA, $packageB] = Package::factory()->count(2)->create();

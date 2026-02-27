@@ -4,8 +4,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('users cannot visit admin protected routes', function () {
     $user = User::factory()->create();

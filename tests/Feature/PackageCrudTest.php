@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use willvincent\Rateable\Rating;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('app package index shows my packages', function () {
     $user = User::factory()->create();

@@ -14,8 +14,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 beforeEach(function () {
     Http::fake([
         'https://packagist.org/packages/tightenco/nova-stripe.json' => Http::response([

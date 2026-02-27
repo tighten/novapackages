@@ -9,8 +9,6 @@ use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
-uses(RefreshDatabase::class);
 
 test('a screenshot can be deleted by the person who uploaded it', function () {
     Storage::fake();
