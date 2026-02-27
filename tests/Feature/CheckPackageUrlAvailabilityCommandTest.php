@@ -5,10 +5,8 @@ use App\Models\Package;
 use App\Models\User;
 use App\Notifications\NotifyAuthorOfUnavailablePackageUrl;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
 
 beforeEach(function () {
     $this->validPackage = Package::factory()->create([

@@ -1,10 +1,7 @@
 <?php
 
 use App\Models\Package;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Tests\TestCase;
-
 
 test('ensures packages feed response code and structure', function () {
     Package::factory(5)->create();

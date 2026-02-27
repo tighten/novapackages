@@ -2,9 +2,7 @@
 
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
 
 beforeEach(function () {
     $this->user = User::factory()->admin()->create();

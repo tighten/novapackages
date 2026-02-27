@@ -4,7 +4,6 @@ use App\BaseRepo;
 use App\GitLabRepo;
 use App\Http\Remotes\GitLab;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
 
 uses(Tests\TestCase::class);
 

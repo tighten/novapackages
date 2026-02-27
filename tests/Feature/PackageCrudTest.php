@@ -12,14 +12,11 @@ use App\Models\User;
 use App\Notifications\NewPackage;
 use App\Notifications\PackageDeleted;
 use App\Tighten;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 use willvincent\Rateable\Rating;
-
 
 test('app package index shows my packages', function () {
     $user = User::factory()->create();

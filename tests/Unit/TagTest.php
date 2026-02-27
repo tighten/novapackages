@@ -4,7 +4,6 @@ use App\Models\Package;
 use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
-use Tests\TestCase;
 
 uses(Tests\TestCase::class);
 uses(RefreshDatabase::class);

@@ -8,13 +8,10 @@ use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Tests\TestCase;
-
 
 it('is dispatched when a package is created', function () {
     Bus::fake();

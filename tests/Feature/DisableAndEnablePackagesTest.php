@@ -2,9 +2,6 @@
 
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
 
 test('admin user can disable a package', function () {
     $user = User::factory()->admin()->create();

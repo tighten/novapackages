@@ -4,10 +4,7 @@ use App\Jobs\SyncPackageRepositoryData;
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
-use Tests\TestCase;
-
 
 test('an authenticated user can request a refresh of a packages repository data', function () {
     Bus::fake();

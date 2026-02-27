@@ -4,10 +4,7 @@ use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Screenshot;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
-
 
 test('a user can view the show package page', function () {
     $packageNamespace = 'tightenco';

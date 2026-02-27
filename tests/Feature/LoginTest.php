@@ -2,10 +2,7 @@
 
 use App\Events\NewUserSignedUp;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Tests\TestCase;
-
 
 test('a user can login after socialite authentication', function () {
     Event::fake();

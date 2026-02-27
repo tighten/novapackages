@@ -3,11 +3,8 @@
 use App\Http\Remotes\GitHub;
 use App\Models\Collaborator;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Mockery as m;
-use Tests\TestCase;
-
 
 test('the url field is optional', function () {
     Event::fake();

@@ -3,9 +3,6 @@
 use App\Models\Favorite;
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
 
 test('a guest user can not favorite a package', function () {
     $package = Package::factory()->create();

@@ -4,10 +4,7 @@ use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Screenshot;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
-
 
 test('a packages screenshots are passed to the view', function () {
     Http::fake(['https://packagist.org/packages/tightenco/bae.json' => Http::response()]);

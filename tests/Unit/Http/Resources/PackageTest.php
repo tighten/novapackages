@@ -3,7 +3,6 @@
 use App\Http\Resources\Package as PackageResource;
 use App\Models\Package;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 uses(Tests\TestCase::class);
 uses(RefreshDatabase::class);

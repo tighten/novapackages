@@ -4,11 +4,9 @@ use App\Events\CollaboratorCreated;
 use App\Http\Remotes\GitHub;
 use App\Models\Collaborator;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Mockery as m;
-use Tests\TestCase;
 
 beforeEach(function () {
     Notification::fake();

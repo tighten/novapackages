@@ -4,10 +4,7 @@ use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use App\Notifications\RemindAuthorOfUnavailablePackage;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
-
 
 test('command sends reminder to package author after 14 days', function () {
 

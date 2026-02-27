@@ -2,9 +2,6 @@
 
 use App\Models\Collaborator;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
 
 test('updating collaborator names when the user name changes', function () {
     $user = User::factory()->create([

@@ -3,9 +3,6 @@
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
 
 test('unauthenticated users cant post ratings', function () {
     $package = Package::factory()->create();

@@ -2,9 +2,6 @@
 
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
 
 test('packages show on main page', function () {
     $user = User::factory()->admin()->create();

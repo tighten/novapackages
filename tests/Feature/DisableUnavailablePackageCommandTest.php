@@ -4,10 +4,7 @@ use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use App\Notifications\NotifyAuthorOfDisabledPackage;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
-
 
 test('command disables unavailable packages after 30 days', function () {
 

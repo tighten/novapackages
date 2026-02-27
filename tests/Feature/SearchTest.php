@@ -1,9 +1,6 @@
 <?php
 
 use App\Models\Package;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
 
 it('returns matching results', function () {
     $package = Package::factory()->create(['name' => 'Dancing hyenas']);

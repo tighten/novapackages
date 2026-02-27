@@ -2,11 +2,8 @@
 
 use App\Models\User;
 use App\Notifications\GithubAuthNotification;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
-
 
 test('users not authenticated with github are notified', function () {
     $oldUser = User::factory()->create([

@@ -2,10 +2,7 @@
 
 use App\Models\Collaborator;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Tests\TestCase;
-
 
 test('user can claim a collaborator', function () {
     Event::fake();

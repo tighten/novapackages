@@ -4,7 +4,6 @@ use App\Exceptions\GitHubException;
 use App\Http\Remotes\GitHub;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
 
 uses(Tests\TestCase::class);
 

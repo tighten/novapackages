@@ -4,11 +4,8 @@ use App\Events\NewUserSignedUp;
 use App\Http\Remotes\GitHub;
 use App\Models\Collaborator;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Mockery as m;
-use Tests\TestCase;
-
 
 it('creates a collaborator for new users', function () {
     Notification::fake();

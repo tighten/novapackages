@@ -2,12 +2,9 @@
 
 use App\Models\Package;
 use App\Models\Screenshot;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
-
 
 test('screnshots not attached to packages that are older than one day are deleted', function () {
     Storage::fake();

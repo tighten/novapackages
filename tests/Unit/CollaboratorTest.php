@@ -2,7 +2,6 @@
 
 use App\Models\Collaborator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 uses(Tests\TestCase::class);
 uses(RefreshDatabase::class);

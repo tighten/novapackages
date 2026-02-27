@@ -2,9 +2,6 @@
 
 use App\Models\Package;
 use App\Models\Tag;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
 
 test('returns popular packages in order', function () {
     $lessPopularPackage = Package::factory()->create([

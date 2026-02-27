@@ -6,12 +6,9 @@ use App\Models\Screenshot;
 use App\Models\Tag;
 use App\Models\User;
 use App\ReadmeFormatter;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
-
 
 test('can attach screenshots to the package', function () {
     Event::fake();

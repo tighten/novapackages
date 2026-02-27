@@ -6,7 +6,6 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
 
 uses(Tests\TestCase::class);
 uses(RefreshDatabase::class);

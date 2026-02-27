@@ -3,7 +3,6 @@
 use App\Models\Package;
 use App\ReadmeFormatter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 uses(Tests\TestCase::class);
 uses(RefreshDatabase::class);

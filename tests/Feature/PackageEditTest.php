@@ -5,11 +5,9 @@ use App\Models\Package;
 use App\Models\Screenshot;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
 uses(WithFaker::class);
 

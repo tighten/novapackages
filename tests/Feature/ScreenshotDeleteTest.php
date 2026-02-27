@@ -4,11 +4,8 @@ use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Screenshot;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
-
 
 test('a screenshot can be deleted by the person who uploaded it', function () {
     Storage::fake();

@@ -1,7 +1,6 @@
 <?php
 
 use App\Jobs\SyncPackagePackagistData;
-use PHPUnit\Framework\TestCase;
 
 it('parses nova version from composer constraint', function (?string $constraint, ?int $expected) {
     expect(SyncPackagePackagistData::parseNovaVersion($constraint))->toBe($expected);

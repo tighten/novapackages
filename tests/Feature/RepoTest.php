@@ -10,9 +10,7 @@ use App\Http\Requests\PackageFormRequest;
 use App\Models\Package;
 use App\NpmRepo;
 use Facades\App\Repo;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
 
 beforeEach(function () {
     Http::fake([
