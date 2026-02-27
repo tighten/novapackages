@@ -34,6 +34,8 @@ class PackageResource extends ModelResource
                 'github_username' => $package->author->github_username,
             ],
             'nova_version' => $package->nova_version ?? null,
+            'is_abandoned' => $package->is_abandoned,
+            'is_possibly_abandoned' => $package->is_possibly_abandoned,
         ];
     }
 

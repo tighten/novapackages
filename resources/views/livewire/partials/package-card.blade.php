@@ -31,7 +31,11 @@ $package['accent'] = app(App\Colors::class)->nextColor();
             </div>
         @endif
 
-        @if ($package['nova_version'] == config('novapackages.nova.latest_major_version'))
+        @if ($package['is_abandoned'])
+            <span class="absolute top-0 right-0 px-3 py-1 text-xs tracking-widest text-white rounded-bl rounded-tr bg-red-600">Abandoned</span>
+        @elseif ($package['is_possibly_abandoned'])
+            <span class="absolute top-0 right-0 px-3 py-1 text-xs tracking-widest text-white rounded-bl rounded-tr bg-orange-500">Possibly Abandoned</span>
+        @elseif ($package['nova_version'] == config('novapackages.nova.latest_major_version'))
             <span class="absolute top-0 right-0 px-3 py-1 text-xs tracking-widest text-white rounded-bl rounded-tr" style="background-color: {{ $package['accent'] }}">Nova {{ config('novapackages.nova.latest_major_version') ?? 'N/A' }} Support</span>
         @endif
 
