@@ -30,7 +30,7 @@ class Repo
             return PackagistRepo::make($package->composer_name);
         } catch (PackagistException $e) {
             if (stripos($e->getMessage(), 'package not found')) {
-                return $this->fromUrl($package->url);
+                return $this->fromUrl($package->repo_url ?? $package->url);
             }
 
             throw $e;
