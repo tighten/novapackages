@@ -1,88 +1,73 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class EmailTest extends TestCase
-{
-    use RefreshDatabase;
+uses(Tests\TestCase::class);
+uses(RefreshDatabase::class);
 
-    #[Test]
-    public function users_with_no_email_must_submit_an_email(): void
-    {
-        $user = User::factory()->create([
-            'email' => null,
-        ]);
+test('users with no email must submit an email', function () {
+    $user = User::factory()->create([
+        'email' => null,
+    ]);
 
-        $response = $this->be($user)->followingRedirects()->get(route('app.collaborators.index'));
+    $response = $this->be($user)->followingRedirects()->get(route('app.collaborators.index'));
 
-        $this->assertEquals(route('app.email.create'), url()->current());
-    }
+    $this->assertEquals(route('app.email.create'), url()->current());
+});
 
-    #[Test]
-    public function user_can_submit_a_email_address_if_the_github_oauth_handshake_doesnt_return_one(): void
-    {
-        $updatedEmail = 'john@example.com';
-        $user = User::factory()->create([
-            'email' => null,
-        ]);
+test('user can submit a email address if the github oauth handshake doesnt return one', function () {
+    $updatedEmail = 'john@example.com';
+    $user = User::factory()->create([
+        'email' => null,
+    ]);
 
-        $response = $this->actingAs($user)->post(route('app.email.store'), [
-            'email' => $updatedEmail,
-        ]);
+    $response = $this->actingAs($user)->post(route('app.email.store'), [
+        'email' => $updatedEmail,
+    ]);
 
-        $response->assertRedirect(route('home'));
-        $this->assertEquals($updatedEmail, $user->fresh()->email);
-    }
+    $response->assertRedirect(route('home'));
+    $this->assertEquals($updatedEmail, $user->fresh()->email);
+});
 
-    #[Test]
-    public function the_email_address_is_required(): void
-    {
-        $user = User::factory()->create([
-            'email' => null,
-        ]);
+test('the email address is required', function () {
+    $user = User::factory()->create([
+        'email' => null,
+    ]);
 
-        $response = $this->actingAs($user)->post(route('app.email.store'), [
-            'email' => null,
-        ]);
+    $response = $this->actingAs($user)->post(route('app.email.store'), [
+        'email' => null,
+    ]);
 
-        $response->assertStatus(302);
-        $response->assertSessionHasErrors('email');
-    }
+    $response->assertStatus(302);
+    $response->assertSessionHasErrors('email');
+});
 
-    #[Test]
-    public function the_email_address_must_be_valid(): void
-    {
-        $user = User::factory()->create([
-            'email' => null,
-        ]);
+test('the email address must be valid', function () {
+    $user = User::factory()->create([
+        'email' => null,
+    ]);
 
-        $response = $this->actingAs($user)->post(route('app.email.store'), [
-            'email' => 'not-valid',
-        ]);
+    $response = $this->actingAs($user)->post(route('app.email.store'), [
+        'email' => 'not-valid',
+    ]);
 
-        $response->assertStatus(302);
-        $response->assertSessionHasErrors('email');
-    }
+    $response->assertStatus(302);
+    $response->assertSessionHasErrors('email');
+});
 
-    #[Test]
-    public function the_email_address_must_be_unique(): void
-    {
-        $existingEmail = 'john@example.com';
-        User::factory()->create(['email' => $existingEmail]);
-        $user = User::factory()->create([
-            'email' => null,
-        ]);
+test('the email address must be unique', function () {
+    $existingEmail = 'john@example.com';
+    User::factory()->create(['email' => $existingEmail]);
+    $user = User::factory()->create([
+        'email' => null,
+    ]);
 
-        $response = $this->actingAs($user)->post(route('app.email.store'), [
-            'email' => $existingEmail,
-        ]);
+    $response = $this->actingAs($user)->post(route('app.email.store'), [
+        'email' => $existingEmail,
+    ]);
 
-        $response->assertStatus(302);
-        $response->assertSessionHasErrors('email');
-    }
-}
+    $response->assertStatus(302);
+    $response->assertSessionHasErrors('email');
+});

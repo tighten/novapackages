@@ -1,33 +1,26 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\User;
 use App\Notifications\GithubAuthNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Notification;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class GithubAuthNotificationTest extends TestCase
-{
-    use RefreshDatabase;
+uses(Tests\TestCase::class);
+uses(RefreshDatabase::class);
 
-    #[Test]
-    public function users_not_authenticated_with_github_are_notified(): void
-    {
-        $oldUser = User::factory()->create([
-            'github_username' => null,
-        ]);
+test('users not authenticated with github are notified', function () {
+    $oldUser = User::factory()->create([
+        'github_username' => null,
+    ]);
 
-        $newUser = User::factory()->create();
+    $newUser = User::factory()->create();
 
-        Notification::fake();
+    Notification::fake();
 
-        Artisan::call('githubauth:notify');
+    Artisan::call('githubauth:notify');
 
-        Notification::assertSentTo($oldUser, GithubAuthNotification::class);
-        Notification::assertNotSentTo($newUser, GithubAuthNotification::class);
-    }
-}
+    Notification::assertSentTo($oldUser, GithubAuthNotification::class);
+    Notification::assertNotSentTo($newUser, GithubAuthNotification::class);
+});

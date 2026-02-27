@@ -1,33 +1,24 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class CheckRoleMiddlewareTest extends TestCase
-{
-    use RefreshDatabase;
+uses(Tests\TestCase::class);
+uses(RefreshDatabase::class);
 
-    #[Test]
-    public function users_cannot_visit_admin_protected_routes(): void
-    {
-        $user = User::factory()->create();
+test('users cannot visit admin protected routes', function () {
+    $user = User::factory()->create();
 
-        $response = $this->be($user->fresh())->get(route('app.admin.index'));
+    $response = $this->be($user->fresh())->get(route('app.admin.index'));
 
-        $response->assertStatus(302);
-    }
+    $response->assertStatus(302);
+});
 
-    #[Test]
-    public function admins_can_visit_admin_protected_routes(): void
-    {
-        $user = User::factory()->admin()->create();
+test('admins can visit admin protected routes', function () {
+    $user = User::factory()->admin()->create();
 
-        $response = $this->be($user->fresh())->get(route('app.admin.index'));
+    $response = $this->be($user->fresh())->get(route('app.admin.index'));
 
-        $response->assertStatus(200);
-    }
-}
+    $response->assertStatus(200);
+});

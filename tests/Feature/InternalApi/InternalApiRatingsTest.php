@@ -1,124 +1,107 @@
 <?php
 
-namespace Tests\Feature\InternalApi;
-
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class InternalApiRatingsTest extends TestCase
-{
-    use RefreshDatabase;
+uses(Tests\TestCase::class);
+uses(RefreshDatabase::class);
 
-    #[Test]
-    public function unauthenticated_users_cant_post_ratings(): void
-    {
-        $package = Package::factory()->create();
-        $response = $this->post(route('internalapi.ratings.store'), [
-            'package_id' => $package->id,
-            'rating' => 4,
-        ]);
+test('unauthenticated users cant post ratings', function () {
+    $package = Package::factory()->create();
+    $response = $this->post(route('internalapi.ratings.store'), [
+        'package_id' => $package->id,
+        'rating' => 4,
+    ]);
 
-        $this->assertEquals(route('login'), $response->getTargetUrl());
-    }
+    $this->assertEquals(route('login'), $response->getTargetUrl());
+});
 
-    #[Test]
-    public function posting_a_rating_increases_the_packages_overall_rating(): void
-    {
-        $package = Package::factory()->create();
-        $user = User::factory()->create();
+test('posting a rating increases the packages overall rating', function () {
+    $package = Package::factory()->create();
+    $user = User::factory()->create();
 
-        $this->be($user)->post(route('internalapi.ratings.store'), [
-            'package_id' => $package->id,
-            'rating' => 4,
-        ]);
+    $this->be($user)->post(route('internalapi.ratings.store'), [
+        'package_id' => $package->id,
+        'rating' => 4,
+    ]);
 
-        $this->assertEquals(4, $package->average_rating);
-    }
+    $this->assertEquals(4, $package->average_rating);
+});
 
-    #[Test]
-    public function the_same_user_cant_add_two_ratings_to_a_package(): void
-    {
-        $package = Package::factory()->create();
-        $user = User::factory()->create();
+test('the same user cant add two ratings to a package', function () {
+    $package = Package::factory()->create();
+    $user = User::factory()->create();
 
-        $this->be($user)->post(route('internalapi.ratings.store'), [
-            'package_id' => $package->id,
-            'rating' => 4,
-        ]);
+    $this->be($user)->post(route('internalapi.ratings.store'), [
+        'package_id' => $package->id,
+        'rating' => 4,
+    ]);
 
-        $this->be($user)->post(route('internalapi.ratings.store'), [
-            'package_id' => $package->id,
-            'rating' => 2,
-        ]);
+    $this->be($user)->post(route('internalapi.ratings.store'), [
+        'package_id' => $package->id,
+        'rating' => 2,
+    ]);
 
-        $this->assertEquals(1, $package->ratings()->count());
-    }
+    $this->assertEquals(1, $package->ratings()->count());
+});
 
-    #[Test]
-    public function users_can_modify_their_ratings(): void
-    {
-        $package = Package::factory()->create();
-        $user = User::factory()->create();
+test('users can modify their ratings', function () {
+    $package = Package::factory()->create();
+    $user = User::factory()->create();
 
-        $this->be($user)->post(route('internalapi.ratings.store'), [
-            'package_id' => $package->id,
-            'rating' => 4,
-        ]);
+    $this->be($user)->post(route('internalapi.ratings.store'), [
+        'package_id' => $package->id,
+        'rating' => 4,
+    ]);
 
-        $this->be($user)->post(route('internalapi.ratings.store'), [
-            'package_id' => $package->id,
-            'rating' => 2,
-        ]);
+    $this->be($user)->post(route('internalapi.ratings.store'), [
+        'package_id' => $package->id,
+        'rating' => 2,
+    ]);
 
-        $this->assertEquals(2, (int) $package->user_average_rating);
-    }
+    $this->assertEquals(2, (int) $package->user_average_rating);
+});
 
-    #[Test]
-    public function a_user_cannot_rate_a_package_they_authored(): void
-    {
-        $user = User::factory()->create();
-        $package = Package::factory()->create([
-            'author_id' => Collaborator::factory()->create([
-                'user_id' => $user->id,
-            ]),
-        ]);
+test('a user cannot rate a package they authored', function () {
+    $user = User::factory()->create();
+    $package = Package::factory()->create([
+        'author_id' => Collaborator::factory()->create([
+            'user_id' => $user->id,
+        ]),
+    ]);
 
-        $request = $this->be($user)->post(route('internalapi.ratings.store'), [
-            'package_id' => $package->id,
-            'rating' => 5,
-        ]);
+    $request = $this->be($user)->post(route('internalapi.ratings.store'), [
+        'package_id' => $package->id,
+        'rating' => 5,
+    ]);
 
-        $this->assertEquals(0, $package->ratings()->count());
-        $request->assertStatus(422);
-        $request->assertJson([
-            'status' => 'error',
-            'message' => 'A package cannot be rated by its author',
-        ]);
-    }
+    $this->assertEquals(0, $package->ratings()->count());
+    $request->assertStatus(422);
+    $request->assertJson([
+        'status' => 'error',
+        'message' => 'A package cannot be rated by its author',
+    ]);
+});
 
-    #[Test]
-    public function a_user_cannot_rate_a_package_they_collaborated_on(): void
-    {
-        $user = User::factory()->create();
-        $collaborator = Collaborator::factory()->make();
-        $user->collaborators()->save($collaborator);
-        $package = Package::factory()->create();
-        $package->contributors()->save($collaborator);
+test('a user cannot rate a package they collaborated on', function () {
+    $user = User::factory()->create();
+    $collaborator = Collaborator::factory()->make();
+    $user->collaborators()->save($collaborator);
+    $package = Package::factory()->create();
+    $package->contributors()->save($collaborator);
 
-        $request = $this->be($user)->post(route('internalapi.ratings.store'), [
-            'package_id' => $package->id,
-            'rating' => 5,
-        ]);
+    $request = $this->be($user)->post(route('internalapi.ratings.store'), [
+        'package_id' => $package->id,
+        'rating' => 5,
+    ]);
 
-        $this->assertEquals(0, $package->ratings()->count());
-        $request->assertStatus(422);
-        $request->assertJson([
-            'status' => 'error',
-            'message' => 'A package cannot be rated by its author',
-        ]);
-    }
-}
+    $this->assertEquals(0, $package->ratings()->count());
+    $request->assertStatus(422);
+    $request->assertJson([
+        'status' => 'error',
+        'message' => 'A package cannot be rated by its author',
+    ]);
+});

@@ -1,176 +1,155 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Collaborator;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class UserTest extends TestCase
-{
-    use RefreshDatabase;
+uses(Tests\TestCase::class);
+uses(RefreshDatabase::class);
 
-    #[Test]
-    public function updating_collaborator_names_when_the_user_name_changes(): void
-    {
-        $user = User::factory()->create([
-            'name' => 'Caleb Dume',
-            'github_username' => 'calebdume',
-        ]);
-        $collaborator = Collaborator::factory()->make([
-            'name' => 'Caleb Dume',
-            'github_username' => 'calebdume',
-        ]);
-        $user->collaborators()->save($collaborator);
+test('updating collaborator names when the user name changes', function () {
+    $user = User::factory()->create([
+        'name' => 'Caleb Dume',
+        'github_username' => 'calebdume',
+    ]);
+    $collaborator = Collaborator::factory()->make([
+        'name' => 'Caleb Dume',
+        'github_username' => 'calebdume',
+    ]);
+    $user->collaborators()->save($collaborator);
 
-        $user->update(['name' => 'Kanan Jarrus']);
+    $user->update(['name' => 'Kanan Jarrus']);
 
-        $this->assertEquals('Kanan Jarrus', $collaborator->fresh()->name);
-    }
+    $this->assertEquals('Kanan Jarrus', $collaborator->fresh()->name);
+});
 
-    #[Test]
-    public function updating_collaborator_names_only_updates_where_same_github_username(): void
-    {
-        $user = User::factory()->create([
-            'name' => 'Caleb Dume',
-            'github_username' => 'calebdume',
-        ]);
-        $collaborator = Collaborator::factory()->make([
-            'name' => 'Caleb Dume',
-            'github_username' => 'calebdume',
-        ]);
-        $newCollaborator = Collaborator::factory()->make([
-            'name' => 'Ezra Bridger',
-            'github_username' => 'ezrabridger',
-        ]);
-        $user->collaborators()->save($collaborator);
-        $user->collaborators()->save($newCollaborator);
+test('updating collaborator names only updates where same github username', function () {
+    $user = User::factory()->create([
+        'name' => 'Caleb Dume',
+        'github_username' => 'calebdume',
+    ]);
+    $collaborator = Collaborator::factory()->make([
+        'name' => 'Caleb Dume',
+        'github_username' => 'calebdume',
+    ]);
+    $newCollaborator = Collaborator::factory()->make([
+        'name' => 'Ezra Bridger',
+        'github_username' => 'ezrabridger',
+    ]);
+    $user->collaborators()->save($collaborator);
+    $user->collaborators()->save($newCollaborator);
 
-        $user->update(['name' => 'Kanan Jarrus']);
+    $user->update(['name' => 'Kanan Jarrus']);
 
-        $this->assertEquals('Kanan Jarrus', $collaborator->fresh()->name);
-        $this->assertEquals('Ezra Bridger', $newCollaborator->fresh()->name);
-    }
+    $this->assertEquals('Kanan Jarrus', $collaborator->fresh()->name);
+    $this->assertEquals('Ezra Bridger', $newCollaborator->fresh()->name);
+});
 
-    #[Test]
-    public function updating_collaborator_github_usernames_when_the_user_github_username_changes(): void
-    {
-        $user = User::factory()->create([
-            'github_user_id' => 123,
-            'github_username' => 'calebdume',
-        ]);
-        $collaborator = Collaborator::factory()->make([
-            'github_user_id' => 123,
-            'github_username' => 'calebdume',
-        ]);
-        $user->collaborators()->save($collaborator);
+test('updating collaborator github usernames when the user github username changes', function () {
+    $user = User::factory()->create([
+        'github_user_id' => 123,
+        'github_username' => 'calebdume',
+    ]);
+    $collaborator = Collaborator::factory()->make([
+        'github_user_id' => 123,
+        'github_username' => 'calebdume',
+    ]);
+    $user->collaborators()->save($collaborator);
 
-        $user->update(['github_username' => 'kananjarrus']);
+    $user->update(['github_username' => 'kananjarrus']);
 
-        $this->assertEquals('kananjarrus', $collaborator->fresh()->github_username);
-    }
+    $this->assertEquals('kananjarrus', $collaborator->fresh()->github_username);
+});
 
-    #[Test]
-    public function updating_collaborator_github_usernames_only_updates_where_same_github_user_id(): void
-    {
-        $user = User::factory()->create([
-            'github_user_id' => 123,
-            'github_username' => 'calebdume',
-        ]);
-        $collaborator = Collaborator::factory()->make([
-            'github_user_id' => 123,
-            'github_username' => 'calebdume',
-        ]);
-        $newCollaborator = Collaborator::factory()->make([
-            'github_user_id' => 321,
-            'github_username' => 'ezrabridger',
-        ]);
-        $user->collaborators()->save($collaborator);
-        $user->collaborators()->save($newCollaborator);
+test('updating collaborator github usernames only updates where same github user id', function () {
+    $user = User::factory()->create([
+        'github_user_id' => 123,
+        'github_username' => 'calebdume',
+    ]);
+    $collaborator = Collaborator::factory()->make([
+        'github_user_id' => 123,
+        'github_username' => 'calebdume',
+    ]);
+    $newCollaborator = Collaborator::factory()->make([
+        'github_user_id' => 321,
+        'github_username' => 'ezrabridger',
+    ]);
+    $user->collaborators()->save($collaborator);
+    $user->collaborators()->save($newCollaborator);
 
-        $user->update(['github_username' => 'kananjarrus']);
+    $user->update(['github_username' => 'kananjarrus']);
 
-        $this->assertEquals('kananjarrus', $collaborator->fresh()->github_username);
-        $this->assertEquals('ezrabridger', $newCollaborator->fresh()->github_username);
-    }
+    $this->assertEquals('kananjarrus', $collaborator->fresh()->github_username);
+    $this->assertEquals('ezrabridger', $newCollaborator->fresh()->github_username);
+});
 
-    #[Test]
-    public function collaborator_github_usernames_are_only_updated_when_github_user_id_is_set(): void
-    {
-        $user = User::factory()->create([
-            'github_user_id' => null,
-            'github_username' => 'calebdume',
-        ]);
-        $collaborator = Collaborator::factory()->make([
-            'github_user_id' => null,
-            'github_username' => 'calebdume',
-        ]);
-        $user->collaborators()->save($collaborator);
+test('collaborator github usernames are only updated when github user id is set', function () {
+    $user = User::factory()->create([
+        'github_user_id' => null,
+        'github_username' => 'calebdume',
+    ]);
+    $collaborator = Collaborator::factory()->make([
+        'github_user_id' => null,
+        'github_username' => 'calebdume',
+    ]);
+    $user->collaborators()->save($collaborator);
 
-        $user->update(['github_username' => 'kananjarrus']);
+    $user->update(['github_username' => 'kananjarrus']);
 
-        $this->assertEquals('calebdume', $collaborator->fresh()->github_username);
-    }
+    $this->assertEquals('calebdume', $collaborator->fresh()->github_username);
+});
 
-    #[Test]
-    public function updating_collaborator_github_user_id_on_user_update(): void
-    {
-        $user = User::factory()->create([
-            'github_user_id' => null,
-            'github_username' => 'calebdume',
-        ]);
-        $collaborator = Collaborator::factory()->make([
-            'github_user_id' => null,
-            'github_username' => 'calebdume',
-        ]);
-        $user->collaborators()->save($collaborator);
+test('updating collaborator github user id on user update', function () {
+    $user = User::factory()->create([
+        'github_user_id' => null,
+        'github_username' => 'calebdume',
+    ]);
+    $collaborator = Collaborator::factory()->make([
+        'github_user_id' => null,
+        'github_username' => 'calebdume',
+    ]);
+    $user->collaborators()->save($collaborator);
 
-        $user->update(['github_user_id' => 123]);
+    $user->update(['github_user_id' => 123]);
 
-        $this->assertEquals(123, $collaborator->fresh()->github_user_id);
-    }
+    $this->assertEquals(123, $collaborator->fresh()->github_user_id);
+});
 
-    #[Test]
-    public function collaborator_github_user_ids_are_only_updated_where_github_username_matches(): void
-    {
-        $user = User::factory()->create([
-            'github_user_id' => null,
-            'github_username' => 'calebdume',
-        ]);
-        $collaborator = Collaborator::factory()->make([
-            'github_user_id' => null,
-            'github_username' => 'calebdume',
-        ]);
-        $newCollaborator = Collaborator::factory()->make([
-            'github_user_id' => null,
-            'github_username' => 'ezrabridger',
-        ]);
-        $user->collaborators()->save($collaborator);
-        $user->collaborators()->save($newCollaborator);
+test('collaborator github user ids are only updated where github username matches', function () {
+    $user = User::factory()->create([
+        'github_user_id' => null,
+        'github_username' => 'calebdume',
+    ]);
+    $collaborator = Collaborator::factory()->make([
+        'github_user_id' => null,
+        'github_username' => 'calebdume',
+    ]);
+    $newCollaborator = Collaborator::factory()->make([
+        'github_user_id' => null,
+        'github_username' => 'ezrabridger',
+    ]);
+    $user->collaborators()->save($collaborator);
+    $user->collaborators()->save($newCollaborator);
 
-        $user->update(['github_user_id' => 123]);
+    $user->update(['github_user_id' => 123]);
 
-        $this->assertEquals(123, $collaborator->fresh()->github_user_id);
-        $this->assertNull($newCollaborator->fresh()->github_user_id);
-    }
+    $this->assertEquals(123, $collaborator->fresh()->github_user_id);
+    $this->assertNull($newCollaborator->fresh()->github_user_id);
+});
 
-    #[Test]
-    public function collaborator_github_user_id_is_only_updated_when_it_is_null(): void
-    {
-        $user = User::factory()->create([
-            'github_user_id' => null,
-            'github_username' => 'calebdume',
-        ]);
-        $collaborator = Collaborator::factory()->make([
-            'github_user_id' => 321,
-            'github_username' => 'calebdume',
-        ]);
-        $user->collaborators()->save($collaborator);
+test('collaborator github user id is only updated when it is null', function () {
+    $user = User::factory()->create([
+        'github_user_id' => null,
+        'github_username' => 'calebdume',
+    ]);
+    $collaborator = Collaborator::factory()->make([
+        'github_user_id' => 321,
+        'github_username' => 'calebdume',
+    ]);
+    $user->collaborators()->save($collaborator);
 
-        $user->update(['github_user_id' => 123]);
+    $user->update(['github_user_id' => 123]);
 
-        $this->assertEquals(321, $collaborator->fresh()->github_user_id);
-    }
-}
+    $this->assertEquals(321, $collaborator->fresh()->github_user_id);
+});

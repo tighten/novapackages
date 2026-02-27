@@ -1,80 +1,71 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use willvincent\Rateable\Rating;
 
-class DeleteSelfAuthoredPackageRatingsTest extends TestCase
-{
-    use RefreshDatabase;
+uses(Tests\TestCase::class);
+uses(RefreshDatabase::class);
 
-    #[Test]
-    public function deleting_self_authored_package_ratings(): void
-    {
-        $packageAuthor = User::factory()->create();
-        // We are creating two collaborators here and setting the
-        // second one on the author to ensure the user_id on the rating
-        // is different from the author_id on the package.
-        $collaborators = Collaborator::factory(2)->create();
-        $packageAuthor->collaborators()->save($collaborators->last());
-        $otherUser = User::factory()->create();
-        $package = Package::factory()->create([
-            'author_id' => $collaborators->last()->id,
-        ]);
+test('deleting self authored package ratings', function () {
+    $packageAuthor = User::factory()->create();
+    // We are creating two collaborators here and setting the
+    // second one on the author to ensure the user_id on the rating
+    // is different from the author_id on the package.
+    $collaborators = Collaborator::factory(2)->create();
+    $packageAuthor->collaborators()->save($collaborators->last());
+    $otherUser = User::factory()->create();
+    $package = Package::factory()->create([
+        'author_id' => $collaborators->last()->id,
+    ]);
 
-        $invalidRating = new Rating(['rating' => 5]);
-        $invalidRating->user_id = $packageAuthor->id;
+    $invalidRating = new Rating(['rating' => 5]);
+    $invalidRating->user_id = $packageAuthor->id;
 
-        $validRating = new Rating(['rating' => 5]);
-        $validRating->user_id = $otherUser->id;
+    $validRating = new Rating(['rating' => 5]);
+    $validRating->user_id = $otherUser->id;
 
-        $package->ratings()->save($invalidRating);
-        $package->ratings()->save($validRating);
-        $this->assertEquals(2, $package->fresh()->ratings()->count());
+    $package->ratings()->save($invalidRating);
+    $package->ratings()->save($validRating);
+    $this->assertEquals(2, $package->fresh()->ratings()->count());
 
-        $this->artisan('purge:self-authored-package-ratings');
+    $this->artisan('purge:self-authored-package-ratings');
 
-        tap($package->fresh(), function ($package) use ($otherUser) {
-            $this->assertEquals(1, $package->ratings()->count());
-            $this->assertEquals($otherUser->id, $package->ratings->first()->user_id);
-        });
-    }
+    tap($package->fresh(), function ($package) use ($otherUser) {
+        $this->assertEquals(1, $package->ratings()->count());
+        $this->assertEquals($otherUser->id, $package->ratings->first()->user_id);
+    });
+});
 
-    #[Test]
-    public function deleting_self_contributed_package_ratings(): void
-    {
-        $packageAuthor = User::factory()->create();
-        $packageContributor = User::factory()->create();
-        $collaborator = Collaborator::factory()->create([
-            'user_id' => $packageContributor->id,
-        ]);
-        $otherUser = User::factory()->create();
-        $package = Package::factory()->create([
-            'author_id' => $packageAuthor->id,
-        ]);
-        $package->contributors()->sync([$collaborator->id]);
+test('deleting self contributed package ratings', function () {
+    $packageAuthor = User::factory()->create();
+    $packageContributor = User::factory()->create();
+    $collaborator = Collaborator::factory()->create([
+        'user_id' => $packageContributor->id,
+    ]);
+    $otherUser = User::factory()->create();
+    $package = Package::factory()->create([
+        'author_id' => $packageAuthor->id,
+    ]);
+    $package->contributors()->sync([$collaborator->id]);
 
-        $invalidRating = new Rating(['rating' => 5]);
-        $invalidRating->user_id = $packageContributor->id;
+    $invalidRating = new Rating(['rating' => 5]);
+    $invalidRating->user_id = $packageContributor->id;
 
-        $validRating = new Rating(['rating' => 5]);
-        $validRating->user_id = $otherUser->id;
+    $validRating = new Rating(['rating' => 5]);
+    $validRating->user_id = $otherUser->id;
 
-        $package->ratings()->save($invalidRating);
-        $package->ratings()->save($validRating);
-        $this->assertEquals(2, $package->fresh()->ratings()->count());
+    $package->ratings()->save($invalidRating);
+    $package->ratings()->save($validRating);
+    $this->assertEquals(2, $package->fresh()->ratings()->count());
 
-        $this->artisan('purge:self-authored-package-ratings');
+    $this->artisan('purge:self-authored-package-ratings');
 
-        tap($package->fresh(), function ($package) use ($otherUser) {
-            $this->assertEquals(1, $package->ratings()->count());
-            $this->assertEquals($otherUser->id, $package->ratings->first()->user_id);
-        });
-    }
-}
+    tap($package->fresh(), function ($package) use ($otherUser) {
+        $this->assertEquals(1, $package->ratings()->count());
+        $this->assertEquals($otherUser->id, $package->ratings->first()->user_id);
+    });
+});

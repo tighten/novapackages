@@ -1,63 +1,54 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Screenshot;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class PackageViewTest extends TestCase
-{
-    use RefreshDatabase;
+uses(Tests\TestCase::class);
+uses(RefreshDatabase::class);
 
-    #[Test]
-    public function a_user_can_view_the_show_package_page(): void
-    {
-        $packageNamespace = 'tightenco';
-        $packageName = 'bae';
-        $packageA = Package::factory()->make([
-            'composer_name' => "{$packageNamespace}/{$packageName}",
-        ]);
-        $collaborator = Collaborator::factory()->make();
-        $user = User::factory()->create();
-        $user->collaborators()->save($collaborator);
-        $collaborator->authoredPackages()->save($packageA);
-        $screenshot = Screenshot::factory()->create(['uploader_id' => $user->id]);
-        $packageA->screenshots()->save($screenshot);
-        $packageB = Package::factory()->create();
+test('a user can view the show package page', function () {
+    $packageNamespace = 'tightenco';
+    $packageName = 'bae';
+    $packageA = Package::factory()->make([
+        'composer_name' => "{$packageNamespace}/{$packageName}",
+    ]);
+    $collaborator = Collaborator::factory()->make();
+    $user = User::factory()->create();
+    $user->collaborators()->save($collaborator);
+    $collaborator->authoredPackages()->save($packageA);
+    $screenshot = Screenshot::factory()->create(['uploader_id' => $user->id]);
+    $packageA->screenshots()->save($screenshot);
+    $packageB = Package::factory()->create();
 
-        Http::fake([
-            "https://packagist.org/packages/{$packageA->composer_name}.json" => Http::response(),
-        ]);
+    Http::fake([
+        "https://packagist.org/packages/{$packageA->composer_name}.json" => Http::response(),
+    ]);
 
-        $response = $this->actingAs($user)
-            ->get(route('packages.show', ['namespace' => $packageNamespace, 'name' => $packageName]));
+    $response = $this->actingAs($user)
+        ->get(route('packages.show', ['namespace' => $packageNamespace, 'name' => $packageName]));
 
-        $response->assertSuccessful();
-        $response->assertViewHas('package');
-    }
+    $response->assertSuccessful();
+    $response->assertViewHas('package');
+});
 
-    #[Test]
-    public function legacy_package_id_lookup_redirects_to_namespace_search(): void
-    {
-        $packageNamespace = 'tightenco';
-        $packageName = 'bae';
-        $package = Package::factory()->make([
-            'composer_name' => "{$packageNamespace}/{$packageName}",
-        ]);
-        $collaborator = Collaborator::factory()->make();
-        $user = User::factory()->create();
-        $user->collaborators()->save($collaborator);
-        $collaborator->authoredPackages()->save($package);
+test('legacy package id lookup redirects to namespace search', function () {
+    $packageNamespace = 'tightenco';
+    $packageName = 'bae';
+    $package = Package::factory()->make([
+        'composer_name' => "{$packageNamespace}/{$packageName}",
+    ]);
+    $collaborator = Collaborator::factory()->make();
+    $user = User::factory()->create();
+    $user->collaborators()->save($collaborator);
+    $collaborator->authoredPackages()->save($package);
 
-        $response = $this->actingAs($user)
-            ->get(route('packages.show-id', ['package' => $package->id]));
+    $response = $this->actingAs($user)
+        ->get(route('packages.show-id', ['package' => $package->id]));
 
-        $response->assertRedirect(route('packages.show', ['namespace' => $packageNamespace, 'name' => $packageName]));
-    }
-}
+    $response->assertRedirect(route('packages.show', ['namespace' => $packageNamespace, 'name' => $packageName]));
+});

@@ -1,49 +1,40 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Jobs\SyncPackageRepositoryData;
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class UpdatePackageRepositoryTest extends TestCase
-{
-    use RefreshDatabase;
+uses(Tests\TestCase::class);
+uses(RefreshDatabase::class);
 
-    #[Test]
-    public function an_authenticated_user_can_request_a_refresh_of_a_packages_repository_data(): void
-    {
-        Bus::fake();
+test('an authenticated user can request a refresh of a packages repository data', function () {
+    Bus::fake();
 
-        $package = Package::factory()->make();
-        $collaborator = Collaborator::factory()->make();
-        $user = User::factory()->create();
-        $user->collaborators()->save($collaborator);
-        $collaborator->authoredPackages()->save($package);
+    $package = Package::factory()->make();
+    $collaborator = Collaborator::factory()->make();
+    $user = User::factory()->create();
+    $user->collaborators()->save($collaborator);
+    $collaborator->authoredPackages()->save($package);
 
-        $response = $this->actingAs($user)->json('POST', route('app.packages.repository.refresh', $package));
+    $response = $this->actingAs($user)->json('POST', route('app.packages.repository.refresh', $package));
 
-        $response->assertSuccessful();
-        Bus::assertDispatched(SyncPackageRepositoryData::class, function ($job) use ($package) {
-            return $job->package->id === $package->id;
-        });
-    }
+    $response->assertSuccessful();
+    Bus::assertDispatched(SyncPackageRepositoryData::class, function ($job) use ($package) {
+        return $job->package->id === $package->id;
+    });
+});
 
-    #[Test]
-    public function a_guest_user_can_not_request_a_refresh_of_a_packages_repository_data(): void
-    {
-        Bus::fake();
+test('a guest user can not request a refresh of a packages repository data', function () {
+    Bus::fake();
 
-        $package = Package::factory()->create();
+    $package = Package::factory()->create();
 
-        $response = $this->json('POST', route('app.packages.repository.refresh', $package));
+    $response = $this->json('POST', route('app.packages.repository.refresh', $package));
 
-        $response->assertStatus(401);
-        Bus::assertNotDispatched(SyncPackageRepositoryData::class);
-    }
-}
+    $response->assertStatus(401);
+    Bus::assertNotDispatched(SyncPackageRepositoryData::class);
+});
