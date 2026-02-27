@@ -12,7 +12,6 @@ beforeEach(function () {
     Notification::fake();
 });
 
-
 test('users can create collaborators', function () {
     Event::fake();
 

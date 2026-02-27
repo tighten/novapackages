@@ -8,7 +8,6 @@ beforeEach(function () {
     $this->user = User::factory()->admin()->create();
 });
 
-
 test('admin panel shows enabled packages if there are any', function () {
     $enabledPackage = Package::factory()->create();
 

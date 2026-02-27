@@ -22,7 +22,6 @@ beforeEach(function () {
     });
 });
 
-
 it('can be scoped by number of associated packages', function () {
     $tagWithMostPackages = Tag::nonTypes()
         ->whereHas('packages')

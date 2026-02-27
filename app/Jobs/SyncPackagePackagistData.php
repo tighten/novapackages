@@ -29,6 +29,25 @@ class SyncPackagePackagistData implements ShouldQueue
         $this->package = $package;
     }
 
+    public static function parseNovaVersion(?string $constraint): ?int
+    {
+        if (! $constraint) {
+            return null;
+        }
+
+        // Split on | to handle multiple version constraints like "^4.0|^5.0"
+        $parts = explode('|', $constraint);
+        $majorVersions = [];
+
+        foreach ($parts as $part) {
+            if (preg_match('/(\d+)/', trim($part), $matches)) {
+                $majorVersions[] = (int) $matches[1];
+            }
+        }
+
+        return ! empty($majorVersions) ? max($majorVersions) : null;
+    }
+
     /**
      * Execute the job.
      */
@@ -64,25 +83,6 @@ class SyncPackagePackagistData implements ShouldQueue
         });
 
         Log::info('Synced packagist data for package #' . $this->package->id . ' (' . $this->package->name . ')');
-    }
-
-    public static function parseNovaVersion(?string $constraint): ?int
-    {
-        if (! $constraint) {
-            return null;
-        }
-
-        // Split on | to handle multiple version constraints like "^4.0|^5.0"
-        $parts = explode('|', $constraint);
-        $majorVersions = [];
-
-        foreach ($parts as $part) {
-            if (preg_match('/(\d+)/', trim($part), $matches)) {
-                $majorVersions[] = (int) $matches[1];
-            }
-        }
-
-        return ! empty($majorVersions) ? max($majorVersions) : null;
     }
 
     private function extractStableVersionsFromPackages($packagist)

@@ -34,7 +34,6 @@ beforeEach(function () {
     ]);
 });
 
-
 test('calling command marks unavailable packages as unavailable', function () {
     Notification::fake();
     $now = now();

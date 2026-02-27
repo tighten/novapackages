@@ -22,7 +22,6 @@ beforeEach(function () {
     ]);
 });
 
-
 test('can get a repo from a package composer name', function () {
     $composerName = 'tightenco/nova-stripe';
     $package = Package::factory()->make([
