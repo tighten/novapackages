@@ -138,7 +138,6 @@ class PackageShow extends Component
             'novaVersion' => $packagist['novaVersion'],
             'readme' => $this->getFormattedReadme(),
             'instructions' => $this->getFormattedInstructions(),
-            'possiblyAbandoned' => $this->isPossiblyAbandoned($packagist['composerLatest'], $packagist['packagistData']),
             'currentUserOwns' => $currentUserOwns,
             'currentUserReview' => $currentUserReview,
             'isSelfAuthored' => $isSelfAuthored,

@@ -136,7 +136,11 @@
         >
             @if (! $creatingReview)
                 {{-- Package Detail Content --}}
-                @if ($possiblyAbandoned)
+                @if ($package->is_abandoned)
+                    <div class="p-4 text-white bg-red-600">
+                        This package has been marked as abandoned on Packagist. Please proceed with care.
+                    </div>
+                @elseif ($package->is_possibly_abandoned)
                     <div class="p-4 text-white bg-red-600">
                         This package is possibly abandoned. Please proceed with care.
                     </div>

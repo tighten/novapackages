@@ -217,10 +217,17 @@ class Package extends Model implements Feedable
         }
     }
 
+    public function getIsPossiblyAbandonedAttribute(): bool
+    {
+        return $this->packagist_downloads === 0
+            && $this->created_at->diffInDays(now()) > 30;
+    }
+
     protected function casts(): array
     {
         return [
             'is_disabled' => 'boolean',
+            'is_abandoned' => 'boolean',
             'packagist_downloads' => 'integer',
             'github_stars' => 'integer',
         ];

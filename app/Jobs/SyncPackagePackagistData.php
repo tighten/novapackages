@@ -59,6 +59,7 @@ class SyncPackagePackagistData implements ShouldQueue
                 'github_stars' => Arr::get($packagistData, 'package.github_stars', 0) ?: 0,
                 'repo_url' => $packagistData['package']['repository'],
                 'nova_version' => $novaVersion,
+                'is_abandoned' => (bool) Arr::get($packagistData, 'package.abandoned', false),
             ]);
         });
 
