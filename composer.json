@@ -39,9 +39,10 @@
         "barryvdh/laravel-debugbar": "^3.15",
         "fakerphp/faker": "^1.23",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^11.5.3",
-        "laravel/pail": "^1.2.2"
+        "nunomaduro/collision": "^7.0",
+        "laravel/pail": "^1.2.2",
+        "pestphp/pest": "^2.2",
+        "pestphp/pest-plugin-laravel": "^2.0"
     },
     "autoload": {
         "psr-4": {
