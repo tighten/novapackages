@@ -4,7 +4,7 @@ use App\Jobs\SyncPackagePackagistData;
 use PHPUnit\Framework\TestCase;
 
 it('parses nova version from composer constraint', function (?string $constraint, ?int $expected) {
-    $this->assertSame($expected, SyncPackagePackagistData::parseNovaVersion($constraint));
+    expect(SyncPackagePackagistData::parseNovaVersion($constraint))->toBe($expected);
 })->with('novaVersionConstraints');
 
 // Datasets

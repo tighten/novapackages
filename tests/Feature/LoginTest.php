@@ -26,10 +26,10 @@ test('a user can login after socialite authentication', function () {
 
     $response->assertRedirect(route('home'));
     Event::assertDispatched(NewUserSignedUp::class);
-    $this->assertCount(1, User::all());
+    expect(User::all())->toHaveCount(1);
     $user = User::first();
     $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $user->toArray(), array_keys($fakeUserData));
-    $this->assertEquals($user->id, auth()->id());
+    expect(auth()->id())->toEqual($user->id);
 });
 
 test('a user can login after socialite authentication when the socialite response is missing an email', function () {
@@ -49,10 +49,10 @@ test('a user can login after socialite authentication when the socialite respons
 
     $response->assertRedirect(route('home'));
     Event::assertDispatched(NewUserSignedUp::class);
-    $this->assertCount(1, User::all());
+    expect(User::all())->toHaveCount(1);
     $user = User::first();
     $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $user->toArray(), array_keys($fakeUserData));
-    $this->assertEquals($user->id, auth()->id());
+    expect(auth()->id())->toEqual($user->id);
 });
 
 test('a user is updated if the email matches the socialite response', function () {
@@ -79,10 +79,10 @@ test('a user is updated if the email matches the socialite response', function (
 
     $response->assertRedirect(route('home'));
     Event::assertNotDispatched(NewUserSignedUp::class);
-    $this->assertCount(1, User::all());
+    expect(User::all())->toHaveCount(1);
     $existingUser->refresh();
     $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $existingUser->toArray(), array_keys($fakeUserData));
-    $this->assertEquals($existingUser->id, auth()->id());
+    expect(auth()->id())->toEqual($existingUser->id);
 });
 
 test('a user is updated if the github username matches the socialite response', function () {
@@ -109,10 +109,10 @@ test('a user is updated if the github username matches the socialite response', 
 
     $response->assertRedirect(route('home'));
     Event::assertNotDispatched(NewUserSignedUp::class);
-    $this->assertCount(1, User::all());
+    expect(User::all())->toHaveCount(1);
     $existingUser->refresh();
     $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $existingUser->toArray(), array_keys($fakeUserData));
-    $this->assertEquals($existingUser->id, auth()->id());
+    expect(auth()->id())->toEqual($existingUser->id);
 });
 
 test('the github user id is updated if it is null', function () {
@@ -140,6 +140,6 @@ test('the github user id is updated if it is null', function () {
 
     $response->assertRedirect(route('home'));
     Event::assertNotDispatched(NewUserSignedUp::class);
-    $this->assertCount(1, User::all());
-    $this->assertEquals(123, $existingUser->fresh()->github_user_id);
+    expect(User::all())->toHaveCount(1);
+    expect($existingUser->fresh()->github_user_id)->toEqual(123);
 });

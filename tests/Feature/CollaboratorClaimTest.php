@@ -15,11 +15,11 @@ test('user can claim a collaborator', function () {
     $user = User::factory()->create();
     $collaborator = Collaborator::factory()->create();
 
-    $this->assertNull($collaborator->user_id);
+    expect($collaborator->user_id)->toBeNull();
 
     $response = $this->be($user)->post(route('app.collaborators.claims.store', [$collaborator]));
 
-    $this->assertEquals($user->id, $collaborator->refresh()->user->id);
+    expect($collaborator->refresh()->user->id)->toEqual($user->id);
 });
 
 test('users can claim a second collaborator', function () {
@@ -32,6 +32,6 @@ test('users can claim a second collaborator', function () {
     $response = $this->be($user)->post(route('app.collaborators.claims.store', [$collaborator]));
     $response = $this->be($user)->post(route('app.collaborators.claims.store', [$secondCollaborator]));
 
-    $this->assertEquals($user->id, $collaborator->refresh()->user_id);
-    $this->assertEquals($user->id, $secondCollaborator->refresh()->user_id);
+    expect($collaborator->refresh()->user_id)->toEqual($user->id);
+    expect($secondCollaborator->refresh()->user_id)->toEqual($user->id);
 });

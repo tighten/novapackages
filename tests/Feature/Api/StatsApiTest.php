@@ -18,7 +18,7 @@ it('counts live packages', function () {
 
     $apiCall = $this->get('api/stats')->json();
 
-    $this->assertEquals(2, $apiCall['package_count']);
+    expect($apiCall['package_count'])->toEqual(2);
 });
 
 it('sums live package download counts', function () {
@@ -30,7 +30,7 @@ it('sums live package download counts', function () {
 
     $apiCall = $this->get('api/stats')->json();
 
-    $this->assertEquals(123 + 234, $apiCall['packagist_download_count']);
+    expect($apiCall['packagist_download_count'])->toEqual(123 + 234);
 });
 
 it('sums live package star counts', function () {
@@ -42,7 +42,7 @@ it('sums live package star counts', function () {
 
     $apiCall = $this->get('api/stats')->json();
 
-    $this->assertEquals(123 + 234, $apiCall['github_star_count']);
+    expect($apiCall['github_star_count'])->toEqual(123 + 234);
 });
 
 it('counts collaborators', function () {
@@ -52,7 +52,7 @@ it('counts collaborators', function () {
 
     $apiCall = $this->get('api/stats')->json();
 
-    $this->assertEquals(4, $apiCall['collaborator_count']);
+    expect($apiCall['collaborator_count'])->toEqual(4);
 });
 
 it('counts ratings', function () {
@@ -74,7 +74,7 @@ it('counts ratings', function () {
 
     $apiCall = $this->get('api/stats')->json();
 
-    $this->assertEquals(5, $apiCall['rating_count']);
+    expect($apiCall['rating_count'])->toEqual(5);
 });
 
 it('averages global rating', function () {
@@ -96,7 +96,7 @@ it('averages global rating', function () {
 
     $apiCall = $this->get('api/stats')->json();
 
-    $this->assertEquals(3, $apiCall['average_rating']);
+    expect($apiCall['average_rating'])->toEqual(3);
 });
 
 // Helpers

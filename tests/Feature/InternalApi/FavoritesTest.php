@@ -15,7 +15,7 @@ test('a guest user can not favorite a package', function () {
     $response = $this->json('POST', route('internalapi.package.favorites.store', $package->id));
 
     $response->assertStatus(401);
-    $this->assertCount(0, Favorite::where('package_id', $package->id)->get());
+    expect(Favorite::where('package_id', $package->id)->get())->toHaveCount(0);
 });
 
 test('an authenticated user can add a package to their favorites', function () {
@@ -24,8 +24,8 @@ test('an authenticated user can add a package to their favorites', function () {
 
     $response = $this->actingAs($user)->json('POST', route('internalapi.package.favorites.store', $package));
 
-    $this->assertCount(1, $user->favorites);
-    $this->assertTrue($user->favorites()->first()->package->is($package));
+    expect($user->favorites)->toHaveCount(1);
+    expect($user->favorites()->first()->package->is($package))->toBeTrue();
 });
 
 test('a user can not favorite the same package twice', function () {
@@ -35,8 +35,8 @@ test('a user can not favorite the same package twice', function () {
 
     $response = $this->actingAs($user)->json('POST', route('internalapi.package.favorites.store', $package));
 
-    $this->assertCount(1, $user->favorites);
-    $this->assertTrue($user->favorites()->first()->package->is($package));
+    expect($user->favorites)->toHaveCount(1);
+    expect($user->favorites()->first()->package->is($package))->toBeTrue();
 });
 
 test('a user can remove a favorite', function () {
@@ -48,6 +48,6 @@ test('a user can remove a favorite', function () {
 
     $response = $this->actingAs($user)->json('DELETE', route('internalapi.package.favorites.destroy', $packageB));
 
-    $this->assertCount(1, $user->favorites);
-    $this->assertTrue($user->favorites()->first()->package->is($packageA));
+    expect($user->favorites)->toHaveCount(1);
+    expect($user->favorites()->first()->package->is($packageA))->toBeTrue();
 });

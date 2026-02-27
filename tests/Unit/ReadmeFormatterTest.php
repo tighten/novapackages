@@ -101,12 +101,12 @@ it('formats html image relative urls to full qualified raw urls', function () {
     $formattedBmp = $readmeFormatter->format($bmpUrl);
     $formattedSvg = $readmeFormatter->format($svgUrl);
 
-    $this->assertEquals("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.jpeg\" /></div>", $formattedJpeg);
-    $this->assertEquals("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.jpg\" /></div>", $formattedJpg);
-    $this->assertEquals("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.png\" /></div>", $formattedPng);
-    $this->assertEquals("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.gif\" /></div>", $formattedGif);
-    $this->assertEquals("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.bmp\" /></div>", $formattedBmp);
-    $this->assertEquals("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.svg\" /></div>", $formattedSvg);
+    expect($formattedJpeg)->toEqual("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.jpeg\" /></div>");
+    expect($formattedJpg)->toEqual("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.jpg\" /></div>");
+    expect($formattedPng)->toEqual("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.png\" /></div>");
+    expect($formattedGif)->toEqual("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.gif\" /></div>");
+    expect($formattedBmp)->toEqual("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.bmp\" /></div>");
+    expect($formattedSvg)->toEqual("<div class=\"markdown\"><img src=\"{$repoUrl}/raw/{$latestVersion}/charges-index.svg\" /></div>");
 });
 
 it('formats html non image relative urls to fully qualified blob urls', function () {
@@ -125,7 +125,7 @@ it('formats html non image relative urls to fully qualified blob urls', function
 
     $formattedUrl = $readmeFormatter->format($relativeUrl);
 
-    $this->assertEquals("<div class=\"markdown\"><a href=\"{$repoUrl}/blob/{$latestVersion}/CONTRIBUTING.md\">contribution guidelines</a></div>", $formattedUrl);
+    expect($formattedUrl)->toEqual("<div class=\"markdown\"><a href=\"{$repoUrl}/blob/{$latestVersion}/CONTRIBUTING.md\">contribution guidelines</a></div>");
 });
 
 it('formats markdown image relative urls to full qualified raw urls', function () {
@@ -154,12 +154,12 @@ it('formats markdown image relative urls to full qualified raw urls', function (
     $formattedBmp = $readmeFormatter->format($bmpUrl);
     $formattedSvg = $readmeFormatter->format($svgUrl);
 
-    $this->assertEquals(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.jpeg)"), $formattedJpeg);
-    $this->assertEquals(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.jpg)"), $formattedJpg);
-    $this->assertEquals(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.png)"), $formattedPng);
-    $this->assertEquals(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.gif)"), $formattedGif);
-    $this->assertEquals(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.bmp)"), $formattedBmp);
-    $this->assertEquals(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.svg)"), $formattedSvg);
+    expect($formattedJpeg)->toEqual(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.jpeg)"));
+    expect($formattedJpg)->toEqual(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.jpg)"));
+    expect($formattedPng)->toEqual(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.png)"));
+    expect($formattedGif)->toEqual(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.gif)"));
+    expect($formattedBmp)->toEqual(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.bmp)"));
+    expect($formattedSvg)->toEqual(markdown("[Dashboard index page]({$repoUrl}/raw/{$latestVersion}/charges-index.svg)"));
 });
 
 it('formats markdown non image relative urls to fully qualified blob urls', function () {
@@ -177,7 +177,7 @@ it('formats markdown non image relative urls to fully qualified blob urls', func
 
     $formattedUrl = $readmeFormatter->format($relativeUrl);
 
-    $this->assertEquals(markdown("[contribution guidelines]({$repoUrl}/blob/{$latestVersion}/CONTRIBUTING.md)"), $formattedUrl);
+    expect($formattedUrl)->toEqual(markdown("[contribution guidelines]({$repoUrl}/blob/{$latestVersion}/CONTRIBUTING.md)"));
 });
 
 it('does not format fully qualified urls', function () {
@@ -195,7 +195,7 @@ it('does not format fully qualified urls', function () {
 
     $unformattedUrl = $readmeFormatter->format($fullyQualifiedUrl);
 
-    $this->assertEquals(markdown($fullyQualifiedUrl), $unformattedUrl);
+    expect($unformattedUrl)->toEqual(markdown($fullyQualifiedUrl));
 });
 
 it('does not format mailto urls', function () {
@@ -205,5 +205,5 @@ it('does not format mailto urls', function () {
 
     $unformattedUrl = $readmeFormatter->format($mailtoUrl);
 
-    $this->assertEquals(markdown($mailtoUrl), $unformattedUrl);
+    expect($unformattedUrl)->toEqual(markdown($mailtoUrl));
 });

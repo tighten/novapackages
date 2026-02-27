@@ -45,7 +45,7 @@ test('calling command marks unavailable packages as unavailable', function () {
     Carbon::setTestNow($now);
     $this->artisan('novapackages:check-package-urls');
 
-    $this->assertNull($this->validPackage->marked_as_unavailable_at);
+    expect($this->validPackage->marked_as_unavailable_at)->toBeNull();
     $this->assertEquals(
         $this->packageWithUnavailableUrl->refresh()->marked_as_unavailable_at,
         $now

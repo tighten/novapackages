@@ -31,13 +31,13 @@ test('command disables unavailable packages after 30 days', function () {
 
     $this->artisan('novapackages:disable-unavailable-packages');
 
-    $this->assertTrue($packageThatShouldBeDisabled->refresh()->is_disabled);
+    expect($packageThatShouldBeDisabled->refresh()->is_disabled)->toBeTrue();
     Notification::assertSentTo(
         $packageThatShouldBeDisabled->author->user,
         NotifyAuthorOfDisabledPackage::class,
     );
 
-    $this->assertFalse($packageThatShouldNotBeDisabled->refresh()->is_disabled);
+    expect($packageThatShouldNotBeDisabled->refresh()->is_disabled)->toBeFalse();
     Notification::assertNotSentTo(
         $packageThatShouldNotBeDisabled->author->user,
         NotifyAuthorOfDisabledPackage::class,

@@ -16,7 +16,7 @@ it('attaches tags to api responses', function () {
     $apiCall = $this->get('api/recent')->json();
 
     $tags = reset($apiCall['data'])['tags'];
-    $this->assertCount(1, $tags);
-    $this->assertEquals($tag->slug, reset($tags)['slug']);
-    $this->assertEquals($tag->name, reset($tags)['name']);
+    expect($tags)->toHaveCount(1);
+    expect(reset($tags)['slug'])->toEqual($tag->slug);
+    expect(reset($tags)['name'])->toEqual($tag->name);
 });

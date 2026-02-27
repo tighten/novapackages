@@ -120,20 +120,20 @@ test('user can submit a package', function () {
         ->assertSuccessful();
 
     Event::assertDispatched(PackageCreated::class);
-    $this->assertCount(1, Package::all());
+    expect(Package::all())->toHaveCount(1);
     $package = Package::first();
-    $this->assertEquals($formData['name'], $package->name);
-    $this->assertEquals($formData['author_id'], $package->author_id);
-    $this->assertEquals($formData['url'], $package->url);
-    $this->assertEquals($formData['abstract'], $package->abstract);
-    $this->assertEquals($formData['instructions'], $package->instructions);
-    $this->assertEquals($packageData->composer_name, $package->composer_name);
-    $this->assertEquals($formData['url'], $package->repo_url);
-    $this->assertEquals($source, $package->readme_source);
-    $this->assertEquals($readme, $package->readme);
-    $this->assertEquals($latestVersion, $package->latest_version);
-    $this->assertTrue($package->tags->contains('id', Tag::where('slug', 'new-tag')->first()->id));
-    $this->assertTrue($package->tags->contains('id', $existingTag->id));
+    expect($package->name)->toEqual($formData['name']);
+    expect($package->author_id)->toEqual($formData['author_id']);
+    expect($package->url)->toEqual($formData['url']);
+    expect($package->abstract)->toEqual($formData['abstract']);
+    expect($package->instructions)->toEqual($formData['instructions']);
+    expect($package->composer_name)->toEqual($packageData->composer_name);
+    expect($package->repo_url)->toEqual($formData['url']);
+    expect($package->readme_source)->toEqual($source);
+    expect($package->readme)->toEqual($readme);
+    expect($package->latest_version)->toEqual($latestVersion);
+    expect($package->tags->contains('id', Tag::where('slug', 'new-tag')->first()->id))->toBeTrue();
+    expect($package->tags->contains('id', $existingTag->id))->toBeTrue();
 });
 
 test('non user cannot submit a package', function () {

@@ -32,21 +32,21 @@ it('can be scoped by number of associated packages', function () {
         ->first();
     $popularTags = Tag::popular()->take(3)->get();
 
-    $this->assertEquals($tagWithMostPackages, $popularTags->first());
-    $this->assertEmpty($popularTags->pluck('slug')->intersect(Tag::PROJECT_TYPES));
-    $this->assertLessThanOrEqual($popularTags->first()->packages->count(), $popularTags->last()->packages->count());
+    expect($popularTags->first())->toEqual($tagWithMostPackages);
+    expect($popularTags->pluck('slug')->intersect(Tag::PROJECT_TYPES))->toBeEmpty();
+    expect($popularTags->last()->packages->count())->toBeLessThanOrEqual($popularTags->first()->packages->count());
 });
 
 it('can be scoped by only project types', function () {
     $tags = Tag::types()->get();
 
     $this->assertNotEmpty($tags->pluck('slug')->intersect(Tag::PROJECT_TYPES));
-    $this->assertEquals($tags->pluck('slug')->count(), count(Tag::PROJECT_TYPES));
-    $this->assertEmpty($tags->pluck('slug')->intersect(Tag::nonTypes()->pluck('slug')));
+    expect(count(Tag::PROJECT_TYPES))->toEqual($tags->pluck('slug')->count());
+    expect($tags->pluck('slug')->intersect(Tag::nonTypes()->pluck('slug')))->toBeEmpty();
 });
 
 it('can be scoped to exclude project types', function () {
-    $this->assertEmpty(Tag::nonTypes()->pluck('slug')->intersect(Tag::PROJECT_TYPES));
+    expect(Tag::nonTypes()->pluck('slug')->intersect(Tag::PROJECT_TYPES))->toBeEmpty();
 });
 
 test('the name attribute is stored as lowercase', function () {
@@ -61,11 +61,11 @@ test('the name attribute is stored as lowercase', function () {
     // the tag by converting the test name to lower case to avoid a sqlite issue
     // and use strcmp to make a case sensitive comparison for mysql.
     $tag = Tag::where('name', Str::lower($name))->first();
-    $this->assertTrue(strcmp(Str::lower($name), $tag->name) === 0);
+    expect(strcmp(Str::lower($name), $tag->name) === 0)->toBeTrue();
 });
 
 it('can generate its own url', function () {
     $tag = Tag::factory()->create(['slug' => 'abc']);
 
-    $this->assertEquals(url('?tag=abc'), $tag->url());
+    expect($tag->url())->toEqual(url('?tag=abc'));
 });

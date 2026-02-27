@@ -30,13 +30,13 @@ test('deleting self authored package ratings', function () {
 
     $package->ratings()->save($invalidRating);
     $package->ratings()->save($validRating);
-    $this->assertEquals(2, $package->fresh()->ratings()->count());
+    expect($package->fresh()->ratings()->count())->toEqual(2);
 
     $this->artisan('purge:self-authored-package-ratings');
 
     tap($package->fresh(), function ($package) use ($otherUser) {
-        $this->assertEquals(1, $package->ratings()->count());
-        $this->assertEquals($otherUser->id, $package->ratings->first()->user_id);
+        expect($package->ratings()->count())->toEqual(1);
+        expect($package->ratings->first()->user_id)->toEqual($otherUser->id);
     });
 });
 
@@ -60,12 +60,12 @@ test('deleting self contributed package ratings', function () {
 
     $package->ratings()->save($invalidRating);
     $package->ratings()->save($validRating);
-    $this->assertEquals(2, $package->fresh()->ratings()->count());
+    expect($package->fresh()->ratings()->count())->toEqual(2);
 
     $this->artisan('purge:self-authored-package-ratings');
 
     tap($package->fresh(), function ($package) use ($otherUser) {
-        $this->assertEquals(1, $package->ratings()->count());
-        $this->assertEquals($otherUser->id, $package->ratings->first()->user_id);
+        expect($package->ratings()->count())->toEqual(1);
+        expect($package->ratings->first()->user_id)->toEqual($otherUser->id);
     });
 });

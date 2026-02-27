@@ -17,7 +17,7 @@ test('the abstract is returned if the resource has an abstract', function () {
 
     $packageResource = (new PackageResource($package))->jsonSerialize();
 
-    $this->assertEquals($abstract, $packageResource['abstract']);
+    expect($packageResource['abstract'])->toEqual($abstract);
 });
 
 test('an abstractified value is returned when the abstract is null', function () {
@@ -28,5 +28,5 @@ test('an abstractified value is returned when the abstract is null', function ()
     $packageResource = (new PackageResource($package))->jsonSerialize();
 
     $this->assertNotNull($packageResource['abstract']);
-    $this->assertEquals($packageResource['abstract'], $package->abstract);
+    expect($package->abstract)->toEqual($packageResource['abstract']);
 });

@@ -22,7 +22,7 @@ it('creates a collaborator for new users', function () {
 
     event(new NewUserSignedUp($user));
 
-    $this->assertEquals(1, Collaborator::count());
+    expect(Collaborator::count())->toEqual(1);
 });
 
 it('claims collaborator for new users if matching by github username', function () {
@@ -38,6 +38,6 @@ it('claims collaborator for new users if matching by github username', function 
 
     event(new NewUserSignedUp($user));
 
-    $this->assertEquals(1, Collaborator::count());
-    $this->assertEquals($user->id, $collaborator->refresh()->user_id);
+    expect(Collaborator::count())->toEqual(1);
+    expect($collaborator->refresh()->user_id)->toEqual($user->id);
 });

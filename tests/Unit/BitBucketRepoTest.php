@@ -20,7 +20,7 @@ it('gets the latest release version for tagged releases', function () {
 
     $repo = BitBucketRepo::make('https://bitbucket.org/starwars/lightsabers');
 
-    $this->assertEquals('v1.0', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('v1.0');
 });
 
 it('falls back to master when there are no releases', function () {
@@ -30,13 +30,13 @@ it('falls back to master when there are no releases', function () {
 
     $repo = BitBucketRepo::make('https://bitbucket.org/starwars/x-wings');
 
-    $this->assertEquals('master', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('master');
 });
 
 it('returns proper readme format', function () {
     $repo = BitBucketRepo::make('https://bitbucket.org/starwars/lightsabers');
 
-    $this->assertEquals(BaseRepo::README_FORMAT, $repo->readmeFormat());
+    expect($repo->readmeFormat())->toEqual(BaseRepo::README_FORMAT);
 });
 
 // Helpers

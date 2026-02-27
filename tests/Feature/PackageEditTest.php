@@ -45,20 +45,20 @@ test('user can update a package', function () {
     $response = $this->actingAs($user)->put(route('app.packages.update', $package), $formData);
 
     $response->assertStatus(302);
-    $this->assertCount(1, Package::all());
+    expect(Package::all())->toHaveCount(1);
     $package = Package::first();
-    $this->assertEquals($formData['name'], $package->name);
-    $this->assertEquals($formData['author_id'], $package->author_id);
-    $this->assertEquals($formData['url'], $package->url);
-    $this->assertEquals($formData['abstract'], $package->abstract);
-    $this->assertEquals($formData['instructions'], $package->instructions);
-    $this->assertEquals("{$formData['packagist_namespace']}/{$formData['packagist_name']}", $package->composer_name);
-    $this->assertEquals($formData['url'], $package->repo_url);
-    $this->assertEquals($source, $package->readme_source);
-    $this->assertEquals($readme, $package->readme);
-    $this->assertEquals($version, $package->latest_version);
-    $this->assertTrue($package->tags->contains('id', Tag::where('slug', 'new-tag')->first()->id));
-    $this->assertTrue($package->tags->contains('id', $existingTag->id));
+    expect($package->name)->toEqual($formData['name']);
+    expect($package->author_id)->toEqual($formData['author_id']);
+    expect($package->url)->toEqual($formData['url']);
+    expect($package->abstract)->toEqual($formData['abstract']);
+    expect($package->instructions)->toEqual($formData['instructions']);
+    expect($package->composer_name)->toEqual("{$formData['packagist_namespace']}/{$formData['packagist_name']}");
+    expect($package->repo_url)->toEqual($formData['url']);
+    expect($package->readme_source)->toEqual($source);
+    expect($package->readme)->toEqual($readme);
+    expect($package->latest_version)->toEqual($version);
+    expect($package->tags->contains('id', Tag::where('slug', 'new-tag')->first()->id))->toBeTrue();
+    expect($package->tags->contains('id', $existingTag->id))->toBeTrue();
 });
 
 test('an authenticated user can view the edit package page', function () {
@@ -150,10 +150,10 @@ test('can update multiple screenshots', function () {
     ]));
 
     tap($package->fresh()->screenshots, function ($packageScreenshots) use ($oldScreenshot, $screenshotA, $screenshotB) {
-        $this->assertCount(2, $packageScreenshots);
-        $this->assertTrue($packageScreenshots->contains($screenshotA));
-        $this->assertTrue($packageScreenshots->contains($screenshotB));
-        $this->assertFalse($packageScreenshots->contains($oldScreenshot));
+        expect($packageScreenshots)->toHaveCount(2);
+        expect($packageScreenshots->contains($screenshotA))->toBeTrue();
+        expect($packageScreenshots->contains($screenshotB))->toBeTrue();
+        expect($packageScreenshots->contains($oldScreenshot))->toBeFalse();
     });
 
     $response->assertRedirect(route('app.packages.index'));
@@ -166,7 +166,7 @@ test('screenshots are optional', function () {
 
     $response = $this->actingAs($user)->put(route('app.packages.update', $package), getValidPackageData());
 
-    $this->assertCount(0, $package->screenshots);
+    expect($package->screenshots)->toHaveCount(0);
     $response->assertRedirect(route('app.packages.index'));
 });
 
@@ -222,7 +222,7 @@ test('the selected author is returned to the view when validation fails', functi
     $response->assertStatus(302);
     $response->assertSessionHas('errors');
     $this->assertNotNull(old('selectedAuthor'), 'Expected selectedAuthor is missing from the session');
-    $this->assertTrue(old('selectedAuthor')->is($author));
+    expect(old('selectedAuthor')->is($author))->toBeTrue();
 });
 
 test('the selected collaborators are returned to the view when validation fails', function () {
@@ -244,10 +244,10 @@ test('the selected collaborators are returned to the view when validation fails'
     $this->assertNotNull(old('selectedCollaborators'), 'Expected selectedCollaborators is missing from the session');
 
     tap(old('selectedCollaborators'), function ($sessionCollaborators) use ($selectedCollaboratorA, $selectedCollaboratorB, $unselectedCollaborator) {
-        $this->assertCount(2, $sessionCollaborators);
-        $this->assertTrue($sessionCollaborators->contains($selectedCollaboratorA));
-        $this->assertTrue($sessionCollaborators->contains($selectedCollaboratorB));
-        $this->assertFalse($sessionCollaborators->contains($unselectedCollaborator));
+        expect($sessionCollaborators)->toHaveCount(2);
+        expect($sessionCollaborators->contains($selectedCollaboratorA))->toBeTrue();
+        expect($sessionCollaborators->contains($selectedCollaboratorB))->toBeTrue();
+        expect($sessionCollaborators->contains($unselectedCollaborator))->toBeFalse();
         $this->assertEquals(array_keys($sessionCollaborators->toArray()), range(0, count($sessionCollaborators) - 1), 'Failed asserting $sessionCollaborator keys are sequential integers');
     });
 });
@@ -301,9 +301,9 @@ test('an existing tag is used if the tag submitted differs only in case', functi
         ],
     ]);
 
-    $this->assertCount(2, $package->tags);
-    $this->assertTrue($package->tags->contains($existingTagA));
-    $this->assertTrue($package->tags->contains($existingTagB));
+    expect($package->tags)->toHaveCount(2);
+    expect($package->tags->contains($existingTagA))->toBeTrue();
+    expect($package->tags->contains($existingTagB))->toBeTrue();
     $response->assertRedirect(route('app.packages.index'));
 });
 
@@ -329,10 +329,10 @@ test('an existing tag is used if the tag submitted differs only in case and a ne
         ],
     ]);
 
-    $this->assertCount(3, $package->tags);
-    $this->assertTrue($package->tags->contains($existingTag));
-    $this->assertTrue($package->tags->contains(Tag::where('name', 'new tag')->first()));
-    $this->assertTrue($package->tags->contains(Tag::where('name', 'another new tag')->first()));
+    expect($package->tags)->toHaveCount(3);
+    expect($package->tags->contains($existingTag))->toBeTrue();
+    expect($package->tags->contains(Tag::where('name', 'new tag')->first()))->toBeTrue();
+    expect($package->tags->contains(Tag::where('name', 'another new tag')->first()))->toBeTrue();
     $response->assertRedirect(route('app.packages.index'));
 });
 
@@ -357,7 +357,7 @@ test('not updating url does not change package availability', function () {
         ->assertRedirect(route('app.packages.index'));
 
     $this->assertNotNull($package->refresh()->marked_as_unavailable_at);
-    $this->assertTrue($package->refresh()->is_disabled);
+    expect($package->refresh()->is_disabled)->toBeTrue();
 });
 
 test('updating url attribute removes unavailable timestamp', function () {
@@ -388,8 +388,8 @@ test('updating url attribute removes unavailable timestamp', function () {
     ])
         ->assertRedirect(route('app.packages.index'));
 
-    $this->assertNull($package->refresh()->marked_as_unavailable_at);
-    $this->assertFalse($package->refresh()->is_disabled);
+    expect($package->refresh()->marked_as_unavailable_at)->toBeNull();
+    expect($package->refresh()->is_disabled)->toBeFalse();
 });
 
 // Helpers

@@ -32,7 +32,7 @@ test('users can create collaborators', function () {
     ]);
 
     Event::assertDispatched(CollaboratorCreated::class);
-    $this->assertEquals(1, Collaborator::count());
+    expect(Collaborator::count())->toEqual(1);
 });
 
 test('only one collaborator is allowed per github username', function () {
@@ -53,7 +53,7 @@ test('only one collaborator is allowed per github username', function () {
         'url' => 'https://statshmauffer.com/',
     ]);
 
-    $this->assertEquals(1, Collaborator::count());
+    expect(Collaborator::count())->toEqual(1);
 });
 
 test('collaborators receive avatar url from github upon creation', function () {
@@ -72,5 +72,5 @@ test('collaborators receive avatar url from github upon creation', function () {
         'url' => 'https://mattstauffer.com/',
     ]);
 
-    $this->assertEquals('http://www.image.com/', Collaborator::first()->avatar);
+    expect(Collaborator::first()->avatar)->toEqual('http://www.image.com/');
 });

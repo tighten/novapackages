@@ -25,7 +25,7 @@ it('gets the latest release version for tagged releases', function () {
 
     $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
 
-    $this->assertEquals('v1.0', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('v1.0');
 });
 
 it('falls back to master when there are no releases', function () {
@@ -33,11 +33,11 @@ it('falls back to master when there are no releases', function () {
 
     $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
 
-    $this->assertEquals('master', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('master');
 });
 
 it('returns proper readme format', function () {
     $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
 
-    $this->assertEquals(GitHubRepo::README_FORMAT, $repo->readmeFormat());
+    expect($repo->readmeFormat())->toEqual(GitHubRepo::README_FORMAT);
 });

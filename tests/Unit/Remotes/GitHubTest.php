@@ -9,11 +9,11 @@ use Tests\TestCase;
 uses(Tests\TestCase::class);
 
 test('validates github urls', function () {
-    $this->assertTrue(GitHub::validateUrl('http://github.com/starwars/lightsabers'));
-    $this->assertTrue(GitHub::validateUrl('https://github.com/starwars/lightsabers'));
+    expect(GitHub::validateUrl('http://github.com/starwars/lightsabers'))->toBeTrue();
+    expect(GitHub::validateUrl('https://github.com/starwars/lightsabers'))->toBeTrue();
 
-    $this->assertFalse(GitHub::validateUrl('https://subdomain.github.com/starwars/lightsabers'));
-    $this->assertFalse(GitHub::validateUrl('https://notgithub.com/starwars/lightsabers'));
+    expect(GitHub::validateUrl('https://subdomain.github.com/starwars/lightsabers'))->toBeFalse();
+    expect(GitHub::validateUrl('https://notgithub.com/starwars/lightsabers'))->toBeFalse();
 });
 
 test('requesting package idea issues sends request to correct url', function () {
@@ -60,7 +60,7 @@ test('requesting readme returns null when readme does not exist', function () {
 
     $response = app(GitHub::class)->readme('starwars/lightsabers');
 
-    $this->assertNull($response);
+    expect($response)->toBeNull();
 });
 
 test('requesting readme throws exception when request has error', function () {

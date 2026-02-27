@@ -47,7 +47,7 @@ test('return the count of favorites for a package', function () {
 
     $packageDetailResource = (PackageDetailResource::from($package));
 
-    $this->assertEquals(2, $packageDetailResource['favorites_count']);
+    expect($packageDetailResource['favorites_count'])->toEqual(2);
 });
 
 test('includes whether package has been marked as unavailable', function () {
@@ -60,13 +60,13 @@ test('includes whether package has been marked as unavailable', function () {
         'marked_as_unavailable_at' => now(),
     ]);
     $unavailablePackageDetailResource = (PackageDetailResource::from($unavailablePackage));
-    $this->assertEquals($unavailablePackageDetailResource['marked_as_unavailable_at'], $now);
+    expect($now)->toEqual($unavailablePackageDetailResource['marked_as_unavailable_at']);
 
     $validPackage = Package::factory()->create([
         'marked_as_unavailable_at' => null,
     ]);
     $validPackageDetailResource = (PackageDetailResource::from($validPackage));
-    $this->assertNull($validPackageDetailResource['marked_as_unavailable_at']);
+    expect($validPackageDetailResource['marked_as_unavailable_at'])->toBeNull();
 });
 
 // Helpers

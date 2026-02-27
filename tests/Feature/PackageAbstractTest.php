@@ -27,7 +27,7 @@ test('package abstracts default to truncated readme if no abstract', function ()
     // Let's check the resource, too; that check above is shaky
     $resource = PackageResource::from($package);
 
-    $this->assertEquals('Abcdef8181', $resource['abstract']);
+    expect($resource['abstract'])->toEqual('Abcdef8181');
 });
 
 test('long package readmes are truncated to 190 characters for abstract', function () {
@@ -42,7 +42,7 @@ test('long package readmes are truncated to 190 characters for abstract', functi
 
     $resource = PackageResource::from($package);
 
-    $this->assertStringContainsString('Lorem ipsum', $resource['abstract']);
+    expect($resource['abstract'])->toContain('Lorem ipsum');
     $this->assertStringNotContainsString('nibh', $resource['abstract']);
 });
 

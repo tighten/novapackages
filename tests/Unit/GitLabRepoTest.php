@@ -17,7 +17,7 @@ it('sets the url for a changed username to the new repository location', functio
 
     $repo = GitLabRepo::make('https://gitlab.com/senator-palpatine/masterplan');
 
-    $this->assertEquals('https://gitlab.com/emperor-palpatine/masterplan', $repo->url());
+    expect($repo->url())->toEqual('https://gitlab.com/emperor-palpatine/masterplan');
 });
 
 it('gets the latest release version for tagged releases', function () {
@@ -33,7 +33,7 @@ it('gets the latest release version for tagged releases', function () {
 
     $repo = GitLabRepo::make('https://gitlab.com/starwars/lightsabers');
 
-    $this->assertEquals('v1.0', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('v1.0');
 });
 
 it('falls back to master when there are no releases', function () {
@@ -45,7 +45,7 @@ it('falls back to master when there are no releases', function () {
 
     $repo = GitLabRepo::make('https://gitlab.com/starwars/x-wings');
 
-    $this->assertEquals('master', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('master');
 });
 
 it('returns proper readme format', function () {
@@ -53,7 +53,7 @@ it('returns proper readme format', function () {
 
     $repo = GitLabRepo::make('https://gitlab.com/starwars/lightsabers');
 
-    $this->assertEquals(BaseRepo::README_FORMAT, $repo->readmeFormat());
+    expect($repo->readmeFormat())->toEqual(BaseRepo::README_FORMAT);
 });
 
 // Helpers

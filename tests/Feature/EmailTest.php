@@ -14,7 +14,7 @@ test('users with no email must submit an email', function () {
 
     $response = $this->be($user)->followingRedirects()->get(route('app.collaborators.index'));
 
-    $this->assertEquals(route('app.email.create'), url()->current());
+    expect(url()->current())->toEqual(route('app.email.create'));
 });
 
 test('user can submit a email address if the github oauth handshake doesnt return one', function () {
@@ -28,7 +28,7 @@ test('user can submit a email address if the github oauth handshake doesnt retur
     ]);
 
     $response->assertRedirect(route('home'));
-    $this->assertEquals($updatedEmail, $user->fresh()->email);
+    expect($user->fresh()->email)->toEqual($updatedEmail);
 });
 
 test('the email address is required', function () {

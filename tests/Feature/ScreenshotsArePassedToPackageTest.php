@@ -35,7 +35,7 @@ test('a packages screenshots are passed to the view', function () {
 
     // Screenshots are now loaded within the Livewire component, not passed as view data
     $package = $response->viewData('package');
-    $this->assertCount(1, $package->screenshots);
-    $this->assertTrue($package->screenshots->contains($screenshotA));
-    $this->assertFalse($package->screenshots->contains($screenshotB));
+    expect($package->screenshots)->toHaveCount(1);
+    expect($package->screenshots->contains($screenshotA))->toBeTrue();
+    expect($package->screenshots->contains($screenshotB))->toBeFalse();
 });

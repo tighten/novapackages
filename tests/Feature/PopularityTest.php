@@ -23,7 +23,7 @@ test('github stars influence popularity', function () {
     });
 
     $popularScope = Package::popular()->take(10)->pluck('id')->toArray();
-    $this->assertCount(10, array_intersect($popularScope, $popularPackages->pluck('id')->toArray()));
+    expect(array_intersect($popularScope, $popularPackages->pluck('id')->toArray()))->toHaveCount(10);
 });
 
 test('packagist downloads influence popularity', function () {
@@ -40,5 +40,5 @@ test('packagist downloads influence popularity', function () {
     });
 
     $popularScope = Package::popular()->take(10)->pluck('id')->toArray();
-    $this->assertCount(10, array_intersect($popularScope, $popularPackages->pluck('id')->toArray()));
+    expect(array_intersect($popularScope, $popularPackages->pluck('id')->toArray()))->toHaveCount(10);
 });

@@ -59,10 +59,10 @@ test('a user can not update a collaborator that is not assigned to them', functi
     $response->assertStatus(403);
 
     tap($collaborator->fresh(), function ($collaborator) use ($collaboratorAttributes) {
-        $this->assertEquals($collaboratorAttributes['name'], $collaborator->name);
-        $this->assertEquals($collaboratorAttributes['url'], $collaborator->url);
-        $this->assertEquals($collaboratorAttributes['description'], $collaborator->description);
-        $this->assertEquals($collaboratorAttributes['github_username'], $collaborator->github_username);
+        expect($collaborator->name)->toEqual($collaboratorAttributes['name']);
+        expect($collaborator->url)->toEqual($collaboratorAttributes['url']);
+        expect($collaborator->description)->toEqual($collaboratorAttributes['description']);
+        expect($collaborator->github_username)->toEqual($collaboratorAttributes['github_username']);
     });
 });
 
@@ -90,10 +90,10 @@ test('a user can update a collaborator assigned to them', function () {
 
     $collaborator->refresh();
 
-    $this->assertEquals($userData['name'], $collaborator->name);
-    $this->assertEquals($userData['url'], $collaborator->url);
-    $this->assertEquals($userData['description'], $collaborator->description);
-    $this->assertEquals($userData['github_username'], $collaborator->github_username);
+    expect($collaborator->name)->toEqual($userData['name']);
+    expect($collaborator->url)->toEqual($userData['url']);
+    expect($collaborator->description)->toEqual($userData['description']);
+    expect($collaborator->github_username)->toEqual($userData['github_username']);
 });
 
 test('the name field is required', function () {
@@ -113,7 +113,7 @@ test('the name field is required', function () {
 
     $response->assertStatus(302);
     $response->assertSessionHasErrors('name');
-    $this->assertEquals($collaboratorAttributes['name'], $collaborator->fresh()->name);
+    expect($collaborator->fresh()->name)->toEqual($collaboratorAttributes['name']);
 });
 
 test('the url field is optional', function () {
@@ -135,7 +135,7 @@ test('the url field is optional', function () {
     ]);
 
     $response->assertSessionHasNoErrors();
-    $this->assertNull($collaborator->fresh()->url);
+    expect($collaborator->fresh()->url)->toBeNull();
 });
 
 test('the url field must be valid', function () {
@@ -155,7 +155,7 @@ test('the url field must be valid', function () {
 
     $response->assertStatus(302);
     $response->assertSessionHasErrors('url');
-    $this->assertEquals($collaboratorAttributes['url'], $collaborator->fresh()->url);
+    expect($collaborator->fresh()->url)->toEqual($collaboratorAttributes['url']);
 });
 
 test('the github username field is required', function () {
@@ -175,7 +175,7 @@ test('the github username field is required', function () {
 
     $response->assertStatus(302);
     $response->assertSessionHasErrors('github_username');
-    $this->assertEquals($collaboratorAttributes['github_username'], $collaborator->fresh()->github_username);
+    expect($collaborator->fresh()->github_username)->toEqual($collaboratorAttributes['github_username']);
 });
 
 test('the github username can be unchanged', function () {
@@ -194,5 +194,5 @@ test('the github username can be unchanged', function () {
     ]);
 
     $response->assertStatus(302);
-    $this->assertEquals($collaboratorAttributes['github_username'], $collaborator->fresh()->github_username);
+    expect($collaborator->fresh()->github_username)->toEqual($collaboratorAttributes['github_username']);
 });

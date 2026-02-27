@@ -16,5 +16,5 @@ test('packages can have contributors', function () {
 
     $package = $contributor->contributedPackages()->save(Package::factory()->make());
 
-    $this->assertEquals($contributor->id, $package->contributors()->first()->id);
+    expect($package->contributors()->first()->id)->toEqual($contributor->id);
 });

@@ -16,7 +16,7 @@ test('unauthenticated users cant post ratings', function () {
         'rating' => 4,
     ]);
 
-    $this->assertEquals(route('login'), $response->getTargetUrl());
+    expect($response->getTargetUrl())->toEqual(route('login'));
 });
 
 test('posting a rating increases the packages overall rating', function () {
@@ -28,7 +28,7 @@ test('posting a rating increases the packages overall rating', function () {
         'rating' => 4,
     ]);
 
-    $this->assertEquals(4, $package->average_rating);
+    expect($package->average_rating)->toEqual(4);
 });
 
 test('the same user cant add two ratings to a package', function () {
@@ -45,7 +45,7 @@ test('the same user cant add two ratings to a package', function () {
         'rating' => 2,
     ]);
 
-    $this->assertEquals(1, $package->ratings()->count());
+    expect($package->ratings()->count())->toEqual(1);
 });
 
 test('users can modify their ratings', function () {
@@ -62,7 +62,7 @@ test('users can modify their ratings', function () {
         'rating' => 2,
     ]);
 
-    $this->assertEquals(2, (int) $package->user_average_rating);
+    expect((int) $package->user_average_rating)->toEqual(2);
 });
 
 test('a user cannot rate a package they authored', function () {
@@ -78,7 +78,7 @@ test('a user cannot rate a package they authored', function () {
         'rating' => 5,
     ]);
 
-    $this->assertEquals(0, $package->ratings()->count());
+    expect($package->ratings()->count())->toEqual(0);
     $request->assertStatus(422);
     $request->assertJson([
         'status' => 'error',
@@ -98,7 +98,7 @@ test('a user cannot rate a package they collaborated on', function () {
         'rating' => 5,
     ]);
 
-    $this->assertEquals(0, $package->ratings()->count());
+    expect($package->ratings()->count())->toEqual(0);
     $request->assertStatus(422);
     $request->assertJson([
         'status' => 'error',

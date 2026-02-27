@@ -17,7 +17,7 @@ it('counts average rating', function () {
         $user->ratePackage($package, $i++);
     }
 
-    $this->assertEquals((1 + 2 + 3 + 4) / 4, $package->fresh()->average_rating);
+    expect($package->fresh()->average_rating)->toEqual((1 + 2 + 3 + 4) / 4);
 });
 
 it('counts each rating correctly', function () {
@@ -43,11 +43,11 @@ it('counts each rating correctly', function () {
 
     $users->shift()->ratePackage($package, 5);
 
-    $this->assertEquals(1, $package->countFiveStarRatings());
-    $this->assertEquals(2, $package->countFourStarRatings());
-    $this->assertEquals(3, $package->countThreeStarRatings());
-    $this->assertEquals(4, $package->countTwoStarRatings());
-    $this->assertEquals(5, $package->countOneStarRatings());
+    expect($package->countFiveStarRatings())->toEqual(1);
+    expect($package->countFourStarRatings())->toEqual(2);
+    expect($package->countThreeStarRatings())->toEqual(3);
+    expect($package->countTwoStarRatings())->toEqual(4);
+    expect($package->countOneStarRatings())->toEqual(5);
 });
 
 it('counts each rating correctly when eager loaded', function () {
@@ -75,11 +75,11 @@ it('counts each rating correctly when eager loaded', function () {
 
     $package = Package::with('ratings')->find($package->id);
 
-    $this->assertEquals(1, $package->countFiveStarRatings());
-    $this->assertEquals(2, $package->countFourStarRatings());
-    $this->assertEquals(3, $package->countThreeStarRatings());
-    $this->assertEquals(4, $package->countTwoStarRatings());
-    $this->assertEquals(5, $package->countOneStarRatings());
+    expect($package->countFiveStarRatings())->toEqual(1);
+    expect($package->countFourStarRatings())->toEqual(2);
+    expect($package->countThreeStarRatings())->toEqual(3);
+    expect($package->countTwoStarRatings())->toEqual(4);
+    expect($package->countOneStarRatings())->toEqual(5);
 });
 
 test('average rating rounded to 1 decimal', function () {
@@ -93,5 +93,5 @@ test('average rating rounded to 1 decimal', function () {
         $i++;
     }
 
-    $this->assertEquals(4.3, $package->fresh()->average_rating);
+    expect($package->fresh()->average_rating)->toEqual(4.3);
 });

@@ -39,17 +39,17 @@ test('calling the command without an argument updates all packages with data fro
 
     $this->artisan('sync:repo');
 
-    $this->assertCount(2, Package::all());
+    expect(Package::all())->toHaveCount(2);
     $packageA->refresh();
-    $this->assertEquals($repoAttributesA['url'], $packageA->repo_url);
-    $this->assertEquals($repoAttributesA['source'], $packageA->readme_source);
-    $this->assertEquals($repoAttributesA['readme'], $packageA->readme);
-    $this->assertEquals($repoAttributesA['latest_version'], $packageA->latest_version);
+    expect($packageA->repo_url)->toEqual($repoAttributesA['url']);
+    expect($packageA->readme_source)->toEqual($repoAttributesA['source']);
+    expect($packageA->readme)->toEqual($repoAttributesA['readme']);
+    expect($packageA->latest_version)->toEqual($repoAttributesA['latest_version']);
     $packageB->refresh();
-    $this->assertEquals($repoAttributesB['url'], $packageB->repo_url);
-    $this->assertEquals($repoAttributesB['source'], $packageB->readme_source);
-    $this->assertEquals($repoAttributesB['readme'], $packageB->readme);
-    $this->assertEquals($repoAttributesB['latest_version'], $packageB->latest_version);
+    expect($packageB->repo_url)->toEqual($repoAttributesB['url']);
+    expect($packageB->readme_source)->toEqual($repoAttributesB['source']);
+    expect($packageB->readme)->toEqual($repoAttributesB['readme']);
+    expect($packageB->latest_version)->toEqual($repoAttributesB['latest_version']);
 });
 
 test('calling the command with a package id only updates that package with data from its remote repo', function () {
@@ -83,17 +83,17 @@ test('calling the command with a package id only updates that package with data 
 
     $this->artisan('sync:repo', ['package' => $packageA->id]);
 
-    $this->assertCount(2, Package::all());
+    expect(Package::all())->toHaveCount(2);
     $packageA->refresh();
-    $this->assertEquals($repoAttributesA['url'], $packageA->repo_url);
-    $this->assertEquals($repoAttributesA['source'], $packageA->readme_source);
-    $this->assertEquals($repoAttributesA['readme'], $packageA->readme);
-    $this->assertEquals($repoAttributesA['latest_version'], $packageA->latest_version);
+    expect($packageA->repo_url)->toEqual($repoAttributesA['url']);
+    expect($packageA->readme_source)->toEqual($repoAttributesA['source']);
+    expect($packageA->readme)->toEqual($repoAttributesA['readme']);
+    expect($packageA->latest_version)->toEqual($repoAttributesA['latest_version']);
     $packageB->refresh();
-    $this->assertEquals($packageBAttributes['readme'], $packageB->readme);
-    $this->assertEquals($packageBAttributes['readme_source'], $packageB->readme_source);
-    $this->assertEquals($packageBAttributes['repo_url'], $packageB->repo_url);
-    $this->assertEquals($packageBAttributes['latest_version'], $packageB->latest_version);
+    expect($packageB->readme)->toEqual($packageBAttributes['readme']);
+    expect($packageB->readme_source)->toEqual($packageBAttributes['readme_source']);
+    expect($packageB->repo_url)->toEqual($packageBAttributes['repo_url']);
+    expect($packageB->latest_version)->toEqual($packageBAttributes['latest_version']);
 });
 
 test('local data is not updated if there are no changes in the remote repo', function () {
@@ -117,6 +117,6 @@ test('local data is not updated if there are no changes in the remote repo', fun
 
     $this->artisan('sync:repo', ['package' => $package->id]);
     $package->refresh();
-    $this->assertCount(1, Package::all());
-    $this->assertEquals($updatedAt->toDateTimeString(), $package->updated_at->toDateTimeString());
+    expect(Package::all())->toHaveCount(1);
+    expect($package->updated_at->toDateTimeString())->toEqual($updatedAt->toDateTimeString());
 });

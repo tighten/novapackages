@@ -32,9 +32,9 @@ test('screnshots not attached to packages that are older than one day are delete
     $this->artisan('purge:abandonedscreenshots');
 
     $remainingScreenshots = Screenshot::get();
-    $this->assertCount(2, $remainingScreenshots);
-    $this->assertTrue($remainingScreenshots->contains($packageScreenshot));
-    $this->assertTrue($remainingScreenshots->contains($newScreenshot));
+    expect($remainingScreenshots)->toHaveCount(2);
+    expect($remainingScreenshots->contains($packageScreenshot))->toBeTrue();
+    expect($remainingScreenshots->contains($newScreenshot))->toBeTrue();
     Storage::assertExists($packageScreenshot->path);
     Storage::assertExists($newScreenshot->path);
     Storage::assertMissing($abandonedScreenshot->path);

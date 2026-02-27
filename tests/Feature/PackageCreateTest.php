@@ -35,9 +35,9 @@ test('can attach screenshots to the package', function () {
     ]));
 
     $packageScreenshots = Package::first()->screenshots;
-    $this->assertCount(2, $packageScreenshots);
-    $this->assertTrue($packageScreenshots->contains($screenshotA));
-    $this->assertTrue($packageScreenshots->contains($screenshotB));
+    expect($packageScreenshots)->toHaveCount(2);
+    expect($packageScreenshots->contains($screenshotA))->toBeTrue();
+    expect($packageScreenshots->contains($screenshotB))->toBeTrue();
     $response->assertRedirect(route('app.packages.index'));
 });
 
@@ -54,8 +54,8 @@ test('screenshots are optional', function () {
 
     $response = $this->actingAs($user)->post(route('app.packages.store'), $validPackageData);
 
-    $this->assertCount(1, Package::all());
-    $this->assertCount(0, Package::first()->screenshots);
+    expect(Package::all())->toHaveCount(1);
+    expect(Package::first()->screenshots)->toHaveCount(0);
     $response->assertRedirect(route('app.packages.index'));
 });
 
@@ -105,12 +105,12 @@ test('all uploaded screenshots are returned when validation fails', function () 
         ['id' => $screenshotB->id, 'public_url' => Storage::url($screenshotB->path)],
     ];
 
-    $this->assertCount(count($expectedScreenshots), $sessionScreenshots);
+    expect($sessionScreenshots)->toHaveCount(count($expectedScreenshots));
 
-    $this->assertEquals($screenshotA->id, $sessionScreenshots[0]['id']);
-    $this->assertEquals(Storage::url($screenshotA->path), $sessionScreenshots[0]['public_url']);
-    $this->assertEquals($screenshotB->id, $sessionScreenshots[1]['id']);
-    $this->assertEquals(Storage::url($screenshotB->path), $sessionScreenshots[1]['public_url']);
+    expect($sessionScreenshots[0]['id'])->toEqual($screenshotA->id);
+    expect($sessionScreenshots[0]['public_url'])->toEqual(Storage::url($screenshotA->path));
+    expect($sessionScreenshots[1]['id'])->toEqual($screenshotB->id);
+    expect($sessionScreenshots[1]['public_url'])->toEqual(Storage::url($screenshotB->path));
 });
 
 test('the selected author is returned to the view when validation fails', function () {
@@ -127,7 +127,7 @@ test('the selected author is returned to the view when validation fails', functi
     $response->assertStatus(302);
     $response->assertSessionHas('errors');
     $this->assertNotNull(old('selectedAuthor'), 'Expected selectedAuthor is missing from the session');
-    $this->assertTrue(old('selectedAuthor')->is($author));
+    expect(old('selectedAuthor')->is($author))->toBeTrue();
 });
 
 test('the selected collaborators are returned to the view when validation fails', function () {
@@ -151,10 +151,10 @@ test('the selected collaborators are returned to the view when validation fails'
     $this->assertNotNull(old('selectedCollaborators'), 'Expected selectedCollaborators is missing from the session');
 
     tap(old('selectedCollaborators'), function ($sessionCollaborators) use ($selectedCollaboratorA, $selectedCollaboratorB, $unselectedCollaborator) {
-        $this->assertCount(2, $sessionCollaborators);
-        $this->assertTrue($sessionCollaborators->contains($selectedCollaboratorA));
-        $this->assertTrue($sessionCollaborators->contains($selectedCollaboratorB));
-        $this->assertFalse($sessionCollaborators->contains($unselectedCollaborator));
+        expect($sessionCollaborators)->toHaveCount(2);
+        expect($sessionCollaborators->contains($selectedCollaboratorA))->toBeTrue();
+        expect($sessionCollaborators->contains($selectedCollaboratorB))->toBeTrue();
+        expect($sessionCollaborators->contains($unselectedCollaborator))->toBeFalse();
         $this->assertEquals(array_keys($sessionCollaborators->toArray()), range(0, count($sessionCollaborators) - 1), 'Failed asserting $sessionCollaborator keys are sequential integers');
     });
 });
@@ -257,9 +257,9 @@ test('an existing tag is used if the tag submitted differs only in case', functi
         ],
     ]));
 
-    $this->assertCount(2, Tag::all());
-    $this->assertTrue(Package::first()->tags->contains($existingTagA));
-    $this->assertTrue(Package::first()->tags->contains($existingTagB));
+    expect(Tag::all())->toHaveCount(2);
+    expect(Package::first()->tags->contains($existingTagA))->toBeTrue();
+    expect(Package::first()->tags->contains($existingTagB))->toBeTrue();
     $response->assertRedirect(route('app.packages.index'));
 });
 
@@ -283,9 +283,9 @@ test('an existing tag is used if the tag submitted differs only in case and a ne
         ],
     ]));
 
-    $this->assertCount(3, Tag::all());
-    $this->assertTrue(Package::first()->tags->contains($existingTag));
-    $this->assertTrue(Package::first()->tags->contains(Tag::where('name', 'new tag')->first()));
-    $this->assertTrue(Package::first()->tags->contains(Tag::where('name', 'another new tag')->first()));
+    expect(Tag::all())->toHaveCount(3);
+    expect(Package::first()->tags->contains($existingTag))->toBeTrue();
+    expect(Package::first()->tags->contains(Tag::where('name', 'new tag')->first()))->toBeTrue();
+    expect(Package::first()->tags->contains(Tag::where('name', 'another new tag')->first()))->toBeTrue();
     $response->assertRedirect(route('app.packages.index'));
 });

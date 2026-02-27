@@ -36,9 +36,9 @@ test('can get a repo from a package composer name', function () {
     $repo = Repo::fromPackageModel($package);
 
     $this->assertNotNull($repo->repo());
-    $this->assertInstanceOf(GitHubRepo::class, $repo->repo());
-    $this->assertEquals('github', $repo->source());
-    $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
+    expect($repo->repo())->toBeInstanceOf(GitHubRepo::class);
+    expect($repo->source())->toEqual('github');
+    expect($repo->url())->toEqual('https://github.com/tighten/nova-stripe');
     $this->assertNotNull($repo->readme());
     $this->assertNotNull($repo->latestReleaseVersion());
     $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -61,9 +61,9 @@ test('can get a repo from a the package url if the composer name is not valid', 
 
     $repo = Repo::fromPackageModel($package);
 
-    $this->assertInstanceOf(GitHubRepo::class, $repo);
-    $this->assertEquals('github', $repo->source());
-    $this->assertEquals($packageUrl, $repo->url());
+    expect($repo)->toBeInstanceOf(GitHubRepo::class);
+    expect($repo->source())->toEqual('github');
+    expect($repo->url())->toEqual($packageUrl);
     $this->assertNotNull($repo->readme());
     $this->assertNotNull($repo->latestReleaseVersion());
     $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -78,9 +78,9 @@ test('can get a repo from a packagist composer name', function () {
     $repo = Repo::fromRequest($mock);
 
     $this->assertNotNull($repo->repo());
-    $this->assertInstanceOf(GitHubRepo::class, $repo->repo());
-    $this->assertEquals('github', $repo->source());
-    $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
+    expect($repo->repo())->toBeInstanceOf(GitHubRepo::class);
+    expect($repo->source())->toEqual('github');
+    expect($repo->url())->toEqual('https://github.com/tighten/nova-stripe');
     $this->assertNotNull($repo->readme());
     $this->assertNotNull($repo->latestReleaseVersion());
     $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -101,9 +101,9 @@ test('can get a repo from a the request url if the composer name is not valid', 
 
     $repo = Repo::fromRequest($mock);
 
-    $this->assertInstanceOf(GitHubRepo::class, $repo);
-    $this->assertEquals('github', $repo->source());
-    $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
+    expect($repo)->toBeInstanceOf(GitHubRepo::class);
+    expect($repo->source())->toEqual('github');
+    expect($repo->url())->toEqual('https://github.com/tighten/nova-stripe');
     $this->assertNotNull($repo->readme());
     $this->assertNotNull($repo->latestReleaseVersion());
     $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -114,9 +114,9 @@ test('can fetch data from a github repo', function () {
 
     $repo = Repo::fromUrl($githubUrl);
 
-    $this->assertInstanceOf(GitHubRepo::class, $repo);
-    $this->assertEquals('github', $repo->source());
-    $this->assertEquals($githubUrl, $repo->url());
+    expect($repo)->toBeInstanceOf(GitHubRepo::class);
+    expect($repo->source())->toEqual('github');
+    expect($repo->url())->toEqual($githubUrl);
     $this->assertNotNull($repo->readme());
     $this->assertNotNull($repo->latestReleaseVersion());
     $this->assertNotEquals('master', $repo->latestReleaseVersion());
@@ -133,7 +133,7 @@ test('github readme is returned as null if one is not present', function () {
 
     $repo = Repo::fromUrl($url);
 
-    $this->assertNull($repo->readme());
+    expect($repo->readme())->toBeNull();
 });
 
 test('can fetch data from a bitbucket repo', function () {
@@ -146,12 +146,12 @@ test('can fetch data from a bitbucket repo', function () {
 
     $repo = Repo::fromUrl($bitBucketUrl);
 
-    $this->assertInstanceOf(BitBucketRepo::class, $repo);
-    $this->assertEquals('bitbucket', $repo->source());
-    $this->assertEquals($bitBucketUrl, $repo->url());
-    $this->assertTrue(str_contains($repo->readme(), '# novapackages-test'));
+    expect($repo)->toBeInstanceOf(BitBucketRepo::class);
+    expect($repo->source())->toEqual('bitbucket');
+    expect($repo->url())->toEqual($bitBucketUrl);
+    expect(str_contains($repo->readme(), '# novapackages-test'))->toBeTrue();
     $this->assertNotNull($repo->latestReleaseVersion());
-    $this->assertEquals('master', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('master');
 });
 
 test('an exception is thrown if bitbucket response has errors that are not file not found errors', function () {
@@ -179,12 +179,12 @@ test('can fetch data from a gitlab repo', function () {
 
     $repo = Repo::fromUrl($url);
 
-    $this->assertInstanceOf(GitLabRepo::class, $repo);
-    $this->assertEquals('gitlab', $repo->source());
-    $this->assertEquals($url, $repo->url());
+    expect($repo)->toBeInstanceOf(GitLabRepo::class);
+    expect($repo->source())->toEqual('gitlab');
+    expect($repo->url())->toEqual($url);
     $this->assertNotNull($repo->readme());
-    $this->assertTrue(str_contains($repo->readme(), '# Rancher-API'));
-    $this->assertEquals('2.0.4', $repo->latestReleaseVersion());
+    expect(str_contains($repo->readme(), '# Rancher-API'))->toBeTrue();
+    expect($repo->latestReleaseVersion())->toEqual('2.0.4');
 });
 
 test('an exception is thrown if gitlab response has errors that are not file not found errors', function () {
@@ -216,7 +216,7 @@ test('gitlab readme is returned as null if one is not present', function () {
 
     $repo = Repo::fromUrl($url);
 
-    $this->assertNull($repo->readme());
+    expect($repo->readme())->toBeNull();
 });
 
 test('can fetch the github data from an npm package with a github vcs', function () {
@@ -235,9 +235,9 @@ test('can fetch the github data from an npm package with a github vcs', function
     $repo = Repo::fromUrl($npmUrl);
 
     $this->assertNotNull($repo->repo());
-    $this->assertInstanceOf(GitHubRepo::class, $repo->repo());
-    $this->assertEquals('github', $repo->source());
-    $this->assertEquals('https://github.com/lodash/lodash.git', $repo->url());
+    expect($repo->repo())->toBeInstanceOf(GitHubRepo::class);
+    expect($repo->source())->toEqual('github');
+    expect($repo->url())->toEqual('https://github.com/lodash/lodash.git');
     $this->assertNotNull($repo->readme());
     $this->assertNotNull($repo->latestReleaseVersion());
 });
@@ -253,9 +253,9 @@ test('can fetch the npm data if the package doesnt have a vcs', function () {
 
     $repo = Repo::fromUrl($npmUrl);
 
-    $this->assertInstanceOf(NpmRepo::class, $repo);
-    $this->assertEquals('npm', $repo->source());
-    $this->assertEquals('https://www.npmjs.com/package/vue-form-state', $repo->url());
+    expect($repo)->toBeInstanceOf(NpmRepo::class);
+    expect($repo->source())->toEqual('npm');
+    expect($repo->url())->toEqual('https://www.npmjs.com/package/vue-form-state');
     $this->assertNotNull($repo->readme());
 });
 
@@ -272,11 +272,11 @@ test('can fetch the default data for a vcs we dont integrate with', function () 
 
     $repo = Repo::fromUrl($npmUrl);
 
-    $this->assertInstanceOf(BaseRepo::class, $repo);
-    $this->assertEquals('www.example.com', $repo->source());
-    $this->assertEquals('https://www.example.com/package/a-new-package', $repo->url());
-    $this->assertNull($repo->readme());
-    $this->assertNull($repo->latestReleaseVersion());
+    expect($repo)->toBeInstanceOf(BaseRepo::class);
+    expect($repo->source())->toEqual('www.example.com');
+    expect($repo->url())->toEqual('https://www.example.com/package/a-new-package');
+    expect($repo->readme())->toBeNull();
+    expect($repo->latestReleaseVersion())->toBeNull();
 });
 
 test('can fetch the default data for a url without the trailing slash', function () {
@@ -284,11 +284,11 @@ test('can fetch the default data for a url without the trailing slash', function
 
     $repo = Repo::fromUrl($npmUrl);
 
-    $this->assertInstanceOf(BaseRepo::class, $repo);
-    $this->assertEquals('www.example.com', $repo->source());
-    $this->assertEquals('https://www.example.com', $repo->url());
-    $this->assertNull($repo->readme());
-    $this->assertNull($repo->latestReleaseVersion());
+    expect($repo)->toBeInstanceOf(BaseRepo::class);
+    expect($repo->source())->toEqual('www.example.com');
+    expect($repo->url())->toEqual('https://www.example.com');
+    expect($repo->readme())->toBeNull();
+    expect($repo->latestReleaseVersion())->toBeNull();
 });
 
 test('can fetch the github data from a packagist package with a github vcs', function () {
@@ -301,12 +301,12 @@ test('can fetch the github data from a packagist package with a github vcs', fun
     $repo = Repo::fromUrl($url);
 
     $this->assertNotNull($repo->repo());
-    $this->assertInstanceOf(GitHubRepo::class, $repo->repo());
-    $this->assertEquals('github', $repo->source());
-    $this->assertEquals('https://github.com/tighten/nova-stripe', $repo->url());
+    expect($repo->repo())->toBeInstanceOf(GitHubRepo::class);
+    expect($repo->source())->toEqual('github');
+    expect($repo->url())->toEqual('https://github.com/tighten/nova-stripe');
     $this->assertNotNull($repo->readme());
     $this->assertNotNull($repo->latestReleaseVersion());
-    $this->assertEquals('v1.0.0', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('v1.0.0');
 });
 
 test('can fetch the bitbucket data from a packagist package with a bitbucket vcs', function () {
@@ -328,11 +328,11 @@ test('can fetch the bitbucket data from a packagist package with a bitbucket vcs
     $repo = Repo::fromUrl($packagistUrl);
 
     $this->assertNotNull($repo->repo());
-    $this->assertInstanceOf(BitBucketRepo::class, $repo->repo());
-    $this->assertEquals('bitbucket', $repo->source());
-    $this->assertEquals('https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield.git', $repo->url());
+    expect($repo->repo())->toBeInstanceOf(BitBucketRepo::class);
+    expect($repo->source())->toEqual('bitbucket');
+    expect($repo->url())->toEqual('https://bitbucket.org/adnanchowdhury/nova-uploadcare-imagefield.git');
     $this->assertNotNull($repo->readme());
-    $this->assertEquals('0.0.3', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('0.0.3');
 });
 
 test('can fetch the gitlab data from a packagist package with a gitlab vcs', function () {
@@ -349,13 +349,13 @@ test('can fetch the gitlab data from a packagist package with a gitlab vcs', fun
     $repo = Repo::fromUrl($packagistUrl);
 
     $this->assertNotNull($repo->repo());
-    $this->assertInstanceOf(GitLabRepo::class, $repo->repo());
-    $this->assertEquals('gitlab', $repo->source());
-    $this->assertEquals($repoUrl, $repo->url());
+    expect($repo->repo())->toBeInstanceOf(GitLabRepo::class);
+    expect($repo->source())->toEqual('gitlab');
+    expect($repo->url())->toEqual($repoUrl);
     $this->assertNotNull($repo->readme());
-    $this->assertTrue(str_contains($repo->readme(), '# Rancher-API'));
+    expect(str_contains($repo->readme(), '# Rancher-API'))->toBeTrue();
     $this->assertNotNull($repo->latestReleaseVersion());
-    $this->assertEquals('2.0.4', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('2.0.4');
 });
 
 test('can fetch the default data from a packagist package with a vcs we do not integrate with', function () {

@@ -15,7 +15,7 @@ it('returns the abstact when the abstract is set', function () {
         'abstract' => $abstract,
     ]);
 
-    $this->assertEquals($abstract, $package->abstract);
+    expect($package->abstract)->toEqual($abstract);
 });
 
 it('returns an abstractified readme when the abstract is not set', function () {
@@ -27,8 +27,8 @@ it('returns an abstractified readme when the abstract is not set', function () {
         'readme' => $readme,
     ]);
 
-    $this->assertEquals(190, strlen(substr($package->abstract, 0, -3)));
-    $this->assertEquals("{$truncatedReadme}...", $package->abstract);
+    expect(strlen(substr($package->abstract, 0, -3)))->toEqual(190);
+    expect($package->abstract)->toEqual("{$truncatedReadme}...");
 });
 
 it('excludes attributes from being synchronized to the scout search index', function () {
@@ -61,7 +61,7 @@ test('the readme is preserved even when its above 500 characters when being sync
 
     $searchableArray = $package->toSearchableArray();
 
-    $this->assertEquals(1400, strlen($searchableArray['readme']));
+    expect(strlen($searchableArray['readme']))->toEqual(1400);
 });
 
 test('searchable array preserves chinese characters in readme', function () {
@@ -73,7 +73,7 @@ test('searchable array preserves chinese characters in readme', function () {
 
     $searchableArray = $package->toSearchableArray();
 
-    $this->assertEquals($chineseReadme, $searchableArray['readme']);
+    expect($searchableArray['readme'])->toEqual($chineseReadme);
     $this->assertNotFalse(json_encode($searchableArray), 'Searchable array must be JSON-encodable');
 });
 
@@ -94,7 +94,7 @@ it('returns the display name of the package', function ($input, $expected) {
         'name' => $input,
     ]);
 
-    $this->assertEquals($expected, $package->display_name);
+    expect($package->display_name)->toEqual($expected);
 })->with('packageNameProvider');
 
 // Datasets

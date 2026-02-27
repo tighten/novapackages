@@ -23,9 +23,9 @@ test('authenticated users can upload a screenshot', function () {
     ]);
 
     $response->assertStatus(201);
-    $this->assertcount(1, Screenshot::all());
+    expect(Screenshot::all())->toHaveCount(1);
     Storage::assertExists($response->json()['path']);
-    $this->assertEquals($userB->id, Screenshot::first()->uploader->id);
+    expect(Screenshot::first()->uploader->id)->toEqual($userB->id);
     $response->assertJsonStructure([
         'id',
         'public_url',
@@ -42,7 +42,7 @@ test('guest users can not upload screenshot', function () {
     ]);
 
     $response->assertStatus(401);
-    $this->assertcount(0, Screenshot::all());
+    expect(Screenshot::all())->toHaveCount(0);
 });
 
 test('the uploaded screenshot must be smaller than 2mb', function () {
@@ -56,7 +56,7 @@ test('the uploaded screenshot must be smaller than 2mb', function () {
 
     $response->assertStatus(422);
     $response->assertJsonValidationErrors('screenshot');
-    $this->assertCount(0, Screenshot::all());
+    expect(Screenshot::all())->toHaveCount(0);
 });
 
 test('the upload screenshot must be an image', function () {
@@ -70,5 +70,5 @@ test('the upload screenshot must be an image', function () {
 
     $response->assertStatus(422);
     $response->assertJsonValidationErrors('screenshot');
-    $this->assertCount(0, Screenshot::all());
+    expect(Screenshot::all())->toHaveCount(0);
 });

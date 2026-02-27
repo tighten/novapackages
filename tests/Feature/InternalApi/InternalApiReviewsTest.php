@@ -19,7 +19,7 @@ test('unauthenticated users cant post review', function () {
         'review' => $review->content,
     ]);
 
-    $this->assertEquals(route('login'), $response->getTargetUrl());
+    expect($response->getTargetUrl())->toEqual(route('login'));
 });
 
 test('authenticated user cannot see link to post review before reviewing package', function () {
@@ -52,7 +52,7 @@ test('the same user cant add two reviews to a package', function () {
         'review' => $review->content,
     ]);
 
-    $this->assertEquals(1, $package->reviews()->count());
+    expect($package->reviews()->count())->toEqual(1);
 });
 
 test('users can modify their reviews', function () {
@@ -71,7 +71,7 @@ test('users can modify their reviews', function () {
         'review' => 'New Review Content',
     ]);
 
-    $this->assertEquals('New Review Content', $package->reviews->first()->content);
+    expect($package->reviews->first()->content)->toEqual('New Review Content');
 });
 
 test('a user can delete their review', function () {

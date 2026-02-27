@@ -13,7 +13,7 @@ it('returns proper readme format', function () {
 
     $repo = NpmRepo::make('https://www.npmjs.com/package/lodash');
 
-    $this->assertEquals(BaseRepo::README_FORMAT, $repo->readmeFormat());
+    expect($repo->readmeFormat())->toEqual(BaseRepo::README_FORMAT);
 });
 
 it('returns latest release if set', function () {
@@ -26,7 +26,7 @@ it('returns latest release if set', function () {
 
     $repo = Repo::fromUrl('https://www.npmjs.com/package/lodash');
 
-    $this->assertEquals('v1.0.0', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('v1.0.0');
 });
 
 it('returns master if latest release is not set', function () {
@@ -37,5 +37,5 @@ it('returns master if latest release is not set', function () {
 
     $repo = Repo::fromUrl('https://www.npmjs.com/package/lodash');
 
-    $this->assertEquals('master', $repo->latestReleaseVersion());
+    expect($repo->latestReleaseVersion())->toEqual('master');
 });

@@ -10,14 +10,14 @@ uses(RefreshDatabase::class);
 test('user default role is user', function () {
     $user = User::factory()->create();
 
-    $this->assertEquals('user', $user->fresh()->role_name);
-    $this->assertEquals(User::USER_ROLE, $user->fresh()->role);
+    expect($user->fresh()->role_name)->toEqual('user');
+    expect($user->fresh()->role)->toEqual(User::USER_ROLE);
 });
 
 test('user correctly reports if admin', function () {
     $user = User::factory()->create();
     $admin = User::factory()->create(['role' => User::ADMIN_ROLE]);
 
-    $this->assertFalse($user->fresh()->isAdmin());
-    $this->assertTrue($admin->fresh()->isAdmin());
+    expect($user->fresh()->isAdmin())->toBeFalse();
+    expect($admin->fresh()->isAdmin())->toBeTrue();
 });

@@ -16,7 +16,7 @@ test('admin user can disable a package', function () {
     $response->assertStatus(302);
 
     $updatedPackage = Package::withoutGlobalScope('notDisabled')->find($package->id);
-    $this->assertTrue($updatedPackage->is_disabled);
+    expect($updatedPackage->is_disabled)->toBeTrue();
 });
 
 test('admin user can enable a package', function () {
@@ -27,5 +27,5 @@ test('admin user can enable a package', function () {
     $response->assertStatus(302);
 
     $updatedPackage = Package::withoutGlobalScope('notDisabled')->find($package->id);
-    $this->assertFalse($updatedPackage->is_disabled);
+    expect($updatedPackage->is_disabled)->toBeFalse();
 });

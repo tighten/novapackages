@@ -31,9 +31,9 @@ test('a screenshot can be deleted by the person who uploaded it', function () {
 
     $response->assertSuccessful();
     $screenshots = Screenshot::all();
-    $this->assertCount(1, $screenshots);
-    $this->assertTrue($screenshots->contains($screenshotB));
-    $this->assertFalse($screenshots->contains($screenshotA));
+    expect($screenshots)->toHaveCount(1);
+    expect($screenshots->contains($screenshotB))->toBeTrue();
+    expect($screenshots->contains($screenshotA))->toBeFalse();
     Storage::assertMissing($screenshotA->path);
 });
 
@@ -53,7 +53,7 @@ test('a package collaborator can delete an attached screenshot', function () {
     ]);
 
     $response->assertSuccessful();
-    $this->assertCount(0, Screenshot::all());
+    expect(Screenshot::all())->toHaveCount(0);
     Storage::assertMissing($packageScreenshot->path);
 });
 
@@ -71,8 +71,8 @@ test('an unauthorized user can not delete a screenshot', function () {
 
     $response->assertStatus(403);
     $screenshots = Screenshot::all();
-    $this->assertCount(1, $screenshots);
-    $this->assertTrue($screenshots->contains($screenshot));
+    expect($screenshots)->toHaveCount(1);
+    expect($screenshots->contains($screenshot))->toBeTrue();
     Storage::assertExists($screenshot->path);
 });
 
@@ -88,8 +88,8 @@ test('a guest user can not delete a screenshot', function () {
     ]);
 
     $response->assertStatus(401);
-    $this->assertCount(1, Screenshot::all());
-    $this->assertTrue(Screenshot::first()->is($screenshot));
+    expect(Screenshot::all())->toHaveCount(1);
+    expect(Screenshot::first()->is($screenshot))->toBeTrue();
     Storage::assertExists($screenshot->path);
 });
 

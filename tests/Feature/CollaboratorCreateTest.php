@@ -28,12 +28,12 @@ test('the url field is optional', function () {
     $response = $this->actingAs($user)->post(route('app.collaborators.store'), $userData);
 
     $response->assertSessionHasNoErrors();
-    $this->assertCount(1, Collaborator::all());
+    expect(Collaborator::all())->toHaveCount(1);
 
     $collaborator = Collaborator::first();
 
-    $this->assertEquals($userData['name'], $collaborator->name);
-    $this->assertEquals($userData['url'], $collaborator->url);
-    $this->assertEquals($userData['description'], $collaborator->description);
-    $this->assertEquals($userData['github_username'], $collaborator->github_username);
+    expect($collaborator->name)->toEqual($userData['name']);
+    expect($collaborator->url)->toEqual($userData['url']);
+    expect($collaborator->description)->toEqual($userData['description']);
+    expect($collaborator->github_username)->toEqual($userData['github_username']);
 });

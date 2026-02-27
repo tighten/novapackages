@@ -25,10 +25,10 @@ test('returns popular packages in order', function () {
 
     $response = $this->get(route('api.popular-packages'));
 
-    $this->assertEquals($morePopularPackage->name, $response->json('data')[0]['name']);
-    $this->assertEquals($lessPopularPackage->name, $response->json('data')[1]['name']);
+    expect($response->json('data')[0]['name'])->toEqual($morePopularPackage->name);
+    expect($response->json('data')[1]['name'])->toEqual($lessPopularPackage->name);
 
-    $this->assertEquals($morePopularPackage->author->name, $response->json('data')[0]['author']['name']);
+    expect($response->json('data')[0]['author']['name'])->toEqual($morePopularPackage->author->name);
 
-    $this->assertEquals($tag->name, $response->json('data')[0]['tags'][0]['name']);
+    expect($response->json('data')[0]['tags'][0]['name'])->toEqual($tag->name);
 });
