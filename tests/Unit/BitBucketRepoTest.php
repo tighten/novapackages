@@ -3,7 +3,6 @@
 use App\BaseRepo;
 use App\BitBucketRepo;
 use App\Http\Remotes\BitBucket;
-use Mockery;
 use Tests\TestCase;
 
 uses(Tests\TestCase::class);
