@@ -1,140 +1,111 @@
 <?php
 
-namespace Tests\Unit\Remotes;
-
 use App\Exceptions\GitHubException;
 use App\Http\Remotes\GitHub;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class GitHubTest extends TestCase
-{
-    #[Test]
-    public function validates_github_urls(): void
-    {
-        $this->assertTrue(GitHub::validateUrl('http://github.com/starwars/lightsabers'));
-        $this->assertTrue(GitHub::validateUrl('https://github.com/starwars/lightsabers'));
+uses(Tests\TestCase::class);
 
-        $this->assertFalse(GitHub::validateUrl('https://subdomain.github.com/starwars/lightsabers'));
-        $this->assertFalse(GitHub::validateUrl('https://notgithub.com/starwars/lightsabers'));
-    }
+test('validates github urls', function () {
+    expect(GitHub::validateUrl('http://github.com/starwars/lightsabers'))->toBeTrue();
+    expect(GitHub::validateUrl('https://github.com/starwars/lightsabers'))->toBeTrue();
 
-    #[Test]
-    public function requesting_package_idea_issues_sends_request_to_correct_url(): void
-    {
-        Http::fake([
-            'https://api.github.com/search/issues*' => Http::response($this->fakeResponse('github.search-issues-in-repo.json')),
-        ]);
+    expect(GitHub::validateUrl('https://subdomain.github.com/starwars/lightsabers'))->toBeFalse();
+    expect(GitHub::validateUrl('https://notgithub.com/starwars/lightsabers'))->toBeFalse();
+});
 
-        app(GitHub::class)->packageIdeaIssues();
+test('requesting package idea issues sends request to correct url', function () {
+    Http::fake([
+        'https://api.github.com/search/issues*' => Http::response($this->fakeResponse('github.search-issues-in-repo.json')),
+    ]);
 
-        Http::assertSent(function ($request) {
-            $url = $request->url();
+    app(GitHub::class)->packageIdeaIssues();
 
-            return str_contains($url, 'https://api.github.com/search/issues')
-                && str_contains($url, urlencode('repo:tighten/nova-package-development'));
-        });
-    }
+    Http::assertSent(function ($request) {
+        $url = $request->url();
 
-    #[Test]
-    public function requesting_package_idea_issues_throws_exception_when_request_has_error(): void
-    {
-        Http::fake(['https://api.github.com/search/issues*' => Http::response(null, 500)]);
+        return str_contains($url, 'https://api.github.com/search/issues')
+            && str_contains($url, urlencode('repo:tighten/nova-package-development'));
+    });
+});
 
-        $this->expectException(RequestException::class);
+test('requesting package idea issues throws exception when request has error', function () {
+    Http::fake(['https://api.github.com/search/issues*' => Http::response(null, 500)]);
 
-        app(GitHub::class)->packageIdeaIssues();
-    }
+    $this->expectException(RequestException::class);
 
-    #[Test]
-    public function requesting_readme_requires_owner_and_repository(): void
-    {
-        $this->expectException(GitHubException::class);
+    app(GitHub::class)->packageIdeaIssues();
+});
 
-        app(GitHub::class)->readme('invalid');
-    }
+test('requesting readme requires owner and repository', function () {
+    $this->expectException(GitHubException::class);
 
-    #[Test]
-    public function requesting_readme_sends_request_to_correct_url(): void
-    {
-        Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response()]);
+    app(GitHub::class)->readme('invalid');
+});
 
-        app(GitHub::class)->readme('starwars/lightsabers');
+test('requesting readme sends request to correct url', function () {
+    Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response()]);
 
-        Http::assertSent(
-            fn ($request) => $request->url() === 'https://api.github.com/repos/starwars/lightsabers/readme'
-        );
-    }
+    app(GitHub::class)->readme('starwars/lightsabers');
 
-    #[Test]
-    public function requesting_readme_returns_null_when_readme_does_not_exist(): void
-    {
-        Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response(null, 404)]);
+    Http::assertSent(
+        fn ($request) => $request->url() === 'https://api.github.com/repos/starwars/lightsabers/readme'
+    );
+});
 
-        $response = app(GitHub::class)->readme('starwars/lightsabers');
+test('requesting readme returns null when readme does not exist', function () {
+    Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response(null, 404)]);
 
-        $this->assertNull($response);
-    }
+    $response = app(GitHub::class)->readme('starwars/lightsabers');
 
-    #[Test]
-    public function requesting_readme_throws_exception_when_request_has_error(): void
-    {
-        Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response(null, 500)]);
+    expect($response)->toBeNull();
+});
 
-        $this->expectException(RequestException::class);
+test('requesting readme throws exception when request has error', function () {
+    Http::fake(['https://api.github.com/repos/starwars/lightsabers/readme' => Http::response(null, 500)]);
 
-        app(GitHub::class)->readme('starwars/lightsabers');
-    }
+    $this->expectException(RequestException::class);
 
-    #[Test]
-    public function requesting_releases_requires_owner_and_repository(): void
-    {
-        $this->expectException(GitHubException::class);
+    app(GitHub::class)->readme('starwars/lightsabers');
+});
 
-        app(GitHub::class)->releases('invalid');
-    }
+test('requesting releases requires owner and repository', function () {
+    $this->expectException(GitHubException::class);
 
-    #[Test]
-    public function requesting_releases_sends_request_to_correct_url(): void
-    {
-        Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response([])]);
+    app(GitHub::class)->releases('invalid');
+});
 
-        app(GitHub::class)->releases('starwars/lightsabers');
+test('requesting releases sends request to correct url', function () {
+    Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response([])]);
 
-        Http::assertSent(
-            fn ($request) => $request->url() === 'https://api.github.com/repos/starwars/lightsabers/releases'
-        );
-    }
+    app(GitHub::class)->releases('starwars/lightsabers');
 
-    #[Test]
-    public function requesting_releases_throws_exception_when_request_has_error(): void
-    {
-        Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response(null, 500)]);
+    Http::assertSent(
+        fn ($request) => $request->url() === 'https://api.github.com/repos/starwars/lightsabers/releases'
+    );
+});
 
-        $this->expectException(RequestException::class);
+test('requesting releases throws exception when request has error', function () {
+    Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response(null, 500)]);
 
-        app(GitHub::class)->releases('starwars/lightsabers');
-    }
+    $this->expectException(RequestException::class);
 
-    #[Test]
-    public function requesting_user_sends_request_to_correct_url(): void
-    {
-        Http::fake(['https://api.github.com/users/lukeskywalker' => Http::response([])]);
+    app(GitHub::class)->releases('starwars/lightsabers');
+});
 
-        app(GitHub::class)->user('lukeskywalker');
+test('requesting user sends request to correct url', function () {
+    Http::fake(['https://api.github.com/users/lukeskywalker' => Http::response([])]);
 
-        Http::assertSent(fn ($request) => $request->url() === 'https://api.github.com/users/lukeskywalker');
-    }
+    app(GitHub::class)->user('lukeskywalker');
 
-    #[Test]
-    public function requesting_user_throws_exception_when_request_has_error(): void
-    {
-        Http::fake(['https://api.github.com/users/lukeskywalker' => Http::response(null, 500)]);
+    Http::assertSent(fn ($request) => $request->url() === 'https://api.github.com/users/lukeskywalker');
+});
 
-        $this->expectException(RequestException::class);
+test('requesting user throws exception when request has error', function () {
+    Http::fake(['https://api.github.com/users/lukeskywalker' => Http::response(null, 500)]);
 
-        app(GitHub::class)->user('lukeskywalker');
-    }
-}
+    $this->expectException(RequestException::class);
+
+    app(GitHub::class)->user('lukeskywalker');
+});

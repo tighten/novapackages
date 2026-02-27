@@ -1,90 +1,71 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Events\CollaboratorCreated;
 use App\Http\Remotes\GitHub;
 use App\Models\Collaborator;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Mockery as m;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class CollaboratorCrudTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(function () {
+    Notification::fake();
+});
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('users can create collaborators', function () {
+    Event::fake();
 
-        Notification::fake();
-    }
+    $github = m::mock(GitHub::class)->shouldIgnoreMissing();
+    app()->instance(GitHub::class, $github);
 
-    #[Test]
-    public function users_can_create_collaborators(): void
-    {
-        Event::fake();
+    $user = User::factory()->create();
 
-        $github = m::mock(GitHub::class)->shouldIgnoreMissing();
-        $this->app->instance(GitHub::class, $github);
+    $this->be($user)->post(route('app.collaborators.store'), [
+        'name' => 'Matt Stauffer',
+        'github_username' => 'mattstauffer',
+        'url' => 'https://mattstauffer.com/',
+    ]);
 
-        $user = User::factory()->create();
+    Event::assertDispatched(CollaboratorCreated::class);
+    expect(Collaborator::count())->toEqual(1);
+});
 
-        $this->be($user)->post(route('app.collaborators.store'), [
-            'name' => 'Matt Stauffer',
-            'github_username' => 'mattstauffer',
-            'url' => 'https://mattstauffer.com/',
-        ]);
+test('only one collaborator is allowed per github username', function () {
+    $github = m::mock(GitHub::class)->shouldIgnoreMissing();
+    app()->instance(GitHub::class, $github);
 
-        Event::assertDispatched(CollaboratorCreated::class);
-        $this->assertEquals(1, Collaborator::count());
-    }
+    $user = User::factory()->create();
 
-    #[Test]
-    public function only_one_collaborator_is_allowed_per_github_username(): void
-    {
-        $github = m::mock(GitHub::class)->shouldIgnoreMissing();
-        $this->app->instance(GitHub::class, $github);
+    $this->be($user)->post(route('app.collaborators.store'), [
+        'name' => 'Matt Stauffer',
+        'github_username' => 'mattstauffer',
+        'url' => 'https://mattstauffer.com/',
+    ]);
 
-        $user = User::factory()->create();
+    $this->be($user)->post(route('app.collaborators.store'), [
+        'name' => 'Stat Shmauffer',
+        'github_username' => 'mattstauffer',
+        'url' => 'https://statshmauffer.com/',
+    ]);
 
-        $this->be($user)->post(route('app.collaborators.store'), [
-            'name' => 'Matt Stauffer',
-            'github_username' => 'mattstauffer',
-            'url' => 'https://mattstauffer.com/',
-        ]);
+    expect(Collaborator::count())->toEqual(1);
+});
 
-        $this->be($user)->post(route('app.collaborators.store'), [
-            'name' => 'Stat Shmauffer',
-            'github_username' => 'mattstauffer',
-            'url' => 'https://statshmauffer.com/',
-        ]);
+test('collaborators receive avatar url from github upon creation', function () {
+    $github = m::mock(GitHub::class);
+    $github->shouldReceive('user')
+        ->with('not_a_real_github_username')
+        ->andReturn(['avatar_url' => 'http://www.image.com/']);
 
-        $this->assertEquals(1, Collaborator::count());
-    }
+    app()->instance(GitHub::class, $github);
 
-    #[Test]
-    public function collaborators_receive_avatar_url_from_github_upon_creation(): void
-    {
-        $github = m::mock(GitHub::class);
-        $github->shouldReceive('user')
-            ->with('not_a_real_github_username')
-            ->andReturn(['avatar_url' => 'http://www.image.com/']);
+    $user = User::factory()->create();
 
-        $this->app->instance(GitHub::class, $github);
+    $this->be($user)->post(route('app.collaborators.store'), [
+        'name' => 'Matt Stauffer',
+        'github_username' => 'not_a_real_github_username',
+        'url' => 'https://mattstauffer.com/',
+    ]);
 
-        $user = User::factory()->create();
-
-        $this->be($user)->post(route('app.collaborators.store'), [
-            'name' => 'Matt Stauffer',
-            'github_username' => 'not_a_real_github_username',
-            'url' => 'https://mattstauffer.com/',
-        ]);
-
-        $this->assertEquals('http://www.image.com/', Collaborator::first()->avatar);
-    }
-}
+    expect(Collaborator::first()->avatar)->toEqual('http://www.image.com/');
+});

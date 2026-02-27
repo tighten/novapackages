@@ -1,53 +1,39 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class PopularityTest extends TestCase
-{
-    use RefreshDatabase;
+test('github stars influence popularity', function () {
+    $user = User::factory()->create();
+    $collaborator = Collaborator::factory()->create();
+    $user->collaborators()->save($collaborator);
 
-    #[Test]
-    public function github_stars_influence_popularity(): void
-    {
-        $user = User::factory()->create();
-        $collaborator = Collaborator::factory()->create();
-        $user->collaborators()->save($collaborator);
+    $collaborator->authoredPackages()->saveMany(Package::factory(20)->make());
 
-        $collaborator->authoredPackages()->saveMany(Package::factory(20)->make());
+    $popularPackages = Package::inRandomOrder()->take(10)->get();
 
-        $popularPackages = Package::inRandomOrder()->take(10)->get();
+    $popularPackages->each(function ($package) {
+        $package->update(['github_stars' => 25]);
+    });
 
-        $popularPackages->each(function ($package) {
-            $package->update(['github_stars' => 25]);
-        });
+    $popularScope = Package::popular()->take(10)->pluck('id')->toArray();
+    expect(array_intersect($popularScope, $popularPackages->pluck('id')->toArray()))->toHaveCount(10);
+});
 
-        $popularScope = Package::popular()->take(10)->pluck('id')->toArray();
-        $this->assertCount(10, array_intersect($popularScope, $popularPackages->pluck('id')->toArray()));
-    }
+test('packagist downloads influence popularity', function () {
+    $user = User::factory()->create();
+    $collaborator = Collaborator::factory()->create();
+    $user->collaborators()->save($collaborator);
 
-    #[Test]
-    public function packagist_downloads_influence_popularity(): void
-    {
-        $user = User::factory()->create();
-        $collaborator = Collaborator::factory()->create();
-        $user->collaborators()->save($collaborator);
+    $collaborator->authoredPackages()->saveMany(Package::factory(20)->make());
 
-        $collaborator->authoredPackages()->saveMany(Package::factory(20)->make());
+    $popularPackages = Package::inRandomOrder()->take(10)->get();
 
-        $popularPackages = Package::inRandomOrder()->take(10)->get();
+    $popularPackages->each(function ($package) {
+        $package->update(['packagist_downloads' => 25]);
+    });
 
-        $popularPackages->each(function ($package) {
-            $package->update(['packagist_downloads' => 25]);
-        });
-
-        $popularScope = Package::popular()->take(10)->pluck('id')->toArray();
-        $this->assertCount(10, array_intersect($popularScope, $popularPackages->pluck('id')->toArray()));
-    }
-}
+    $popularScope = Package::popular()->take(10)->pluck('id')->toArray();
+    expect(array_intersect($popularScope, $popularPackages->pluck('id')->toArray()))->toHaveCount(10);
+});

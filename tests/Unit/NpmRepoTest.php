@@ -1,51 +1,40 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\BaseRepo;
 use App\NpmRepo;
 use Facades\App\Repo;
 use Illuminate\Support\Facades\Http;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class NpmRepoTest extends TestCase
-{
-    #[Test]
-    public function it_returns_proper_readme_format(): void
-    {
-        Http::fake(['https://registry.npmjs.org/lodash/' => Http::response()]);
+uses(Tests\TestCase::class);
 
-        $repo = NpmRepo::make('https://www.npmjs.com/package/lodash');
+it('returns proper readme format', function () {
+    Http::fake(['https://registry.npmjs.org/lodash/' => Http::response()]);
 
-        $this->assertEquals(BaseRepo::README_FORMAT, $repo->readmeFormat());
-    }
+    $repo = NpmRepo::make('https://www.npmjs.com/package/lodash');
 
-    #[Test]
-    public function it_returns_latest_release_if_set(): void
-    {
-        Http::fake([
-            'https://registry.npmjs.org/lodash/' => Http::response(
-                $this->fakeResponse('npm.repo-with-github-vcs.json')
-            ),
-            'https://api.github.com/repos/lodash/lodash/releases' => Http::response($this->fakeResponse('github.repo-releases.json')),
-        ]);
+    expect($repo->readmeFormat())->toEqual(BaseRepo::README_FORMAT);
+});
 
-        $repo = Repo::fromUrl('https://www.npmjs.com/package/lodash');
+it('returns latest release if set', function () {
+    Http::fake([
+        'https://registry.npmjs.org/lodash/' => Http::response(
+            $this->fakeResponse('npm.repo-with-github-vcs.json')
+        ),
+        'https://api.github.com/repos/lodash/lodash/releases' => Http::response($this->fakeResponse('github.repo-releases.json')),
+    ]);
 
-        $this->assertEquals('v1.0.0', $repo->latestReleaseVersion());
-    }
+    $repo = Repo::fromUrl('https://www.npmjs.com/package/lodash');
 
-    #[Test]
-    public function it_returns_master_if_latest_release_is_not_set(): void
-    {
-        Http::fake([
-            'https://registry.npmjs.org/lodash/' => Http::response(),
-            'https://api.github.com/repos/lodash/lodash/releases' => Http::response($this->fakeResponse('github.repo-releases.json')),
-        ]);
+    expect($repo->latestReleaseVersion())->toEqual('v1.0.0');
+});
 
-        $repo = Repo::fromUrl('https://www.npmjs.com/package/lodash');
+it('returns master if latest release is not set', function () {
+    Http::fake([
+        'https://registry.npmjs.org/lodash/' => Http::response(),
+        'https://api.github.com/repos/lodash/lodash/releases' => Http::response($this->fakeResponse('github.repo-releases.json')),
+    ]);
 
-        $this->assertEquals('master', $repo->latestReleaseVersion());
-    }
-}
+    $repo = Repo::fromUrl('https://www.npmjs.com/package/lodash');
+
+    expect($repo->latestReleaseVersion())->toEqual('master');
+});

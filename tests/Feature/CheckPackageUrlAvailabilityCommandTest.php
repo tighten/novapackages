@@ -1,112 +1,87 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use App\Notifications\NotifyAuthorOfUnavailablePackageUrl;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class CheckPackageUrlAvailabilityCommandTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(function () {
+    $this->validPackage = Package::factory()->create([
+        'name' => 'Valid Package',
+        'url' => 'https://github.com/tighten/novapackages',
+        'repo_url' => 'https://github.com/tighten/novapackages',
+        'author_id' => Collaborator::factory()->create([
+            'user_id' => User::factory()->create()->id,
+        ])->id,
+    ]);
 
-    private Package $validPackage;
+    $this->packageWithUnavailableUrl = Package::factory()->create([
+        'name' => 'Package with Unavailable URL',
+        'url' => 'https://github.com/some-dev/package-name',
+        'repo_url' => 'https://github.com/some-dev/package-name',
+        'author_id' => Collaborator::factory()->create([
+            'user_id' => User::factory()->create()->id,
+        ])->id,
+    ]);
 
-    private Package $packageWithUnavailableUrl;
+    $this->packageWithUnavailableDomain = Package::factory()->create([
+        'name' => 'Package with Unavailable Domain',
+        'url' => 'https://not-github.com/other-dev/package-name',
+        'repo_url' => 'https://github.com/tighten/novapackages',
+    ]);
+});
 
-    private Package $packageWithUnavailableDomain;
+test('calling command marks unavailable packages as unavailable', function () {
+    Notification::fake();
+    $now = now();
+    Carbon::setTestNow($now);
+    $this->artisan('novapackages:check-package-urls');
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    expect($this->validPackage->marked_as_unavailable_at)->toBeNull();
+    $this->assertEquals(
+        $this->packageWithUnavailableUrl->refresh()->marked_as_unavailable_at,
+        $now
+    );
+    $this->assertEquals(
+        $this->packageWithUnavailableDomain->refresh()->marked_as_unavailable_at,
+        $now
+    );
+});
 
-        $this->validPackage = Package::factory()->create([
-            'name' => 'Valid Package',
-            'url' => 'https://github.com/tighten/novapackages',
-            'repo_url' => 'https://github.com/tighten/novapackages',
-            'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id,
-            ])->id,
-        ]);
+test('calling command sends notification to author of unavailable packages', function () {
+    Notification::fake();
 
-        $this->packageWithUnavailableUrl = Package::factory()->create([
-            'name' => 'Package with Unavailable URL',
-            'url' => 'https://github.com/some-dev/package-name',
-            'repo_url' => 'https://github.com/some-dev/package-name',
-            'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id,
-            ])->id,
-        ]);
+    Http::fake([
+        $this->validPackage->url => Http::response(null, 200),
+        $this->packageWithUnavailableUrl->url => Http::response(null, 404),
+    ]);
 
-        $this->packageWithUnavailableDomain = Package::factory()->create([
-            'name' => 'Package with Unavailable Domain',
-            'url' => 'https://not-github.com/other-dev/package-name',
-            'repo_url' => 'https://github.com/tighten/novapackages',
-        ]);
-    }
+    $this->artisan('novapackages:check-package-urls');
 
-    #[Test]
-    public function calling_command_marks_unavailable_packages_as_unavailable(): void
-    {
-        Notification::fake();
-        $now = now();
-        Carbon::setTestNow($now);
-        $this->artisan('novapackages:check-package-urls');
+    Notification::assertNotSentTo(
+        $this->validPackage->author->user,
+        NotifyAuthorOfUnavailablePackageUrl::class
+    );
 
-        $this->assertNull($this->validPackage->marked_as_unavailable_at);
-        $this->assertEquals(
-            $this->packageWithUnavailableUrl->refresh()->marked_as_unavailable_at,
-            $now
-        );
-        $this->assertEquals(
-            $this->packageWithUnavailableDomain->refresh()->marked_as_unavailable_at,
-            $now
-        );
-    }
+    Notification::assertSentTo(
+        $this->packageWithUnavailableUrl->author->user,
+        NotifyAuthorOfUnavailablePackageUrl::class,
+    );
+});
 
-    #[Test]
-    public function calling_command_sends_notification_to_author_of_unavailable_packages(): void
-    {
-        Notification::fake();
+test('command ignores packages that are already unavailable', function () {
+    Notification::fake();
 
-        Http::fake([
-            $this->validPackage->url => Http::response(null, 200),
-            $this->packageWithUnavailableUrl->url => Http::response(null, 404),
-        ]);
+    $this->packageWithUnavailableUrl->marked_as_unavailable_at = now();
+    $this->packageWithUnavailableUrl->save();
 
-        $this->artisan('novapackages:check-package-urls');
+    $this->artisan('novapackages:check-package-urls');
 
-        Notification::assertNotSentTo(
-            $this->validPackage->author->user,
-            NotifyAuthorOfUnavailablePackageUrl::class
-        );
-
-        Notification::assertSentTo(
-            $this->packageWithUnavailableUrl->author->user,
-            NotifyAuthorOfUnavailablePackageUrl::class,
-        );
-    }
-
-    #[Test]
-    public function command_ignores_packages_that_are_already_unavailable(): void
-    {
-        Notification::fake();
-
-        $this->packageWithUnavailableUrl->marked_as_unavailable_at = now();
-        $this->packageWithUnavailableUrl->save();
-
-        $this->artisan('novapackages:check-package-urls');
-
-        Notification::assertNotSentTo(
-            $this->packageWithUnavailableUrl->author->user,
-            NotifyAuthorOfUnavailablePackageUrl::class,
-        );
-    }
-}
+    Notification::assertNotSentTo(
+        $this->packageWithUnavailableUrl->author->user,
+        NotifyAuthorOfUnavailablePackageUrl::class,
+    );
+});

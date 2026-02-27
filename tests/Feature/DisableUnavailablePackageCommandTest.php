@@ -1,52 +1,40 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use App\Notifications\NotifyAuthorOfDisabledPackage;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class DisableUnavailablePackageCommandTest extends TestCase
-{
-    use RefreshDatabase;
+test('command disables unavailable packages after 30 days', function () {
 
-    #[Test]
-    public function command_disables_unavailable_packages_after_30_days(): void
-    {
+    Notification::fake();
 
-        Notification::fake();
+    $packageThatShouldBeDisabled = Package::factory()->create([
+        'marked_as_unavailable_at' => today()->subDays(30),
+        'author_id' => Collaborator::factory()->create([
+            'user_id' => User::factory()->create()->id,
+        ])->id,
+    ]);
 
-        $packageThatShouldBeDisabled = Package::factory()->create([
-            'marked_as_unavailable_at' => today()->subDays(30),
-            'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id,
-            ])->id,
-        ]);
+    $packageThatShouldNotBeDisabled = Package::factory()->create([
+        'marked_as_unavailable_at' => today()->subDays(29),
+        'author_id' => Collaborator::factory()->create([
+            'user_id' => User::factory()->create()->id,
+        ])->id,
+    ]);
 
-        $packageThatShouldNotBeDisabled = Package::factory()->create([
-            'marked_as_unavailable_at' => today()->subDays(29),
-            'author_id' => Collaborator::factory()->create([
-                'user_id' => User::factory()->create()->id,
-            ])->id,
-        ]);
+    $this->artisan('novapackages:disable-unavailable-packages');
 
-        $this->artisan('novapackages:disable-unavailable-packages');
+    expect($packageThatShouldBeDisabled->refresh()->is_disabled)->toBeTrue();
+    Notification::assertSentTo(
+        $packageThatShouldBeDisabled->author->user,
+        NotifyAuthorOfDisabledPackage::class,
+    );
 
-        $this->assertTrue($packageThatShouldBeDisabled->refresh()->is_disabled);
-        Notification::assertSentTo(
-            $packageThatShouldBeDisabled->author->user,
-            NotifyAuthorOfDisabledPackage::class,
-        );
-
-        $this->assertFalse($packageThatShouldNotBeDisabled->refresh()->is_disabled);
-        Notification::assertNotSentTo(
-            $packageThatShouldNotBeDisabled->author->user,
-            NotifyAuthorOfDisabledPackage::class,
-        );
-    }
-}
+    expect($packageThatShouldNotBeDisabled->refresh()->is_disabled)->toBeFalse();
+    Notification::assertNotSentTo(
+        $packageThatShouldNotBeDisabled->author->user,
+        NotifyAuthorOfDisabledPackage::class,
+    );
+});

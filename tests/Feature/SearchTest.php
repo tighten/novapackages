@@ -1,43 +1,27 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Package;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class SearchTest extends TestCase
-{
-    use RefreshDatabase;
+it('returns matching results', function () {
+    $package = Package::factory()->create(['name' => 'Dancing hyenas']);
 
-    #[Test]
-    public function it_returns_matching_results(): void
-    {
-        $package = Package::factory()->create(['name' => 'Dancing hyenas']);
+    $response = $this->get(route('search', ['q' => 'hyenas']));
 
-        $response = $this->get(route('search', ['q' => 'hyenas']));
+    $response->assertSee('Dancing hyenas');
+});
 
-        $response->assertSee('Dancing hyenas');
-    }
+it('doesnt return non matching results', function () {
+    $package = Package::factory()->create(['name' => 'Dancing hyenas']);
 
-    #[Test]
-    public function it_doesnt_return_non_matching_results(): void
-    {
-        $package = Package::factory()->create(['name' => 'Dancing hyenas']);
+    $response = $this->get(route('search', ['q' => 'acrobats']));
 
-        $response = $this->get(route('search', ['q' => 'acrobats']));
+    $response->assertDontSee('Dancing hyenas');
+});
 
-        $response->assertDontSee('Dancing hyenas');
-    }
+it('ignores disabled packages', function () {
+    $package2 = Package::factory()->disabled()->create(['name' => 'An alligator']);
 
-    #[Test]
-    public function it_ignores_disabled_packages(): void
-    {
-        $package2 = Package::factory()->disabled()->create(['name' => 'An alligator']);
+    $response = $this->get(route('search', ['q' => 'a']));
 
-        $response = $this->get(route('search', ['q' => 'a']));
-
-        $response->assertDontSee('alligator');
-    }
-}
+    $response->assertDontSee('alligator');
+});

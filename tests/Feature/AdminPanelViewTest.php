@@ -1,95 +1,68 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class AdminPanelViewTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(function () {
+    $this->user = User::factory()->admin()->create();
+});
 
-    private $user;
+test('admin panel shows enabled packages if there are any', function () {
+    $enabledPackage = Package::factory()->create();
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $this->be($this->user)
+        ->get(route('app.admin.index'))
+        ->assertViewHas('enabled_packages', function ($enabled_packages) use ($enabledPackage) {
+            return $enabled_packages->contains($enabledPackage);
+        });
+});
 
-        $this->user = User::factory()->admin()->create();
-    }
+test('admin panel shows disabled packages if there are any', function () {
+    $disabledPackage = Package::factory()->disabled()->create();
 
-    #[Test]
-    public function admin_panel_shows_enabled_packages_if_there_are_any(): void
-    {
-        $enabledPackage = Package::factory()->create();
+    $this->be($this->user)
+        ->get(route('app.admin.index'))
+        ->assertViewHas('disabled_packages', function ($disabled_packages) use ($disabledPackage) {
+            return $disabled_packages->contains($disabledPackage);
+        });
+});
 
-        $this->be($this->user)
-            ->get(route('app.admin.index'))
-            ->assertViewHas('enabled_packages', function ($enabled_packages) use ($enabledPackage) {
-                return $enabled_packages->contains($enabledPackage);
-            });
-    }
+test('admin panel does not show disabled package list if there are none', function () {
+    $enabledPackage = Package::factory()->create();
 
-    #[Test]
-    public function admin_panel_shows_disabled_packages_if_there_are_any(): void
-    {
-        $disabledPackage = Package::factory()->disabled()->create();
+    $this->be($this->user)
+        ->get(route('app.admin.index'))
+        ->assertDontSee('Disabled Packages');
+});
 
-        $this->be($this->user)
-            ->get(route('app.admin.index'))
-            ->assertViewHas('disabled_packages', function ($disabled_packages) use ($disabledPackage) {
-                return $disabled_packages->contains($disabledPackage);
-            });
-    }
+test('admin panel does not show enabled package list if there are none', function () {
+    $disabledPackage = Package::factory()->disabled()->create();
 
-    #[Test]
-    public function admin_panel_does_not_show_disabled_package_list_if_there_are_none(): void
-    {
-        $enabledPackage = Package::factory()->create();
+    $this->be($this->user)
+        ->get(route('app.admin.index'))
+        ->assertDontSee('Enabled Packages');
+});
 
-        $this->be($this->user)
-            ->get(route('app.admin.index'))
-            ->assertDontSee('Disabled Packages');
-    }
+test('admin user can view individual page for disabled package', function () {
+    Http::fake([
+        'https://packagist.org/packages/*.json' => Http::response(),
+    ]);
 
-    #[Test]
-    public function admin_panel_does_not_show_enabled_package_list_if_there_are_none(): void
-    {
-        $disabledPackage = Package::factory()->disabled()->create();
+    $disabledPackage = Package::factory()->disabled()->create();
 
-        $this->be($this->user)
-            ->get(route('app.admin.index'))
-            ->assertDontSee('Enabled Packages');
-    }
+    $this->be($this->user)
+        ->get(route('packages.show', [
+            'namespace' => $disabledPackage->composer_vendor,
+            'name' => $disabledPackage->composer_package,
+        ]))
+        ->assertOk();
+});
 
-    #[Test]
-    public function admin_user_can_view_individual_page_for_disabled_package(): void
-    {
-        Http::fake([
-            'https://packagist.org/packages/*.json' => Http::response(),
-        ]);
+test('admin user can view edit page for disabled package', function () {
+    $disabledPackage = Package::factory()->disabled()->create();
 
-        $disabledPackage = Package::factory()->disabled()->create();
-
-        $this->be($this->user)
-            ->get(route('packages.show', [
-                'namespace' => $disabledPackage->composer_vendor,
-                'name' => $disabledPackage->composer_package,
-            ]))
-            ->assertOk();
-    }
-
-    #[Test]
-    public function admin_user_can_view_edit_page_for_disabled_package(): void
-    {
-        $disabledPackage = Package::factory()->disabled()->create();
-
-        $this->be($this->user)
-            ->get(route('app.packages.edit', $disabledPackage->id))
-            ->assertOk();
-    }
-}
+    $this->be($this->user)
+        ->get(route('app.packages.edit', $disabledPackage->id))
+        ->assertOk();
+});

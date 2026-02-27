@@ -1,40 +1,26 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class DisableAndEnablePackagesTest extends TestCase
-{
-    use RefreshDatabase;
+test('admin user can disable a package', function () {
+    $user = User::factory()->admin()->create();
+    $package = Package::factory()->create();
 
-    #[Test]
-    public function admin_user_can_disable_a_package(): void
-    {
-        $user = User::factory()->admin()->create();
-        $package = Package::factory()->create();
+    $response = $this->be($user->fresh())->get(route('app.admin.disable-package', [$package]));
+    $response->assertStatus(302);
 
-        $response = $this->be($user->fresh())->get(route('app.admin.disable-package', [$package]));
-        $response->assertStatus(302);
+    $updatedPackage = Package::withoutGlobalScope('notDisabled')->find($package->id);
+    expect($updatedPackage->is_disabled)->toBeTrue();
+});
 
-        $updatedPackage = Package::withoutGlobalScope('notDisabled')->find($package->id);
-        $this->assertTrue($updatedPackage->is_disabled);
-    }
+test('admin user can enable a package', function () {
+    $user = User::factory()->admin()->create();
+    $package = Package::factory()->disabled()->create();
 
-    #[Test]
-    public function admin_user_can_enable_a_package(): void
-    {
-        $user = User::factory()->admin()->create();
-        $package = Package::factory()->disabled()->create();
+    $response = $this->be($user->fresh())->get(route('app.admin.enable-package', [$package]));
+    $response->assertStatus(302);
 
-        $response = $this->be($user->fresh())->get(route('app.admin.enable-package', [$package]));
-        $response->assertStatus(302);
-
-        $updatedPackage = Package::withoutGlobalScope('notDisabled')->find($package->id);
-        $this->assertFalse($updatedPackage->is_disabled);
-    }
-}
+    $updatedPackage = Package::withoutGlobalScope('notDisabled')->find($package->id);
+    expect($updatedPackage->is_disabled)->toBeFalse();
+});

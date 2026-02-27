@@ -114,11 +114,6 @@ class Package extends Model implements Feedable
         ];
     }
 
-    private function sanitizeForSearch(string $value): string
-    {
-        return mb_convert_encoding($value, 'UTF-8', 'UTF-8');
-    }
-
     public function getDisplayNameAttribute()
     {
         // The haystack used to check if the string contains any of the invalid substrings.
@@ -272,5 +267,10 @@ class Package extends Model implements Feedable
     protected function novaCurrent($query)
     {
         return $query->where('nova_version', config('novapackages.nova.latest_major_version'));
+    }
+
+    private function sanitizeForSearch(string $value): string
+    {
+        return mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
 }

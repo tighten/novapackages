@@ -1,160 +1,140 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Events\NewUserSignedUp;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class LoginTest extends TestCase
-{
-    use RefreshDatabase;
+test('a user can login after socialite authentication', function () {
+    Event::fake();
 
-    #[Test]
-    public function a_user_can_login_after_socialite_authentication(): void
-    {
-        Event::fake();
+    $fakeUserData = [
+        'name' => 'test',
+        'email' => 'test@example.com',
+        'avatar' => 'http://someimg.jpg',
+        'github_username' => 'test',
+        'github_user_id' => 123,
+    ];
 
-        $fakeUserData = [
-            'name' => 'test',
-            'email' => 'test@example.com',
-            'avatar' => 'http://someimg.jpg',
-            'github_username' => 'test',
-            'github_user_id' => 123,
-        ];
+    $this->mockSocialiteWithUserData($fakeUserData);
 
-        $this->mockSocialiteWithUserData($fakeUserData);
+    $response = $this->get('login/github/callback');
 
-        $response = $this->get('login/github/callback');
+    $response->assertRedirect(route('home'));
+    Event::assertDispatched(NewUserSignedUp::class);
+    expect(User::all())->toHaveCount(1);
+    $user = User::first();
+    $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $user->toArray(), array_keys($fakeUserData));
+    expect(auth()->id())->toEqual($user->id);
+});
 
-        $response->assertRedirect(route('home'));
-        Event::assertDispatched(NewUserSignedUp::class);
-        $this->assertCount(1, User::all());
-        $user = User::first();
-        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $user->toArray(), array_keys($fakeUserData));
-        $this->assertEquals($user->id, auth()->id());
-    }
+test('a user can login after socialite authentication when the socialite response is missing an email', function () {
+    Event::fake();
 
-    #[Test]
-    public function a_user_can_login_after_socialite_authentication_when_the_socialite_response_is_missing_an_email(): void
-    {
-        Event::fake();
+    $fakeUserData = [
+        'name' => 'test',
+        'email' => null,
+        'avatar' => 'http://someimg.jpg',
+        'github_username' => 'test',
+        'github_user_id' => 123,
+    ];
 
-        $fakeUserData = [
-            'name' => 'test',
-            'email' => null,
-            'avatar' => 'http://someimg.jpg',
-            'github_username' => 'test',
-            'github_user_id' => 123,
-        ];
+    $this->mockSocialiteWithUserData($fakeUserData);
 
-        $this->mockSocialiteWithUserData($fakeUserData);
+    $response = $this->get('login/github/callback');
 
-        $response = $this->get('login/github/callback');
+    $response->assertRedirect(route('home'));
+    Event::assertDispatched(NewUserSignedUp::class);
+    expect(User::all())->toHaveCount(1);
+    $user = User::first();
+    $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $user->toArray(), array_keys($fakeUserData));
+    expect(auth()->id())->toEqual($user->id);
+});
 
-        $response->assertRedirect(route('home'));
-        Event::assertDispatched(NewUserSignedUp::class);
-        $this->assertCount(1, User::all());
-        $user = User::first();
-        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $user->toArray(), array_keys($fakeUserData));
-        $this->assertEquals($user->id, auth()->id());
-    }
+test('a user is updated if the email matches the socialite response', function () {
+    Event::fake();
 
-    #[Test]
-    public function a_user_is_updated_if_the_email_matches_the_socialite_response(): void
-    {
-        Event::fake();
+    $fakeUserData = [
+        'name' => 'new name',
+        'email' => 'test@example.com',
+        'avatar' => 'http://new-test-avatar.jpg',
+        'github_username' => 'newgithubname',
+        'github_user_id' => 123,
+    ];
 
-        $fakeUserData = [
-            'name' => 'new name',
-            'email' => 'test@example.com',
-            'avatar' => 'http://new-test-avatar.jpg',
-            'github_username' => 'newgithubname',
-            'github_user_id' => 123,
-        ];
+    $this->mockSocialiteWithUserData($fakeUserData);
 
-        $this->mockSocialiteWithUserData($fakeUserData);
+    $existingUser = User::factory()->create([
+        'name' => 'John Smith',
+        'email' => 'test@example.com',
+        'avatar' => 'http://test-avatar.jpg',
+        'github_username' => 'test',
+    ]);
 
-        $existingUser = User::factory()->create([
-            'name' => 'John Smith',
-            'email' => 'test@example.com',
-            'avatar' => 'http://test-avatar.jpg',
-            'github_username' => 'test',
-        ]);
+    $response = $this->get('login/github/callback');
 
-        $response = $this->get('login/github/callback');
+    $response->assertRedirect(route('home'));
+    Event::assertNotDispatched(NewUserSignedUp::class);
+    expect(User::all())->toHaveCount(1);
+    $existingUser->refresh();
+    $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $existingUser->toArray(), array_keys($fakeUserData));
+    expect(auth()->id())->toEqual($existingUser->id);
+});
 
-        $response->assertRedirect(route('home'));
-        Event::assertNotDispatched(NewUserSignedUp::class);
-        $this->assertCount(1, User::all());
-        $existingUser->refresh();
-        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $existingUser->toArray(), array_keys($fakeUserData));
-        $this->assertEquals($existingUser->id, auth()->id());
-    }
+test('a user is updated if the github username matches the socialite response', function () {
+    Event::fake();
 
-    #[Test]
-    public function a_user_is_updated_if_the_github_username_matches_the_socialite_response(): void
-    {
-        Event::fake();
+    $fakeUserData = [
+        'name' => 'new name',
+        'email' => 'newtest@example.com',
+        'avatar' => 'http://new-test-avatar.jpg',
+        'github_username' => 'githubname',
+        'github_user_id' => 123,
+    ];
 
-        $fakeUserData = [
-            'name' => 'new name',
-            'email' => 'newtest@example.com',
-            'avatar' => 'http://new-test-avatar.jpg',
-            'github_username' => 'githubname',
-            'github_user_id' => 123,
-        ];
+    $this->mockSocialiteWithUserData($fakeUserData);
 
-        $this->mockSocialiteWithUserData($fakeUserData);
+    $existingUser = User::factory()->create([
+        'name' => 'John Smith',
+        'email' => 'test@example.com',
+        'avatar' => 'http://test-avatar.jpg',
+        'github_username' => 'githubname',
+    ]);
 
-        $existingUser = User::factory()->create([
-            'name' => 'John Smith',
-            'email' => 'test@example.com',
-            'avatar' => 'http://test-avatar.jpg',
-            'github_username' => 'githubname',
-        ]);
+    $response = $this->get('login/github/callback');
 
-        $response = $this->get('login/github/callback');
+    $response->assertRedirect(route('home'));
+    Event::assertNotDispatched(NewUserSignedUp::class);
+    expect(User::all())->toHaveCount(1);
+    $existingUser->refresh();
+    $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $existingUser->toArray(), array_keys($fakeUserData));
+    expect(auth()->id())->toEqual($existingUser->id);
+});
 
-        $response->assertRedirect(route('home'));
-        Event::assertNotDispatched(NewUserSignedUp::class);
-        $this->assertCount(1, User::all());
-        $existingUser->refresh();
-        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($fakeUserData, $existingUser->toArray(), array_keys($fakeUserData));
-        $this->assertEquals($existingUser->id, auth()->id());
-    }
+test('the github user id is updated if it is null', function () {
+    Event::fake();
 
-    #[Test]
-    public function the_github_user_id_is_updated_if_it_is_null(): void
-    {
-        Event::fake();
+    $fakeUserData = [
+        'name' => 'Ahsoka Tano',
+        'email' => 'ahsoka@example.com',
+        'avatar' => 'http://new-test-avatar.jpg',
+        'github_username' => 'ahsokatano',
+        'github_user_id' => 123,
+    ];
 
-        $fakeUserData = [
-            'name' => 'Ahsoka Tano',
-            'email' => 'ahsoka@example.com',
-            'avatar' => 'http://new-test-avatar.jpg',
-            'github_username' => 'ahsokatano',
-            'github_user_id' => 123,
-        ];
+    $this->mockSocialiteWithUserData($fakeUserData);
 
-        $this->mockSocialiteWithUserData($fakeUserData);
+    $existingUser = User::factory()->create([
+        'name' => 'Ahsoka Tano',
+        'email' => 'ahsoka@example.com',
+        'avatar' => 'http://test-avatar.jpg',
+        'github_username' => 'ahsokatano',
+        'github_user_id' => null,
+    ]);
 
-        $existingUser = User::factory()->create([
-            'name' => 'Ahsoka Tano',
-            'email' => 'ahsoka@example.com',
-            'avatar' => 'http://test-avatar.jpg',
-            'github_username' => 'ahsokatano',
-            'github_user_id' => null,
-        ]);
+    $response = $this->get('login/github/callback');
 
-        $response = $this->get('login/github/callback');
-
-        $response->assertRedirect(route('home'));
-        Event::assertNotDispatched(NewUserSignedUp::class);
-        $this->assertCount(1, User::all());
-        $this->assertEquals(123, $existingUser->fresh()->github_user_id);
-    }
-}
+    $response->assertRedirect(route('home'));
+    Event::assertNotDispatched(NewUserSignedUp::class);
+    expect(User::all())->toHaveCount(1);
+    expect($existingUser->fresh()->github_user_id)->toEqual(123);
+});

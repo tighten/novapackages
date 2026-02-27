@@ -1,55 +1,42 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Exceptions\GitHubException;
 use App\GitHubRepo;
 use Illuminate\Support\Facades\Http;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class GitHubRepoTest extends TestCase
-{
-    #[Test]
-    public function requires_valid_url(): void
-    {
-        $this->expectException(GitHubException::class);
+uses(Tests\TestCase::class);
 
-        GitHubRepo::make('https://notgithub.com/starwars/lightsabers');
-    }
+test('requires valid url', function () {
+    $this->expectException(GitHubException::class);
 
-    #[Test]
-    public function it_gets_the_latest_release_version_for_tagged_releases(): void
-    {
-        Http::fake([
-            'https://api.github.com/repos/starwars/lightsabers/releases' => Http::response(collect([
-                [
-                    'name' => 'Release',
-                    'tag_name' => 'v1.0',
-                ],
-            ])),
-        ]);
+    GitHubRepo::make('https://notgithub.com/starwars/lightsabers');
+});
 
-        $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
+it('gets the latest release version for tagged releases', function () {
+    Http::fake([
+        'https://api.github.com/repos/starwars/lightsabers/releases' => Http::response(collect([
+            [
+                'name' => 'Release',
+                'tag_name' => 'v1.0',
+            ],
+        ])),
+    ]);
 
-        $this->assertEquals('v1.0', $repo->latestReleaseVersion());
-    }
+    $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
 
-    #[Test]
-    public function it_falls_back_to_master_when_there_are_no_releases(): void
-    {
-        Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response([])]);
+    expect($repo->latestReleaseVersion())->toEqual('v1.0');
+});
 
-        $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
+it('falls back to master when there are no releases', function () {
+    Http::fake(['https://api.github.com/repos/starwars/lightsabers/releases' => Http::response([])]);
 
-        $this->assertEquals('master', $repo->latestReleaseVersion());
-    }
+    $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
 
-    #[Test]
-    public function it_returns_proper_readme_format(): void
-    {
-        $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
+    expect($repo->latestReleaseVersion())->toEqual('master');
+});
 
-        $this->assertEquals(GitHubRepo::README_FORMAT, $repo->readmeFormat());
-    }
-}
+it('returns proper readme format', function () {
+    $repo = GitHubRepo::make('https://github.com/starwars/lightsabers');
+
+    expect($repo->readmeFormat())->toEqual(GitHubRepo::README_FORMAT);
+});

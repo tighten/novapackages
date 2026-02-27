@@ -1,29 +1,17 @@
 <?php
 
-namespace Tests\Feature\Api;
-
 use App\Models\Package;
 use App\Models\Tag;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class TagsOnApiTest extends TestCase
-{
-    use RefreshDatabase;
+it('attaches tags to api responses', function () {
+    $package = Package::factory()->create();
+    $tag = Tag::factory()->create();
+    $package->tags()->attach($tag);
 
-    #[Test]
-    public function it_attaches_tags_to_api_responses(): void
-    {
-        $package = Package::factory()->create();
-        $tag = Tag::factory()->create();
-        $package->tags()->attach($tag);
+    $apiCall = $this->get('api/recent')->json();
 
-        $apiCall = $this->get('api/recent')->json();
-
-        $tags = reset($apiCall['data'])['tags'];
-        $this->assertCount(1, $tags);
-        $this->assertEquals($tag->slug, reset($tags)['slug']);
-        $this->assertEquals($tag->name, reset($tags)['name']);
-    }
-}
+    $tags = reset($apiCall['data'])['tags'];
+    expect($tags)->toHaveCount(1);
+    expect(reset($tags)['slug'])->toEqual($tag->slug);
+    expect(reset($tags)['name'])->toEqual($tag->name);
+});

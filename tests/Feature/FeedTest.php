@@ -1,23 +1,11 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Package;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-class FeedTest extends TestCase
-{
-    use RefreshDatabase;
+test('the recent feed loads', function () {
+    Package::factory()->create();
 
-    #[Test]
-    public function the_recent_feed_loads(): void
-    {
-        Package::factory()->create();
+    $response = $this->get('feeds/recent');
 
-        $response = $this->get('feeds/recent');
-
-        $response->assertSuccessful();
-    }
-}
+    $response->assertSuccessful();
+});
