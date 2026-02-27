@@ -204,7 +204,7 @@ test('user cannot submit package with duplicate packagist name', function () {
     $duplicatePackage = Package::factory()->make(['composer_name' => $originalPackage->composer_name]);
 
     $this->actingAs($user)
-        ->post(route('app.packages.store'), $this->postfromPackage($originalPackage));
+        ->post(route('app.packages.store'), postFromPackage($originalPackage));
 
     $this->assertDatabaseHas('packages', ['name' => $originalPackage->name]);
 
@@ -427,20 +427,3 @@ test('deleting package fires slack notification', function () {
         }
     );
 });
-
-// Helpers
-function postFromPackage($package)
-{
-    $packagistInformation = explode('/', $package->composer_name);
-
-    return [
-        'author_id' => $package->author_id,
-        'name' => $package->name,
-        'packagist_namespace' => $packagistInformation[0],
-        'packagist_name' => $packagistInformation[1],
-        'url' => $package->url,
-        'description' => $package->description,
-        'abstract' => $package->abstract,
-        'instructions' => $package->instructions,
-    ];
-}

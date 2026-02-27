@@ -128,19 +128,3 @@ function createANewOpenGraphImage($packageName)
 
     return $filePath;
 }
-
-function postFromPackage($package)
-{
-    $packagistInformation = explode('/', $package->composer_name);
-
-    return [
-        'author_id' => $package->author_id,
-        'name' => $package->name,
-        'packagist_namespace' => $packagistInformation[0],
-        'packagist_name' => $packagistInformation[1],
-        'url' => $package->url,
-        'description' => $package->description,
-        'abstract' => $package->abstract,
-        'instructions' => $package->instructions,
-    ];
-}

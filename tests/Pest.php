@@ -41,3 +41,36 @@ uses(\Illuminate\Foundation\Testing\RefreshDatabase::class)->in('Feature');
 */
 
 /** @link https://pestphp.com/docs/custom-helpers */
+
+use App\Models\Collaborator;
+use App\Models\Package;
+use App\Models\Tag;
+use App\Models\User;
+
+function postFromPackage($package)
+{
+    $packagistInformation = explode('/', $package->composer_name);
+
+    return [
+        'author_id' => $package->author_id,
+        'name' => $package->name,
+        'packagist_namespace' => $packagistInformation[0],
+        'packagist_name' => $packagistInformation[1],
+        'url' => $package->url,
+        'description' => $package->description,
+        'abstract' => $package->abstract,
+        'instructions' => $package->instructions,
+    ];
+}
+
+function createPackageWithUser()
+{
+    $package = Package::factory()->make();
+    $collaborator = Collaborator::factory()->make();
+    $user = User::factory()->create();
+    $user->collaborators()->save($collaborator);
+    $collaborator->authoredPackages()->save($package);
+    $package->tags()->save(Tag::factory()->create());
+
+    return [$package, $user];
+}

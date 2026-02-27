@@ -3,14 +3,12 @@
 use App\Http\Remotes\GitHub;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\AssertableJsonString;
-use Tests\TestCase;
 
+uses()->group('integration');
 
-#[Group('integration')]
 beforeEach(function () {
     Http::allowStrayRequests();
 });
-
 
 test('readme response in expected format', function () {
     $response = app(GitHub::class)->readme('tighten/nova-stripe');

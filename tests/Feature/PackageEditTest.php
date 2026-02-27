@@ -396,15 +396,3 @@ function getValidPackageData()
         'packagist_name' => 'bae',
     ]);
 }
-
-function createPackageWithUser()
-{
-    $package = Package::factory()->make();
-    $collaborator = Collaborator::factory()->make();
-    $user = User::factory()->create();
-    $user->collaborators()->save($collaborator);
-    $collaborator->authoredPackages()->save($package);
-    $package->tags()->save(Tag::factory()->create());
-
-    return [$package, $user];
-}

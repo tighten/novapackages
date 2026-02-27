@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Collaborator;
-use App\Models\Package;
 use App\Models\Screenshot;
 use App\Models\User;
 use Illuminate\Http\Testing\File;
@@ -87,15 +85,3 @@ test('a guest user can not delete a screenshot', function () {
     expect(Screenshot::first()->is($screenshot))->toBeTrue();
     Storage::assertExists($screenshot->path);
 });
-
-// Helpers
-function createPackageWithUser()
-{
-    $package = Package::factory()->make();
-    $collaborator = Collaborator::factory()->make();
-    $user = User::factory()->create();
-    $user->collaborators()->save($collaborator);
-    $collaborator->authoredPackages()->save($package);
-
-    return [$package, $user];
-}
