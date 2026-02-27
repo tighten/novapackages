@@ -237,6 +237,35 @@ class PackageTest extends TestCase
     }
 
     #[Test]
+    public function searchable_array_preserves_chinese_characters_in_readme(): void
+    {
+        $chineseReadme = '# nova-amap' . "\n" . 'Laravel Nova高德地图';
+
+        $package = Package::factory()->create([
+            'readme' => $chineseReadme,
+        ]);
+
+        $searchableArray = $package->toSearchableArray();
+
+        $this->assertEquals($chineseReadme, $searchableArray['readme']);
+        $this->assertNotFalse(json_encode($searchableArray), 'Searchable array must be JSON-encodable');
+    }
+
+    #[Test]
+    public function searchable_array_strips_invalid_utf8_sequences(): void
+    {
+        $invalidUtf8 = "Valid text \xc3\x28 more text";
+
+        $package = Package::factory()->create([
+            'readme' => $invalidUtf8,
+        ]);
+
+        $searchableArray = $package->toSearchableArray();
+
+        $this->assertNotFalse(json_encode($searchableArray), 'Searchable array must be JSON-encodable');
+    }
+
+    #[Test]
     #[DataProvider('packageNameProvider')]
     public function it_returns_the_display_name_of_the_package($input, $expected): void
     {
