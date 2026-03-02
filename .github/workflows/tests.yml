@@ -56,4 +56,4 @@ jobs:
           php artisan migrate
 
       - name: Run PHP tests
-        run: vendor/bin/pest --exclude-group integration
+        run: php artisan test --exclude-group integration
