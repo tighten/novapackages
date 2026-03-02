@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -23,8 +23,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.composer/cache/files
-          key: php-8.3-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: php-8.3-composer-
+          key: php-8.4-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: php-8.4-composer-
 
       - name: Cache npm dependencies
         uses: actions/cache@v3
@@ -40,6 +40,7 @@ jobs:
         run: |
           composer install --prefer-dist --no-interaction --no-progress --no-suggest
           npm install
+          
       - name: Build Assets
         run: npm run build
 
