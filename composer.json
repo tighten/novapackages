@@ -13,7 +13,7 @@
         "php": "^8.2",
         "algolia/algoliasearch-client-php": "^3.3",
         "erusev/parsedown": "^1.7",
-        "laravel/framework": "^12.53",
+        "laravel/framework": "^12.54",
         "laravel/helpers": "^1.7",
         "laravel/horizon": "^5.30",
         "laravel/passport": "^13.0",
