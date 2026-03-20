@@ -3,15 +3,15 @@
 namespace App\Console\Commands;
 
 use App\Models\Package;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
+#[Signature('purge:ogimage {package? : The ID of the package}')]
+#[Description('Deletes all existing Open Graph images from storage.')]
 class DeleteOpenGraphImages extends Command
 {
-    protected $signature = 'purge:ogimage {package? : The ID of the package}';
-
-    protected $description = 'Deletes all existing Open Graph images from storage.';
-
     public function handle(): void
     {
         if (! $this->argument('package')) {

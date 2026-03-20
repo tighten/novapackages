@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use App\Jobs\GeneratePackageOpenGraphImage;
 use App\Models\Package;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
+#[Signature('generate:ogimage {package? : The ID of the package}')]
+#[Description('Generates new Open Graph images for every package.')]
 class GenerateOpenGraphImages extends Command
 {
-    protected $signature = 'generate:ogimage {package? : The ID of the package}';
-
-    protected $description = 'Generates new Open Graph images for every package.';
-
     public function handle(): void
     {
         $this->callSilent('purge:ogimage', ['package' => $this->argument('package')]);
