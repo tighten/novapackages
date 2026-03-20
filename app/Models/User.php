@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Jobs\UserRatePackage;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\Contracts\OAuthenticatable;
 use Laravel\Passport\HasApiTokens;
 
+#[Fillable(['name', 'email', 'avatar', 'github_username', 'github_user_id'])]
 class User extends Authenticatable implements OAuthenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -21,15 +23,6 @@ class User extends Authenticatable implements OAuthenticatable
     protected $roles = [
         self::USER_ROLE => 'user',
         self::ADMIN_ROLE => 'admin',
-    ];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'avatar', 'github_username', 'github_user_id',
     ];
 
     /**

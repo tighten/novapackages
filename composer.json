@@ -33,7 +33,7 @@
         "tightenco/duster": "^3.3",
         "tightenco/ziggy": "^2.6",
         "typesense/typesense-php": "^4.9",
-        "willvincent/laravel-rateable": "^3.5"
+        "willvincent/laravel-rateable": "dev-l13-compatibility"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^4.0",
@@ -108,5 +108,11 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/laravel-rateable"
+        }
+    ]
 }

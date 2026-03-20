@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\OpenGraphImage;
 use App\RatingCountable;
+use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,7 @@ use Spatie\Feed\FeedItem;
 use willvincent\Rateable\Rateable;
 use willvincent\Rateable\Rating;
 
+#[Guarded(['id', 'is_disabled'])]
 class Package extends Model implements Feedable
 {
     use HasFactory;
@@ -29,8 +31,6 @@ class Package extends Model implements Feedable
         RatingCountable::averageRating insteadof Rateable;
     }
     use Searchable;
-
-    protected $guarded = ['id', 'is_disabled'];
 
     protected $excludeFromSearchIndex = [
         'description',
