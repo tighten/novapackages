@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "862c3989a8360c725f2152196d1c187c",
+    "content-hash": "601439ee5672e92de79743a51d47c597",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -9884,87 +9884,6 @@
                 }
             ],
             "time": "2024-11-21T01:49:47+00:00"
-        },
-        {
-            "name": "willvincent/laravel-rateable",
-            "version": "dev-l13-compatibility",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-shift/laravel-rateable.git",
-                "reference": "add1af6d526d6030b74a35a36ac2b321a51f5160"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-shift/laravel-rateable/zipball/add1af6d526d6030b74a35a36ac2b321a51f5160",
-                "reference": "add1af6d526d6030b74a35a36ac2b321a51f5160",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "^8.53 || ^9 || ^10 || ^11 || ^12 || ^13.0",
-                "illuminate/support": "^8 || ^9 || ^10 || ^11 || ^12 || ^13.0",
-                "php": "^8.1 || ^8.2 || ^8.3 || ^8.4"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.23 || ^7 || ^8 || ^9 || ^10 || ^11.0",
-                "phpunit/phpunit": "^9.5 || ^10.5 || ^12.5.12"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "willvincent\\Rateable\\RateableServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "willvincent\\Rateable\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "willvincent\\Rateable\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit"
-                ],
-                "test-coverage": [
-                    "vendor/bin/phpunit --coverage-html coverage"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Will Vincent",
-                    "email": "tcindie@gmail.com",
-                    "homepage": "https://willvincent.com"
-                }
-            ],
-            "description": "Allows multiple models to be rated with a fivestar like system.",
-            "homepage": "https://github.com/willvincent/laravel-rateable",
-            "keywords": [
-                "fivestar",
-                "laravel",
-                "laravel 8",
-                "laravel 9",
-                "rateable",
-                "rating",
-                "vote"
-            ],
-            "support": {
-                "source": "https://github.com/laravel-shift/laravel-rateable/tree/l13-compatibility"
-            },
-            "funding": [
-                {
-                    "type": "github",
-                    "url": "https://github.com/willvincent"
-                }
-            ],
-            "time": "2026-02-26T21:29:47+00:00"
         }
     ],
     "packages-dev": [
@@ -13379,9 +13298,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "willvincent/laravel-rateable": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

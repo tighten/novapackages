@@ -32,8 +32,7 @@
         "stil/gd-text": "^1.1",
         "tightenco/duster": "^3.3",
         "tightenco/ziggy": "^2.6",
-        "typesense/typesense-php": "^4.9",
-        "willvincent/laravel-rateable": "dev-l13-compatibility"
+        "typesense/typesense-php": "^4.9"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^4.0",

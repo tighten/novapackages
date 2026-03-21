@@ -4,9 +4,9 @@ namespace App;
 
 use App\Models\Collaborator;
 use App\Models\Package;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use willvincent\Rateable\Rating;
 
 class Stats
 {

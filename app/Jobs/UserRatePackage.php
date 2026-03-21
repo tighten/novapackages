@@ -5,8 +5,8 @@ namespace App\Jobs;
 use App\Exceptions\SelfAuthoredRatingException;
 use App\Models\Collaborator;
 use App\Models\Package;
+use App\Models\Rating;
 use Illuminate\Foundation\Bus\Dispatchable;
-use willvincent\Rateable\Rating;
 
 class UserRatePackage
 {

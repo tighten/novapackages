@@ -4,9 +4,9 @@ namespace App\Http\Controllers\InternalApi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Package;
+use App\Models\Rating;
 use App\Models\Review;
 use Illuminate\Http\Response;
-use willvincent\Rateable\Rating;
 
 class ReviewsController extends Controller
 {

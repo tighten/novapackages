@@ -2,8 +2,8 @@
 
 use App\Models\Collaborator;
 use App\Models\Package;
+use App\Models\Rating;
 use App\Models\User;
-use willvincent\Rateable\Rating;
 
 test('deleting self authored package ratings', function () {
     $packageAuthor = User::factory()->create();
