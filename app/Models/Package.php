@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\OpenGraphImage;
+use App\Rateable;
 use App\RatingCountable;
+use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,9 +20,8 @@ use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
-use willvincent\Rateable\Rateable;
-use willvincent\Rateable\Rating;
 
+#[Guarded(['id', 'is_disabled'])]
 class Package extends Model implements Feedable
 {
     use HasFactory;
@@ -29,8 +29,6 @@ class Package extends Model implements Feedable
         RatingCountable::averageRating insteadof Rateable;
     }
     use Searchable;
-
-    protected $guarded = ['id', 'is_disabled'];
 
     protected $excludeFromSearchIndex = [
         'description',
@@ -76,11 +74,6 @@ class Package extends Model implements Feedable
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
-    }
-
-    public function ratings(): MorphMany
-    {
-        return $this->morphMany(Rating::class, 'rateable');
     }
 
     public function favorites(): HasMany

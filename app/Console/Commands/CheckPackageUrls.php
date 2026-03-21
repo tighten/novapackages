@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use App\Jobs\CheckPackageUrlsForAvailability as CheckPackageUrlsJob;
 use App\Models\Package;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
+#[Signature('novapackages:check-package-urls')]
+#[Description('Check all package URLs for 4XX errors')]
 class CheckPackageUrls extends Command
 {
-    protected $signature = 'novapackages:check-package-urls';
-
-    protected $description = 'Check all package URLs for 4XX errors';
-
     public function handle(): void
     {
         $validPackages = Package::whereNull('marked_as_unavailable_at')

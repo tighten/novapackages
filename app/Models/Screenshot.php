@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,14 +10,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
+#[Fillable(['uploader_id', 'path'])]
 class Screenshot extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'uploader_id',
-        'path',
-    ];
 
     protected $appends = ['public_url'];
 

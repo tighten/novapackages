@@ -5,6 +5,7 @@ use App\Listeners\SendNewPackageNotification;
 use App\Models\Collaborator;
 use App\Models\Favorite;
 use App\Models\Package;
+use App\Models\Rating;
 use App\Models\Review;
 use App\Models\Screenshot;
 use App\Models\Tag;
@@ -16,7 +17,6 @@ use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
-use willvincent\Rateable\Rating;
 
 test('app package index shows my packages', function () {
     $user = User::factory()->create();

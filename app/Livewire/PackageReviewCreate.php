@@ -5,8 +5,8 @@ namespace App\Livewire;
 use App\Events\PackageRated;
 use App\Exceptions\SelfAuthoredRatingException;
 use App\Models\Package;
+use App\Models\Rating;
 use Livewire\Component;
-use willvincent\Rateable\Rating;
 
 class PackageReviewCreate extends Component
 {

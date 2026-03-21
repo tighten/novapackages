@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
+#[Guarded(['id'])]
 class Tag extends Model
 {
     use HasFactory;
@@ -27,8 +29,6 @@ class Tag extends Model
         'trend',
         'value',
     ];
-
-    protected $guarded = ['id'];
 
     public function packages(): BelongsToMany
     {

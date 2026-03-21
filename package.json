@@ -15,5 +15,6 @@
         "@tailwindcss/vite": "^4.2.0",
         "tailwindcss": "^4.2.0",
         "tom-select": "^2.5.1"
-    }
+    },
+    "$schema": "https://www.schemastore.org/package.json"
 }

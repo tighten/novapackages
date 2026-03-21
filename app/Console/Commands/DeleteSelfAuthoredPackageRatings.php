@@ -2,15 +2,15 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Rating;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
-use willvincent\Rateable\Rating;
 
+#[Signature('purge:self-authored-package-ratings')]
+#[Description('Delete all package ratings where the rating was by the author or a contributor of the package')]
 class DeleteSelfAuthoredPackageRatings extends Command
 {
-    protected $signature = 'purge:self-authored-package-ratings';
-
-    protected $description = 'Delete all package ratings where the rating was by the author or a contributor of the package';
-
     public function handle(): void
     {
         $this->deleteSelfAuthoredPackageRatings();

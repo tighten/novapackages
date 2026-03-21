@@ -10,17 +10,17 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "algolia/algoliasearch-client-php": "^3.3",
         "erusev/parsedown": "^1.8",
-        "laravel/framework": "^12.55",
+        "laravel/framework": "^13.0",
         "laravel/helpers": "^1.8",
         "laravel/horizon": "^5.45",
         "laravel/passport": "^13.6",
         "laravel/scout": "^10.24",
-        "laravel/slack-notification-channel": "^3.7",
+        "laravel/slack-notification-channel": "^3.8",
         "laravel/socialite": "^5.25",
-        "laravel/tinker": "^2.10.1",
+        "laravel/tinker": "^3.0",
         "laravel/ui": "^4.6",
         "league/flysystem-aws-s3-v3": "^3.32",
         "livewire/livewire": "^4.2",
@@ -32,17 +32,16 @@
         "stil/gd-text": "^1.1",
         "tightenco/duster": "^3.3",
         "tightenco/ziggy": "^2.6",
-        "typesense/typesense-php": "^4.9",
-        "willvincent/laravel-rateable": "^3.5"
+        "typesense/typesense-php": "^4.9"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.16",
+        "barryvdh/laravel-debugbar": "^4.0",
         "fakerphp/faker": "^1.23",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "laravel/pail": "^1.2.2",
-        "pestphp/pest": "^3.0",
-        "pestphp/pest-plugin-laravel": "^3.0"
+        "laravel/pail": "^1.2.5",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.1"
     },
     "autoload": {
         "psr-4": {
@@ -108,5 +107,11 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/laravel-rateable"
+        }
+    ]
 }
