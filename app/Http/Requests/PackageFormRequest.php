@@ -9,6 +9,7 @@ use App\Models\Tag;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class PackageFormRequest extends FormRequest
@@ -23,7 +24,7 @@ class PackageFormRequest extends FormRequest
         return [
             'author_id' => [
                 'required',
-                'exists:collaborators,id',
+                Rule::exists('collaborators', 'id'),
             ],
             'contributors' => [
                 'array',
