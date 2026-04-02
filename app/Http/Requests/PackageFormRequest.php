@@ -21,12 +21,25 @@ class PackageFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'author_id' => 'required|exists:collaborators,id',
-            'contributors' => 'array',
-            'tags' => 'array',
-            'tags-new' => 'array',
-            'name' => 'required',
-            'packagist_namespace' => 'required',
+            'author_id' => [
+                'required',
+                'exists:collaborators,id',
+            ],
+            'contributors' => [
+                'array',
+            ],
+            'tags' => [
+                'array',
+            ],
+            'tags-new' => [
+                'array',
+            ],
+            'name' => [
+                'required',
+            ],
+            'packagist_namespace' => [
+                'required',
+            ],
             'packagist_name' => [
                 'required',
                 function ($attribute, $value, $fail) {
@@ -37,8 +50,14 @@ class PackageFormRequest extends FormRequest
                     }
                 },
             ],
-            'url' => 'required|url',
-            'abstract' => 'required|max:190',
+            'url' => [
+                'required',
+                'url',
+            ],
+            'abstract' => [
+                'required',
+                'max:190',
+            ],
             'screenshots' => [
                 'array',
                 function ($attribute, $value, $fail) {
