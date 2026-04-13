@@ -9,12 +9,10 @@ test('unauthenticated users cant post review', function () {
     $package = Package::factory()->create();
     $review = Review::factory()->make();
 
-    $response = $this->post(route('internalapi.reviews.store'), [
+    $this->post(route('internalapi.reviews.store'), [
         'package_id' => $package->id,
         'review' => $review->content,
-    ]);
-
-    expect($response->getTargetUrl())->toEqual(route('login'));
+    ])->assertRedirect(route('login'));
 });
 
 test('authenticated user cannot see link to post review before reviewing package', function () {
