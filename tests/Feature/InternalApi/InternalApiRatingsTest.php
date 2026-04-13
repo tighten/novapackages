@@ -6,12 +6,10 @@ use App\Models\User;
 
 test('unauthenticated users cant post ratings', function () {
     $package = Package::factory()->create();
-    $response = $this->post(route('internalapi.ratings.store'), [
+    $this->post(route('internalapi.ratings.store'), [
         'package_id' => $package->id,
         'rating' => 4,
-    ]);
-
-    expect($response->getTargetUrl())->toEqual(route('login'));
+    ])->assertRedirect(route('login'));
 });
 
 test('posting a rating increases the packages overall rating', function () {
