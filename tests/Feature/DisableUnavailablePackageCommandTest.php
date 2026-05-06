@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\DisableUnavailablePackages;
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
@@ -24,7 +25,7 @@ test('command disables unavailable packages after 30 days', function () {
         ])->id,
     ]);
 
-    $this->artisan('novapackages:disable-unavailable-packages');
+    $this->artisan(DisableUnavailablePackages::class);
 
     expect($packageThatShouldBeDisabled->refresh()->is_disabled)->toBeTrue();
     Notification::assertSentTo(

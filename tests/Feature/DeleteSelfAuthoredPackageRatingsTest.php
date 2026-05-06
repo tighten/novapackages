@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\DeleteSelfAuthoredPackageRatings;
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\Rating;
@@ -27,7 +28,7 @@ test('deleting self authored package ratings', function () {
     $package->ratings()->save($validRating);
     expect($package->fresh()->ratings()->count())->toEqual(2);
 
-    $this->artisan('purge:self-authored-package-ratings');
+    $this->artisan(DeleteSelfAuthoredPackageRatings::class);
 
     tap($package->fresh(), function ($package) use ($otherUser) {
         expect($package->ratings()->count())->toEqual(1);
@@ -57,7 +58,7 @@ test('deleting self contributed package ratings', function () {
     $package->ratings()->save($validRating);
     expect($package->fresh()->ratings()->count())->toEqual(2);
 
-    $this->artisan('purge:self-authored-package-ratings');
+    $this->artisan(DeleteSelfAuthoredPackageRatings::class);
 
     tap($package->fresh(), function ($package) use ($otherUser) {
         expect($package->ratings()->count())->toEqual(1);
