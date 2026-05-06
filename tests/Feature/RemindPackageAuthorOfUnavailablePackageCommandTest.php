@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\SendUnavailablePackageFollowUp;
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
@@ -32,7 +33,7 @@ test('command sends reminder to package author after 14 days', function () {
         ])->id,
     ]);
 
-    $this->artisan('novapackages:send-unavailable-package-followup');
+    $this->artisan(SendUnavailablePackageFollowUp::class);
 
     Notification::assertSentTo(
         $packageThatShouldReceiveNotification->author->user,
