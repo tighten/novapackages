@@ -47,9 +47,7 @@ class Packagist
             return $response->json();
         });
 
-        if (Arr::get($this->data, 'status') === 'error') {
-            throw new PackagistException("Packagist error looking up [{$name}]: " . $this->data['message']);
-        }
+        throw_if(Arr::get($this->data, 'status') === 'error', new PackagistException("Packagist error looking up [{$name}]: " . $this->data['message']));
 
         return $this->data;
     }

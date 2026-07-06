@@ -22,9 +22,7 @@ class GitHubRepo extends BaseRepo
 
     private function __construct($url, GitHub $github)
     {
-        if (! GitHub::validateUrl($url)) {
-            throw new GitHubException('Invalid Url Provided');
-        }
+        throw_unless(GitHub::validateUrl($url), new GitHubException('Invalid Url Provided'));
 
         $this->url = $url;
         $this->github = $github;

@@ -38,9 +38,7 @@ class UserRatePackage
 
             $package = Package::findOrFail($this->packageId);
 
-            if ($this->isSelfAuthored($package) || $this->isSelfContributed($package)) {
-                throw new SelfAuthoredRatingException;
-            }
+            throw_if($this->isSelfAuthored($package) || $this->isSelfContributed($package), new SelfAuthoredRatingException);
 
             $package->ratings()->save($rating);
         } else {
