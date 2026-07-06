@@ -28,11 +28,9 @@ class GitLab
     {
         $this->response = Http::get('https://gitlab.com/api/' . self::API_VERSION . '/' . $endpoint)->json();
 
-        if ($this->responseHasErrors() && ($this->isNotFileNotFoundError() || $this->isCommitNotFoundError())) {
-            throw new GitLabException(
+        throw_if($this->responseHasErrors() && ($this->isNotFileNotFoundError() || $this->isCommitNotFoundError()), new GitLabException(
                 "GitLab error fetching data for [{$this->url}]: " . Arr::get($this->response, 'message')
-            );
-        }
+            ));
 
         return $this->response;
     }

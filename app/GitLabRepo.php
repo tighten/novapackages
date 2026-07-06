@@ -17,9 +17,7 @@ class GitLabRepo extends BaseRepo
 
     private function __construct($url, GitLab $gitLab)
     {
-        if (! $gitLab->validateUrl($url)) {
-            throw new Exception('Invalid Url Provided');
-        }
+        throw_unless($gitLab->validateUrl($url), new Exception('Invalid Url Provided'));
 
         $this->url = $url;
         $this->gitLab = $gitLab;
