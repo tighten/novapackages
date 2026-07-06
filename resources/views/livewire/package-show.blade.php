@@ -291,7 +291,7 @@
                             <td class="font-bold py-2">Last updated</td>
                             <td class="py-2">
                                 @if (isset($composerLatest['time']))
-                                    {{ \Illuminate\Support\Str::title(\Carbon\Carbon::parse($composerLatest['time'])->diffForHumans()) }}
+                                    {{ \Illuminate\Support\Str::title(\Illuminate\Support\Carbon::parse($composerLatest['time'])->diffForHumans()) }}
                                 @else
                                     Nothing yet.
                                 @endif

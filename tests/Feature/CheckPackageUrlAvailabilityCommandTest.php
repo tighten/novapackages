@@ -4,7 +4,7 @@ use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
 use App\Notifications\NotifyAuthorOfUnavailablePackageUrl;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
 

@@ -3,7 +3,7 @@
 use App\Http\Resources\PackageDetailResource;
 use App\Models\Package;
 use App\Models\User;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 
