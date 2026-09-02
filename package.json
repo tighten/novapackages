@@ -11,6 +11,9 @@
         "laravel-vite-plugin": "^2.0.0",
         "concurrently": "^9.0.1"
     },
+    "optionalDependencies": {
+        "@laravel/multiplex": "^0.4.1"
+    },
     "dependencies": {
         "@tailwindcss/vite": "^4.2.0",
         "tailwindcss": "^4.2.0",
