@@ -1,15 +1,20 @@
 <?php
 
+use App\Http\Middleware\CheckForEmailAddress;
+use App\Http\Middleware\CheckRole;
+use App\Http\Middleware\CheckUserClaimedCollaborator;
 use App\Providers\AppServiceProvider;
+use App\Providers\HorizonServiceProvider;
+use App\Providers\HttpClientServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
-        App\Providers\AppServiceProvider::class,
-        App\Providers\HorizonServiceProvider::class,
-        App\Providers\HttpClientServiceProvider::class,
+        AppServiceProvider::class,
+        HorizonServiceProvider::class,
+        HttpClientServiceProvider::class,
     ])
     ->withRouting(
         web: __DIR__ . '/../routes/web.php',
@@ -27,9 +32,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->throttleApi();
 
         $middleware->alias([
-            'claimed' => \App\Http\Middleware\CheckUserClaimedCollaborator::class,
-            'email' => \App\Http\Middleware\CheckForEmailAddress::class,
-            'role' => \App\Http\Middleware\CheckRole::class,
+            'claimed' => CheckUserClaimedCollaborator::class,
+            'email' => CheckForEmailAddress::class,
+            'role' => CheckRole::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 return [
 
     'guards' => [
@@ -12,7 +14,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
     ],
 

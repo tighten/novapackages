@@ -9466,29 +9466,30 @@
         },
         {
             "name": "tightenco/duster",
-            "version": "v3.4.1",
+            "version": "v3.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tighten/duster.git",
-                "reference": "5570f8183c91164192c48908fb94f0b4cafe79ae"
+                "reference": "cc441ee6fa86efa3c70ac70d0e8256fad205635b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tighten/duster/zipball/5570f8183c91164192c48908fb94f0b4cafe79ae",
-                "reference": "5570f8183c91164192c48908fb94f0b4cafe79ae",
+                "url": "https://api.github.com/repos/tighten/duster/zipball/cc441ee6fa86efa3c70ac70d0e8256fad205635b",
+                "reference": "cc441ee6fa86efa3c70ac70d0e8256fad205635b",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.94",
-                "laravel-zero/framework": "^12.0",
-                "laravel/pint": "^1.27",
+                "friendsofphp/php-cs-fixer": "^3.95",
+                "laravel-zero/framework": "^12.1",
+                "laravel/agent-detector": "^2.0",
+                "laravel/pint": "^1.29",
                 "nunomaduro/termwind": "^2.4",
                 "spatie/invade": "^1.1",
                 "squizlabs/php_codesniffer": "^4.0",
-                "tightenco/tlint": "^9.5"
+                "tightenco/tlint": "^9.6"
             },
             "bin": [
                 "builds/duster"
@@ -9530,7 +9531,7 @@
                 "issues": "https://github.com/tighten/duster/issues",
                 "source": "https://github.com/tighten/duster"
             },
-            "time": "2026-03-27T00:41:08+00:00"
+            "time": "2026-09-02T05:46:47+00:00"
         },
         {
             "name": "tightenco/ziggy",

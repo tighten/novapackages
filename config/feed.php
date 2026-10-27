@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Package;
+
 return [
     'feeds' => [
         'recent' => [
@@ -11,7 +13,7 @@ return [
              * You can also pass an argument to that method:
              * ['App\Model@getAllFeedItems', 'argument']
              */
-            'items' => App\Models\Package::class . '@getRecentFeedItems',
+            'items' => Package::class . '@getRecentFeedItems',
 
             /*
              * The feed will be available on this url.

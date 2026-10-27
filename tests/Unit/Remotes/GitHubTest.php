@@ -4,8 +4,9 @@ use App\Exceptions\GitHubException;
 use App\Http\Remotes\GitHub;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 
 test('validates github urls', function () {
     expect(GitHub::validateUrl('http://github.com/starwars/lightsabers'))->toBeTrue();

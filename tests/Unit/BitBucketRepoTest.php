@@ -3,8 +3,9 @@
 use App\BaseRepo;
 use App\BitBucketRepo;
 use App\Http\Remotes\BitBucket;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 
 it('gets the latest release version for tagged releases', function () {
     mockBitBucketWith([

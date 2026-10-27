@@ -3,8 +3,9 @@
 use App\Exceptions\GitHubException;
 use App\GitHubRepo;
 use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 
 test('requires valid url', function () {
     $this->expectException(GitHubException::class);

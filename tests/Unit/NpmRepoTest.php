@@ -4,8 +4,9 @@ use App\BaseRepo;
 use App\NpmRepo;
 use Facades\App\Repo;
 use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 
 it('returns proper readme format', function () {
     Http::fake(['https://registry.npmjs.org/lodash/' => Http::response()]);

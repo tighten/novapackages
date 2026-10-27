@@ -2,6 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Events\PackageCreated;
+use App\Events\PackageUpdated;
 use App\Jobs\GeneratePackageOpenGraphImage;
 
 class PackageEventSubscriber
@@ -18,12 +20,12 @@ class PackageEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            \App\Events\PackageCreated::class,
+            PackageCreated::class,
             'App\Listeners\PackageEventSubscriber@handle'
         );
 
         $events->listen(
-            \App\Events\PackageUpdated::class,
+            PackageUpdated::class,
             'App\Listeners\PackageEventSubscriber@handle'
         );
     }

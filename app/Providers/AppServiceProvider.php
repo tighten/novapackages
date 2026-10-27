@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\CollaboratorClaimed;
 use App\Models\Package;
 use App\Tighten;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -28,14 +29,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Relation::morphMap([
-            'App\Package' => \App\Models\Package::class,
+            'App\Package' => Package::class,
         ]);
 
         Passport::$clientUuids = false;
         Passport::$registersJsonApiRoutes = true;
 
         Event::listen(
-            \App\Events\CollaboratorClaimed::class,
+            CollaboratorClaimed::class,
             [\App\Notifications\CollaboratorClaimed::class, 'handle']
         );
 
