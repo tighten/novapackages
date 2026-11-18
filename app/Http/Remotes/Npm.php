@@ -13,9 +13,7 @@ class Npm
 
     public function __construct($url)
     {
-        if (! $this->validateUrl($url)) {
-            throw new NpmException('Invalid Url Provided');
-        }
+        throw_unless($this->validateUrl($url), new NpmException('Invalid Url Provided'));
 
         $this->setRegistryUrl($url);
         $this->data = $this->fetchData($url);

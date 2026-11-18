@@ -17,7 +17,7 @@ class PackagesController extends Controller
 
         Log::info('API: /packages');
 
-        return PackageResource::collection(Package::orderBy('created_at', 'desc')
+        return PackageResource::collection(Package::orderByDesc('created_at')
             ->when($githubUsername, function ($query) use ($githubUsername) {
                 $query->whereHas('author', function ($query) use ($githubUsername) {
                     $query->where('github_username', $githubUsername);

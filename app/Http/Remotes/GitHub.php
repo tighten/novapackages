@@ -89,8 +89,6 @@ class GitHub
 
     private function guardAgainstInvalidRepositoryPath(string $repositoryPath): void
     {
-        if (! preg_match('/^([\w-]+)\/([\w-]+)/', $repositoryPath)) {
-            throw new GitHubException("Invalid repository path provided: {$repositoryPath}");
-        }
+        throw_unless(preg_match('/^([\w-]+)\/([\w-]+)/', $repositoryPath), new GitHubException("Invalid repository path provided: {$repositoryPath}"));
     }
 }

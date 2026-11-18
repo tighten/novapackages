@@ -253,7 +253,7 @@ class Package extends Model implements Feedable
         return $query->select(
             DB::raw('packages.*, ((`github_stars` * ' . $this->githubStarVsPackagistDownloadsMultiplier . ') + `packagist_downloads`) as `popularity`')
         )
-            ->orderBy('popularity', 'desc');
+            ->orderByDesc('popularity');
     }
 
     #[Scope]

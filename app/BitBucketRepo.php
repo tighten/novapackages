@@ -16,9 +16,7 @@ class BitBucketRepo extends BaseRepo
 
     private function __construct($url, BitBucket $bitBucket)
     {
-        if (! $bitBucket->validateUrl($url)) {
-            throw new BitBucketException('Invalid Url Provided');
-        }
+        throw_unless($bitBucket->validateUrl($url), new BitBucketException('Invalid Url Provided'));
 
         $this->url = $url;
         $this->bitBucket = $bitBucket;

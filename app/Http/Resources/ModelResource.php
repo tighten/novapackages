@@ -34,9 +34,7 @@ class ModelResource
             });
         }
 
-        if (get_class($this->payload) != $this->model) {
-            throw new Exception("Payload is not an instance of {$this->model}");
-        }
+        throw_if(get_class($this->payload) != $this->model, new Exception("Payload is not an instance of {$this->model}"));
 
         return $this->toArray($this->payload);
     }

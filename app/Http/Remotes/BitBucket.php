@@ -28,9 +28,7 @@ class BitBucket
         $responseContents = $response->getBody()->getContents();
         $responseJson = json_decode($responseContents, true);
 
-        if ($this->responseHasErrors($responseJson) && $this->isFileNotFoundError($responseJson) === false) {
-            throw new BitBucketException("BitBucket error fetching data for [{$this->url}]: " . Arr::get($responseJson, 'error.message'));
-        }
+        throw_if($this->responseHasErrors($responseJson) && $this->isFileNotFoundError($responseJson) === false, new BitBucketException("BitBucket error fetching data for [{$this->url}]: " . Arr::get($responseJson, 'error.message')));
 
         return $asJson ? $responseJson : $responseContents;
     }
