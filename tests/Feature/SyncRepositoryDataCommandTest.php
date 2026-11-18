@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\SyncRepositoryData;
 use App\Models\Package;
 use Illuminate\Support\Carbon;
 
@@ -32,7 +33,7 @@ test('calling the command without an argument updates all packages with data fro
 
     $this->fakeRepoFromPackageModel([$repoAttributesA, $repoAttributesB]);
 
-    $this->artisan('sync:repo');
+    $this->artisan(SyncRepositoryData::class);
 
     expect(Package::all())->toHaveCount(2);
     $packageA->refresh();
@@ -76,7 +77,7 @@ test('calling the command with a package id only updates that package with data 
 
     $this->fakeRepoFromPackageModel([$repoAttributesA, $repoAttributesB]);
 
-    $this->artisan('sync:repo', ['package' => $packageA->id]);
+    $this->artisan(SyncRepositoryData::class, ['package' => $packageA->id]);
 
     expect(Package::all())->toHaveCount(2);
     $packageA->refresh();
@@ -110,7 +111,7 @@ test('local data is not updated if there are no changes in the remote repo', fun
         'latest_version' => 'v2.3.4',
     ]);
 
-    $this->artisan('sync:repo', ['package' => $package->id]);
+    $this->artisan(SyncRepositoryData::class, ['package' => $package->id]);
     $package->refresh();
     expect(Package::all())->toHaveCount(1);
     expect($package->updated_at->toDateTimeString())->toEqual($updatedAt->toDateTimeString());

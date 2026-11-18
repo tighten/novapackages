@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\CheckPackageUrls;
 use App\Models\Collaborator;
 use App\Models\Package;
 use App\Models\User;
@@ -38,7 +39,7 @@ test('calling command marks unavailable packages as unavailable', function () {
     Notification::fake();
     $now = now();
     Carbon::setTestNow($now);
-    $this->artisan('novapackages:check-package-urls');
+    $this->artisan(CheckPackageUrls::class);
 
     expect($this->validPackage->marked_as_unavailable_at)->toBeNull();
     $this->assertEquals(
@@ -59,7 +60,7 @@ test('calling command sends notification to author of unavailable packages', fun
         $this->packageWithUnavailableUrl->url => Http::response(null, 404),
     ]);
 
-    $this->artisan('novapackages:check-package-urls');
+    $this->artisan(CheckPackageUrls::class);
 
     Notification::assertNotSentTo(
         $this->validPackage->author->user,
@@ -78,7 +79,7 @@ test('command ignores packages that are already unavailable', function () {
     $this->packageWithUnavailableUrl->marked_as_unavailable_at = now();
     $this->packageWithUnavailableUrl->save();
 
-    $this->artisan('novapackages:check-package-urls');
+    $this->artisan(CheckPackageUrls::class);
 
     Notification::assertNotSentTo(
         $this->packageWithUnavailableUrl->author->user,

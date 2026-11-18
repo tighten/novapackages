@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\DeleteAbandonedScreenshots;
 use App\Models\Package;
 use App\Models\Screenshot;
 use Illuminate\Http\Testing\File;
@@ -24,7 +25,7 @@ test('screnshots not attached to packages that are older than one day are delete
         'created_at' => Carbon::now(),
     ]);
 
-    $this->artisan('purge:abandonedscreenshots');
+    $this->artisan(DeleteAbandonedScreenshots::class);
 
     $remainingScreenshots = Screenshot::get();
     expect($remainingScreenshots)->toHaveCount(2);
